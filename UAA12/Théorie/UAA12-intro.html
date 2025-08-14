@@ -117,7 +117,6 @@
 .resources-container {
   display: flex;
   gap: 2rem;
-  margin: 2rem 0;
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -133,6 +132,7 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  max-height: 500px;
 }
 
 .resource-card::before {
@@ -191,7 +191,7 @@
   font-size: 1.8rem !important;
   font-weight: 700 !important;
   text-align: center;
-  margin-bottom: 1.5rem !important;
+  margin-bottom: 0.5rem !important;
   margin-top: 0 !important;
 }
 
@@ -792,6 +792,246 @@
   }
 }
 
+/* Container principal pour le résumé */
+.summary-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* Cartes du résumé */
+.summary-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border-left: 5px solid;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.summary-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  opacity: 0.05;
+  background: radial-gradient(circle, currentColor 0%, transparent 70%);
+}
+
+.summary-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+/* Couleurs spécifiques pour chaque carte */
+.comparison-card {
+  border-left-color: #f59e0b;
+  color: #92400e;
+}
+
+.dynamic-card {
+  border-left-color: #10b981;
+  color: #065f46;
+}
+
+.stateless-card {
+  border-left-color: #8b5cf6;
+  color: #5b21b6;
+}
+
+/* Icônes du résumé */
+.summary-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/* Titres des cartes */
+.summary-title {
+  font-size: 1.3rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 1rem !important;
+  margin-top: 0 !important;
+  color: inherit !important;
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+/* Grille de comparaison PHP vs JS */
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.comparison-item {
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.php-side {
+  background: linear-gradient(135deg, #fef3c7, #fef7cd);
+  border: 2px solid #fcd34d;
+}
+
+.js-side {
+  background: linear-gradient(135deg, #fef2f2, #fef7f7);
+  border: 2px solid #fca5a5;
+}
+
+.comparison-item strong {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #374151;
+}
+
+.comparison-item ul {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  font-size: 0.9rem;
+}
+
+.comparison-item ul li {
+  padding: 0.3rem 0 !important;
+  margin: 0 !important;
+}
+
+.comparison-item ul li::before {
+  content: '✓' !important;
+  color: #10b981 !important;
+  font-weight: bold !important;
+  margin-right: 0.5rem !important;
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+}
+
+/* Contenu dynamique */
+.dynamic-content p {
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  text-align: center;
+  color: #374151;
+}
+
+.dynamic-example {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.file-php, .file-html {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.file-php {
+  background: #ddd6fe;
+  color: #5b21b6;
+}
+
+.file-html {
+  background: #d1fae5;
+  color: #065f46;
+  font-size: 0.8rem;
+}
+
+.multiple-html {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.arrow {
+  font-size: 1.5rem;
+  color: #6b7280;
+  font-weight: bold;
+}
+
+/* Contenu stateless */
+.stateless-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.stateless-point {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem;
+  background: linear-gradient(135deg, #f3e8ff, #faf5ff);
+  border-radius: 12px;
+  border: 2px solid #e9d5ff;
+}
+
+.point-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.stateless-point span:last-child {
+  flex-grow: 1;
+  color: #374151;
+  font-weight: 500;
+}
+
+/* Responsive pour mobile */
+@media (max-width: 768px) {
+  .comparison-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .dynamic-example {
+    flex-direction: column;
+  }
+  
+  .multiple-html {
+    flex-direction: row;
+  }
+}
+
+/* Ajustements pour l'impression */
+@media print {
+  .summary-container {
+    gap: 5mm !important;
+  }
+  
+  .summary-card {
+    padding: 5mm !important;
+    box-shadow: none !important;
+    border: 1pt solid #e5e7eb !important;
+    page-break-inside: avoid;
+  }
+  
+  .summary-icon {
+    font-size: 14pt !important;
+  }
+  
+  .summary-title {
+    font-size: 12pt !important;
+  }
+  
+  .comparison-item ul li {
+    font-size: 10pt !important;
+  }
+}
+
+
 
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
@@ -858,13 +1098,13 @@
     </ul>
   </div>
 </div>
-
+---
 ## Le langage PHP
 ### Un premier exemple
 
 Le PHP s'écrit directement dans un fichier HTML.
 
-```PHP
+```html
 <h1>Heure actuelle</h1>
 <p>Bonjour ! Il est actuellement
 <?php
@@ -887,15 +1127,71 @@ Une fois que le serveur PHP aura exécuté le script, le fichier HTML suivant se
 ---
 ## Le langage PHP
 ### En résumé
-* **PHP vs. JavaScript**
-  * PHP permet d'écrire des scripts coté serveur, JavaScript permet d'écrire des scripts coté client
-  * PHP ne permet pas d'interagir avec l'utilisateur car PHP est exécuté avant l'envoi de la page au client
-  * PHP peut interagir avec des fichiers, avec des bases de données, etc.
-* **Le but de PHP est de construire des pages web dynamiques**
-  * un même fichier PHP peut donner plusieurs fichiers HTML différents
-* **PHP est un langage "stateless"** :
-  * une fois le boulot terminé, il oublie tout !
-  * si un navigateur émet deux requêtes, elles seront traitées de manière indépendante !
+
+<div class="summary-container">
+  <div class="summary-card comparison-card">
+    <div class="summary-icon">⚔️</div>
+    <h4 class="summary-title">PHP vs. JavaScript</h4>
+    <div class="comparison-grid">
+      <div class="comparison-item php-side">
+        <strong>PHP</strong>
+        <ul>
+          <li>Scripts côté serveur</li>
+          <li>Exécuté avant envoi au client</li>
+          <li>Accès fichiers & bases de données</li>
+        </ul>
+      </div>
+      <div class="comparison-item js-side">
+        <strong>JavaScript</strong>
+        <ul>
+          <li>Scripts côté client</li>
+          <li>Interaction avec l'utilisateur</li>
+          <li>Manipulation du DOM</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+---
+## Le langage PHP
+### En résumé
+<div class="summary-container">
+  <div class="summary-card dynamic-card">
+    <div class="summary-icon">🔄</div>
+    <h4 class="summary-title">Pages Web Dynamiques</h4>
+    <div class="dynamic-content">
+      <p>Un même fichier PHP peut générer plusieurs fichiers HTML différents</p>
+      <div class="dynamic-example">
+        <span class="file-php">script.php</span>
+        <span class="arrow">→</span>
+        <div class="multiple-html">
+          <span class="file-html">page1.html</span>
+          <span class="file-html">page2.html</span>
+          <span class="file-html">page3.html</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+---
+## Le langage PHP
+### En résumé
+<div class="summary-container">
+  <div class="summary-card stateless-card">
+    <div class="summary-icon">🧠</div>
+    <h4 class="summary-title">Langage "Stateless"</h4>
+    <div class="stateless-content">
+      <div class="stateless-point">
+        <span class="point-icon">💭</span>
+        <span>Une fois le travail terminé, PHP oublie tout !</span>
+      </div>
+      <div class="stateless-point">
+        <span class="point-icon">🔄</span>
+        <span>Chaque requête est traitée indépendamment</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 ---
 ## Installation d'un serveur PHP sur une machine
 
