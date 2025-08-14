@@ -1,49 +1,650 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Title</title>
+   <head>
+    <title>UAA12 - Bases PHP</title>
     <meta charset="utf-8">
     <style>
-      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
-      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
-      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
 
-      body { font-family: 'Droid Serif'; }
-      h1, h2, h3 {
-        font-family: 'Yanone Kaffeesatz';
-        font-weight: normal;
+      :root {
+        --primary-color: #6366f1;
+        --secondary-color: #8b5cf6;
+        --accent-color: #06b6d4;
+        --text-dark: #1f2937;
+        --text-light: #6b7280;
+        --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --code-bg: #1e293b;
+        --code-text: #e2e8f0;
+        --success-color: #10b981;
+        --warning-color: #f59e0b;
+        --error-color: #ef4444;
       }
-      .remark-code, .remark-inline-code { font-family: 'Consolas'; }
-			  @page {
-		  size: 1210px 681px;
-		  margin: 0;
-		}
 
-		@media print {
-		  .remark-slide-scaler {
-			width: 100% !important;
-			height: 100% !important;
-			transform: scale(1) !important;
-			top: 0 !important;
-			left: 0 !important;
-		  }
-		}
-    small{
-      font-size: 10px!important;
-    }
+      body { 
+        font-family: 'Inter', sans-serif;
+        background: var(--bg-gradient);
+        color: var(--text-dark);
+        line-height: 1.6;
+      }
+
+      .remark-slide-content {
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        border-radius: 20px;
+        padding: 40px !important;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .remark-slide-content::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+        border-radius: 20px 20px 0 0;
+      }
+
+      h1, h2, h3 {
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-top : 0px;
+        margin-bottom: 1rem;
+      }
+
+      h1 {
+        font-size: 3rem;
+        text-align: center;
+        text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        font-size: 2.5rem;
+        border-bottom: 3px solid var(--accent-color);
+        padding-bottom: 0.5rem;
+      }
+
+      h3 {
+        font-size: 1.8rem;
+        color: var(--secondary-color);
+      }
+
+      h4 {
+        font-size: 1.4rem;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-top: 0px;
+        margin-bottom: 1rem;
+      }
+
+      .remark-code, .remark-inline-code { 
+        font-family: 'JetBrains Mono', monospace;
+        background: var(--code-bg);
+        color: var(--code-text);
+        border-radius: 8px;
+        padding: 2px 6px;
+        font-size: 0.9em;
+      }
+
+      pre {
+        background: var(--code-bg) !important;
+        border-radius: 12px !important;
+        padding: 1rem !important;
+        border-left: 5px solid var(--accent-color) !important;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+        overflow-x: auto;
+      }
+
+      .hljs-keyword { color: #c792ea !important; }
+      .hljs-string { color: #c3e88d !important; }
+      .hljs-number { color: #f78c6c !important; }
+      .hljs-comment { color: #546e7a !important; }
+      .hljs-tag { color: #f07178 !important; }
+      .hljs-attr { color: #82aaff !important; }
+
+      p {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+        color: var(--text-dark);
+      }
+
+      ul {
+        font-size: 1.1rem;
+        margin-left: 1rem;
+        list-style: none !important;
+        padding-left: 0;
+      }
+
+      ul li {
+        margin-bottom: 0.8rem;
+        position: relative;
+        padding-left: 2rem;
+      }
+
+      ul li::before {
+        content: '→';
+        color: var(--primary-color);
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+        top: 0;
+        transition: transform 0.2s ease;
+      }
+
+      ul li:hover::before {
+        transform: translateX(3px);
+      }
+
+      ol {
+        counter-reset: item;
+        padding-left: 0;
+        list-style: none;
+      }
+
+      ol li {
+        display: block;
+        margin-bottom: 1rem;
+        padding-left: 3rem;
+        position: relative;
+      }
+
+      ol li::before {
+        content: counter(item);
+        counter-increment: item;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        border-radius: 50%;
+        width: 2rem;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-weight: 600;
+        font-size: 0.9rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      a {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border-bottom: 2px solid transparent;
+      }
+
+      a:hover {
+        color: var(--secondary-color);
+        border-bottom-color: var(--secondary-color);
+        transform: translateY(-1px);
+      }
+
+      img {
+        border-radius: 12px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        max-width: 100%;
+        height: auto;
+      }
+
+      img:hover {
+        transform: scale(1.02);
+      }
+
+      .center img {
+        display: block;
+        margin: 0 auto;
+      }
+
+      small {
+        font-size: 0.8rem !important;
+        color: var(--text-light) !important;
+        font-style: italic;
+        opacity: 0.8;
+      }
+
+      .center.middle {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        min-height: 80vh;
+      }
+
+      .center.middle h1 {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        animation: fadeInUp 1s ease-out;
+      }
+
+      .center.middle img {
+        animation: bounceIn 1s ease-out 0.5s both;
+        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+      }
+
+      span[style*="color: rgb(255, 200, 0)"] {
+        background: linear-gradient(135deg, var(--warning-color), #fbbf24);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 600 !important;
+      }
+
+      span[style*="color: red"] {
+        color: var(--error-color) !important;
+        font-weight: 600 !important;
+      }
+
+      span[style*="color: orange"] {
+        color: var(--warning-color) !important;
+        font-weight: 600 !important;
+      }
+
+      span[style*="color: blue"] {
+        color: var(--accent-color) !important;
+        font-weight: 600 !important;
+      }
+
+      .remark-slide-number {
+        background: rgba(99, 102, 241, 0.9) !important;
+        color: white !important;
+        border-radius: 20px !important;
+        padding: 8px 16px !important;
+        font-weight: 500 !important;
+        backdrop-filter: blur(10px) !important;
+        z-index: 1001 !important;
+        position: fixed !important;
+        bottom: 12px !important;
+        right: 20px !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+      }
+
+      .logo-top-left {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        height: 100px;
+        z-index: 999;
+        opacity: 0.9;
+        transition: opacity 0.3s ease;
+      }
+
+      .logo-top-left:hover {
+        opacity: 1;
+      }
+
+      .title-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 0.5rem;
+        margin-top: 50px;
+      }
+
+      /* Container pour les niveaux d'erreur */
+.error-levels-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* Cartes d'erreur */
+.error-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border-top: 4px solid;
+  transition: all 0.3s ease;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.error-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  opacity: 0.05;
+  border-radius: 50%;
+}
+
+.error-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+/* Couleurs spécifiques par type d'erreur */
+.error-fatal {
+  border-top-color: var(--error-color);
+}
+
+.error-fatal::before {
+  background: var(--error-color);
+}
+
+.error-warning {
+  border-top-color: var(--warning-color);
+}
+
+.error-warning::before {
+  background: var(--warning-color);
+}
+
+.error-notice {
+  border-top-color: var(--accent-color);
+}
+
+.error-notice::before {
+  background: var(--accent-color);
+}
+
+/* Icônes d'erreur */
+.error-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Types d'erreur */
+.error-type {
+  font-size: 1.3rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 1rem !important;
+  margin-top: 0 !important;
+  color: var(--text-dark) !important;
+  background: none !important;
+  -webkit-text-fill-color: var(--text-dark) !important;
+}
+
+.error-fatal .error-type {
+  color: var(--error-color) !important;
+  -webkit-text-fill-color: var(--error-color) !important;
+}
+
+.error-warning .error-type {
+  color: var(--warning-color) !important;
+  -webkit-text-fill-color: var(--warning-color) !important;
+}
+
+.error-notice .error-type {
+  color: var(--accent-color) !important;
+  -webkit-text-fill-color: var(--accent-color) !important;
+}
+
+/* Description des erreurs */
+.error-description {
+  text-align: left;
+}
+
+.error-description p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+}
+
+.error-example {
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 8px;
+  padding: 0.8rem;
+  border-left: 3px solid;
+}
+
+.error-fatal .error-example {
+  border-left-color: var(--error-color);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.error-warning .error-example {
+  border-left-color: var(--warning-color);
+  background: rgba(245, 158, 11, 0.05);
+}
+
+.error-notice .error-example {
+  border-left-color: var(--accent-color);
+  background: rgba(6, 182, 212, 0.05);
+}
+
+.example-label {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  font-weight: 500;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.error-example code {
+  font-size: 0.9rem;
+  background: none !important;
+  padding: 0 !important;
+  color: var(--text-dark) !important;
+  font-weight: 500;
+}
+
+/* Section erreur manuelle */
+.error-manual {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05));
+  border: 2px solid rgba(239, 68, 68, 0.2);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.error-manual h4 {
+  color: var(--error-color) !important;
+  margin-bottom: 1rem !important;
+  font-size: 1.2rem !important;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.code-example {
+  background: var(--code-bg);
+  border-radius: 8px;
+  padding: 1rem;
+  border-left: 4px solid var(--error-color);
+}
+
+.code-example pre {
+  margin: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .error-levels-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .error-card {
+    padding: 1.2rem;
+  }
+  
+  .error-icon {
+    font-size: 2rem;
+  }
+}
+
+/* Ajustements pour l'impression */
+@media print {
+  .error-levels-container {
+    gap: 5mm !important;
+  }
+  
+  .error-card {
+    padding: 5mm !important;
+    box-shadow: none !important;
+    border: 1pt solid #e5e7eb !important;
+    page-break-inside: avoid;
+  }
+  
+  .error-icon {
+    font-size: 14pt !important;
+  }
+  
+  .error-type {
+    font-size: 12pt !important;
+  }
+  
+  .error-description p {
+    font-size: 10pt !important;
+  }
+}
+
+
+      .main-title {
+        font-size: 4rem !important;
+        font-weight: 800 !important;
+        background: linear-gradient(135deg, #1e40af, #6366f1, #8b5cf6) !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        background-clip: text !important;
+        text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+        margin-bottom: 0.5rem !important;
+        line-height: 1.1 !important;
+      }
+
+      .subtitle {
+        font-size: 2.2rem !important;
+        font-weight: 300 !important;
+        color: #64748b !important;
+        font-style: italic !important;
+        opacity: 0.85 !important;
+        margin-top: 0 !important;
+        margin-bottom: 1.5rem !important;
+        position: relative !important;
+      }
+
+      .subtitle::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #6366f1, transparent);
+      }
+
+      .centered-image {
+        display: block;
+        margin: 1.5rem auto 0 auto;
+        max-height: 200px;
+        filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
+        transition: transform 0.3s ease;
+      }
+
+      .centered-image:hover {
+        transform: scale(1.05);
+      }
+
+      .remark-slide-content:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes bounceIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.3);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        70% {
+          transform: scale(0.9);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .remark-slide-content {
+          padding: 20px !important;
+        }
+        
+        h1 {
+          font-size: 2.5rem;
+        }
+        
+        h2 {
+          font-size: 2rem;
+        }
+
+        .main-title {
+          font-size: 2.5rem !important;
+        }
+        
+        .subtitle {
+          font-size: 1.6rem !important;
+        }
+        
+        .logo-top-left {
+          height: 80px;
+          top: 15px;
+          left: 15px;
+        }
+      }
+
+      @page {
+        size: 1210px 681px;
+        margin: 0;
+      }
+
+      
+      
     </style>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
   </head>
   <body>
     <textarea id="source">
 
-class: center, middle
-
-# Développement d’un site web dynamique :
-# bases
-<img height="200px" src="img/php.png">
-
+<img src="img/indbg.jpg" class="logo-top-left" alt="Logo">
+<div class="title-container">
+  <h1 class="main-title">Développement d'un site web dynamique</h1>
+  <h2 class="subtitle">bases</h2>
+  <img src="img/php.png" class="centered-image" alt="Logo PHP">
+</div>
 ---
 ## On parle de quoi ?
 
@@ -72,7 +673,7 @@ class: center, middle
 ```php
 $maVariable = 1;
 ```
-* Ce nom doit commencer par une lettre ou `_` et être composé de lettres, de chiffres et/ou de `_` .
+* Il doit commencer par une lettre ou `_` et être composé de lettres, de chiffres et/ou de `_` .
 ```php
 // correct
 $_maVar = 1;
@@ -81,16 +682,16 @@ $maVar_ = 2;
 // pas correct
 $1var = "Hello !";
 ```
+---
+## Syntaxe
 * <span style="color: rgb(255, 200, 0);">[idem Javascript]</span>Les noms de variables PHP sont sensibles à la casse
-* Les noms des fonctions, classes et les mots clefsnne sont **pas** sensibles à la casse
+* Les noms des fonctions, classes et les mots-clés ne sont **pas** sensibles à la casse
 ---
 ## Sorties
 
-Sortie : contenu imprimé (intégrée) directement dans le document HTML.
+*Sortie : contenu imprimé (intégrée) directement dans le document HTML.*
 
-* Fontion `echo`
-
-→ imprime une chaine de caractère
+* Fontion `echo` qui imprime une chaine de caractère
 
 ```php
 echo "Bonjour ";
@@ -104,9 +705,7 @@ Bonjour lucas !
 ```
 ---
 ## Sorties
-* Fontion `print_r`
-
-→ affiche le contenu d'une variable
+* Fontion `print_r` qui affiche le contenu d'une variable
 
 ```PHP
 $tab = array("red", "green", "blue");
@@ -117,23 +716,22 @@ Array ( [0] => red [1] => green [2] => blue )
 ```
 ---
 ## Sorties
-* Fontion `var_dump`
-
-→ affiche le type et la valeur d'une variable
+* Fontion `var_dump` qui affiche le type et la valeur d'une variable
 
 ```PHP
 $a = 32;
 var_dump($a);
-
 $b = "Salut !";
 var_dump($b);
-
 $c = 32.5;
 var_dump($c);
-
 $d = array("red", "green", "blue");
 var_dump($d);
 ```
+---
+## Sorties
+* Fontion `var_dump` qui affiche le type et la valeur d'une variable
+
 ```
 int(32)
 string(7) "Salut !"
@@ -148,24 +746,43 @@ array(3) {
 
 En PHP, il existe trois niveaux d'erreur :
 
-* <span style="color: red; font-weight: bold;">ERROR</span> : l'exécution s'interrompt (ex. oubli d'un point-virgule)
-* <span style="color: orange; font-weight: bold;">WARNING</span> : l'exécution se poursuit (ex. essayer de modifier la valeur d'une constante)
-* <span style="color: blue; font-weight: bold;">NOTICE</span> : l'exécution se poursuit (ex. écrire une variable non définie)
+<div class="error-levels-container">
+  <div class="error-card error-fatal">
+    <div class="error-icon">💥</div>
+    <h3 class="error-type">ERROR</h3>
+    <div class="error-description">
+      <p><strong>L'exécution s'interrompt</strong></p>
+      <div class="error-example">
+        <span class="example-label">Exemple :</span>
+        <code>oubli d'un point-virgule</code>
+      </div>
+    </div>
+  </div>
 
-Il est possible de "lancer" manuellement une erreur en utilisant `die` :
-```PHP
-die("Une erreur s'est produite !");
-```
+  <div class="error-card error-warning">
+    <div class="error-icon">⚠️</div>
+    <h3 class="error-type">WARNING</h3>
+    <div class="error-description">
+      <p><strong>L'exécution se poursuit</strong></p>
+      <div class="error-example">
+        <span class="example-label">Exemple :</span>
+        <code>modifier une constante</code>
+      </div>
+    </div>
+  </div>
 
-Généralement, `die` est utilisée lorsque qu'une connexion à une BD échoue :
-```PHP
-$connection = mysql_connect('localhost', 'user', 'password');
-if (!$connection) {
-    die("Connexion à la BD échouée");
-}
-// pourquoi ne faut-il pas de else ?
-echo "Connexion à la BD réussie !";
-```
+  <div class="error-card error-notice">
+    <div class="error-icon">💡</div>
+    <h3 class="error-type">NOTICE</h3>
+    <div class="error-description">
+      <p><strong>L'exécution se poursuit</strong></p>
+      <div class="error-example">
+        <span class="example-label">Exemple :</span>
+        <code>variable non définie</code>
+      </div>
+    </div>
+  </div>
+</div>
 
 ---
 ## Programmation modulaire
@@ -194,8 +811,10 @@ echo "Connexion à la BD réussie !";
   <script type="text/javascript" src="script.js"></script>
 </body>
 ```
-
-`script.js`
+---
+## Programmation modulaire
+### En JavaScript
+Le fichier `script.js` contient :
 ```javascript
 document.getElementById("para").innerHTML = "Vous savez, moi..."
 ```
@@ -231,7 +850,10 @@ document.getElementById("para").innerHTML = "Vous savez, moi..."
   </p>
 </body>
 ```
-`situation.php`
+---
+## Programmation modulaire
+### En PHP
+Le fichier `situation.php` contient :
 ```PHP
 <?php
 echo "Vous savez, moi..."
@@ -240,12 +862,11 @@ echo "Vous savez, moi..."
 ---
 ## Déclaration d'une variable
 
-**En PHP, pas besoin de déclarer !**
-
-Une variable est déclarée quand on lui donne une valeur pour la première fois.
+**En PHP, pas besoin de déclarer !** Une variable est déclarée quand on lui donne une valeur pour la première fois.
 
 ```PHP
-$compteur = 1; // déclaration de la variable "compteur" et initialisation
+// déclaration de la variable "compteur" et initialisation
+$compteur = 1;
 ```
 
 On peut utiliser la fonction `isset` pour tester si une variable existe et ne vaut pas `NULL`
@@ -264,6 +885,8 @@ isset($autreVar); // false
 $ville = "Beauraing";
 $ville2 = $ville; //ville2 contient "Beauraing"
 ```
+---
+## Affectation d'une variable
 ### Affectation avec opération
 ```PHP
 $increment = 2;
@@ -294,26 +917,17 @@ $res2 = $var1 . $var2;
 ## Type d'une variable
 ### La fonction gettype
 
-→ indique le type actuel d'une variable
-
 ```php
-gettype($var);
+gettype($var); // indique le type actuel de $var
 ```
 
-Elle peut indiquer :
-
-* `"boolean"` : valeurs booléennes
-* `"integer"` : entiers
-* `"double"` : réels
-* `"string"` : chaine de caractères
-* `"boolean"` : tableaux
-* `"object"` : objets
-* `"NULL"` : valeur NULL
-* `"resource"` : ressources binaires
-
-Fonctions pour tester le type d'une valeur : `is_boolean` ,
-`is_integer` , `is_double` , `is_string` , `is_array` , `is_object` ,
-`is_ressource` , `is_null` , `is_numeric` (entier ou réel)
+Elle peut indiquer (notamment) :
+* `boolean` : valeurs booléennes
+* `integer` : entiers
+* `double` : réels
+* `string` : chaine de caractères
+* `boolean` : tableaux
+* `NULL` : valeur NULL
 
 ---
 ## Type d'une variable
@@ -323,13 +937,7 @@ Fonctions pour tester le type d'une valeur : `is_boolean` ,
 * réels (`1.5`, `-2.02`, ...)
 
 #### Opérateurs
-* `+`
-* `-`
-* `*`
-* `/`
-* `%`
-* `++`
-* `--`
+`+` `-` `*` `/` `%` `++` `--`
 ---
 ## Type d'une variable
 ### Booléens
@@ -342,7 +950,9 @@ Fonctions pour tester le type d'une valeur : `is_boolean` ,
 * `[]` (tableau vide)
 * `{}` (objet vide)
 * `NULL`
-
+---
+## Type d'une variable
+### Booléens
 #### Opérateurs
 * `!`
 * `&&` ou `and`
@@ -351,8 +961,7 @@ Fonctions pour tester le type d'une valeur : `is_boolean` ,
 ---
 ## Type d'une variable
 ### Absence de valeur
-#### Valeurs
-* `NULL`
+La valeur `NULL` matérialise l'absence de valeur.
 
 **Rappel** : `isset` permet de tester si une variable possède une valeur.
 
@@ -368,76 +977,31 @@ isset($var) //false
 ---
 ## Type d'une variable
 ### Chaines de caractères
-#### Valeurs
-
-* **chaines littérales (avec des apostrophes)**
+#### Chaines littérales (avec des apostrophes)
 
 → le contenu est écrit tel quel
 
 ```php
 $variable = "avec un dollard devant";
-echo 'Il fait beau aujourd\'hui !';
 echo 'En PHP, les variable s\'écrivent $variable.';
 ```
 ```
-Il fait beau aujourd'hui ! En PHP, les variable s'écrivent $variable.
+En PHP, les variable s'écrivent $variable.
 ```
-
-* **chaines non littérales (avec des guillemets)**
+---
+## Type d'une variable
+### Chaines de caractères
+#### Chaines non littérales (avec des guillemets)
 
 → les variables sont remplacées par leur valeur
 
 ```php
 $variable = "avec un dollard devant";
-echo "Il fait beau aujourd'hui !";
 echo "En PHP, les variable s'écrivent $variable.";
 ```
 ```
-Il fait beau aujourd'hui ! En PHP, les variable s'écrivent
-avec un dollard devant.
+En PHP, les variable s'écrivent avec un dollard devant.
 ```
----
-## Type d'une variable
-### Chaines de caractères
-#### Valeurs
-* **chaines "here-document" (heredoc)**
-
-→ pour écrire un message sur plusieurs lignes
-
-```php
-$nbMonstres = 5;
-$msg = <<<EXTRAIT
-Il y a $nbMonstres monstres dans ce niveau
-sur lequel je m'arrache les cheveux
-depuis des heures.
-EXTRAIT;
-echo $msg;
-```
-```
-Il y a 5 monstres dans ce niveau sur lequel je m'arrache les cheveux
-depuis des heures. 
-```
----
-## Type d'une variable
-### Chaines de caractères
-#### Valeurs
-* **chaines "now-document" (nowdoc)**
-
-→ idem mais les variables ne sont pas remplacées
-
-```php
-$nbMonstres = 5;
-$msg = <<<'EXTRAIT'
-Il y a $nbMonstres monstres dans ce niveau
-sur lequel je m'arrache les cheveux
-depuis des heures.
-EXTRAIT;
-echo $msg;
-```
-```
-Il y a $nbMonstres monstres dans ce niveau sur lequel
-je m'arrache les cheveux depuis des heures.
-``` 
 ---
 ## Constantes
 
@@ -464,6 +1028,8 @@ if(condition){
   //bloc
 }
 ```
+---
+## Les instructions
 ### Structure switch
 ```PHP
 switch($var){
@@ -478,6 +1044,7 @@ switch($var){
 }
 ```
 ---
+## Les instructions
 ### Boucle while
 
 ```php
