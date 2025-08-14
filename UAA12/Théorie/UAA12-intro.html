@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html>
+   <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+      :root {
+        --primary-color: #6366f1;
+        --secondary-color: #8b5cf6;
+        --accent-color: #06b6d4;
+        --text-dark: #1f2937;
+        --text-light: #6b7280;
+        --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --code-bg: #1e293b;
+        --code-text: #e2e8f0;
+        --success-color: #10b981;
+        --warning-color: #f59e0b;
+      }
+
+      body { 
+        font-family: 'Inter', sans-serif;
+        background: var(--bg-gradient);
+        color: var(--text-dark);
+        line-height: 1.6;
+      }
+
+      .remark-slide-content {
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        border-radius: 20px;
+        padding: 40px !important;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .remark-slide-content::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+        border-radius: 20px 20px 0 0;
+      }
+
+      h1, h2, h3 {
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1.5rem;
+      }
+
+      h1 {
+        font-size: 3rem;
+        text-align: center;
+        margin-bottom: 2rem;
+        text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        font-size: 2.5rem;
+        border-bottom: 3px solid var(--accent-color);
+        padding-bottom: 0.5rem;
+        margin-bottom: 2rem;
+      }
+
+      h3 {
+        font-size: 1.8rem;
+        color: var(--secondary-color);
+        margin-top: 2rem;
+      }
+
+      .remark-code, .remark-inline-code { 
+        font-family: 'JetBrains Mono', monospace;
+        background: var(--code-bg);
+        color: var(--code-text);
+        border-radius: 8px;
+        padding: 2px 6px;
+        font-size: 0.9em;
+      }
+
+      .remark-code-line {
+        padding: 0.5em 1em;
+      }
+
+      pre {
+        background: var(--code-bg) !important;
+        border-radius: 12px !important;
+        padding: 1.5rem !important;
+        border-left: 5px solid var(--accent-color) !important;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+        overflow-x: auto;
+      }
+
+      .hljs-keyword { color: #c792ea !important; }
+      .hljs-string { color: #c3e88d !important; }
+      .hljs-number { color: #f78c6c !important; }
+      .hljs-comment { color: #546e7a !important; }
+      .hljs-tag { color: #f07178 !important; }
+      .hljs-attr { color: #82aaff !important; }
+
+      p {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+        color: var(--text-dark);
+      }
+      /* Container principal pour les ressources */
+.resources-container {
+  display: flex;
+  gap: 2rem;
+  margin: 2rem 0;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Cartes individuelles */
+.resource-card {
+  flex: 1;
+  min-width: 300px;
+  max-width: 450px;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.resource-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: 20px 20px 0 0;
+}
+
+/* Couleurs spécifiques pour chaque carte */
+.browser-card {
+  background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+  border: 2px solid rgba(6, 182, 212, 0.2);
+}
+
+.browser-card::before {
+  background: linear-gradient(90deg, #06b6d4, #0891b2);
+}
+
+.server-card {
+  background: linear-gradient(135deg, #f3e8ff 0%, #faf5ff 100%);
+  border: 2px solid rgba(139, 92, 246, 0.2);
+}
+
+.server-card::before {
+  background: linear-gradient(90deg, #8b5cf6, #7c3aed);
+}
+
+/* Effets au survol */
+.resource-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.browser-card:hover {
+  border-color: rgba(6, 182, 212, 0.4);
+}
+
+.server-card:hover {
+  border-color: rgba(139, 92, 246, 0.4);
+}
+
+/* Icônes des ressources */
+.resource-icon {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+/* Titres des ressources */
+.resource-title {
+  font-size: 1.8rem !important;
+  font-weight: 700 !important;
+  text-align: center;
+  margin-bottom: 1.5rem !important;
+  margin-top: 0 !important;
+}
+
+.browser-card .resource-title {
+  background: linear-gradient(135deg, #0891b2, #06b6d4) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+.server-card .resource-title {
+  background: linear-gradient(135deg, #7c3aed, #8b5cf6) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* Listes dans les cartes */
+.resource-list {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+.resource-list li {
+  padding: 0.8rem 0;
+  padding-left: 2.5rem;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.resource-list li:last-child {
+  border-bottom: none;
+}
+
+.resource-list li:hover {
+  padding-left: 3rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+}
+
+/* Puces personnalisées pour chaque type */
+.browser-card .resource-list li::before {
+  content: '🔄';
+  position: absolute;
+  left: 0.5rem;
+  top: 0.8rem;
+  font-size: 1.2rem;
+}
+
+.server-card .resource-list li::before {
+  content: '⚡';
+  position: absolute;
+  left: 0.5rem;
+  top: 0.8rem;
+  font-size: 1.2rem;
+}
+
+/* Animation d'entrée */
+.resource-card {
+  animation: slideInUp 0.6s ease-out;
+}
+
+.browser-card {
+  animation-delay: 0.1s;
+}
+
+.server-card {
+  animation-delay: 0.3s;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .resources-container {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .resource-card {
+    min-width: auto;
+    max-width: none;
+  }
+}
+
+      ul {
+        font-size: 1.1rem;
+        margin-left: 2rem;
+        list-style: none !important; /* Supprime les puces par défaut */
+        padding-left: 0; /* Supprime le padding par défaut */
+      }
+      ul li {
+        margin-bottom: 0.8rem;
+        position: relative;
+        padding-left: 2rem; /* Espace pour la flèche personnalisée */
+      }
+
+      ul, ol {
+        font-size: 1.1rem;
+        margin-left: 2rem;
+      }
+
+      li {
+        margin-bottom: 0.8rem;
+        position: relative;
+      }
+
+      ul li::before {
+        content: '→';
+        color: var(--primary-color);
+        font-weight: bold;
+        position: absolute;
+        left: 0; /* Ajustement de la position */
+        top: 0;
+      }
+
+      a {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border-bottom: 2px solid transparent;
+      }
+
+      a:hover {
+        color: var(--secondary-color);
+        border-bottom-color: var(--secondary-color);
+        transform: translateY(-1px);
+      }
+
+      img {
+        border-radius: 12px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      img:hover {
+        transform: scale(1.02);
+      }
+
+      .center img {
+        display: block;
+        margin: 0 auto;
+      }
+
+      small {
+        font-size: 0.8rem !important;
+        color: var(--text-light) !important;
+        font-style: italic;
+        opacity: 0.8;
+      }
+
+      .center.middle {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        min-height: 80vh;
+      }
+
+      .center.middle h1 {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        animation: fadeInUp 1s ease-out;
+      }
+
+      .center.middle img {
+        animation: bounceIn 1s ease-out 0.5s both;
+        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes bounceIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.3);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        70% {
+          transform: scale(0.9);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      /* Style spécial pour les puces de navigation */
+/* Correction pour le numéro de slide */
+.remark-slide-number {
+  background: rgba(99, 102, 241, 0.9) !important;
+  color: white !important;
+  border-radius: 20px !important;
+  padding: 8px 16px !important;
+  font-weight: 500 !important;
+  backdrop-filter: blur(10px) !important;
+  z-index: 1001 !important; /* Plus élevé que le logo */
+  position: fixed !important;
+  bottom: 12px !important;
+  right: 20px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Ajustement du logo pour éviter les conflits */
+.logo-top-left {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  height: 100px;
+  z-index: 999; /* Légèrement inférieur au numéro de slide */
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+
+      /* Effet de survol pour les éléments interactifs */
+      .remark-slide-content:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      /* Style amélioré pour les listes numérotées */
+      ol {
+        counter-reset: item;
+        padding-left: 0;
+      }
+
+      ol li {
+        display: block;
+        margin-bottom: 1rem;
+        padding-left: 3rem;
+        position: relative;
+      }
+
+      ol li::before {
+        content: counter(item);
+        counter-increment: item;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        border-radius: 50%;
+        width: 2rem;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-weight: 600;
+        font-size: 0.9rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .remark-slide-content {
+          padding: 20px !important;
+        }
+        
+        h1 {
+          font-size: 2.5rem;
+        }
+        
+        h2 {
+          font-size: 2rem;
+        }
+      }
+
+      @page {
+        size: 1210px 681px;
+        margin: 0;
+      }
+
+.logo-top-left:hover {
+  opacity: 1;
+}
+
+/* Container pour le titre centré */
+.title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.5rem;
+  margin-top: 100px;
+}
+
+/* Titre principal avec plus d'emphase */
+.main-title {
+  font-size: 4rem !important;
+  font-weight: 800 !important;
+  background: linear-gradient(135deg, #1e40af, #6366f1, #8b5cf6) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+  margin-bottom: 0.5rem !important;
+  line-height: 1.1 !important;
+}
+
+/* Sous-titre plus discret mais visible */
+.subtitle {
+  font-size: 2.2rem !important;
+  font-weight: 300 !important;
+  color: #64748b !important;
+  font-style: italic !important;
+  opacity: 0.85 !important;
+  margin-top: 0 !important;
+  margin-bottom: 1.5rem !important;
+  position: relative !important;
+}
+
+.subtitle::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #6366f1, transparent);
+}
+
+/* Image PHP centrée avec effet */
+.centered-image {
+  display: block;
+  margin: 1.5rem auto 0 auto;
+  max-height: 200px;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
+  transition: transform 0.3s ease;
+}
+
+.centered-image:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive pour mobile */
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 2.5rem !important;
+  }
+  
+  .subtitle {
+    font-size: 1.6rem !important;
+  }
+  
+  .logo-top-left {
+    height: 80px;
+    top: 15px;
+    left: 15px;
+  }
+}
+/* =================================
+   RÈGLES D'IMPRESSION PDF OPTIMISÉES
+   ================================= */
+
+@media print {
+  /* Configuration générale de la page */
+  @page {
+    size: A4 landscape; /* Format paysage pour les slides */
+    margin: 10mm;
+  }
+
+  /* Corps de la page */
+  body {
+    background: white !important;
+    font-size: 12pt !important;
+  }
+
+  /* Container principal des slides */
+  .remark-slide-scaler {
+    width: 100% !important;
+    height: 100% !important;
+    left: 0 !important;
+    top: 0 !important;
+    transform: scale(1) !important;
+    box-shadow: none !important;
+  }
+
+  /* Contenu des slides */
+  .remark-slide-content {
+    width: 100% !important;
+    height: 90vh !important;
+    padding: 15mm !important;
+    margin: 0 !important;
+    background: white !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    page-break-after: always;
+    position: relative !important;
+    overflow: visible !important;
+  }
+
+  /* Masquer les éléments de navigation */
+  .remark-slide-number,
+  .remark-notes,
+  .remark-help,
+  .remark-backdrop {
+    display: none !important;
+  }
+
+  /* Logo en haut à gauche - ajustement pour l'impression */
+  .logo-top-left {
+    position: absolute !important;
+    top: 5mm !important;
+    left: 5mm !important;
+    height: 15mm !important;
+    z-index: 1 !important;
+    opacity: 1 !important;
+  }
+
+  /* Ajustement des titres pour l'impression */
+  h1, h2, h3 {
+    color: #1f2937 !important;
+    background: none !important;
+    -webkit-text-fill-color: #1f2937 !important;
+    text-shadow: none !important;
+  }
+
+  h1 {
+    font-size: 24pt !important;
+  }
+
+  h2 {
+    font-size: 20pt !important;
+    border-bottom: 2pt solid #6366f1 !important;
+  }
+
+  h3 {
+    font-size: 16pt !important;
+  }
+
+  /* Ajustement des paragraphes */
+  p {
+    font-size: 12pt !important;
+    line-height: 1.4 !important;
+    color: #1f2937 !important;
+  }
+
+  /* Ajustement des listes */
+  ul, ol {
+    font-size: 12pt !important;
+  }
+
+  ul li::before {
+    color: #6366f1 !important;
+  }
+
+  /* Blocs de code - optimisation pour l'impression */
+  pre {
+    background: #f8f9fa !important;
+    border: 1pt solid #e9ecef !important;
+    border-left: 3pt solid #6366f1 !important;
+    color: #212529 !important;
+    font-size: 10pt !important;
+    padding: 8pt !important;
+    page-break-inside: avoid;
+  }
+
+  .remark-code, .remark-inline-code {
+    background: #f8f9fa !important;
+    color: #212529 !important;
+    border: 1pt solid #e9ecef !important;
+    font-size: 10pt !important;
+  }
+
+  /* Images - ajustement pour l'impression */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
+
+  /* Cartes de ressources - adaptation pour l'impression */
+  .resources-container {
+    display: flex !important;
+    gap: 10mm !important;
+    page-break-inside: avoid;
+  }
+
+  .resource-card {
+    border: 1pt solid #e9ecef !important;
+    border-radius: 3mm !important;
+    background: white !important;
+    box-shadow: none !important;
+    padding: 8mm !important;
+    page-break-inside: avoid;
+  }
+
+  .resource-card::before {
+    height: 2pt !important;
+  }
+
+  .browser-card {
+    border-top: 3pt solid #06b6d4 !important;
+  }
+
+  .server-card {
+    border-top: 3pt solid #8b5cf6 !important;
+  }
+
+  /* Icônes des ressources */
+  .resource-icon {
+    font-size: 18pt !important;
+    margin-bottom: 5mm !important;
+  }
+
+  .resource-title {
+    font-size: 14pt !important;
+    color: #1f2937 !important;
+    background: none !important;
+    -webkit-text-fill-color: #1f2937 !important;
+  }
+
+  .resource-list li {
+    font-size: 11pt !important;
+    padding: 2mm 0 !important;
+    border-bottom: none !important;
+  }
+
+  /* Liens - couleur adaptée pour l'impression */
+  a {
+    color: #1f2937 !important;
+    text-decoration: underline !important;
+  }
+
+  /* Ajustements pour la slide de titre */
+  .title-container {
+    margin-top: 20mm !important;
+  }
+
+  .main-title {
+    font-size: 28pt !important;
+    color: #1f2937 !important;
+    background: none !important;
+    -webkit-text-fill-color: #1f2937 !important;
+  }
+
+  .subtitle {
+    font-size: 16pt !important;
+    color: #6b7280 !important;
+  }
+
+  .centered-image {
+    max-height: 40mm !important;
+  }
+
+  /* Éviter les coupures de page non désirées */
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+
+  .resource-card,
+  pre,
+  blockquote {
+    page-break-inside: avoid;
+  }
+
+  /* Masquer les animations et transitions pour l'impression */
+  * {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+}
+
+
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <textarea id="source">
+<img src="img/indbg.jpg" class="logo-top-left" alt="Logo">
+<div class="title-container">
+  <h1 class="main-title">Développement d'un site web dynamique</h1>
+  <h2 class="subtitle">introduction</h2>
+  <img src="img/php.png" class="centered-image" alt="Logo PHP">
+</div>
+---
+## On parle de quoi ?
+
+1. <a href="UAA12-intro.html#3">Fonctionnement d'un site internet</a>
+2. <a href="UAA12-intro.html#7">Le langage PHP</a>
+3. <a href="UAA12-intro.html#10">Installation d'un serveur PHP sur une machine</a>
+---
+## Fonctionnement d'un site internet (version 3TTr)
+<br>
+<br>
+<img height="350px" src="img/http1.png">
+<br>
+<small>Image tirée du cours de "Développement web" - HENALLUX 2018</small>
+---
+## Fonctionnement d'un site internet (version 4TTr)
+<br>
+<br>
+<img height="350px" src="img/http2.png">
+<br>
+<small>Image tirée du cours de "Développement web" - HENALLUX 2018</small>
+---
+## Fonctionnement d'un site internet (version 5-6TTr)
+<br>
+<br>
+<img height="350px" src="img/http3.png">
+<br>
+<small>Image tirée du cours de "Développement web" - HENALLUX 2018</small>
+---
+## Deux ressources fondamentales
+
+<div class="resources-container">
+  <div class="resource-card browser-card">
+    <div class="resource-icon">🌐</div>
+    <h3 class="resource-title">Un navigateur</h3>
+    <ul class="resource-list">
+      <li>Envoie les demandes de fichiers (HTML / CSS / JavaScript)</li>  
+      <li>Réceptionne les réponses</li>
+      <li>Gère l'affichage (HTML / CSS)</li>
+      <li>Exécute du JavaScript</li>
+    </ul>
+  </div>
+  
+  <div class="resource-card server-card">
+    <div class="resource-icon">🖥️</div>
+    <h3 class="resource-title">Un serveur</h3>
+    <ul class="resource-list">
+      <li>Est un ordinateur sur lequel un logiciel est installé</li>
+      <li>Est accessible depuis internet</li>
+      <li>Est capable de répondre à des demandes de fichiers</li>
+      <li>Est capable d'exécuter des scripts en modifiant ces fichiers</li>
+    </ul>
+  </div>
+</div>
+
+## Le langage PHP
+### Un premier exemple
+
+Le PHP s'écrit directement dans un fichier HTML.
+
+```PHP
+<h1>Heure actuelle</h1>
+<p>Bonjour ! Il est actuellement
+<?php
+$heure = date('H:i');
+echo $heure;
+?>
+ en Belgique.</p>
+```
+Lorsqu'un document contient du PHP, l'extension du fichier devient .php (et plus .html !).
+---
+## Le langage PHP
+### Un premier exemple
+Une fois que le serveur PHP aura exécuté le script, le fichier HTML suivant sera envoyé au client :
+```html
+<h1>Heure actuelle</h1>
+<p>Bonjour ! Il est actuellement
+11:20
+ en Belgique.</p>
+```
+---
+## Le langage PHP
+### En résumé
+* **PHP vs. JavaScript**
+  * PHP permet d'écrire des scripts coté serveur, JavaScript permet d'écrire des scripts coté client
+  * PHP ne permet pas d'interagir avec l'utilisateur car PHP est exécuté avant l'envoi de la page au client
+  * PHP peut interagir avec des fichiers, avec des bases de données, etc.
+* **Le but de PHP est de construire des pages web dynamiques**
+  * un même fichier PHP peut donner plusieurs fichiers HTML différents
+* **PHP est un langage "stateless"** :
+  * une fois le boulot terminé, il oublie tout !
+  * si un navigateur émet deux requêtes, elles seront traitées de manière indépendante !
+---
+## Installation d'un serveur PHP sur une machine
+
+* Télécharger et installer XAMPP : https://www.apachefriends.org/download.html
+---
+## Installation d'un serveur PHP sur une machine
+* Ouvrir l'application et se rendre dans l'onglet de gestion des serveurs ("Manage Servers")
+<br>
+<img height="350px" src="img/xampp0.png">
+---
+## Installation d'un serveur PHP sur une machine
+* Vérifier que le serveur Apache est bien en cours d'exécution ("running")
+<img height="350px" src="img/xampp.png">
+---
+## Installation d'un serveur PHP sur une machine
+* Revenir ensuite dans l'onglet principal ("Welcome") et cliquer sur le bouton permetant d'ouvrir le dossier de l'app ("Open application folder")
+<img height="350px" src="img/xampp0.png">
+---
+## Installation d'un serveur PHP sur une machine
+* Ouvrir le dossier "htdocs"
+<img height="350px" src="img/xampp1.png">
+---
+## Installation d'un serveur PHP sur une machine
+* Supprimer les fichiers déjà présents
+<img height="200px" src="img/xampp2.png">
+---
+## Installation d'un serveur PHP sur une machine
+* Créer un dossier qui contiendra vos projets
+<img height="200px" src="img/xampp3.png">
+---
+## Installation d'un serveur PHP sur une machine
+* Placer vos fichiers PHP/HTML/CSS/JS dans ce dossier
+<img height="200px" src="img/xampp4.png">
+---
+## Installation d'un serveur PHP sur une machine
+* Accéder à l'url suivante depuis un navigateur WEB : http://localhost/projets/
+<img height="200px" src="img/xampp5.png">
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+
+</html>

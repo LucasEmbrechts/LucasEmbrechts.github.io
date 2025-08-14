@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Consolas'; }
+			  @page {
+		  size: 1210px 681px;
+		  margin: 0;
+		}
+
+		@media print {
+		  .remark-slide-scaler {
+			width: 100% !important;
+			height: 100% !important;
+			transform: scale(1) !important;
+			top: 0 !important;
+			left: 0 !important;
+		  }
+		}
+    small{
+      font-size: 10px!important;
+    }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# Développement d’un site web dynamique :
+# bases
+<img height="200px" src="img/php.png">
+
+---
+## On parle de quoi ?
+
+1. <a href="UAA12-bases.html#3">Syntaxe</a>
+2. <a href="UAA12-bases.html#5">Sorties</a>
+3. <a href="UAA12-bases.html#8">Erreurs</a>
+4. <a href="UAA12-bases.html#9">Programmation modulaire</a>
+5. <a href="UAA12-bases.html#13">Déclaration d'une variable</a>
+6. <a href="UAA12-bases.html#14">Affectation d'une variable</a>
+7. <a href="UAA12-bases.html#15">Type d'une variable</a>
+8. <a href="UAA12-bases.html#23">Constantes</a>
+9. <a href="UAA12-bases.html#24">Les instructions</a>
+---
+## Syntaxe
+* <span style="color: rgb(255, 200, 0);">[idem Javascript]</span>Tous les blancs (espaces, tabulations, retours à la ligne) dans le code sont ignorés (pas d'excuse pour ne pas écrire un beau code bien indenté !)
+
+* <span style="color: rgb(255, 200, 0);">[idem Javascript]</span>Deux formats pour les commentaires :
+  * `//` pour tout le reste de la ligne
+  * `/* ... /*` pour plusieurs lignes ou une partie de ligne
+
+
+* Chaque instruction PHP doit se terminer par un `;`. Le dernier avant la balise fermante peut être omis.
+---
+## Syntaxe
+* Le nom d'une variable commence par `$`
+```php
+$maVariable = 1;
+```
+* Ce nom doit commencer par une lettre ou `_` et être composé de lettres, de chiffres et/ou de `_` .
+```php
+// correct
+$_maVar = 1;
+// correct
+$maVar_ = 2;
+// pas correct
+$1var = "Hello !";
+```
+* <span style="color: rgb(255, 200, 0);">[idem Javascript]</span>Les noms de variables PHP sont sensibles à la casse
+* Les noms des fonctions, classes et les mots clefsnne sont **pas** sensibles à la casse
+---
+## Sorties
+
+Sortie : contenu imprimé (intégrée) directement dans le document HTML.
+
+* Fontion `echo`
+
+→ imprime une chaine de caractère
+
+```php
+echo "Bonjour ";
+$prenom = "lucas";
+echo $prenom;
+echo " !";
+```
+
+```
+Bonjour lucas ! 
+```
+---
+## Sorties
+* Fontion `print_r`
+
+→ affiche le contenu d'une variable
+
+```PHP
+$tab = array("red", "green", "blue");
+echo $tab;
+```
+```
+Array ( [0] => red [1] => green [2] => blue ) 
+```
+---
+## Sorties
+* Fontion `var_dump`
+
+→ affiche le type et la valeur d'une variable
+
+```PHP
+$a = 32;
+var_dump($a);
+
+$b = "Salut !";
+var_dump($b);
+
+$c = 32.5;
+var_dump($c);
+
+$d = array("red", "green", "blue");
+var_dump($d);
+```
+```
+int(32)
+string(7) "Salut !"
+float(32.5)
+array(3) {
+  [0]=> string(3) "red"
+  [1]=> string(5) "green"
+  [2]=> string(4) "blue" } 
+```
+---
+## Erreurs
+
+En PHP, il existe trois niveaux d'erreur :
+
+* <span style="color: red; font-weight: bold;">ERROR</span> : l'exécution s'interrompt (ex. oubli d'un point-virgule)
+* <span style="color: orange; font-weight: bold;">WARNING</span> : l'exécution se poursuit (ex. essayer de modifier la valeur d'une constante)
+* <span style="color: blue; font-weight: bold;">NOTICE</span> : l'exécution se poursuit (ex. écrire une variable non définie)
+
+Il est possible de "lancer" manuellement une erreur en utilisant `die` :
+```PHP
+die("Une erreur s'est produite !");
+```
+
+Généralement, `die` est utilisée lorsque qu'une connexion à une BD échoue :
+```PHP
+$connection = mysql_connect('localhost', 'user', 'password');
+if (!$connection) {
+    die("Connexion à la BD échouée");
+}
+// pourquoi ne faut-il pas de else ?
+echo "Connexion à la BD réussie !";
+```
+
+---
+## Programmation modulaire
+### En JavaScript
+
+**Option 1** : directement dans le document HTML.
+
+```html
+<body>
+  <h1>Exemple</h1>
+  <p id="para"></p>
+  <script>
+    document.getElementById("para").innerHTML = "Vous savez, moi..."
+  </script>
+</body>
+```
+---
+## Programmation modulaire
+### En JavaScript
+**Option 2** : dans un fichier qui ne contient que du JavaScript.
+
+```html
+<body>
+  <h1>Exemple</h1>
+  <p id="para"></p>
+  <script type="text/javascript" src="script.js"></script>
+</body>
+```
+
+`script.js`
+```javascript
+document.getElementById("para").innerHTML = "Vous savez, moi..."
+```
+
+---
+## Programmation modulaire
+### En PHP
+
+**Option 1** : directement dans le document HTML (à l'endroit où le résultat doit être placé)
+
+```html
+<body>
+  <h1>Exemple</h1>
+  <p>
+    <?php
+    echo "Vous savez, moi..."
+    ?>
+  </p>
+</body>
+```
+---
+## Programmation modulaire
+### En PHP
+**Option 2** : dans un fichier qui ne contient que du PHP.
+
+```html
+<body>
+  <h1>Exemple</h1>
+  <p>
+    <?php
+    include("situation.php");
+    ?>
+  </p>
+</body>
+```
+`situation.php`
+```PHP
+<?php
+echo "Vous savez, moi..."
+?>
+```
+---
+## Déclaration d'une variable
+
+**En PHP, pas besoin de déclarer !**
+
+Une variable est déclarée quand on lui donne une valeur pour la première fois.
+
+```PHP
+$compteur = 1; // déclaration de la variable "compteur" et initialisation
+```
+
+On peut utiliser la fonction `isset` pour tester si une variable existe et ne vaut pas `NULL`
+```PHP
+isset($var); //false
+$var = 1;
+isset($var); //true
+$autreVar = null;
+isset($autreVar); // false
+```
+---
+## Affectation d'une variable
+### Affectation par valeur
+
+```PHP
+$ville = "Beauraing";
+$ville2 = $ville; //ville2 contient "Beauraing"
+```
+### Affectation avec opération
+```PHP
+$increment = 2;
+$compteur = 0;
+
+$compteur += $increment;
+$compteur -= $increment;
+$compteur *= $increment;
+$compteur /= $increment;
+$compteur .= $increment;
+```
+---
+## Type d'une variable
+### PHP est un langage non typé
+**<span style="color: rgb(255, 200, 0);">[idem Javascript]</span> les variables ne sont pas typées** :
+
+* pas besoin de déclarer le type des variables / arguments des fonctions
+* le type d'une variable peut changer au cours du programme
+* <span style="color: red">conversion implicite</span>
+
+```php
+$var1 = "12";
+$var2 = 2;
+$res1 = $var1 * $var2;
+$res2 = $var1 . $var2;
+```
+---
+## Type d'une variable
+### La fonction gettype
+
+→ indique le type actuel d'une variable
+
+```php
+gettype($var);
+```
+
+Elle peut indiquer :
+
+* `"boolean"` : valeurs booléennes
+* `"integer"` : entiers
+* `"double"` : réels
+* `"string"` : chaine de caractères
+* `"boolean"` : tableaux
+* `"object"` : objets
+* `"NULL"` : valeur NULL
+* `"resource"` : ressources binaires
+
+Fonctions pour tester le type d'une valeur : `is_boolean` ,
+`is_integer` , `is_double` , `is_string` , `is_array` , `is_object` ,
+`is_ressource` , `is_null` , `is_numeric` (entier ou réel)
+
+---
+## Type d'une variable
+### Nombres
+#### Valeurs
+* entiers (`42`, `-6`, `0`, ...)
+* réels (`1.5`, `-2.02`, ...)
+
+#### Opérateurs
+* `+`
+* `-`
+* `*`
+* `/`
+* `%`
+* `++`
+* `--`
+---
+## Type d'une variable
+### Booléens
+#### Valeurs
+* `true` ou `TRUE`
+* `false` ou `FALSE`
+* `0`
+* `"`
+* `"0"`
+* `[]` (tableau vide)
+* `{}` (objet vide)
+* `NULL`
+
+#### Opérateurs
+* `!`
+* `&&` ou `and`
+* `||` ou `or`
+
+---
+## Type d'une variable
+### Absence de valeur
+#### Valeurs
+* `NULL`
+
+**Rappel** : `isset` permet de tester si une variable possède une valeur.
+
+**Aussi** : `unset` permet de supprimer une variable.
+
+```PHP
+$var = "Hello";
+isset($var) //true
+unset($var)
+isset($var) //false
+```
+
+---
+## Type d'une variable
+### Chaines de caractères
+#### Valeurs
+
+* **chaines littérales (avec des apostrophes)**
+
+→ le contenu est écrit tel quel
+
+```php
+$variable = "avec un dollard devant";
+echo 'Il fait beau aujourd\'hui !';
+echo 'En PHP, les variable s\'écrivent $variable.';
+```
+```
+Il fait beau aujourd'hui ! En PHP, les variable s'écrivent $variable.
+```
+
+* **chaines non littérales (avec des guillemets)**
+
+→ les variables sont remplacées par leur valeur
+
+```php
+$variable = "avec un dollard devant";
+echo "Il fait beau aujourd'hui !";
+echo "En PHP, les variable s'écrivent $variable.";
+```
+```
+Il fait beau aujourd'hui ! En PHP, les variable s'écrivent
+avec un dollard devant.
+```
+---
+## Type d'une variable
+### Chaines de caractères
+#### Valeurs
+* **chaines "here-document" (heredoc)**
+
+→ pour écrire un message sur plusieurs lignes
+
+```php
+$nbMonstres = 5;
+$msg = <<<EXTRAIT
+Il y a $nbMonstres monstres dans ce niveau
+sur lequel je m'arrache les cheveux
+depuis des heures.
+EXTRAIT;
+echo $msg;
+```
+```
+Il y a 5 monstres dans ce niveau sur lequel je m'arrache les cheveux
+depuis des heures. 
+```
+---
+## Type d'une variable
+### Chaines de caractères
+#### Valeurs
+* **chaines "now-document" (nowdoc)**
+
+→ idem mais les variables ne sont pas remplacées
+
+```php
+$nbMonstres = 5;
+$msg = <<<'EXTRAIT'
+Il y a $nbMonstres monstres dans ce niveau
+sur lequel je m'arrache les cheveux
+depuis des heures.
+EXTRAIT;
+echo $msg;
+```
+```
+Il y a $nbMonstres monstres dans ce niveau sur lequel
+je m'arrache les cheveux depuis des heures.
+``` 
+---
+## Constantes
+
+Une constante est une variable qui ne peut pas changer de valeur au cours de l'exécution du programme.
+
+On définit une constante à l'aide de `define` :
+
+```php
+define('MACONSTANTE', 'le contenu de ma constante');
+```
+<span style="color:red">Attention : les constantes s'utilisent sans `$` !</span>
+```php
+define('MESSAGE', 'Bienvenue sur mon site internet !');
+echo MESSAGE;
+```
+---
+## Les instructions
+### Structure if-else
+
+```PHP
+if(condition){
+  // bloc
+} else{
+  //bloc
+}
+```
+### Structure switch
+```PHP
+switch($var){
+  case valeur:
+    //instruction
+    break;
+  case valeur:
+    //instruction
+    break;
+  default:
+    //instruction
+}
+```
+---
+### Boucle while
+
+```php
+while(condition){
+  //bloc
+}
+```
+### Boucle for
+```php
+for(initialisation, condition, incrémentation){
+  //bloc
+}
+```
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
