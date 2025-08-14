@@ -1,53 +1,1086 @@
+
+
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Title</title>
+    <title>UAA12 - Tableaux PHP</title>
     <meta charset="utf-8">
     <style>
-      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
-      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
-      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
 
-      body { font-family: 'Droid Serif'; }
-      h1, h2, h3 {
-        font-family: 'Yanone Kaffeesatz';
-        font-weight: normal;
+      :root {
+        --primary-color: #6366f1;
+        --secondary-color: #8b5cf6;
+        --accent-color: #06b6d4;
+        --text-dark: #1f2937;
+        --text-light: #6b7280;
+        --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --code-bg: #1e293b;
+        --code-text: #e2e8f0;
+        --success-color: #10b981;
+        --warning-color: #f59e0b;
+        --error-color: #ef4444;
       }
-      .remark-code, .remark-inline-code { font-family: 'Consolas'; }
-			  @page {
-		  size: 1210px 681px;
-		  margin: 0;
-		}
 
-		@media print {
-		  .remark-slide-scaler {
-			width: 100% !important;
-			height: 100% !important;
-			transform: scale(1) !important;
-			top: 0 !important;
-			left: 0 !important;
-		  }
-		}
-    small{
-      font-size: 10px!important;
-    }
+      body { 
+        font-family: 'Inter', sans-serif;
+        background: var(--bg-gradient);
+        color: var(--text-dark);
+        line-height: 1.6;
+      }
+
+      .remark-slide-content {
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        border-radius: 20px;
+        padding: 40px !important;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .remark-slide-content::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+        border-radius: 20px 20px 0 0;
+      }
+
+      h1, h2, h3 {
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-top: 0px;
+        margin-bottom: 1rem;
+      }
+
+      h1 {
+        font-size: 3rem;
+        text-align: center;
+        text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        font-size: 2.5rem;
+        border-bottom: 3px solid var(--accent-color);
+        padding-bottom: 0.5rem;
+      }
+
+      h3 {
+        font-size: 1.8rem;
+        color: var(--secondary-color);
+      }
+
+      h4 {
+        font-size: 1.4rem;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-top: 0px;
+        margin-bottom: 1rem;
+      }
+
+      .remark-code, .remark-inline-code { 
+        font-family: 'JetBrains Mono', monospace;
+        background: var(--code-bg);
+        color: var(--code-text);
+        border-radius: 8px;
+        padding: 2px 6px;
+        font-size: 0.9em;
+      }
+
+      pre {
+        background: var(--code-bg) !important;
+        border-radius: 12px !important;
+        padding: 1rem !important;
+        border-left: 5px solid var(--accent-color) !important;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+        overflow-x: auto;
+      }
+
+      .hljs-keyword { color: #c792ea !important; }
+      .hljs-string { color: #c3e88d !important; }
+      .hljs-number { color: #f78c6c !important; }
+      .hljs-comment { color: #546e7a !important; }
+      .hljs-tag { color: #f07178 !important; }
+      .hljs-attr { color: #82aaff !important; }
+
+      p {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+        color: var(--text-dark);
+      }
+
+      ul {
+        font-size: 1.1rem;
+        margin-left: 1rem;
+        list-style: none !important;
+        padding-left: 0;
+      }
+
+      ul li {
+        margin-bottom: 0.8rem;
+        position: relative;
+        padding-left: 2rem;
+      }
+
+      ul li::before {
+        content: '→';
+        color: var(--primary-color);
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+        top: 0;
+        transition: transform 0.2s ease;
+      }
+
+      ul li:hover::before {
+        transform: translateX(3px);
+      }
+
+      ol {
+        counter-reset: item;
+        padding-left: 0;
+        list-style: none;
+      }
+
+      ol li {
+        display: block;
+        margin-bottom: 1rem;
+        padding-left: 3rem;
+        position: relative;
+      }
+
+      ol li::before {
+        content: counter(item);
+        counter-increment: item;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        border-radius: 50%;
+        width: 2rem;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-weight: 600;
+        font-size: 0.9rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      a {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border-bottom: 2px solid transparent;
+      }
+
+      a:hover {
+        color: var(--secondary-color);
+        border-bottom-color: var(--secondary-color);
+        transform: translateY(-1px);
+      }
+
+      img {
+        border-radius: 12px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        max-width: 100%;
+        height: auto;
+      }
+
+      img:hover {
+        transform: scale(1.02);
+      }
+
+      .center img {
+        display: block;
+        margin: 0 auto;
+      }
+
+      small {
+        font-size: 0.8rem !important;
+        color: var(--text-light) !important;
+        font-style: italic;
+        opacity: 0.8;
+      }
+
+      .center.middle {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+        min-height: 80vh;
+        padding-top: 2rem;
+      }
+
+      .center.middle h1 {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        animation: fadeInUp 1s ease-out;
+      }
+
+      .center.middle img {
+        animation: bounceIn 1s ease-out 0.5s both;
+        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+      }
+
+      span[style*="color: rgb(255, 200, 0)"] {
+        background: linear-gradient(135deg, var(--warning-color), #fbbf24);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 600 !important;
+      }
+
+      span[style*="color: red"] {
+        color: var(--error-color) !important;
+        font-weight: 600 !important;
+      }
+
+      span[style*="color: orange"] {
+        color: var(--warning-color) !important;
+        font-weight: 600 !important;
+      }
+
+      span[style*="color: blue"] {
+        color: var(--accent-color) !important;
+        font-weight: 600 !important;
+      }
+
+      .remark-slide-number {
+        background: rgba(99, 102, 241, 0.9) !important;
+        color: white !important;
+        border-radius: 20px !important;
+        padding: 8px 16px !important;
+        font-weight: 500 !important;
+        backdrop-filter: blur(10px) !important;
+        z-index: 1001 !important;
+        position: fixed !important;
+        bottom: 12px !important;
+        right: 20px !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+      }
+
+      .logo-top-left {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        height: 100px;
+        z-index: 999;
+        opacity: 0.9;
+        transition: opacity 0.3s ease;
+      }
+
+      .logo-top-left:hover {
+        opacity: 1;
+      }
+
+      .title-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 0.5rem;
+        margin-top: 50px;
+      }
+
+      .main-title {
+        font-size: 4rem !important;
+        font-weight: 800 !important;
+        background: linear-gradient(135deg, #1e40af, #6366f1, #8b5cf6) !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        background-clip: text !important;
+        text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+        margin-bottom: 0.5rem !important;
+        line-height: 1.1 !important;
+      }
+
+      .subtitle {
+        font-size: 2.2rem !important;
+        font-weight: 300 !important;
+        color: #64748b !important;
+        font-style: italic !important;
+        opacity: 0.85 !important;
+        margin-top: 0 !important;
+        margin-bottom: 1.5rem !important;
+        position: relative !important;
+      }
+
+      .subtitle::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #6366f1, transparent);
+      }
+
+      .centered-image {
+        display: block;
+        margin: 1.5rem auto 0 auto;
+        max-height: 200px;
+        filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
+        transition: transform 0.3s ease;
+      }
+
+      .centered-image:hover {
+        transform: scale(1.05);
+      }
+
+      .remark-slide-content:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes bounceIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.3);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        70% {
+          transform: scale(0.9);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .remark-slide-content {
+          padding: 20px !important;
+        }
+        
+        h1 {
+          font-size: 2.5rem;
+        }
+        
+        h2 {
+          font-size: 2rem;
+        }
+
+        .main-title {
+          font-size: 2.5rem !important;
+        }
+        
+        .subtitle {
+          font-size: 1.6rem !important;
+        }
+        
+        .logo-top-left {
+          height: 80px;
+          top: 15px;
+          left: 15px;
+        }
+      }
+
+      @page {
+        size: 1210px 681px;
+        margin: 0;
+      }
+
+      @media print {
+        @page {
+          size: A4 landscape;
+          margin: 10mm;
+        }
+
+        body {
+          background: white !important;
+          font-size: 12pt !important;
+        }
+
+        .remark-slide-scaler {
+          width: 100% !important;
+          height: 100% !important;
+          left: 0 !important;
+          top: 0 !important;
+          transform: scale(1) !important;
+          box-shadow: none !important;
+        }
+
+        .remark-slide-content {
+          width: 100% !important;
+          height: 90vh !important;
+          padding: 15mm !important;
+          margin: 0 !important;
+          background: white !important;
+          border-radius: 0 !important;
+          box-shadow: none !important;
+          border: none !important;
+          page-break-after: always;
+          position: relative !important;
+          overflow: visible !important;
+        }
+
+        .remark-slide-number,
+        .remark-notes,
+        .remark-help,
+        .remark-backdrop {
+          display: none !important;
+        }
+
+        .logo-top-left {
+          position: absolute !important;
+          top: 5mm !important;
+          left: 5mm !important;
+          height: 15mm !important;
+          z-index: 1 !important;
+          opacity: 1 !important;
+        }
+
+        h1, h2, h3 {
+          color: #1f2937 !important;
+          background: none !important;
+          -webkit-text-fill-color: #1f2937 !important;
+          text-shadow: none !important;
+        }
+
+        h1 {
+          font-size: 24pt !important;
+        }
+
+        h2 {
+          font-size: 20pt !important;
+          border-bottom: 2pt solid #6366f1 !important;
+        }
+
+        h3 {
+          font-size: 16pt !important;
+        }
+
+        p {
+          font-size: 12pt !important;
+          line-height: 1.4 !important;
+          color: #1f2937 !important;
+        }
+
+        ul, ol {
+          font-size: 12pt !important;
+        }
+
+        ul li::before {
+          color: #6366f1 !important;
+        }
+
+        pre {
+          background: #f8f9fa !important;
+          border: 1pt solid #e9ecef !important;
+          border-left: 3pt solid #6366f1 !important;
+          color: #212529 !important;
+          font-size: 10pt !important;
+          padding: 8pt !important;
+          page-break-inside: avoid;
+        }
+
+        .remark-code, .remark-inline-code {
+          background: #f8f9fa !important;
+          color: #212529 !important;
+          border: 1pt solid #e9ecef !important;
+          font-size: 10pt !important;
+        }
+
+        img {
+          max-width: 100% !important;
+          height: auto !important;
+          border-radius: 0 !important;
+          box-shadow: none !important;
+          page-break-inside: avoid;
+        }
+
+        a {
+          color: #1f2937 !important;
+          text-decoration: underline !important;
+        }
+
+        .title-container {
+          margin-top: 20mm !important;
+        }
+
+        .main-title {
+          font-size: 28pt !important;
+          color: #1f2937 !important;
+          background: none !important;
+          -webkit-text-fill-color: #1f2937 !important;
+        }
+
+        .subtitle {
+          font-size: 16pt !important;
+          color: #6b7280 !important;
+        }
+
+        .centered-image {
+          max-height: 40mm !important;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+          page-break-after: avoid;
+        }
+
+        pre, blockquote {
+          page-break-inside: avoid;
+        }
+
+        * {
+          animation-duration: 0s !important;
+          animation-delay: 0s !important;
+          transition-duration: 0s !important;
+          transition-delay: 0s !important;
+        }
+      }
+      /* Container principal pour les concepts de tableaux */
+.array-concept-container {
+  margin: 2rem 0;
+  padding: 0.5rem;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05));
+  border-radius: 20px;
+  border: 2px solid rgba(99, 102, 241, 0.1);
+}
+
+.concept-title {
+  text-align: center;
+  color: var(--secondary-color) !important;
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+}
+
+/* Visualisation du tableau */
+.array-visualization {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Items individuels du tableau */
+.array-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.array-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  border-color: rgba(99, 102, 241, 0.2);
+}
+
+/* Clés du tableau */
+.array-key {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 8px rgba(99, 102, 241, 0.3);
+  flex-shrink: 0;
+  padding: 5px;
+}
+
+/* Flèche de correspondance */
+.array-arrow {
+  color: var(--accent-color);
+  font-size: 1.5rem;
+  font-weight: bold;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.array-item:hover .array-arrow {
+  transform: translateX(5px);
+}
+
+/* Valeurs du tableau */
+.array-value {
+  background: linear-gradient(135deg, var(--accent-color), var(--success-color));
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  flex-grow: 1;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(6, 182, 212, 0.3);
+  min-width: 120px;
+}
+
+/* Légende */
+.array-legend {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding-top: 1.5rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.key-color {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+.value-color {
+  background: linear-gradient(135deg, var(--accent-color), var(--success-color));
+}
+
+/* Animation d'entrée */
+.array-item {
+  animation: slideInLeft 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+.array-item:nth-child(1) { animation-delay: 0.1s; }
+.array-item:nth-child(2) { animation-delay: 0.2s; }
+.array-item:nth-child(3) { animation-delay: 0.3s; }
+.array-item:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .array-concept-container {
+    padding: 0.5rem;
+    margin: 1rem 0;
+  }
+  
+  .array-visualization {
+    max-width: 100%;
+  }
+  
+  .array-item {
+    padding: 0.8rem;
+    gap: 0.8rem;
+  }
+  
+  .array-key {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  
+  .array-value {
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    min-width: 100px;
+  }
+  
+  .array-legend {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+}
+
+/* Ajustements pour l'impression */
+@media print {
+  .array-concept-container {
+    background: white !important;
+    border: 1pt solid #e5e7eb !important;
+    page-break-inside: avoid;
+  }
+  
+  .array-item {
+    box-shadow: none !important;
+    border: 1pt solid #e5e7eb !important;
+  }
+  
+  .array-key {
+    background: #6366f1 !important;
+    box-shadow: none !important;
+  }
+  
+  .array-value {
+    background: #06b6d4 !important;
+    box-shadow: none !important;
+  }
+  
+  .legend-color {
+    border: 1pt solid #000 !important;
+  }
+}
+/* Container principal condensé */
+.simple-structure-demo {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.structure-title {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+/* Container principal */
+.main-container {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(139, 92, 246, 0.08));
+  border: 3px solid var(--primary-color);
+  border-radius: 20px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.container-label {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  background: var(--primary-color);
+  color: white;
+  padding: 0.3rem 1rem;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Grille des familles */
+.families-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+/* Boîtes des familles */
+.family-box {
+  background: white;
+  border-radius: 15px;
+  padding: 1.2rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border: 2px solid rgba(139, 92, 246, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.family-box:hover {
+  transform: translateY(-3px);
+  border-color: var(--secondary-color);
+}
+
+/* Noms des familles - CLÉS PRINCIPALES (mauve) */
+.family-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  padding: 0.6rem;
+  border-radius: 10px;
+  color: white;
+  background: linear-gradient(135deg, var(--secondary-color), #7c3aed);
+  box-shadow: 0 3px 8px rgba(139, 92, 246, 0.3);
+}
+
+/* Liste des membres */
+.members-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* Container de chaque membre */
+.member {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  padding: 0.6rem 0.8rem;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.member:hover {
+  transform: translateX(5px);
+  background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Rôles des membres - CLÉS SECONDAIRES (mauve) */
+.member-role {
+  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  min-width: 50px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(139, 92, 246, 0.3);
+}
+
+/* Noms des personnes - VALEURS (vert/bleu) */
+.member-name {
+  background: linear-gradient(135deg, var(--accent-color), var(--success-color));
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  flex-grow: 1;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(6, 182, 212, 0.3);
+}
+
+/* Démonstration d'accès */
+.access-demo {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1));
+  border: 2px solid rgba(16, 185, 129, 0.3);
+  border-radius: 15px;
+  padding: 1rem;
+}
+
+.access-path {
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  font-family: 'JetBrains Mono', monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Surlignage des clés dans l'exemple */
+.key-highlight {
+  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 6px rgba(139, 92, 246, 0.3);
+}
+
+/* Surlignage des valeurs dans l'exemple */
+.value-highlight {
+  background: linear-gradient(135deg, var(--accent-color), var(--success-color));
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 6px rgba(6, 182, 212, 0.3);
+}
+
+/* Animations légères */
+.family-box {
+  animation: fadeInScale 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+.simpson {
+  animation-delay: 0.1s;
+}
+
+.vanhouten {
+  animation-delay: 0.3s;
+}
+
+.member {
+  animation: slideInLeft 0.5s ease-out;
+  animation-fill-mode: both;
+}
+
+.simpson .member:nth-child(1) { animation-delay: 0.3s; }
+.simpson .member:nth-child(2) { animation-delay: 0.4s; }
+.simpson .member:nth-child(3) { animation-delay: 0.5s; }
+.simpson .member:nth-child(4) { animation-delay: 0.6s; }
+
+.vanhouten .member:nth-child(1) { animation-delay: 0.5s; }
+.vanhouten .member:nth-child(2) { animation-delay: 0.6s; }
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .families-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .simple-structure-demo {
+    margin: 1rem 0;
+  }
+  
+  .main-container {
+    padding: 1rem;
+  }
+  
+  .family-box {
+    padding: 1rem;
+  }
+  
+  .family-name {
+    font-size: 1rem;
+  }
+  
+  .member {
+    gap: 0.5rem;
+  }
+  
+  .member-role,
+  .member-name {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+  }
+  
+  .access-path {
+    flex-direction: column;
+    gap: 0.3rem;
+    font-size: 1rem;
+  }
+  
+  .key-highlight,
+  .value-highlight {
+    font-size: 0.85rem;
+  }
+}
+
+/* Impression */
+@media print {
+  .main-container {
+    background: white !important;
+    border: 2pt solid #6366f1 !important;
+  }
+  
+  .family-box {
+    box-shadow: none !important;
+    border: 1pt solid rgba(139, 92, 246, 0.5) !important;
+  }
+  
+  .family-name {
+    background: #8b5cf6 !important;
+    box-shadow: none !important;
+  }
+  
+  .member-role {
+    background: #8b5cf6 !important;
+    box-shadow: none !important;
+  }
+  
+  .member-name {
+    background: #06b6d4 !important;
+    box-shadow: none !important;
+  }
+  
+  .key-highlight {
+    background: #8b5cf6 !important;
+    box-shadow: none !important;
+  }
+  
+  .value-highlight {
+    background: #06b6d4 !important;
+    box-shadow: none !important;
+  }
+}
+
+
     </style>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
   </head>
   <body>
     <textarea id="source">
-
 class: center, middle
 
-# Développement d’un site web dynamique :
-# les tableaux
-<img height="200px" src="img/php.png">
+<img src="img/indbg.jpg" class="logo-top-left" alt="Logo">
+<div class="title-container">
+  <h1 class="main-title">Développement d'un site web dynamique</h1>
+  <h2 class="subtitle">les tableaux</h2>
+  <img src="img/php.png" class="centered-image" alt="Logo PHP">
+</div>
 
 ---
 ## On parle de quoi ?
 1. <a href="UAA12-tableaux.html#3">Tableaux : concepts</a>
-2. <a href="UAA12-tableaux.html#8">Tableaux multidimentionnels</a>
+2. <a href="UAA12-tableaux.html#8">Tableaux multidimensionnels</a>
 3. <a href="UAA12-tableaux.html#9">Décomposition de valeurs</a>
 4. <a href="UAA12-tableaux.html#10">Fonction renvoyant plusieurs valeurs</a>
 5. <a href="UAA12-tableaux.html#11">Parcours d'un tableau</a>
@@ -55,58 +1088,92 @@ class: center, middle
 ---
 ## Tableaux : concepts
 
-En PHP, les tableaux sont des tableaux associatifs (clé → valeur).
+En PHP, les tableaux sont des tableaux associatifs **(clé → valeur)**.
+---
+## Tableaux : concepts
+<div class="array-concept-container">
+  <h3 class="concept-title">Tableaux à index numérique</h3>
+  <div class="array-visualization">
+    <div class="array-item">
+      <div class="array-key">0</div>
+      <div class="array-arrow">→</div>
+      <div class="array-value">Homer</div>
+    </div>
+    <div class="array-item">
+      <div class="array-key">1</div>
+      <div class="array-arrow">→</div>
+      <div class="array-value">Bart</div>
+    </div>
+    <div class="array-item">
+      <div class="array-key">2</div>
+      <div class="array-arrow">→</div>
+      <div class="array-value">Lisa</div>
+    </div>
+  </div>
+  <div class="array-legend">
+    <span class="legend-item">
+      <span class="legend-color key-color"></span>
+      <span>Clé (index)</span>
+    </span>
+    <span class="legend-item">
+      <span class="legend-color value-color"></span>
+      <span>Valeur</span>
+    </span>
+  </div>
+</div>
 
-**Le cas classique : tableaux à index numérique.**
+---
+## Tableaux : concepts
+<div class="array-concept-container">
+  <h3 class="concept-title">Tableaux à index non numérique</h3>
+  <div class="array-visualization">
+    <div class="array-item">
+      <div class="array-key">père</div>
+      <div class="array-arrow">→</div>
+      <div class="array-value">Homer</div>
+    </div>
+    <div class="array-item">
+      <div class="array-key">frère</div>
+      <div class="array-arrow">→</div>
+      <div class="array-value">Bart</div>
+    </div>
+    <div class="array-item">
+      <div class="array-key">soeur</div>
+      <div class="array-arrow">→</div>
+      <div class="array-value">Lisa</div>
+    </div>
+  </div>
+  <div class="array-legend">
+    <span class="legend-item">
+      <span class="legend-color key-color"></span>
+      <span>Clé (index)</span>
+    </span>
+    <span class="legend-item">
+      <span class="legend-color value-color"></span>
+      <span>Valeur</span>
+    </span>
+  </div>
+</div>
 
-(clé)     (valeur)
-
-0     →   Homer
-
-1     →   Bart
-
-2     →   Lisa
-
-3     →   Marge
 ---
 ## Tableaux : concepts
 
-En PHP, les tableaux sont des tableaux associatifs (clé → valeur).
+### Tableau à index numérique
 
-**Autre cas : tableaux à index non numérique.**
-
-(clé)     (valeur)
-
-père    →   Homer
-
-fils    →   Bart
-
-fille   →   Lisa
-
-mère    →   Marge
----
-## Tableaux : concepts
-
-Les tableaux peuvent avoir pour clefs :
-
-* des entiers
-
-```PHP
+```php
 $famille = ['Homer', 'Bart', 'Lisa', 'Marge'];
 // syntaxe alternative :
 $famille = array('Homer', 'Bart', 'Lisa', 'Marge');
-
 $h = $famille[0];  // 'Homer'
 $b = $famille[1];  // 'Bart'
 $l = $famille[2];  // 'Lisa'
 $m = $famille[3];  // 'Marge'
 ```
+
 ---
 ## Tableaux : concepts
 
-Les tableaux peuvent avoir pour clefs :
-
-* des chaines de caractères
+### Tableau à index non numérique
 
 ```php
 $famille = array(
@@ -120,60 +1187,111 @@ $h = $famille['père'];   // 'Homer'
 $b = $famille['fils'];   // 'Bart'
 $l = $famille['fille'];  // 'Lisa'
 $m = $famille['mère'];   // 'Marge'
+
 ```
 ---
 ## Tableaux : concepts
 
-* Création d'un tableau vide :
+### Création d'un tableau vide
 
-```PHP
+```php
 // Syntaxe 1 :
 $famille = [];
 
 // Syntaxe 2 :
 $famille = array();
 ```
+---
+## Tableaux : concepts
+### Ecriture dans la case suivante
 
-* Ecriture dans la case suivante :
-
-```PHP
+```php
 // pour les tableaux à index numérique :
 array_push($famille, 'Maggie');
 
 // pour les tableaux à index non numérique :
 $famille['fille2'] = 'Maggie';
+
 ```
+
 ---
 ## Tableaux multidimensionnels
 
-On peut aussi créer des tableaux 3D, 4D, ...
+<div class="simple-structure-demo">
+  <div class="families-tree">
+    <div class="main-container">
+      <div class="container-label">$familles</div>
+      <div class="families-grid">
+        <!-- Famille Simpson -->
+        <div class="family-box simpson">
+          <div class="family-name">Simpson</div>
+          <div class="members-list">
+            <div class="member">
+              <span class="member-role">père</span>
+              <div class="array-arrow">→</div>
+              <span class="member-name">Homer</span>
+            </div>
+            <div class="member">
+              <span class="member-role">mère</span>
+              <div class="array-arrow">→</div>
+              <span class="member-name">Marge</span>
+            </div>
+            <div class="member">
+              <span class="member-role">fille</span>
+              <div class="array-arrow">→</div>
+              <span class="member-name">Lisa</span>
+            </div>
+          </div>
+        </div>
+        <!-- Famille Van Houten -->
+        <div class="family-box vanhouten">
+          <div class="family-name">Van Houten</div>
+          <div class="members-list">
+            <div class="member">
+              <span class="member-role">père</span>
+              <div class="array-arrow">→</div>
+              <span class="member-name">Kirk</span>
+            </div>
+            <div class="member">
+              <span class="member-role">mère</span>
+              <div class="array-arrow">→</div>
+              <span class="member-name">Luann</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="access-demo">
+    <div class="access-path">
+      $familles → <span class="key-highlight">Van Houten</span> → <span class="key-highlight">père</span> = <span class="value-highlight">Kirk</span>
+    </div>
+  </div>
+</div>
 
-```PHP
+---
+## Tableaux multidimensionnels
+```php
 $familles = array(
-  'Simpson' => array(
-    'père' => 'Homer',
-    'mère' => 'Marge',
-    'fils' => 'Bart',
-    'fille' => 'Lisa'
-  ),
-  'Van Houten' => array(
-    'père' => 'Kirk',
-    'mère' => 'Luann'
-  )
+'Simpson' => array(
+  'père' => 'Homer',
+  'mère' => 'Marge',
+  'fille' => 'Lisa'
+),
+'Van Houten' => array(
+  'père' => 'Kirk',
+  'mère' => 'Luann'
+)
 );
 ```
-
-Exemple : nous souhaitons connaitre la mère de la famille Van Houten :
-
-```PHP
-$pèreVH = $familles['Van Houten']['père'];
+```php
+echo familles['Van Houten']['père']; // Affiche 'Kirk'
 ```
+
 ---
 ## Décomposition de valeurs
 
-On peut "extraire" certaines valeurs d'un tableau et les stocker dans des variables :
-
-→ mot clé `list`
+On peut "extraire" certaines valeurs d'un tableau et les stocker dans des variables avec `list`
 
 ```php
 $familles = array('Simpson','Van Houten','Flanders');
@@ -181,33 +1299,6 @@ list($fam1,$fam2) = $familles;
 // $fam1 contient 'Simpson' et $fam2 contient 'Van Houten'
 ```
 
----
-## Fonction renvoyant plusieurs valeurs
-
-En PHP, une fonction peut renvoyer plusieurs valeurs.
-
-→ il s'agit d'une fonction qui **renvoie un tableau**
-
-→ <span style="color: red;"> un seul return !</span>
-
-```php
-function calculerOps($n){
-  $ops = [];
-  array_push($ops, $n + $n);
-  array_push($ops, $n - $n);
-  array_push($ops, $n * $n);
-  array_push($ops, $n / $n);
-  return $ops;
-}
-
-$nb = 5;
-list($add, $sous, $mult, $div) = calculerOps($nb);
-
-echo "$nb + $nb = $add\n";
-echo "$nb - $nb = $sous\n";
-echo "$nb * $nb = $mult\n";
-echo "$nb / $nb = $div\n";
-```
 ---
 ## Parcours d'un tableau
 
@@ -225,18 +1316,17 @@ for($i = 0 ; $i < count($familles) ; $i++){
 ```
 ---
 ## Parcours d'un tableau
-
 ### À index numérique / non numérique
 
 → utilisation de `foreach` pour itérer
 
-
 ```php
+
 $famille = array(
-  'père' => 'Homer',
-  'fils' => 'Bart',
-  'fille' => 'Lisa',
-  'mère' => 'Marge'
+'père' => 'Homer',
+'fils' => 'Bart',
+'fille' => 'Lisa',
+'mère' => 'Marge'
 );
 
 foreach($famille as $role => $prenom){
@@ -244,7 +1334,6 @@ foreach($famille as $role => $prenom){
 }
 
 ```
-
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
     </script>
