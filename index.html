@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cours - Développement Web</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #06b6d4;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* En-tête */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e40af, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #e5e7eb;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        /* Grille des cours */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Cartes de cours */
+        .course-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            border-radius: 20px 20px 0 0;
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Numérotation des cours avec couleurs alternées */
+        .course-card:nth-child(4n+1) { border-left: 4px solid var(--primary-color); }
+        .course-card:nth-child(4n+2) { border-left: 4px solid var(--secondary-color); }
+        .course-card:nth-child(4n+3) { border-left: 4px solid var(--accent-color); }
+        .course-card:nth-child(4n+4) { border-left: 4px solid var(--success-color); }
+
+        .course-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .course-card:nth-child(4n+1) .course-number { background: var(--primary-color); }
+        .course-card:nth-child(4n+2) .course-number { background: var(--secondary-color); }
+        .course-card:nth-child(4n+3) .course-number { background: var(--accent-color); }
+        .course-card:nth-child(4n+4) .course-number { background: var(--success-color); }
+
+        .course-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .course-description {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .course-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .course-link:hover {
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        .course-link::after {
+            content: '→';
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .course-link:hover::after {
+            transform: translateX(3px);
+        }
+
+        /* Pied de page */
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+        }
+
+        .footer p {
+            color: #e5e7eb;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Statistiques */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            min-width: 120px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #e5e7eb;
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .course-card {
+                padding: 1.5rem;
+            }
+
+            .stats {
+                gap: 1rem;
+            }
+
+            .stat-item {
+                min-width: 100px;
+                padding: 1rem;
+            }
+
+            .stat-number {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Animation d'entrée */
+        .course-card {
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .course-card:nth-child(1) { animation-delay: 0.1s; }
+        .course-card:nth-child(2) { animation-delay: 0.2s; }
+        .course-card:nth-child(3) { animation-delay: 0.3s; }
+        .course-card:nth-child(4) { animation-delay: 0.4s; }
+        .course-card:nth-child(5) { animation-delay: 0.5s; }
+        .course-card:nth-child(6) { animation-delay: 0.6s; }
+        .course-card:nth-child(7) { animation-delay: 0.7s; }
+        .course-card:nth-child(8) { animation-delay: 0.8s; }
+        .course-card:nth-child(9) { animation-delay: 0.9s; }
+        .course-card:nth-child(10) { animation-delay: 1.0s; }
+        .course-card:nth-child(11) { animation-delay: 1.1s; }
+        .course-card:nth-child(12) { animation-delay: 1.2s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main class="courses-grid">
+            <div class="course-card">
+                <div class="course-number">4</div>
+                <h2 class="course-title">Projet collaboratif</h2>
+                <p class="course-description">Apprenez à travailler en équipe sur des projets de développement web avec les outils de collaboration moderne.</p>
+                <a href="UAA4/" class="course-link">Accéder au cours</a>
+            </div>
+
+            <div class="course-card">
+                <div class="course-number">5</div>
+                <h2 class="course-title">Programmation impérative</h2>
+                <p class="course-description">Maîtrisez les fondamentaux de la programmation impérative et les structures de contrôle.</p>
+                <a href="UAA5/" class="course-link">Accéder au cours</a>
+            </div>
+
+            <div class="course-card">
+                <div class="course-number">6</div>
+                <h2 class="course-title">Création et mise en ligne d'un site web</h2>
+                <p class="course-description">Découvrez comment créer et déployer un site web complet de A à Z.</p>
+                <a href="UAA6/" class="course-link">Accéder au cours</a>
+            </div>
+
+            <div class="course-card">
+                <div class="course-number">7</div>
+                <h2 class="course-title">BD relationnelles</h2>
+                <p class="course-description">Explorez le monde des bases de données relationnelles et du langage SQL.</p>
+                <a href="UAA7/" class="course-link">Accéder au cours</a>
+            </div>
+
+            <div class="course-card">
+                <div class="course-number">8</div>
+                <h2 class="course-title">Sécurité</h2>
+                <p class="course-description">Apprenez les bonnes pratiques de sécurité en développement web et protection des données.</p>
+                <a href="UAA8/" class="course-link">Accéder au cours</a>
+            </div>
+
+            <div class="course-card">
+                <div class="course-number">9</div>
+                <h2 class="course-title">Projet et cahier des charges</h2>
+                <p class="course-description">Méthodologie de gestion de projet et rédaction de cahiers des charges techniques.</p>
+                <a href="UAA9/" class="course-link">Accéder au cours</a>
+            </div>
+
+            <div class="course-card">
+                <div class="course-number">10</div>
+                <h2 class="course-title">Hardware et architecture</h2>
+                <p class="course-description">Comprenez l'architecture des systèmes informatiques et les composants matériels.</p>
+                <a href="UAA10/" class="course-link">Accéder au cours</a>
+            </div>
+
+            <div class="course-card">
+                <div class="course-number">11</div>
+                <h2 class="course-title">Programmation procédurale</h2>
+                <p class="course-description">Approfondissez vos compétences en programmation procédurale et algorithmique.</p>
+                <a href="UAA11/" class="course-link">Accéder au cours</a>
+            </div>
+
+            <div class="course-card">
+                <div class="course-number">12</div>
+                <h2 class="course-title">Développement d'un site WEB dynamique</h2>
+                <p class="course-description">Créez des sites web dynamiques avec PHP, bases de données et interactions utilisateur.</p>
+                <a href="UAA12/index.html" class="course-link">Accéder au cours</a>
+            </div>
+
+            <div class="course-card">
+                <div class="course-number">13</div>
+                <h2 class="course-title">Conception et gestion de projet</h2>
+                <p class="course-description">Méthodologies de conception et outils de gestion de projet informatique.</p>
+                <a href="UAA13/" class="course-link">Accéder au cours</a>
+            </div>
+
+            <div class="course-card">
+                <div class="course-number">14</div>
+                <h2 class="course-title">POO</h2>
+                <p class="course-description">Maîtrisez la programmation orientée objet : classes, objets, héritage et polymorphisme.</p>
+                <a href="UAA14/" class="course-link">Accéder au cours</a>
+            </div>
+
+            <div class="course-card">
+                <div class="course-number">15</div>
+                <h2 class="course-title">Réseau</h2>
+                <p class="course-description">Comprenez les réseaux informatiques, protocoles et architectures distribuées.</p>
+                <a href="UAA15/" class="course-link">Accéder au cours</a>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>Institut Notre-Dame de Beauraing - Technique de Transition Informatique</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAA12 - Développement d'un site web dynamique</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #06b6d4;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --php-color: #777bb4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Logo institutionnel */
+        .logo-top-left {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            height: 100px;
+            z-index: 999;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo-top-left:hover {
+            opacity: 1;
+        }
+
+        /* En-tête */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            margin-top: 60px;
+        }
+
+.header h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+
+        .header .uaa-number {
+            font-size: 1.2rem;
+            color: #e5e7eb;
+            font-weight: 500;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            color: #e5e7eb;
+            font-weight: 300;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .php-logo {
+            width: 220px;
+            height: auto;
+            margin: 1rem 0;
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
+        }
+
+        /* Section des présentations */
+        .presentations-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        /* Grille des présentations */
+        .presentations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Cartes de présentation */
+        .presentation-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .presentation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            border-radius: 20px 20px 0 0;
+        }
+
+        .presentation-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Statut des présentations */
+        .status-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-available {
+            background: linear-gradient(135deg, var(--success-color), #059669);
+            color: white;
+        }
+
+        .status-wip {
+            background: linear-gradient(135deg, var(--warning-color), #d97706);
+            color: white;
+        }
+
+        .presentation-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        /* Couleurs spécifiques par type de présentation */
+        .intro-card .presentation-icon { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); }
+        .bases-card .presentation-icon { background: linear-gradient(135deg, var(--secondary-color), var(--accent-color)); }
+        .functions-card .presentation-icon { background: linear-gradient(135deg, var(--accent-color), var(--success-color)); }
+        .arrays-card .presentation-icon { background: linear-gradient(135deg, var(--success-color), var(--warning-color)); }
+        .data-card .presentation-icon { background: linear-gradient(135deg, var(--warning-color), var(--primary-color)); }
+
+        .presentation-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .presentation-subtitle {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .presentation-description {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .presentation-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--text-dark);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .btn-disabled {
+            background: #9ca3af;
+            color: white;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .btn-disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Section progression */
+        .progress-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .progress-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: white;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            height: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--success-color), var(--accent-color));
+            height: 100%;
+            width: 80%;
+            border-radius: 25px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+            color: #e5e7eb;
+            font-size: 0.9rem;
+        }
+
+        /* Navigation de retour */
+        .back-nav {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.8rem 1.2rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .presentations-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .presentation-card {
+                padding: 1.5rem;
+            }
+
+            .presentation-actions {
+                flex-direction: column;
+            }
+
+            .logo-top-left {
+                height: 80px;
+                top: 15px;
+                left: 15px;
+            }
+
+            .back-nav {
+                top: 15px;
+                right: 15px;
+            }
+        }
+
+        /* Animations */
+        .presentation-card {
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .intro-card { animation-delay: 0.1s; }
+        .bases-card { animation-delay: 0.2s; }
+        .functions-card { animation-delay: 0.3s; }
+        .arrays-card { animation-delay: 0.4s; }
+        .data-card { animation-delay: 0.5s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <img src="img/indbg.jpg" class="logo-top-left" alt="Logo institutionnel">
+    
+    <nav class="back-nav">
+        <a href="../" class="back-btn">← Retour aux cours</a>
+    </nav>
+
+    <div class="container">
+        <header class="header">
+            <div class="uaa-number">UAA12</div>
+            <h1>Développement d'un site web dynamique</h1>
+            <p>Maîtrisez PHP et créez des applications web interactives</p>
+            <img src="img/php.png" alt="PHP Logo" class="php-logo">
+        </header>
+
+        <section class="presentations-section">
+            <h2 class="section-title">📚 Modules du cours</h2>
+            
+            <div class="presentations-grid">
+                <!-- Introduction -->
+                <div class="presentation-card intro-card">
+                    <div class="status-badge status-available">Disponible</div>
+                    <div class="presentation-icon">🚀</div>
+                    <h3 class="presentation-title">Introduction</h3>
+                    <p class="presentation-subtitle">Les fondamentaux du web dynamique</p>
+                    <p class="presentation-description">
+                        Découvrez le fonctionnement d'un site internet, les différences entre client et serveur, 
+                        et apprenez à installer votre environnement de développement PHP avec XAMPP.
+                    </p>
+                    <div class="presentation-actions">
+                        <a href="UAA12-intro.html" class="btn btn-primary">
+                            📖 Ouvrir la présentation
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Bases PHP -->
+                <div class="presentation-card bases-card">
+                    <div class="status-badge status-available">Disponible</div>
+                    <div class="presentation-icon">🔧</div>
+                    <h3 class="presentation-title">Bases du PHP</h3>
+                    <p class="presentation-subtitle">Variables, types et structures de base</p>
+                    <p class="presentation-description">
+                        Apprenez la syntaxe PHP, les variables, les types de données, les opérateurs 
+                        et les structures conditionnelles pour créer vos premiers scripts.
+                    </p>
+                    <div class="presentation-actions">
+                        <a href="UAA12-bases.html" class="btn btn-primary">
+                            📖 Ouvrir la présentation
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Fonctions -->
+                <div class="presentation-card functions-card">
+                    <div class="status-badge status-available">Disponible</div>
+                    <div class="presentation-icon">⚙️</div>
+                    <h3 class="presentation-title">Fonctions PHP</h3>
+                    <p class="presentation-subtitle">Création et utilisation de fonctions</p>
+                    <p class="presentation-description">
+                        Maîtrisez la création de fonctions personnalisées, les paramètres, les valeurs de retour 
+                        et découvrez les fonctions PHP les plus utiles.
+                    </p>
+                    <div class="presentation-actions">
+                        <a href="UAA12-fonctions.html" class="btn btn-primary">
+                            📖 Ouvrir la présentation
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Tableaux -->
+                <div class="presentation-card arrays-card">
+                    <div class="status-badge status-available">Disponible</div>
+                    <div class="presentation-icon">📊</div>
+                    <h3 class="presentation-title">Tableaux</h3>
+                    <p class="presentation-subtitle">Manipulation des arrays en PHP</p>
+                    <p class="presentation-description">
+                        Explorez les tableaux indexés et associatifs, les boucles, les fonctions de manipulation 
+                        et les techniques avancées de traitement des données.
+                    </p>
+                    <div class="presentation-actions">
+                        <a href="UAA12-tableaux.html" class="btn btn-primary">
+                            📖 Ouvrir la présentation
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Échanges de données -->
+                <div class="presentation-card data-card">
+                    <div class="status-badge status-wip">En cours</div>
+                    <div class="presentation-icon">🔄</div>
+                    <h3 class="presentation-title">Échanges de données</h3>
+                    <p class="presentation-subtitle">Formulaires et interaction utilisateur</p>
+                    <p class="presentation-description">
+                        Apprenez à créer des formulaires HTML, traiter les données POST et GET, 
+                        valider les entrées utilisateur et sécuriser vos applications.
+                    </p>
+                    <div class="presentation-actions">
+                        <button class="btn btn-disabled">
+                            🚧 En préparation
+                        </button>
+                        <button class="btn btn-disabled">
+                            📝 Bientôt disponible
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer style="text-align: center; padding: 2rem 0; border-top: 1px solid rgba(255, 255, 255, 0.1); margin-top: 3rem;">
+            <p style="color: #e5e7eb; font-size: 0.9rem; opacity: 0.7;">
+                UAA12 - Développement d'un site web dynamique • Beauraing, Namur • 2024
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
