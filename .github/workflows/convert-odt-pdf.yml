@@ -3,8 +3,22 @@ name: Convert ODT to PDF
 on:
   push:
     paths:
-      - 'UAA12/*.odt'      # Ou dans un sous-dossier
-  workflow_dispatch:      # Permet de lancer manuellement
+      - 'UAA4/*.odt'
+      - 'UAA5/*.odt'
+      - 'UAA6/*.odt'
+      - 'UAA7/*.odt'
+      - 'UAA8/*.odt'
+      - 'UAA9/*.odt'
+      - 'UAA10/*.odt'
+      - 'UAA11/*.odt'
+      - 'UAA12/*.odt'
+      - 'UAA13/*.odt'
+      - 'UAA14/*.odt'
+      - 'UAA15/*.odt'
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   convert:
@@ -21,16 +35,24 @@ jobs:
 
     - name: Convert ODT to PDF
       run: |
-        for file in $(find . -name "*.odt"); do
+        for file in $(find . -type f -name "*.odt"); do
+          echo "Converting $file to PDF..."
           libreoffice --headless --convert-to pdf "$file" --outdir "$(dirname "$file")"
         done
 
     - name: Commit and push generated PDFs
       run: |
-        git config --global user.name 'github-actions'
-        git config --global user.email 'actions@github.com'
-        git add *.pdf UAA12/*.pdf
-        git commit -m "Automated ODT to PDF conversion"
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+        
+        git add UAA4/*.pdf UAA5/*.pdf UAA6/*.pdf UAA7/*.pdf UAA8/*.pdf UAA9/*.pdf UAA10/*.pdf UAA11/*.pdf UAA12/*.pdf UAA13/*.pdf UAA14/*.pdf UAA15/*.pdf 2>/dev/null || true
+        
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+          exit 0
+        fi
+        
+        git commit -m "Automated ODT to PDF conversion [skip ci]"
         git push
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
