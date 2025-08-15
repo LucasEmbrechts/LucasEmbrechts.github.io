@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Consolas';}
+      p{font-size: 20px;}
+      @media print {
+		  .remark-slide-scaler {
+			width: 100% !important;
+			height: 100% !important;
+			transform: scale(1) !important;
+			top: 0 !important;
+			left: 0 !important;
+		  }
+		}
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# Programmation procédurale :
+# synonyme et énumération
+<img height="200px" src="img/logo.png">
+---
+
+## On parle de quoi ?
+
+1. <a href="UAA11-ch7.html#3">Synonyme</a>
+2. <a href="UAA11-ch7.html#6">Énumération</a>
+
+---
+## Synonyme
+
+Situation :
+
+```c
+int calculeSuperficie(int longueur, int largeur);
+void main (void){
+
+  int lo;
+  int la;
+  printf("Entrez la longueur : \n");
+  scanf_s("%d", &lo);
+  printf("Entrez la largeur : \n");
+  scanf_s("%d", &la);
+  printf("Superficie : %d m²", calculeSuperficie(lo, la));
+}
+
+int calculeSuperficie(int longueur, int largeur){
+  return longueur * largeur;
+}
+```
+Que se passe-t-il si l'on souhaite calculer la superficie avec une meilleure précision ?
+
+→ Il faut changer tous les `int` en `float` ou `double`
+
+---
+## Synonyme
+
+Pour faciliter les modifications du code et améliorer sa lisibilité, on peut utiliser un **synonyme**.
+
+→ Si on décide de changer le type de mesure (int → float) il n'y a qu'une seule ligne à modifier !
+
+
+```c
+typedef int mesure;
+
+mesure calculeSuperficie(mesure longueur, mesure largeur);
+void main (void){
+
+  mesure lo;
+  mesure la;
+  printf("Entrez la longueur : \n");
+  scanf_s("%d", &lo);
+  printf("Entrez la largeur : \n");
+  scanf_s("%d", &la);
+  printf("Superficie : %d m²", calculeSuperficie(lo, la));
+}
+
+mesure calculeSuperficie(mesure longueur, mesure largeur){
+  return longueur * largeur;
+}
+```
+
+---
+## Énumération
+
+Situation :
+
+```c
+void main(void){
+
+  char couleurFeu;
+
+  printf("Quel était la couleur du feu au moment de votre passage ?\n");
+  scanf_s("%c", &couleurFeu, 1);
+
+  switch(couleurFeu){
+    case 'R':
+      printf("Erreur grave !\n");
+      break;
+    case 'O':
+      printf("Il aurait fallu s'arrêter...\n");
+      break;
+    case 'V':
+      printf("Tout va bien !\n");
+      break;
+  }
+}
+```
+
+→ Comment améliorer la lisibilité ?
+
+---
+## Énumération
+
+Une **énumération** permet de remplacer une série de valeurs par des libellé.
+
+```c
+enum couleurFeu {ROUGE = 'R', ORANGE='O', VERT='V'};
+
+void main(void){
+
+  char couleurFeu;
+
+  printf("Quel était la couleur du feu au moment de votre passage ?\n");
+  scanf_s("%c", &couleurFeu, 1);
+
+  switch(couleurFeu){
+    case ROUGE:
+      printf("Erreur grave !\n");
+      break;
+    case ORANGE:
+      printf("Il aurait fallu s'arrêter...\n");
+      break;
+    case VERT:
+      printf("Tout va bien !\n");
+      break;
+  }
+}
+```
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/FitText.js/1.2.0/jquery.fittext.min.js"></script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>

@@ -198,7 +198,6 @@
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease;
         max-width: 100%;
-        height: auto;
       }
 
       img:hover {
@@ -627,7 +626,6 @@
 
       .method-overview {
         text-align: center;
-        margin-bottom: 2rem;
       }
 
       .method-badge.get-primary {
@@ -1491,7 +1489,6 @@
         }
 
         img {
-          max-width: 100% !important;
           height: auto !important;
           border-radius: 0 !important;
           box-shadow: none !important;
@@ -1568,6 +1565,853 @@
 .js-dynamic-card .code-example pre {
   border-left-color: #667eea !important;
 }
+/* ===== ENCODAGE COMPACT ===== */
+.encoding-compact {
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), rgba(234, 179, 8, 0.05));
+  border-radius: 16px;
+  border: 2px solid rgba(245, 158, 11, 0.2);
+}
+
+.encoding-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.compact-title {
+  font-size: 1.3rem !important;
+  font-weight: 600 !important;
+  color: var(--warning-color) !important;
+  margin: 0 !important;
+  background: none !important;
+  -webkit-text-fill-color: var(--warning-color) !important;
+}
+
+/* Comparaison avant/après */
+.encoding-comparison {
+  margin-bottom: 1.5rem;
+}
+
+.before-after {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.before-section, .after-section {
+  flex: 1;
+  text-align: center;
+}
+
+.label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  display: inline-block;
+  margin-bottom: 0.8rem;
+  color: white;
+}
+
+.error-label {
+  background: var(--error-color);
+}
+
+.success-label {
+  background: var(--success-color);
+}
+
+.url-example {
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 2px solid;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.url-example.problem {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.url-example.success {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.arrow-transform {
+  font-size: 2rem;
+  color: var(--warning-color);
+  font-weight: bold;
+}
+
+/* Méthodes d'encodage */
+.encoding-methods-compact {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.method-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: white;
+  padding: 0.8rem 1.2rem;
+  border-radius: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.lang-badge {
+  padding: 0.3rem 0.6rem;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: white;
+  letter-spacing: 0.5px;
+}
+
+.lang-badge.js {
+  background: #38b2ac;
+}
+
+.lang-badge.php {
+  background: #8b5cf6;
+}
+
+.method-item code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: white;
+}
+
+/* Résumé des caractères */
+.chars-summary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  flex-wrap: wrap;
+}
+
+.chars-title {
+  font-weight: 600;
+  color: var(--warning-color);
+  font-size: 0.9rem;
+}
+
+.char-pair {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(234, 179, 8, 0.1));
+  padding: 0.4rem 0.8rem;
+  border-radius: 15px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  color: var(--text-dark);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .before-after {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .arrow-transform {
+    transform: rotate(90deg);
+    font-size: 1.5rem;
+  }
+  
+  .encoding-methods-compact {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .chars-summary {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+}
+
+/* ===== STYLES POUR LA MÉTHODE POST ===== */
+.post-method-demo {
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), rgba(220, 38, 38, 0.05));
+  border-radius: 20px;
+  border: 2px solid rgba(239, 68, 68, 0.15);
+}
+
+/* Vue d'ensemble de la méthode POST */
+.method-overview {
+  text-align: center;
+}
+
+.method-badge.post-primary {
+  background: linear-gradient(135deg, var(--error-color), #dc2626);
+  color: white;
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3);
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.method-description {
+  font-size: 1.1rem !important;
+  color: var(--text-dark) !important;
+  font-style: italic;
+  margin: 0 !important;
+}
+
+/* Caractéristiques de POST */
+.post-characteristics {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border: 2px solid rgba(239, 68, 68, 0.1);
+}
+
+.characteristics-title {
+  color: var(--error-color) !important;
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 1.5rem !important;
+  text-align: center;
+  background: none !important;
+  -webkit-text-fill-color: var(--error-color) !important;
+}
+
+.characteristics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.char-item {
+  text-align: center;
+  padding: 1rem;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), rgba(220, 38, 38, 0.05));
+  border-radius: 12px;
+  border: 1px solid rgba(239, 68, 68, 0.1);
+  transition: all 0.3s ease;
+}
+
+.char-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.char-icon {
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.char-content h5 {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: var(--error-color) !important;
+  margin-bottom: 0.5rem !important;
+  background: none !important;
+  -webkit-text-fill-color: var(--error-color) !important;
+}
+
+.char-content p {
+  font-size: 0.85rem !important;
+  color: var(--text-light) !important;
+  margin: 0 !important;
+  line-height: 1.3;
+}
+
+/* Grille avantages/inconvénients (réutilise les styles existants) */
+.pros-cons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.pros-card, .cons-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.pros-card {
+  border: 2px solid rgba(16, 185, 129, 0.2);
+}
+
+.pros-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--success-color);
+}
+
+.cons-card {
+  border: 2px solid rgba(239, 68, 68, 0.2);
+}
+
+.cons-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--error-color);
+}
+
+.pros-icon, .cons-icon {
+  font-size: 1.5rem;
+}
+
+.card-title {
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  margin: 0 !important;
+  background: none !important;
+}
+
+.pros-header .card-title {
+  color: var(--success-color) !important;
+  -webkit-text-fill-color: var(--success-color) !important;
+}
+
+.cons-header .card-title {
+  color: var(--error-color) !important;
+  -webkit-text-fill-color: var(--error-color) !important;
+}
+
+.advantage-item, .disadvantage-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.8rem;
+  padding: 0.6rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.advantage-item {
+  background: rgba(16, 185, 129, 0.05);
+  border-left: 3px solid var(--success-color);
+}
+
+.advantage-item:hover {
+  background: rgba(16, 185, 129, 0.1);
+  transform: translateX(5px);
+}
+
+.disadvantage-item {
+  background: rgba(239, 68, 68, 0.05);
+  border-left: 3px solid var(--error-color);
+}
+
+.disadvantage-item:hover {
+  background: rgba(239, 68, 68, 0.1);
+  transform: translateX(5px);
+}
+
+.advantage-icon, .disadvantage-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.advantage-text, .disadvantage-text {
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+/* Animations */
+.post-characteristics, .pros-card, .cons-card {
+  animation: slideInUp 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+.post-characteristics { animation-delay: 0.1s; }
+.pros-card { animation-delay: 0.3s; }
+.cons-card { animation-delay: 0.5s; }
+
+.char-item {
+  animation: fadeInScale 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+.char-item:nth-child(1) { animation-delay: 0.2s; }
+.char-item:nth-child(2) { animation-delay: 0.3s; }
+.char-item:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .post-method-demo {
+    padding: 1.5rem;
+  }
+  
+  .characteristics-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .pros-cons-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .method-badge.post-primary {
+    font-size: 1.2rem;
+    padding: 0.6rem 1.5rem;
+  }
+}
+
+/* Impression */
+@media print {
+  .post-method-demo {
+    background: white !important;
+    border: 2pt solid #ef4444 !important;
+  }
+  
+  .post-characteristics {
+    border: 1pt solid rgba(239, 68, 68, 0.3) !important;
+    box-shadow: none !important;
+  }
+  
+  .pros-card {
+    border: 1pt solid #10b981 !important;
+    box-shadow: none !important;
+  }
+  
+  .cons-card {
+    border: 1pt solid #ef4444 !important;
+    box-shadow: none !important;
+  }
+  
+  .method-badge.post-primary {
+    background: #ef4444 !important;
+    box-shadow: none !important;
+  }
+  
+  .char-item {
+    box-shadow: none !important;
+    border: 1pt solid rgba(239, 68, 68, 0.2) !important;
+  }
+}
+
+/* ===== STYLES POUR LA DÉMO PHP POST ===== */
+.php-post-demo {
+  margin: 2rem 0;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.03), rgba(220, 38, 38, 0.03));
+  border-radius: 20px;
+  border: 2px solid rgba(239, 68, 68, 0.1);
+}
+
+.php-post-demo .url-to-php-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Section formulaire */
+.php-post-demo .form-section {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border: 2px solid rgba(239, 68, 68, 0.2);
+  transition: all 0.3s ease;
+}
+
+.php-post-demo .form-section:hover {
+  border-color: var(--error-color);
+}
+
+.php-post-demo .form-section .section-label {
+  color: var(--error-color);
+}
+
+/* Affichage du formulaire */
+.php-post-demo .form-display {
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  border: 2px solid rgba(239, 68, 68, 0.1);
+}
+
+.php-post-demo .form-preview {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.php-post-demo .form-field {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.php-post-demo .form-field label {
+  font-weight: 600;
+  color: var(--text-dark);
+  min-width: 60px;
+  font-size: 0.9rem;
+}
+
+.php-post-demo .form-field input {
+  flex: 1;
+  padding: 0.5rem 0.8rem;
+  border: 2px solid rgba(239, 68, 68, 0.2);
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  background: white;
+  color: var(--text-dark);
+}
+
+.php-post-demo .form-submit {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.php-post-demo .form-submit button {
+  background: linear-gradient(135deg, var(--error-color), #dc2626);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+  transition: all 0.3s ease;
+}
+
+.php-post-demo .form-submit button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
+}
+
+/* Décomposition des paramètres POST */
+.php-post-demo .form-breakdown {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.php-post-demo .param-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1));
+  padding: 0.5rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.php-post-demo .param-key {
+  background: var(--error-color);
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.php-post-demo .param-separator {
+  font-weight: bold;
+  color: var(--text-dark);
+}
+
+.php-post-demo .param-value {
+  background: var(--success-color);
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Section PHP pour POST */
+.php-post-demo .php-section {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border: 2px solid rgba(139, 92, 246, 0.2);
+  transition: all 0.3s ease;
+}
+
+.php-post-demo .php-section:hover {
+  border-color: var(--secondary-color);
+}
+
+.php-post-demo .php-section .section-label {
+  color: var(--secondary-color);
+}
+
+/* CODE PHP POST - TOUJOURS VISIBLE ET MULTILIGNE */
+.php-post-demo .php-code-example {
+  margin: 0 !important;
+  opacity: 1 !important;
+  max-height: none !important;
+  overflow: visible !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+.php-post-demo .php-code-example pre {
+  background: var(--code-bg) !important;
+  color: var(--code-text) !important;
+  padding: 1.2rem !important;
+  border-radius: 10px !important;
+  border-left: 4px solid var(--secondary-color) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  font-size: 0.9rem !important;
+  line-height: 1.6 !important;
+  margin: 0 !important;
+  white-space: pre !important;
+  overflow-x: auto !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  opacity: 1 !important;
+  max-height: none !important;
+  transform: none !important;
+}
+
+.php-post-demo .php-code-example code {
+  font-family: 'JetBrains Mono', monospace !important;
+  white-space: pre !important;
+  tab-size: 2;
+  -moz-tab-size: 2;
+}
+
+/* Section résultat POST */
+.php-post-demo .result-section {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border: 2px solid rgba(16, 185, 129, 0.2);
+  transition: all 0.3s ease;
+}
+
+.php-post-demo .result-section:hover {
+  border-color: var(--success-color);
+}
+
+.php-post-demo .result-section .section-label {
+  color: var(--success-color);
+}
+
+.php-post-demo .section-label {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Variables display POST */
+.php-post-demo .variables-display {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.php-post-demo .variable-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1));
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.php-post-demo .var-name {
+  background: var(--secondary-color);
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.php-post-demo .var-arrow {
+  color: var(--success-color);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.php-post-demo .var-value {
+  background: var(--success-color);
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Visualisation mapping POST */
+.php-post-demo .mapping-visualization {
+  background: linear-gradient(135deg, #fef2f2, #fef7f7);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 2px solid rgba(239, 68, 68, 0.1);
+}
+
+.php-post-demo .mapping-title {
+  text-align: center;
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+  color: var(--error-color) !important;
+  margin-bottom: 1.5rem !important;
+  background: none !important;
+  -webkit-text-fill-color: var(--error-color) !important;
+}
+
+.php-post-demo .mapping-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.php-post-demo .mapping-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.php-post-demo .mapping-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.php-post-demo .form-param, 
+.php-post-demo .php-var {
+  flex: 1;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  padding: 0.8rem;
+  border-radius: 8px;
+}
+
+.php-post-demo .form-param {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1));
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.php-post-demo .php-var {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(99, 102, 241, 0.1));
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.php-post-demo .mapping-arrow {
+  font-size: 1.5rem;
+  color: var(--error-color);
+  font-weight: bold;
+}
+
+.php-post-demo .key-highlight {
+  background: var(--error-color);
+  color: white;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.php-post-demo .value-highlight {
+  background: var(--success-color);
+  color: white;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.php-post-demo .var-highlight {
+  color: var(--secondary-color);
+  font-weight: 600;
+}
+
+/* Responsive POST */
+@media (max-width: 768px) {
+  .php-post-demo {
+    padding: 1.5rem;
+  }
+  
+  .php-post-demo .form-section, 
+  .php-post-demo .php-section, 
+  .php-post-demo .result-section {
+    padding: 1.2rem;
+  }
+  
+  .php-post-demo .form-breakdown {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  
+  .php-post-demo .variables-display {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .php-post-demo .mapping-item {
+    flex-direction: column;
+    gap: 0.8rem;
+    text-align: center;
+  }
+  
+  .php-post-demo .mapping-arrow {
+    transform: rotate(90deg);
+  }
+}
+
     </style>
   </head>
   <body>
@@ -1657,7 +2501,7 @@ class: center, middle
 ---
 ## L'échange de données en PHP
 
-*Les informations envoyées ne sont pas toujours simplement un document HTML entier*
+*Les informations envoyées au client ne sont pas toujours simplement un document HTML entier*
 
 <div class="data-exchange-examples">
   <div class="example-grid">
@@ -1951,45 +2795,226 @@ if (isset($_GET['age'])){
     </div>
   </div>
 </div>
+---
+## Méthode GET - Encodage des URL
+
+<div class="encoding-compact">
+  <div class="encoding-header">
+    <h4 class="compact-title">⚠️ Caractères spéciaux dans les URLs</h4>
+  </div>
+  <div class="encoding-comparison">
+    <!-- Problème et solution côte à côte -->
+    <div class="before-after">
+      <div class="before-section">
+        <div class="label error-label">❌ Problème</div>
+        <div class="url-example problem">
+          <code>&nom=jules dupont</code>
+        </div>
+      </div>
+      <div class="arrow-transform">→</div>
+      <div class="after-section">
+        <div class="label success-label">✅ Encodé</div>
+        <div class="url-example success">
+          <code>&nom=jules+dupont</code>
+        </div>
+      </div>
+    </div>
+    <!-- Méthodes d'encodage -->
+    <div class="encoding-methods-compact">
+      <div class="method-item">
+        <span class="lang-badge js">JS</span>
+        <code>encodeURIComponent()</code>
+      </div>
+      <div class="method-item">
+        <span class="lang-badge php">PHP</span>
+        <code>urlencode()</code>
+      </div>
+    </div>
+  </div>
+  <!-- Caractères courants -->
+  <div class="chars-summary">
+    <span class="chars-title">Caractères courants :</span>
+    <span class="char-pair">espace → +</span>
+    <span class="char-pair">& → %26</span>
+    <span class="char-pair">= → %3D</span>
+    <span class="char-pair">? → %3F</span>
+  </div>
+</div>
 
 ---
-### Méthode GET
+## Méthode POST
 
-Certaines données passées en GET ne peuvent pas contenir certains caractères (espaces, =, &, ...).
-
-Exemple : `&nom=jules dupont`
-
-Solution : ces données doivent être "encodées" :
-
-* en JavaScript : `encodeURIComponent($chaine)`
-* en PHP : `urlencode($chaine)`
-
-Transformation : `&nom=jules+dupont`
+<div class="post-method-demo">
+  <div class="method-overview">
+    <div class="method-badge post-primary">POST</div>
+    <p class="method-description">Les informations sont transmises dans un paquet séparé, invisible dans l'URL</p>
+  </div>
+  
+  <div class="post-characteristics">
+    <h4 class="characteristics-title">📋 Caractéristiques principales</h4>
+    <div class="characteristics-grid">
+      <div class="char-item">
+        <div class="char-icon">📦</div>
+        <div class="char-content">
+          <h5>Transmission séparée</h5>
+          <p>Les données voyagent dans le corps de la requête HTTP</p>
+        </div>
+      </div>
+      <div class="char-item">
+        <div class="char-icon">🙈</div>
+        <div class="char-content">
+          <h5>Format invisible</h5>
+          <p>Aucune donnée visible dans la barre d'adresse</p>
+        </div>
+      </div>
+      <div class="char-item">
+        <div class="char-icon">📝</div>
+        <div class="char-content">
+          <h5>Origine formulaire</h5>
+          <p>Données issues d'un formulaire HTML</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
 
 ---
-### Méthode POST
+## Méthode POST
+  <div class="post-method-demo">
+  <div class="pros-cons-grid">
+    <div class="pros-card">
+      <div class="card-header pros-header">
+        <div class="pros-icon">✅</div>
+        <h4 class="card-title">Avantages</h4>
+      </div>
+      <div class="pros-content">
+        <div class="advantage-item">
+          <span class="advantage-icon">🔒</span>
+          <span class="advantage-text">Données cachées de l'utilisateur</span>
+        </div>
+        <div class="advantage-item">
+          <span class="advantage-icon">🗑️</span>
+          <span class="advantage-text">Ne laisse pas de trace dans l'historique</span>
+        </div>
+        <div class="advantage-item">
+          <span class="advantage-icon">📊</span>
+          <span class="advantage-text">Peut transmettre beaucoup de données</span>
+        </div>
+      </div>
+    </div>
+    <div class="cons-card">
+      <div class="card-header cons-header">
+        <div class="cons-icon">❌</div>
+        <h4 class="card-title">Inconvénients</h4>
+      </div>
+      <div class="cons-content">
+        <div class="disadvantage-item">
+          <span class="disadvantage-icon">🔧</span>
+          <span class="disadvantage-text">Plus complexe à mettre en place</span>
+        </div>
+        <div class="disadvantage-item">
+          <span class="disadvantage-icon">📝</span>
+          <span class="disadvantage-text">Nécessite un formulaire HTML</span>
+        </div>
+        <div class="disadvantage-item">
+          <span class="disadvantage-icon">🚫</span>
+          <span class="disadvantage-text">Impossible à tester directement dans l'URL</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+---
+## Méthode POST - Côté client
 
-* les informations sont transmises séparément
-* format : pas visible
-* les données proviennent d'un formulaire
+<div class="php-post-demo">
+  <div class="url-to-php-flow">
+    <!-- Formulaire HTML -->
+    <div class="form-section">
+      <div class="section-label">📝 Formulaire HTML envoyé</div>
+      <div class="form-display">
+        <div class="form-preview">
+          <div class="form-field">
+            <label>Nom :</label>
+            <input type="text" value="Dupont" readonly>
+          </div>
+          <div class="form-field">
+            <label>Âge :</label>
+            <input type="text" value="25" readonly>
+          </div>
+          <div class="form-submit">
+            <button>Envoyer (POST)</button>
+          </div>
+        </div>
+      </div>
+      <div class="form-breakdown">
+        <div class="param-item">
+          <span class="param-key">nom</span>
+          <span class="param-separator">=</span>
+          <span class="param-value">Dupont</span>
+        </div>
+        <div class="param-item">
+          <span class="param-key">age</span>
+          <span class="param-separator">=</span>
+          <span class="param-value">25</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 ---
-## GET et POST
-### POST
+## Méthode POST - Côté serveur
 
-*les informations proviennent d'un formulaire et sont envoyées dans un paquet séparé*
+<div class="php-post-demo">
+  <div class="url-to-php-flow">
+    <!-- Code PHP -->
+    <div class="php-section">
+      <div class="section-label">⚙️ Code PHP</div>
+      <div class="php-code-container">
+          <pre><code class="language-php">if (isset($_POST['nom'])){
+  $nom = $_POST['nom'];  // "Dupont"
+}
 
-Avantage :
+if (isset($_POST['age'])){
+  $age = $_POST['age'];  // "25"
+}</code></pre>
+        </div>
+      </div>
+    </div>
+</div>
+---
+## Méthode POST - Côté serveur
 
-* ne laisse pas de trace
+<div class="php-post-demo">
+  <div class="url-to-php-flow">
+    <!-- Correspondance visuelle -->
+    <div class="mapping-visualization">
+      <h5 class="mapping-title">🎯 Correspondance clé/valeur</h5>
+      <div class="mapping-container">
+        <div class="mapping-item">
+          <div class="form-param">
+            <span class="param-highlight key-highlight">nom</span>=<span class="param-highlight value-highlight">Dupont</span>
+          </div>
+          <div class="mapping-arrow">⟷</div>
+          <div class="php-var">
+            <span class="var-highlight">$_POST['<span class="key-highlight">nom</span>']</span> = "<span class="value-highlight">Dupont</span>"
+          </div>
+        </div>
+        <div class="mapping-item">
+          <div class="form-param">
+            <span class="param-highlight key-highlight">age</span>=<span class="param-highlight value-highlight">25</span>
+          </div>
+          <div class="mapping-arrow">⟷</div>
+          <div class="php-var">
+            <span class="var-highlight">$_POST['<span class="key-highlight">age</span>']</span> = "<span class="value-highlight">25</span>"
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-Inconvénient :
-
-* plus "lourd" à mettre en place
-
-<img height="100px" src="img/form.png">
-
-<img height="100px" src="img/post.png">
 
 ---
 ## Cookies et sessions
