@@ -1,0 +1,2181 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>UAA12 - Échange de données PHP</title>
+    <meta charset="utf-8">
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+      :root {
+        --primary-color: #6366f1;
+        --secondary-color: #8b5cf6;
+        --accent-color: #06b6d4;
+        --text-dark: #1f2937;
+        --text-light: #6b7280;
+        --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --code-bg: #1e293b;
+        --code-text: #e2e8f0;
+        --success-color: #10b981;
+        --warning-color: #f59e0b;
+        --error-color: #ef4444;
+      }
+
+      body { 
+        font-family: 'Inter', sans-serif;
+        background: var(--bg-gradient);
+        color: var(--text-dark);
+        line-height: 1.6;
+      }
+
+      .remark-slide-content {
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        border-radius: 20px;
+        padding: 40px !important;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .remark-slide-content::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+        border-radius: 20px 20px 0 0;
+      }
+
+      h1, h2, h3 {
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-top: 0;
+        margin-bottom: 1rem;
+      }
+
+      h1 {
+        font-size: 3rem;
+        text-align: center;
+        text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        font-size: 2.5rem;
+        border-bottom: 3px solid var(--accent-color);
+        padding-bottom: 0.5rem;
+      }
+
+      h3 {
+        font-size: 1.8rem;
+        color: var(--secondary-color);
+      }
+
+      h4 {
+        font-size: 1.4rem;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-top: 0;
+        margin-bottom: 1rem;
+      }
+
+      .remark-code, .remark-inline-code { 
+        font-family: 'JetBrains Mono', monospace;
+        background: var(--code-bg);
+        color: var(--code-text);
+        border-radius: 8px;
+        padding: 2px 6px;
+        font-size: 0.9em;
+      }
+
+      pre {
+        background: var(--code-bg) !important;
+        border-radius: 12px !important;
+        padding: 1rem !important;
+        border-left: 5px solid var(--accent-color) !important;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+        overflow-x: auto;
+      }
+
+      .hljs-keyword { color: #c792ea !important; }
+      .hljs-string { color: #c3e88d !important; }
+      .hljs-number { color: #f78c6c !important; }
+      .hljs-comment { color: #546e7a !important; }
+      .hljs-tag { color: #f07178 !important; }
+      .hljs-attr { color: #82aaff !important; }
+
+      p {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+        color: var(--text-dark);
+      }
+
+      ul {
+        font-size: 1.1rem;
+        margin-left: 1rem;
+        list-style: none !important;
+        padding-left: 0;
+      }
+
+      ul li {
+        margin-bottom: 0.8rem;
+        position: relative;
+        padding-left: 2rem;
+      }
+
+      ul li::before {
+        content: '→';
+        color: var(--primary-color);
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+        top: 0;
+        transition: transform 0.2s ease;
+      }
+
+      ul li:hover::before {
+        transform: translateX(3px);
+      }
+
+      ol {
+        counter-reset: item;
+        padding-left: 0;
+        list-style: none;
+      }
+
+      ol li {
+        display: block;
+        margin-bottom: 1rem;
+        padding-left: 3rem;
+        position: relative;
+      }
+
+      ol li::before {
+        content: counter(item);
+        counter-increment: item;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        border-radius: 50%;
+        width: 2rem;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-weight: 600;
+        font-size: 0.9rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      a {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border-bottom: 2px solid transparent;
+      }
+
+      a:hover {
+        color: var(--secondary-color);
+        border-bottom-color: var(--secondary-color);
+        transform: translateY(-1px);
+      }
+
+      img {
+        border-radius: 12px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        max-width: 100%;
+        height: auto;
+      }
+
+      img:hover {
+        transform: scale(1.02);
+      }
+
+      .center img {
+        display: block;
+        margin: 0 auto;
+      }
+
+      small {
+        font-size: 0.8rem !important;
+        color: var(--text-light) !important;
+        font-style: italic;
+        opacity: 0.8;
+      }
+
+      .center.middle {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+        min-height: 80vh;
+        padding-top: 2rem;
+      }
+
+      .center.middle h1 {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        animation: fadeInUp 1s ease-out;
+      }
+
+      .center.middle img {
+        animation: bounceIn 1s ease-out 0.5s both;
+        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+      }
+
+      .remark-slide-number {
+        background: rgba(99, 102, 241, 0.9) !important;
+        color: white !important;
+        border-radius: 20px !important;
+        padding: 8px 16px !important;
+        font-weight: 500 !important;
+        backdrop-filter: blur(10px) !important;
+        z-index: 1001 !important;
+        position: fixed !important;
+        bottom: 12px !important;
+        right: 20px !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+      }
+
+      .logo-top-left {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        height: 100px;
+        z-index: 999;
+        opacity: 0.9;
+        transition: opacity 0.3s ease;
+      }
+
+      .logo-top-left:hover {
+        opacity: 1;
+      }
+
+      .title-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 0.5rem;
+        margin-top: 100px;
+      }
+
+      .main-title {
+        font-size: 4rem !important;
+        font-weight: 800 !important;
+        background: linear-gradient(135deg, #1e40af, #6366f1, #8b5cf6) !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        background-clip: text !important;
+        text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+        margin-bottom: 0.5rem !important;
+        line-height: 1.1 !important;
+      }
+
+      .subtitle {
+        font-size: 2.2rem !important;
+        font-weight: 300 !important;
+        color: #64748b !important;
+        font-style: italic !important;
+        opacity: 0.85 !important;
+        margin-top: 0 !important;
+        margin-bottom: 1.5rem !important;
+        position: relative !important;
+      }
+
+      .subtitle::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #6366f1, transparent);
+      }
+
+      .centered-image {
+        display: block;
+        margin: 1.5rem auto 0 auto;
+        max-height: 200px;
+        filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
+        transition: transform 0.3s ease;
+      }
+
+      .centered-image:hover {
+        transform: scale(1.05);
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes bounceIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.3);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        70% {
+          transform: scale(0.9);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      /* ===== STYLES POUR LES CARTES D'ÉCHANGE ===== */
+      .data-exchange-examples {
+        padding: 1.5rem;
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.03), rgba(139, 92, 246, 0.03));
+        border-radius: 20px;
+        border: 2px solid rgba(99, 102, 241, 0.1);
+      }
+
+      .example-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+
+      .exchange-card {
+        background: white;
+        border-radius: 16px;
+        padding: 0.5rem;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .exchange-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        border-radius: 16px 16px 0 0;
+      }
+
+      .exchange-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+      }
+
+      .post-card {
+        border-color: rgba(239, 68, 68, 0.2);
+      }
+
+      .post-card::before {
+        background: linear-gradient(90deg, var(--error-color), #dc2626);
+      }
+
+      .post-card:hover {
+        border-color: var(--error-color);
+      }
+
+      .get-card {
+        border-color: rgba(99, 102, 241, 0.2);
+      }
+
+      .get-card::before {
+        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      }
+
+      .get-card:hover {
+        border-color: var(--primary-color);
+      }
+
+      .cookies-card {
+        border-color: rgba(245, 158, 11, 0.2);
+      }
+
+      .cookies-card::before {
+        background: linear-gradient(90deg, var(--warning-color), #f59e0b);
+      }
+
+      .cookies-card:hover {
+        border-color: var(--warning-color);
+      }
+
+      .session-card {
+        border-color: rgba(16, 185, 129, 0.2);
+      }
+
+      .session-card::before {
+        background: linear-gradient(90deg, var(--success-color), #059669);
+      }
+
+      .session-card:hover {
+        border-color: var(--success-color);
+      }
+
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .method-badge {
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        font-weight: 700;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: white;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      }
+
+      .post-badge {
+        background: linear-gradient(135deg, var(--error-color), #dc2626);
+      }
+
+      .get-badge {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      }
+
+      .cookies-badge {
+        background: linear-gradient(135deg, var(--warning-color), #f59e0b);
+      }
+
+      .session-badge {
+        background: linear-gradient(135deg, var(--success-color), #059669);
+      }
+
+      .card-icon {
+        font-size: 2rem;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+      }
+
+      .card-content {
+        text-align: left;
+      }
+
+      .card-description {
+        font-size: 0.95rem;
+        color: var(--text-light);
+        line-height: 1.4;
+        margin-bottom: 1rem;
+        font-style: italic;
+        background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+        padding: 0.8rem;
+        border-radius: 8px;
+        border-left: 3px solid;
+      }
+
+      .post-card .card-description {
+        border-left-color: var(--error-color);
+      }
+
+      .get-card .card-description {
+        border-left-color: var(--primary-color);
+      }
+
+      .cookies-card .card-description {
+        border-left-color: var(--warning-color);
+      }
+
+      .session-card .card-description {
+        border-left-color: var(--success-color);
+      }
+
+      /* ===== STYLES POUR LE CONCEPT STATELESS ===== */
+      .stateless-concept {
+        margin: 2rem 0;
+        background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), rgba(220, 38, 38, 0.05));
+        border: 3px solid rgba(239, 68, 68, 0.2);
+        border-radius: 20px;
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .stateless-concept::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: linear-gradient(90deg, var(--error-color), #dc2626, #b91c1c);
+        border-radius: 20px 20px 0 0;
+      }
+
+      .concept-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        text-align: center;
+        flex-wrap: wrap;
+      }
+
+      .warning-icon {
+        font-size: 2.5rem;
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+      }
+
+      .concept-title {
+        font-size: 1.8rem !important;
+        font-weight: 700 !important;
+        color: var(--error-color) !important;
+        background: none !important;
+        -webkit-text-fill-color: var(--error-color) !important;
+        margin: 0 !important;
+        text-align: center;
+      }
+
+      .stateless-badge {
+        background: linear-gradient(135deg, var(--error-color), #dc2626);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+      }
+
+      .explanation-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+      }
+
+      .explanation-item {
+        background: white;
+        border-radius: 16px;
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        border: 2px solid rgba(239, 68, 68, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .explanation-item:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        border-color: rgba(239, 68, 68, 0.3);
+      }
+
+      .item-icon {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+      }
+
+      .item-content h4 {
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
+        color: var(--error-color) !important;
+        margin-bottom: 0.5rem !important;
+        background: none !important;
+        -webkit-text-fill-color: var(--error-color) !important;
+      }
+
+      .item-content p {
+        font-size: 0.9rem !important;
+        color: var(--text-light) !important;
+        margin: 0 !important;
+        line-height: 1.3;
+      }
+
+      /* ===== STYLES POUR LA MÉTHODE GET ===== */
+      .get-method-demo {
+        margin: 2rem 0;
+        padding: 2rem;
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05));
+        border-radius: 20px;
+        border: 2px solid rgba(99, 102, 241, 0.15);
+      }
+
+      .method-overview {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .method-badge.get-primary {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        padding: 0.8rem 2rem;
+        border-radius: 25px;
+        font-size: 1.5rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
+        display: inline-block;
+        margin-bottom: 1rem;
+      }
+
+      .method-description {
+        font-size: 1.1rem !important;
+        color: var(--text-dark) !important;
+        font-style: italic;
+        margin: 0 !important;
+      }
+
+      .url-format-demo {
+        background: white;
+        border-radius: 16px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        border: 2px solid rgba(99, 102, 241, 0.1);
+      }
+
+      .demo-title {
+        color: var(--primary-color) !important;
+        font-size: 1.2rem !important;
+        font-weight: 600 !important;
+        margin-bottom: 1rem !important;
+        text-align: center;
+        background: none !important;
+        -webkit-text-fill-color: var(--primary-color) !important;
+      }
+
+      .url-structure {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1rem;
+      }
+
+      .url-part.base {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-weight: 600;
+      }
+
+      .url-part.param {
+        background: linear-gradient(135deg, var(--accent-color), var(--success-color));
+        color: white;
+        padding: 0.5rem 0.8rem;
+        border-radius: 8px;
+        font-weight: 500;
+      }
+
+      .url-separator {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: var(--warning-color);
+      }
+
+      .url-example {
+        background: var(--code-bg);
+        border-radius: 16px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        border: 2px solid rgba(6, 182, 212, 0.3);
+      }
+
+      .example-title {
+        color: var(--accent-color) !important;
+        font-size: 1.2rem !important;
+        font-weight: 600 !important;
+        margin-bottom: 1rem !important;
+        text-align: center;
+        background: none !important;
+        -webkit-text-fill-color: var(--accent-color) !important;
+      }
+
+      .example-url {
+        text-align: center;
+      }
+
+      .url-breakdown {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1.1rem;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 1rem;
+        border-radius: 10px;
+        display: inline-block;
+      }
+
+      .url-base {
+        color: #82aaff;
+        font-weight: 600;
+      }
+
+      .url-query {
+        color: #c3e88d;
+        font-weight: 600;
+      }
+
+      .pros-cons-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+      }
+
+      .pros-card, .cons-card {
+        background: white;
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+      }
+
+      .pros-card {
+        border: 2px solid rgba(16, 185, 129, 0.2);
+      }
+
+      .pros-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--success-color);
+      }
+
+      .cons-card {
+        border: 2px solid rgba(239, 68, 68, 0.2);
+      }
+
+      .cons-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--error-color);
+      }
+
+      .pros-icon, .cons-icon {
+        font-size: 1.5rem;
+      }
+
+      .card-title {
+        font-size: 1.2rem !important;
+        font-weight: 700 !important;
+        margin: 0 !important;
+        background: none !important;
+      }
+
+      .pros-header .card-title {
+        color: var(--success-color) !important;
+        -webkit-text-fill-color: var(--success-color) !important;
+      }
+
+      .cons-header .card-title {
+        color: var(--error-color) !important;
+        -webkit-text-fill-color: var(--error-color) !important;
+      }
+
+      .advantage-item, .disadvantage-item {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin-bottom: 0.8rem;
+        padding: 0.6rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .advantage-item {
+        background: rgba(16, 185, 129, 0.05);
+        border-left: 3px solid var(--success-color);
+      }
+
+      .advantage-item:hover {
+        background: rgba(16, 185, 129, 0.1);
+        transform: translateX(5px);
+      }
+
+      .disadvantage-item {
+        background: rgba(239, 68, 68, 0.05);
+        border-left: 3px solid var(--error-color);
+      }
+
+      .disadvantage-item:hover {
+        background: rgba(239, 68, 68, 0.1);
+        transform: translateX(5px);
+      }
+
+      .advantage-icon, .disadvantage-icon {
+        font-size: 1.2rem;
+        flex-shrink: 0;
+      }
+
+      .advantage-text, .disadvantage-text {
+        font-size: 0.95rem;
+        color: var(--text-dark);
+        font-weight: 500;
+      }
+
+      /* ===== STYLES POUR L'IMPLÉMENTATION GET (CARTES AVEC SURVOL) ===== */
+      .get-implementation-demo {
+        margin: 1.5rem 0;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.03), rgba(139, 92, 246, 0.03));
+        border-radius: 16px;
+        border: 2px solid rgba(99, 102, 241, 0.1);
+      }
+
+      .implementation-header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .section-title {
+        font-size: 1.4rem !important;
+        font-weight: 600 !important;
+        color: var(--primary-color) !important;
+        margin: 0 !important;
+        background: none !important;
+        -webkit-text-fill-color: var(--primary-color) !important;
+      }
+
+      .implementation-grid {
+        display: flex;
+        gap: 1.2rem;
+        margin-bottom: 2rem;
+      }
+
+      .implementation-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.2rem;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 2px solid transparent;
+        position: relative;
+        overflow: hidden;
+        min-height: 180px;
+        cursor: pointer;
+        flex: 1;
+      }
+
+      .implementation-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+      }
+
+      .implementation-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+        flex: 2;
+        min-height: 200px;
+      }
+
+      .html-card {
+        border-color: rgba(245, 101, 101, 0.2);
+      }
+
+      .html-card::before {
+        background: linear-gradient(90deg, #f56565, #e53e3e);
+      }
+
+      .html-card:hover {
+        border-color: #f56565;
+      }
+
+      .js-direct-card {
+        border-color: rgba(56, 178, 172, 0.2);
+      }
+
+      .js-direct-card::before {
+        background: linear-gradient(90deg, #38b2ac, #319795);
+      }
+
+      .js-direct-card:hover {
+        border-color: #38b2ac;
+      }
+
+      .js-dynamic-card {
+        border-color: rgba(102, 126, 234, 0.2);
+      }
+
+      .js-dynamic-card::before {
+        background: linear-gradient(90deg, #667eea, #764ba2);
+      }
+
+      .js-dynamic-card:hover {
+        border-color: #667eea;
+      }
+
+      .tech-badge {
+        padding: 0.3rem 0.6rem;
+        border-radius: 12px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: white;
+        letter-spacing: 0.5px;
+      }
+
+      .html-badge {
+        background: linear-gradient(135deg, #f56565, #e53e3e);
+      }
+
+      .js-badge {
+        background: linear-gradient(135deg, #38b2ac, #319795);
+      }
+
+      .js-advanced-badge {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+      }
+
+      .method-title {
+        font-size: 1rem !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+        color: var(--text-dark) !important;
+        background: none !important;
+        -webkit-text-fill-color: var(--text-dark) !important;
+      }
+      /* CODE POUR CARTES D'IMPLÉMENTATION - TOUJOURS VISIBLE ET MULTILIGNE */
+.implementation-card .code-example {
+  margin-bottom: 1rem;
+  opacity: 1 !important;
+  max-height: none !important;
+  overflow: visible !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+.implementation-card .code-example pre {
+  background: var(--code-bg) !important;
+  color: var(--code-text) !important;
+  padding: 1rem !important;
+  border-radius: 6px !important;
+  font-size: 0.85rem !important;
+  line-height: 1.5 !important; /* Meilleur espacement pour multiligne */
+  border-left: 3px solid !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  margin: 0 !important;
+  overflow-x: auto;
+  white-space: pre !important; /* MULTILIGNE AUTORISÉ */
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+.html-card .code-example pre {
+  border-left-color: #f56565 !important;
+}
+
+.js-direct-card .code-example pre {
+  border-left-color: #38b2ac !important;
+}
+
+.js-dynamic-card .code-example pre {
+  border-left-color: #667eea !important;
+}
+
+
+      .get-implementation-demo .implementation-card:hover .code-example pre {
+        font-size: 0.8rem !important;
+      }
+
+      .get-implementation-demo .html-card .code-example pre {
+        border-left-color: #f56565 !important;
+      }
+
+      .get-implementation-demo .js-direct-card .code-example pre {
+        border-left-color: #38b2ac !important;
+      }
+
+      .get-implementation-demo .js-dynamic-card .code-example pre {
+        border-left-color: #667eea !important;
+      }
+
+      .method-features {
+        display: flex;
+        gap: 0.4rem;
+        flex-wrap: wrap;
+      }
+
+      .feature {
+        padding: 0.2rem 0.5rem;
+        border-radius: 8px;
+        font-size: 0.65rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+      }
+
+      .feature.simple {
+        background: rgba(72, 187, 120, 0.1);
+        color: #48bb78;
+        border: 1px solid rgba(72, 187, 120, 0.2);
+      }
+
+      .feature.static {
+        background: rgba(160, 174, 192, 0.1);
+        color: #a0aec0;
+        border: 1px solid rgba(160, 174, 192, 0.2);
+      }
+
+      .feature.immediate {
+        background: rgba(56, 178, 172, 0.1);
+        color: #38b2ac;
+        border: 1px solid rgba(56, 178, 172, 0.2);
+      }
+
+      .feature.programmatic {
+        background: rgba(99, 179, 237, 0.1);
+        color: #63b3ed;
+        border: 1px solid rgba(99, 179, 237, 0.2);
+      }
+
+      .feature.dynamic {
+        background: rgba(102, 126, 234, 0.1);
+        color: #667eea;
+        border: 1px solid rgba(102, 126, 234, 0.2);
+      }
+
+      .feature.interactive {
+        background: rgba(139, 92, 246, 0.1);
+        color: #8b5cf6;
+        border: 1px solid rgba(139, 92, 246, 0.2);
+      }
+
+      /* ===== STYLES POUR LA DÉMO PHP (CODE MULTILIGNE) ===== */
+      .php-get-demo {
+        margin: 2rem 0;
+        padding: 2rem;
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.03), rgba(139, 92, 246, 0.03));
+        border-radius: 20px;
+        border: 2px solid rgba(99, 102, 241, 0.1);
+      }
+
+      .php-get-demo .url-to-php-flow {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .php-get-demo .url-section, 
+      .php-get-demo .php-section, 
+      .php-get-demo .result-section {
+        background: white;
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+      }
+
+      .php-get-demo .url-section {
+        border-color: rgba(6, 182, 212, 0.2);
+      }
+
+      .php-get-demo .php-section {
+        border-color: rgba(139, 92, 246, 0.2);
+      }
+
+      .php-get-demo .result-section {
+        border-color: rgba(16, 185, 129, 0.2);
+      }
+
+      .php-get-demo .section-label {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .php-get-demo .url-section .section-label {
+        color: var(--accent-color);
+      }
+
+      .php-get-demo .php-section .section-label {
+        color: var(--secondary-color);
+      }
+
+      .php-get-demo .result-section .section-label {
+        color: var(--success-color);
+      }
+
+      .php-get-demo .url-display {
+        background: var(--code-bg);
+        color: var(--code-text);
+        padding: 1rem;
+        border-radius: 10px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        word-break: break-all;
+      }
+
+      .php-get-demo .url-base {
+        color: #82aaff;
+      }
+
+      .php-get-demo .url-query {
+        color: #c3e88d;
+        font-weight: 600;
+      }
+
+      .php-get-demo .url-breakdown {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .php-get-demo .param-item {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(16, 185, 129, 0.1));
+        padding: 0.5rem 0.8rem;
+        border-radius: 8px;
+        border: 1px solid rgba(6, 182, 212, 0.2);
+      }
+
+      .php-get-demo .param-key {
+        background: var(--accent-color);
+        color: white;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      .php-get-demo .param-separator {
+        font-weight: bold;
+        color: var(--text-dark);
+      }
+
+      .php-get-demo .param-value {
+        background: var(--success-color);
+        color: white;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      /* CODE PHP - TOUJOURS VISIBLE ET MULTILIGNE */
+      .php-get-demo .php-code-example {
+        margin: 0 !important;
+        opacity: 1 !important;
+        max-height: none !important;
+        overflow: visible !important;
+        transform: none !important;
+        transition: none !important;
+      }
+
+      .php-get-demo .php-code-example pre {
+        background: var(--code-bg) !important;
+        color: var(--code-text) !important;
+        padding: 1.2rem !important;
+        border-radius: 10px !important;
+        border-left: 4px solid var(--secondary-color) !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+        font-size: 0.9rem !important;
+        line-height: 1.6 !important;
+        margin: 0 !important;
+        white-space: pre !important; /* MULTILIGNE POUR LE CODE PHP */
+        overflow-x: auto !important;
+        font-family: 'JetBrains Mono', monospace !important;
+        opacity: 1 !important;
+        max-height: none !important;
+        transform: none !important;
+      }
+
+      .php-get-demo .php-code-example code {
+        font-family: 'JetBrains Mono', monospace !important;
+        white-space: pre !important;
+        tab-size: 2;
+        -moz-tab-size: 2;
+      }
+
+      .php-get-demo .variables-display {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .php-get-demo .variable-item {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1));
+        padding: 0.8rem 1rem;
+        border-radius: 10px;
+        border: 1px solid rgba(16, 185, 129, 0.2);
+      }
+
+      .php-get-demo .var-name {
+        background: var(--secondary-color);
+        color: white;
+        padding: 0.3rem 0.6rem;
+        border-radius: 6px;
+        font-family: 'JetBrains Mono', monospace;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      .php-get-demo .var-arrow {
+        color: var(--success-color);
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+
+      .php-get-demo .var-value {
+        background: var(--success-color);
+        color: white;
+        padding: 0.3rem 0.6rem;
+        border-radius: 6px;
+        font-family: 'JetBrains Mono', monospace;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      .php-get-demo .mapping-visualization {
+        background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+        border-radius: 16px;
+        padding: 1.5rem;
+        border: 2px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .php-get-demo .mapping-title {
+        text-align: center;
+        font-size: 1.2rem !important;
+        font-weight: 600 !important;
+        color: var(--primary-color) !important;
+        margin-bottom: 1.5rem !important;
+        background: none !important;
+        -webkit-text-fill-color: var(--primary-color) !important;
+      }
+
+      .php-get-demo .mapping-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .php-get-demo .mapping-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        background: white;
+        padding: 1rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+      }
+
+      .php-get-demo .mapping-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .php-get-demo .url-param, 
+      .php-get-demo .php-var {
+        flex: 1;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.9rem;
+        padding: 0.8rem;
+        border-radius: 8px;
+      }
+
+      .php-get-demo .url-param {
+        background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(16, 185, 129, 0.1));
+        border: 1px solid rgba(6, 182, 212, 0.2);
+      }
+
+      .php-get-demo .php-var {
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(99, 102, 241, 0.1));
+        border: 1px solid rgba(139, 92, 246, 0.2);
+      }
+
+      .php-get-demo .mapping-arrow {
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        font-weight: bold;
+      }
+
+      .php-get-demo .key-highlight {
+        background: var(--accent-color);
+        color: white;
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        font-weight: 600;
+      }
+
+      .php-get-demo .value-highlight {
+        background: var(--success-color);
+        color: white;
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        font-weight: 600;
+      }
+
+      .php-get-demo .var-highlight {
+        color: var(--secondary-color);
+        font-weight: 600;
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 768px) {
+        .remark-slide-content {
+          padding: 20px !important;
+        }
+        
+        h1 {
+          font-size: 2.5rem;
+        }
+        
+        h2 {
+          font-size: 2rem;
+        }
+
+        .main-title {
+          font-size: 2.5rem !important;
+        }
+        
+        .subtitle {
+          font-size: 1.6rem !important;
+        }
+        
+        .logo-top-left {
+          height: 80px;
+          top: 15px;
+          left: 15px;
+        }
+
+        .example-grid {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+        
+        .explanation-grid {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+        
+        .pros-cons-grid {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+        
+        .implementation-grid {
+          flex-direction: column;
+          gap: 1rem;
+        }
+        
+        .implementation-card {
+          flex: 1;
+        }
+        
+        .implementation-card:hover {
+          flex: 1;
+          min-height: 220px;
+        }
+        
+        .php-get-demo .url-breakdown {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+        
+        .php-get-demo .variables-display {
+          flex-direction: column;
+          gap: 0.8rem;
+        }
+        
+        .php-get-demo .mapping-item {
+          flex-direction: column;
+          gap: 0.8rem;
+          text-align: center;
+        }
+        
+        .php-get-demo .mapping-arrow {
+          transform: rotate(90deg);
+        }
+      }
+
+      /* ===== IMPRESSION ===== */
+      @media print {
+        @page {
+          size: A4 landscape;
+          margin: 10mm;
+        }
+
+        body {
+          background: white !important;
+          font-size: 12pt !important;
+        }
+
+        .remark-slide-content {
+          width: 100% !important;
+          height: 90vh !important;
+          padding: 15mm !important;
+          margin: 0 !important;
+          background: white !important;
+          border-radius: 0 !important;
+          box-shadow: none !important;
+          border: none !important;
+          page-break-after: always;
+          position: relative !important;
+          overflow: visible !important;
+        }
+
+        .remark-slide-number,
+        .remark-notes,
+        .remark-help,
+        .remark-backdrop {
+          display: none !important;
+        }
+
+        h1, h2, h3 {
+          color: #1f2937 !important;
+          background: none !important;
+          -webkit-text-fill-color: #1f2937 !important;
+          text-shadow: none !important;
+        }
+
+        pre {
+          background: #f8f9fa !important;
+          border: 1pt solid #e9ecef !important;
+          border-left: 3pt solid #6366f1 !important;
+          color: #212529 !important;
+          font-size: 10pt !important;
+          padding: 8pt !important;
+          page-break-inside: avoid;
+        }
+
+        .get-implementation-demo .code-example {
+          opacity: 1 !important;
+          max-height: none !important;
+          transform: none !important;
+        }
+
+        .php-get-demo .php-code-example pre {
+          background: #f8f9fa !important;
+          color: #212529 !important;
+          white-space: pre !important;
+        }
+
+        img {
+          max-width: 100% !important;
+          height: auto !important;
+          border-radius: 0 !important;
+          box-shadow: none !important;
+          page-break-inside: avoid;
+        }
+
+        .exchange-card, .explanation-item, .pros-card, .cons-card, .implementation-card {
+          box-shadow: none !important;
+          page-break-inside: avoid;
+        }
+      }
+
+      /* ===== SOLUTION DÉFINITIVE POUR LE CODE MULTILIGNE ===== */
+/* Force le code à s'afficher sur plusieurs lignes - PRIORITÉ ABSOLUE */
+
+.implementation-card .code-example,
+.html-card .code-example,
+.js-direct-card .code-example,
+.js-dynamic-card .code-example {
+  margin-bottom: 1rem !important;
+  opacity: 1 !important;
+  max-height: none !important;
+  overflow: visible !important;
+  transform: none !important;
+  transition: none !important;
+  display: block !important;
+}
+
+.implementation-card .code-example pre,
+.html-card .code-example pre,
+.js-direct-card .code-example pre,
+.js-dynamic-card .code-example pre {
+  background: var(--code-bg) !important;
+  color: var(--code-text) !important;
+  padding: 1rem !important;
+  border-radius: 6px !important;
+  font-size: 0.85rem !important;
+  line-height: 1.6 !important;
+  border-left: 3px solid !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  margin: 0 !important;
+  overflow-x: auto !important;
+  white-space: pre !important; /* MULTILIGNE FORCÉ */
+  font-family: 'JetBrains Mono', monospace !important;
+  display: block !important;
+}
+
+.implementation-card .code-example code,
+.html-card .code-example code,
+.js-direct-card .code-example code,
+.js-dynamic-card .code-example code {
+  white-space: pre !important; /* MULTILIGNE FORCÉ AU NIVEAU DU CODE AUSSI */
+  font-family: 'JetBrains Mono', monospace !important;
+  display: block !important;
+  tab-size: 2 !important;
+  -moz-tab-size: 2 !important;
+}
+
+/* Suppression explicite de toute règle nowrap */
+.implementation-card .code-example pre,
+.implementation-card .code-example code {
+  white-space: pre !important; /* JAMAIS nowrap */
+}
+
+/* Couleurs des bordures */
+.html-card .code-example pre {
+  border-left-color: #f56565 !important;
+}
+
+.js-direct-card .code-example pre {
+  border-left-color: #38b2ac !important;
+}
+
+.js-dynamic-card .code-example pre {
+  border-left-color: #667eea !important;
+}
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle
+
+<img src="img/indbg.jpg" class="logo-top-left" alt="Logo">
+<div class="title-container">
+  <h1 class="main-title">Développement d'un site web dynamique</h1>
+  <h2 class="subtitle">échange de données</h2>
+  <img src="img/php.png" class="centered-image" alt="Logo PHP">
+</div>
+
+---
+## On parle de quoi ?
+1. <a href="UAA12-echanges_de_donnees.html#3">L'échange de données en PHP</a>
+2. <a href="UAA12-echanges_de_donnees.html#3">GET et POST</a>
+3. <a href="UAA12-echanges_de_donnees.html#8">Cookies et sessions</a>
+
+---
+## L'échange de données en PHP
+
+<div style="text-align: center;">
+<img height="400px" src="img/schema_general.png">
+</div>
+<br>
+<small>Image tirée du cours de "Développement web" - HENALLUX 2018</small>
+
+---
+## L'échange de données en PHP
+
+<p style="font-style: italic; margin-bottom: 5px;">Les informations envoyées au serveur sont souvent plus complexes qu'une simple URL du document désiré.</p>
+
+<div class="data-exchange-examples">
+  <div class="example-grid">
+    <!-- POST Example -->
+    <div class="exchange-card post-card">
+      <div class="card-header">
+        <div class="method-badge post-badge">POST</div>
+        <div class="card-icon">🔐</div>
+      </div>
+      <div class="card-content">
+        <p class="card-description">
+          "Je suis un admin, voici mon pseudo et un mot de passe"
+        </p>
+      </div>
+    </div>
+    <!-- GET Example -->
+    <div class="exchange-card get-card">
+      <div class="card-header">
+        <div class="method-badge get-badge">GET</div>
+        <div class="card-icon">🏷️</div>
+      </div>
+      <div class="card-content">
+        <p class="card-description">
+          "La catégorie de vêtement qui m'intéresse est 'Pantalon'"
+        </p>
+      </div>
+    </div>
+    <!-- COOKIES Example -->
+    <div class="exchange-card cookies-card">
+      <div class="card-header">
+        <div class="method-badge cookies-badge">COOKIES</div>
+        <div class="card-icon">🍪</div>
+      </div>
+      <div class="card-content">
+        <p class="card-description">
+          "C'est encore moi, l'admin de tout à l'heure... souviens-toi de moi !"
+        </p>
+      </div>
+    </div>
+    <!-- SESSION Example -->
+    <div class="exchange-card session-card">
+      <div class="card-header">
+        <div class="method-badge session-badge">SESSION</div>
+        <div class="card-icon">🛒</div>
+      </div>
+      <div class="card-content">
+        <p class="card-description">
+          "Voici ce que tu peux ajouter à mon panier"
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+---
+## L'échange de données en PHP
+
+*Les informations envoyées ne sont pas toujours simplement un document HTML entier*
+
+<div class="data-exchange-examples">
+  <div class="example-grid">
+    <!-- AJAX Example -->
+    <div class="exchange-card post-card">
+      <div class="card-header">
+        <div class="method-badge post-badge">AJAX</div>
+        <div class="card-icon">⚡</div>
+      </div>
+      <div class="card-content">
+        <p class="card-description">
+          Scroll infini, autocomplétion, etc.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+---
+## L'échange de données en PHP
+
+<div class="stateless-concept">
+  <div class="concept-header">
+    <div class="warning-icon">⚠️</div>
+    <h3 class="concept-title">Un serveur PHP n'a pas de mémoire</h3>
+    <div class="stateless-badge">STATELESS</div>
+  </div>
+  <div class="concept-explanation">
+    <div class="explanation-grid">
+      <div class="explanation-item">
+        <div class="item-icon">🔄</div>
+        <div class="item-content">
+          <h4>Requêtes séparées</h4>
+          <p>Chaque requête est traitée indépendamment</p>
+        </div>
+      </div>
+      <div class="explanation-item">
+        <div class="item-icon">🗑️</div>
+        <div class="item-content">
+          <h4>Oubli immédiat</h4>
+          <p>Après traitement, tout est effacé de la mémoire</p>
+        </div>
+      </div>
+      <div class="explanation-item">
+        <div class="item-icon">❌</div>
+        <div class="item-content">
+          <h4>Aucune trace</h4>
+          <p>Pas de souvenir des requêtes précédentes</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+---
+## Méthode GET
+
+<div class="get-method-demo">
+  <div class="method-overview">
+    <div class="method-badge get-primary">GET</div>
+    <p class="method-description">Les informations se trouvent directement dans l'URL</p>
+  </div>
+  
+  <div class="url-format-demo">
+    <h4 class="demo-title">📋 Format de l'URL</h4>
+    <div class="url-structure">
+      <div class="url-part base">url</div>
+      <div class="url-separator">?</div>
+      <div class="url-part param">clé=valeur</div>
+      <div class="url-separator">&</div>
+      <div class="url-part param">clé=valeur</div>
+      <div class="url-separator">&</div>
+      <div class="url-part param">clé=valeur</div>
+    </div>
+  </div>
+</div>
+  
+---
+## Méthode GET
+
+<div class="url-example">
+  <h4 class="example-title">🌐 Exemple concret</h4>
+  <div class="example-url">
+    <div class="url-breakdown">
+      <span class="url-base">https://www.google.be/search</span><span class="url-query">?q=javascript</span>
+    </div>
+  </div>
+</div>
+
+---
+## Méthode GET
+
+<div class="pros-cons-grid">
+  <div class="pros-card">
+    <div class="card-header pros-header">
+      <div class="pros-icon">✅</div>
+      <h4 class="card-title">Avantages</h4>
+    </div>
+    <div class="pros-content">
+      <div class="advantage-item">
+        <span class="advantage-icon">👁️</span>
+        <span class="advantage-text">Données visibles dans l'adresse</span>
+      </div>
+      <div class="advantage-item">
+        <span class="advantage-icon">🎯</span>
+        <span class="advantage-text">Simple à comprendre et déboguer</span>
+      </div>
+    </div>
+  </div>
+  <div class="cons-card">
+    <div class="card-header cons-header">
+      <div class="cons-icon">❌</div>
+      <h4 class="card-title">Inconvénients</h4>
+    </div>
+    <div class="cons-content">
+      <div class="disadvantage-item">
+        <span class="disadvantage-icon">🔍</span>
+        <span class="disadvantage-text">Données trop visibles</span>
+      </div>
+      <div class="disadvantage-item">
+        <span class="disadvantage-icon">🕵️</span>
+        <span class="disadvantage-text">Risque d'interception</span>
+      </div>
+      <div class="disadvantage-item">
+        <span class="disadvantage-icon">📜</span>
+        <span class="disadvantage-text">Traces dans l'historique</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+---
+## Méthode GET - Côté client
+
+  <div class="implementation-header">
+    <h4 class="section-title">💡 Les données peuvent être écrites de 3 façons</h4>
+  </div>
+    <!-- HTML Direct -->
+    <div class="implementation-card html-card">
+      <div class="card-header">
+        <div class="tech-badge html-badge">HTML</div>
+        <div class="card-icon">🔗</div>
+      </div>
+      <div class="card-content">
+        <h5 class="method-title">Lien direct</h5>
+        <p class="method-description">Données intégrées dans l'attribut href</p>
+          <pre><code class="language-html">href="monsite.be?cat=Pantalon"</code></pre>
+        <div class="method-features">
+          <span class="feature simple">Simple</span>
+          <span class="feature static">Statique</span>
+        </div>
+      </div>
+    </div>
+---
+## Méthode GET - Côté client
+  <div class="implementation-header">
+    <h4 class="section-title">💡 Les données peuvent être écrites de 3 façons</h4>
+  </div>
+    <!-- JavaScript Direct -->
+    <div class="implementation-card js-direct-card">
+      <div class="card-header">
+        <div class="tech-badge js-badge">JS</div>
+        <div class="card-icon">⚡</div>
+      </div>
+      <div class="card-content">
+        <h5 class="method-title">Script direct</h5>
+        <p class="method-description">Redirection immédiate avec URL fixe</p>
+          <pre><code class="language-js">location.href ="monsite.be?cat=Pantalon";</code></pre>
+        <div class="method-features">
+          <span class="feature immediate">Immédiat</span>
+          <span class="feature programmatic">Programmé</span>
+        </div>
+      </div>
+    </div>
+---
+## Méthode GET - Côté client
+
+  <div class="implementation-header">
+    <h4 class="section-title">💡 Les données peuvent être écrites de 3 façons</h4>
+  </div>
+    <!-- JavaScript Dynamique -->
+    <div class="implementation-card js-dynamic-card">
+      <div class="card-header">
+        <div class="tech-badge js-advanced-badge">JS</div>
+        <div class="card-icon">🔧</div>
+      </div>
+      <div class="card-content">
+        <h5 class="method-title">Construction dynamique</h5>
+        <p class="method-description">URL construite à partir des données utilisateur</p>
+  <pre><code class="language-js">let cat = document.getElementById("cat").value;
+let url = "monsite.be?cat=" + cat;
+location.href = url;
+</code></pre>
+        <div class="method-features">
+          <span class="feature dynamic">Dynamique</span>
+          <span class="feature interactive">Interactif</span>
+        </div>
+      </div>
+    </div>
+
+---
+## Méthode GET - Côté serveur
+<div class="php-get-demo">
+  <div class="url-to-php-flow">
+<div class="url-section">
+  <div class="section-label">📧 URL reçue</div>
+  <div class="url-display">
+    <span class="url-base">http://monsite.be/page.php</span><span class="url-query">?nom=Dupont&age=25</span>
+  </div>
+  <div class="url-breakdown">
+    <div class="param-item">
+      <span class="param-key">nom</span>
+      <span class="param-separator">=</span>
+      <span class="param-value">Dupont</span>
+    </div>
+    <div class="param-item">
+      <span class="param-key">age</span>
+      <span class="param-separator">=</span>
+      <span class="param-value">25</span>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+---
+## Méthode GET - Côté serveur
+<div class="php-get-demo">
+  <div class="url-to-php-flow">
+    <div class="php-section">
+      <div class="section-label">⚙️ Code PHP</div>
+      <div class="php-code-container">
+          <pre><code class="language-php">if (isset($_GET['nom'])){
+  $nom = $_GET['nom'];  // "Dupont"
+}
+
+if (isset($_GET['age'])){
+  $age = $_GET['age'];  // "25"
+}</code></pre>
+      </div>
+    </div>
+  </div>
+  
+---
+## Méthode GET - Côté serveur
+<div class="php-get-demo">
+  <div class="url-to-php-flow">
+    <!-- Résultat -->
+    <div class="result-section">
+      <div class="section-label">✅ Variables créées</div>
+      <div class="variables-display">
+        <div class="variable-item">
+          <span class="var-name">$nom</span>
+          <span class="var-arrow">→</span>
+          <span class="var-value">"Dupont"</span>
+        </div>
+        <div class="variable-item">
+          <span class="var-name">$age</span>
+          <span class="var-arrow">→</span>
+          <span class="var-value">"25"</span>
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+---
+## Méthode GET - Côté serveur
+<div class="php-get-demo">
+  <div class="url-to-php-flow">
+  <!-- Correspondance visuelle -->
+  <div class="mapping-visualization">
+    <h5 class="mapping-title">🎯 Correspondance clé/valeur</h5>
+    <div class="mapping-container">
+      <div class="mapping-item">
+        <div class="url-param">
+          <span class="param-highlight key-highlight">nom</span>=<span class="param-highlight value-highlight">Dupont</span>
+        </div>
+        <div class="mapping-arrow">⟷</div>
+        <div class="php-var">
+          <span class="var-highlight">$_GET['<span class="key-highlight">nom</span>']</span> = "<span class="value-highlight">Dupont</span>"
+        </div>
+      </div>
+      <div class="mapping-item">
+        <div class="url-param">
+          <span class="param-highlight key-highlight">age</span>=<span class="param-highlight value-highlight">25</span>
+        </div>
+        <div class="mapping-arrow">⟷</div>
+        <div class="php-var">
+          <span class="var-highlight">$_GET['<span class="key-highlight">age</span>']</span> = "<span class="value-highlight">25</span>"
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+---
+### Méthode GET
+
+Certaines données passées en GET ne peuvent pas contenir certains caractères (espaces, =, &, ...).
+
+Exemple : `&nom=jules dupont`
+
+Solution : ces données doivent être "encodées" :
+
+* en JavaScript : `encodeURIComponent($chaine)`
+* en PHP : `urlencode($chaine)`
+
+Transformation : `&nom=jules+dupont`
+
+---
+### Méthode POST
+
+* les informations sont transmises séparément
+* format : pas visible
+* les données proviennent d'un formulaire
+
+---
+## GET et POST
+### POST
+
+*les informations proviennent d'un formulaire et sont envoyées dans un paquet séparé*
+
+Avantage :
+
+* ne laisse pas de trace
+
+Inconvénient :
+
+* plus "lourd" à mettre en place
+
+<img height="100px" src="img/form.png">
+
+<img height="100px" src="img/post.png">
+
+---
+## Cookies et sessions
+
+De base, une application web est **"stateless"**, càd qu'il n'y a aucune méthode *automatique* pour :
+
+* suivre le parcours d'un utilisateur (ex. retenir le login, le niveau d'accès, etc.)
+* se souvenir de données d'une page à l'autre
+
+Exemple :
+
+* rends-toi sur un site de vente en ligne
+* ajoute quelques articles dans le panier
+* ferme le navigateur
+* ouvre de nouveau le même navigateur et rends-toi sur le même site de vente
+* ton panier contient toujours l'article ajouté précédemment
+* refais cette manipulation en navigation privée et observe la différence
+
+---
+## Cookies et sessions
+
+Le mécanisme pour "suivre" (pister, tracker) un utilisateur se fait à l'aide des cookies et des sessions :
+
+* **cookie** : données stockées chez le client
+* **session** : données stockées sur le serveur
+
+---
+## Cookies et sessions
+### Cookies
+
+Caractéristiques :
+
+* stockées sur le disque dur du client
+* écrites / lues par le navigateur
+* liées à un site donné
+* envoyées avec chaque requête au serveur de ce site
+
+<img height="340px" src="img/cookie.png">
+
+---
+## Cookies et sessions
+### Cookies
+
+#### Accéder à un cookie
+
+```
+
+\$_COOKIE['clé'];
+
+```
+
+#### Définir / Modifier un cookie
+
+```
+
+// expiration dans 7 jours
+setcookie('clé', 'valeur', time() + 60 * 60 * 24 * 7);
+
+```
+
+#### Détruire un cookie
+
+```
+
+// date d'expiration dans le passé
+setcookie('clé', '', time() - 3600);
+
+```
+
+#### Attention à la position dans le code !
+
+```
+
+<?php
+setcookie('dernièreVisite', time(), time() + 60 * 60 * 24 * 7);
+?>
+<!DOCTYPE html>
+
+```
+
+---
+## Cookies et sessions
+### Sessions
+
+Problème : et si le client interdit les cookies ?
+
+<img height="340px" src="img/deny.jpg">
+
+--
+
+Solution : stocker les données sur le serveur, c'est plus sûr !
+
+---
+## Cookies et sessions
+### Sessions
+
+Problème : comment savoir quelles données correspondent à quel client ?
+
+<img height="340px" src="img/session1.png">
+
+---
+## Cookies et sessions
+### Sessions
+
+Solution : attribuer un identifiant à chaque client (stocké dans les cookies)
+
+<img height="340px" src="img/session2.png">
+
+---
+## Cookies et sessions
+### Sessions
+
+Oui mais... et si le client interdit les cookies ?
+
+---
+## Cookies et sessions
+### Sessions
+
+#### Commencer une session
+
+```
+
+<?php
+// à exécuter avant la balise HTML !
+session_start();
+?>
+```
+
+#### Créer / Modifier une variable de session
+
+```
+
+<?php
+$_SESSION['login'] = $loginUtilisateur;
+?>
+```
+
+#### Lire une variable de session
+
+```
+
+<?php
+$loginUtilisateur = $_SESSION['login'];
+?>
+```
+
+---
+#### Tester si une variable de session existe
+
+```
+
+<?php
+if(isset($_SESSION['login'])){
+  // ...
+}
+?>
+```
+
+#### Supprimer une variable de session
+```
+
+<?php
+unset($_SESSION['login'])
+?>
+```
+
+#### Terminer / Effacer une session
+```
+
+<?php
+// Cas classique : l'utilisateur clique sur le bouton "Se déconnecter"
+session_destroy();
+$_SESSION = array();
+?>
+```
+
+---
+## Cookies vs. sessions
+
+<img height="200px" src="img/cookievssession.png">
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+   <script>
+  var slideshow = remark.create();
+</script>
+
+  </body>
+</html>
