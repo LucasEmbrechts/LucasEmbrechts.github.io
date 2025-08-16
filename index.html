@@ -280,6 +280,14 @@
             }
         }
     </style>
+    <script>
+// Vérifier si on accède via github.io au lieu du domaine personnalisé
+if (window.location.hostname.includes('.github.io')) {
+    // Rediriger vers le domaine personnalisé protégé
+    window.location.replace('https://info305.ovh' + window.location.pathname + window.location.search);
+}
+</script>
+
 </head>
 <body>
     <div class="container">
@@ -291,11 +299,11 @@
                 <a href="UAA4/" class="course-link">Accéder au cours</a>
             </div>
 
-            <div class="course-card" style="display: none;">
+            <div class="course-card" style="">
                 <div class="course-number">5</div>
                 <h2 class="course-title">Programmation impérative</h2>
                 <p class="course-description">Maîtrisez les fondamentaux de la programmation impérative et les structures de contrôle.</p>
-                <a href="UAA5/" class="course-link">Accéder au cours</a>
+                <a href="UAA5/index.html" class="course-link">Accéder au cours</a>
             </div>
 
             <div class="course-card" style="display: none;">
