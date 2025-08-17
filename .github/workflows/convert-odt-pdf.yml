@@ -21,9 +21,18 @@ jobs:
 
     - name: Convert ODT files to PDF
       run: |
-        for file in $(find . -type f -name "*.odt"); do
-          echo "Converting $file to PDF..."
-          libreoffice --headless --convert-to pdf "$file" --outdir "$(dirname "$file")"
+        # Utiliser find avec des conditions plus strictes et une boucle while plus sûre
+        find . -type f -name "*.odt" -print0 | while IFS= read -r -d '' file; do
+          if [ -f "$file" ] && [ -r "$file" ]; then
+            echo "Converting $file to PDF..."
+            libreoffice --headless --convert-to pdf "$file" --outdir "$(dirname "$file")" || {
+              echo "Warning: Failed to convert $file"
+              continue
+            }
+            echo "Successfully converted $file"
+          else
+            echo "Skipping $file (not a readable file)"
+          fi
         done
 
     - name: Debug - List generated PDFs
