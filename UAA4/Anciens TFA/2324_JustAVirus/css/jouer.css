@@ -1,0 +1,68 @@
+@font-face {
+    font-family: cyber;
+    src: url(../sources/Cybrpnuk2.ttf);
+}
+/* fait par mateo */
+html{
+    background-image: url('../sources/interface de jeux.jpg');
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+#btn1{
+	position:absolute;
+	bottom:190px;
+	left:530px;
+	background-image: url('../sources/button.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	height:200px;
+	width:250px;
+	font-size: 120%;
+	font-family: cyber;
+	color:red;
+}
+#btn2{
+	position:absolute;
+	top:10px;
+	right:15px;
+	background-image: url('../sources/button.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	height:30px;
+	width:80px;
+	font-size: 120%;
+	font-family: cyber;
+	color:red;
+
+}
+#btn3{
+	position:absolute;
+	bottom:190px;
+	right:440px;
+	background-image: url('../sources/button.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	height:200px;
+	width:250px;
+	font-size: 120%;
+	font-family: cyber;
+	color:red;
+}
+
+#imge{
+	height:500px;
+	width:800px;
+}
+#text{
+	height:200px;
+	width:400px;
+	position:absolute;
+	left:1100px;
+	top:100px;
+	font-family: cyber;
+	color:red;
+	font-size:120%;
+}

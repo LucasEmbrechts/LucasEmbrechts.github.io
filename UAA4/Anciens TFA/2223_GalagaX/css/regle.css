@@ -1,0 +1,68 @@
+/*codé entierement par basil*/
+/*Projet X - 4TTr - 2023*/
+body{
+	background-image: url('../sources/regle et histoire.jpg');
+    background-color: #1A1A1A;/*fond d'ecran noir pour eviter de flasher les yeux de l'utilisateurs au chargement de la page*/
+}
+@font-face{
+	font-family: Cyberpuk;
+	src:url(../sources/Cybrpnuk2.ttf);/*caligraphie de la page, un peu post-apocalyptique*/
+}
+h1{
+	font-family: Cyberpuk;
+	font-size: 6em;
+	color: black;
+	user-select: none ;
+}
+h2{
+	font-family: Cyberpuk;
+	font-size: 64px;
+	color: white;
+	text-align: center;	
+	user-select: none ;	
+}
+#img{
+	background-image: url(../sources/button_menu.png);/*l'image du bouton pour aller au menu*/
+	background-size: cover;
+	width: 21%;
+	height: 11vh;	
+	cursor: pointer;
+	user-select: none;
+}
+
+#bloc{
+	display: bloc;
+	float: right;
+	margin-right: 20%;
+	user-select: none ;
+}
+#txt{
+	color: white;
+	font-size: 2em;
+	user-select: none ;
+}
+
+#blochistoire{
+	display: none;
+	float: right;
+	position: absolute;
+	user-select: none ;
+	left: 22%;
+}
+#histoire{
+	color: white;
+	font-size: 2em;
+}
+
+#fleche{
+	background-image: url(../sources/fleche.png);/*le fond d'écran de la flèche pour switcher entre les règles et l'histoire*/
+	background-size: cover;
+	width: 25%;
+	height: 15vh;
+	position: relative;
+	cursor: pointer;
+}
+#fleche:hover{
+	transition:0.1s;
+	transform: scale(1.25);	
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Classement</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="./style_classement.css">
+	<script type="text/javascript" src="./javascript/script_interfaces.js"></script>
+</head>
+<body>
+<div id="background"></div>
+<img src="./img/boutton.png" id="bouttonMenu" onclick="menu()">
+</body>
+<script type="text/javascript">
+	
+//Affiche le tableau
+function afficheTab(){
+	var htmlTAB = ""; 
+		var i; 
+
+	for (i=0; i<scoreJoueurs.length; i++)
+	{
+		if (i < 10)
+		{
+			htmlTAB = htmlTAB + (i+1) + "." + "</br>" + " Nom:  " + scoreJoueurs[i].nom + "</br>" + " Points:  " + scoreJoueurs[i].points + "</br>" + " Temps:  " + scoreJoueurs[i].temps + "s" + "</br>" + "</br>";
+		}
+	}
+
+	document.getElementById('background').innerHTML = htmlTAB;
+}
+
+// Fonction pour trier s'applique avec nomTableau.sort(compare));
+function compare(a, b) {
+  const genreA = a.points;
+  const genreB = b.points;
+  
+  let comparison = 0;
+  if (genreA > genreB) {
+    comparison = 1;
+  } else if (genreA < genreB) {
+    comparison = -1;
+  }
+  return comparison * -1;
+}
+
+
+//------------------------------------- AU CHARGEMENT
+
+//Reprend le tableau des cookies
+var scoreJoueurs = JSON.parse(localStorage.getItem("scoresJoueursPairesGame"));
+
+// Si le tableau n'existe pas, je l'initialise comme un tableau
+if (scoreJoueurs == null){
+	// initialise un tableau
+	 scoreJoueurs = [ ]; 
+}
+
+scoreJoueurs.sort(compare);
+//affiche le tableau
+afficheTab();
+
+
+</script>
+</html>

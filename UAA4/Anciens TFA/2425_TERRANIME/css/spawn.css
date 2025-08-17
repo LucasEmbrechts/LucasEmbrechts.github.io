@@ -1,0 +1,444 @@
+
+    /*Ryan De Roeck*/
+    body {
+      background-image: url('../sources/img/téléchargement.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      overflow: hidden;
+      
+    }
+    
+    .moving {
+      background-image: url('../sources/img/show.png');
+      background-size: cover;
+      position: absolute;
+      transition: ease;
+      background-repeat: no-repeat;
+      width: 100px;
+      height: 100px;
+      background-color: lightblue;
+      
+    }
+    
+    .falling {
+      position: absolute;
+      top: 0;
+      left: 200px;
+
+      background-color: rgba(255, 0, 0, 0);
+      border-radius: 5px;
+      transform: translateX(-50%);
+    }
+    
+    .ground {
+      position: absolute;
+      bottom: 200px;
+      left: 150px;
+      width: 200px;
+      height: 100px;
+      background-color: green;
+    }
+    
+    #container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    .elem {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: absolute;
+      height: 50px;
+      width: 50px;
+    }
+    .menu {
+      position: fixed;
+      top: 300px;
+      right: -300px; /* Cache le menu en dehors de l'écran */
+      width: 250px;
+      height: auto;
+      background: rgba(255, 0, 0, 0.727);
+      padding: 20px;
+      border-radius: 10px;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      transform: translateX(0);
+      opacity: 0;
+      z-index: 100;
+    }
+    
+    .menu.open {
+      transform: translateX(-1100px);
+      opacity: 1;
+    }
+    
+    .menu-button {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      padding: 10px 20px;
+      background: #ff99006e;
+      color: rgba(255, 255, 255, 0.584);
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      border-radius: 2px 3px;
+      font-size: 16px;
+    }
+    
+    .btn {
+      display: block;
+      width: 100%;
+      height: 50px;
+      padding: 10px;
+      margin: 5px 0;
+      background: #4e0000d3;
+      color: white;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      border-radius: 5px;
+      margin-bottom: 30px;
+      margin-top: 50px;
+    }
+    
+    .btn:hover {
+      animation: waow 3s linear infinite;
+      background: #3e0000f1;
+    }
+    
+    @keyframes waow {
+      0% {
+        box-shadow: 0px 0px 10px 10px rgba(5, 181, 64, 0.5);
+      }
+      25%{
+        box-shadow: 10px 5px 3px 2px rgba(2, 110, 38, 0.595);
+      }
+      50%{
+        box-shadow: 0px 3px -10px 5px rgba(21, 52, 191, 0.5);
+      }
+      75%{
+        box-shadow: 20px 0px -10px -3px rgba(0, 65, 244, 0.5);
+      }
+      100% {
+        box-shadow:20px -3px -10px 10px rgba(224, 148, 7, 0.5);
+      }
+    }
+    /* Styles de l'inventaire */
+    .inventory {
+      position:fixed;
+      top: 20%;
+
+      left: 22%;
+      transform: translate(-50%, -50%) scale(0.5);
+      opacity: 0;
+      background: rgba(5, 0, 68, 0.8);
+      color: rgb(255, 0, 0);
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+      display: none;
+      width: 800px;
+      height: 400px;
+      -moz-user-select: none;
+      user-select: none;
+    }
+    
+   /* .inventory.active {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+      display: block;
+      z-index: 100;
+      
+    }*/
+/* Activation avec animation */
+.inventory.active {
+  display: block;
+  z-index: 100;
+  animation: popFromBottom 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Animation "viens du bas avec pop" */
+@keyframes popFromBottom {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 100%) scale(0.3);
+  }
+
+
+  60% {
+    opacity: 1;
+    transform: translate(-50%, -55%) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }}
+    .inventory-item {
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      margin: 5px;
+      padding: 5px;
+      display: inline-block;
+      grid-auto-flow: column;
+      width:30px;
+      height: 30px;
+      background-color: #6189e6;
+      border: 1px solid #fff;
+      margin-bottom: 10px;
+    }
+   
+.inventory-item.selected {
+  border-color: #ffcc00;
+  box-shadow: 0 0 10px #ffcc00, inset 0 0 5px #ffcc00;
+}
+.inventory-item:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px #ffcc00;
+}
+
+
+   
+    
+ 
+ /* Animation de fondu en sortie */
+.fade-out {
+  animation: fadeOut 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+#moncercle{
+  background:url(../sources/img/breath.png);
+  border-radius:50%;
+  width:90px;
+  height:90px;
+  position: relative;
+  left: 10px;
+  top: 10px;
+background-size: cover;
+    opacity: 1; /* Vérifiez si l'opacité est bien définie sur 1 (complètement opaque) */
+  
+
+  z-index: 10; 
+}
+#monbarre{
+text-align: center;
+  background:#bfd70e; 
+  width: 300px;
+  height: 60px;
+  border-radius: 0% 50% 50% 0%;
+  position: relative;
+  top: -65px;
+  left: 65px;
+  font-size: 20px; /* augmente selon ton besoin */
+  font-weight: bold; /* optionnel : met le texte en gras */
+  line-height: 60px; /* aligne verticalement le texte si besoin */
+  margin: 0;         /* enlève l’espace par défaut */
+ 
+}
+#money{
+  position: absolute;
+  left: 50px;
+  top: -15px;
+  font-size: 30px;
+}
+#UI{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+
+.craft {
+  position:fixed;
+  top: 20%;
+
+  left: 22%;
+  transform: translate(-50%, -50%) scale(0.5);
+  opacity: 0;
+  background: rgba(5, 0, 68, 0.8);
+  color: rgb(255, 0, 0);
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  display: none;
+  width: 800px;
+  height: 400px;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+/* .inventory.active {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  display: block;
+  z-index: 100;
+  
+}*/
+/* Activation avec animation */
+.craft.active {
+display: block;
+z-index: 100;
+animation: popFromBottom 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Animation "viens du bas avec pop" */
+@keyframes popFromBottom {
+0% {
+opacity: 0;
+transform: translate(-50%, 100%) scale(0.3);
+}
+
+
+60% {
+opacity: 1;
+transform: translate(-50%, -55%) scale(1.05);
+}
+100% {
+opacity: 1;
+transform: translate(-50%, -50%) scale(1);
+}}
+.craft-item {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 5px;
+  padding: 5px;
+  display: inline-block;
+  grid-auto-flow: column;
+  width:30px;
+  height: 30px;
+  background-color: #6189e6;
+  border: 1px solid #fff;
+  margin-bottom: 10px;
+}
+
+.craft-item.selected {
+border-color: #ffcc00;
+box-shadow: 0 0 10px #ffcc00, inset 0 0 5px #ffcc00;
+}
+.craft-item:hover {
+transform: scale(1.1);
+box-shadow: 0 0 10px #ffcc00;
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Cardo&display=swap');
+    
+html, body {
+margin: 0;
+padding: 0;
+overflow: hidden; /* plus de scroll bar */
+}
+
+#bodyOne {
+font-family: 'Cardo', serif;
+background: linear-gradient(145deg, #1c2541, #3a506b);
+color: #fff;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 40px 20px 20px 20px; /* si tu veux du padding en haut, ajuste ici */
+box-sizing: border-box;
+}
+
+
+
+h1 {
+  color: #fddc8f;
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  text-shadow: 0 0 10px #fff4d2;
+}
+
+#tableau {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  max-width: 700px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid #d4af37;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+}
+
+.ligne, .recompense {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #f5d76e;
+  border-radius: 15px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.ligne:hover {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  background: rgba(59, 58, 58, 0.442);
+  transform: scale(1.02);
+  box-shadow: 0 0 15px #f9e79f;
+}
+.recompense:hover {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  background: rgba(255, 255, 255, 0.57);
+  transform: scale(1.02);
+  box-shadow: 0 0 15px #f9e79f;
+}
+
+.ligne p, .recompense p {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+/* Bouton pour ajouter des quêtes (optionnel) */
+#Retour {
+
+  padding: 12px 20px;
+  border: none;
+  position:absolute;
+  margin-top: 20px;
+  margin-left: 20px;
+  border-radius: 10px;
+  background: #f5d76e;
+  color: #2f2f2f;
+  font-size: 1em;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  box-shadow: 0 0 10px #f5d76e88;
+  transition: background 0.3s;
+}
+
+#Retour:hover { 
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  background: #ffeaa7;
+  transform: scale(1.2);
+
+}
+
+#quetes{
+  display: none;
+}

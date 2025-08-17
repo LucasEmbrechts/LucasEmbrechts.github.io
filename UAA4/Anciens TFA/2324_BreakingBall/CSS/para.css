@@ -1,0 +1,14 @@
+body{
+	background-image: url("../SOURCES/fond-jeu.jpg");
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+#retourshop{
+	height: 80px;
+	left: 20px;
+	position: absolute;
+	top: 20px;
+}

@@ -1,0 +1,992 @@
+body {
+	background-image: url(image/fond.png);
+}
+@font-face {
+    font-family: 'reboot_crushregular';
+    src: url('reboot_crush-webfont.woff2') format('woff2'),
+         url('reboot_crush-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+#containerinterface {
+	display: block;
+	position: relative;
+}
+#containerjeux {
+	display: none;
+	position: relative;
+}
+#containerjeuxs {
+	display: none;
+	position: relative;
+}
+#containerregle {
+	display: none;
+}
+#containercredit {
+	display: none;
+}
+#tour {
+	width: 350px;
+	height: 200px;
+	margin-left: 5%;
+	position: absolute;
+	color: #00f7ff;
+	font-family: 'reboot_crushregular';
+}
+#start {
+	width: 100px;
+	height: 50px;
+	border: solid 0.1px #00f7ff;
+}
+#credits {
+	width: 60%;
+	height: 20%;
+	margin-left: 3%;
+	margin-top: 3%;
+	font-size: 50px;
+	color: #00f7ff;
+	font-family: 'reboot_crushregular';
+}
+#text {
+	width: 1000px;
+	height: 500px;
+	font-family: 'reboot_crushregular';
+	color: #00f7ff;
+	border:solid 1px  #00f7ff;
+	margin-left: 25%;
+	margin-top: 1%;
+	text-align: center;
+	font-size: 30px;
+	background-color: #111111;
+}
+#retour {
+	width: 400px;
+	height: 150px;
+	margin-top: 5%;
+	margin-left: 65%;
+	color: #00f7ff;
+	font-family: 'reboot_crushregular';
+	text-align: center;
+	font-size: 50px;
+	cursor: pointer;
+}
+#retour2 {
+	width: 400px;
+	height: 50px;
+	top: 50px;
+	left: 450px;
+	color: yellow;
+	font-family: 'reboot_crushregular';
+	text-align: center;
+	font-size: 20px;
+	cursor: pointer;
+	position: absolute;
+}
+#retour2rouge {
+	width: 400px;
+	height: 50px;
+	top: 50px;
+	left: 450px;
+	color: red;
+	font-family: 'reboot_crushregular';
+	text-align: center;
+	font-size: 20px;
+	cursor: pointer;
+	position: absolute;
+}
+#retour3 {
+	width: 400px;
+	height: 50px;
+	color: #00f7ff;
+	left: 100px;
+	top: 50px;
+	font-size: 20px;
+	font-family: 'reboot_crushregular';
+	position: absolute;
+	cursor: pointer;
+}
+#rejouer {
+	width: 400px;
+	height: 50px;
+	color: yellow;
+	left: 100px;
+	top: 50px;
+	font-size: 20px;
+	font-family: 'reboot_crushregular';
+	position: absolute;
+	cursor: pointer;
+}
+#rejouerouge {
+	width: 400px;
+	height: 50px;
+	color: red;
+	left: 100px;
+	top: 50px;
+	font-size: 20px;
+	font-family: 'reboot_crushregular';
+	position: absolute;
+	cursor: pointer;
+}
+#titre {
+	width: 65%;
+	height: 10%;
+	margin-left: 22%;
+	font-family: 'reboot_crushregular';
+	color: #00f7ff;
+	font-size: 72px;
+	text-shadow: 4px 4px 8px black;
+	text-align: center;
+}
+#jouer {
+	width: 375px;
+	height: 140px;
+	margin-left: 35%;
+	margin-top: 5%;
+	font-family: 'reboot_crushregular';
+	color: #00f7ff;
+	font-size: 40px;
+	text-align: center;
+	line-height: 140px;
+	text-shadow: 4px 4px 8px black;
+	background-image: url(image/boutton.png);
+	background-size: 100%;
+	cursor: pointer;
+}
+#solo {
+	width: 375px;
+	height: 140px;
+	margin-left: 25%;
+	margin-top: 5%;
+	font-family: 'reboot_crushregular';
+	color: #00f7ff;
+	font-size: 40px;
+	text-align: center;
+	line-height: 140px;
+	text-shadow: 4px 4px 8px black;
+	background-image: url(image/boutton.png);
+	background-size: 100%;
+	cursor: pointer;
+	display: none;
+	float: left;
+}
+#multi {
+	width: 375px;
+	height: 140px;
+	margin-left: 45%;
+	margin-top: 5%;
+	font-family: 'reboot_crushregular';
+	color: #00f7ff;
+	font-size: 40px;
+	text-align: center;
+	line-height: 140px;
+	text-shadow: 4px 4px 8px black;
+	background-image: url(image/boutton.png);
+	background-size: 100%;
+	cursor: pointer;
+	display: none;
+}
+#regle {
+	width: 375px;
+	height: 140px;
+	margin-left: 35%;
+	margin-top: 2%;
+	font-family: 'reboot_crushregular';
+	color: #00f7ff;
+	font-size: 40px;
+	text-align: center;
+	line-height: 140px;
+	text-shadow: 4px 4px 8px black;
+	background-image: url(image/boutton.png);
+	background-size: 100%;
+	cursor: pointer;
+}
+#credit {
+	width: 375px;
+	height: 140px;
+	margin-left: 35%;
+	margin-top: 2%;
+	font-family: 'reboot_crushregular';
+	color: #00f7ff;
+	font-size: 40px;
+	text-align: center;
+	line-height: 140px;
+	text-shadow: 4px 4px 8px black;
+	background-image: url(image/boutton.png);
+	background-size: 100%;
+	cursor: pointer;
+}
+#joueur {
+	width: 23%;
+	height: 10%;
+	top: 750px;
+	left: 0;
+	font-family: 'reboot_crushregular';
+	color: #00f7ff;
+	font-size: 40px;
+	text-shadow: 4px 4px 8px black;
+	float: left;
+	position: absolute;
+}
+#joueur2 {
+	width: 30%;
+	height: 10%;
+	top: 810px;
+	left: 0;
+	font-family: 'reboot_crushregular';
+	color: #00f7ff;
+	font-size: 40px;
+	text-shadow: 4px 4px 8px black;
+	float: left;
+	position: absolute;
+}
+#champ1 {
+	top: 750px;
+	left: 400px;
+	width: 20%;
+	height: 5%;
+	font-size: 40px;
+	font-family: 'reboot_crushregular';
+	color: #00f7ff;
+	position: absolute;
+}
+#champ2 {
+	width: 20%;
+	height: 5%;
+	font-size: 40px;
+	font-family: 'reboot_crushregular';
+	color: #00f7ff;
+	float: right;
+	margin-right: 56.8%;
+	top: 810px;
+	left: 400px;
+	position: absolute;
+}
+#bluegauche {
+	width: 373px;
+	height: 634px;
+	left: 73px;
+	top: 150px;
+	position: absolute;
+	background-image: url(image/bluegauche.png);
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#bluedroit {
+	width: 373px;
+	height: 634px;
+	left: 1255px;
+	top: 150px;
+	position: absolute;
+	background-image: url(image/bluedroite.png);
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#plateau {
+	width: 900px;
+	height: 750px;
+	left: 400px;
+	background-image: url(image/plateau.png);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	position: absolute;
+	z-index: -1;
+}
+#gagne {
+	width: 100%;
+	height: 30%;
+	position: absolute;
+	top: 200px;
+	background-image: url(image/bande-rouge.gif);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	display: none;
+	text-align: center;
+	font-size: 40px;
+	color: yellow;
+	font-family: 'reboot_crushregular';
+}
+#gagnes {
+	width: 100%;
+	height: 30%;
+	position: absolute;
+	top: 200px;
+	background-image: url(image/bande-rouge.gif);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	display: none;
+	text-align: center;
+	font-size: 40px;
+	color: yellow;
+	font-family: 'reboot_crushregular';
+}
+#égalité {
+	width: 100%;
+	height: 30%;
+	position: absolute;
+	top: 200px;
+	background-image: url(image/bande-jaune.png);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	display: none;
+	text-align: center;
+	font-size: 40px;
+	color: red;
+	font-family: 'reboot_crushregular';
+}
+#égalités {
+	width: 100%;
+	height: 30%;
+	position: absolute;
+	top: 200px;
+	background-image: url(image/bande-jaune.png);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	display: none;
+	text-align: center;
+	font-size: 40px;
+	color: red;
+	font-family: 'reboot_crushregular';
+}
+#fleche {
+	width: 900px;
+	height: 125px;
+	margin-top: 1%;
+	margin-left: 400px;
+}
+#fleches {
+	width: 900px;
+	height: 125px;
+	margin-top: 1%;
+	margin-left: 400px;
+}
+#faux {
+	width: 900px;
+	height: 125px;
+	margin-top: 1%;
+	margin-left: 400px;
+	display: none;
+}
+#fauxs {
+	width: 900px;
+	height: 125px;
+	margin-top: 1%;
+	margin-left: 400px;
+	display: none;
+}
+.imagefleche {
+	width: 14.28%;
+	height: 125px;
+	background-image: url(image/fleche1.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	float: left;
+	cursor: pointer;
+}
+
+.imagefleche:hover {
+	background-image: url(image/fleche1hover.png);
+}
+#case0 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	margin-left: 10px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case1 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case2 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case3 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case4 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case5 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case6 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case8 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	margin-left: 10px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case9 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case10 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case11 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case12 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case13 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case14 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case16 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	margin-left: 10px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case17 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case18 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case19 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case20 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case21 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case22 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case24 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	margin-left: 10px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case25 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case26 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case27 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case28 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case29 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case30 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case32 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	margin-left: 10px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case33 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case34 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case35 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case36 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case37 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case38 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case40 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	margin-left: 10px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case41 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case42 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case43 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case44 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case45 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#case46 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+#boite0 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	margin-left: 10px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite1 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite2 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite3 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite4 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite5 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite6 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite8 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	margin-left: 10px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite9 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite10 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite11 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite12 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite13 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite14 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite16 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	margin-left: 10px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite17 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite18 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite19 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite20 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite21 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite22 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite24 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	margin-left: 10px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite25 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite26 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite27 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite28 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite29 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite30 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite32 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	margin-left: 10px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite33 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite34 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite35 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite36 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite37 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite38 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite40 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	margin-left: 10px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite41 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite42 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite43 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite44 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite45 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#boite46 {
+	width: 126px;
+	height: 122.5px;
+	float: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}

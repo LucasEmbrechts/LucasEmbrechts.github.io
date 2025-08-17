@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TFA</title>
+	
+	<link rel="stylesheet" type="text/css" href="demarer.css">
+	<meta charset="utf-8">
+</head>
+<body>
+<div id="cage">
+<!--Bouton pour répondre oui-->	
+	<button id="oui" onclick="checkProposition('oui')"><img src="../bouton oui.png"></button>
+<!--Bouton pour répondre non-->		
+	<button id="non" onclick="checkProposition('non')"><img src="../bouton non.png"></button>
+<!--Bouton pour mettre pause-->	
+	<div id="pause"  style="display: block;" onclick="pause()"><img src="../bouton pause.png"></div>
+
+	<button id="pause1" onclick="pause()"></button>
+<!--Menu pause-->
+	<div id="pause2" style="display: none;">
+
+		<div id="continuer" onclick="continuer()" style="display: none;"></div>
+		<a href="demarer.html" ><div id="recommencer" style="display: none;"></div></a>
+		<a href="index.html" ><div id="menuprincipal" style="display: none;"></div></a>
+
+	</div>
+<!-- nombre de points  -->
+	<div id="population">100</div>
+	<div id="satisfaction">100</div>
+	<div id="argent">200</div>
+<!-- Endroit où sont insérer les proposition-->
+	<div id="proposition">Bonjour nouveau roi, je suis votre conseillère.</div>
+<!-- Endroit où sont insérer les personnages-->
+	<div id="personnage"></div>
+<!--Affichage de perdu-->
+	<div id="cagePerdu" style="display: none;">	
+	<div id="perdu"</div>
+	<a href="demarer.html" ><div id="recommencer1" ></div></a>
+	</div>
+<!--Affichage de gagné-->
+	<div id="cageGagne" style="display: none;">
+	<div id="gagne"></div>
+	<a href="demarer.html" ><div id="recommencer1"></div></a>
+	</div>
+	<script type="text/javascript" src="demarer.js"></script>
+</div>
+</body>
+</html>

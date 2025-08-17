@@ -1,0 +1,127 @@
+@font-face {font-family : "policePixel"; src : url("police.ttf");} 
+
+body
+{
+	padding: 0px;
+	margin: 0px;
+	background-color: #000;
+	font-family: "policePixel";
+	color : #FFF;
+	overflow: hidden;
+}
+
+canvas
+{
+	display: none;
+	position: absolute;
+	background-color: #000;
+}
+
+button
+{	
+	margin-top: 2vh;
+	font-size: 5vw;
+	background-color: #000;
+	border: #000;
+	color : #FFF;
+	font-family: "policePixel";
+}
+
+button:hover
+{
+	font-size: 6vw;
+	color : #fffdbc;
+}
+
+h1
+{
+	font-size: 8vw;
+	margin-top: auto;
+	margin-bottom: 5vh;
+}
+
+footer
+{
+	margin-top: 96vh;
+	font-size: 4vh;
+	width: 100%;
+	background-color: #000;
+}
+
+.anime
+{
+	position: absolute;
+	width: 100%;
+	height: 97%;
+	animation-name: oscillement;
+	animation-duration: 3s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}
+
+@keyframes oscillement
+{
+	0% { top : 0%;}
+	50%{ top : 3%;}
+	100%{ top : 0%;}
+}
+
+#dialogueVieux
+{
+	position: absolute;
+	margin-left: 15vw;
+	height: auto;
+	width: auto;
+	font-size: 2vw;
+	margin-top: 88vh;
+	margin-right: 2vw;
+}
+
+#credits
+{
+	font-size: 2.5vw;
+	position: absolute;
+	display: none;
+	margin-left: 28%;
+	animation-name: descente;
+	animation-timing-function: linear;
+	animation-duration: 25s;
+}
+
+.warning
+{
+	animation-name: warning;
+	animation-timing-function: ease;
+	animation-duration: 4s;
+}
+
+#congratulations, #difficultes, #modeDeJeu
+{
+	display: none;
+}
+
+@keyframes descente
+{
+	0% { top : 100%;}
+	100%{ top : -291vh; }
+}
+
+@keyframes warning
+{
+	0% { background-color: #000}
+	25% { background-color: #FF0000 }
+	50% { background-color: #000}
+	75% { background-color: #FF0000 }
+	100%{ background-color: #000 }
+}
+
+h2
+{
+	margin-bottom: 0;
+	font-size: 6vw
+}
+
+h3
+{
+	font-size : 4vw;
+}

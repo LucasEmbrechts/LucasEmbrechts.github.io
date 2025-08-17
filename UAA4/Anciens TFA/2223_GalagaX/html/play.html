@@ -1,0 +1,35 @@
+<!--codé par ferre-->
+<!--2023 - 4TTr - Project X-->  
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le jeu</title>
+    <link rel="stylesheet" href="../css/play.css"></link>
+</head>
+<body>
+    <div id="container">
+
+        <div id="button_menu" onclick="menu()"><h1>menu</h1></div><!--bouton pour retourner au menu-->
+        <div id="stellars"><h2 id="number"></h2></div><!--endroit ou les stellars sont affichés-->
+
+    </div>
+
+    <div id="healthBarOne"><!--endroit où la barre de vie est contenue-->
+        <div id="healthBarTwo"><!--endroit où la barre de vie est montrée-->
+        </div>
+    </div>
+
+    <div id="chrono"></div>
+
+    <!--petit bout codé par basil-->
+    <canvas id="mon_canvas" width="1900" height="800"></canvas><!--creation du canvas-->
+    <!--fin du bout codé par basil-->
+
+    <script type="text/javascript" src="../js/play.js"></script>
+    <audio controls autoplay hidden><!--creation de controles de l'audio-->
+        <source src="../sources/play_sound.mp3" type="audio/mp3"><!--donner la source et le type d'audio-->
+    </audio> 
+</body>
+</html>

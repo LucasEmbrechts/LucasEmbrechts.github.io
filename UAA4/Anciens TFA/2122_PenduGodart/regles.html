@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Jeu du pendu</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<script type="text/javascript" src="code.js"></script>
+</head>
+<body width="100%" height="100%">
+
+
+<div id="R_left">
+
+	<div id="titreRegles">RÈGLES DU JEU:</div>
+	<div id="Regles">
+		Le but du jeu est simple : deviner toutes les lettres qui doivent composer un mot, en moins
+		de 10 tentatives et sur base de thèmes fixés à l'avance (les pays, les marques, les
+		légumes, les animaux, les capitales, les sports). A chaque fois que le joueur devine une
+		lettre, elle s’affiche à sa place respective et elle se met en vert. Dans le cas contraire, un
+		nouvel élément dans le bonhomme pendu s’affiche et la lettre se met en rouge. Quand
+		l’utilisateur a cliqué sur la lettre, elle n’est plus cliquable après.<br><br>
+		<b>Comment jouer ?</b><br><br>
+Jouer au pendu est très simple.<br><br>
+Vous devez choisir une lettre sur le clavier afin de trouver le mot. Pour vous aider, vous
+trouverez des tirets qui désigneront le nombre de lettres que comporte le mot à trouver.
+<br><br>
+Dans le cas où la lettre que vous choisissez est bien dans le mot, elle se place d’ellemême et la lettre devient verte.<br><br>
+Dans le cas contraire, la lettre devient rouge et elle ne s’affiche donc pas dans le mot. Par
+contre, un nouvel élément du pendu s’affiche.<br><br>
+Si vous avez trouvé toutes les lettres du mot avant que le pendu soit totalement
+recomposé, alors un écran s’affiche avec le message « Vous avez gagné !» et avec la
+possibilité de rejouer la partie ou de revenir au menu principal.<br><br>
+Dans le cas contraire, après 10 tentatives échouées, un écran s’affiche avec la mention
+« Vous avez perdu ! » et un bouton « Revenir au menu principal » suivi du bouton
+« Rejouer » vous sont proposés.<br><br>
+Si en cours de partie, vous éprouvez des difficultés, il est possible d’obtenir des indices en
+cliquant sur le bouton en bas à droite. Dans ce cas, un nouvel élément s’affichera dans le
+pendu.<br><br>
+Après votre partie, il est aussi possible de changer la catégorie / le thème du mot à
+deviner en appuyant sur le bouton "rejouer". 
+	</div>
+
+			<a id="retourMenuPrincipal1" href="index.html">
+				<img src="images/boutonretourMenuPrincipal.png">
+			</a>
+
+</div>
+
+<div id="R_right">
+	<img src="images/pendu10Regles.png" width="100%" height="100%">
+</div>
+
+</body>
+</html>

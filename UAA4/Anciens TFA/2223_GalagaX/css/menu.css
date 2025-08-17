@@ -1,0 +1,119 @@
+/*codé par basil et ferre*/
+/*Projet X - 4TTr - 2023*/
+body{
+    background-color: #1A1A1A;/*fond d'ecran noir pour eviter de flasher les yeux de l'utilisateurs au chargement de la page*/
+	background-image: url('../sources/fond-menu.jpg');/*le fond d'écran de la page, une image cyberpunk créé sur photoshop*/
+	background-size: cover;
+}	
+#titre{
+	background-image: url(../sources/titre.png);
+	position: absolute;
+	width:60%;
+	height: 32vh;
+	background-size: cover;
+	top: 20%;
+	transition: transform 0.2s ease-in-out;
+}
+#eclairOne{
+	position: absolute;
+	background-image: url(../sources/eclairOne.png);
+	background-size: cover;
+	width: 20%;
+	height: 40vh;
+	top: 1%;
+	left: 5%;
+}
+#eclairDeux{
+	position: absolute;
+	background-image: url(../sources/eclairTwo.png);
+	background-size: cover;
+	width: 26%;
+	height: 52vh;
+	top: 15%;
+	left: 0%;
+	display: none;
+}
+#eclairTrois{
+	position: absolute;
+	background-image: url(../sources/eclairThree.png);
+	background-size: cover;
+	width: 30%;
+	height: 65vh;
+	top: 15%;
+	left: 0%;
+	display: none;
+}
+#eclairQuattre{
+	position: absolute;
+	background-image: url(../sources/eclairFour.png);
+	background-size: cover;
+	width: 20%;
+	height: 29vh;
+	left: 20%;
+	top: 20%;
+	display: none;
+}
+#eclaiCinq{
+	position: absolute;
+	background-image: url(../sources/eclairFive.png);
+	background-size: cover;
+	width: 20%;
+	height: 20vh;
+}
+#titre:hover {
+    transform: translateX(5%);
+}
+.bloc{
+	margin-left: 70%;
+	display: inline-block;
+	background-repeat: no-repeat;
+	width: 24%;
+	height: 23vh;
+	position: relative;
+	padding: 1%;
+	box-sizing: border-box;
+	
+}
+#play{
+	background-image: url('../sources/bouttonplaybleu.png');/*l'image du bouton du play créé sur photoshop*/
+	cursor: pointer;
+}
+#play:hover{
+	transition: 0.5s;
+	margin-left: 71.5%;
+}
+
+#shop{
+	background-image: url('../sources/bouttonshopbleu.png');/*l'image du bouton du shop créé sur photoshop*/
+	cursor: pointer;
+}
+#shop:hover{
+	transition: 0.5s;
+	margin-left: 71.5%;
+}
+
+#regle{
+	margin-left:68%;
+	margin-bottom: 20px;
+	background-image: url('../sources/bouttonreglebleu.png');/*l'image du bouton du regle créé sur photoshop*/
+	cursor: pointer;
+}
+#regle:hover{
+	transition: 0.5s;
+	margin-left: 70.5%;
+}
+
+#credit{
+	background-image: url('../sources/bouttoncreditbleu.png');/*l'image du bouton du credit créé sur photoshop*/
+	cursor: pointer;
+}
+#credit:hover{
+	transition: 0.5s;
+	margin-left: 71.5%;
+}
+h1{
+	float: right;
+	color: white;
+	margin-top: -2%;
+	margin-right: 3%;
+}

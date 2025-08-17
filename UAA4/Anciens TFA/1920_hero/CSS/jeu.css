@@ -1,0 +1,272 @@
+/*balise multi-interface*/
+h1{
+	font-family: Segoe Script;
+	font-size: 60pt;
+	margin-bottom: 5px;
+	margin-top: 10px;
+	display: block;
+}
+#bottom{
+	position: absolute;
+	bottom: 0;
+	height: 400px;
+	width: 100%;
+}
+#background{
+	background-image: url(../Sources/img_jeu/background/fond_choix.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.jeu{
+	display: none;
+}
+
+/*interface de choix du sexe*/
+.sexe{
+	display: block;
+}
+#sex1{
+	background-image: url(../Sources/img_jeu/personnages/femme-symbol.png);
+	width: 400px;
+	height: 400px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin: 150px 100px 50px 420px;
+	float: left;
+}
+#sex2{
+	background-image: url(../Sources/img_jeu/personnages/homme-symbol.png);
+	width: 400px;
+	height: 400px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin: 150px 420px 50px 100px;
+	float: left;
+}
+
+/*interface de choix du personnage*/
+.perso-1{
+	display: none;
+	position: absolute;
+	background-image: url(../Sources/img_jeu/personnages/personnage.png);
+	width: 229px;
+	height: 345px;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+#perso1{
+	margin: 10px 0px 20px 200px;
+}
+#perso2{
+	margin: 10px 0px 20px 825px;
+}
+#perso3{
+	margin: 10px 0px 20px 1450px;
+}
+#pseudo{
+	width: 550px;
+	height: 50px;
+	font-size: 40px;
+	font-family: Segoe Script;
+	display: none;
+	position: absolute;
+	margin: 375px 660px; 
+}
+#perso4{
+	margin: 450px 0px 20px 200px ;
+}
+#perso5{
+	margin: 450px 0px 20px 825px;
+}
+#perso6{
+	margin: 450px 0px 20px 1450px;
+}
+
+.perso-2{
+	display: none;
+	position: absolute;
+	background-image: url(../Sources/img_jeu/personnages/personnage.png);
+	width: 229px;
+	height: 345px;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+#pseudo2{
+	width: 550px;
+	height: 50px;
+	font-size: 40px;
+	font-family: Segoe Script;
+	display: none;
+	position: absolute;
+	margin: 375px 660px; 
+}
+/*interface de base du jeu*/
+#aff{
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 617px;
+	width: 540px;
+	margin-top: 180px;
+}
+#text{
+	background-image: url(../Sources/img_jeu/interface/dialogue.png);
+	height: 331px;
+	width: 1259px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin: 50px auto 0px;
+}
+#texte{
+	position: absolute;
+	height: 100px;
+	width: 600px;
+	margin: 170px 0px 0px 390px;
+	font-family : Berlin Sans FB;
+}
+#psd{
+	position: absolute;
+	height: 24px;
+	width: 240px;
+	margin: 120px 0px 0px 857px;
+	color: white;
+	text-align: center;
+	font-family: Segoe Script;
+	font-size: 20pt;
+}
+
+/*interface de choix (et de défaite)*/
+.choix{
+	background-image: url(../Sources/img_jeu/interface/choix1.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 62px;
+	width: 722px;
+	z-index: 1;
+}
+.choix:hover{
+	background-image: url(../Sources/img_jeu/interface/choix2.png);
+}
+#c1{
+	position: absolute;
+	margin: 300px 150px 0px;
+	display: none;
+	padding-top: 50px;
+	text-align: center;
+	font-size: 20pt;
+	font-family: Segoe Script;
+	text-shadow: -0.07em -0.1em 0.1em #333;
+	font-weight: bold;
+}
+#c2{
+	position: absolute;
+	margin: 300px 972px 0px;
+	display: none;
+	padding-top: 50px;
+	text-align: center;
+	font-size: 20pt;
+	font-family: Segoe Script;
+	text-shadow: -0.07em -0.1em 0.1em #333;
+	font-weight: bold;
+}
+
+/*interface de combat*/
+#gentil{
+	position: absolute;
+	margin: 310px 15% 0px;
+	height: 400px;
+	width: 250px;
+	display: none;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+#ennemy{
+	position: absolute;
+	margin: 310px 70% 0px;
+	height: 400px;
+	width: 250px;
+	display: none;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+#battle{
+	position: absolute;
+	bottom: 0;
+	margin:0px 18%;
+	background-image: url(../Sources/img_jeu/interface/combat-choix-back.png);
+	background-size: cover;
+	height: 228px;
+	width: 1185px;
+	background-repeat: no-repeat;
+	display: none;
+	text-align: center;
+	color: lightgray;
+	font-family : Berlin Sans FB;
+}
+
+/*choix de combat */
+#cbt1{
+	position: absolute;
+	display: none;
+}
+#cbt2{
+	position: absolute;
+	margin: 0px 0px 10px 575px;
+	display: none;
+}
+#cbt3{
+	position: absolute;
+	margin: 100px 0px 10px 0px;
+	display: none;
+}
+#cbt4{
+	position: absolute;
+	margin: 100px 0px 10px 575px;
+	display: none;
+}
+.choixb{
+	background-image: url(../Sources/img_jeu/interface/choix1.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	font-size: 20pt;
+	font-family: Segoe Script;
+	text-shadow: -0.07em -0.1em 0.1em #333;
+	font-weight: bold;
+	padding-top: 35px;
+	color: black;
+	height: 53px;
+	width: 592px;
+}
+.choixb:hover{
+	background-image: url(../Sources/img_jeu/interface/choix2.png);
+}
+
+/*interface de Mort*/
+#death{
+	margin-top: 200px;
+	display: none;
+	color: darkred;
+}
+#d1{
+	position: absolute;
+	margin: 100px 150px 0px;
+	display: none;
+	padding-top: 50px;
+	text-align: center;
+	font-size: 20pt;
+	font-family: Segoe Script;
+	text-shadow: -0.07em -0.1em 0.1em #333;
+	font-weight: bold;
+	display: none;
+}
+#d2{
+	position: absolute;
+	margin: 100px 972px 0px;
+	display: none;
+	padding-top: 50px;
+	text-align: center;
+	font-size: 20pt;
+	font-family: Segoe Script;
+	text-shadow: -0.07em -0.1em 0.1em #333;
+	font-weight: bold;
+	display: none;
+}

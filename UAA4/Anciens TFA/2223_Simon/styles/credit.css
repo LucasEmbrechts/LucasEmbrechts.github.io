@@ -1,0 +1,130 @@
+/*justin;4G1;Simon: les 4 fantastiques;2022-2023*/
+body{
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: #000509;
+	background-image: url(../images/logo.png);
+	min-height: 90vh;
+	width: 100%;
+}
+
+
+/*texte*/
+#texte{
+	color: white;
+	text-align: center;
+}
+
+/*bouton pour retourner au menu*/
+#btn {
+	background-image: url(../images/menu.png);
+	width: 140px;
+	height:180px;
+	margin-right: -150px;
+	
+}
+
+
+/*titre crédit */
+h1{
+	text-align: center;
+	font-size: 6.5em;
+	color: black;
+	letter-spacing: -7px;
+	font-weight: 700;
+	text-transform: uppercase;
+	animation: titre 1.50s ease-out infinite;
+	text-shadow: 0px 0px 5px #fff, 0px 0px 7px #fff;
+	font-family:cursive;
+}
+
+/*titre crédit animation*/
+@keyframes titre {
+  from {
+    text-shadow:0px 0px 10px blue,
+      0px 0px 1px #fff, 
+      0px 0px 2px #fff,
+      0px 0px 2px #fff,
+      0px 0px 2px #fff,
+      0px 0px 2px #fff,
+      0px 0px 2px #fff,
+      0px 0px 2px #fff,
+      0px 0px 5px #fff,
+      0px 0px 5px #fff,
+      0px 0px 5px #7B96B8,
+      0px 0px 15px #7B96B8,
+      0px 10px 10px #7B96B8,
+      0px 10px 10px #7B96B8,
+      0px 10px 10px #7B96B8,
+      0px 10px 10px #7B96B8,
+      0px -10px 10px #7B96B8,
+      0px -10px 10px #7B96B8;
+  }
+}
+
+
+/*footer qui contient les info classe , année scolaire etc*/
+footer{
+
+	width: 100%;
+	height: 80px;
+	background-color:black ;
+	color: white;
+	position:fixed ;
+	bottom: 0px;
+	text-align: left;
+	line-height: 80px;
+	margin: 0px;
+	padding: 0px 0 px 0px 20px;
+	box-shadow: inset 0 0 15px #000;
+	border-top: 1px solid white;
+	opacity: 0.8;
+
+}
+
+/*sous titre*/
+h2{
+	margin-top: -10px;
+	color:#F8F8FF;
+	text-decoration: underline dotted #e4087e ;
+	font-size: 35px;
+	color: olivedrab;
+	font-family:monospace;
+	
+	
+
+
+}
+
+/*reponse*/
+h3{
+	margin-top: -10px;
+	text-shadow:#ff006e 2.5px 2.5px 0,
+	#8338ec 5px 5px 0,
+	#3a86ff 7.5px 7.5px 0,
+	#333 10px 10px 10px;color:#ffcc00;
+	font-size: 30px;
+	font-family:fantasy;
+	letter-spacing: 3px;
+}
+
+/*bouton pour retourner au menu*/
+#btn{
+
+  background-image: url(../images/menu.png);
+  height:115px ;
+  width:450px ;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-top: -950px;
+  float: left;
+  transition: 500ms;
+
+}  
+ 
+/*bouton pour retourner au menu animation*/
+#btn:hover{
+  filter: brightness(50%);
+  transform: scale(1.1);
+}

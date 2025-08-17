@@ -1,0 +1,11 @@
+ body{
+            background-image: url("../SOURCES/IMG/PhotoFunia5.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+            
+            #b1{
+            height: 20px;
+            width: 50px;
+        }
+            

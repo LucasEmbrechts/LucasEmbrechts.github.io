@@ -1,0 +1,47 @@
+var questions = [
+
+	{text:"Qui a offert la statue de la liberté aux USA?",r1:"La France",r2:"Le Vatican",r3:"Le Royaume-Uni",r4:"L'Espagne"},
+	{text:"Quel pays a remporté l'Euro de football en 2004?", r1:"Le Portugal",r2:"La France",r3:"La Grèce",r4:"L'Espagne"},
+	{text:"Quelle planète est la plus éloignée de la Terre?", r1:"Jupiter",r2:"Mars",r3:"Saturne",r4:"Neptune"},
+	{text:"En quelle année est décédé Michael Jackson?", r1:"2011",r2:"2003",r3:"2008",r4:"2009"},
+	{text:"Quelle est la valeur de PI?", r1:"3.14156",r2:"3.14159",r3:"3.15599",r4:"3.14999"},
+	{text:"Avec combien de titre de champion de Belgique, Anderlecht est-elle l'équipe la plus titrée du pays?", r1:"28",r2:"34",r3:"36",r4:"39"},
+	{text:"Dans quel jeu peut-on être imposteur ou crewmate?", r1:"Pokémon",r2:"Loup-Garou",r3:"Among Us",r4:"Outlaws"},
+	{text:"Donnez la bonne réponse : 9+6*3+2", r1:"47",r2:"90",r3:"29",r4:"51"},
+	{text:"Complétez le dicton, « chapeau melon, »", r1:"et botte de cuir",r2:"et chapeau de paille",r3:"et veste de cuir",r4:"et chapeau rouge"},
+	{text:"Quelle couleur n’est pas présente sur le drapeau du Mexique ?", r1:"Bleu",r2:"Noir",r3:"Rouge",r4:"Blanc"},
+	{text:"Avec quelle chanteuse, Gérard Piqué est-il en couple ?", r1:"Ariana Grande",r2:"Shakira",r3:"Rihanna",r4:"Lady Gaga"},
+	{text:"Quelle célébrité a le plus d’abonnés sur Instagram (271 millions)?", r1:"Cristiano Ronaldo",r2:"Lionel Messi",r3:"Beyoncé",r4:"Justin Bieber"},
+	{text:"Que vaut 1 octet en informatique ?", r1:"8 bits",r2:"16 bits",r3:"32 bits",r4:"64 bits"},
+	{text:"Quelle couleur n’est pas primaire ?", r1:"Rouge",r2:"Vert",r3:"Bleu",r4:"Noir"},
+	{text:"Quel animal terrestre est le plus rapide avec une vitesse de pointe de 120km/h ?", r1:"L'antilope",r2:"Le lièvre",r3:"Le guépard",r4:"Le léopard"},
+	{text:"Combien d’os le squelette humain comporte-t-il ?", r1:"206",r2:"254",r3:"321",r4:"369"},
+	{text:"Dans quel sport peut-on faire un SPARE ?", r1:"Le golf",r2:"Le boowling",r3:"Le tir à l'arc",r4:"Le volley"},
+	{text:"De quelle nationalité est Christophe Colomb", r1:"Espagnol",r2:"Italien",r3:"Colombien",r4:"Français"},
+
+]
+
+// Fonction de génération d'un nombre aléatoire. 
+function aleat(){
+	const MIN = 0; // déclaration d'une constante
+	const MAX = 17;
+	var nb = MIN + (MAX-MIN+1)*Math.random();
+    return Math.floor(nb); 
+};
+
+
+// la variable nbAleat recoit le résultat de la fonction aleat()
+var nbAleat = aleat();
+console.log(nbAleat);
+
+var el = document.getElementById("question");
+el.innerHTML = questions[nbAleat].text;
+var el2 = document.getElementById("rep1");
+el2.innerHTML = questions[nbAleat].r1;
+var el3 = document.getElementById("rep2");
+el3.innerHTML = questions[nbAleat].r2;
+var el4 = document.getElementById("rep3");
+el4.innerHTML = questions[nbAleat].r3;
+var el5 = document.getElementById("rep4");
+el5.innerHTML = questions[nbAleat].r4;
+

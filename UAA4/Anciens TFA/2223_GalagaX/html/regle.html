@@ -1,0 +1,57 @@
+<!--codé presque entierement par basil-->
+<!--2023 - 4TTr - Project X-->  
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" type="text/css" href="../css/regle.css">
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+</head>
+<body>
+
+<div id="img"onclick="menu()"><h2>Menu</h2></div><!--le bouton pour le retour au menu-->
+
+<div id="bloc"><!--conteneur des regles du jeu-->
+<h1>Règle</h1>
+<!--regles et histoire écrites par ferre-->
+<div id="txt"><!--les regles du jeu-->
+	<p>Les règles sont simples ne vous inquétez pas.</p>
+	<p>utilisez les flèche droite et gauche pour bouger le vaisseau.</p>
+	<p>évitez les obstacles qui tombent.</p>
+	<p>vous gagnez un SR par seconde.</p>
+	<p>vous pouvez utiliser les SR au shop pour;</p>
+	<p>ameliorer votre vaisseau et donc booster vos vies.</p>
+	<p>il y a un secret au menu de mort ;)</p>
+
+</div>
+</div>
+
+<div id="blochistoire"><!--conteneur de l'histoire-->
+<h1>histoire</h1>
+
+<div id="histoire"><!--l'histoire-->
+	<p>votre vaisseau est dans l'espace comme prototype dans une simulation créé par vos 2 oncles</p>
+	<p>fous! vous vous retrouvez seul contre des meteorites qui sonts TOUS LES MÊMES ?!!</p>
+	<p>ils avaient la flemme... Bref la simulation,vous teste a l'adrénaline et votre adresse,</p>
+	<p>allez-vous les décevoir ? En plus votre a un réacteur nano-thermique nucleaire qui crée une</p>
+	<p>nitroglycérine capable de faire un bout de code appelée le stellar (SR) avec celui-ci vous</p>
+	<p>avez un nombre de points pour vous comparer a vos potes ou bien pour hacker le sythème</p>
+	<p>pour rendre votre vaisseau plus BG et avoir plus de vies, heureusement un endroit </p>
+	<p>qui vous est dédié ; LE SHOP !! globalement ça fait un bug dans la matrice </p>
+	<p>pour avoir plus de vies pour un certain nombre de stellars</p>
+
+</div>
+</div>
+<div id="fleche" onclick="toggleHistRules('toHistory')" ></div><!--flèche pour passer des regles à l'histoire-->
+
+<!--petit bout codé par ferre-->
+<audio controls autoplay hidden><!--creation de controles de l'audio-->
+	<source src="../sources/regle_sound.mp3" type="audio/mp3"><!--donner la source et le type d'audio-->
+</audio>
+<!--fin du petit bout-->
+
+<script type="text/javascript" src="../js/regle.js"></script>
+</body>
+</html>

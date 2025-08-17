@@ -1,0 +1,45 @@
+<!--Phèdre Simon-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/setting.Css">
+</head>
+
+<body>
+    <div id="fond">
+        <img src="../sources/img/image parametres.PNG" id="image">
+        <div id="titre">
+            <h2>Parametres</h2>
+        </div>
+            <div id="volume">
+                <h3>Musique</h3>
+            </div>
+        <input type="button" value="Retour" class="play" onclick="window.location.href='menu.html';">
+        <input type="button" value="Aventure" class="play" onclick="avent()" id="aventure">
+        <input type="button" value="Relax" class="play" onclick="rel()" id="relax">
+        <audio id="audio" src="../sources/musique/Musique Épique Guerre Invasion  Musique Libre de Droit.mp3" loop="true" ></audio>
+
+    </div>   
+    <script>
+        let audio=document.getElementById("audio")
+        audio.play();
+      function avent(){
+        let aventure=document.getElementById("aventure")
+        audio.src="../sources/musique/epique.mp3"
+        localStorage.setItem("musique","../sources/musique/epique.mp3")
+        audio.play();
+      }
+      
+      function rel(){
+        let relax=document.getElementById("relax")
+        audio.src="../sources/musique/Finalement.mp3"
+        localStorage.setItem("musique","../sources/musique/Finalement.mp3")
+        audio.play();
+      }
+    </script>
+    
+</body>
+</html>

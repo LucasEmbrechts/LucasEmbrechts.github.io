@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="CSS/shop.css">
+<title></title>
+<style type="text/css">
+	@font-face {font-family:pixel; src: url('SOURCES/pixel.ttf');} 
+	#Acheter{
+		font-family: 'pixel', sans-serif;
+	}
+	#prix{
+		font-family: 'pixel', sans-serif;
+	}
+	#equiper{
+		font-family: 'pixel', sans-serif;
+	}
+</style>
+</head>
+<body>
+<br>
+<div id="bordurT"></div>
+<img src="SOURCES/bouton_triangle_gauche2.png" id="gauche" onclick="retourshop()">
+<div id="image" onclick="boule()">
+</div>
+<button onclick="achat()" id="Acheter">Acheter</button>
+<button onclick="equiped()" id="equiper">Equiper</button>
+<br>
+<div id="emballeur">
+<img id="triangleG" onclick="bouton_triangle_gauche()" src="SOURCES/bouton_triangle_gauche.png">
+<img id="triangleD" onclick="bouton_triangle_droite()" src="SOURCES/bouton_triangle_droite.png">
+</div>
+<div id="prix"></div>
+<script type="text/javascript" src="JS/shop.js"></script>
+</body>
+</html>

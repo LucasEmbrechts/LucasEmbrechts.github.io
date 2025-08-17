@@ -1,0 +1,26 @@
+@font-face {
+    font-family:sao ui;
+    src: url(../source/font/sao-ui/SAOWelcomeTT-Regular.ttf);
+}
+body{
+    font-family: "sao ui" , sans-serif;
+    background-image: url(../source/img/fond-tout-celeste-de-l_evasion.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-position: center; */
+}
+h1{
+    text-align: center; 
+    margin-top: 15%;
+    padding: 10px;
+}
+/* #espace{
+    margin-top: 150px;
+    border: 2px solid;
+    width: 300px;
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url(../source/img/image-espace-de-la-tour-celeste-de-l_evasion.jpg);
+    background-size:cover;
+} */

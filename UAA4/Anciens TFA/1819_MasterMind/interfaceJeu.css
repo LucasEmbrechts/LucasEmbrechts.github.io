@@ -1,0 +1,437 @@
+#interfaceJeu{
+	display: none;
+	text-align: center;
+	height: 720px;
+	width: 1280px;
+	background-image: url(./img/camouflage.jpg);
+	margin: auto;
+	margin-top: 100px;
+	border: solid 3px black;
+	position: relative;
+}
+#boxPrin{
+	height: 500px;
+	width: 1200px;
+	background-image: url(./img/camouflage.jpg) no-repeat;
+	border: solid 2px black;
+	position: absolute;
+	left: 35px;
+	top: 55px;
+}
+#timer{
+	font-family: Army;
+	font-size: 20px;
+	color: black;
+	height: 30px;
+	width: 150px;
+	left: 35px;
+	top: 12px;
+	position: absolute;
+	background-color: #719955;
+	border: solid 2px black;
+	line-height: 30px;
+}
+#essais{
+	font-family: Army;
+	font-size: 20px;
+	color: black;
+	height: 30px;
+	width: 150px;
+	right: 42px;
+	top: 12px;
+	position: absolute;
+	background-color: #719955;
+	border: solid 2px black;
+	line-height: 30px;
+}
+#stockCombinaisons{
+	height: 438px;
+	width: 300px;
+	background-color: white;
+	border: solid 2px black;
+	position: absolute;
+	left: 900px;
+	top: 80px;
+	font-family: Army;
+	font-size: 30px;
+	line-height: 22px;
+	padding-top: 8px;
+	letter-spacing: 6px;
+}
+
+#coursCombinaison{
+	height: 350px;
+	width: 800px;
+	background-image: url(./img/camouflage.jpg) no-repeat;
+	border: solid 2px black;
+	position: absolute;
+	left: 65px;
+	top: 80px;
+}
+#chiffres{
+	height: 220px;
+	width: 750px;
+	background-image: url(./img/camouflage.jpg) no-repeat;
+	border: solid 2px black;
+	position: absolute;
+	left: 22px;
+	top: 16px;
+	font-family: Army;
+	font-size: 230px;
+	line-height: 0.85em;
+}
+#chiffre1{
+	height: 185px;
+	width: 150px;
+	background-color: white;
+	border: solid 2px black;
+	position: absolute;
+	left: 26px;
+	top: 16px;
+}
+#chiffre2{
+	height: 185px;
+	width: 150px;
+	background-color: white;
+	border: solid 2px black;
+	position: absolute;
+	left: 208px;
+	top: 16px;
+}
+#chiffre3{
+	height: 185px;
+	width: 150px;
+	background-color: white;
+	border: solid 2px black;
+	position: absolute;
+	left: 390px;
+	top: 16px;
+}
+#chiffre4{
+	height: 185px;
+	width: 150px;
+	background-color: white;
+	border: solid 2px black;
+	position: absolute;
+	left: 570px;
+	top: 16px;
+}
+#couleurs{
+	height: 60px;
+	width: 750px;
+	background-image: url(./img/camouflage.jpg) no-repeat;
+	border: solid 2px black;
+	position: absolute;
+	left: 22px;
+	top: 270px;
+}
+#couleur1{
+	height: 15px;
+	width: 150px;
+	background-color: white;
+	border: solid 2px black;
+	position: absolute;
+	left: 50px;
+	top: 292px;
+}
+#couleur2{
+	height: 15px;
+	width: 150px;
+	background-color: white;
+	border: solid 2px black;
+	position: absolute;
+	left: 230px;
+	top: 292px;
+}
+#couleur3{
+	height: 15px;
+	width: 150px;
+	background-color: white;
+	border: solid 2px black;
+	position: absolute;
+	left: 410px;
+	top: 292px;
+}
+#couleur4{
+	height: 15px;
+	width: 150px;
+	background-color: white;
+	border: solid 2px black;
+	position: absolute;
+	left: 595px;
+	top: 292px;
+}
+
+#clavierNumerique{
+
+}
+#button0{
+	bottom: 190px;
+	left: 65px;
+}
+#button1{
+	bottom: 190px;
+	left: 147px;
+}
+#button2{
+	bottom: 190px;
+	left: 228.5px;
+}
+#button3{
+	bottom: 190px;
+	left: 309px;
+}
+#button4{
+	bottom: 190px;
+	left: 389.5px;
+}
+#button5{
+	bottom: 190px;
+	left: 472px;
+}
+#button6{
+	bottom: 190px;
+	left: 553px;
+}
+#button7{
+	bottom: 190px;
+	left: 635px;
+}
+#button8{
+	bottom: 190px;
+	left: 718px;
+}
+#button9{
+	bottom: 190px;
+	left: 800px;
+}
+#soldatJeu{
+	height: 250px;
+	width: 250px;
+	position: absolute;
+	top: 470px;
+	right: 30px;
+}
+#finGame{
+	height: 720px;
+	width: 1280px;
+	background-color: white;
+	position: absolute;
+	display: none;
+}
+#explosion{
+    position: absolute;
+    left: 160px;
+    bottom: 150px;
+}
+#feu{
+    position: absolute;
+    height: 660px;
+    left: 460px;
+    bottom: 80px;	
+}
+#victoire{
+	height: 720px;
+	width: 1280px;
+	background-color: white;
+	position: absolute;
+	display: none;
+}
+#win, #lose{
+    font-family: Army;
+    font-size: 100px;
+    padding-top: 30px;
+}
+#txt1{
+	padding-left: 520px;
+	padding-top: 150px;
+	font-size: 30px;
+}
+#replace1, #replace2, #replace3{
+	font-weight: bold;
+}
+#txt2{
+    padding-left: 460px;
+    padding-top: 35px;
+    font-size: 30px;
+    display: none;
+}
+#txt3{
+    padding-left: 470px;
+    padding-top: 35px;
+    font-size: 30px;
+    display: none;
+}
+#dynamiteDefused{
+	position: absolute;
+    right: 660px;
+    bottom: 0px;
+    height: 700px;
+    width: 700px;
+}
+#aide{
+	font-family: Army;
+	font-size: 16px;
+	color: white;
+	height: 30px;
+	width: 150px;
+	left: 35px;
+	bottom: 60px;
+	position: absolute;
+	background-color: #393a3b;
+	border: solid 2px black;
+	cursor: help;	
+}
+#aide2{
+	font-family: Army;
+    font-size: 32px;
+    color: white;
+    height: 40px;
+    width: 250px;
+    left: 650px;
+    bottom: 80px;
+    position: absolute;
+    background-color: #393a3b;
+    border: solid 2px black;
+    cursor: pointer;
+    display: none;
+}
+#returnMenuP{
+	font-family: Army;
+    font-size: 32px;
+    color: white;
+    height: 40px;
+    width: 250px;
+    left: 650px;
+    bottom: 80px;
+    position: absolute;
+    background-color: #393a3b;
+    border: solid 2px black;
+    cursor: pointer;
+	display: none;
+}
+#recommencer{
+	font-family: Army;
+    font-size: 32px;
+    color: white;
+    height: 40px;
+    width: 250px;
+    left: 940px;
+    bottom: 80px;
+    position: absolute;
+    background-color: #393a3b;
+    border: solid 2px black;
+    cursor: pointer;
+    display: none;
+}
+.rectangles{
+	width: 18px;
+	height: 7px;
+	border: solid 1px black;
+	margin-left: 925px;
+	margin-top: 140px;
+	position: absolute;
+}
+.rectangle1Colonne{
+	left: 79px;
+}
+.rectangle2Colonne{	left: 103px;
+}
+.rectangle3Colonne{
+	left: 127px;
+}
+.rectangle4Colonne{
+	left: 151px;
+}
+.rectangle1Ligne{
+	top: -25px;
+}
+.rectangle2Ligne{
+	top: 20px;
+}
+.rectangle3Ligne{
+	top: 62px;
+}
+.rectangle4Ligne{
+	top: 106px;
+}
+.rectangle5Ligne{
+	top: 150px;
+}
+.rectangle6Ligne{
+	top: 194px;
+}
+.rectangle7Ligne{
+	top: 238px;
+}
+.rectangle8Ligne{
+	top: 285px;
+}
+.rectangle9Ligne{
+	top: 325px;
+}
+.rectangle10Ligne{
+	top: 372px;
+}
+.buttonNumerique{
+	margin-top: 695px;
+	height: 70px;
+	width: 70px;
+	background-color: #cecece;
+	padding:6px 0 6px 0;
+	font:bold 30px Army;
+	color: black;
+	border-radius:2px;
+	border: solid 2px black;
+	position: absolute;
+	cursor: pointer;
+}
+.buttonNumerique:hover{
+	margin-top: 695px;
+	height: 70px;
+	width: 70px;
+	background-color: #719955;
+	padding:6px 0 6px 0;
+	font:bold 30px Army;
+	color: black;
+	border-radius:2px;
+	border: solid 2px black;
+	position: absolute;
+}
+.buttonNumerique:active{
+	margin-top: 695px;
+	height: 70px;
+	width: 70px;
+	background-color: #719955;
+	padding:6px 0 6px 0;
+	font:bold 40px Army;
+	color: black;
+	border-radius:2px;
+	border: solid 2px black;
+	position: absolute;
+}
+#consigne{
+    margin-top: 580px;
+    position: absolute;
+    font-size: 20px;
+    font-family: Army;
+    margin-left: 34px;
+    width: 700px;
+    background-color: white;
+    border: solid 2px black;
+    height: 25px;
+    line-height: 25px;
+  }
+  #identiqueChiffre{
+    margin-top: 580px;
+    position: absolute;
+    font-size: 20px;
+    font-family: Army;
+    margin-left: 34px;
+    width: 700px;
+    background-color: white;
+    border: solid 2px black;
+    height: 25px;
+    line-height: 25px;
+    display: none;
+  }

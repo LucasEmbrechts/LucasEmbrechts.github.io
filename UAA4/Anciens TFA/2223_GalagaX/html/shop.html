@@ -1,0 +1,47 @@
+<!--entieremnt codé par ferre-->  
+<!--2023 - 4TTr - Project X-->  
+<!DOCTYPE html >
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/shop.css"></link>
+    <title>le Shop</title>
+</head>
+
+<body>
+<div  id ="container"><!--le conteneur du shop-->
+    
+    <div id="button_menu" onclick="menu()"><h1>menu</h1></div><!--bouton pour retourner au menu-->
+
+    <div id="stellars"><h2 id="sr"></h2></div><!--bouton pour afficher le nombre de stellars-->
+        
+    <div id="button_upgrade_menu" onclick="show()" ondblclick="kill()">Upgrade</div><!--bouton pour afficher les ameliorations et active un fonction JavaScript-->
+
+    <div id="souris_base" class="souris"></div><!--div du vaisseau de base-->
+    <div id="souris_one" class="souris"></div><!--div du premier vaisseau achetable -->
+    <div id="souris_two" class="souris"></div><!--div du deuxieme vaisseau achetable-->
+
+    <div id="upgrade_menu"><!--conteneur du menu d'amelioration-->
+        
+    <button id="upgrade1" class="button_upgrade" onclick="upgrade_one()"><h3>40 SR</h3></button><!--divs pour les 4 ameliorations qui lancent tous les fonctions JavaScript pour effectuer l'achat-->
+    <button id="upgrade2" class="button_upgrade" onclick="upgrade_two()"><h3>100 SR</h3></button>
+    <button id="upgrade3" class="button_upgrade" onclick="upgrade_three()"><h3>350 SR</h3></button>
+    <button id="upgrade4" class="button_upgrade" onclick="upgrade_four()"><h3>500 SR</h3></button>
+        
+    <div id="show1" class="button_show" onmouseover="changeSourisOne()" onmouseout="resetSourisOne()"><h4>Churchill I</h4></div><!--divs pour dire le nom des 4 ameliorations et la fonction pour montrer le vaisseau si la souris passe dessus-->
+    <div id="show2" class="button_show"onmouseover="changeSourisTwo()" onmouseout="resetSourisTwo()"><h4>Modified BaseShip</h4></div>
+    <div id="show3" class="button_show"onmouseover="changeSourisThree()" onmouseout="resetSourisThree()"><h4>Churchill III</h4></div>
+    <div id="show4" class="button_show"onmouseover="changeSourisFour()" onmouseout="resetSourisFour()"><h4>BaseShip Deluxe-ED</h4></div>
+
+</div> 
+    <div id="fleche" onclick="toggleFleche()" ></div><!--div pour la fleche qui passe du vaisseau au premier et deuxieme vaiseeau achetable -->
+</div> 
+
+<audio controls autoplay hidden><!--creation de controles de l'audio-->
+    <source src="../sources/shop_sound.mp3" type="audio/mp3"><!--donner la source et le type d'audio-->
+</audio>
+
+</body>
+    <script type="text/javascript" src="../js/shop.js"></script>
+</html>

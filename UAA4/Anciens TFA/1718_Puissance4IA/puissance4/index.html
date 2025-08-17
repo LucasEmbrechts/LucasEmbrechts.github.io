@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>puissance 4</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div id="containerinterface">
+		<div id="titre">PUISSANCE 4</div>
+		
+		<div id="jouer" onclick="jeu(champ1.value, champ2.value)">JOUER</div>
+		<div id="solo" onclick="solos(champ1.value, champ2.value)">SOLO</div>
+		<div id="multi" onclick="multis(champ1.value, champ2.value)">MULTI</div>
+		<div id="regle" onclick="regle()">REGLES</div>
+		<div id="credit" onclick="credit()">CREDIT</div>
+		<div id="joueur">JOUEUR 1</div><input type="text" id="champ1" placeholder="nom en majuscule">
+		<div id="joueur2">JOUEUR2</div><input type="text" id="champ2" placeholder="nom en majuscule">
+	
+	</div>
+	
+	<div id="containerjeux">
+		
+		<div id="titre">PUISSANCE 4</div>
+		<div id="retour3" onclick="interface()">RETOUR</div>
+		<div id="tour"></div>
+		<div id="fleche">
+			<div class="imagefleche" onclick="jeu1(champ1.value, champ2.value)"></div>
+			<div class="imagefleche" onclick="jeu2(champ1.value, champ2.value)"></div>
+			<div class="imagefleche" onclick="jeu3(champ1.value, champ2.value)"></div>
+			<div class="imagefleche" onclick="jeu4(champ1.value, champ2.value)"></div>
+			<div class="imagefleche" onclick="jeu5(champ1.value, champ2.value)"></div>
+			<div class="imagefleche" onclick="jeu6(champ1.value, champ2.value)"></div>
+			<div class="imagefleche" onclick="jeu7(champ1.value, champ2.value)"></div>
+		</div>
+		<div id="faux"></div>
+		<div id="bluegauche"></div>
+		<div id="bluedroit"></div>
+		<div id="plateau">
+			<div id="gagne"></div>
+			<div id="égalité"></div>
+
+			<div id="case0"></div>
+			<div id="case1"></div>
+			<div id="case2"></div>
+			<div id="case3"></div>
+			<div id="case4"></div>
+			<div id="case5"></div>
+			<div id="case6"></div>
+		
+			<div id="case8"></div>
+			<div id="case9"></div>
+			<div id="case10"></div>
+			<div id="case11"></div>
+			<div id="case12"></div>
+			<div id="case13"></div>
+			<div id="case14"></div>
+
+			<div id="case16"></div>
+			<div id="case17"></div>
+			<div id="case18"></div>
+			<div id="case19"></div>
+			<div id="case20"></div>
+			<div id="case21"></div>
+			<div id="case22"></div>
+
+			<div id="case24"></div>
+			<div id="case25"></div>
+			<div id="case26"></div>
+			<div id="case27"></div>
+			<div id="case28"></div>
+			<div id="case29"></div>
+			<div id="case30"></div>
+
+			<div id="case32"></div>
+			<div id="case33"></div>
+			<div id="case34"></div>
+			<div id="case35"></div>
+			<div id="case36"></div>
+			<div id="case37"></div>
+			<div id="case38"></div>
+
+			<div id="case40"></div>
+			<div id="case41"></div>
+			<div id="case42"></div>
+			<div id="case43"></div>
+			<div id="case44"></div>
+			<div id="case45"></div>
+			<div id="case46"></div>
+			
+		</div>
+	</div>
+	<div id="containerregle">
+		
+		<div id="titre">REGLE</div>
+		<div id="text">
+			le but du jeu est d'aligner une suite de 4 pions de même couleur sur une grille comptant 6 rangées et 7 colonnes. Chaque joueur dispose de 21 pions d'une couleur (par convention, en général jaune ou rouge). tour à tour les deux joueurs placent un pion dans la colonne de leur choix, le pion coulisse alors jusqu'à la position la plus basse possible dans la dite colonne à la suite de quoi c'est à l'adversaire de jouer. le vainqueur est le joueur qui réalise le premier un alignement (horizontal, vertical ou diagonal) consécutif d'au moins quatre pions de sa couleur. Si, alors que toutes les cases de la grille de jeu sont remplies, aucun des deux joueurs n'a réalisé un tel alignement, la partie est déclarée nulle.
+			<br>Pour jouer cliquer au dessus de la colonne pour y insérez le pion.
+		</div>
+		<div id="retour" onclick="interface()">RETOUR</div>
+	</div>
+	
+	<div id="containercredit">
+		
+		<div id="titre">CREDIT</div>
+		<div id="credits">ANNEE ACADEMIQUE<br>2017-2018</div>
+		<div id="credits">REALISER EN 4 TTR<br>PAR ROMAIN DEFESCHE</div>
+		<div id="credits">NUMERO DE GROUPE : 006</div>
+		<div id="retour" onclick="interface()">RETOUR</div>
+	</div>
+
+	<div id="containerjeuxs">
+		
+		<div id="titre">PUISSANCE 4</div>
+		<div id="retour3" onclick="interface()">RETOUR</div>
+		<div id="tour"></div>
+		<div id="fleches">
+			<div class="imagefleche" onclick="jeu1s(champ1.value, champ2.value)"></div>
+			<div class="imagefleche" onclick="jeu2s(champ1.value, champ2.value)"></div>
+			<div class="imagefleche" onclick="jeu3s(champ1.value, champ2.value)"></div>
+			<div class="imagefleche" onclick="jeu4s(champ1.value, champ2.value)"></div>
+			<div class="imagefleche" onclick="jeu5s(champ1.value, champ2.value)"></div>
+			<div class="imagefleche" onclick="jeu6s(champ1.value, champ2.value)"></div>
+			<div class="imagefleche" onclick="jeu7s(champ1.value, champ2.value)"></div>
+		</div>
+		<div id="fauxs"></div>
+		<div id="bluegauche"></div>
+		<div id="bluedroit"></div>
+		<div id="plateau">
+			<div id="gagnes"></div>
+			<div id="égalités"></div>
+
+			<div id="boite0"></div>
+			<div id="boite1"></div>
+			<div id="boite2"></div>
+			<div id="boite3"></div>
+			<div id="boite4"></div>
+			<div id="boite5"></div>
+			<div id="boite6"></div>
+		
+			<div id="boite8"></div>
+			<div id="boite9"></div>
+			<div id="boite10"></div>
+			<div id="boite11"></div>
+			<div id="boite12"></div>
+			<div id="boite13"></div>
+			<div id="boite14"></div>
+
+			<div id="boite16"></div>
+			<div id="boite17"></div>
+			<div id="boite18"></div>
+			<div id="boite19"></div>
+			<div id="boite20"></div>
+			<div id="boite21"></div>
+			<div id="boite22"></div>
+
+			<div id="boite24"></div>
+			<div id="boite25"></div>
+			<div id="boite26"></div>
+			<div id="boite27"></div>
+			<div id="boite28"></div>
+			<div id="boite29"></div>
+			<div id="boite30"></div>
+
+			<div id="boite32"></div>
+			<div id="boite33"></div>
+			<div id="boite34"></div>
+			<div id="boite35"></div>
+			<div id="boite36"></div>
+			<div id="boite37"></div>
+			<div id="boite38"></div>
+
+			<div id="boite40"></div>
+			<div id="boite41"></div>
+			<div id="boite42"></div>
+			<div id="boite43"></div>
+			<div id="boite44"></div>
+			<div id="boite45"></div>
+			<div id="boite46"></div>
+			
+		</div>
+	</div>
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>

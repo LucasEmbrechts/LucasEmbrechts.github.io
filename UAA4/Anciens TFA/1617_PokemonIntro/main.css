@@ -1,0 +1,39 @@
+
+body {
+	background-color: #b6e2a0;
+}
+
+.credits {
+	opacity: 0.9;
+	margin-top: 5px;
+}
+
+/* NAVBAR */
+.navbar {
+	background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* FONTS */
+@font-face {
+	font-family: pokemon;
+	src: url(assets/pokemon_font.ttf);
+}
+
+/* CANVAS */
+#layers {
+	border: 2px solid #555;
+	width: 844px;
+	height: 484px;
+	padding: 0;
+	position: relative;
+	margin: 70px auto auto;
+}
+#layers canvas {
+	position: absolute;
+}
+#layers #game {
+	z-index: 1;
+}
+#layers #transitions {
+	z-index: 2;
+}

@@ -1,0 +1,90 @@
+/*codé entierement par ferre*/
+/*Projet X - 4TTr - 2023*/
+body{
+    background-image: url("../sources/background.gif");/*fond d'écran d'étoiles dans l'espace, un gif pour être plus badass*/
+    background-size: cover;
+    background-color: black;/*fond d'ecran noir pour eviter de flasher les yeux de l'utilisateurs au chargement de la page*/
+}
+#container{
+    height: 100%;
+    width: 100%;    
+}
+#chrono{
+    background-color: #2A2A2A;
+    border-radius: 20px;
+    height: 5%;
+    width: 7%;
+    position: absolute;
+    top: 2%;
+    font-size: 3em;
+    color: white;
+    text-align: center;
+    left: 60%;
+    border: 10px solid black;
+}
+#button_menu{
+    float: left;
+    background-image: url(../sources/button_menu.png);/*l'image du bouton pour aller au menu*/
+    height: 11vh;
+    width: 21%;
+    background-size: cover;
+    padding: 1%;
+    box-sizing: border-box ;
+    user-select: none ;
+    cursor: pointer;
+}
+#stellars{
+
+    float: right;
+    background-image: url(../sources/stellars.png);/*le compteur des stellars*/
+    height: 14vh;
+    width: 21%;
+    background-size: cover;
+    padding: 1%;
+    box-sizing: border-box; 
+}
+#souris{
+    height: 25px;
+    width: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#healthBarOne{
+    border-radius: 20px;
+    width: 15%;
+    height: 50px;
+    background-color: #2A2A2A;
+    position: absolute;
+    top: 2%;
+    left: 30%;
+    box-sizing: border-box;
+    padding: 1%;
+}
+#healthBarTwo{
+    border-radius: 20px;
+    width: 100%;
+    height: 150%;
+    background-color: red;
+    position: relative;
+    transition: 0.5s;
+}
+h1{
+    color: white;
+    text-align: center;
+    font-family: cyberpunk;
+    font-size: 64px;
+    margin-top: 10px;
+}
+h2{
+    color: white;
+    text-align: center;
+    font-family: cyberpunk;
+    font-size: 48px;
+    margin-top: 10%; 
+    margin-left: 5%;
+}
+@font-face {
+    font-family: cyberpunk;
+    src: url(../sources/Cybrpnuk2.ttf);/*caligraphie de la page, un peu post-apocalyptique*/
+}

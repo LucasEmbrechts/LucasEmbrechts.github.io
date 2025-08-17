@@ -1,0 +1,134 @@
+@font-face{
+    font-family: policeTitre;
+    src: url(../../font/Designer.otf);
+}
+
+@font-face{
+    font-family: policeReveil;
+    src: url(../../font/DS-DIGII.TTF);
+}
+
+body{
+    background-image: url(../../img/fondaccueil.gif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+}
+
+h1{
+    font-family: policeTitre;
+    width: auto;
+    color: white;
+    padding: 15px;
+    border-left: 10px solid white;
+    border-right: 10px solid white;
+    height: auto;
+    font-size: 100px;
+    margin-top: 150px;
+    position: absolute;
+    text-align: center;
+    margin-left: 33.3%;
+}
+
+#jeux{
+    background-image: url(../../img/go.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    width: 15%;
+    height: 26%;
+    margin-left: 42.5%;
+    margin-top: 19%;
+    transition: transform 200ms;
+}
+
+#jeux:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+#clock{
+    font-size: 60px;
+	font-weight: bold;
+	text-align: center;
+    color: aliceblue;
+    position: absolute;
+    font-family: policeReveil;
+    margin-left: 100px;
+    margin-top: 25px;
+}
+
+button{
+    margin: 15px;
+    border: none;
+    padding: 25px 30px;
+    background-color: rgba(138, 138, 138, 0);
+    color: #03e9f4;
+    border: 3px solid #03e9f4;
+    font-weight: bold;
+    border-radius: 5px;
+    letter-spacing: 4px;
+    overflow: hidden;
+    transition: 0.5s;
+    cursor: pointer;
+}
+  
+button:hover{
+    background: #03e9f4;
+    color: #050801;
+    box-shadow: 0 0 5px #03e9f4,
+                0 0 25px #03e9f4,
+                0 0 50px #03e9f4,
+                 0 0 200px #03e9f4;
+    -webkit-box-reflect:below 1px linear-gradient(transparent, #0005);
+}
+
+#button{
+    z-index: 99;
+    float: right;
+    margin-top: 25px;
+    margin-right: 150px;
+}
+
+#contJeu{
+    display: none;
+    position: absolute;
+    top: 23%;
+    left: 19%;
+}
+
+.mode{
+    display: inline-block;
+    height: 500px;
+    width: 500px;
+    margin: 25px;
+    border: 8px solid white;
+    border-radius: 5px;
+    transition: transform 500ms;
+}
+
+.mode:hover{
+    transform: scale(1.1);
+}
+
+#close{
+    display: none;
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    border: 1px solid #ffffff;
+    transition: transform 200ms;
+}
+
+#close:hover{
+    transform: scale(1.1);
+    transform: rotate(0.25turn);
+}
+
+#soko{
+    background-image: url(../../img/jouer.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+

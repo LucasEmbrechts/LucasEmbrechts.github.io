@@ -1,0 +1,453 @@
+html{
+    height: 100%;
+}
+body{
+    background-image:url(../source/img/etage-3.2.png);
+    background-repeat: no-repeat;
+    overflow: hidden;
+    height: 100%;
+    margin: 0;
+    cursor: none;
+}
+#back-menu{
+    font-family: "sao ui" , sans-serif;
+    height: 35px;
+    width: 35px;
+    border-radius: 50px;
+    background: radial-gradient(circle, #87CEFA 20%, #4169E1 80%);
+    border: 3px solid #4169E1;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 14px 28px;
+    border-radius: 15;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.4s ease-in-out;
+    /* box-shadow: 0 0 20px #4169E1, 0 0 10px rgba(255, 255, 255, 0.4) inset; */
+    position: relative;
+    overflow: hidden;
+    position: sticky;
+    top: 20px;
+    margin-left: 20px;        
+    z-index : 1002
+
+
+}
+.back-menu::before {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 250%;
+    height: 250%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 10%, transparent 70%);
+    transition: all 0.6s ease-in-out;
+}
+.back-menu:hover::before {
+    top: 0%;
+    left: 0%;
+}
+.back-menu:hover {
+    background: radial-gradient(circle, #B0E0E6 30%, #1E90FF 90%);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.8), 0 0 15px rgba(255, 255, 255, 0.6) inset;
+    transform: translateY(-3px);
+}
+.back-menu:active {
+    transform: scale(0.95);
+}
+#image1{
+    background-image: url(../source/img/menus.png);
+    background-size: cover;
+    height: 35px;
+    width: 35px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#perso{
+    background-image: url(../source/img/perso1.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position:center ;
+    width: 50px;
+    height: 95px;
+    position: absolute;
+    z-index : 1000
+}
+.epee{
+    background-image: url(../source/img/epee.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:center ;
+    height: 100px ;
+    width: 50px;
+    position: absolute;
+}
+#epee1{
+    left: 400px;
+    top : 500px;
+}
+.pelle{
+    background-image: url(../source/img/pelle.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:center ;
+    height: 75px ;
+    width: 25px;
+    position: absolute;
+}
+#barriere{
+    position: absolute;
+    top: 0px;
+    height: 138px;
+    width: 100%;
+    /* border: 2px solid red; */
+}
+#vie{
+    background-color: red;
+    border: 2px solid;
+    height: 20px;
+    width: 150px;
+    position: absolute;
+    left: 134.4px;
+    top: 32.4px;
+}
+
+#viePourcent{
+    text-transform: uppercase;
+    margin: 0%;
+    font-size: 1.1rem;
+}
+
+#outil-porter{
+    border: 2px solid ;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    left: 50%;
+    top: 90%;
+    background-color: rgba(255, 255, 255, 0.445);
+
+}
+
+#case-outil{
+    background-size:contain;  
+    background-repeat: no-repeat;
+    position: absolute;
+    height: 50px ;
+    width: 50px;
+}
+
+#portail{
+    height: 350px;
+    width: 420px;
+    background-image: url(../source/img/portail.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:center ;
+    position: absolute;
+    left:79%;
+    top: 390px;
+}
+
+.info{
+    height: 100px;
+    width: 100px;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: none;
+}
+.trou{
+    background-image: url(../source/img/trou.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:center ;
+    height: 25px;
+    width: 50px;
+    position: absolute;
+}
+#trou1{
+    left: 250px;
+    top: 400px;
+}
+
+#trou2{
+    left:500px;
+    top: 400px;
+}
+
+#menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 1001;
+
+    display: none;               /* caché au départ */
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;        /* actif uniquement quand visible */
+    cursor: initial;
+}
+
+#choixMenu {
+    height: 600px;
+    width: 800px;
+    /* border: 2px solid red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    font-family: "sao ui", sans-serif;
+    height: 60px;
+    width: 310px;
+    border-radius: 50px;
+    background: radial-gradient(circle, #87CEFA 20%, #4169E1 80%);
+    border: 3px solid #eeff00;
+    color: #000000;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 14px 28px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 0 10px rgba(255, 255, 255, 0.4) inset;
+    position: relative;
+    overflow: hidden;
+    margin: 50px;
+}
+
+.button::before {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 250%;
+    height: 250%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 10%, transparent 70%);
+    transition: all 0.6s ease-in-out;
+}
+.button:hover::before {
+    top: 0%;
+    left: 0%;
+}
+.button:hover {
+    background: radial-gradient(circle, #B0E0E6 30%, #1E90FF 90%);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.8), 0 0 15px rgba(255, 255, 255, 0.6) inset;
+    transform: translateY(-3px);
+}
+.button:active {
+    transform: scale(0.95);
+}
+
+
+
+.boite{
+    /* border: 2px solid red ; */
+    height: 120px;
+    width: 110px;
+    position: absolute;
+}
+#boite1{
+    left: -60px;
+    top: 90px;
+}
+#boite2{
+    left: 175px;
+    top: 90px;
+}
+#boite3{
+    left: 410px;
+    top: 90px;
+}
+#boite4{
+    left: 645px;
+    top: 90px;
+}
+#boite5{
+    left: 880px;
+    top: 90px;
+}
+#boite6{
+    left: 1115px;
+    top: 90px;
+}
+#boite7{
+    left: 1350px;
+    top: 90px;
+}
+#boite8{
+    left: 1580px;
+    top: 90px;
+}
+#boite9{
+    left: 1815px;
+    top: 90px;
+}
+#boite10{
+    left: -60px;
+    top: 323px;
+}
+#boite11{
+    left: -60px;
+    top: 323px;
+}
+#boite12{
+    left: 175px;
+    top: 323px;
+}
+#boite13{
+    left: 410px;
+    top: 323px;
+}
+#boite14{
+    left: 645px;
+    top: 323px;
+}
+#boite15{
+    left: 880px;
+    top: 323px;
+}
+#boite16{
+    left: 1115px;
+    top: 323px;
+}
+#boite17{
+    left: 1350px;
+    top: 323px;
+}
+#boite18{
+    left: 1580px;
+    top: 323px;
+}
+#boite19{
+    left: 1815px;
+    top: 323px;
+}
+
+#boite20{
+    left: -60px;
+    top: 556px;
+}
+#boite21{
+    left: -60px;
+    top: 556px;
+}
+#boite22{
+    left: 175px;
+    top: 556px;
+}
+#boite23{
+    left: 410px;
+    top: 556px;
+}
+#boite24{
+    left: 645px;
+    top: 556px;
+}
+#boite25{
+    left: 880px;
+    top: 556px;
+}
+#boite26{
+    left: 1115px;
+    top: 556px;
+}
+#boite27{
+    left: 1350px;
+    top: 556px;
+}
+#boite28{
+    left: 1580px;
+    top: 556px;
+}
+#boite29{
+    left: 1815px;
+    top: 556px;
+}
+#boite30{
+    left: -60px;
+    top: 789px;
+}
+#boite31{
+    left: -60px;
+    top: 789px;
+}
+#boite32{
+    left: 175px;
+    top: 789px;
+}
+#boite33{
+    left: 410px;
+    top: 789px;
+}
+#boite34{
+    left: 645px;
+    top: 789px;
+}
+#boite35{
+    left: 880px;
+    top: 789px;
+}
+#boite36{
+    left: 1115px;
+    top: 789px;
+}
+#boite37{
+    left: 1350px;
+    top: 789px;
+}
+#boite38{
+    left: 1580px;
+    top: 789px;
+}
+#boite39{
+    left: 1815px;
+    top: 789px;
+}
+#boite40{
+    left: -60px;
+    top: 1022px;
+}
+#boite41{
+    left: -60px;
+    top: 1022px;
+}
+#boite42{
+    left: 175px;
+    top: 1022px;
+}
+#boite43{
+    left: 410px;
+    top: 1022px;
+}
+#boite44{
+    left: 645px;
+    top: 1022px;
+}
+#boite45{
+    left: 880px;
+    top: 1022px;
+}
+#boite46{
+    left: 1115px;
+    top: 1022px;
+}
+#boite47{
+    left: 1350px;
+    top: 1022px;
+}
+#boite48{
+    left: 1580px;
+    top: 1022px;
+}
+#boite49{
+    left: 1815px;
+    top: 1022px;
+}

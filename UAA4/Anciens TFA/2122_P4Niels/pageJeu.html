@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PUISSANCE 4</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	
+</head>
+<body background="img/fond.png">
+
+	<div id="astronautes">
+		<div id="mot1"> <img src="img/mot1.png"> </div>
+		<div id="img1"> <img id="player1" src="img/astronaute1.png"> </div>
+		<div id="mot2"> <img src="img/mot2.png"> </div>
+		<div id="img2"> <img id="player2" src="img/astronaute2.png"> </div>
+	</div>
+	
+
+	
+
+
+	<div id="game">
+
+		<div id="boutonHD">
+			<div class="aide"><img src="img/jaune.png"></div>
+			<div class="aide"><img src="img/rouge.png"></div>	 
+		</div>
+		
+
+		<!-- MINI ASTRONAUTE AU DESSUS DU PUISSANCE 4 -->
+		
+		<div id="pbh0" class="petitbonhomme" onclick="jeu(0)" onmouseover="pbho(0)" onmouseleave="pbhl(0)">
+			<img class="lune" src="img/lunerouge.png"> 
+			<img class="miniastronaute" src="img/astlune.png"> 
+		</div>
+
+		<div id="pbh1" class="petitbonhomme" onclick="jeu(1)" onmouseover="pbho(1)" onmouseleave="pbhl(1)">
+			<img class="lune" src="img/lunerouge.png"> 
+			<img class="miniastronaute" src="img/astlune.png"> 
+		</div>
+		<div id="pbh2" class="petitbonhomme" onclick="jeu(2)" onmouseover="pbho(2)" onmouseleave="pbhl(2)">
+			<img class="lune" src="img/lunerouge.png"> 
+			<img class="miniastronaute" src="img/astlune.png"> 
+		</div>
+		<div id="pbh3" class="petitbonhomme" onclick="jeu(3)" onmouseover="pbho(3)" onmouseleave="pbhl(3)">
+			<img class="lune" src="img/lunerouge.png"> 
+			<img class="miniastronaute" src="img/astlune.png"> 
+		</div>
+		<div id="pbh4" class="petitbonhomme" onclick="jeu(4)" onmouseover="pbho(4)" onmouseleave="pbhl(4)">
+			<img class="lune" src="img/lunerouge.png"> 
+			<img class="miniastronaute" src="img/astlune.png"> 
+		</div>
+		<div id="pbh5" class="petitbonhomme" onclick="jeu(5)" onmouseover="pbho(5)" onmouseleave="pbhl(5)">
+			<img class="lune" src="img/lunerouge.png"> 
+			<img class="miniastronaute" src="img/astlune.png"> 
+		</div>
+		<div id="pbh6" class="petitbonhomme" onclick="jeu(6)" onmouseover="pbho(6)" onmouseleave="pbhl(6)">
+			<img class="lune" src="img/lunerouge.png"> 
+			<img class="miniastronaute" src="img/astlune.png"> 
+		</div>
+
+
+
+		<!-- GRILLE DU PUISSANCE 4 -->
+
+		<div id="grille">
+		</div>
+
+	</div>
+	
+		<!-- RESULTAT POUR UNE VCTOIRE DU JOUEUR 1-->
+
+	<div id="resultat1">
+		<img id="pouce" src="img/victoire.png">
+		<h1 class="textevictoire">FELICITATION, L'ASTRONAUTE 1 A GAGNÉ</h1>
+		<div id="rejouer"> 
+			<a href="pageJeu.html">
+				<img src="img/rejouer.png" height="100%" width="100%" >  
+			</a>
+		</div>
+		<div id="retourmenu2"> 
+			<a href="index.html">
+				<img src="img/retourmenu.png" height="100%" width="100%" >  
+			</a>
+		</div>
+	</div>
+
+		<!-- RESULTAT POUR UNE VCTOIRE DU JOUEUR 2-->
+
+	<div id="resultat2">
+		<img id="pouce" src="img/victoire.png">
+		<h1 class="textevictoire">FELICITATION, L'ASTRONAUTE 2 A GAGNÉ</h1>
+		<div id="rejouer"> 
+			<a href="pageJeu.html">
+				<img src="img/rejouer.png" height="100%" width="100%" >  
+			</a>
+		</div>
+		<div id="retourmenu2"> 
+			<a href="index.html">
+				<img src="img/retourmenu.png" height="100%" width="100%" >  
+			</a>
+		</div>
+	</div>
+
+
+
+		<!-- RESULTAT POUR UNE EGALITE -->
+
+	<div id="resultatDraw">
+		<img id="pouce" src="img/klopp.png">
+		<h1 class="textevictoire">DOMMAGE, C'EST UNE EGALITE</h1>
+		<div id="rejouer"> 
+			<a href="pageJeu.html">
+				<img src="img/rejouer.png" height="100%" width="100%" >  
+			</a>
+		</div>
+		<div id="retourmenu2"> 
+			<a href="index.html">
+				<img src="img/retourmenu.png" height="100%" width="100%" >  
+			</a>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="code.js"></script>
+</body>
+</html>

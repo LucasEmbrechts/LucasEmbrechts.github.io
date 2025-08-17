@@ -1,0 +1,547 @@
+@font-face{
+	font-family: "retrocyles";
+	src: url(../sources/Retrocycles.ttf);
+}
+
+body{
+	background-image:url(../img/fond_bois.jpg);
+	background-size: cover;
+	background-position: absolute;
+	background-repeat: no-repeat;
+	color: white;
+	font-family: "retrocyles";
+}
+
+#createur {
+	text-align:bottom;
+    position:absolute;
+    left:10px;
+    bottom:10px;
+    color: #454545;
+    font-size: 20px;
+}
+
+#title{
+	float: center;
+	text-align: center;
+	display: block;
+	margin: auto;
+	margin-top: 100px;
+}
+
+a{
+	margin-bottom: 25px;
+	color: white;
+	text-decoration: none;
+	font-size: 60px;
+	display: block;
+	border: 5px solid white;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	width: 180%;
+	text-align: left;
+	transition: 0.2s;
+	cursor: pointer;
+}
+
+button {
+	cursor: pointer;
+	font-family: retrocyles;
+	margin-bottom: 25px;
+	color: white;
+	text-decoration: none;
+	font-size: 60px;
+	display: block;
+	border: 5px solid white;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	width: 192.5%;
+	text-align: left;
+	transition: 0.2s;
+	background: none;
+}
+
+button:hover {
+	width: 232%;
+	border: 5px solid grey;
+	color: grey;
+	transition: 0.2s;
+}
+
+a:hover {
+	width: 220%;
+	border: 5px solid grey;
+	color: grey;
+	transition: 0.2s;
+}
+
+#bouton{
+	float: right;
+	margin-top: 12%;
+	margin-right: 30%;
+}
+
+#MM{
+	margin-right: 10%;
+	float: right;
+	width: 40%;
+	margin-top: 225px;
+}
+
+#regles{
+	padding: 30px;
+	border: 2px solid white;
+	font-size: 25px;
+	min-height: 200px;
+	width: 1200px;
+	font-family: retrocyles;
+	text-align: justify;
+	display: block;
+	margin: auto;
+	margin-top: 100px;
+	border-bottom-left-radius: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-right-radius: 15px;
+	border-top-left-radius: 15px;
+}
+
+.boutonR {
+	padding-left: none;
+	color: white;
+	text-decoration: none;
+	font-size: 30px;
+	display: inline;
+	border: 5px solid white;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	width: 200%;
+	text-align: center;
+	transition: 0.2s;
+}
+
+#boutonDroit{
+	width: 250px;
+	float: right;
+}
+
+#boutonGauche {
+	margin-top: -90px;
+	width: 250px;
+	float: left;
+}
+
+#boutonAleat{
+	display: none;
+	border: none;
+	font-size: 15px;
+	width: 50px;
+}
+
+#reglesC{
+	padding: 30px;
+	border: 2px solid white;
+	font-size: 25px;
+	min-height: 50px;
+	width: 600px;
+	font-family: retrocyles;
+	text-align: justify;
+	display: block;
+	margin: auto;
+	border-top-left-radius: 15px;
+	margin-top: 150px;
+	border-bottom-left-radius: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-right-radius: 15px;
+	border-top-left-radius: 15px;
+}
+
+#MMvide{
+	background-image:url(../img/MM_vide.png);
+	background-size: cover;
+	background-position: absolute;
+	background-repeat: no-repeat;
+	width: 900px;
+	height: 400px;
+	text-align: center;
+	display: none;
+	margin: auto;
+	margin-top: 50px;
+}
+
+#BoutonR {
+	padding-left: 20px;
+	font-size: 40px;
+	display: none;
+	margin-top: -90px;
+	width: 163px;
+	float: left;
+	margin-right: -1500px;
+}
+
+#jouer {
+	padding-left: 20px;
+}
+
+
+#pion {
+	margin: 5px;
+	cursor: pointer;
+	opacity: 50%;
+	transition: 0.2s;
+	height: 50px;
+}
+
+#pion:hover {
+	cursor: pointer;
+	opacity: 100%;
+	transition: 0.2s;
+}
+
+#MenuCoul {
+	display: none;
+	min-width: 341px;
+	padding: 5px;
+	border: solid 1px white;
+	min-height: 45px;
+	margin:auto;
+	bottom: 0px;
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%);
+	cursor: pointer;
+	margin-bottom: 5px;
+	padding-bottom: 0px;
+	border-top-right-radius: 15px;
+	border-top-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+
+}
+
+#Bcacher{
+	display: block;
+	padding-left: 20px;
+}
+
+#Bcacher2{
+	display: block;
+	padding-left: 20px;
+}
+
+#C11{
+	margin-left:60px;
+    margin-top:28px;
+	float: left;
+	height: 50px;
+}
+
+#C21{
+	margin-left:60px;
+	margin-top: 46px;
+	float: left;
+	height: 50px;
+}
+
+#C31{
+	margin-left:60px;
+	margin-top: 52px;
+	float: left;
+	height: 50px;
+}
+
+#C41{
+	margin-left:60px;
+	margin-top: 46px;
+	float: left;
+	height: 50px;
+}
+
+#boutonLigne1{
+	border: 2px solid white;
+	margin-top: 42px;
+	float: left;
+	font-family: retrocyles;
+	text-decoration: none;
+	width: 150px;
+	text-align: center;
+	font-size: 25px;
+}
+
+#boutonLigne1:hover {
+	border: 2px solid grey;
+}
+
+#boutonLigne2{
+	border: 2px solid white;
+	margin-top: 36px;
+	float: left;
+	font-family: retrocyles;
+	text-decoration: none;
+	width: 150px;
+	text-align: center;
+	font-size: 25px;
+}
+
+#boutonLigne2:hover {
+	border: 2px solid grey;
+}
+
+#boutonLigne3{
+	border: 2px solid white;
+	margin-top: 40px;
+	float: left;
+	font-family: retrocyles;
+	text-decoration: none;
+	width: 150px;
+	text-align: center;
+	font-size: 25px;
+}
+
+#boutonLigne3:hover {
+	border: 2px solid grey;
+}
+
+#boutonLigne4{
+	border: 2px solid white;
+	margin-top: 35px;
+	float: left;
+	font-family: retrocyles;
+	text-decoration: none;
+	width: 150px;
+	text-align: center;
+	font-size: 25px;
+}
+
+#boutonLigne4:hover {
+	border: 2px solid grey;
+}
+
+#bL{
+	display: none;
+	float: left;
+	width: 160px;
+	margin-top: 40px;
+	margin-left: 180px;
+}
+
+#score {
+	display: none;
+}
+
+#boutonScore {
+	margin-top: 50px;
+	display:none;
+	font-size: 30px;
+	width: 180px;
+	text-align: center;
+	border: 2px solid white;
+	float: right;
+	margin-right: 10%;
+}
+
+#boutonScore:hover {
+	border: 2px solid grey;
+}
+
+#CouleurChoisir{
+	display: none;
+	text-align: center;
+	border: 1px solid white;
+	font-size: 30px;
+	width: 60%;
+	margin: auto;
+	margin-top: 100px;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	border-bottom-left-radius: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-right-radius: 15px;
+	border-top-left-radius: 15px;
+}
+
+#boutonChoisir{
+	width: 550px;
+	margin:auto;
+	font-size: 35px;
+	text-align: center;
+	margin-top: 50px;
+	font-family: retrocyles;
+}
+
+#PionChoisir{
+	display: none;
+	width: 40%;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin:auto;
+	border: 1px solid white;
+	word-spacing: 5px;
+	border-bottom-left-radius: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-right-radius: 15px;
+	border-top-left-radius: 15px;
+	font-size: 30px;
+	padding-left:50px;
+	padding-right: 50px;
+	text-align: center;
+	min-height: 510px;
+	padding-bottom: 50px;
+	margin-top: 50px;
+}
+
+#R1{
+	float: right;
+	margin-top: 5px;
+	margin-right: 20%;
+	margin-left:3px;
+	height: 50px;
+}
+
+#R2{
+	float: right;
+	margin-top: 5px;
+	margin-right: 20%;
+	height: 50px;
+}
+
+#R3{
+	float: right;
+	margin-top: 5px;
+	margin-right: 20%;
+	height: 50px;
+}
+
+#R4{
+	float: right;
+	margin-top: 5px;
+	margin-right: 20%;
+	height: 50px;
+}
+
+#MenuCoul2{
+	text-align: center;
+}
+
+.boutonMenu{
+	text-align: center;
+	width: 250px;
+	display: inline-block;
+	cursor: pointer;
+	font-size: 45px;
+}
+
+.boutonMenu:hover{
+	width: 250px;
+}
+
+#ligne1{
+	margin-top: 10px;
+}
+
+#continuer2 {
+	margin-top: 5px;
+	font-size: 25px;
+	width: 150px;
+	text-align: center;
+	float: right;
+	padding-left: 0px;
+}
+
+#Fin {
+	padding-top:V50px;
+	height: 50%;
+	width: 100%;
+	text-align: center;
+	margin: auto;
+	display: none;
+	font-size: 75px;
+}
+
+#Fin a{
+	margin:auto;
+	width: 300px;
+	text-align: center;
+	margin-top: 50px;
+}
+
+#Fin a:hover{
+	width: 300px;
+}
+
+.colonne{
+	float: left;
+	width: 55px;
+	height: 400px;
+}
+
+#colonne1{
+	width: 110px;
+	margin-right: 3px;
+}
+
+#barreC11 {
+	margin-left: 58px;
+}
+
+#continuer {
+	padding-left: none;
+	display: none;
+	text-align: center;
+	width: 150%;
+}
+
+#continuer:hover{
+	width: 150%;
+}
+
+#relancer {
+	padding-left: none;
+	display: none;
+	text-align: center;
+	width: 150%;
+}
+
+#gameplay {
+	text-align:bottom;
+    position:absolute;
+    right:10px;
+    top:10px;
+    color: white;
+    font-size: 20px;
+}
+
+#V{
+	margin-top: 50px;
+	width: 100%;
+	height: 50%;
+}
+
+#D{
+	margin-top: 50px;
+	width: 100%;
+	height: 50%;
+}
+
+#victoireIMG {
+	margin-top: 50px;
+	width: 30%;
+	margin-left: 35%;
+	margin-right: 35%;
+	margin: auto;
+	display: block;
+}
+
+#defaiteIMG {
+	margin-top: 50px;
+	width: 30%;
+	margin-left: 35%;
+	margin-right: 35%;
+	margin: auto;
+	display: block;
+}

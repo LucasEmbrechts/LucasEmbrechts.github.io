@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="g:\2506_aTT_\8-BIT WONDER.TTF">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Document</title>
+  <link rel="stylesheet" href="../css/spawn.css">
+</head>
+
+<body>
+  <div id="game">
+
+
+
+    <button class="menu-button" onclick="toggleMenu()">Menu</button>
+    <button class="menu-button" onclick="toggleMenu()">Menu</button>
+    
+    <div class="menu" id="menu">
+      
+      <button class="btn" onclick="window.location.href='menu.html';">Menu</button>
+      <button class="btn" onclick="window.location.href='#';">Page 2</button>
+      <button class="btn" onclick="window.location.href='#444';">Page 3</button>
+      <button class="btn" onclick="toggleMenu()">Fermer</button>
+    </div>
+
+
+
+  
+  
+
+  
+  
+  
+  <div class="inventory" id="inventoryPage1">
+    <h2>Inventaire - Page 1</h2>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <br>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <br>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <br>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <br>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <br>
+
+
+    <button onclick="ouvrirInventaire(2)">Page Suivante</button>
+    <button onclick="fermerInventaire()">Fermer</button>
+  </div>
+  
+  <div class="inventory" id="inventoryPage2">
+    <h2>Inventaire - Page 2</h2>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <br>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <br>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <br>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <br>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <div class="inventory-item"></div>
+    <br>
+    <button onclick="ouvrirInventaire(1)">Page Précédente</button>
+    <button onclick="fermerInventaire()">Fermer</button>
+  </div> 
+ </div>
+  <script src="crafty-min.js"></script>
+  <script src="game.js"></script>
+  <script src="inventaire.js"></script>
+  <script src="monde.js"></script>
+  <script src="personnage.js"></script>
+  <script>
+    function toggleMenu() {
+      let menu = document.getElementById("menu");
+      menu.classList.toggle("open");
+    }
+    
+    /* Empêche le zoom avec la molette ou les raccourcis clavier */
+    document.addEventListener('wheel', function (event) {
+      if (event.ctrlKey) {
+        event.preventDefault();
+      }
+    }, { passive: false });
+    
+    document.addEventListener('keydown', function (event) {
+      if (event.ctrlKey && (event.key === '+' || event.key === '-' || event.key === '0')) {
+        event.preventDefault();
+      }
+    });
+  </script>
+</body>
+
+</html>

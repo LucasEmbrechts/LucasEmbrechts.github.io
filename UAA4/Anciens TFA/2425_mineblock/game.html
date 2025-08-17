@@ -1,0 +1,1271 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>game</title>
+  
+    <head>
+  <style>
+    
+    
+
+
+    /*louis*/
+    @font-face {
+      font-family: 'minecraft'; /*a name to be used later*/
+      src: url('./source/font/Minecraft.ttf'); /*URL to font*/
+    }
+    #titre{
+      background-image: url('./source/img/mine.png');
+      height: 100px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 50px;
+    }
+    html{
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+    #score{
+      font-family:'minecraft';
+      background-size: cover;
+      margin-top: -700px;
+      font-size: 50px;
+      margin-left: 950px;
+      color: white;
+      
+    }
+    
+    body{
+      margin: 0;
+      height: 100%;
+      background-image: url('./source/img/gamefont.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    #jeu{
+      width: 560px;
+      margin-left: 300px;
+      margin-top: 100px;
+    }
+    
+    .fer{
+      background-image: url('./source/img/ferfin.png');
+    } 
+    .emeraude{
+      background-image: url('./source/img/emeraudefin.png');
+    }
+    .charbon{
+      background-image: url('./source/img/charbonfin.png');
+    }
+    .diamond{
+      background-image: url('./source/img/diamondfin.png');
+    }
+    .vide{
+      background-image: url('./source/img/caseInvent.PNG');
+    }  
+    /*tom*/
+/*button tableau des score*/
+.button-79 {
+  align-items: center;
+      appearance: none;
+      background-clip: padding-box;
+      background-color: initial;
+      background-image: none;
+      border-style: none;
+      box-sizing: border-box;
+      color: #fff;
+      cursor: pointer;
+      display: inline-block;
+      flex-direction: row;
+      flex-shrink: 0;
+      font-family: Eina01,sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      justify-content: center;
+      line-height: 24px;
+      margin: 0;
+      min-height: 64px;
+      outline: none;
+      overflow: visible;
+      padding: 19px 26px;
+      pointer-events: auto;
+      position: relative;
+      text-align: center;
+      text-decoration: none;
+      text-transform: none;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      vertical-align: middle;
+      width: auto;
+      word-break: keep-all;
+      z-index: 0;
+      bottom: 750px;
+      left: 0px;
+}
+
+@media (min-width: 768px) {
+  .button-79 {
+    padding: 19px 32px;
+  }
+}
+
+.button-79:before,
+.button-79:after {
+  border-radius: 80px;
+}
+
+.button-79:before {
+  background-image: linear-gradient(92.83deg, #ff7426 0, #f93a13 100%);
+  content: "";
+  display: block;
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -2;
+}
+
+.button-79:after {
+  background-color: initial;
+  background-image: linear-gradient(#541a0f 0, #0c0d0d 100%);
+  bottom: 4px;
+  content: "";
+  display: block;
+  left: 4px;
+  overflow: hidden;
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  transition: all 100ms ease-out;
+  z-index: -1;
+}
+
+.button-79:hover:not(:disabled):before {
+  background: linear-gradient(92.83deg, rgb(255, 116, 38) 0%, rgb(249, 58, 19) 100%);
+}
+
+.button-79:hover:not(:disabled):after {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  transition-timing-function: ease-in;
+  opacity: 0;
+}
+
+.button-79:active:not(:disabled) {
+  color: #ccc;
+}
+
+.button-79:active:not(:disabled):before {
+  background-image: linear-gradient(0deg, rgba(35, 180, 149, 0.2), rgba(0, 0, 0, .2)), linear-gradient(92.83deg, #ff7426 0, #f93a13 100%);
+}
+
+.button-79:active:not(:disabled):after {
+  background-image: linear-gradient(#541a0f 0, #0c0d0d 100%);
+  bottom: 4px;
+  left: 4px;
+  right: 4px;                   
+  top: 4px;
+}
+
+.button-79:disabled {
+  cursor: default;
+  opacity: .24;
+}
+
+    /*buton menu*/
+    .button-78 {
+      align-items: center;
+      appearance: none;
+      background-clip: padding-box;
+      background-color: initial;
+      background-image: none;
+      border-style: none;
+      box-sizing: border-box;
+      color: #fff;
+      cursor: pointer;
+      display: inline-block;
+      flex-direction: row;
+      flex-shrink: 0;
+      font-family: Eina01,sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      justify-content: center;
+      line-height: 24px;
+      margin: 0;
+      min-height: 64px;
+      outline: none;
+      overflow: visible;
+      padding: 19px 26px;
+      pointer-events: auto;
+      position: relative;
+      text-align: center;
+      text-decoration: none;
+      text-transform: none;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      vertical-align: middle;
+      width: auto;
+      word-break: keep-all;
+      z-index: 0;
+      left: 1700px;
+    }
+    
+    @media (min-width: 768px) {
+      .button-78 {
+        padding: 19px 32px;
+      }
+    }
+    
+    .button-78:before,
+    .button-78:after {
+      border-radius: 80px;
+    }
+    
+    .button-78:before {
+      background-image: linear-gradient(92.83deg, #ff7426 0, #f93a13 100%);
+      content: "";
+      display: block;
+      height: 100%;
+      left: 0;
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: -2;
+    }
+    
+    .button-78:after {
+      background-color: initial;
+      background-image: linear-gradient(#541a0f 0, #0c0d0d 100%);
+      bottom: 4px;
+      content: "";
+      display: block;
+      left: 4px;
+      overflow: hidden;
+      position: absolute;
+      right: 4px;
+      top: 4px;
+      transition: all 100ms ease-out;
+      z-index: -1;
+    }
+    
+    .button-78:hover:not(:disabled):before {
+      background: linear-gradient(92.83deg, rgb(255, 116, 38) 0%, rgb(249, 58, 19) 100%);
+    }
+    
+    .button-78:hover:not(:disabled):after {
+      bottom: 0;
+      left: 0;
+      right: 0;
+      top: 0;
+      transition-timing-function: ease-in;
+      opacity: 0;
+    }
+    
+    .button-78:active:not(:disabled) {
+      color: #ccc;
+    }
+    
+    .button-78:active:not(:disabled):before {
+      background-image: linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), linear-gradient(92.83deg, #ff7426 0, #f93a13 100%);
+    }
+    
+    .button-78:active:not(:disabled):after {
+      background-image: linear-gradient(#541a0f 0, #0c0d0d 100%);
+      bottom: 4px;
+      left: 4px;
+      right: 4px;
+      top: 4px;
+    }
+    
+    .button-78:disabled {
+      cursor: default;
+      opacity: .24;
+    }
+    .bloc{
+      background-position: center;
+      background-size: cover;
+      height: 70px;
+      width: 70px;
+      margin-top: -2px;
+      margin-bottom: -2px;
+      display: inline-block;
+    }
+    .bloc1{
+      background-position: center;
+      background-size: cover;
+      height: 70px;
+      width: 70px;
+      margin-top: -2px;
+      margin-bottom: -2px;
+      display: inline-block;
+      
+    }
+    .bloc2{
+      background-position: center;
+      background-size: cover;
+      height: 70px;
+      width: 70px;
+      margin-top: -2px;
+      margin-bottom: -2px;
+      display: inline-block;
+                            
+    }
+    .bloc3{
+      background-position: center;
+      background-size: cover;
+      height: 70px;
+      width: 70px;
+      margin-top: -2px;
+      margin-bottom: -2px;
+      display: inline-block;
+      
+    }
+    #emplBloc1{
+      position: absolute;
+      top: 250px;
+      left: 1050px;
+      height: 210px;
+      width: 210px;
+    }
+    #emplBloc2{
+      position: absolute;
+      top: 250px;
+      left: 1350px;
+      height: 210px;
+      width: 210px;
+    }
+    #emplBloc3{
+      position: absolute;
+      top: 550px;
+      left: 1200px;
+      height: 210px;
+      width: 210px;
+    }
+    #meilleur-score{
+      font-family:'minecraft';
+      background-size: cover;
+      margin-top: -150px;
+      font-size: 50px;
+      margin-left: 1420px;
+      color: white;
+    }
+    .explosion{
+        background-image: url('./source/img/etape_explosion1.jpg');
+        height: 70px;
+        width: 70px;
+        background-size: contain;
+        position: absolute;
+        background-repeat: no-repeat;
+        background-position: center;
+        animation-name: explosionanim;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: 1;
+        }
+        @keyframes explosionanim{
+            0%{
+                background-image: url('./source/img/explosion1.png');
+            }
+            13%{
+                background-image: url('./source/img/explosion2.png');
+            }
+            25%{
+                background-image: url('./source/img/explosion3.png');
+            }
+            38%{
+                background-image: url('./source/img/explosion4.png');
+            }
+            50%{
+                background-image: url('./source/img/explosion5.png');
+            }
+            63%{
+                background-image: url('./source/img/explosion6.png');
+            }
+            75%{
+                background-image: url('./source/img/explosion7.png');
+            }
+            88%{
+                background-image: url('./source/img/explosion8.png');
+            }
+            100%{
+              background-image: none;
+            }
+        }
+    
+    
+  </style>
+</head>
+<body>
+  <div id="titre"></div>
+  <div id="jeu"></div>
+  <button class="button-78" onclick="location.href='acceuil.html'" >MENU</button>
+  <button class="button-79" onclick="location.href='Tab_Score.html'">Tableau des score</button>
+  
+  <div id="corps2">
+    <div id="emplBloc1"></div>
+    <div id="emplBloc2"></div>
+    <div id="emplBloc3"></div>
+    
+  </div>
+  <div id="score">0</div>
+  <div id="meilleur-score">Meilleur score : 0</div>
+  <div id="explosion"></div>
+  
+  <script>
+    let score = 0
+    let anim_blocs = []
+    let tabclick
+    /*tableau principale (tom, louis)*/
+    let cases = [ 'x','x','x','x','x','x','x','x',
+    'x','x','x','x','x','x','x','x',
+    'x','x','x','x','x','x','x','x',
+    'x','x','x','x','x','x','x','x',
+    'x','x','x','x','x','x','x','x',
+    'x','x','x','x','x','x','x','x',
+    'x','x','x','x','x','x','x','x',
+    'x','x','x','x','x','x','x','x']
+    /*tableaux des bloc que l'ont peut deplacer (tom, louis)*/
+    let prembloc = ['d','d','',
+    'd','d','',
+    '','','']
+    
+    let deuxbloc = ['e','e','e',
+    'e','e','e',
+    'e','e','e']
+    
+    
+    let troisbloc = ['c','c','c',
+    'c','','',
+    'c','','']
+    /*tableau de toute les forme possible (tom, louis)*/
+    let formes = [
+    [
+    'x','x','x',
+    '','','',
+    '','',''
+    ],
+    [
+    'x','x','x', 
+    'x','x','x',     
+    '','',''
+    ],
+    [
+    'x','x','x', 
+    'x','x','x',     
+    'x','x','x'
+    ],
+    [
+    'x','x','x', 
+    'x','','',     
+    'x','',''
+    ],
+    [
+    'x','x','x', 
+    'x','','',     
+    '','',''
+    ],
+    [
+    'x','x','x', 
+    '','x','',     
+    '','',''
+    ],
+    [
+    'x','x','x', 
+    '','','x',     
+    '','',''
+    ],
+    [
+    'x','x','', 
+    '','','',     
+    '','',''
+    ],
+    [
+    'x','','', 
+    '','','',     
+    '','',''
+    ],
+    [
+    'x','','', 
+    'x','','',     
+    '','',''
+    ],
+    [
+    'x','','', 
+    'x','','',     
+    'x','',''
+    ],
+    [
+    'x','x','', 
+    'x','','',     
+    '','',''
+    ],
+    [
+    'x','x','', 
+    'x','x','',     
+    '','',''
+    ],
+    [
+    'x','x','', 
+    '','x','x',     
+    '','',''
+    ],
+    [
+    'x','','', 
+    'x','x','x',     
+    '','',''
+    ],
+    [
+    'x','','', 
+    'x','','',     
+    'x','x','x'
+    ],
+    [
+    'x','x','', 
+    'x','x','',     
+    'x','x',''
+    ],
+    ]
+
+  
+
+  
+  
+  let meilleurScore = localStorage.getItem("meilleurScore") || 0;
+
+  // Afficher le meilleur score au chargement de la page (louis)
+  document.getElementById("meilleur-score").innerHTML = `Meilleur score : ${meilleurScore}`;
+
+  // Fonction pour ajouter 10 points (louis)
+  function ajoute10Point() {
+    score += 10;
+    document.getElementById("score").innerHTML = score;
+    localStorage.setItem("score", score);
+    mettreAJourMeilleurScore();
+  }
+
+  // Fonction pour ajouter 50 points (louis)
+  function ajoute50Point() {
+    score += 50;
+    document.getElementById("score").innerHTML = score;
+    localStorage.setItem("score", score);
+    mettreAJourMeilleurScore();
+  }
+  function ajoute100Point() {
+    score += 100;
+    document.getElementById("score").innerHTML = score;
+    localStorage.setItem("score", score);
+    mettreAJourMeilleurScore();
+  }
+
+  // Fonction pour mettre à jour le meilleur score (louis)
+  function mettreAJourMeilleurScore() {
+    if (score > meilleurScore) {
+      meilleurScore = score;
+      localStorage.setItem("meilleurScore", meilleurScore);
+      document.getElementById("meilleur-score").innerHTML = `Meilleur score : ${meilleurScore}`;
+    }
+  }
+
+  
+  
+    dessin()
+    /*generation des different bloc (Mr Embrechts)*/
+    function genere(){
+      
+      const symboles = ['d', 'e', 'c', 'f'];
+      
+      
+      let aleaSymboles = Math.floor(Math.random() * symboles.length);
+      let aleaFormes = Math.floor(Math.random() * formes.length);
+      let blocs = formes[aleaFormes].map(valeur => valeur === 'x' ? symboles[aleaSymboles] : valeur);
+      prembloc = blocs
+      aleaSymboles = Math.floor(Math.random() * symboles.length);
+      aleaFormes = Math.floor(Math.random() * formes.length);
+      blocs = formes[aleaFormes].map(valeur => valeur === 'x' ? symboles[aleaSymboles] : valeur);
+      deuxbloc = blocs
+      aleaSymboles = Math.floor(Math.random() * symboles.length);
+      aleaFormes = Math.floor(Math.random() * formes.length);
+      blocs = formes[aleaFormes].map(valeur => valeur === 'x' ? symboles[aleaSymboles] : valeur);
+      troisbloc = blocs
+      dessin()
+    }
+    
+    function dessin() {
+      let jeu = document.getElementById("jeu")
+      let emplBloc1 = document.getElementById("emplBloc1")
+      let emplBloc2 = document.getElementById("emplBloc2")
+      let emplBloc3 = document.getElementById("emplBloc3")
+      jeu.innerHTML = ''
+      emplBloc1.innerHTML = ''
+      emplBloc2.innerHTML = ''
+      emplBloc3.innerHTML = ''
+      /*ce qui dessine les bloc (tom)*/
+      for(let i = 0 ; i < cases.length ; i++){
+        
+        let div = document.createElement("div")
+       
+        div.classList.add("bloc")
+        if(anim_blocs.includes(i)){
+         let div2 = document.createElement("div")
+        div2.classList.add("explosion")
+                div.appendChild(div2)
+        }
+
+        div.onclick = function(){
+          let posDepart = i;
+          let tab;
+          if(tabclick == 1){
+            tab = prembloc
+          }else{
+            if(tabclick == 2){
+              tab = deuxbloc
+            } else{
+              if(tabclick == 3){
+                tab = troisbloc
+              }
+            }
+          }
+
+          
+          if(peuPose(posDepart , tab)){
+            ajoute10Point()
+            
+            
+            /*verif (tom, louis)*/
+            if(tab[0] != ''){
+              
+              cases[posDepart] = tab[0]
+            }
+            if(tab[1] != ''){
+              
+              cases[posDepart +1] = tab[1]
+            }
+            if(tab[2] != ''){
+              cases[posDepart +2] = tab[2]
+            }
+            if(tab[3] != ''){
+              
+              cases[posDepart +8] = tab[3]
+            }
+            if(tab[4] != ''){
+              
+              cases[posDepart +9] = tab[4]
+            }
+            if(tab[5] != ''){
+              
+              cases[posDepart +10] = tab[5]
+            }
+            if(tab[6] != ''){
+              
+              cases[posDepart +16] = tab[6]
+            }
+            if(tab[7] != ''){
+              
+              cases[posDepart +17] = tab[7]
+            }
+            if(tab[8] != ''){
+              
+              cases[posDepart +18] = tab[8]
+            }
+            if(tabclick == 1){
+              prembloc = []
+            }else{
+              if(tabclick == 2){
+                deuxbloc = []
+              } else{
+                if(tabclick == 3){
+                  troisbloc = []
+                }
+              }
+            }
+            
+            // L'utilisateur a utilisé les 3 tableaux à droite (tom)
+            if(prembloc.length == 0 && deuxbloc.length == 0 && troisbloc.length == 0){
+              genere()
+            }else{
+              
+              let peuPoser = false
+              
+              if(prembloc.length != 0){
+                for(let y = 0 ; y < cases.length ; y++){
+                  if(peuPose(y , prembloc)){
+                    peuPoser = true
+                    break;
+                  }
+                }
+                
+                
+              }
+              if(peuPoser == false){
+                if(deuxbloc.length != 0){
+                  let y;
+                  for(y = 0 ; y < cases.length ; y++){
+                    
+                    if(peuPose(y , deuxbloc)){
+                      peuPoser = true
+                      break;
+                    }
+                  }
+                }
+                
+              }
+              if(peuPoser == false){
+                if(troisbloc.length != 0){
+                  for(let y = 0 ; y < cases.length ; y++){
+                    if(peuPose(y , troisbloc)){
+                      peuPoser = true
+                      break;
+                    }
+                  }
+                }
+              }
+              if(peuPoser == false){
+                let scores = localStorage.getItem("scores")
+                if(scores == null){
+                  scores = []
+                }else{
+                  scores = JSON.parse(scores)
+                }
+
+                
+
+                scores.push({
+                  nom : localStorage.getItem("nom"),
+                  score : localStorage.getItem("score")
+                
+                })
+                localStorage.setItem('scores', JSON.stringify(scores))
+                window.location.href = 'menu_dead.html'
+              }  
+            }
+          }else{
+            
+          }
+          
+          
+          
+          if(cases[0] != 'x' && cases[1] != 'x' && cases[2] != 'x' && cases[3] != 'x' && cases[4] != 'x' && cases[5] != 'x' && cases[6] != 'x' && cases[7] != 'x'){
+            cases[0] = 'x' 
+            cases[1] = 'x'  
+            cases[2] = 'x' 
+            cases[3] = 'x' 
+            cases[4] = 'x'  
+            cases[5] = 'x' 
+            cases[6] = 'x'   
+            cases[7] = 'x'
+            anim_blocs.push(0)
+            anim_blocs.push(1)
+            anim_blocs.push(2)
+            anim_blocs.push(3)
+            anim_blocs.push(4)
+            anim_blocs.push(5)
+            anim_blocs.push(6)
+            anim_blocs.push(7)
+            ajoute50Point()
+            verifVide()
+            
+          }
+
+          if(cases[8] != 'x' && cases[9] != 'x' && cases[10] != 'x' && cases[11] != 'x' && cases[12] != 'x' && cases[13] != 'x' && cases[14] != 'x' && cases[15] != 'x'){
+            cases[8] = 'x'
+            cases[9] = 'x' 
+            cases[10] = 'x' 
+            cases[11] = 'x' 
+            cases[12] = 'x' 
+            cases[13] = 'x' 
+            cases[14] = 'x' 
+            cases[15] = 'x'
+            anim_blocs.push(8)
+            anim_blocs.push(9)
+            anim_blocs.push(10)
+            anim_blocs.push(11)
+            anim_blocs.push(12)
+            anim_blocs.push(13)
+            anim_blocs.push(14)
+            anim_blocs.push(15)
+            ajoute50Point()
+            verifVide()
+            
+          }
+          if(cases[16] != 'x' && cases[17] != 'x' && cases[18] != 'x' && cases[19] != 'x' && cases[20] != 'x' && cases[21] != 'x' && cases[22] != 'x' && cases[23] != 'x'){
+            cases[16] = 'x'
+            cases[17] = 'x' 
+            cases[18] = 'x' 
+            cases[19] = 'x' 
+            cases[20] = 'x' 
+            cases[21] = 'x' 
+            cases[22] = 'x' 
+            cases[23] = 'x'
+            anim_blocs.push(16)
+            anim_blocs.push(17)
+            anim_blocs.push(18)
+            anim_blocs.push(19)
+            anim_blocs.push(20)
+            anim_blocs.push(21)
+            anim_blocs.push(22)
+            anim_blocs.push(23)
+            ajoute50Point()
+            verifVide()
+            
+          }
+          if(cases[24] != 'x' && cases[25] != 'x' && cases[26] != 'x' && cases[27] != 'x' && cases[28] != 'x' && cases[29] != 'x' && cases[30] != 'x' && cases[31] != 'x'){
+            cases[24] = 'x'
+            cases[25] = 'x' 
+            cases[26] = 'x' 
+            cases[27] = 'x' 
+            cases[28] = 'x' 
+            cases[29] = 'x' 
+            cases[30] = 'x' 
+            cases[31] = 'x'
+            anim_blocs.push(24)
+            anim_blocs.push(25)
+            anim_blocs.push(26)
+            anim_blocs.push(27)
+            anim_blocs.push(28)
+            anim_blocs.push(29)
+            anim_blocs.push(30)
+            anim_blocs.push(31)
+            ajoute50Point()
+            verifVide()
+            
+          }
+          if(cases[32] != 'x' && cases[33] != 'x' && cases[34] != 'x' && cases[35] != 'x' && cases[36] != 'x' && cases[37] != 'x' && cases[38] != 'x' && cases[39] != 'x'){
+            cases[32] = 'x'
+            cases[33] = 'x' 
+            cases[34] = 'x' 
+            cases[35] = 'x' 
+            cases[36] = 'x' 
+            cases[37] = 'x' 
+            cases[38] = 'x' 
+            cases[39] = 'x'
+            anim_blocs.push(32)
+            anim_blocs.push(33)
+            anim_blocs.push(34)
+            anim_blocs.push(35)
+            anim_blocs.push(36)
+            anim_blocs.push(37)
+            anim_blocs.push(38)
+            anim_blocs.push(39)
+            ajoute50Point()
+            verifVide()
+            
+          }
+          if(cases[40] != 'x' && cases[41] != 'x' && cases[42] != 'x' && cases[43] != 'x' && cases[44] != 'x' && cases[45] != 'x' && cases[46] != 'x' && cases[47] != 'x'){
+            cases[40] = 'x'
+            cases[41] = 'x' 
+            cases[42] = 'x' 
+            cases[43] = 'x' 
+            cases[44] = 'x' 
+            cases[45] = 'x' 
+            cases[46] = 'x' 
+            cases[47] = 'x'
+            anim_blocs.push(40)
+            anim_blocs.push(41)
+            anim_blocs.push(42)
+            anim_blocs.push(43)
+            anim_blocs.push(44)
+            anim_blocs.push(45)
+            anim_blocs.push(46)
+            anim_blocs.push(47)
+            ajoute50Point()
+            verifVide()
+          }
+          if(cases[48] != 'x' && cases[49] != 'x' && cases[50] != 'x' && cases[51] != 'x' && cases[52] != 'x' && cases[53] != 'x' && cases[54] != 'x' && cases[55] != 'x'){
+            cases[48] = 'x'
+            cases[49] = 'x' 
+            cases[50] = 'x' 
+            cases[51] = 'x' 
+            cases[52] = 'x' 
+            cases[53] = 'x' 
+            cases[54] = 'x' 
+            cases[55] = 'x'
+            anim_blocs.push(48)
+            anim_blocs.push(49)
+            anim_blocs.push(50)
+            anim_blocs.push(51)
+            anim_blocs.push(52)
+            anim_blocs.push(53)
+            anim_blocs.push(54)
+            anim_blocs.push(55)
+            ajoute50Point()
+            verifVide()
+          }
+          if(cases[56] != 'x' && cases[57] != 'x' && cases[58] != 'x' && cases[59] != 'x' && cases[60] != 'x' && cases[61] != 'x' && cases[62] != 'x' && cases[63] != 'x'){
+            cases[56] = 'x'
+            cases[57] = 'x' 
+            cases[58] = 'x' 
+            cases[59] = 'x' 
+            cases[60] = 'x' 
+            cases[61] = 'x' 
+            cases[62] = 'x' 
+            cases[63] = 'x'
+            anim_blocs.push(56)
+            anim_blocs.push(57)
+            anim_blocs.push(58)
+            anim_blocs.push(59)
+            anim_blocs.push(60)
+            anim_blocs.push(61)
+            anim_blocs.push(62)
+            anim_blocs.push(63) 
+            ajoute50Point()
+            verifVide()
+          }
+          //vertical
+          if(cases[0] != 'x' && cases[8] != 'x' && cases[16] != 'x' && cases[24] != 'x' && cases[32] != 'x' && cases[40] != 'x' && cases[48] != 'x' && cases[56] != 'x'){
+            cases[0] = 'x' 
+            cases[8] = 'x'  
+            cases[16] = 'x' 
+            cases[24] = 'x' 
+            cases[32] = 'x'  
+            cases[40] = 'x' 
+            cases[48] = 'x' 
+            cases[56] = 'x'
+            anim_blocs.push(0)
+            anim_blocs.push(8)
+            anim_blocs.push(16)
+            anim_blocs.push(24)
+            anim_blocs.push(32)
+            anim_blocs.push(40)
+            anim_blocs.push(48)
+            anim_blocs.push(56)
+            ajoute50Point()
+          }
+          if(cases[1] != 'x' && cases[9] != 'x' && cases[17] != 'x' && cases[25] != 'x' && cases[33] != 'x' && cases[41] != 'x' && cases[49] != 'x' && cases[57] != 'x'){
+            cases[1] = 'x'
+            cases[9] = 'x' 
+            cases[17] = 'x' 
+            cases[25] = 'x' 
+            cases[33] = 'x' 
+            cases[41] = 'x' 
+            cases[49] = 'x' 
+            cases[57] = 'x'
+            anim_blocs.push(1)
+            anim_blocs.push(9)
+            anim_blocs.push(17)
+            anim_blocs.push(25)
+            anim_blocs.push(33)
+            anim_blocs.push(41)
+            anim_blocs.push(49)
+            anim_blocs.push(57)
+            ajoute50Point()
+            verifVide()         
+          }
+          if(cases[2] != 'x' && cases[10] != 'x' && cases[18] != 'x' && cases[26] != 'x' && cases[34] != 'x' && cases[42] != 'x' && cases[50] != 'x' && cases[58] != 'x'){
+            cases[2] = 'x'
+            cases[10] = 'x' 
+            cases[18] = 'x' 
+            cases[26] = 'x' 
+            cases[34] = 'x' 
+            cases[42] = 'x' 
+            cases[50] = 'x' 
+            cases[58] = 'x'
+            anim_blocs.push(2)
+            anim_blocs.push(10)
+            anim_blocs.push(18)
+            anim_blocs.push(26)
+            anim_blocs.push(34)
+            anim_blocs.push(42)
+            anim_blocs.push(50)
+            anim_blocs.push(58)
+            ajoute50Point()
+            verifVide()
+          }
+          if(cases[3] != 'x' && cases[11] != 'x' && cases[19] != 'x' && cases[27] != 'x' && cases[35] != 'x' && cases[43] != 'x' && cases[51] != 'x' && cases[59] != 'x'){
+            cases[3] = 'x'
+            cases[11] = 'x' 
+            cases[19] = 'x' 
+            cases[27] = 'x' 
+            cases[35] = 'x' 
+            cases[43] = 'x' 
+            cases[51] = 'x' 
+            cases[59] = 'x'
+            anim_blocs.push(3)
+            anim_blocs.push(11)
+            anim_blocs.push(19)
+            anim_blocs.push(27)
+            anim_blocs.push(35)
+            anim_blocs.push(43)
+            anim_blocs.push(51)
+            anim_blocs.push(59)
+            ajoute50Point()
+            verifVide()
+          }
+          if(cases[4] != 'x' && cases[12] != 'x' && cases[20] != 'x' && cases[28] != 'x' && cases[36] != 'x' && cases[44] != 'x' && cases[52] != 'x' && cases[60] != 'x'){
+            cases[4] = 'x'
+            cases[12] = 'x' 
+            cases[20] = 'x' 
+            cases[28] = 'x' 
+            cases[36] = 'x' 
+            cases[44] = 'x' 
+            cases[52] = 'x' 
+            cases[60] = 'x'
+            anim_blocs.push(4)
+            anim_blocs.push(12)
+            anim_blocs.push(20)
+            anim_blocs.push(28)
+            anim_blocs.push(36)
+            anim_blocs.push(44)
+            anim_blocs.push(52)
+            anim_blocs.push(60)
+            ajoute50Point()
+            verifVide()
+          }
+          if(cases[5] != 'x' && cases[13] != 'x' && cases[21] != 'x' && cases[29] != 'x' && cases[37] != 'x' && cases[45] != 'x' && cases[53] != 'x' && cases[61] != 'x'){
+            cases[5] = 'x'
+            cases[13] = 'x' 
+            cases[21] = 'x' 
+            cases[29] = 'x' 
+            cases[37] = 'x' 
+            cases[45] = 'x' 
+            cases[53] = 'x' 
+            cases[61] = 'x'
+            anim_blocs.push(5)
+            anim_blocs.push(13)
+            anim_blocs.push(21)
+            anim_blocs.push(29)
+            anim_blocs.push(37)
+            anim_blocs.push(45)
+            anim_blocs.push(53)
+            anim_blocs.push(61)
+            ajoute50Point()
+            verifVide()
+          }
+          if(cases[6] != 'x' && cases[14] != 'x' && cases[22] != 'x' && cases[30] != 'x' && cases[38] != 'x' && cases[46] != 'x' && cases[54] != 'x' && cases[62] != 'x'){
+            cases[6] = 'x'
+            cases[14] = 'x' 
+            cases[22] = 'x' 
+            cases[30] = 'x' 
+            cases[38] = 'x' 
+            cases[46] = 'x' 
+            cases[54] = 'x' 
+            cases[62] = 'x'
+            anim_blocs.push(6)
+            anim_blocs.push(14)
+            anim_blocs.push(22)
+            anim_blocs.push(30)
+            anim_blocs.push(38)
+            anim_blocs.push(46)
+            anim_blocs.push(54)
+            anim_blocs.push(62)
+            ajoute50Point()
+            verifVide()
+          }
+          if(cases[7] != 'x' && cases[15] != 'x' && cases[23] != 'x' && cases[31] != 'x' && cases[39] != 'x' && cases[47] != 'x' && cases[55] != 'x' && cases[63] != 'x'){
+            cases[7] = 'x'
+            cases[15] = 'x' 
+            cases[23] = 'x' 
+            cases[31] = 'x' 
+            cases[39] = 'x' 
+            cases[47] = 'x' 
+            cases[55] = 'x' 
+            cases[63] = 'x'
+            anim_blocs.push(7)
+            anim_blocs.push(15)
+            anim_blocs.push(23)
+            anim_blocs.push(31)
+            anim_blocs.push(39)
+            anim_blocs.push(47)
+            anim_blocs.push(55)
+            anim_blocs.push(63)
+            ajoute50Point()
+            verifVide()
+          }
+          
+          
+          dessin()
+          
+        };
+        
+        if(cases[i] == "f" ){
+          div.classList.add("fer")
+        }else{
+          if(cases[i] == "e"){
+            div.classList.add("emeraude")
+          }else{
+            if(cases[i] == "d"){
+              div.classList.add("diamond")
+            }else{
+              if(cases[i] == "c"){
+                div.classList.add("charbon")
+              }else{
+                if(cases[i] == "x"){
+                  div.classList.add("vide")
+                }
+              }
+            }
+          }
+        }
+        jeu.appendChild(div)
+      }
+      anim_blocs = []
+      
+      for(let i = 0 ; i < prembloc.length ; i++){
+        let premie = document.getElementById("emplBloc1")
+        let div1 = document.createElement("div1")
+        div1.classList.add("bloc1")
+        div1.onclick = function(){
+          tabclick = 1
+        };
+        if(prembloc[i] == "f" ){
+          div1.classList.add("fer")
+        }else{
+          if(prembloc[i] == "e"){
+            div1.classList.add("emeraude")
+          }else{
+            if(prembloc[i] == "d"){
+              div1.classList.add("diamond")
+            }else{
+              if(prembloc[i] == "c"){
+                div1.classList.add("charbon")
+              }else{
+                if(prembloc[i] == "x"){
+                  div1.classList.add("vide")
+                }
+              }
+            }
+          }
+        }
+        emplBloc1.appendChild(div1)
+      }
+      for(let i = 0 ; i < deuxbloc.length ; i++){
+        let premie = document.getElementById("emplBloc2")
+        let div2 = document.createElement("div2")
+        div2.classList.add("bloc2")
+        div2.onclick = function(){
+          tabclick = 2
+        };
+        if(deuxbloc[i] == "f" ){
+          div2.classList.add("fer")
+        }else{
+          if(deuxbloc[i] == "e"){
+            div2.classList.add("emeraude")
+          }else{
+            if(deuxbloc[i] == "d"){
+              div2.classList.add("diamond")
+            }else{
+              if(deuxbloc[i] == "c"){
+                div2.classList.add("charbon")
+              }else{
+                if(deuxbloc[i] == "x"){
+                  div2.classList.add("vide")
+                }
+              }
+            }
+          }
+        }
+        emplBloc2.appendChild(div2)
+      }
+      for(let i = 0 ; i < troisbloc.length ; i++){
+        let premie = document.getElementById("emplBloc3")
+        let div3 = document.createElement("div3")
+        div3.classList.add("bloc3")
+        div3.onclick = function(){
+          tabclick = 3
+        };
+        if(troisbloc[i] == "f" ){
+          div3.classList.add("fer")
+        }else{
+          if(troisbloc[i] == "e"){
+            div3.classList.add("emeraude")
+          }else{
+            if(troisbloc[i] == "d"){
+              div3.classList.add("diamond")
+            }else{
+              if(troisbloc[i] == "c"){
+                div3.classList.add("charbon")
+              }else{
+                if(troisbloc[i] == "x"){
+                  div3.classList.add("vide")
+                }
+              }
+            }
+          }
+        }
+        emplBloc3.appendChild(div3)
+      }
+    }
+    function peuPose(posDepart, tab) {
+  // Si le tableau est vide, impossible de le placer
+  if(tab.length == 0) {
+    return false;
+  }
+ 
+  // Calculer les coordonnées x,y à partir de posDepart
+  const x = posDepart % 8;
+  const y = Math.floor(posDepart / 8);
+ 
+  // Vérifier si la position de départ permettrait au bloc de dépasser la limite droite
+  if (x === 6) {
+    // Si on est à la colonne 6, on vérifie que la 3ème colonne du bloc est vide
+    if (tab[2] !== '' || tab[5] !== '' || tab[8] !== '') {
+      return false;
+    }
+  } else if (x === 7) {
+    // Si on est à la colonne 7, on vérifie que les 2ème et 3ème colonnes du bloc sont vides
+    if (tab[1] !== '' || tab[2] !== '' || tab[4] !== '' || tab[5] !== '' || tab[7] !== '' || tab[8] !== '') {
+      return false;
+    }
+  }
+ 
+  // Vérifier si la position de départ permettrait au bloc de dépasser la limite inférieure
+  if (y === 6) {
+    // Si on est à la ligne 6, on vérifie que la 3ème ligne du bloc est vide
+    if (tab[6] !== '' || tab[7] !== '' || tab[8] !== '') {
+      return false;
+    }
+  } else if (y === 7) {
+    // Si on est à la ligne 7, on vérifie que les 2ème et 3ème lignes du bloc sont vides
+    if (tab[3] !== '' || tab[4] !== '' || tab[5] !== '' || tab[6] !== '' || tab[7] !== '' || tab[8] !== '') {
+      return false;
+    }
+  }
+ 
+  // Vérifier si les cases où on veut poser le bloc sont disponibles
+  // Pour chaque position du bloc à placer:
+  // - Si cette position contient un élément (tab[i] !== ''), la case correspondante doit être libre ('x')
+  // - Si cette position est vide (tab[i] === ''), peu importe l'état de la case
+  return (tab[0] === '' || cases[posDepart] === 'x') &&
+         (tab[1] === '' || cases[posDepart + 1] === 'x') &&
+         (tab[2] === '' || cases[posDepart + 2] === 'x') &&
+         (tab[3] === '' || cases[posDepart + 8] === 'x') &&
+         (tab[4] === '' || cases[posDepart + 9] === 'x') &&
+         (tab[5] === '' || cases[posDepart + 10] === 'x') &&
+         (tab[6] === '' || cases[posDepart + 16] === 'x') &&
+         (tab[7] === '' || cases[posDepart + 17] === 'x') &&
+         (tab[8] === '' || cases[posDepart + 18] === 'x');
+}
+
+    
+    let nom = localStorage.getItem("nom")
+    let age = localStorage.getItem("age");  
+    function verifVide(){
+      for(let i = 0 ; i < cases.length ; i++){
+        if(cases[i] != 'x'){
+          return;
+        }
+      }
+      ajoute100Point()
+    }
+    
+  </script>
+  
+  
+  
+</body>
+</html>

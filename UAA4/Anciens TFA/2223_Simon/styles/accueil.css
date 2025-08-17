@@ -1,0 +1,93 @@
+/*justin;4G1;Simon: les 4 fantastiques;2022-2023*/
+/*image de fond*/
+body{
+	background-image: url(../images/backrong.jpg);/*image de fond*/
+	background-size: cover;/*permet de garder l'image initial*/
+	background-repeat: no-repeat;/*permet de garder l'image tel quelle*/
+}
+
+#container{
+	height:95vh;
+}
+/*perso en gros plan*/
+#personnages{
+	background-image: url(../images/personnages.png);/*image de fond du perso*/
+	width: 820px;
+	height: 100%;
+	background-size: cover;/*permet de garder l'image initial*/	
+	background-repeat: no-repeat;/*permet de garder l'image tel quelle*/
+	bottom: 0px;/*coller l'image coller sur la bas */
+	position: absolute;
+}
+
+/*grand titre menu*/
+#titre {
+	background-image: url(../images/titre.png);
+	width: 300x;
+	height: 450px;
+	background-repeat: no-repeat;
+	margin-top: 25px;
+	margin-left:950px;
+	
+
+}
+/*bouton du jeu*/
+#play{
+	background-image: url(../images/b_playr.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	width: 500px;
+	height: 150px;
+	float: right;
+	margin-right: 290px;
+	margin-top: -150px;
+	transition: 500ms;
+
+
+
+	
+}
+/*bouton du jeu animation*/
+#play:hover{
+	filter: brightness(50%);
+	transform: scale(1.1);
+}
+
+/*bouton des règles*/
+#regle{
+	background-image: url(../images/regles.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	width: 500px;
+	height: 150px;
+	margin-right: 290px;
+	float: right;
+	margin-top: 50px;
+	transition: 500ms;
+	
+}
+
+/*bouton des règles animation*/
+#regle:hover{
+	filter: brightness(50%);
+	transform: scale(1.1);
+}
+
+/*bouton des crédits */
+#credit{
+	background-image: url(../images/credit.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	width: 500px;
+	height: 150px;
+	margin-right: -510px;
+	float: right;
+	margin-top: 250px;
+	transition: 500ms;
+
+}
+/*bouton des crédit animation*/
+#credit:hover{
+	filter: brightness(40%);
+	transform: scale(1.1);
+}

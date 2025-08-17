@@ -1,0 +1,71 @@
+@font-face {
+  font-family: PressStart2P;
+  src: url(PressStart2P.ttf);
+}
+
+body{
+	background-image: url(../img/imageFond.jpg);
+	background-size: cover;
+	text-align: center;
+}
+#backtxt{
+	height: 550px;
+	width: 800px;
+	background-image: url(../img/bak-txt.png);
+	background-size: cover;
+	margin: auto;
+	font-size: normal;
+	font-family: 'PressStart2P', cursive;
+	padding: 80px;
+	text-align: left;
+	position: absolute;
+	left: 26%;
+}
+
+#titre{
+	height: 80px;
+	width: 350px;
+	background-image: url(../img/bouton.png);
+	background-position: center;
+	background-size: cover;
+	margin: auto;
+	font-size: 2.12ex;
+	font-family: 'PressStart2P', cursive;
+	color: white;
+	line-height: 79px;	
+}
+
+#buttonR{
+height: 65px;
+	width: 282px;
+	background-image: url(../img/bouton.png);
+	background-position: center;
+	background-size: cover;
+	font-size: large;
+	font-family: 'PressStart2P', cursive;
+	color: white;
+	line-height: 59px;
+	margin-left: 82%;
+	position: absolute;
+	bottom: 130px;
+	text-decoration: underline #815A0C;
+	font-size: 4.1ex;
+}
+
+#gif{
+	height: 115px;
+	width: 115px;
+	position: absolute;
+	background-image: url(../img/lol.gif);
+	background-position: center;
+	background-size: cover;
+	margin-left: 83%;
+	margin-top: 90px;
+	display: none;
+
+}
+
+a{
+	height: 60.125px;
+	width: 282.875px;
+}

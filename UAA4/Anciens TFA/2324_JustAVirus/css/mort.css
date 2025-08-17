@@ -1,0 +1,34 @@
+@font-face {
+	font-family: cyber;
+	src:url(../sources/Cybrpnuk2.ttf);
+}
+
+#btn1{
+	position:absolute;
+	top:700px;
+	left:100px;
+	background-image: url('../sources/button.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	height:100px;
+	width:200px;
+	font-size: 120%;
+	font-family: cyber;
+	color:red;
+}
+#btn2{
+	position:absolute;
+	top:700px;
+	left:1600px;
+	background-image: url('../sources/button.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	height:100px;
+	width:200px;
+	font-size: 120%;
+	font-family: cyber;
+	color:red;
+}
+body{
+	background-color: black;
+}

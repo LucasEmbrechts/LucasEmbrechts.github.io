@@ -1,0 +1,383 @@
+@font-face {
+  font-family: PressStart2P;
+  src: url(PressStart2P.ttf);
+}
+
+body{
+	background-image: url(../img/imageFond.jpg);
+	background-size: cover;
+	text-align: center;
+}
+
+/*-------------------- POSTIONNEMENT DES GRILLES ---------------*/
+
+/*Mode 3x3*/
+
+#grille{
+
+	margin-left :36%;
+	margin-top: 7%;
+
+}
+
+.case1{
+	width: 100px;
+	height: 100px;
+	background-image: url('../img/case1.png');
+	float: left;
+
+}
+
+#a3case3{
+	margin-left: 200px;
+	float: none;
+
+}
+
+#a3case6{
+	margin-left: 200px;
+	float: none;
+}
+
+#a3case9{
+	margin-left: 200px;
+	float: none;
+
+}
+/*Mode 4x4*/
+
+.case2{
+	width: 100px;
+	height: 100px;
+	background-image: url('../img/case1.png');
+	float: left;
+}
+
+#a4case4{
+	margin-left: 300px;
+	float: none;
+	
+}
+
+#a4case8{
+	margin-left: 300px;
+	float: none;
+	
+}
+
+#a4case12{
+	margin-left: 300px;
+	float: none;
+	
+}
+
+#a4case16{
+	margin-left: 300px;
+	float: none;
+	
+}
+
+/*Mode 5x5*/
+
+.case3{
+	width: 100px;
+	height: 100px;
+	background-image: url('../img/case1.png');
+	float: left;
+}
+
+#a5case5{
+	margin-left: 400px;
+	float: none;
+}
+
+#a5case10{
+	margin-left: 400px;
+	float: none;
+}
+
+#a5case15{
+	margin-left: 400px;
+	float: none;
+}
+
+#a5case20{
+	margin-left: 400px;
+	float: none;
+}
+
+#a5case25{
+	margin-left: 400px;
+	float: none;
+}
+
+
+
+/*Mode 6x6*/
+
+.case4{
+	width: 100px;
+	height: 100px;
+	background-image: url('../img/case1.png');
+	float: left;
+}
+
+
+#a6case6{
+	margin-left: 500px;
+	float: none;
+
+}
+
+#a6case12{
+	margin-left: 500px;
+	float: none;
+
+}
+
+#a6case18{
+	margin-left: 500px;
+	float: none;
+
+}
+
+#a6case24{
+	margin-left: 500px;
+	float: none;
+
+}
+
+#a6case30{
+	margin-left: 500px;
+	float: none;
+
+}
+
+#a6case36{
+	margin-left: 500px;
+	float: none;
+
+}
+
+/*Mode 7x7*/
+
+.case5{
+	width: 90px;
+	height: 90px;
+	background-image: url('../img/case2.png');
+	float: left;
+}
+
+#a7case7{
+	margin-left: 540px;
+	float: none;
+
+}
+
+#a7case14{
+	margin-left: 540px;
+	float: none;
+
+}
+
+#a7case21{
+	margin-left: 540px;
+	float: none;
+
+}
+
+#a7case28{
+	margin-left: 540px;
+	float: none;
+
+}
+
+#a7case35{
+	margin-left: 540px;
+	float: none;
+
+}
+
+#a7case42{
+	margin-left: 540px;
+	float: none;
+
+}
+
+#a7case49{
+	margin-left: 540px;
+	float: none;
+
+}
+
+
+/*Mode 8x8*/
+
+.case6{
+	width: 90px;
+	height: 90px;
+	background-image: url('../img/case2.png');
+	float: left;
+}
+
+#a8case8{
+	margin-left: 630px;
+	float: none;
+
+}
+
+#a8case16{
+	margin-left: 630px;
+	float: none;
+
+}
+
+#a8case24{
+	margin-left: 630px;
+	float: none;
+
+}
+
+#a8case32{
+	margin-left: 630px;
+	float: none;
+
+}
+
+#a8case40{
+	margin-left: 630px;
+	float: none;
+
+}
+
+#a8case48{
+	margin-left: 630px;
+	float: none;
+
+}
+
+#a8case56{
+	margin-left: 630px;
+	float: none;
+
+}
+
+#a8case64{
+	margin-left: 630px;
+	float: none;
+
+}
+
+#a8case72{
+	margin-left: 630px;
+	float: none;
+
+}
+
+#a8case80{
+	margin-left: 630px;
+	float: none;
+
+}
+
+/*-------------------- FIN POSTIONNEMENT DES GRILLES ---------------*/
+
+#buttonR{
+height: 65px;
+	width: 282px;
+	background-image: url(../img/bouton.png);
+	background-position: center;
+	background-size: cover;
+	font-size: large;
+	font-family: 'PressStart2P', cursive;
+	color: white;
+	line-height: 59px;
+	margin-left: 82%;
+	position: absolute;
+	bottom: 130px;
+	text-decoration: underline #815A0C;
+	font-size: 4.1ex;
+}
+
+#entre{
+	height: 75px;
+	width: 370px;
+	background-image: url(../img/bouton.png);
+	background-position: center;
+	background-size: cover;
+	font-size: normal;
+	font-family: 'PressStart2P', cursive;
+	color: white;
+	line-height: 68px;
+	position: absolute;	
+	margin-left: 40%;
+	margin-top: 10px;
+}
+
+#taille{
+	font-size: 3ex;
+	height: 30px;
+	width: 250px;
+	margin-top: 18%;
+	text-align: center;
+
+}
+
+#tourJ{
+	height: 80px;
+	width: 400px;
+	background-image: url(../img/bouton.png);
+	background-position: center;
+	background-size: cover;
+	margin: auto;
+	font-size: large;
+	font-family: 'PressStart2P', cursive;
+	color: white;
+	line-height: 75px;
+	position: absolute;
+	bottom: 40px;
+	left: 50%;
+	margin-left: -200px;
+	display: none;
+}
+
+
+#paswin{
+
+}
+
+
+#victoire{
+	height: 99px;
+	width: 430px;
+	background-image: url(../img/bouton.png);
+	background-position: center;
+	background-size: cover;
+	margin: auto;
+	font-size: large;
+	font-family: 'PressStart2P', cursive;
+	color: white;
+	line-height: 90px;
+	position: absolute;
+	top: 40px;
+	left: 76%;
+	display: none;
+}
+
+#rejouer{
+	height: 60.125px;
+	width: 282.875px;
+	background-image: url(../img/bouton.png);
+	background-position: center;
+	background-size: cover;
+	font-size: large;
+	font-family: 'PressStart2P', cursive;
+	color: white;
+	line-height: 59px;
+	margin-left: 82%;
+	position: absolute;
+	bottom: 50px;
+	text-decoration: underline #815A0C;
+	font-size: 4ex;
+	cursor: pointer;
+}

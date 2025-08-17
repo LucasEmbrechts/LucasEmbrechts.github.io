@@ -1,0 +1,52 @@
+html,body
+{
+	margin: 0px;
+	padding: 0px;
+}
+body
+{
+	background-image: url(./img/difficulte.jpg);
+	background-size: 1920px 1000px;
+    background-repeat: no-repeat;
+    background-color: black;
+}
+#bouttonMenu
+{
+	position: absolute;
+    left: 670px;
+    top: 840px;
+    width: 580px;
+    height: 110px;
+    opacity: 0;
+    cursor: pointer;
+}
+#bouttonJeuFacile
+{
+    position: absolute;
+    left: 709px;
+    top: 280px;
+    opacity: 0;
+    cursor: pointer;
+    width: 495px;
+    height: 106px;
+}
+#bouttonJeuMoyen
+{
+    position: absolute;
+    left: 709px;
+    top: 443px;
+    opacity: 0;
+    cursor: pointer;
+    width: 495px;
+    height: 106px;
+}
+#bouttonJeuDifficile
+{
+    position: absolute;
+    left: 709px;
+    top: 609px;
+    opacity: 0;
+    cursor: pointer;
+    width: 495px;
+    height: 106px;
+}

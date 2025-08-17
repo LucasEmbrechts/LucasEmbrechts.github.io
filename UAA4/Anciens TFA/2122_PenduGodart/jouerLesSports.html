@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Jeu du pendu</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	
+</head>
+<body width="100%" height="100%">
+
+		<!--box gauche+box penduAMonter et retour au menu principal-->
+	<div id="j_left">
+			<img id="penduAMonter" src="images/montagePendu/pendu0.png">
+			<a id="retourMenuPrincipal" href="index.html">
+				<img src="images/boutonretourMenuPrincipal.png">
+			</a>
+		</div>
+	<div id="j_right">
+		<div id="motAtrouver"></div>
+			<!--box clavier et lettre-->
+	<div id="clavier">
+			<div class="boxClavier" id="caseA" onclick="game('A')">
+				<div class="Lettres" >A</div>
+			</div>
+			<div class="boxClavier" id="caseZ" onclick="game('Z')">
+				<div class="Lettres" >Z</div>
+			</div>
+			<div class="boxClavier" id="caseE" onclick="game('E')">
+				<div class="Lettres" >E</div>
+			</div>
+			<div class="boxClavier" id="caseR" onclick="game('R')">
+				<div class="Lettres">R</div>
+			</div>
+			<div class="boxClavier" id="caseT" onclick="game('T')">
+				<div class="Lettres">T</div>
+			</div>
+			<div class="boxClavier" id="caseY" onclick="game('Y')">
+				<div class="Lettres">Y</div>
+			</div>
+			<div class="boxClavier" id="caseU" onclick="game('U')">
+				<div class="Lettres">U</div>
+			</div>
+			<div class="boxClavier" id="caseI"  onclick="game('I')">
+				<div class="Lettres">I</div>
+			</div>
+			<div class="boxClavier" id="caseO" onclick="game('O')">
+				<div class="Lettres">O</div>
+			</div>
+			<div class="boxClavier" id="caseP"  onclick="game('P')">
+				<div class="Lettres">P</div>
+			</div>
+
+			<br>
+
+			<div class="boxClavier"  id="caseQ"  onclick="game('Q')">
+				<div class="Lettres">Q</div>
+			</div>
+			<div class="boxClavier"  id="caseS" onclick="game('S')">
+				<div class="Lettres">S</div>
+			</div>
+			<div class="boxClavier" id="caseD" onclick="game('D')">
+				<div class="Lettres">D</div>
+			</div>
+			<div class="boxClavier" id="caseF"  onclick="game('F')">
+				<div class="Lettres">F</div>
+			</div>
+			<div class="boxClavier" id="caseG" onclick="game('G')">
+				<div class="Lettres">G</div>
+			</div>
+			<div class="boxClavier" id="caseH" onclick="game('H')">
+				<div class="Lettres">H</div>
+			</div>
+			<div class="boxClavier"  id="caseJ" onclick="game('J')">
+				<div class="Lettres">J</div>
+			</div>
+			<div class="boxClavier"  id="caseK" onclick="game('K')">
+				<div class="Lettres">K</div>
+			</div>
+			<div class="boxClavier"  id="caseL" onclick="game('L')">
+				<div class="Lettres">L</div>
+			</div>
+			<div class="boxClavier"  id="caseM" onclick="game('M')"> 
+				<div class="Lettres">M</div>
+			</div>
+
+			<br>
+			<div id="centrageToucheClavier">
+				<div class="boxClavier"  id="caseW" onclick="game('W')">
+					<div class="Lettres">W</div>
+				</div>
+				<div class="boxClavier" id="caseX" onclick="game('X')">
+					<div class="Lettres">X</div>
+				</div>
+				<div class="boxClavier" id="caseC" onclick="game('C')">
+					<div class="Lettres">C</div>
+				</div>
+				<div class="boxClavier" id="caseV" onclick="game('V')">
+					<div class="Lettres">V</div>
+				</div>
+				<div class="boxClavier" id="caseB"  onclick="game('B')">
+					<div class="Lettres">B</div>
+				</div>
+				<div class="boxClavier" id="caseN"  onclick="game('N')">
+					<div class="Lettres">N</div>
+				</div>
+			</div>	
+		</div>
+
+			<!--choix catégories et indice-->
+		<div id="choixCategories">
+			<img src="images/choixCategories.png">
+		</div>
+		<div id="diffCategories">
+			<img src="images/lesSports.png">
+		</div>
+		<div id="boxPhraseIndice"></div>
+		<a id="logoIndice" onclick="affichageIndice()">
+			<img src="images/logoIndice.png" width="100%" height="100%">
+		</a>
+
+	</div>
+
+<!---box gagner et perdu-->
+
+<div id="boxPerdu">
+	<div id="boxPerdu_left">
+		<div id="VousAvezPerdu">
+		<center >Vous avez perdu!</center>
+		</div>
+			<div id="AffichageMotaTrouverPerdu">
+				
+			</div>
+			<a id="Rejouer" href="categories.html">
+				<img src="images/boutonRejouer.png">
+			</a>
+			<a id="retourMenuPrincipalGagner" href="index.html">
+				<img src="images/boutonretourMenuPrincipal.png">
+			</a>
+						
+	</div>
+	<div id="boxPerdu_right">
+		<img src="images/tombeRIP.png">
+	</div>
+</div>
+
+
+<div id="boxGagner">
+	<div id="boxPerdu_left">
+		<div id="VousAvezPerdu">
+		<center >Vous avez gagné!</center>
+		</div>
+			<div id="AffichageMotaTrouverGagner">
+				
+			</div>
+			<a id="Rejouer" href="categories.html">
+				<img src="images/boutonRejouer.png">
+			</a>
+			<a id="retourMenuPrincipalGagner" href="index.html">
+				<img src="images/boutonretourMenuPrincipal.png">
+			</a>
+			
+			
+	</div>
+	<div id="boxPerdu_right">
+		<img src="images/mecGagner.png">
+	</div>
+</div>
+	<script type="text/javascript" src="codeLesSports.js"></script>
+</body>
+</html>

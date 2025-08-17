@@ -1,0 +1,97 @@
+<html>
+<head>
+	<title>Space Cleaner</title>
+	<meta charset='utf-8'>
+	<script type="text/javascript" src="myScript.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<canvas id="monCanvas">
+Votre naviguateur ne lis pas le canvas, pour résoudre ce problème, veuillez suivre ces instructions : <br>
+- Sortir du précambrien <br>
+- Dégager ce suppot de satan qu'est interet explorer <br>
+- Si tout cela ne fonctionne pas, brulez votre ordinateur <br>
+- Si rien ne fonctione, brulez votre slip <br> 
+</canvas>
+<div id="tout">
+	<center>
+	<div class="anime" id="menu">
+		<h1>Space Cleaner</h1>
+		<button onclick="deleteDiv('menu', 'modeDeJeu')">Jouer</button><br>
+		<button onclick="tuto()">Tutoriel</button><br>
+		<button onclick="credits()">Credits</button>
+	</div>
+
+	<div class="anime" id="modeDeJeu">
+		<h1>Choississez le mode de Jeu</h1>
+		<button onclick="unlimited(); deleteDiv('modeDeJeu', 'difficultes')">Sans Fin</button><br>
+		<button onclick="modNormal(); deleteDiv('modeDeJeu', 'difficultes')">Normal</button>
+	</div>
+	
+	<div class="anime" id="difficultes">
+		<h1>Choisissez votre difficulte</h1>
+		<button onclick="facile()">Facile</button><br>
+		<button onclick="normal()">Normal</button><br>
+		<button onclick="difficle()">Difficle</button><br>
+		<button onclick="gandalf()">Gandalf</button>
+	</div>
+
+	<div class="anime" id="congratulations">
+		<h2 id='message'></h2><br>
+		<h3 id="score"></h3>
+		<button onclick="window.location.reload();">Retourner au menu principal</button>
+	</div>
+
+	<div id="credits">
+		<h2>Community Manager</h2>
+		Claes Nils<br>
+		<h2>Graphism Designer</h2>
+		Claes Nils<br>
+		Claes Nils<br>
+		Claes Nils<br>
+		Claes Nils<br>
+		Claes Nils<br>
+		<h2>Software Developer</h2>
+		Claes Nils<br>
+		Claes Nils<br>
+		Claes Nils<br>
+		Claes Nils<br>
+		<h2>Character Designer</h2>
+		Claes Nils<br>
+		Claes Nils<br>
+		Claes Nils<br>
+		Claes Nils<br>
+		<h2>Project Supervisor</h2>
+		Claes Nils<br>
+		Claes Nils<br>	
+		<h2>Propaganda Minister</h2>
+		Claes Nils<br>
+		<h2>CEO</h2><br>
+		Claes Nils<br> 
+		<h2>Sound Master</h2>
+		Claes Nils<br>
+		Claes Nils<br>
+		Claes Nils<br>
+		<h2>Operation Director</h2>
+		Claes Nils<br>
+		Claes Nils<br>
+		<h2>Special Thanks</h2>
+		Claes Nils<br>
+		Claes Nils<br>
+		Claes Nils<br>
+		Mme Cauchie	
+	</div>
+	<footer id="pied">Un jeu fait par Claes Nils, 4TTr</footer>
+	</center>
+</div>
+<div id="dialogueVieux"></div>
+<audio src="menu.wav" id="musiqueMenu" loop="-1">
+<audio src="jeu.mp3" id="musiqueJeu" loop="-1">
+<audio src="gandalf.mp3" id="musiqueGandalf" loop="-1">
+<audio src="hitEnnemi.wav" id="hitEnnemiSond">
+<audio src="tir.wav" id="tirSond">
+<audio src="vaisseauTue.wav" id="vaisseauTue">
+<audio src="warning.mp3" id="warning">
+<audio src="boss.mp3" id="musiqueBoss">
+</body>
+</html>

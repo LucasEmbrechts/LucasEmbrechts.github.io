@@ -1,0 +1,194 @@
+html{
+    height: 100%;
+}
+body{
+    background-image:url(../source/img/fondFin.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    height: 100%;
+    margin: 0;
+}
+#back-menu{
+    font-family: "sao ui" , sans-serif;
+    height: 35px;
+    width: 35px;
+    border-radius: 50px;
+    background: radial-gradient(circle, #87CEFA 20%, #4169E1 80%);
+    border: 3px solid #4169E1;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 14px 28px;
+    border-radius: 15;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.4s ease-in-out;
+    /* box-shadow: 0 0 20px #4169E1, 0 0 10px rgba(255, 255, 255, 0.4) inset; */
+    position: relative;
+    overflow: hidden;
+    position: sticky;
+    top: 20px;
+    margin-left: 20px;        
+    z-index : 1002
+
+
+}
+.back-menu::before {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 250%;
+    height: 250%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 10%, transparent 70%);
+    transition: all 0.6s ease-in-out;
+}
+.back-menu:hover::before {
+    top: 0%;
+    left: 0%;
+}
+.back-menu:hover {
+    background: radial-gradient(circle, #B0E0E6 30%, #1E90FF 90%);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.8), 0 0 15px rgba(255, 255, 255, 0.6) inset;
+    transform: translateY(-3px);
+}
+.back-menu:active {
+    transform: scale(0.95);
+}
+#image1{
+    background-image: url(../source/img/menus.png);
+    background-size: cover;
+    height: 35px;
+    width: 35px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 1001;
+
+    display: none;               /* caché au départ */
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;        /* actif uniquement quand visible */
+    cursor: initial;
+}
+
+#choixMenu {
+    height: 600px;
+    width: 800px;
+    /* border: 2px solid red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    font-family: "sao ui", sans-serif;
+    height: 60px;
+    width: 310px;
+    border-radius: 50px;
+    background: radial-gradient(circle, #87CEFA 20%, #4169E1 80%);
+    border: 3px solid #eeff00;
+    color: #000000;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 14px 28px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 0 10px rgba(255, 255, 255, 0.4) inset;
+    position: relative;
+    overflow: hidden;
+    margin: 50px;
+}
+
+.button::before {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 250%;
+    height: 250%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 10%, transparent 70%);
+    transition: all 0.6s ease-in-out;
+}
+.button:hover::before {
+    top: 0%;
+    left: 0%;
+}
+.button:hover {
+    background: radial-gradient(circle, #B0E0E6 30%, #1E90FF 90%);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.8), 0 0 15px rgba(255, 255, 255, 0.6) inset;
+    transform: translateY(-3px);
+}
+.button:active {
+    transform: scale(0.95);
+}
+
+
+
+
+.center-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* espace entre input et bouton */
+  z-index: 1003;
+}
+
+#nom {
+  height: 40px;
+  width: 280px;
+  padding: 8px 12px;
+  font-size: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.95);
+  font-family: "sao ui", sans-serif;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+#valider {
+  padding: 12px 26px;
+  font-size: 18px;
+  background: radial-gradient(circle, #fff8dc 20%, #ffd700 80%);
+  border: 3px solid #fdf5e6;
+  border-radius: 25px;
+  color: #5c3900;
+  font-family: "sao ui", sans-serif;
+  font-weight: bold;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0 0 25px rgba(255, 248, 220, 0.9), 0 0 15px rgba(255, 255, 255, 0.4) inset;
+  transition: all 0.4s ease-in-out;
+}
+
+#valider:hover {
+  background: radial-gradient(circle, #fffacd 30%, #ffec8b 90%);
+  box-shadow: 0 0 35px rgba(255, 248, 220, 1), 0 0 18px rgba(255, 255, 255, 0.5) inset;
+  transform: translateY(-2px);
+}
+
+#valider:active {
+  transform: scale(0.96);
+}
+
+
+#corps3 p {
+  margin: 2px 0;
+}
+

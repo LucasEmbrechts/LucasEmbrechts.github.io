@@ -1,0 +1,39 @@
+<!--Aaron Masson-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+     body{
+        background-image: url(source/dragon.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+    }
+    #continue{
+        position: absolute;
+        left: 150px;
+        top: 550px;
+        
+    }
+    #fin{
+        width: 836.5px;
+        position: absolute;
+        top: 200px;
+        left: 500px;
+    }
+    </style>
+    <head>
+        <body>
+            <img id="continue" onclick="continu()" src="source/continuer.png">
+            <img id="fin" src="source/fin.png">
+            <script>
+                 function continu(){
+                    window.location.replace('mondesfin.html')
+                }
+            </script>
+        </body>
+</html>

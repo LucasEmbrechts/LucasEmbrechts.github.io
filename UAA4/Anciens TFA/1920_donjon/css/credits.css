@@ -1,0 +1,18 @@
+body{
+	background-image: url(../Sources/Boutons/Credits.jpg);
+}
+
+#BoutonsMenu{
+	background-image: url(../Sources/Boutons/boutonMenu.png);
+	width: 220px;
+	height: 100px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	position: absolute;
+	margin-left: 830px;
+	margin-top: 800px;
+}
+
+#BoutonsMenu:hover{
+	background-image: url(../Sources/Boutons/overMenu.png);
+}

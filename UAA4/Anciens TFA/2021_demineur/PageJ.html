@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head><link rel="stylesheet" type="text/css" href="style.css">
+	<title>Mine Sweeper Game</title>
+</head>
+<body>
+
+	<div class="boutons" id="bHome" onclick="openPage('index.html')"></div>
+
+	<center>
+		<h1>Good Game</h1>
+	</center>
+
+	<div id="TableauChoix" >
+		<center> 
+			Outil en main
+			<div id="Choix1" onclick="toggleDrapeau()">Pelle</div>
+			<div id="Choix2" onclick="toggleDrapeau()">Drapeau</div>
+		</center>
+	</div>
+
+	<div id="nbflag"><h3>Drapeau restant : 10</h3></div>
+
+	<center>
+	<div id="Lose">
+		<center>
+			<h1> Vous avez perdu !!!</h1>
+			<br><h1>Back to menu</h1>	
+			<div class="boutons" id="bHome2" onclick="openPage('index.html')"></div>
+
+
+		</center>
+
+	</div>
+	<div id="Win">
+				<center><h1> Vous avez Gagner !!!</h1><br>
+				<h1>Back to menu</h1>	
+				<div class="boutons" id="bHome2" onclick="openPage('index.html')"></div></center>
+			</div>
+	<div id="wrapper"></div>
+	
+	
+	</center>
+
+
+
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>

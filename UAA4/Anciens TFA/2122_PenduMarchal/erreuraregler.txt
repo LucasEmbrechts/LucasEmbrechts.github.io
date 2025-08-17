@@ -1,0 +1,10 @@
+Non réglé:
+
+
+
+Réglé:
+
+1: Quand il y avait une erreur mais qu'on trouvais le mot, l'écran gagner n'apparaissait pas
+2: Quand les lettres disparaissent, le mot bouge avec les parties du pendu
+3:on peux encore jouer malgré le perdu ou gagner
+4: Les lettres ne sont pas centré sur les tirets

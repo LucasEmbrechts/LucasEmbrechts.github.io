@@ -1,0 +1,496 @@
+@font-face{
+	font-family: "police";
+	src:url("images/police/Dust West College.otf") format("OpenType");
+}
+@font-face{
+	font-family: "policeRegles";
+	src:url("images/police/Mangaka.otf") format("OpenType");
+}
+body{
+	margin: 0;
+	padding: 0;
+	background-repeat: no-repeat; 
+	background-image: url(images/fond/photoTableau1_0.png)
+}
+a{
+	text-decoration: none;
+}
+/*------Page d'Accueil--------*/
+#m_left{
+	width: 22%;
+	min-height: 250px;
+	display:inline-block;
+	margin-left: 80px;
+}
+
+#m_left img{
+	width: 100%; 
+}
+
+#m_middle{
+	padding-top: 200px;
+	width: 47%;
+	min-height: 250px; 
+	display:inline-block;
+	overflow: hidden;
+	text-align: center;
+}
+
+#m_middle img{
+	display: block;
+	margin: auto;
+
+}
+
+#m_right{
+	width: 20%;
+	min-height: 250px; 
+	display:inline-block;
+	overflow: hidden;
+	margin-left: 40px;
+
+}
+
+#m_right img{
+	width: 95%;
+	height: 95%; 
+	
+}
+
+#bouton1{
+	margin-top: 200px;
+}
+#bouton2 img {
+	margin-top: 10px;
+}
+#bouton3 img {
+	margin-top: 10px;
+}
+
+
+#optionsBulles{
+	width: 450px;
+	margin-top: 15px; 
+	margin: auto; 
+}
+#engrenageblanc{
+	float:right;
+	margin-right: 130px;
+}
+
+#langues{
+	float:right;
+}
+
+
+
+/*------Page de jeu--------*/
+
+
+
+#j_left{
+	width: 40%;
+	height: 1000px;
+	margin-left: 90px;
+	min-height: 250px;
+	display:inline-block;
+	overflow: hidden;
+}
+
+#j_left img {
+	width: 50%;
+}
+
+#retourMenuPrincipal{
+	width: 500px;
+	height: 100px;
+	display:inline-block;
+	margin-top: 50px;
+
+}
+
+#retourMenuPrincipal img{
+	width: 75%;
+	height: 100%;
+}
+
+#penduAMonter{
+	margin-top: 100px;
+	margin-left: 90px;
+}
+
+#j_right{
+	
+	width: 53%;
+	height: 1050px;
+	display:inline-block;
+	overflow: hidden
+}
+
+#motAtrouver{
+	height: 175px;
+	width: 1000px;
+	margin-right: 400px;
+	margin-top:  90px;
+}
+
+#clavier{
+	margin-left: 13.5px;
+	margin-top: 30px;
+	height: 320px;
+	width: 973px;
+	
+}
+
+#centrageToucheClavier{
+	margin-left: 6%;
+	margin-right: 34%;
+}
+
+.boxClavier{
+	height: 85px;
+	width: 85px;
+	border: 2.9px solid black;
+	border-radius: 20px;
+	float: left;
+	margin-left: 5px;
+	margin-top: 10px;
+	background-color: rgba(255,255,255,0.6);
+
+
+}
+
+.Lettres{
+	height: 85px;
+	width: 85px;
+	margin-top: 4px;
+	margin-left: 4px;
+	font-size: 33px;
+	cursor: pointer;
+}
+
+#choixCategories{
+	margin-top: 25px;
+	margin-left: 100px;
+}
+#diffCategories{
+	margin-top: 20px;
+	margin-left: 20px;
+	padding-left: 10px;
+	height: 100px;
+	width: 900px;
+}
+
+#diffCategories img{
+	margin-top: 5px;
+	margin-left: 285px;
+}
+#boxPhraseIndice{
+	height: 100px;
+	width: 900px;
+	float: left;
+	display: block;
+	margin-top: 60px;
+	text-align: left;
+	color: white;
+	font-family: policeRegles;
+	font-size: 36px;
+
+}
+#logoIndice{
+	margin-left: 880px;
+	margin-top: -90px;
+	float: right;
+	display: block;
+}
+
+#boxPerdu_left{
+	width: 57%;
+	display:inline-block;
+	overflow: hidden;
+	padding: 20px;
+}
+
+#boxPerdu_right{
+	width: 20%;
+	display:inline-block;
+
+}
+#boxPerdu{
+	width: 1000px;
+	height: 590px;
+	background-color: rgba(48, 91, 71, 0.9);
+	border: 1px solid black; 
+	display: none;
+	position: relative;
+	z-index: 100;
+	margin-top: -42%;
+	margin-left: 25%;
+	margin-right: 35%;
+	border-radius: 80px;
+
+
+}
+
+#boxGagner{
+	width: 1000px;
+	height: 590px;
+	background-color: rgba(48, 91, 71, 0.9);
+	border: 1px solid black; 
+	display: none;
+	position: relative;
+	z-index: 100;
+	margin-top: -42%;
+	margin-left: 25%;
+	margin-right: 35%;
+	border-radius: 80px;
+
+
+}
+
+
+#VousAvezPerdu{
+	font-family: police;
+	font-size: 70px;
+	color: white;
+	margin-top: 30px;
+	margin-left: 5px;
+}
+
+#Rejouer{
+	margin-top: 20px;
+	margin-left: 15px;
+	float: left;
+}
+
+#retourMenuPrincipalGagner{
+	margin-top: 15px;
+	margin-left: 15px;
+	float: left;
+}
+
+#AffichageMotaTrouverGagner{
+	height: 120px;
+	width: 500px;
+	border: 1px solid black;
+	margin-top: 2px;
+	font-family: police;
+	font-size: 40px;
+	color: white;
+	text-align: center;
+	margin: 10px;
+
+}
+
+#AffichageMotaTrouverPerdu{
+	height: 120px;
+	width: 500px;
+	border: 1px solid black;
+	margin-top: 2px;
+	font-family: police;
+	font-size: 40px;
+	color: white;
+	text-align: center;
+	margin: 10px;
+
+}
+
+
+#boxPerdu_right img{
+	margin-top: -420px;
+	margin-right: -50px;
+	width: 220px;
+	height: 370px;
+	float: right;
+	position: relative;
+}
+
+/*------Page de règles du jeu--------*/
+
+
+#R_left{
+	width: 60%;
+	display:inline-block;
+	overflow: hidden;
+
+}
+
+#R_right{
+	width: 700px;
+	height: 800px;
+	display:inline-block;
+
+
+}
+
+#R_right img{
+	width: 100%;
+}
+
+#titreRegles{
+	font-family: police;
+	color: white;
+	font-size: 120px;
+	margin-left: 100px;
+	margin-top: 50px;
+}
+
+#Regles{
+	height: 640px;
+	width: 890px;
+	border: 2.5px solid black;
+	border-radius: 40px;
+	margin-left: 80px;
+	display:inline-block;
+	overflow: hidden;
+	font-size: 19px;
+	background-color: rgba(255, 255, 255, 0.3);
+	padding: 30px;
+	font-family: policeRegles;
+
+}
+
+
+
+
+/*------Page de crédits--------*/
+
+
+#titreCredits{
+	font-family: police;
+	color: white;
+	font-size: 120px;
+	margin-left: 150px;
+	margin-top: 50px;
+}
+
+#Credits{
+	height: 700px;
+	width: 950px;
+	border: 2.5px solid black;
+	border-radius: 40px;
+	margin-left: 80px;
+	display:inline-block;
+	overflow: hidden;
+	font-size: 70px;
+	background-color: rgba(255, 255, 255, 0.3);
+	text-align: center;
+	font-family: policeRegles;
+
+}
+
+
+
+/*------Page de parametres et page langues--------*/
+
+
+
+#titreParametresEtLangues{
+	font-family: police;
+	font-size:  100px;
+	text-align: center;
+	color: white;
+	margin-top: 70px;
+}
+
+#parametresEtLangues{
+	height: 700px;
+	width: 950px;
+	border: 2.5px solid black;
+	border-radius: 40px;
+	margin-left: 470px;
+	display:inline-block;
+	overflow: hidden;
+	font-size: 70px;
+	background-color: rgba(255, 255, 255, 0.3);
+	text-align: center;
+	margin-top: 10px;
+	font-family: policeRegles;
+	line-height: 100px;
+}
+
+#RetourEnArriereParametresEtLangues{
+	margin-left: 40px;
+}
+
+#languesFrancais{
+	height: 100px;
+	width: 300px;
+	border: 1px solid black;
+	margin-left: 85px;
+	margin-top: 200px;
+	float: left;
+}
+#languesAnglais{
+	height: 100px;
+	width: 300px;
+	border: 1px solid black;
+	margin-left: 500px;
+	margin-top: 200px;
+
+}
+
+
+.case{
+	height: 110px;
+	width: 80px;
+	margin-bottom: 3px;
+	margin-left: 10px;
+	margin-top: 60px;
+	float: left;
+	background-image: url(images/tirets.png);
+	background-repeat: no-repeat;
+	background-position: 7px 82px;
+	font-size: 90px;
+	color: white;
+	font-family: police;
+	line-height: 100px;
+	text-align: center;
+}
+
+/*-------page de catégories----------*/
+
+
+#titrecategories{
+	font-family: police;
+	font-size:  100px;
+	text-align: center;
+	color: white;
+	margin-top: 70px;
+}
+
+#encadrerCategories{
+	height: 700px;
+	width: 1300px;
+	border: 2.5px solid black;
+	border-radius: 40px;
+	margin-left: 17%;
+	margin-right: 10%;
+	display:inline-block;
+	overflow: hidden;
+	font-size: 70px;
+	background-color: rgba(255, 255, 255, 0.3);
+	text-align: center;
+	margin-top: 10px;
+}
+
+#CategoriesAchoisir{
+	margin-top: 120px;
+	margin-right: 30px;	
+	cursor: pointer;
+}
+
+.categoAvantJeu{
+	margin-left: 30px;
+	margin-top: 50px;
+}
+
+
+#retourMenuPrincipal1{
+	margin-left: 65px;
+	margin-top: 15px;
+	display:inline-block;
+	overflow: hidden;
+}
+
+

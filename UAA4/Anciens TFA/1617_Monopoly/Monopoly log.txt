@@ -1,0 +1,138 @@
+25/08
+
+ - Chargement instantanée des noms lors du lancement du jeu.
+ - Animation lors de l'achat de la couleur de l'étiquette prix.
+ - Ajout d'une fonction pour enlever ou ajouter le bouton acheter ou passer.
+ - Bug fixé, mauvaise attribution de la case lors de l'achat suite à un reste de code non optimalisé (Trace restante
+   de l'ancien système avant l'optimalisation).
+
+27/08
+
+ - Ajout de fonctions pour enlever séparement certains boutons, utilisé pour par exemple
+   le payement d'une case déjà acheté, où le bouton "Rien faire" n'a pas d'utilité.
+ - Bug avec les pions ayant eu un test d'optimalisation a été résolu.
+ - Enlevé un "X" sauvage dans le code.
+ - Réajustement des cases du tableau mal aligné.
+ - Les boutons et texte disparaisent lorsque un joueur clique sur "Rien faire" pour éviter
+   qu'un joueur passe son tour.
+ - Nouveau message lorsque une personne a fini son tour.
+ - Ajout d'un delai avant d'afficher que le joueur suivant peut jouer, ceci permet
+   aux joueurs de donner la souris à une autre personne, tout en ayant le temps de lire
+   le message eventuel.
+ 
+28/08
+
+ - Optimalisation du mouvement des pions
+ - Optimalisation du système d'affichage des dès.
+
+01/09
+
+ - Rajout d'une valuer "prixSansMaison" dans la base de données pour les cases affectés d'un payement
+ - Tentative d'optimalisation de l'affichage des noms des joueurs et leur solde (FAIL) (A résoudre)
+ - Optimalisation réussie (Voir ci-dessus) (1h après).
+
+02/09
+
+ - Optimalisationg globale
+
+04/09 
+
+ - Ajout d'une fonction pour générer les fonctions dans les cases
+ - Modification de l'ID d'une case mal changé suite à l'ancienne manière utilisé pour générer les cases
+ - Optimalisation générale
+ - Erreur de génération mode debug résolu
+ - Génération de fonctions pour le système de construction de maisons
+ - Ajout d'une fonction pour obtenir le nom d'un joueur à partir de son ID
+ - Ajout d'ID dans la page HTML pour la reconnaissance des identificateurs de maisons
+ - Création du style d'identificateur des maisons
+
+06/09
+
+ - Création de tout les identificateurs graphiques pour les maisons
+ - Fonction optimalisé pour éffacer les maisons
+
+08/09
+
+ - Résolution bug d'un mauvais reset de maisons
+ - Ajout de fonction qui mets a jour les maisons sur les cases (Meme systeme de maj que l'emplacement d'information
+ - Ajout du système "Click to build" à la place d'un bouton
+ - Suppression du bouton "Construire une maison"
+ - Compatibiité amélioré sur un écran 1366*765
+
+21/09
+
+ - Premiers tests pour l'argent customisé/infini. Système fonctionne (Bug trouvé puisque le script principal fesait la génération des joueurs après l'argent. Problème résolu avec un cookie.
+ - Optimalisation plus approfondie du système de mise à jour des maisons.
+ - Bug fixé affichant "null" à la place du nom des joueurs suite à une modification de la manière dont sont sauvegardés les informations des joueurs.
+ - Ajout d'un identificateur de version.
+ - Affichage d'une alerte lorsque la valeur de l'argent costomisé n'est pas valide
+
+23/09
+
+ - Alerte et déchargement de la page si les noms des joueurs ne sont pas valides (Fonctionne après plusieurs essais, faute de mauvaise utilisation des opérateurs logiques).
+ - Plus de détails en mode debug
+ - Bug fixé suite à une mauvaise optimalisation du système précédent
+ - Bug trouvé dans le système de cartes chance (2000€ + 1000€ = 20001000€)
+
+12/10
+
+ - Changement d'une information dans les cartes chance
+
+17/10
+
+ - Désactivation du système d'argent illimité pour le moment (Problème avec le système faillite qui prends le dessus)
+ - Bug fixé (Voir 23/09) suite à l'utilisation des cookies pour sauvegarder l'argent. Ajouter un + devant un sessionStorage.getItem le converti en int, en non en string comme le fait sessionstorage par defaut
+ - Optimalisation dans les transitions de couleurs pour les noms+argent des joueurs.
+ - Optimalisation du système utilisé pour générer l'argent des joueurs.
+ - Le nom de la case cliqué en mode construction est maintenant affiché.
+ - Optimalisation globale (1471 lignes --> 1084)
+ - Application du système de payement avec plusieurs maisons
+ - Documentation complète de chaque fonction
+ - Update version number
+ - Informations plus détaillés dans le mode debug
+ - Optimalisation des pages HTML
+
+18/10
+
+- Optimalisation complète du code CSS
+- Ajout d'une limite de construction des maisons (4)
+- Fonction crée pour verifier si des joueurs sont encore en vie (Et donc fin du jeu. Et oui pendant tout ce temps j'avais oublié que le jeu n'avais pas vraiment une fin, si ce n'est que vous ne pouviez pas relancer les dès après être mort).
+- ClearCase avant d'affichier l'information des cartes chances
+
+19/10
+
+- Le jour recoit l'argent de la case départ si celui-ci doit passer par départ lors d'une action effectué par une carte chance.
+- Bug fixé, mauvaise affiche des dès car id égaux pour les 2 dès.
+- Ajout d'information debug aux dès
+- Les dès affichent par defaut un double 6
+- Preparations pour un beta-test ouvert?
+
+10/11
+
+- Suppression de la function pour avoir de l'argent à l'infini (Aucune utilité à premiere vue)
+- Bug case chance fixé (Mauvais reset de l'affichage)
+- Le bouton du prochain joueur n'apparait que apres que le message "C'est au tour de...."
+- Apparition des boutons payer sur une case achat fixé (Mauvaise manipulation durant l'optimalisation)
+- Bug fixé avec le bouton "Rien faire" lorsque le joueur ne veut pas acheter la case.
+- Nettoyage du code lié au système des boutons "Payer" et "Rien faire"
+- Mise à jour du message prochain joueur
+- Bouton pour lancer le jeu plus grand et plus clair a lire
+- Faute de frappe corrigé dans le système de transfer d'argent
+
+11/11
+
+- Changement du style de menu sur la page index
+- Changement de style des boutons sur la page index
+- Optimalisation du code CSS
+- Compatibilité écrans 15 pouces sur la page d'accueil
+
+16/01
+
+- Il n'est jamais trop tard de s'y remettre, de tout de facon vaut mieux travailler que de dormir quand on a 3h de bus par jour...
+- Revision complète des espaces entre les cases
+- Remise en ordre des tailles des images
+- Debug prison, le message que le joueur était sur la case visite ne s'affichait pas
+- Modifications paneau des paramètres en dessous du tableau
+- Optimisation JS 1275 --> 1129 lignes
+- Affichage de la version du jeu effacé, aucune utilité
+- Ajout d'un début du panneau des paramètres

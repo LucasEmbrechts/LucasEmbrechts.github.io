@@ -1,0 +1,92 @@
+<!--joshua dirick-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body{
+    background-image: url(source/mondes.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;   
+}
+#retour{
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+#namek{
+    position: absolute;
+    bottom: 85px;
+    left: 50px;
+}
+#futur{
+    position: absolute;
+    bottom: 0px;
+    right: 230px;
+    
+}
+#tdp{
+    position: absolute;
+    left: 1250px;
+    top: 200px;
+}
+#destine{
+    position: absolute;
+    top: 50px;
+    left: 250px;
+}
+
+    </style>
+</head>
+<body>
+    <audio controls autoplay hidden loop id="audio">
+        <source src="" type="audio/mp3" id="son">
+
+    </audio>
+    <img id="retour" onclick="retard()" src="source/bouton_retour.png">
+    <img id="namek" onclick="nomak()" src="source/namek.png">
+    <img id="futur" onclick="foutour()" src="source/futurlock.png">
+    <img id="tdp" onclick="top()" src="source/tdplock.png">
+    <img id="destine" onclick="destin()" src="source/destinelock.png">
+    <script>
+        function retard(){
+    window.location.replace('ecranacc.html')
+}
+function nomak(){
+    window.location.replace('demo.html')
+}
+let reussi = 2
+if(reussi >= 1){
+    document.getElementById("futur").src = "source/futur.png"
+    document.getElementById("futur").onclick = function(){
+        window.location.replace('futur.html')
+    }
+
+}
+    if(reussi >= 2){
+        document.getElementById("tdp").src = "source/tdp.png"
+        document.getElementById("tdp").onclick = function(){
+            window.location.replace('tdp.html')
+        }
+    }    
+        if(reussi >= 3){
+            document.getElementById("destine").src = "source/destine.png"
+            document.getElementById("destine").onclick = function(){
+                window.location.replace('destine.html')
+            }
+        } 
+        document.getElementById('son').src = "source/musique/musique_monde.mp3"
+        document.getElementById('audio').load()
+        document.getElementById('audio').play()
+    
+
+    </script>
+</body>
+</html>

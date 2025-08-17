@@ -1,0 +1,202 @@
+<!--Ryan De roeck-->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Launcher TERRANIME</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      background: black;
+    }
+
+    body.hidden {
+      visibility: hidden;
+    }
+
+    body.loaded {
+        background-image: url('sources/img/fond.png');
+      visibility: visible;
+    }
+
+    #intro {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      animation: fadeOut 2s ease 2.5s forwards;
+    }
+
+    #intro h1 {
+      font-size: 4em;
+      color: #00ffaa;
+      animation: fadeInZoom 2s ease forwards;
+    }
+
+    @keyframes fadeInZoom {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 100px auto;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 255, 170, 0.6);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease 2.5s;
+    }
+
+    body.loaded .container {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #00ffaa;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 6px;
+      background-color: #222;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      background: linear-gradient(to right, #00ffaa, #00ccff);
+      color: black;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #00ffcc, #00aaff);
+    }
+
+    #createUserBtn {
+      background: linear-gradient(to right, #008CBA, #00BFFF);
+    }
+
+    #createUserBtn:hover {
+      background: linear-gradient(to right, #00BFFF, #3399FF);
+    }
+  </style>
+</head>
+<body class="hidden">
+
+  <!-- INTRO -->
+  <div id="intro">
+    <h1>TERRANIME</h1>
+  </div>
+
+  <!-- FORMULAIRE -->
+  <div class="container">
+    <h2>Connexion ou Création</h2>
+    <input type="text" id="username" placeholder="Nom d'utilisateur">
+    <input type="password" id="password" placeholder="Mot de passe">
+    <button onclick="login()">Se connecter</button>
+    <button id="createUserBtn" onclick="register()">Créer un utilisateur</button>
+  </div>
+
+  <script>
+    // Affichage progressif
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.body.classList.remove('hidden');
+        document.body.classList.add('loaded');
+      }, 100);
+    });
+
+    function getUsers() {
+      return JSON.parse(localStorage.getItem("users") || "{}");
+    }
+
+    function saveUser(username, password) {
+      const users = getUsers();
+      users[username] = password;
+      localStorage.setItem("users", JSON.stringify(users));
+    }
+
+    function register() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (!username || !password) {
+        alert("Veuillez remplir tous les champs.");
+        return;
+      }
+
+      const users = getUsers();
+      if (users[username]) {
+        alert("Nom d'utilisateur déjà existant.");
+        return;
+      }
+
+      saveUser(username, password);
+      alert("Utilisateur créé avec succès !");
+    }
+
+    function login() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (!username || !password) {
+        alert("Veuillez remplir tous les champs.");
+        return;
+      }
+
+      const users = getUsers();
+      if (users[username] === password) {
+        alert("Connexion réussie !");
+        localStorage.setItem("user", JSON.stringify({ username }));
+
+        window.location.href = "html/menu.html"; // ← change si besoin
+      } else {
+        alert("Identifiants incorrects.");
+      }
+    }
+  </script>
+
+</body>
+</html>

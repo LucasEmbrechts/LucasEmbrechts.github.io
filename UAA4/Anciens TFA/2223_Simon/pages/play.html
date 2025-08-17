@@ -1,0 +1,30 @@
+<!firmin ; 4G3;Simon:  les 4 fantastiques ;2022-2023-->
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="../styles/play.css">
+	<title>Play</title>
+</head>
+<body>
+	<a href="../index.html">
+			<div id="btn"></div>
+	</a>
+		<div id="perdu">Vous avez perdu</div>
+		<div class="information">
+			<div id="begin"><div id="commencer" onclick="start()">commencer</div><div id="texteguidage"></div></div>
+			<div id="redemarrer" onclick="reload()">redémarrer</div>
+			<div id="scores">SCORE:</div>
+		</div>
+		
+		<div class="personnages">
+			<div id="msrfantastique" onclick="clic(1)"></div>
+			<div id="choose" onclick="clic(2)"></div>
+			<div id="torche" onclick="clic(3)"></div>
+			<div id="janestorm" onclick="clic(4)"></div>
+		</div>
+	</div>
+	<script type="text/javascript" src="../scripts/play.js"></script>
+</body>
+</html>

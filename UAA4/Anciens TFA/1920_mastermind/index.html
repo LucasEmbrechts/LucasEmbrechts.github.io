@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Master Mind</title>
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+	<link rel="icon" type="image/png" href="./img/logo.png">
+	<meta charset="utf-8">
+</head>
+<body>
+	<div id="gameplay">Mettez en plein écran pour une meilleur expérience de jeu !</div>
+	<button id="BoutonR" onclick="retour()">Retour</button>
+	<button onclick="generate()" id="boutonAleat">aléatoire</button>
+	<img src="./img/titre.png" id="title">
+
+	<div id="CouleurChoisir">
+		Les couleurs à trouver seront:
+		<a onclick="generate()" id="boutonChoisir">choisi aléatoirement</a>
+		<a onclick="joueurChoisir()" id="boutonChoisir">choisi par un 2e joueur</a>
+	</div>
+	
+	<div id="PionChoisir">
+		Joueur 2, choisi les couleurs<br>
+			<div id="ligne1">
+				<a class="boutonMenu" onclick="Selec2L1()">couleur 1</a>
+				<img src="./img/Cnoir.png" id="R1">
+			</div>
+
+			<div id="ligne2">
+				<a class="boutonMenu" onclick="Selec2L2()">couleur 2</a>
+				<img src="./img/Cnoir.png" id="R2">
+			</div>
+
+			<div id="ligne3">
+				<a class="boutonMenu" onclick="Selec2L3()">couleur 3</a>
+				<img src="./img/Cnoir.png" id="R3">
+			</div>
+
+			<div id="ligne4" >
+				<a class="boutonMenu" onclick="Selec2L4()">couleur 4</a>
+				<img src="./img/Cnoir.png" id="R4">
+			</div>
+
+			<div id="MenuCoul2">
+				<img src="./img/pion_bleu.png" id="pion" onclick="ChangeCouleur2('bleu')">
+				<img src="./img/pion_jaune.png" id="pion" onclick="ChangeCouleur2('jaune')">
+				<img src="./img/pion_mauve.png" id="pion" onclick="ChangeCouleur2('mauve')">
+				<img src="./img/pion_orange.png" id="pion" onclick="ChangeCouleur2('orange')">
+				<img src="./img/pion_rouge.png" id="pion" onclick="ChangeCouleur2('rouge')">
+				<img src="./img/pion_vert.png" id="pion" onclick="ChangeCouleur2('vert')">
+			</div>
+		<a onclick="continuer2()" id="continuer2">continuer</a>
+	</div>
+
+	<div id="Fin">
+		<a href="index.html" id="recommencerBouton">Recommencer</a>
+		<div id="V">
+			<img src="./img/victoire.png" id="victoireIMG">
+		</div>
+		<div id="D">
+			<img src="./img/defaite.png" id="defaiteIMG">
+		</div>
+	</div>
+
+	<div id="game">
+
+		<div id="bouton">
+			<a onclick="choisirCouleur()" id="jouer">jouer</a> 
+			<a onclick="continuer()" id="continuer">continuer</a>
+			<a href="index.html" id="relancer">recommencer</a>
+			<a href="credits.html" id="Bcacher">crédits</a>
+			<a href="regles.html" id="Bcacher2">règles</a>
+		</div>
+
+		<img src="./img/MM_accueil.png" id="MM">
+		<div id="affichage"></div>
+
+	</div>
+
+	<div id="bL">
+		<a onclick="SelecL1()" id="boutonLigne1">Ligne 01</a>
+		<a onclick="SelecL2()" id="boutonLigne2">Ligne 02</a>
+		<a onclick="SelecL3()" id="boutonLigne3">Ligne 03</a>
+		<a onclick="SelecL4()" id="boutonLigne4">Ligne 04</a>
+	</div>
+
+		
+	<div id="MMvide">
+		<div id="colonne1" class="colonne"></div>
+		<div id="colonne2" class="colonne"></div>
+		<div id="colonne3" class="colonne"></div>
+		<div id="colonne4" class="colonne"></div>
+		<div id="colonne5" class="colonne"></div>
+		<div id="colonne6" class="colonne"></div>
+		<div id="colonne7" class="colonne"></div>
+		<div id="colonne8" class="colonne"></div>
+		<div id="colonne9" class="colonne"></div>
+		<div id="colonne10" class="colonne"></div>
+		<div id="colonne11" class="colonne"></div>
+		<div id="colonne12" class="colonne"></div>
+		<div id="colonne13" class="colonne"></div>
+		<div id="colonne14" class="colonne"></div>
+		<div id="colonne15" class="colonne"></div>
+	</div>
+
+	<b><div id="createur">staf samuel <br> 4ttr <br> 2019-2020</div></b>
+
+	<a onclick="tourClick()" id="boutonScore">Tour suivant</a>
+	<span id="score">0</span>
+
+	<div id="MenuCoul">
+		<img src="./img/pion_bleu.png" id="pion" onclick="ChangeCouleur('bleu')">
+		<img src="./img/pion_jaune.png" id="pion" onclick="ChangeCouleur('jaune')">
+		<img src="./img/pion_mauve.png" id="pion" onclick="ChangeCouleur('mauve')">
+		<img src="./img/pion_orange.png" id="pion" onclick="ChangeCouleur('orange')">
+		<img src="./img/pion_rouge.png" id="pion" onclick="ChangeCouleur('rouge')">
+		<img src="./img/pion_vert.png" id="pion" onclick="ChangeCouleur('vert')">
+	</div>
+
+	<script type="text/javascript" src="./js/script.js"></script>
+</body>
+</html>

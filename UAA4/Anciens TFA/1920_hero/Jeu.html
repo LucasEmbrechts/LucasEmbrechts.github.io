@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GamePlay-The Forest Path</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="CSS/jeu.css">
+</head>
+<body id="background">
+
+<!-- interface de préparation (personnages,sexe) -->
+	<!--choix du sexe-->
+	<center>
+		<h1 id="Titre">Choix de votre sexe</h1>
+	</center>
+	<div id="sex1" onclick="s1()" class="sexe"></div>
+	<div id="sex2" onclick="s2()" class="sexe"></div>
+
+		<!--choix du personnage (femme)-->
+		<div id="perso1" class="perso-1" onclick="p1(pseudo.value,0,'f')"></div>
+		<div id="perso2" class="perso-1" onclick="p1(pseudo.value,1,'f')"></div>
+		<div id="perso3" class="perso-1" onclick="p1(pseudo.value,2,'f')"></div>
+		<input type="text" name="pseudo" id="pseudo" placeholder="entrez votre pseudonyme">
+		<div id="perso4" class="perso-1" onclick="p1(pseudo.value,3,'f')"></div>
+		<div id="perso5" class="perso-1" onclick="p1(pseudo.value,4,'f')"></div>
+		<div id="perso6" class="perso-1" onclick="p1(pseudo.value,5,'f')"></div>
+
+		<!--choix du personnage (homme)-->
+		<div id="perso1" class="perso-2" onclick="p1(pseudo2.value,0,'h' )"></div>
+		<div id="perso2" class="perso-2" onclick="p1(pseudo2.value,1,'h')"></div>
+		<div id="perso3" class="perso-2" onclick="p1(pseudo2.value,2,'h')"></div>
+		<input type="text" name="pseudo2" id="pseudo2" placeholder="entrez votre pseudonyme">
+		<div id="perso4" class="perso-2" onclick="p1(pseudo2.value,3,'h')"></div>
+		<div id="perso5" class="perso-2" onclick="p1(pseudo2.value,4,'h')"></div>
+		<div id="perso6" class="perso-2" onclick="p1(pseudo2.value,5,'h')"></div>
+
+<!-- interface de jeu -->
+	<div id="other">
+		<center><h1 id="death"></h1></center>
+		<a href="index.html"><div class="choix" id="d1">Retour au menu</div></a>
+		<a href="credits.html"><div class="choix" id="d2">Crédits</div></a>
+		<div class="choix" id="c1"></div>
+		<div class="choix" id="c2"></div>
+	</div>
+	<center><div id="aff" class="jeu"></div></center>
+
+<!-- interface de jeu en bas -->
+	<div id="bottom">
+			<div id="text" class="jeu">
+				<div id="psd"></div>
+				<div id="texte"></div>
+			</div>
+
+	<!-- interface de choix de combats -->
+			<div id="battle">
+				<div class="choixb" onclick="cb1()" id="cbt1"></div>
+				<div class="choixb" onclick="cb2()" id="cbt2"></div>
+				<div class="choixb" onclick="cb3()" id="cbt3"></div>
+				<div class="choixb" onclick="cb4()" id="cbt4"></div>
+			</div>
+	</div>
+
+	<!-- personnages en combat -->
+	 <div id="ennemy"></div>
+	 <div id="gentil"></div>
+
+<!-- lien du fichier JS -->
+	<script type="text/javascript" src="JS/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+html,body
+{
+	margin: 0px;
+	padding: 0px;
+    font-family: arial;
+}
+body
+{
+	background-image: url(./img/leaderboard.jpg);
+	background-size: 1920px 1000px;
+    background-repeat: no-repeat;
+    background-color: black;
+}
+#bouttonMenu
+{
+	position: absolute;
+    left: 670px;
+    top: 840px;
+    width: 580px;
+    height: 110px;
+    opacity: 0;
+    cursor: pointer;
+}
+#background
+{
+    background-color: #d20009;
+    position: absolute;
+    width: 1085px;
+    top: 287px;
+    left: 404px;
+    height: 462px;
+    color: #fffa81;
+    font-size: 30px;
+    padding-left: 15px;
+    padding-top: 10px;
+    font-weight: bold;
+    overflow: scroll;
+}
+}

@@ -1,0 +1,330 @@
+ /*code pas à moi*/
+ body{cursor: url("http://2.bp.blogspot.com/-uc-RVzjXLhI/VkVYXbrFXEI/AAAAAAAADas/LbzSMFo4kn4/s1600/Miku%2BCursor.png"), auto;} a:hover{cursor: url("http://4.bp.blogspot.com/-axs-k9qZBkk/VkVZiyF1s9I/AAAAAAAADa4/lRFOLcR-ZjU/s1600/miku%2Bcursor2.png"), auto;}
+
+/*code à moi*/
+@font-face
+{
+	font-family: 'Quarter';
+	src: url('Police/Quarter_light.ttf');
+}
+
+@font-face
+{
+	font-family: 'ACROTSRG';
+	src: url('Police/ACROTSRG.TTF');
+}
+
+@font-face
+{
+	font-family: 'Power';
+	src: url('Police/Power.ttf');
+}
+
+h1
+{
+	font-family: 'Quarter';
+	text-align: center;
+	font-size: 4.5vh;
+	font-size: 4.5vw;
+	font-weight: bold;
+}
+
+body, html
+{
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	position: absolute;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+footer
+{
+	height: 4.5vh;
+	width: 99.2%;
+	border-style: solid;
+	background-color: rgba(255, 255, 255, 0.5);
+	border-color: rgba(51, 51, 51, 0.8);
+	position: fixed;
+	bottom: 0;
+	margin-right :0.25%;
+	margin-left: 0.25%;
+	display: inline;
+
+}
+
+h2
+{
+	font-family: 'Quarter';
+	text-align: center;
+	font-size: 3.5vh;
+	font-size: 3.5vw;
+	font-weight: bold;
+}
+
+.jouer
+{
+	margin-top: 17%;
+	animation: title-moove 4s infinite;
+}
+
+@keyframes title-moove {
+	0% {
+		margin-top: 17%;
+	}
+	50% {
+		margin-top: 16%;
+	}
+	100% {
+		margin-top: 17%;
+	}
+}
+
+.choixNom
+{
+	margin-top: 20%;
+	font-size: 4.5vh;
+	font-size: 4.5vw;
+	display: none;
+}
+
+.nom
+{
+	height: 7vh;
+	width: 22vw;
+	text-align: center;
+	font-size: 3vh;
+	font-size: 3vw;
+	font-family: 'Quarter';
+	font-weight: bold;
+}
+
+#nom
+{
+	margin-left: 34%;
+	display: none;
+}
+
+#nom img
+{
+	height: 6.2vh;
+	width: 4.2vw;
+	float: right;
+	margin-top: -6.9vh;
+	margin-right: 38%;
+
+	animation: arrow-moove 3s infinite;
+}
+
+@keyframes arrow-moove {
+	0% {
+		margin-right: 38%;
+	}
+	50% {
+		margin-right: 37.5%;
+	}
+	100% {
+		margin-right: 38%;
+	}
+}
+
+#texteIntro
+{
+	height: auto;
+	width: 100%;
+	text-align: center;
+
+	display: none;
+}
+
+#texteIntro img
+{
+	height: 4.2vh;
+	width: 2.2vw;
+	float: right;
+	margin-right: 3%;
+	bottom: 0;
+
+	animation: arrow-moove 3s infinite;
+}
+
+#texte
+{
+	font-family: 'ACROTSRG';
+	font-size: 2.5vh;
+	font-size: 2.5vw;
+	font-weight: bold;
+	padding-right-left: 5%;
+	padding-top: 10%;
+}
+
+#interface
+{
+	padding-top: 94vh;
+	height: 40vh;
+	width: 100%;
+	display: none;
+	
+}
+
+#choix
+{
+	height: 8vh;
+	width: 99%;
+	border-style: solid;
+	border-color: rgba(51, 51, 51, 0.8);
+	background-color: rgba(255, 255, 255, 0.5);
+	margin: auto;
+	margin-top: 0.25%;
+	padding-left: 0.25%;
+}
+
+#paroles
+{
+	height: 10vh;
+	width: 99%;
+	border-style: solid;
+	border-color: rgba(51, 51, 51, 0.8);
+	margin: auto;
+	background-color: rgba(255, 255, 255, 0.5);
+}
+
+#parolees
+{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	font-family: 'ACROTSRG';
+	font-size: 1vh;
+	font-size: 1vw;
+	font-weight:bold ;
+	text-align: center;
+}
+
+#left
+{
+	height: 35.8vh;
+	border-style: solid;
+	border-color: rgba(51, 51, 51, 0.8);
+	margin-right:0.25%;
+	margin-left: 0.25%;
+	width: 14%;
+	position: absolute;
+	left: 0;
+	margin-right: 0.25%;
+	background-size: cover;
+	background-color: rgba(255, 255, 255, 0.5);
+}
+
+#right
+{
+	height: 35.8vh;
+	border-style: solid;
+	border-color: rgba(51, 51, 51, 0.8);
+	margin: 0 auto;
+	width: 14%;	
+	position: absolute;
+	right: 0;
+	margin-right: 0.25%;
+	background-size: cover;
+	background-color: rgba(255, 255, 255, 0.5);
+}
+
+#milieu
+{
+	display: inline;
+	float: left;
+	margin: auto;
+	width: 70%;
+	margin-left: 15%;
+}
+
+#inutile
+{
+	height: 16.8vh;
+}
+
+#dessus
+{
+	height: 58vh;
+}
+
+
+#GameOver
+{
+
+	color: white;
+	font-size: 12vh;
+	font-size: 12vw;
+	text-align: center;
+	height: 50vh;
+	width: 100vh;
+	margin: auto;
+	font-family: 'Quarter';
+	padding-top: 7.5%;
+	animation: gameOver-moove 3s infinite;
+}
+
+#rejouer
+{
+	color: white;
+	font-size: 5vh;
+	font-size: 5vw;
+	text-align: center;
+	height: 10vh;
+	width: 50vh;
+	margin: auto;
+	font-family: 'Quarter';
+	font-weight:bold ;
+}
+animation: arrow-moove 3s infinite;
+
+@keyframes gameOver-moove {
+	0% {
+		padding-top: 7.5%;
+	}
+	50% {
+		padding-top: 7%;
+	}
+	100% {
+		padding-top: 7.5%;
+	}
+}
+.choix1
+{
+	height: 6vh;
+	width: 31.5%;
+	border-style: solid;
+	border-color: rgba(51, 51, 51, 0.8);
+	font-family: 'ACROTSRG';
+	font-size: 0.8vh;
+	font-size: 0.8vw;
+	display: inline-block;
+	margin: auto;
+	margin-top: 0.5%;
+	margin-left: 0.85%;
+	font-weight:bold ;
+	text-align:center;
+	float: left;
+}
+
+.choix1 div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+#perdu
+{
+	display: none;
+}
+
+#credit
+{
+}
+
+
+

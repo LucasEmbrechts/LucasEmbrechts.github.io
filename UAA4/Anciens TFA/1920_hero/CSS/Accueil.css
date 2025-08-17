@@ -1,0 +1,44 @@
+#body{
+	background-image: url(../Sources/img_Accueil/Background.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	padding: 2% 0%;
+}
+#Titre{
+	background-image: url(../Sources/img_Accueil/titre.png);
+	height: 100px;
+	width: 452px;
+	background-size: cover;
+	margin: 0px 0% 6%;
+}
+#Play{
+	background-image: url(../Sources/img_Accueil/buton-1.png);
+	width: 281px;
+	height : 112px;
+	background-size: cover;
+	margin: 5% 0%;
+}
+#Play:hover{
+	background-image: url(../Sources/img_Accueil/buton-1-on.png);
+}
+#Regles{
+	background-image: url(../Sources/img_Accueil/buton-2.png);
+	width: 281px;
+	height : 112px;
+	background-size: cover;
+	margin: 5% 0%;
+}
+#Regles:hover{
+	background-image: url(../Sources/img_Accueil/buton-2-on.png);
+}
+#Credits{
+	background-image: url(../Sources/img_Accueil/buton-3.png);
+	width: 281px;
+	height : 112px;
+	background-size: cover;
+	margin: 5% 0%;
+
+}
+#Credits:hover{
+	background-image: url(../Sources/img_Accueil/buton-3-on.png);
+}

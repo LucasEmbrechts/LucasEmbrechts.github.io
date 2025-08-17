@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mort</title>
+    <style>
+        @font-face {
+            font-family: 'minecraft'; /*a name to be used later*/
+            src: url('./source/font/Minecraft.ttf'); /*URL to font*/
+        }
+        html{
+            margin: 0;
+            height: 100%;
+            overflow: hidden;
+
+        }
+        #scoress{
+            font-family:'minecraft';
+            background-size: cover;
+            font-size: 50px;
+            color: white;
+            top: 410px;
+            right: 810px;
+            position: absolute;
+        }
+        body{
+            background-color: red;
+            margin: 0;
+            height: 100%;
+            background-image: url('./source/img/mort.png');
+            background-size: auto;
+            background-repeat: no-repeat;
+            background-position: center;
+            
+        }
+        .button-78{
+            font-family: 'minecraft';
+            height: 60px;
+            width: 600px;
+            margin-left: 660px;
+            margin-top: 535px;
+            position: absolute;
+            opacity: 0;
+        }
+        .button-79{
+            font-family: 'minecraft';
+            height: 60px;
+            width: 600px;
+            margin-left: 660px;
+            margin-top: 610px;
+            position: absolute;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <button class="button-78" onclick="location.href='game.html'" >respawn</button>
+    <button class="button-79" onclick="location.href='acceuil.html'" >title screen</button>
+    <div id="scoress"></div>
+<script>
+    let score= localStorage.getItem('score')
+    let scoress = document.getElementById('scoress')
+    scoress.innerHTML = score
+    
+    
+</script>
+</body>
+</html>

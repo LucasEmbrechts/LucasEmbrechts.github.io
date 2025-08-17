@@ -1,0 +1,32 @@
+/*codé entierement par basil*/
+/*Projet X - 4TTr - 2023*/
+body{
+	background: black;
+}
+
+.choix{
+	user-select: none;
+	width: 25%;
+	height: 25%;
+	position: absolute;
+	background-size: cover;
+	color: white;
+	border-radius: 20px;
+	border: 2px solid red;
+}
+
+#positionUn{
+	top: 10%;
+	left: 35%;
+	background-image: url(../sources/base.png);
+}
+#positionDeux{
+	top: 45%;
+	left: 25%;
+	background-image: url(../sources/parpaing.png);
+}
+#positionTrois{
+	top: 45%;
+	left: 55%;
+	background-image: url(../sources/gandalfChoix.png);
+}

@@ -1,0 +1,67 @@
+body{
+	background-color: black;
+}
+#texte{
+	color: #ba0daf;
+	font-size: 27px;
+	position: absolute;
+	top: 150px;
+}
+#textee{
+	color: #ba0daf;
+	font-size: 27px;
+	bottom: 150px;
+	position: absolute;
+	left: 110px;
+}
+#barre{
+	border: solid #ba0daf 10px;
+	border-radius: 50px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 490px;
+	margin-bottom: 440px;
+	height: 50px;
+	position: relative;
+}
+
+#chargement{
+	animation-name: chargement;
+	animation-duration: 15s;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
+	height: inherit;
+	background-color: pink;
+	border-radius: 50px;
+}
+
+@keyframes chargement{
+	0%{
+		width: 0%;
+	}
+	100%{
+		width: 100%;
+	}
+}
+
+#texte2{
+	bottom: 15px;
+	position: absolute;
+	left: 50%;
+	color: #ba0daf;
+	animation-name: texte;
+	animation-delay: 0s;
+	animation-fill-mode: none;
+	animation-duration: 1s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}
+
+@keyframes texte{
+	0%{
+		opacity: 0;
+	}
+	100%{
+		opacity: 1;
+	}
+}

@@ -1,0 +1,26 @@
+@font-face {
+    font-family: cyber;
+    src: url(Cybrpnuk2.ttf);
+}
+
+html{
+        background-image: url('../sources/ecransfin.jpg');
+        background-repeat: no-repeat;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+}
+#btn{
+	position: absolute;
+	background-repeat: no-repeat;
+	background-image: url('../sources/button.jpg');
+	background-size: cover;
+	height: 60px;
+	width: 170px;
+	top:350px;
+	left: 250px;
+	font-size: 40px;
+	font-family: cyber;
+	color:#e70506;
+}

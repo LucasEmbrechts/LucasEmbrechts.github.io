@@ -1,0 +1,66 @@
+<!--Joshua Dirick-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    body {
+        background-image: url(source/mort.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+    }
+    #menu{
+        position: absolute;
+        right: 350px;
+        top: 350px;
+    }
+    #again{
+        position: absolute;
+        right: 350px;
+        top: 550px;
+        height: 107px;
+        width: 244px;
+    }
+    #shaft{
+        display: none;
+    }
+    #faiblard{
+        display: none;
+    }
+    
+    </style>
+    <head>
+        <body>
+            <audio controls autoplay hidden loop id="audio">
+                <source src="" type="audio/mp3" id="son">
+        
+            </audio>
+            <div id="shaft"><img id="real" src="source/mort_shaft.png"></div>
+            <div id="faiblard"><img id="faible" src="source/mort.png"></div>
+            <img id="again" onclick="again()" src="source/boutonRecommencer.png">
+            <img id="menu" onclick="menu()" src="source/bouton_menu.png">
+            <script>
+                function again(){
+                    window.location.replace('tdp.html')
+                }
+                function menu(){
+                    window.location.replace('mondes.html')
+                }
+                document.getElementById('son').src = "source/musique/musique_mort.mp3"
+                document.getElementById('audio').load()
+                document.getElementById('audio').play()
+                let random = Math.floor(Math.random() * 100);
+                if(random == 50){
+                    document.getElementById("shaft").style.display = "block"
+                }else{
+                    document.getElementById("failbard").style.display = "block"
+                }
+
+            </script>
+        </body>
+
+    </html>

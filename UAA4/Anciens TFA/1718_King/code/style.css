@@ -1,0 +1,41 @@
+body{
+	background-color: #aea294;
+}
+#container{
+	width: 1420px;
+	height: 800px;
+	background-image: url("../fond d'ecran.png");
+	background-size: cover;
+	margin: 4% auto 4% auto;
+	/* la div se positionne en fonction du reste de la page */
+	position: relative;
+	
+}
+#demarer{
+	height:15%; 
+	width:30%;
+	background-color: black;
+	color: white;
+	text-align: center;
+	font-size: 70px;
+	border-radius: 50px;
+	line-height: 120px;
+	/* l'élément se positionne par rapport à la gauche et le haut de la div qui le contient */
+	position: absolute;
+	top: 60px;
+	left: 70px;
+}
+#Credit{
+	height:15%; 
+	width:30%;
+	background-color: black;
+	color: white;
+	text-align: center;
+	font-size: 70px;
+	border-radius: 50px;
+	line-height: 120px;
+	/* l'élément se positionne par rapport à la gauche et le haut de la div qui le contient */
+	position: absolute;
+	top: 220px;
+	left: 70px;
+}

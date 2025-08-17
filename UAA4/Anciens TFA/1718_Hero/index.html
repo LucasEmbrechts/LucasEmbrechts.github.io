@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script type="text/javascript" src='myScript.js'></script>
+	<script type="text/javascript" src='replique-censored.js'></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<title></title>
+</head>
+<body id="body">
+<audio id="audio">
+	<source src="bonus/musique.wav">
+</audio>
+	<h1 id="titre">The Life Is a Game</h1>
+	<h2 id="choixNom" class="choixNom">Quel est votre Nom ?</h2>
+	<h2 id="jouer" class="jouer" onclick="jouer()">Play</h2>
+	<div id="nom">
+	    <input class="nom" type="texte" value="" name="" id="nom2">
+	        <div onclick="start(nom2.value)">
+	            <img src="Bouton/send.png">
+	       </div>
+	   </div>
+	<div id="texteIntro">
+		<p id="texte"></p>
+		<div id='bouton'><img src="Bouton/send.png"></div>
+	</div>
+	<div id="interface">
+		<div id="dessus"></div>
+		<div id="left"></div>
+		<div id="milieu">
+			<div id="inutile"></div>
+			<div id='paroles'>
+				<div id="parolees"></div>
+			</div>
+			<div id="choix"></div>
+		</div>
+		<div id='right'></div>
+		<div id="vide"></div>
+	</div>
+	<div id="perdu">
+		<div id="GameOver">Game Over</div>
+		<div id="rejouer" id="refresh" onclick="document.location.reload(false)">Rejouer ?</div>
+	</div>
+	<footer id="footer">Leseure Lucas</footer>
+</body>
+</html>

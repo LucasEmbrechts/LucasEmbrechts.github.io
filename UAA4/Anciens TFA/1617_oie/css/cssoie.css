@@ -1,0 +1,242 @@
+body{
+	background-image: url(images/img3.jpg);
+	z-index: 0;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+h1{
+	color: white;
+}
+.case {
+	border: solid black 1px;
+	width: 75px;
+	height: 75px;
+	float: left;
+	float: top;
+	margin: 10px;
+	background-color: white;
+	position: relative;
+	color: #C9001A;
+}
+
+#plateau {
+	float: left;
+	margin-top: 2500px;
+	margin-left: 150px;
+	margin-top: -500px;
+}
+
+.joueur {
+    width: 100px;
+    height: 100px;
+    background: red;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px
+}
+
+#dice1{
+	width:50px;
+	height: 50px;
+	border: solid black 1px;
+	margin-top: 25px;
+	float: bottom;
+	background-color: white;
+}
+
+#dice2{
+	width:50px;
+	height: 50px;
+	border: solid black 1px;
+	margin-top: 25px;
+	float: left;
+	float: bottom
+	margin-left: 1000px;
+	background-color: white;
+}
+
+#joueur1{
+	width: 20px;
+	height: 20px;
+ 	background-color: #0159b3;
+ 	border-radius: 50%;
+ 	top: 25px;
+ 	left: 15px;
+ 	position: absolute;
+}
+
+#joueur2{
+	width: 20px;
+	height: 20px;
+ 	background-color: #E41F1F;
+ 	border-radius: 50%;
+	top: 25px;
+ 	left: 50px;
+ 	position: absolute;
+}
+
+
+#joueur3{
+	width: 20px;
+	height: 20px;
+ 	background-color: #EE03FA;
+ 	border-radius: 50%;
+ 	top: 50px;
+ 	left: 15px;
+ 	position: absolute;
+}
+
+
+#joueur4{
+	width: 20px;
+	height: 20px;
+  	background-color: #31FA03;
+ 	border-radius: 50%;
+ 	top: 50px;
+ 	left: 50px;
+ 	position: absolute;
+}
+
+#explication1{
+	width: 20px;
+	height: 20px;
+	background-color: #0159b3;
+ 	border-radius: 10px;
+ 	float: right;
+ }
+#playerHolder {
+	width: 150px;
+	float: left;
+	float: bottom;
+	background-color: #FCFAE1;
+}
+#explication2{
+	width: 20px;
+	height: 20px;
+	background-color: #E41F1F;
+ 	border-radius: 10px;
+ 	float: right;
+}
+#explication3{
+	width: 20px;
+	height: 20px;
+	background-color: #EE03FA;
+ 	border-radius: 10px;
+ 	float: right;
+}
+#explication4{
+	width: 20px;
+	height: 20px;
+	background-color: #31FA03;
+ 	border-radius: 10px;
+ 	float: right;
+}
+#pass{
+	width: 145px;
+	border: solid black 1px;
+	padding: 2px;
+}
+
+#case5 {
+	background-image: url(images/img2.png);
+	background-position: center;
+	background-size: 125px;
+}
+#case9 {
+	background-image: url(images/img2.png);
+	background-position: center;
+	background-size: 125px;
+}
+#case14 {
+	background-image: url(images/img2.png);
+	background-position: center;
+	background-size: 125px;
+}
+#case18 {
+	background-image: url(images/img2.png);
+	background-position: center;
+	background-size: 125px;
+}
+#case23 {
+	background-image: url(images/img2.png);
+	background-position: center;
+	background-size: 125px;
+}
+#case27 {
+	background-image: url(images/img2.png);
+	background-position: center;
+	background-size: 125px;
+}
+#case32 {
+	background-image: url(images/img2.png);
+	background-position: center;
+	background-size: 125px;
+}
+#case36 {
+	background-image: url(images/img2.png);
+	background-position: center;
+	background-size: 125px;
+}
+#case41 {
+	background-image: url(images/img2.png);
+	background-position: center;
+	background-size: 125px;
+}#case45 {
+	background-image: url(images/img2.png);
+	background-position: center;
+	background-size: 125px;
+}#case50 {
+	background-image: url(images/img2.png);
+	background-position: center;
+	background-size: 125px;
+}#case54 {
+	background-image: url(images/img2.png);
+	background-position: center;
+	background-size: 125px;
+}
+#case59 {
+	background-image: url(images/img2.png);
+	background-position: center;
+	background-size: 125px;
+}
+#case19 {
+	background-image: url(images/img4.jpg);
+	background-position: center;
+	background-size: 75px;
+}
+#case31 {
+	background-image: url(images/img5.jpg);
+	background-position: center;
+	background-size: 100px;
+}
+#case42 {
+	background-image: url(images/img6.gif);
+	background-position: center;
+	background-size: 75px;
+}
+#case52 {
+	background-image: url(images/img7.jpg);
+	background-position: center;
+	background-size: 80px;
+}
+#case58 {
+	background-image: url(images/img8.jpg);
+	background-position: center;
+	background-size: 80px;
+}
+#photo1 {
+	width: 850px;
+	height: 850px;
+	background-image: url("images/win1.png");
+	background-position: center;
+	background-size: 100%;
+	z-index: 1;
+}
+footer{
+	width: 100%
+	height: 5%;
+	position: fixed;
+	bottom: 0;
+	background-color: lightblue;
+}

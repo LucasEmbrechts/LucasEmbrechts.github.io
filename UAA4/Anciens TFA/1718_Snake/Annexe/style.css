@@ -1,0 +1,135 @@
+body{
+	background-image: url(image3.png);
+	
+	background-repeat: no-repeat;
+	margin: auto;
+	width: 1080px;
+	height: 100%;
+	position: absolute;
+}
+#titre{
+	margin-left: 700px;
+}
+#bouton{
+	margin-left: 35%;
+
+}
+#boite1{
+	color: white;
+	padding-top: 3%;
+	margin-left: 450px;
+	width: 355px;
+	height: 50px;
+	text-align: center;
+	box-shadow: 5px 5px;
+	padding-bottom: 10px;
+	border: solid;
+}
+.photo{
+	margin-left: 340px;
+	float: left;
+}
+#boite1:hover{
+	border: solid;
+	color: black;
+	box-shadow: 15px 15px;
+	transition-duration: 300ms;
+}
+#TitreTexte{
+	margin-left: 800px;
+	margin-bottom: 2%;
+	color: white;
+	width: 400px;
+	text-align: center;
+}
+#Texte{
+	margin-left: 820px;
+	margin-bottom: 2%;
+	color: white;
+	width: 355px;
+	text-align: center;
+}
+#Retour{
+	color: white;
+	padding-top: 1%;
+	margin-left: 5%;
+	width: 300px;
+	height: 50px;
+	text-align: center;
+	box-shadow: 5px 5px;
+	padding-bottom: 1%;
+	border: solid;
+	position: relative;
+	float: left;
+	margin-top: 0px;
+}
+#Retour:hover{
+	border: solid;
+	color: grey;
+	box-shadow: 15px 15px;
+	transition-duration: 300ms;
+}
+#Recommencer{
+	color: white;
+	padding-top: 1%;
+	margin-top: 240px;
+	margin-left: 900px;
+	width: 200px;
+	height: 50px;
+	text-align: center;
+	box-shadow: 5px 5px;
+	padding-bottom: 1%;
+	border: solid;
+	display: none;
+	margin-bottom: 2%;
+	float: left;
+	position: absolute;
+	z-index: 1;
+
+}
+#Recommencer:hover{
+	border: solid;
+	color: grey;
+	box-shadow: 15px 15px;
+	transition-duration: 300ms;
+}
+#myCanvas{
+	position: relative;
+	z-index: 0
+}
+#score{
+	color: white;
+	margin-left: 700px;
+	font-size: 30px;
+}
+.TexteScore{
+	color: white;
+	height: 100px;
+	float: left;
+	position: absolute;
+	margin-top: 100px;
+	margin-left: 20px;
+	font-size: 17px;
+	
+}
+#TexteScore1{
+	display: none;
+}
+#TexteScore2{
+	display: none;
+}
+#TexteScore3{
+	display: none;
+}
+#TexteScore4{
+	display: none;
+}
+#TexteScore5{
+	display: none;
+}
+#TexteScore6{
+	display: none;
+}
+#TexteScore7{
+	display: none;
+}

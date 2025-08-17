@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Unlocking code</title>
+	<meta charset="utf-8">
+	<link rel="shortcut icon" href="./img/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="menuPrincipal.css">
+	<link rel="stylesheet" type="text/css" href="interfaceJeu.css">
+	<link rel="stylesheet" type="text/css" href="interfaceRegles.css">
+	<link rel="stylesheet" type="text/css" href="interfaceCredits.css">
+</head>
+<body>
+
+<!-- ---------------------------------------- MENU PRINCIPAL ------------------------------------------------- !-->
+
+	<div id="menuPrincipal">
+		<h1>UNLOCKING CODE</h1>
+		<img id="dynamite" src="./img/dynamite.png">
+		<img id="soldatMenu" src="./img/soldatMenu.png">
+		<button id="play" class="myButtonMP " onclick="playGame()">Play</button><br>
+		<button id="regles" class="myButtonMP" onclick="reglesDuJeu()">Règles</button><br>
+		<button id="credits" class="myButtonMP" onclick="creditsDuJeu()">Crédits</button><br>
+	</div>
+
+<!-- ---------------------------------------- INTERFACE DU JEU ------------------------------------------------- !-->
+
+	<div id="interfaceJeu">
+
+		<div id="boxPrin"></div>
+
+		<div id="timer">Start</div>
+
+		<div id="essais">0/10 essais</div>
+
+		<div id="stockCombinaisons"></div>
+				
+				<div class=" rectangles rectangle1Colonne rectangle1Ligne" id="rectangle1"></div>
+				<div class=" rectangles rectangle2Colonne rectangle1Ligne" id="rectangle2"></div>
+				<div class=" rectangles rectangle3Colonne rectangle1Ligne" id="rectangle3"></div>
+				<div class=" rectangles rectangle4Colonne rectangle1Ligne" id="rectangle4"></div>
+
+				<div class=" rectangles rectangle1Colonne rectangle2Ligne" id="rectangle5"></div>
+				<div class=" rectangles rectangle2Colonne rectangle2Ligne" id="rectangle6"></div>
+				<div class=" rectangles rectangle3Colonne rectangle2Ligne" id="rectangle7"></div>
+				<div class=" rectangles rectangle4Colonne rectangle2Ligne" id="rectangle8"></div>
+
+				<div class=" rectangles rectangle1Colonne rectangle3Ligne" id="rectangle9"></div>
+				<div class=" rectangles rectangle2Colonne rectangle3Ligne" id="rectangle10"></div>
+				<div class=" rectangles rectangle3Colonne rectangle3Ligne" id="rectangle11"></div>
+				<div class=" rectangles rectangle4Colonne rectangle3Ligne" id="rectangle12"></div>
+
+				<div class=" rectangles rectangle1Colonne rectangle4Ligne" id="rectangle13"></div>
+				<div class=" rectangles rectangle2Colonne rectangle4Ligne" id="rectangle14"></div>
+				<div class=" rectangles rectangle3Colonne rectangle4Ligne" id="rectangle15"></div>
+				<div class=" rectangles rectangle4Colonne rectangle4Ligne" id="rectangle16"></div>
+
+				<div class=" rectangles rectangle1Colonne rectangle5Ligne" id="rectangle17"></div>
+				<div class=" rectangles rectangle2Colonne rectangle5Ligne" id="rectangle18"></div>
+				<div class=" rectangles rectangle3Colonne rectangle5Ligne" id="rectangle19"></div>
+				<div class=" rectangles rectangle4Colonne rectangle5Ligne" id="rectangle20"></div>
+
+				<div class=" rectangles rectangle1Colonne rectangle6Ligne" id="rectangle21"></div>
+				<div class=" rectangles rectangle2Colonne rectangle6Ligne" id="rectangle22"></div>
+				<div class=" rectangles rectangle3Colonne rectangle6Ligne"  id="rectangle23"></div>
+				<div class=" rectangles rectangle4Colonne rectangle6Ligne" id="rectangle24"></div>
+
+				<div class=" rectangles rectangle1Colonne rectangle7Ligne" id="rectangle25"></div>
+				<div class=" rectangles rectangle2Colonne rectangle7Ligne" id="rectangle26"></div>
+				<div class=" rectangles rectangle3Colonne rectangle7Ligne" id="rectangle27"></div>
+				<div class=" rectangles rectangle4Colonne rectangle7Ligne" id="rectangle28"></div>
+
+				<div class=" rectangles rectangle1Colonne rectangle8Ligne" id="rectangle29"></div>
+				<div class=" rectangles rectangle2Colonne rectangle8Ligne" id="rectangle30"></div>
+				<div class=" rectangles rectangle3Colonne rectangle8Ligne" id="rectangle31"></div>
+				<div class=" rectangles rectangle4Colonne rectangle8Ligne" id="rectangle32"></div>
+
+				<div class=" rectangles rectangle1Colonne rectangle9Ligne" id="rectangle33"></div>
+				<div class=" rectangles rectangle2Colonne rectangle9Ligne" id="rectangle34"></div>
+				<div class=" rectangles rectangle3Colonne rectangle9Ligne" id="rectangle35"></div>
+				<div class=" rectangles rectangle4Colonne rectangle9Ligne" id="rectangle36"></div>
+
+				<div class=" rectangles rectangle1Colonne rectangle10Ligne" id="rectangle37"></div>
+				<div class=" rectangles rectangle2Colonne rectangle10Ligne" id="rectangle38"></div>
+				<div class=" rectangles rectangle3Colonne rectangle10Ligne" id="rectangle39"></div>
+				<div class=" rectangles rectangle4Colonne rectangle10Ligne" id="rectangle40"></div>
+
+		<div id="coursCombinaison">
+			
+			<div id="chiffres">
+
+				<div id="chiffre1" class="chiffres"></div>
+				<div id="chiffre2" class="chiffres"></div>
+				<div id="chiffre3" class="chiffres"></div>
+				<div id="chiffre4" class="chiffres"></div>
+
+			</div>
+
+			<div id="couleurs"></div>
+
+				<div id="couleur1"></div>
+				<div id="couleur2"></div>
+				<div id="couleur3"></div>
+				<div id="couleur4"></div>
+
+		</div>
+
+		<div id="clavierNumerique">
+			
+			<button class="buttonNumerique" id="button0" onclick="displayNB(0)">0</button>
+			<button class="buttonNumerique" id="button1" onclick="displayNB(1)">1</button>
+			<button class="buttonNumerique" id="button2" onclick="displayNB(2)">2</button>
+			<button class="buttonNumerique" id="button3" onclick="displayNB(3)">3</button>
+			<button class="buttonNumerique" id="button4" onclick="displayNB(4)">4</button>
+			<button class="buttonNumerique" id="button5" onclick="displayNB(5)">5</button>
+			<button class="buttonNumerique" id="button6" onclick="displayNB(6)">6</button>
+			<button class="buttonNumerique" id="button7" onclick="displayNB(7)">7</button>
+			<button class="buttonNumerique" id="button8" onclick="displayNB(8)">8</button>
+			<button class="buttonNumerique" id="button9" onclick="displayNB(9)">9</button>
+
+		</div>
+
+		<img id="soldatJeu" src="./img/soldatJeu.png">
+
+		<div id="finGame">
+				
+			<div id="lose">Dynamite Exploded</div>
+
+			<img id="explosion" src="./img/explosion.png">
+			<img id="feu" src="./img/feu.gif">
+
+		</div>
+
+		<div id="victoire">
+
+			<div id="win">Dynamite Defused</div>
+
+			<div id="txt1">Bien joué !<br><br> La combinaison était bien : <span id="replace1">####</span></div>
+
+			<div id="txt2">Temps restant : <span id="replace2">##</span></div>
+
+			<div id="txt3">Nombre de tentative(s) : <span id="replace3">###### ## ##########</span></div>
+			
+			<img id="dynamiteDefused" src="./img/win.png">
+
+		</div>
+
+		<div id="consigne">Cliquez sur le clavier virtuel ou réel pour générer un chiffre.</div>
+		<div id="identiqueChiffre">Le nombre a déjà été inséré dans la combinaison</div>
+
+		<button id="aide" onclick="aide()">Aide</button>
+		<button id="aide2" onclick="aide()">Règles</button>
+		<button class="returnMP" id="returnMenuP" onclick="returnMP()">Menu</button>
+		<button id="recommencer" onclick="recommencerGame()">Recommencer</button>
+	</div>
+
+<!-- ---------------------------------------- INTERFACE DES REGLES ------------------------------------------------- !-->
+
+	<div id="interfaceRegles">
+		<div id="boxRegles">
+		<h1 id="reglesTitle">Règles du jeu</h1>
+		<p>- Le but est de gagner la partie en alignant <span>4 chiffres</span> dans le bon ordre, en <span>1min</span> et <span>10 essais</span>.</p>
+		<p>- Si le joueur a trouvé la combinaison correcte en moins d'une minute et 10 essais, il remporte la partie.</p>
+		<p>- Pour commencer, l'ordinateur génère une combinaison aléatoire.</p>
+		<p>- Une fois cela fait, le joueur peut commencer à jouer.</p>
+		<p>- Le joueur <span>ne peut pas</span> cliquer sur <span>2 mêmes chiffres</span>, ils <span>doivent tous être différents</span>.</p>
+		<p>- Pour cela, il va devoir cliquer sur 4 chiffres différents de son choix parmi les <span>10</span> proposés.</p>
+		<p>Les chiffres choisis par le joueur s'affichent et des couleurs sont déterminées par</p>
+		<p>-- <span id="red">Rouge</span> : Le chiffre correpondant <span>n'existe pas</span> parmi la combinaison.</p>
+		<p>-- <span id="blue">Bleu</span> : Le chiffre correspondant existe parmi la combinaison, il ne se situe <span>pas à la bonne place</span>.</p>
+		<p>-- <span id="green">Vert</span> : Le chiffre est <span>correcte</span> et se situe à la <span>bonne place</span>.</p>
+		<p>- Le joueur devant deviner la combinaison continue ainsi en proposant sur la ligne suivante une autre proposition, en prenant bien entendu en compte les indications
+		des couleurs précédentes.</p>
+		<p>- Si le joueur a trouvé la combinaison secrète en moins d'une minute et en moins de 10 essais, a gagné la partie.</p>
+		</div>
+		<button class="returnMP" id="returnMPRegles" onclick="returnMP()">Menu Principal</button>
+		<button id="returnPlay" onclick="returnPlay()">Jeu</button>
+	</div>
+
+<!-- ---------------------------------------- INTERFACE DES CREDITS ------------------------------------------------- !-->
+
+	<div id="interfaceCredits">
+
+		<div id="boxCredits">
+		<h1 id="creditsTitre">Crédits</h1>
+
+		<p class="textCrédits">Groupe : <span>001</span></p>
+		<p class="textCrédits">Réalisé par <span>Collot Benjamin</span> et <span>Poncelet Antoine</span></p>
+
+		</div>
+
+		<button class="returnMP" onclick="returnMP()">Menu Principal</button>
+	</div>
+
+<!-- ---------------------------------------- FIN DU CODE ------------------------------------------------- !-->
+
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>

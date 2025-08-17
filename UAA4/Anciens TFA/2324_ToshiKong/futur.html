@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Joshuacss-->
+    <style>
+        body {
+            overflow: hidden;
+        }
+
+        #game {
+            background-image: url(source/bgfutur.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            position: absolute;
+            top: -5px;
+            left: -8px;
+
+        }
+
+        #pause {
+            position: absolute;
+            right: 30px;
+            height: 100px;
+            width: 150px;
+            border-radius: 10%;
+            top: 10px;
+        }
+
+        #ecran-pause {
+            display: none;
+            background-image: url(source/bgpause.jpg);
+            position: absolute;
+            height: 1080px;
+            width: 1980px;
+        }
+
+        #continuer {
+            position: absolute;
+            left: 400px;
+            top: 250px;
+            height: 107px;
+            width: 244px;
+        }
+
+        #recommencer {
+            height: 107px;
+            width: 244px;
+            position: absolute;
+            left: 400px;
+            top: 450px;
+        }
+
+        #menu {
+            position: absolute;
+            left: 400px;
+            top: 650px;
+        }
+
+        #pointvie {
+            position: absolute;
+            right: 220px;
+            top: 10px;
+        }
+
+        .coeur {
+            width: 107.5px;
+            height: 100px;
+        }
+    </style>
+    <!--Joshuacss-->
+
+    <head>
+
+    <body><!--Joshuahtml-->
+
+
+
+        <!--Joshuahtml-->
+
+        <!--Aaronjeuxjs-->
+
+        <div id="game"></div>
+        <img id="pause" onclick="pose()" src="source/bouton_pause.png">
+        <div id="ecran-pause">
+            <img id="continuer" onclick="back()" src="source/bouton_reprendre.png">
+            <img id="recommencer" onclick="again()" src="source/bouton_recommencer_rouge.png">
+            <img id="menu" onclick="menue()" src="source/bouton_menu.png">
+        </div>
+        <div id="pointvie"></div>
+        <audio controls autoplay hidden loop id="audio">
+            <source src="" type="audio/mp3" id="son">
+
+        </audio>
+    <script src="source/crafty-min.js"></script>
+
+        <script>
+            document.getElementById('son').src = "source/musique/musique_futur.mp3"
+            document.getElementById('audio').load()
+            document.getElementById('audio').play()
+
+            let arretjeu = false;
+            let toucheEchelle = false;
+            let estEnPause = false;
+            let vie = 3
+
+            window.onload = function () {
+
+
+
+                Crafty.init(1920, 1080, document.getElementById('game'));
+
+                dessinerVies()
+
+                Crafty.e('PlateformeGauche, Plateforme,Plate1, 2D, DOM, Image, Collision')
+                    .attr({ x: 660, y: 640, w: 550, h: 25 })
+                    .image("source/plateforme_rotat.png")
+                    .css({ 'background-size': 'cover', 'background-repeat': 'no-repeat' })
+
+                Crafty.e('PlateformeDroite, Plateforme,Plate2, 2D, DOM, Image, Collision')
+                    .attr({ x: 577, y: 300, w: 550, h: 25 })
+                    .image("source/plateforme.png")
+                    .css({ 'background-size': 'cover', 'background-repeat': 'no-repeat' })
+
+                Crafty.e('PlateformeGauche, Plateforme,Plate3, 2D, DOM, Image, Collision')
+                    .attr({ x: 660, y: 820, w: 550, h: 25 })
+                    .image("source/plateforme_rotat.png")
+                    .css({ 'background-size': 'cover', 'background-repeat': 'no-repeat' })
+
+                Crafty.e('PlateformeGauche, Plateforme,Plate4, 2D, DOM, Image, Collision')
+                    .attr({ x: 1300, y: 450, w: 550, h: 25 })
+                    .image("source/plateforme_rotat.png")
+                    .css({ 'background-size': 'cover', 'background-repeat': 'no-repeat' })
+
+
+                Crafty.e('PlateformeDepart, Plateforme,PlateDe, 2D, DOM, Image, Collision')
+                    .attr({ x: 0, y: 190, w: 500, h: 25 })
+                    .image("source/plateforme.png")
+                    .css({ 'background-size': 'cover', 'background-repeat': 'no-repeat' })
+
+                Crafty.e('PlateformeDroite, Plateforme,Plate5, 2D, DOM, Image, Collision')
+                    .attr({ x: 0, y: 700, w: 500, h: 25 })
+                    .image("source/plateforme.png")
+                    .css({ 'background-size': 'cover', 'background-repeat': 'no-repeat' })
+
+                Crafty.e('PlateformeDroite, Plateforme,Plate6, 2D, DOM, Color, Collision')
+                    .attr({ x: 0, y: 1000, w: 2000, h: 15 })
+                    .color('black')
+                    .css({ 'background-size': 'cover', 'background-repeat': 'no-repeat' })
+
+
+                Crafty.e('Echelle, 2D, DOM, Image')
+                    .attr({ x: 850, y: 640, w: 60, h: 210 })
+                    .image("source/echelle1.png")
+
+                Crafty.e('Freezer,2D, DOM, Image')
+                    .attr({ x: 0, y: 100, w: 60.625, h: 98.625 })
+                    .image("source/blacktoshi.png")
+                    .css({ 'background-size': 'cover', 'background-repeat': 'no-repeat' })
+
+                let joueur = Crafty.e('2D, DOM, Twoway, Gravity, Collision, Image, Keyboard, Joueur')
+                    .image("source/trunksz.png")
+                    .css({ 'background-size': 'cover' })
+                    .attr({ x: 1000, y: 875, w: 61.5, h: 82.875 })
+                    .twoway(300)
+                    .gravity('Plateforme')
+                    .jumper(440, ['UP_ARROW', 'Z'])
+                    .checkHits("Echelle");
+
+                joueur.bind("CheckJumping", function (ground) {
+
+                    if (toucheEchelle) {
+                        joueur.y -= 150
+                    }
+
+
+
+                });
+
+                joueur.bind("HitOn", function (hitData) {
+                    toucheEchelle = true;
+
+                });
+
+                joueur.bind("HitOff", function (comp) {
+                    toucheEchelle = false;
+                });
+
+                joueur.bind("KeyDown", function (e) {
+
+
+                    if (e.key == Crafty.keys.LEFT_ARROW) {
+                        joueur.image("source/trunkszrota.png")
+                    } else if (e.key == Crafty.keys.RIGHT_ARROW) {
+                        joueur.image("source/trunksz.png")
+                    }
+
+                });
+                joueur.bind("Move", function (evt) {
+                    var hitDatas, hitData;
+                    if ((hitDatas = this.hit('Plateforme'))) {
+                        hitData = hitDatas[0];
+                        if (hitData.type === 'SAT') {
+                            this.x -= hitData.overlap * hitData.nx;
+                            this.y -= hitData.overlap * hitData.ny;
+                        }
+                    }
+                    if ((hitDatas = this.hit('Freezer'))) {
+                        window.location.replace('victoire2.html')
+                    }
+
+                })
+
+                genererProjectile();
+                requestAnimationFrame(avanceProjectile)
+            };
+
+            function avanceProjectile() {
+                if (!estEnPause) {
+                    Crafty("Projectile").each(function (i) {
+                        Crafty("Projectile").get(i).x = Crafty("Projectile").get(i).x + Crafty("Projectile").get(i).deplacement
+                    });
+                }
+
+                requestAnimationFrame(avanceProjectile)
+            }
+            //AaronjeuxJs//
+
+            //JoshuaJs//
+            function pose() {
+                document.getElementById("ecran-pause").style.display = "block";
+                document.getElementById("pause").style.display = "none";
+                estEnPause = true;
+                document.getElementById("game").style.display = "none";
+                document.getElementById("pointvie").style.display = "none";
+
+            }
+            function back() {
+                document.getElementById("ecran-pause").style.display = "none";
+                document.getElementById("pause").style.display = "block";
+                estEnPause = false;
+                genererProjectile();
+                document.getElementById("game").style.display = "block";
+                document.getElementById("pointvie").style.display = "block";
+            }
+            function again() {
+                window.location.replace('futur.html')
+            }
+            function menue() {
+                window.location.replace('ecranacc.html')
+            }
+            //JoshuaJs//
+            //AaronJs//
+            function genererProjectile() {
+                let element = Crafty.e('Projectile, 2D, DOM, Image, Collision, Gravity')
+                    .attr({ x: 100, y: 10, w: 43.875, h: 41.25, deplacement: 0, estActif: true })
+                    .image("source/blackblast.png")
+                    .css({ 'background-size': 'cover', 'background-repeat': 'no-repeat' })
+                    .gravity('Plateforme')
+                    .bind('Move', function (evt) {
+                        var hitDatas, hitData;
+                        if ((hitDatas = element.hit('PlateformeDroite'))) {
+                            hitData = hitDatas[0];
+
+                            if (hitData.type === 'SAT') {
+
+
+                                setTimeout(function () {
+                                    element.deplacement = 4;
+                                    element.image("source/blackblast.png")
+                                }, 1500)
+                            }
+                        }
+                        if ((hitDatas = element.hit('PlateformeGauche'))) {
+                            hitData = hitDatas[0];
+                            if (hitData.type === 'SAT') {
+
+                                setTimeout(function () {
+                                    element.deplacement = -4;
+                                    element.image("source/blackblast.png")
+                                }, 1500)
+
+                            }
+                        }
+                        if ((hitDatas = element.hit('PlateformeDepart'))) {
+                            hitData = hitDatas[0];
+                            if (hitData.type === 'SAT') {
+                                element.deplacement = 4;
+                            }
+                        }
+                        if ((hitDatas = this.hit('Joueur'))) {
+                            hitData = hitDatas[0];
+                            if (element.estActif) {
+                                if (hitData.type === 'SAT') {
+                                    if (vie > 1) {
+                                        vie = vie - 1
+                                        dessinerVies()
+                                        element.estActif = false;
+                                        element._element.style.display = "none"
+                                    } else {
+                                        arretjeu = true;
+                                        window.location.replace('mort_futur.html')
+                                    }
+                                }
+                            }
+
+                        }
+                    });
+                let random = Math.random() * (4 - 2) + 2
+                if (!estEnPause) {
+                    setTimeout(function () {
+                        genererProjectile()
+                    }, random * 1000)
+                }
+
+            }
+
+            function dessinerVies() {
+                document.getElementById("pointvie").innerHTML = ""
+                for (let cpt = 0; cpt < vie; cpt++) {
+                    document.getElementById("pointvie").innerHTML += "<img src='source/senzu.png' class='coeur'>"
+                }
+            }
+
+
+            //AaronJs//
+        </script>
+    </body>
+
+</html>

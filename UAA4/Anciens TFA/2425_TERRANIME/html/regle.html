@@ -1,0 +1,148 @@
+<!--Phèdre Simon-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../sources/font/8-BIT WONDER.TTF">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>Document</title>
+</head>
+<style>
+    body,
+    html {
+        height: 100%;
+        margin: 0;
+    }
+
+    #fond {
+        background-image: url("../sources/img/terraria-background-m0hdco5lj63yzo7p.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100%;
+        background-position: center;
+        overflow: hidden;
+    }
+
+    /*Ryan*/
+    #btn {
+        font-family: "Press Start 2P", serif;
+        position: relative;
+        padding: 10px;
+        margin-left: 50px;
+        margin-right: 50px;
+        margin-top: 50px;
+        color: rgba(255, 255, 255, 0.706);
+        opacity: 0.7;
+        font-size: 3rem;
+        /*1rem = 16pixel*/
+        background: linear-gradient(to left top, rgb(53, 199, 24), rgb(193, 32, 131));
+        transform: scale(1);
+        border: none;
+        border-radius: 20px;
+        /* Coins arrondis */
+        cursor: pointer;
+        transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+        bottom: 50px;
+       top: 50px;
+        left: 1500px;
+
+    }
+
+    #btn:hover {
+        background: linear-gradient(to left top, blue, red);
+        transform: scale(1.1);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+
+    }
+    @keyframes rotatingShadow {
+        0% {
+            box-shadow: 0px 0px 20px 3px rgba(255, 0, 0, 0.7);
+        }
+        25% {
+            box-shadow: 10px 10px 20px 3px rgba(0, 255, 0, 0.7);
+        }
+        50% {
+            box-shadow: -10px 10px 20px 3px rgba(0, 0, 255, 0.7);
+        }
+        75% {
+            box-shadow: -10px -10px 20px 3px rgba(255, 255, 0, 0.7);
+        }
+        100% {
+            box-shadow: 0px 0px 20px 3px rgba(255, 0, 0, 0.7);
+        }
+    }
+
+    #btn  {
+        animation: rotatingShadow 3s linear infinite;
+    }
+
+    /*Phedere*/
+    #regles {
+        color: red;
+        text-align: center;
+        font-size: 40px;
+    }
+
+    #texte {
+        text-align: center;
+        font-size: 20px;
+        color: white;
+    }
+
+    #milieu {
+        margin-top: 100px;
+        border: 10px solid rgba(0, 0, 0, 0.296);
+        /*ryan*/
+        margin-left: 200px;
+        margin-right: 200px;
+        box-shadow: 2px 3px rgba(255, 0, 0, 0.514);
+
+    }
+</style>
+
+<body>
+    <!--phedere-->
+    <div id="fond">
+        <div id="milieu">
+            <p id="regles">Les regles de Terranimé</p>
+            <p id="texte">Les regles sont simples: vous êtes un héros qui doivent battre des monstres pour obtenir des
+                armes et des matéraiaux. </p>
+            <p id="texte">Aussi, vous pouvez obtenir des matériaux en détruisant des maisons, de la vegetation,...</p>
+            <p id="texte">Il y aura des magains qui permetront d'acheter des nouvelles armes grace à l'argent que vous
+                allez obtenir en battant des monstres ou en détruisant des choses (Youn)</p>
+            <p id="texte">Les touches:</p>
+            <p id="texte">La fleche du haut: Qui permet de se sauter</p>
+            <p id="texte">La fleche du bas: Qui permet de se deplacer vers le bas</p>
+            <p id="texte">La fleche de droite: Qui permet de se deplacer vers la droite</p>
+            <p id="texte">La fleche de gauche: Qui permet de se deplacer vers la gauche</p>
+            <p id="texte">E: pour ouvrir ton inventaire</p>
+            <p id="texte">F:ou attaquer les monstres(en fonction du positionement du personnage)</p>
+            <p id="texte">Clique droit: Qui permet d'ouvrire le menu des actions</p>
+        </div>
+
+        <input type="button" id="btn" onclick="window.location.href='menu.html';" value="Retour">
+    </div>
+    <script>
+/*sert a ne pas pouvoir zoomer ou dezoomer*/
+   document.addEventListener('wheel', function(event) {
+  if (event.ctrlKey) {
+    event.preventDefault();
+  }
+}, { passive: false });
+
+document.addEventListener('keydown', function(event) {
+  if (event.ctrlKey && (event.key === '+' || event.key === '-' || event.key === '0')) {
+    event.preventDefault();
+  }
+});
+
+      </script>
+</body>
+
+</html>

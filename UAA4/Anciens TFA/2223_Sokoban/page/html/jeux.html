@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Basic Sokoban HTML Game</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="../style/jeux.css">
+  <link rel="icon"  href="../../img/icon.png">
+ 
+</head>
+<body>
+  <h1 id="finJeu">Vous avez terminé le jeu<br>Félicitation</h1>
+
+  <video id="fullscreenVideo" >
+        
+    <source src="../../img/cradit.mp4" type="video/mp4">
+  
+  </video>
+
+  <div id="menu" onclick="menu()">Niveaux</div>
+  <div id="pageNiveau">
+    <canvas id="close" width="45" height="45" onclick="closeNiveau()"></canvas>
+    <button class="choixNiveau" onclick="changeLevel(0)">1</button>
+    <button class="choixNiveau" onclick="changeLevel(1)">2</button>
+    <button class="choixNiveau" onclick="changeLevel(2)">3</button>
+    <button class="choixNiveau" onclick="changeLevel(3)">4</button>
+    <button class="choixNiveau" onclick="changeLevel(4)">5</button>
+    <button class="choixNiveau" onclick="changeLevel(5)">6</button>
+    <button class="choixNiveau" onclick="changeLevel(6)">7</button>
+    <button class="choixNiveau" onclick="changeLevel(7)">8</button>
+    <button class="choixNiveau" onclick="changeLevel(8)">9</button>
+    <button class="choixNiveau" onclick="changeLevel(9)">10</button>
+    <button class="choixNiveau" onclick="changeLevel(10)">11</button>
+    <button class="choixNiveau" onclick="changeLevel(11)">12</button>
+    <button class="choixNiveau" onclick="changeLevel(12)">13</button>
+    <button class="choixNiveau" onclick="changeLevel(13)">14</button>
+    <button class="choixNiveau" onclick="changeLevel(14)">15</button>
+  </div>
+
+  <a href="../../index.html"><button class="button" id="retour">Retour</button></a>
+  <button class="button" onclick="reload()" id="reload">Recommencer</button>
+
+  <div id="win">
+    <b>you win !</b>
+    <button id="next" onclick="next()">Prochain niveau</button>
+  </div>
+  <p id="nbCoups"> Nombre de coups = 0 </p>
+  <div id="curseur">
+    
+  </div>
+
+  <table id="jeu">
+    
+  </table>
+
+  <script type="text/javascript" src="../script/jeux.js" ></script>
+</body>
+</html>

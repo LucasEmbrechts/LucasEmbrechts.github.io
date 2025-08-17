@@ -1,0 +1,74 @@
+<!--entierement codé par ferre-->
+<!--2023 - 4TTr - Project X-->  
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/mort.css">
+    <title>Vous etes mort...</title>
+</head>
+<body>
+    <div id="dead" onclick="dead()">Bonjour, bienvenue sur la page de mort, bravo d'être arrivé si loin !<br><center>vous pouvez cliquer sur ce texte pour rejoindre le menu</center></div><!--lancer la fonction avec un onclick, donc apres un clic et ça enmène au menu-->
+    <div class="debris" id="one" onmouseenter="oneEnter()" ></div><!--lancer la fonction pour voir si on passe au dessus du debris un-->
+    <div class="debris" id="two" onmouseenter="twoEnter()" ></div><!--lancer la fonction pour voir si on passe au dessus du debris deux-->
+    <div class="debris" id="three" onmouseenter="threeEnter()" ></div><!--lancer la fonction pour voir si on passe au dessus du debris trois-->
+    <div class="debris" id="four" onmouseenter="fourEnter()" ></div><!--lancer la fonction pour voir si on passe au dessus du debris quatre-->
+    <div class="debris" id="five" onmouseenter="fiveEnter()" ></div><!--lancer la fonction pour voir si on passe au dessus du debris cinq-->
+</body>
+<script>
+    function dead() {
+        document.getElementById("dead");
+        window.location.href = "../html/menu.html";//chercher la page et y aller
+        
+    }
+    let compteurOnMouseEnter = 0;//creation du compteur de fois où on passe sur les debris
+    var oneDisabled = false//chaque debris est defini qu'il n'a pas encore été passé dessus
+    var twoDisabled = false
+    var threeDisabled = false
+    var fourDisabled = false
+    var fiveDisabled = false
+
+    function oneEnter() {//fonction qui quand on passe sur le debris,
+        if (oneDisabled === false) {//si elle n'a jamais été appelée alors,
+            compteurOnMouseEnter ++  //rajoute un au compteur de debris
+            checkCompteur() //regarde si il y a pas encore 5 debris
+            oneDisabled = true//et dit qu'il a deja été passé dessus pour qu'il n'est plus réutilisé et cela evite un abus
+        }  
+    }
+    function twoEnter() {
+        if (twoDisabled === false) {
+            compteurOnMouseEnter ++  
+            checkCompteur() 
+            twoDisabled = true
+        }   
+    }
+    function threeEnter() {
+        if (threeDisabled === false) {
+            compteurOnMouseEnter ++  
+            checkCompteur() 
+            threeDisabled = true
+        }    
+    }
+    function fourEnter() {
+        if (fourDisabled === false) {
+            compteurOnMouseEnter ++
+            checkCompteur() 
+            fourDisabled = true
+        }    
+    }
+    function fiveEnter() {
+        if (fiveDisabled === false) {
+            compteurOnMouseEnter ++
+            checkCompteur() 
+            fiveDisabled = true
+        }   
+    }
+function checkCompteur() {//fonction qui regarde le nombre de debris qui on été activés
+    if (compteurOnMouseEnter === 5) {//si il y a 5 débris alors,
+        alert("bravo ! vous les avez tous trouvés !")//alerter l'utilisateur de sa victoire 
+    }
+}
+</script>
+</html>

@@ -1,0 +1,33 @@
+body{
+	background-image: url(../Sources/Boutons/Interfacejeux.jpg);	
+
+}
+
+
+#BoutonsMenu{
+	background-image: url(../Sources/Boutons/boutonMenu.png);
+	width: 220px;
+	height: 100px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	position: absolute;
+	margin-left: 80px;
+	margin-top: 200px;
+	
+	
+}
+
+#BoutonsMenu:hover{
+	background-image: url(../Sources/Boutons/overMenu.png);
+	margin-top: 200px;
+	
+}
+
+
+
+
+
+canvas{
+		margin-left: 480px;
+}
+

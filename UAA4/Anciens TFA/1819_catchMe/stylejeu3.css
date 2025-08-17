@@ -1,0 +1,338 @@
+@font-face{
+	font-family: indie;
+	src:url(IndieFlower.ttf);
+}
+
+body{
+	margin: 0;
+	padding: 0;
+	background-image: url(./img/accueil.jpg);
+	font-family: indie;
+}
+
+#img{
+	display: none;
+	top: 350px;
+    left: 900px;
+    position: absolute
+}
+
+#liste{
+width: 20%;
+min-height: 900px;
+display: inline-block;
+background-image: url(./img/o.jpg);
+float: left;
+margin : 2%;
+text-align: center;
+}
+
+#plateau{
+
+
+
+width: 70%;
+min-height:900px;
+display: inline-block;
+
+background-image: url(./img3/3.jpg);
+margin : 2%;
+}
+
+#postide{
+	width: 100%;
+	min-height: 450px;
+	display: inline-block;
+	background-image: url(./img/md.png);
+	background-repeat: no-repeat;
+	text-align: center;
+	top: 100px;
+}
+
+#menu{
+	margin-top: 100px;
+	background-image: url(./img/button.png);
+	background-repeat: no-repeat;
+	height: 100px;
+	background-position: center;
+	line-height: 100px;
+}
+
+#chrono{
+	height: 50px;
+	width: 100%;
+	margin-top: 100px;
+	left: 450px;
+	font-size: xx-large;
+	background-color: rgba(255,255,255,0.8);
+}
+
+
+#o1{
+	background-image: url(./img/0.png);
+	height: 50px;
+	width: 50px;
+	position: absolute;
+	background-size: cover;
+	background-position: center;
+	top: 888px;
+    left: 581px;
+	opacity: 1;
+
+	animation-name: a;
+	animation-duration: 5s;
+	animation-delay: 1s;
+	animation-timing-function: linear;
+	animation-play-state: paused;
+	animation-fill-mode: forwards;
+}
+
+@keyframes a{
+	0%{ left: 581px; top: 888px; height: 50px; width: 50px;opacity: 1;}
+	25%{ left: 826px; top: 686px; height: 150px; width: 150px;opacity: 1;} 
+	50%{ left: 1070px; top: 515px; height: 255px; width: 250px;opacity: 1;}
+	75%{ left: 1070px; top: 1005px; height: 200px; width: 200px;opacity: 0.5;}
+	100%{ left: 1070px; top: 1555px; height: 155px; width: 150px; opacity: 0;}
+}
+
+#o2{
+	background-image: url(./img/i2.png);
+	height: 50px;
+	width: 50px;
+	position: absolute;
+	background-size: cover;
+	background-position: center;
+	top: 181px;
+    left: 1553px;
+    opacity: 1;
+
+	animation-name: b;
+	animation-duration: 5s;
+	animation-delay: 1s;
+	animation-timing-function: linear;
+	animation-play-state: paused;
+	animation-fill-mode: forwards;
+}
+
+@keyframes b{
+	0%{ left:1553px; top: 181px; height: 50px; width: 50px;opacity: 1;}
+	25%{ left: 1311px; top: 348px; height: 150px; width: 150px;opacity: 1;} 
+	50%{ left: 1070px; top: 515px; height: 255px; width: 250px;opacity: 1;}
+	75%{ left: 1070px; top: 1005px; height: 200px; width: 200px;opacity: 0.5;}
+	100%{ left: 1070px; top: 1555px; height: 155px; width: 150px; opacity: 0;}
+}
+
+#o3{
+	background-image: url(./img/i3.png);
+	height: 50px;
+	width: 50px;
+	position: absolute;
+	background-size: cover;
+	background-position: center;
+	top: 482px;
+    left: 1037px;
+	opacity: 1;
+
+	animation-name: c;
+	animation-duration: 5s;
+	animation-delay: 1s;
+	animation-timing-function: linear;
+	animation-play-state: paused;
+	animation-fill-mode: forwards;
+}
+
+@keyframes c{
+	0%{ left: 1037px; top: 482px; height: 50px; width: 50px;opacity: 1;}
+	25%{ left: 1050px; top: 498px; height: 150px; width: 150px;opacity: 1;} 
+	50%{ left: 1070px; top: 515px; height: 255px; width: 250px;opacity: 1;}
+	75%{ left: 1070px; top: 1005px; height: 200px; width: 200px;opacity: 0.5;}
+	100%{ left: 1070px; top: 1555px; height: 155px; width: 150px; opacity: 0;}
+}
+
+#o4{
+	background-image: url(./img/i4.png);
+	height: 50px;
+	width: 50px;
+	position: absolute;
+	background-size: cover;
+	background-position: center;
+	top: 505px;
+    left: 1596px;
+	opacity: 1;
+
+	animation-name: d;
+	animation-duration: 5s;
+	animation-delay: 1s;
+	animation-timing-function: linear;
+	animation-play-state: paused;
+	animation-fill-mode: forwards;
+}
+
+@keyframes d{
+	0%{ left: 1596px; top: 505px; height: 50px; width: 50px;opacity: 1;}
+	25%{ left: 1333px; top: 510px; height: 150px; width: 150px;opacity: 1;} 
+	50%{ left: 1070px; top: 515px; height: 255px; width: 250px;opacity: 1;}
+	75%{ left: 1070px; top: 1005px; height: 200px; width: 200px;opacity: 0.5;}
+	100%{ left: 1070px; top: 1555px; height: 155px; width: 150px; opacity: 0;}
+}
+
+#o5{
+	background-image: url(./img/i5.png);
+	height: 50px;
+	width: 50px;
+	position: absolute;
+	background-size: cover;
+	background-position: center;
+	top: 157px;
+    left: 659px;
+	opacity: 1;
+
+	animation-name: e;
+	animation-duration: 5s;
+	animation-delay: 1s;
+	animation-timing-function: linear;
+	animation-play-state: paused;
+	animation-fill-mode: forwards;
+}
+
+@keyframes e{
+	0%{ left: 659px; top: 157px; height: 50px; width: 50px;opacity: 1;}
+	25%{ left: 864px; top: 336px; height: 150px; width: 150px;opacity: 1;} 
+	50%{ left: 1070px; top: 515px; height: 255px; width: 250px;opacity: 1;}
+	75%{ left: 1070px; top: 1005px; height: 200px; width: 200px;opacity: 0.5;}
+	100%{ left: 1070px; top: 1555px; height: 155px; width: 150px; opacity: 0;}
+}
+
+#o6{
+	background-image: url(./img/i6.png);
+	height: 75px;
+	width: 75px;
+	position: absolute;
+	background-size: cover;
+	background-position: center;
+	top: 454px;
+    left: 544px;
+	opacity: 1;
+
+	animation-name: f;
+	animation-duration: 5s;
+	animation-delay: 1s;
+	animation-timing-function: linear;
+	animation-play-state: paused;
+	animation-fill-mode: forwards;
+}
+
+@keyframes f{
+	0%{ left: 544px; top: 454px; height: 50px; width: 50px;opacity: 1;}
+	25%{ left: 757px; top: 484px; height: 150px; width: 150px;opacity: 1;} 
+	50%{ left: 1070px; top: 515px; height: 255px; width: 250px;opacity: 1;}
+	75%{ left: 1070px; top: 1005px; height: 200px; width: 200px;opacity: 0.5;}
+	100%{ left: 1070px; top: 1555px; height: 155px; width: 150px; opacity: 0;}
+}
+
+#o7{
+	background-image: url(./img/i7.png);
+	height: 70px;
+	width: 70px;
+	position: absolute;
+	background-size: cover;
+	background-position: center;
+	top: 900px;
+	left: 1600px;
+	opacity: 1;
+
+	animation-name: g;
+	animation-duration: 5s;
+	animation-delay: 1s;
+	animation-timing-function: linear;
+	animation-play-state: paused;
+	animation-fill-mode: forwards;
+}
+
+@keyframes g{
+	0%{ left: 1600px; top: 900px; height: 50px; width: 50px;opacity: 1;}
+	25%{ left: 1335px; top: 717px; height: 150px; width: 150px;opacity: 1;} 
+	50%{ left: 1070px; top: 515px; height: 255px; width: 250px;opacity: 1;}
+	75%{ left: 1070px; top: 1005px; height: 200px; width: 200px;opacity: 0.5;}
+	100%{ left: 1070px; top: 1555px; height: 155px; width: 150px; opacity: 0;}
+}
+#o8{
+	background-image: url(./img/i8.png);
+	height: 50px;
+	width: 50px;
+	position: absolute;
+	background-size: cover;
+	background-position: center;
+	top: 250px;
+	left: 1050px;
+	opacity: 1;
+
+	animation-name: h;
+	animation-duration: 5s;
+	animation-delay: 1s;
+	animation-timing-function: linear;
+	animation-play-state: paused;
+	animation-fill-mode: forwards;
+}
+
+@keyframes h{
+	0%{ left: 1050px; top: 250px; height: 50px; width: 50px;opacity: 1;}
+	25%{ left: 1060px; top: 382px; height: 150px; width: 150px;opacity: 1;} 
+	50%{ left: 1070px; top: 515px; height: 255px; width: 250px;opacity: 1;}
+	75%{ left: 1070px; top: 1005px; height: 200px; width: 200px;opacity: 0.5;}
+	100%{ left: 1070px; top: 1555px; height: 155px; width: 150px; opacity: 0;}
+}
+
+#o9{
+	background-image: url(./img/i9.png);
+	height: 50px;
+	width: 50px;
+	position: absolute;
+	background-size: cover;
+	background-position: center;
+	top: 797px;
+    left: 1250px;
+	opacity: 1;
+
+	animation-name: i;
+	animation-duration: 5s;
+	animation-delay: 1s;
+	animation-timing-function: linear;
+	animation-play-state: paused;
+	animation-fill-mode: forwards;
+}
+
+@keyframes i{
+	0%{ left: 1250px; top: 797px; height: 50px; width: 50px;opacity: 1;}
+	25%{ left: 1160px; top: 656px; height: 150px; width: 150px;opacity: 1;} 
+	50%{ left: 1070px; top: 515px; height: 255px; width: 250px;opacity: 1;}
+	75%{ left: 1070px; top: 1005px; height: 200px; width: 200px;opacity: 0.5;}
+	100%{ left: 1070px; top: 1555px; height: 155px; width: 150px; opacity: 0;}
+}
+
+#o10{
+	background-image: url(./img/i10.png);
+	height: 50px;
+	width: 50px;
+	position: absolute;
+	background-size: cover;
+	background-position: center;
+    top: 155px;
+    left: 1300px;
+	opacity: 1;
+
+	animation-name: j;
+	animation-duration: 5s;
+	animation-delay: 1s;
+	animation-timing-function: linear;
+	animation-play-state: paused;
+	animation-fill-mode: forwards;
+}
+
+@keyframes j{
+	0%{ left: 1300px; top: 155px; height: 50px; width: 50px;opacity: 1;}
+	25%{ left: 1185px; top: 285px; height: 150px; width: 150px;opacity: 1;} 
+	50%{ left: 1070px; top: 515px; height: 255px; width: 250px;opacity: 1;}
+	75%{ left: 1070px; top: 1005px; height: 200px; width: 200px;opacity: 0.5;}
+	100%{ left: 1070px; top: 1555px; height: 155px; width: 150px; opacity: 0;}
+}

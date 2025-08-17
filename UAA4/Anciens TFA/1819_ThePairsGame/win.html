@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vous avez gagné !</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="./css/style_win.css">
+	<script type="text/javascript" src="script_interfaces.js"></script>
+</head>
+<body>
+	<div id="time_score"></div>
+	<div id="points_score"></div>
+	<input id="nameInput" type="text">
+	<img src="./img/boutton.png" id="bouttonSendInfos" onclick="joueurSave(nameInput.value)">
+	<img src="./img/boutton.png" id="bouttonMenu" onclick="menu()">
+</body>
+<script type="text/javascript">
+
+	//Reprend le tableau des cookies (SCORE DE FIN DE PARTIE)
+	var scoreActuel = JSON.parse(localStorage.getItem("scoreActuelPairesGame"));
+	document.getElementById('points_score').innerHTML = scoreActuel[0].points;
+	document.getElementById('time_score').innerHTML = scoreActuel[0].temps + "s";
+
+//---------------------------------------------------------------------------------
+
+	//Reprend le tableau des cookies (TABLEAU DES SCORES)
+	var scoreJoueurs = JSON.parse(localStorage.getItem("scoresJoueursPairesGame"));
+
+	// Si le tableau n'existe pas, je l'initialise comme un tableau
+	if (scoreJoueurs == null)
+	{
+	// initialise un tableau
+	 scoreJoueurs = [ ]; 
+	}
+	
+function joueurSave(name)
+{
+	//Function qui ajoute une ligne au tableau;
+	var joueurNom = name;
+	if (joueurNom == '')
+	{
+		alert("veuillez indiquer votre nom.")
+	}
+	else
+	{
+		var joueurTemps = scoreActuel[0].temps;
+		var joueurPoints = scoreActuel[0].points;
+		console.log(joueurNom + " " + joueurTemps + " " + joueurPoints);
+		scoreJoueurs.push({'nom' : joueurNom, 'temps' : joueurTemps, 'points' : joueurPoints});
+
+		//Enregistre le tableau dans les cookies
+		localStorage.setItem("scoresJoueursPairesGame", JSON.stringify(scoreJoueurs));
+
+		document.getElementById('bouttonSendInfos').style.display = 'none';
+		document.getElementById('nameInput').value = 'envoyé !'
+	}
+}
+
+</script>
+</html>

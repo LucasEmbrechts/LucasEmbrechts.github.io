@@ -1,0 +1,5 @@
+
+Plusieurs des bugs ont été réglé et plusieurs des images peuvent avoir des problèmes d'affichage. 
+Malheuresement il reste quelques petits bug et éléments manquant comme le combat final ou les fonctions aléatoires
+qui posent problèmes.
+Le jeu reste cependant jouable et bien plus appréciable que la dernière version.

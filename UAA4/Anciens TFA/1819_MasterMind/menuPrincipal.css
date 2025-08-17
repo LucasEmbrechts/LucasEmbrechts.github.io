@@ -1,0 +1,47 @@
+#menuPrincipal{
+	height: 720px;
+	width: 1280px;
+	background-color: #929292;
+	text-align: center;
+	margin: auto;
+	display: block;
+	position: relative;
+	margin-top: 100px;
+}
+#dynamite{
+	height: 700px;
+	width: 700px;
+	position: absolute;
+	left: -170px;
+	top: 150px;
+}
+#soldatMenu{
+	height: 650px;
+	width: 650px;
+	position: absolute;
+	left: 700px;
+	top: 100px;
+}
+#play{
+	left: 200px;
+    top: 165px;
+
+}
+#regles{
+	left: 410px;
+    top: 380px;
+}
+#credits{
+	left: 620px;
+    top: 610px;
+}
+.myButtonMP{
+	font-size: 80px;
+	font-family: Army;
+	text-shadow: 0 0 10px black;
+	color: white;
+	position: absolute;
+    background: none;
+    border: none;
+    cursor: pointer;
+}

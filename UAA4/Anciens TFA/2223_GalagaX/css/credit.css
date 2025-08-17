@@ -1,0 +1,50 @@
+/*codé entierement par basil*/
+/*Projet X - 4TTr - 2023*/
+body{
+    background-color: #1A1A1A;/*fond d'ecran noir pour eviter de flasher les yeux de l'utilisateurs au chargement de la page*/
+}   
+#button_menu{
+    float: left;
+    background-image: url(../sources/button_menu.png);/*l'image du bouton pour aller au menu*/
+    height: 11vh;
+    width: 21%;
+    background-size: cover;
+    padding: 0%;
+    box-sizing: border-box ;
+    user-select: none ;
+    cursor: pointer;
+}
+#container{
+    height: 95vh;
+    width: 100%;
+}
+#credit{
+    height: 90vh;
+    width: 50%;
+    margin: auto;
+    background-color: black;
+}
+h1{
+    font-size: 64px;
+    font-family: cyberpunk;
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+}
+h2{
+    font-size: 2em;
+    font-family: cyberpunk;
+    color: white;
+    text-align: center;
+}
+h3{
+    font-size: 1em;
+    font-family: sans-serif;
+    color: white;
+    text-align: center;
+}
+@font-face {
+    font-family: cyberpunk;
+    src: url(../sources/Cybrpnuk2.ttf);/*caligraphie de la page, un peu post-apocalyptique*/
+    color: white;
+}

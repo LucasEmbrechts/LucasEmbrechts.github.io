@@ -1,0 +1,23 @@
+ body{ background-image: url("../SOURCES/IMG/dft1.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+            
+        }
+        #rejouer{
+            position: absolute;
+            left: 450px;
+            top:848px;
+            height: 110px;
+            width: 470px;
+ 
+        }
+       #menu{
+        position: absolute;
+        left: 1030px;
+        top: 848px;
+        height: 110px;
+        width: 445px;
+
+       }
+
+        

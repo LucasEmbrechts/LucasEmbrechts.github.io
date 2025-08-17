@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ThePairGame - Moyen</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="./style_jeuMoyen.css">
+</head>
+<body onload="timer()">
+	<div id="plateau"></div>
+	<div id="infos">
+		<p class="nb" id="retrouvees">Nombre de paires retrouvées : 0</p>
+		<p class="nb" id="restantes">Nombre de paires restantes : </p>
+		<p class="nb" id="erreurs">Nombre d'erreurs : 0</p>
+		<p class="tpsEtPts" id="time">Temps : 0</p>
+		<p class="tpsEtPts" id="points">Points : 0</p>
+	</div>
+
+	<img src="./img/boutton.png" id="bouttonMenu" onclick="menu()">
+	<img src="./img/boutton.png" id="bouttonJeu" onclick="jeuMoyen()">
+</body>
+<script type="text/javascript" src="./javascript/script_jeuMoyen.js"></script>
+<script type="text/javascript" src="./javascript/script_interfaces.js"></script>
+</html>

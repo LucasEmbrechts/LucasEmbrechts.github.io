@@ -1,0 +1,38 @@
+  body{
+            background-color: grey;
+        }
+        html{
+            overflow: hidden;
+        }
+        #jeu{
+            background-image: url("../SOURCES/IMG/routedrawio.drawio\ \(1\).png");
+            background-repeat: no-repeat;
+            height: 754px;
+            width: 1170px;
+            background-color: grey;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        #b1{
+            height: 20px;
+            width: 50px;
+        }
+        #joueur{
+            background-image:url("../SOURCES/IMG/m1.png");
+            width:59.908px;
+            height: 110px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            position: absolute;
+            left: 46%;
+        }
+        .vdroite{
+            
+            width:182.25px;
+            height: 80.8137px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            position: absolute;
+            
+        }

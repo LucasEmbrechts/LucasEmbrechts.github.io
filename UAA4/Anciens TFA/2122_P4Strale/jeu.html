@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Puissance 4</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	
+</head>
+<body onload="DemarrerChrono()" background="images/fond.jpg">
+
+ 	<!-- Boîte contenant les portes jetons et les prénoms -->
+<div id="contour">
+	<div id="prénom1"></div>
+
+	<div id="pionrouge">
+		<img id="rouge" src="images/pionRouge.png">
+	</div>
+	
+	<div id="prénom2"></div>
+
+	<div id="pionjaune">
+		<img  id="jaune" src="images/pionJaune.png"> 
+	</div>
+</div>
+
+	<!-- Boîte contenant le plateau du jeu ainsi que les boites du nombre d'essais et le minuteur -->
+
+<div id="game">
+
+	<div id="plateau" width="100%" height="100%">
+	<div id="grille" ></div>
+	</div>
+	
+	<div id="contour1">
+	<div id="nbreessais"><p id="phrase">Nombre de coup de la partie</p></div>
+	
+	<div id="chronomètre"></div>
+
+		</div>
+	</div>	
+</div>
+
+	<!-- Boîte qui apparaît lorsqu'un joueur remporte la partie -->
+
+<div id="resultat">
+	<div id="homme"><img src="images/homme.png"></div>
+		
+	<div id="nomUtilisateur"></div>
+
+	<div id="phraseGagner"><center>A gagné la partie</center></div>
+	
+	<div id="menu2"><a href="index.html"><b>MENU</b></a></div> 
+
+	<div class="recommencer">
+	<a href="jeu.html"><img src="images/recommencer.png" height="100%" width="100%"></a></div>
+			
+</div>
+
+	<!-- Boîte qui apparaît lorsqu'il y a une égalité -->
+
+<div id="egalite">
+
+	<div id="balance"><img src="images/balance.png" height="100%" width="100%"></div>
+
+	<div id="phraseEgalite"><center>Dommage<br>C'est égalité</center></div>
+
+	<div id="menu4"><a href="index.html"><b>MENU</b></a></div>
+
+	<div id="recommencer"><a href="jeu.html" ><img src="images/recommencer.png" height="100%" width="100%"></a></div>
+
+
+</div>
+
+<script type="text/javascript" src="code.js"></script>
+
+</body>
+</html>

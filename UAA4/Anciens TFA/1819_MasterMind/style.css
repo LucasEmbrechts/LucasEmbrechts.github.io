@@ -1,0 +1,40 @@
+@font-face{
+	font-family: Army;
+	src: url(./fonts/Army.ttf);
+}
+@font-face{
+	font-family: consola;
+	src: url(./fonts/consola.ttf);
+}
+body{
+	padding: 0px;
+	margin: 0px;
+	background-color: #929292;
+}
+h1{
+	margin : 0 auto;
+	font-size: 80px;
+	font-family: Army;
+	padding-bottom: 25px;
+}
+p{
+	font-family: consola;
+	padding-left: 35px;
+    padding-bottom: 5px;
+}
+span{
+	font-weight: bold;
+}
+.returnMP{
+	font-family: Army;
+	font-size: 16px;
+	color: white;
+	height: 30px;
+	width: 150px;
+	left: 35px;
+	bottom: 60px;
+	position: absolute;
+	background-color: #393a3b;
+	border: solid 2px black;
+	cursor: pointer;	
+}

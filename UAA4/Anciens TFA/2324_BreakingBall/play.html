@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="CSS/play.css">
+	<title></title>
+<style type="text/css">
+	@font-face {font-family: pixel; src: url('SOURCES/pixel.ttf');}
+	#score{
+		font-family: 'pixel', sans-serif;
+	}
+</style>	
+</head>
+<body>
+    <div id="game"></div>
+
+    
+	<img id="bouton-pause" src="SOURCES/pause.png" onclick="pause()">
+	<div id="encadrer-pause">
+		<img id="quit" src="SOURCES/quit.png" onclick="quitter()">
+		<br>
+		<img id="play" src="SOURCES/play.png" onclick="continuer()">	
+	</div>
+	<img id="gameover" src="SOURCES/game-over.png">
+	<img id="back" src="SOURCES/quit.png" onclick="backk()">
+	<div id="score"></div>
+
+
+
+
+<script type="text/javascript" src="SOURCES/crafty-min.js"></script>
+<script type="text/javascript" src="JS/play.js"></script>
+</body>
+</html>

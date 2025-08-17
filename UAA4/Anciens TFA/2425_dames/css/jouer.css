@@ -1,0 +1,93 @@
+body{
+    background-color: black;
+}
+
+#boutons{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-evenly;
+    
+}
+
+#boutons div{
+    width: 100%;
+    text-align: center;
+    border: solid aqua 2px;
+    
+
+}
+button{
+    height: 50px;
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 12px;
+    
+}
+.case{
+    float: left;
+    width: 80px;
+    height: 80px;
+    color: aliceblue;
+    border: solid darkgreen 2px;
+   
+}
+
+#page{
+    width: 46%;
+    margin-left: 30%;
+   
+}
+.fonce{
+    background-color: darkgreen;
+}
+.clair{
+    background-color: green;
+}
+
+.real{
+background-image:url("../source/realmadrid.png") ;
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+
+
+}
+
+.barca{
+ background-image:url("../source/barca.png") ;
+ background-size: cover;
+ background-repeat: no-repeat;
+ background-position: center;
+}
+.cr7{
+background-image:url("../source/CR7.png") ;
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+}
+.messi{
+background-image:url("../source/messi.png") ;
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+}
+.animation{
+    animation-name: mon-animation;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+}
+    @keyframes mon-animation{
+        0%{
+            background-size: 100%;
+        }
+        50%{
+            background-size: 110%;
+
+        }
+        100%{
+            background-size: 100%;
+
+        }
+    }

@@ -1,0 +1,67 @@
+html,body
+{
+	margin: 0px;
+	padding: 0px;
+    overflow: hidden;
+}
+body
+{
+    background-color: black;
+	background-image: url(./img/jeu.jpg);
+	background-size: 1920px 970px;
+    background-repeat: no-repeat;
+}
+#bouttonMenu
+{
+	position: absolute;
+    left: 1690px;
+    top: 891px;
+    width: 200px;
+    height: 51px;
+    opacity: 0;
+    cursor: pointer;
+}
+#bouttonJeu
+{
+	position: absolute;
+    left: 1460px;
+    top: 891px;
+    width: 200px;
+    height: 51px;
+    opacity: 0;
+    cursor: pointer;
+}
+#plateau
+{
+    width: 1340px;
+    position: fixed;
+    height: 750px;
+    margin-left: 50px;
+    margin-top: 120px;
+}
+.carte
+{
+    padding: 23px;
+    width: 100px;
+    margin-left: 20px;
+}
+#infos
+{
+    position: fixed;
+    width: 440px;
+    height: 790px;
+    left: 1460px;
+    top: 25px;
+    font-family: arial;
+    color: white;
+    font-size: 22px;
+}
+.nb
+{
+    padding-top: 100px;
+}
+.tpsEtPts
+{
+    padding-top: 80px;
+    font-size: 35px;
+}

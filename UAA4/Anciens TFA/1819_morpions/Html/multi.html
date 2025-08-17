@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Multijoueur</title>
+	<link rel="stylesheet" type="text/css" href="../Style/multi.css">
+	<meta charset="utf-8">
+</head>
+<body>
+
+	<input type="number" id="taille">
+	<div onclick="affichage(taille.value, joueur1.value, joueur2.value)" id="entre">Commencer la partie</div>
+	<div id="victoire"></div>
+	<div id="grille"></div>
+	<input type="text" id="joueur1" placeholder="Pseudo du joueur 1">
+	<input type="text" id="joueur2" placeholder="Pseudo du joueur 2">
+	<div id="tourJ">Tour du joueur 1</div>
+	<a href="index.html"><div id="buttonR">Retour</div></a>
+	<div id="rejouer" onclick="rejouer(taille.value)">Rejouer</div>
+
+<script type="text/javascript" src="../JavaScript/multi.js"></script>
+</body>
+</html>

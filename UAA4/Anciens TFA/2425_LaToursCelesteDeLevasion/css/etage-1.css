@@ -1,0 +1,376 @@
+@font-face {
+    font-family:sao ui;
+    src: url(../source/font/sao-ui/SAOWelcomeTT-Regular.ttf);
+}
+html{
+    height: 100%;
+}
+body{
+    font-family: "sao ui" , sans-serif;
+    background-image:url(../source/img/etage-1.png);
+    background-repeat: no-repeat;
+    overflow: hidden;
+    height: 100%;
+    margin: 0;
+    cursor: none;
+
+}
+#back-menu{
+    font-family: "sao ui" , sans-serif;
+    height: 35px;
+    width: 35px;
+    border-radius: 50px;
+    background: radial-gradient(circle, #87CEFA 20%, #4169E1 80%);
+    border: 3px solid #4169E1;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 14px 28px;
+    border-radius: 15;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.4s ease-in-out;
+    /* box-shadow: 0 0 20px #4169E1, 0 0 10px rgba(255, 255, 255, 0.4) inset; */
+    position: relative;
+    overflow: hidden;
+    position: sticky;
+    top: 20px;
+    margin-left: 20px;
+
+}
+.back-menu::before {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 250%;
+    height: 250%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 10%, transparent 70%);
+    transition: all 0.6s ease-in-out;
+}
+.back-menu:hover::before {
+    top: 0%;
+    left: 0%;
+}
+.back-menu:hover {
+    background: radial-gradient(circle, #B0E0E6 30%, #1E90FF 90%);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.8), 0 0 15px rgba(255, 255, 255, 0.6) inset;
+    transform: translateY(-3px);
+}
+.back-menu:active {
+    transform: scale(0.95);
+}
+#image1{
+    background-image: url(../source/img/menus.png);
+    background-size: cover;
+    height: 35px;
+    width: 35px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#perso{
+    background-image: url(../source/img/perso1.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position:center ;
+    width: 50px;
+    height: 100px;
+    position: absolute;
+    z-index : 950
+}
+#vie{
+    background-color: red;
+    border: 2px solid;
+    height: 20px;
+    width: 150px;
+    position: absolute;
+    left: 134.4px;
+    top: 32.4px;
+}
+
+#viePourcent{
+    text-transform: uppercase;
+    margin: 0%;
+    font-size: 1.1rem;
+}
+
+#outil-porter{
+    border: 2px solid ;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    left: 50%;
+    top: 90%;
+    background-color: rgba(255, 255, 255, 0.445);
+
+}
+
+#case-outil{
+    background-size:contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    height: 50px ;
+    width: 50px;
+}
+.pelle{
+    background-image: url(../source/img/pelle.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:center ;
+    height: 75px ;
+    width: 25px;
+    position: absolute;
+}
+#pelle1{
+    top: 290px;
+    left: 85px;
+    /* top: 320px;
+    left: 85px; */
+    z-index : 900
+}
+#portail{
+    height: 350px;
+    width: 420px;
+    background-image: url(../source/img/portail.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:center ;
+    position: absolute;
+    left:75%;
+    top: 371px;
+}
+#ratelier{
+    background-image: url(../source/img/ratelier-darmes-removebg-preview.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position:center ;
+    position: relative;
+    top: 200px;
+    left: 50px;
+    height: 160px;
+    width: 100px;
+}
+#bordure{
+    height: 80px;
+    width: 69px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.cle{
+    background-image: url(../source/img/cle-removebg-preview.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:center ;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+}
+#cle1{
+    display: none;
+}
+.message {
+    margin: 10px auto;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    color: rgb(30, 255, 0);
+    font-size: 1.5rem;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 1s ease-out; /* Transition pour disparition progressive */
+    position: relative;
+    top: -200px;
+}
+#menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 1001;
+
+    display: none;               /* caché au départ */
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;        /* actif uniquement quand visible */
+    cursor: initial;
+}
+
+#choixMenu {
+    height: 600px;
+    width: 800px;
+    /* border: 2px solid red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    font-family: "sao ui", sans-serif;
+    height: 60px;
+    width: 310px;
+    border-radius: 50px;
+    background: radial-gradient(circle, #87CEFA 20%, #4169E1 80%);
+    border: 3px solid #eeff00;
+    color: #000000;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 14px 28px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 0 10px rgba(255, 255, 255, 0.4) inset;
+    position: relative;
+    overflow: hidden;
+    margin: 50px;
+}
+
+.button::before {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 250%;
+    height: 250%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 10%, transparent 70%);
+    transition: all 0.6s ease-in-out;
+}
+.button:hover::before {
+    top: 0%;
+    left: 0%;
+}
+.button:hover {
+    background: radial-gradient(circle, #B0E0E6 30%, #1E90FF 90%);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.8), 0 0 15px rgba(255, 255, 255, 0.6) inset;
+    transform: translateY(-3px);
+}
+.button:active {
+    transform: scale(0.95);
+}
+.trou{
+    background-image: url(../source/img/trou.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:center ;
+    height: 25px;
+    width: 50px;
+    position: absolute;
+}
+#trouCoffre0{
+    left: 376px;
+    top: 286px;
+}
+#trouCoffre1{
+    left: 622px;
+    top: 400px;
+}
+#trouCoffre2{
+    left: 882px;
+    top: 497px;
+}
+#trouCoffre3{
+    left: 650px;
+    top: 620px;
+}
+#trouCoffre4{
+    left: 426px;
+    top: 842px;
+}
+#trouCoffre5{
+    left: 211px;
+    top: 770px;
+}
+#trouCoffre6{
+    left: 889px;
+    top: 302px;
+}
+#trouCoffre7{
+    left: 1040px;
+    top: 942px;
+}
+#trouCoffre8{
+    left: 423px;
+    top: 474px;
+}
+#trouCoffre9{
+    left: 217px;
+    top: 603px;
+}
+#trouCoffre10{
+    left: 973px;
+    top: 709px;
+}
+#trouCoffre11{
+    left: 732px;
+    top: 851px;
+}
+#trouCoffre12{
+    left: 1251px;
+    top: 334px;
+}
+#trouCoffre13{
+    left: 1100px;
+    top: 739px;
+}
+#trouCoffre14{
+    left: 246px;
+    top: 432px;
+}
+.coffre{
+    background-image: url(../source/img/coffre.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:center ;
+    height: 38px;
+    width: 38px;
+    position: absolute;
+
+ }
+ .coffreOuvert{
+    background-image: url(../source/img/coffre4.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:center ;
+    height: 40px;
+    width: 40px;
+ }
+ #mur{
+    position: relative;
+    top: -140px;
+    height: 100px;
+ }
+ .barreDeChargement {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    display: none;
+    z-index: 9999;
+}
+
+.barreDeChargement::before {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 0%;
+    background-color: #af4c4c;
+    animation: charger 2s linear forwards;
+}
+
+@keyframes charger {
+    from { width: 0%; }
+    to { width: 100%; }
+}
+

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+        @font-face {
+      font-family: 'minecraft'; /*a name to be used later*/
+      src: url('./source/font/Minecraft.ttf'); /*URL to font*/
+    }
+    * {
+      box-sizing: border-box;
+    }
+    html{
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    #titre{
+      background-image: url('./source/img/mine.png');
+      height: 100px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 50px;
+    }
+    
+    @import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i&subset=greek-ext');
+    
+    @keyframes zoomKreeper {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  99%{
+    opacity: 1;
+    transform: scale(10);
+  }
+  100% {
+    transform: scale(10);
+    opacity: 0;
+    z-index: 0;
+
+  }
+}
+@keyframes zoominput
+{
+  0% {
+    opacity: 0;
+}
+  100% {
+    opacity: 1;
+    z-index: 960;
+  }
+}
+
+@keyframes zoomFond {
+  0% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    z-index: 0;
+  }
+}
+
+#fond1 {
+  background-image: url('./source/img/kreeper.png');
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  position: absolute;
+  top: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  animation: zoomKreeper 10s ease-in-out forwards;
+}
+
+#fond2 {
+  background-image: url('./source/img/BackDeDem.jpg');
+  width: 100vw;
+  height: 100vh;
+  z-index: 910;
+  position: absolute;
+  top: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  animation: zoomFond 10s ease-in-out forwards;
+}
+
+    body{
+
+
+	      min-height:100vh;
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        height: 100vh;
+        /*background: linear-gradient(135deg, #e3f2fd, #bbdefb);*/
+        display: flex;
+        justify-content: center;  /* centre horizontalement */
+        align-items: center;      /* centre verticalement */
+    }
+    
+    .form-container {
+      background: #ffffff;  
+      padding: 35px;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      width: 320px;
+      text-align: center;
+      z-index: 960;
+      animation: zoominput 10s ease-in-out forwards;
+    }
+
+    .form-container h2 {
+      margin: 0;
+      color: #1565c0;
+      z-index: 960;
+      animation: zoominput 10s ease-in-out forwards;
+    }
+
+    .input-container {
+      position: relative;
+      z-index: 960;
+      animation: zoominput 10s ease-in-out forwards;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 12px;
+      font-size: 16px;
+      border: 2px solid #90caf9;
+      border-radius: 12px;
+      outline: none;
+      background: #f9f9f9;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      z-index: 960;
+      animation: zoominput 10s ease-in-out forwards;
+      
+    }
+
+    input:focus {
+      border-color: #1976d2;
+      box-shadow: 0 0 5px rgba(25, 118, 210, 0.4);
+      background: white;
+      z-index: 960;
+      animation: zoominput 10s ease-in-out forwards;
+    }
+
+    label {
+      position: absolute;
+      top: 50%;
+      left: 14px;
+      transform: translateY(-50%);
+      color: #777;
+      background: #ffffff;
+      padding: 0 6px;
+      transition: 0.3s;
+      pointer-events: none;
+      z-index: 960;
+      animation: zoominput 10s ease-in-out forwards;
+    }
+
+    input:focus + label,
+    input:not(:placeholder-shown) + label {
+      top: -8px;
+      left: 10px;
+      font-size: 12px;
+      color: #1976d2;
+      z-index: 960;
+      animation: zoominput 10s ease-in-out forwards;
+      
+    }
+
+    button {
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background-color: #1976d2;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      z-index: 960;
+      animation: zoominput 10s ease-in-out forwards;
+    }
+
+    button:hover {
+      background-color: #0d47a1;
+      transform: translateY(-2px);
+      z-index: 960;
+      animation: zoominput 10s ease-in-out forwards;
+    }
+
+    button:active {
+      transform: translateY(0);
+      z-index: 960;
+      animation: zoominput 10s ease-in-out forwards;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Bienvenue 👋</h2>
+    <div class="input-container">
+      <input type="text" id="nom" placeholder="ton nom " required>
+      <label for="nom">Ton nom</label>
+    </div>
+    <button onclick="clic()">Envoyer</button>
+  </div>
+<div id='fond1'></div>
+<div id='fond2'></div>
+  <script>
+    function clic() {
+      let nom1 = document.getElementById("nom").value.trim();
+      if (nom1 !== "") {
+        localStorage.setItem("nom", nom1);
+        location.href = 'acceuil.html';
+      } else {
+        alert("Merci de remplir ton nom !");
+      }
+    }
+  </script>
+
+</body>
+</html>

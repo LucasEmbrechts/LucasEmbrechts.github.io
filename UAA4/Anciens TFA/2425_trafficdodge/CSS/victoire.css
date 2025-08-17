@@ -1,0 +1,27 @@
+ html, body{
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            background-position: center;
+        }
+        body{ 
+            background-image: url("../SOURCES/IMG/vct.png");
+        background-repeat: no-repeat;
+        background-color: rgba(20,24,27,255);
+        }
+        #menu{
+        position: absolute;
+        left: 998px;
+        top: 720px;
+        height: 120px;
+        width: 420px;
+       }
+    
+    #prch{
+            position: absolute;
+            left: 525px;
+            top:720px;
+            height: 125px;
+            width: 420px;
+        }
+        

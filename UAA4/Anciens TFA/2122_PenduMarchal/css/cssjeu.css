@@ -1,0 +1,170 @@
+@font-face {
+  font-family: 'Entan';
+  src: url('../font/Entanglement-rgpRB.ttf') format('truetype'); 
+}
+
+body{
+
+	background-image: url(../img/partie.png);
+	margin: 0;
+	padding: 0;
+}
+
+#contien{
+
+	margin-left: 2%;
+	margin-top: 3%;
+	height: 700px;
+	width: 50%;
+	margin-bottom: 5%;
+}
+
+button{
+
+	width: 15%;
+	height: 125px;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-size: contain;
+	margin-bottom: 1%;
+	border: 0px;
+}
+
+.lettre{
+
+	background-image: url(../img/boutonjeu.png);
+	font-family: 'Entan';
+	color : white;
+	font-size: 4em;
+	padding-left: 25px;
+}
+
+#motfaux{
+
+	float: right;
+	margin-right: 20%;
+	margin-top: -40%;
+	font-family: 'Entan';
+	color: white;
+	font-size: 3em;
+}
+
+.case{
+
+	background-image: url(../img/espacelettre.png);
+	background-repeat: no-repeat;
+	background-size: contain;
+	float: left;
+	width: 155px;
+	height: 105px;
+	font-size: 3em;
+	text-align: center;
+	color: white;
+	font-family: 'Entan';
+}
+
+#tete{
+
+	width: 500px;
+	height: 500px;
+	margin-right: 23%;
+	float: right;
+	background-repeat: no-repeat;
+	background-size: contain;
+	margin-top: -36%;
+}
+
+#torse{
+
+	width: 300px;
+	height: 300px;
+	margin-left: 54%;
+	background-repeat: no-repeat;
+	background-size: contain;
+	margin-top: -14%;
+}
+
+#brasd{
+
+	width: 300px;
+	height: 300px;
+	margin-left: 50.2%;
+	background-repeat: no-repeat; 
+	background-size: contain;
+	margin-top: -16.6%;
+}
+
+#brasg{
+
+	width: 232px;
+	height: 232px;
+	margin-left: 62%;
+	background-repeat: no-repeat;
+	background-size: contain;
+	margin-top: -13.3%;
+}
+
+#jambed{
+
+	width: 150px;
+	height: 150px;
+	margin-left: 54.5%;
+	background-repeat: no-repeat; 
+	background-size: contain;
+	margin-top: -3.7%;
+}
+
+#jambeg{
+
+	width: 180px;
+	height: 180px;
+	margin-left: 59.5%;
+	background-repeat: no-repeat; 
+	background-size: contain;
+	margin-top: -7.5%;
+}
+
+#ecranpg{
+
+	display: none;
+	width: 1700px;
+	height: 1000px;
+	position: absolute;
+	background-size: contain;
+	background-repeat: no-repeat;
+	margin-top: -30px;
+	margin-left: 3%;
+}
+
+#boutonretour{
+
+	color: white;
+	float: right;
+	font-size: 2em;
+	margin-right: 5%;
+	margin-top: 48%;
+	font-family: 'Entan';
+}
+
+#affichemots{
+
+	margin-top: 45%;
+	float: left;
+	color: white;
+	font-family: 'Entan';
+	font-size: 3em;
+}
+
+.efface{
+	display: none;
+}
+
+#rejoue{
+
+	color: white;
+	float: right;
+	font-size: 2em;
+	margin-right: 5%;
+	margin-top: 48%;
+	font-family: 'Entan';
+}

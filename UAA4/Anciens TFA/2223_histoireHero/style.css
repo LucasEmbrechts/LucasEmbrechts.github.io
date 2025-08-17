@@ -1,0 +1,68 @@
+body{
+
+	background-image: url(img/font.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+#contain{
+
+	position: absolute;
+}
+
+#play{
+
+	background-image: url(img/boutonplay.png);
+	width: 600px;
+	height: 300px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin-top: 15%;
+	margin-left: 15%;
+	float: left;
+	position: relative;
+}
+
+#play:hover{
+
+	background-image: url(img/boutonplaypasse.png);
+	background-size: cover;
+	transition: 1s;
+	width: 600px;
+	height: 300px;
+}
+
+#credit{
+
+	background-image: url(img/boutoncred.png);
+	width: 600px;
+	height: 300px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin-top: 65%;
+	margin-left: 60%;
+}
+
+#credit:hover{
+
+	background-image: url(img/btncredbleu.png);
+	background-size: cover;
+	transition: 1s;
+}
+
+#regleobje{
+
+	background-image: url(img/boutonro.png);
+	width: 600px;
+	height: 300px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin-left: 15%;
+}
+
+#regleobje:hover{
+
+	background-image: url(img/btnreglebleu.png);
+	background-size: cover;
+	transition: 1s;
+}

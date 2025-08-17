@@ -1,0 +1,46 @@
+html,body
+{
+	margin: 0px;
+	padding: 0px;
+}
+body
+{
+	background-image: url(./img/menu_principal.jpg);
+	background-size: 1920px 1000px;
+    background-repeat: no-repeat;
+    background-color: black;
+}
+#bouttonRegles
+{
+	position: absolute;
+	left: 770px;
+	top: 290px;
+	opacity: 0;
+	cursor: pointer;
+}
+#bouttonClassement
+{
+	position: absolute;
+	left: 770px;
+	top: 460px;
+	opacity: 0;
+	cursor: pointer;
+}
+#bouttonCredits
+{
+	position: absolute;
+	left: 770px;
+	top: 620px;
+	opacity: 0;
+	cursor: pointer;
+}
+#bouttonDifficulte
+{
+	position: absolute;
+	left: 635px;
+	top: 775px;
+	width: 650px;
+    height: 170px;
+	opacity: 0;
+	cursor: pointer;
+}

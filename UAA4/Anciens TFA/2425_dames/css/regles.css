@@ -1,0 +1,46 @@
+body{
+    background-image: url("../source/fondcredit.webp");
+    background-size:cover;
+    background-repeat: no-repeat;
+    text-align: center;
+    height: 500px;
+}
+
+
+h1{
+    
+    text-align: center;
+    color: lightblue;
+
+}
+img{
+    width: 200px;
+    height: 200px;
+}
+#cadre{
+    margin-left: 720px;
+    width: 450px;
+    height: 800px;
+    text-align: center;
+    color: aqua;
+
+}
+#boutcredit{
+    height: 120px;
+    width: 150px;
+    opacity: 80%;
+    background-color: black;
+    border: solid aqua 2px;
+    color: white;
+ margin-top: 150px;
+ border-radius: 12px;
+ 
+}
+#boutoncredit{
+    opacity: 0;
+    width: 50px;
+    height: 20px;
+    background-color: black;
+    
+}
+

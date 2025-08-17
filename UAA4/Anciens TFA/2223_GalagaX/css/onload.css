@@ -1,0 +1,50 @@
+/*codé entierement par ferre*/
+/*Projet X - 4TTr - 2023*/
+body{
+    background-color: #1A1A1A;/*fond d'ecran noir pour eviter de flasher les yeux de l'utilisateurs au chargement de la page*/
+}
+
+h1 {
+    margin-left: 15%;
+    margin-top: 20%;
+    font-size: 3em;
+    color: white;
+    font-family: sans-serif;
+    animation: animationOne 3s ease-in-out;
+    animation-fill-mode: forwards;
+  }
+  
+  h2 {
+    font-size: 3em;
+    color: white;
+    font-family: sans-serif;
+    animation: animationTwo 3s ease-in-out 3s;
+    visibility: hidden;
+    position: absolute;
+    top: 45%;
+    left: 25%;
+    animation-fill-mode: forwards;
+  }
+  
+  @keyframes animationOne {/*animtion pour faire apparaitre le texte et de le faire disparaitre ensuite*/
+    0% {
+      opacity: 0;
+    }
+    50% {
+        opacity: 1;
+      }
+    100% {
+      opacity: 0;
+    }
+  }
+  
+  @keyframes animationTwo {/*animtion pour faire apparaitre le texte*/
+    0% {
+      visibility: visible;
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+      visibility: visible;
+    }
+  }

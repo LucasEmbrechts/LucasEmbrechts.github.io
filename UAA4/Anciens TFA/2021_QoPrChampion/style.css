@@ -1,0 +1,207 @@
+body{
+	background-image: url(fond/fond.jpg);
+	background-size: cover;
+}
+
+p{
+	width: 350px;
+	height: 80px;
+	background-color: #48125c; 
+	border-radius: 3px;
+	color: white;
+	text-align: center;
+	line-height: 40px;
+	font-family: MingLiU-ExtB;
+	margin: 20px auto;
+	font-size: 35px;
+}
+
+
+.mButton{
+	width: 250px; 
+	height: 40px; 
+	margin: 20px auto; 
+	background-color: #48125c; 
+	border-radius: 3px; 
+	color : white;
+	text-align: center;
+	line-height: 40px; 
+	font-family: MingLiU-ExtB;
+	font-size: 20px
+}
+
+.mButton a{
+	color : white;
+	text-decoration: none;
+}
+
+#premier{
+	margin-top: 250px;
+}
+
+#cadre{
+	width: 700px;
+	height: 800px;
+	background-color: #48125c;
+	opacity: 0.7;
+	font-family: MingLiU-ExtB;
+	text-align: center;
+	color: white;
+	padding : 10px;
+	margin: auto;
+	font-size: 22px;
+}
+
+#credit{
+	width: 700px;
+	height: 800px;
+	background-color: #48125c;
+	opacity: 0.7;
+	font-family: MingLiU-ExtB;
+	text-align: center;
+	color: white;
+	padding: 10px;
+	margin: auto;
+	font-size: 22px;
+	line-height: 100px;
+}
+
+#question{
+	width: 750px;
+	height: 100px;
+	background-color: #48125c;
+	opacity: 0.7;
+	font-family: MingLiU-ExtB;
+	text-align: center;
+	color: white;
+	margin: 150px auto;
+	text-align: center;
+	font-size: 20px;
+	line-height: 100px;
+	padding: 5px;
+}
+
+#rep1{
+	width: 300px;
+	height: 80px;
+	background-color: #48125c;
+	opacity: 0.7;
+	font-family: MingLiU-ExtB;
+	text-align: center;
+	margin: 5px auto;
+	border: 1px solid #0000;
+	margin-right: 5px;
+	color: white;
+	line-height: 80px;
+	cursor: pointer;
+}
+
+
+#rep2{
+	width: 300px;
+	height: 80px;
+	background-color: #48125c;
+	opacity: 0.7;
+	font-family: MingLiU-ExtB;
+	text-align: center;
+	color: white;
+	border: black 2px;
+	margin: 5px auto;
+	margin-left: 5px;
+	line-height: 80px;
+	cursor: pointer;
+}
+
+
+#rep3{
+	width: 300px;
+	line-height: 80px;
+	height: 80px;
+	background-color: #48125c;
+	opacity: 0.7;
+	font-family: MingLiU-ExtB;
+	text-align: center;
+	color: white;
+	border: black 2px;
+	margin: 5px auto;
+	margin-right: 5px;
+	cursor: pointer;
+}
+
+#rep4{
+	width: 300px;
+	height: 80px;
+	background-color: #48125c;
+	opacity: 0.7;
+	font-family: MingLiU-ExtB;
+	text-align: center;
+	color: white;
+	border: black 2px;
+	margin: 5px auto;
+	margin-left: 5px;
+	line-height: 80px;
+	cursor: pointer;
+}
+
+#game{
+	margin-top: 150px;
+}
+h1{
+	color: white;
+}
+
+#flex{
+	display: flex;
+}
+
+#buttonNxt{
+	display: none;
+	cursor: pointer;
+}
+
+#j1 {
+	width: 100px;
+	height: 50px;
+	background-color: #48125c;
+	opacity: 0.7;
+	float: left;
+	color: white;
+	text-align: center;
+	line-height: 50px;
+	margin-left: 100px;
+}
+
+#j2 {
+	width: 100px;
+	height: 50px;
+	background-color: #48125c;
+	opacity: 0.7;
+	margin-left: 1700px;
+	color: white;
+	text-align: center;
+	line-height: 50px;
+}
+
+#joueur {
+	width: 150px;
+	height: 100px;
+	background-color: #48125c;
+	opacity: 0.7;
+	margin-left: 900px;
+	color: white;
+	text-align: center;
+	line-height: 100px;
+
+}
+
+#finJeu{
+	width: 400px;
+	height: 200px;
+	background-color: #48125c;
+	opacity: 0.7;
+	margin: 20px auto;
+	color: white;
+	text-align: center;
+	line-height: 200px;
+	display: none;
+}

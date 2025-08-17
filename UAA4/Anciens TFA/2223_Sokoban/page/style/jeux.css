@@ -1,0 +1,236 @@
+@font-face{
+    font-family: policeTitre;
+    src: url(../../font/Designer.otf);
+}
+
+@font-face{
+    font-family: policeCoups;
+    src: url(../../font/RoundStyle-Book.ttf);
+}
+
+
+body {
+    height: 100vh;
+    width: 100%;
+	margin: 0;
+	padding: 0;
+	background-color: rgb(179, 152, 152);
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+}
+
+h1{
+    display: none;
+    color: white;
+    margin: auto;
+    font-size: 5em;
+}
+
+#fullscreenVideo {
+    z-index: 100000;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+#pageNiveau{
+    position: absolute;
+    background-color: grey;
+    width: 30%;
+    height: 30%;
+}
+
+#win{
+    position: absolute;
+    margin-top: 10%;
+    width: 100%;
+    height: 100px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 80px;
+    visibility: hidden;
+}
+
+
+
+canvas {
+	position: absolute;
+}
+
+.button{
+    margin-left: 0;
+    border: none;
+    padding: 25px 30px;
+    background-color: rgba(138, 138, 138, 0);
+    color: #d40101;
+    border: 3px solid #d40101;
+    font-weight: bold;
+    border-radius: 5px;
+    letter-spacing: 4px;
+    overflow: hidden;
+    transition: 0.5s;
+    cursor: pointer;
+    margin-left: 25px;
+    margin-top: 25px;
+}
+
+
+
+.button:hover{
+    background: #c20505;
+    color: #050801;
+    box-shadow: 0 0 5px #c20505,
+                0 0 25px #c20505,
+                0 0 50px #c20505,
+                 0 0 200px #990404;
+}
+
+#next{
+    position: absolute;
+    margin-left: 0;
+    border: none;
+    padding: 25px 30px;
+    background-color: rgba(138, 138, 138, 0);
+    color: #e9bc27;
+    border: 3px solid #ebc54b;
+    font-weight: bold;
+    border-radius: 5px;
+    letter-spacing: 4px;
+    overflow: hidden;
+    transition: color 0.5s;
+    transition: box-shadow 0.5s;
+    cursor: pointer;
+    margin-left: 100px;
+    margin-top: 12px;
+}
+
+#next:hover{
+    background: #e9bc27;
+    color: #050801;
+    box-shadow: 0 0 5px #e9bc27,
+                0 0 25px #e9bc27,
+                0 0 50px #e9bc27,
+                 0 0 200px #e9bc27;
+}
+
+#menu{
+    z-index: 10000;
+    position: absolute;
+    float: right;
+    right: 25px;
+    top: 0;
+    border: none;
+    padding: 25px 30px;
+    background-color: rgba(138, 138, 138, 0);
+    color: #000000;
+    border: 3px solid #000000;
+    font-weight: bold;
+    border-radius: 5px;
+    letter-spacing: 4px;
+    overflow: hidden;
+    transition: color 0.5s;
+    transition: box-shadow 0.5s;
+    cursor: pointer;
+    margin-top: 25px;
+}
+
+#menu:hover{
+    background: #000000;
+    color: #ffffff;
+    box-shadow: 0 0 5px #000000,
+                0 0 25px #000000,
+                0 0 50px #000000,
+                 0 0 200px #000000;
+}
+
+#pageNiveau{
+    z-index: 9999;
+    position: absolute;
+    right: 0;
+    padding: 2%;
+    padding-top: 1%;
+    height: 290px;
+    width: 500px;
+    visibility: hidden;
+    border-left: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+#close{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    border: 1px solid #000000;
+    transition: transform 200ms;
+}
+
+#close:hover{
+    transform: scale(1.1);
+    transform: rotate(0.25turn);
+}
+
+.choixNiveau{
+    box-sizing: border-box;
+    display: inline-block;
+    border: 3px solid white;
+    border-radius: 50%;
+    height: 75px;
+    width: 75px;
+    text-align: center;
+    font-size: 3em;
+    color: black;
+    margin: 2%;
+    transition: transform 500ms;
+    font-family: ebrima;
+}
+
+.choixNiveau:hover{
+    background-color: white;
+    transform: scale(1.1);
+}
+
+.mur{
+    background-image: url(../../img/mur.png);
+    background-size: cover;
+}
+
+#perso{
+    background-image: url(../../img/surplace_droite.gif);
+    background-size: cover;
+}
+
+.cailloux{
+    background-image: url(../../img/cailloux.png);
+    background-size: cover;
+}
+
+.croix{
+    background-image: url(../../img/croix.png);
+    background-size: cover;
+}
+
+.valide{
+    background-image: url(../../img/valider.png);
+    background-size: cover;
+}
+
+#jeu{
+    margin: auto;
+    margin-top: 100px;
+    height: 600px;
+    width: 600px;
+    border-collapse: collapse;
+}
+
+#nbCoups {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-left: 10px;
+    font-size: 60px;
+    position: absolute;
+}

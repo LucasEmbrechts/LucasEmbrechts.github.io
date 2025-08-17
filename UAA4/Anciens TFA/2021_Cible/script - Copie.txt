@@ -1,0 +1,94 @@
+//code pour faire déplacer la cible.
+function draw() {
+	ctx.clearRect(0,0,canvas.width, canvas.height);
+	ctx.drawImage(cible1,x,y,tc,tc);
+    x=x+dx;
+	y=y+dy;
+
+	if (x >= canvas.width -tc || x <= 0) {
+		dx = -dx;
+	}
+	if (y >= canvas.height -tc|| y <= 0) {
+
+		dy = -dy;
+	}	
+		
+}
+
+//fonction pour démarer la cible.
+function game(){
+   dx = 0 + 1;
+   dy = 0 + 1;
+
+   var el = document.getElementById("mycanvas");
+   el.style.display ="block";
+   document.getElementById("démarer").style.display= "none";
+
+}
+
+//code pour pouvoir tirer sur la cible.
+function tir(event){
+	var tirX; 
+	var tirY; 
+	var posCanvas = canvas.getBoundingClientRect();
+
+	nbClic = nbClic +1;
+
+
+	//code pour les scores.
+	if (nbClic == 30) {
+
+		document.getElementById("gif").style.display = "block";
+		document.getElementById("mycanvas").style.display= "none";
+		document.getElementById("démarer").style.display ="none";
+		document.getElementById("brestart").style.display ="block";
+
+	}
+
+	if (score == 14) {
+
+		document.getElementById("gif1").style.display = "block";
+		document.getElementById("mycanvas").style.display = "none";
+		document.getElementById("brestart").style.display ="block";
+		document.getElementById("démarer").style.display ="none";
+	
+	}
+
+	//code pour recupérer les coordonnés des clicks.
+    tirX = event.clientX - posCanvas.x ;
+	tirY = event.clientY - posCanvas.y ; 
+	console.log("tir : " + tirX + " - " + tirY);
+
+	if(tirX > x  &&  tirX < x + tc  &&  tirY > y && tirY < y + tc ){
+
+		score = score +1;
+		dx = dx*1.3; 
+		dy = dy*1.3;
+		console.log("Votre score est de " + score );
+
+	} else {
+		console.log("à coté!");
+	}
+	el.innerHTML = "<div id='score'> <br> SCORE : <br>"  + score + "/15" + "</div>" ;
+}
+
+
+// ------------------------------------------------------------------------------
+//chargement de la page
+//toutes mes variables
+var el = document.getElementById("score");
+var canvas = document.getElementById("mycanvas");
+var ctx = canvas.getContext("2d");
+var cible1 = new Image();
+cible1.src = "img/cible.png";
+imgPerdu = "img/giphy.webp";
+var x = 250;
+var y = 250;
+var tc = 100;
+var dx = 0;
+var dy = 0;
+var score = 0;
+var nbClic = 0; 
+
+setInterval(draw, 10);
+canvas.addEventListener("click", tir);

@@ -1,0 +1,64 @@
+body{
+	background-image: url(../Sources/Boutons/Accueil.jpg);
+
+}
+
+#Titre{
+	background-image: url(../Sources/Boutons/Titre.png);
+	width: 500px;
+	height: 100px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	margin-top: 200px;
+	margin-left: 100px;
+	}
+
+#Jouer{
+	background-image: url(../Sources/Boutons/boutonJouer.png);
+	width: 220px;
+	height: 100px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	margin-bottom: 20px;	
+}
+
+#Regles{
+	background-image: url(../Sources/Boutons/boutonRegles.png);
+	width: 220px;
+	height: 100px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	margin-bottom: 20px;
+}
+
+#Credits{
+	background-image: url(../Sources/Boutons/boutonCredits.png);
+	width: 220px;
+	height: 100px;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+#Jouer:hover{
+	background-image: url(../Sources/Boutons/overJouer.png);
+	cursor: pointer;
+}
+
+#Regles:hover{
+	background-image: url(../Sources/Boutons/overRegles.png);
+	cursor: pointer;
+}	
+
+#Credits:hover{
+	background-image: url(../Sources/Boutons/overCredits.png);
+	cursor: pointer;
+}
+
+#Boutons{
+	width: 220px;
+	margin-left: 100px;
+	position: absolute;
+	bottom: 10px;
+
+}
+ 

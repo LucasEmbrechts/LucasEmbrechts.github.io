@@ -1,0 +1,361 @@
+<!--Phèdre Simon-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Press Start 2P', cursive;
+}
+
+body {
+    background: url('../sources/img/téléchargement.jpg'); /* fond étoilé style Terraria */
+    background-size: cover;
+    color: #ffffff;
+}
+
+#fond {
+    max-width: 1280px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: rgba(10, 10, 30, 0.9);
+    border: 6px solid #4444aa;
+    border-image: url('https://i.imgur.com/KkI2mDg.png') 10 stretch; /* bordure pixel style Terraria */
+    box-shadow: 0 0 25px #000 inset, 0 0 10px #4444aa;
+    border-radius: 8px;
+}
+
+#titre {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #FFD700;
+    text-shadow: 2px 2px 0px #000;
+}
+
+.inv {
+    background-size: contain;
+    width: 64px;
+    height: 64px;
+    display: inline-block;
+    border: 2px solid #666;
+    margin: 4px;
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 0.1s ease;
+}
+
+.inv:hover {
+    border-color: #fff700;
+    transform: scale(1.1);
+    box-shadow: 0 0 10px #fff700aa;
+}
+
+.num {
+    position: absolute;
+    bottom: 2px;
+    right: 4px;
+    font-size: 10px;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px black;
+}
+
+#tableau {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+#fabrication, #bloc {
+    display: flex;
+    flex-wrap: wrap;
+    width: 300px;
+    justify-content: center;
+    padding: 12px;
+    background-color: rgba(20, 20, 50, 0.7);
+    border: 3px solid #888;
+    border-radius: 6px;
+    box-shadow: inset 0 0 10px #000;
+}
+
+#Armes {
+    margin-top: 20px;
+    background-color: rgba(30, 30, 60, 0.7);
+    padding: 12px;
+    border: 3px solid #888;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border-radius: 6px;
+    box-shadow: inset 0 0 10px #000;
+}
+
+#resultat {
+    background-size: contain;
+    width: 64px;
+    height: 64px;
+    background-position: center;
+    margin: 10px auto;
+    border: 2px solid #ccc;
+    box-shadow: 0 0 10px #555;
+    transition: transform 0.2s ease;
+}
+
+#resultat:hover {
+    transform: scale(1.1);
+    border-color: #fff700;
+}
+
+#recipient {
+    font-size: 9px;
+    color: #ccc;
+    margin-top: 10px;
+}
+
+input[type="button"] {
+    display: block;
+    background: linear-gradient(to bottom, #5a5aff, #3a3aad);
+    border: 2px solid #222266;
+    color: white;
+    padding: 8px 16px;
+    font-size: 10px;
+    margin: 6px auto;
+    cursor: pointer;
+    text-shadow: 1px 1px #000;
+    box-shadow: 0 0 5px #000;
+    border-radius: 4px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+input[type="button"]:hover {
+    background: linear-gradient(to bottom, #7a7aff, #4a4add);
+    transform: scale(1.05);
+}
+
+.ligne {
+    display: none;
+}
+
+#miner {
+    margin-top: 30px;
+}
+
+</style>
+<body>
+    <div id="fond">
+        <div id="titre">
+            <h2>Craft</h2>
+        </div>
+        <div id="tableau">
+            <div id="bloc"></div> 
+            <div id="fabrication"></div>
+        </div>
+        <div class="ligne"></div>
+        <div id="Armes">
+            <h3>Armes</h3>
+            <div id="resultat"></div>
+            <div id="recipient"></div>
+        </div>
+        <input type="button" value="Crafter" id="miner" onclick="miner()">
+         <input type="button" value="Hache" id="hache" onclick="fabriquerHache()">
+        <input type="button" value="Pioche" id="pioche" onclick="fabriquerPioche()">
+        <input type="button" value="Lance" id="Lance" onclick="fabriquerLance()">
+        <input type="button" value="Arc a fleches" id="arc" onclick="fabriquerArc()">
+        <input type="button" value="Retour" id="retour" onclick="window.location.href='spawn.html'">
+        <input type="button" value="Annuler la sélection" id="annulerSelection" onclick="reinitialiser()">
+    </div>
+</body>
+<script>
+    let tableau=document.getElementById("tableau")
+    let hache=document.getElementById("hache")
+    let fabrication=document.getElementById("fabrication")
+    let bloc=document.getElementById("bloc")
+    let resultat=document.getElementById("resultat")
+    let recipient=document.getElementById("recipient")
+    let inventaire = JSON.parse(localStorage.getItem("inventaire"))
+    let nombre = JSON.parse(localStorage.getItem("quantité"))
+    let selection=[]
+    dessiner()
+    dessinerselection()
+    function dessiner(){
+        bloc.innerHTML=""
+        for(let i=0;i<inventaire.length;i++){
+            bloc.innerHTML+='<div onclick=selectionnner('+i+') class="inv" style=background-image:url("'+inventaire[i]+'");font-weight:bold><span class="num">'+nombre[i]+'</span></div>'
+        }
+    }
+    function selectionnner(numclick){
+        selection.push(inventaire[numclick])
+        nombre[numclick]=nombre[numclick]-1
+        if(nombre[numclick] == 0){
+            nombre.splice(numclick,1)
+            inventaire.splice(numclick,1)
+        }
+        dessiner()
+        dessinerselection()
+    }
+    function dessinerselection(){
+        fabrication.innerHTML=""
+        for(let i=0;i<selection.length;i++){
+            fabrication.innerHTML+='<div class="inv" style=background-image:url("'+selection[i]+'");></div>'
+        }
+    }
+    function fabriquerHache(){
+        resultat.style.backgroundImage = "url('../sources/img/Iron_Axe.png')"
+        recipient.innerHTML="1 metal et 1 bois"
+    }
+    function fabriquerPioche(){
+        resultat.style.backgroundImage="url('../sources/img/Iron_Pickaxe.png')"
+        recipient.innerHTML="2 metal et 3 terres"
+    }
+    function fabriquerLance(){
+        resultat.style.backgroundImage="url('../sources/img/lance.png')"
+        recipient.innerHTML="3 terre"
+    }
+    function fabriquerArc(){
+        resultat.style.backgroundImage="url('../sources/img/arc.png')"
+        recipient.innerHTML="1 metal et 2 bois"
+    }
+    function miner(){
+
+        let bois = 0;
+        let pierre = 0;
+        let hache =0;
+        let pioche = 0;
+        let lance = 0;
+        let arc = 0;
+        for(let i=0; i<selection.length; i++){
+            if(selection[i] === "../sources/img/tree.png") bois++;
+            if(selection[i] === "../sources/img/rock.png") pierre++;
+            if(selection[i] === "../sources/img/Iron_Axe.png") hache++;
+            if(selection[i] === "../sources/img/Iron_Pickaxe.png") pioche++;
+            if(selection[i] === "../sources/img/lance.png") lance++;
+            if(selection[i] === "../sources/img/arc.png") arc++;
+            
+        }
+
+        if(bois == 1 && pierre == 1 && hache == 1 && lance == 1 && arc == 1 && pioche == 1){ 
+            inventaire.push("../sources/img/secret.png")
+            nombre.push(1)
+            dessiner()
+            localStorage.setItem("inventaire",JSON.stringify(inventaire))
+            localStorage.setItem("quantité",JSON.stringify(nombre))
+            
+            selection = []
+            dessinerselection()
+        } 
+        
+        
+
+    if(resultat.style.backgroundImage == 'url("../sources/img/Iron_Axe.png")'){
+        // Vérifie au moins 2 bois et 1 pierre
+        let bois = 0;
+        let pierre = 0;
+
+        for(let i=0; i<selection.length; i++){
+            if(selection[i] === "../sources/img/tree.png") bois++;
+            if(selection[i] === "../sources/img/rock.png") pierre++;
+        }
+
+        if(bois == 1 && pierre == 1){
+            inventaire.push("../sources/img/Iron_Axe.png")
+            nombre.push(1)
+            dessiner()
+            localStorage.setItem("inventaire",JSON.stringify(inventaire))
+            localStorage.setItem("quantité",JSON.stringify(nombre))
+            alert("La hache se trouve bien dans l'inventaire")
+            selection = []
+            dessinerselection()
+        } else {
+            alert("Sélection invalide : il faut 1 arbre et 1 pierre")
+        }
+
+    } else if(resultat.style.backgroundImage == 'url("../sources/img/Iron_Pickaxe.png")'){
+        let pierre = 0;
+        let terre = 0;
+
+        for(let i=0; i<selection.length; i++){
+            if(selection[i] === "../sources/img/rock.png") pierre++;
+            if(selection[i] === "../sources/img/porntap-paenmook-035-texture8.jpg") terre++;
+        }
+
+        if(pierre == 2 && terre == 3){
+            inventaire.push("../sources/img/Iron_Pickaxe.png")
+            nombre.push(1)
+            dessiner()
+            localStorage.setItem("inventaire",JSON.stringify(inventaire))
+            localStorage.setItem("quantité",JSON.stringify(nombre))
+            alert("La pioche se trouve bien dans l'inventaire")
+            selection = []
+            dessinerselection()
+        } else {
+            alert("Sélection invalide : il faut 2 pierres et 3 terres")
+        }
+
+    } else if(resultat.style.backgroundImage == 'url("../sources/img/lance.png")'){
+        let terre = 0;
+
+        for(let i=0; i<selection.length; i++){
+            if(selection[i] === "../sources/img/porntap-paenmook-035-texture8.jpg") terre++;
+        }
+        if(selection.length>3){
+            alert("il y a des elements en trop dans ta recette: il faut 3 terres")
+        }else{
+            if(terre == 3){
+            inventaire.push("../sources/img/lance.png")
+            nombre.push(1)
+            dessiner()
+            localStorage.setItem("inventaire",JSON.stringify(inventaire))
+            localStorage.setItem("quantité",JSON.stringify(nombre))
+            alert("La lance se trouve bien dans l'inventaire")
+            selection = []
+            dessinerselection()
+        } else {
+            alert("sélection invalide : il faut 3 terres")
+        } 
+        }
+    } else if(resultat.style.backgroundImage == 'url("../sources/img/arc.png")'){
+        let bois = 0;
+        let pierre = 0;
+
+        for(let i=0; i<selection.length; i++){
+            if(selection[i] === "../sources/img/tree.png") bois++;
+            if(selection[i] === "../sources/img/rock.png") pierre++;
+        }
+
+        if(bois == 2 && pierre == 1){
+            inventaire.push("../sources/img/arc.png")
+            nombre.push(1)
+            dessiner()
+            localStorage.setItem("inventaire",JSON.stringify(inventaire))
+            localStorage.setItem("quantité",JSON.stringify(nombre))
+            alert("L'arc se trouve bien dans l'inventaire")
+            selection = []
+            dessinerselection()
+            inventaire.push("../sources/img/rock.png")
+            nombre.push(3)
+            dessiner()
+            localStorage.setItem("inventaire",JSON.stringify(inventaire))
+            localStorage.setItem("quantité",JSON.stringify(nombre))
+            dessinerseletion()
+            
+        } else {
+            alert("Sélection invalide : il faut 2 bois et 1 pierre")
+        }
+    }
+}
+
+function reinitialiser(){
+    window.location.reload();
+}
+</script>
+</html>

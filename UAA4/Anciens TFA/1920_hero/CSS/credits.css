@@ -1,0 +1,16 @@
+h1{
+	font-family: Bradley Hand ITC;
+	font-size: 70pt;
+}
+#cred{
+	background-color: gray;
+	width: 750px;
+	height: 500px;
+	font-family : Berlin Sans FB;
+	padding: 10px;
+}
+button{
+	position: absolute;
+	bottom: 0;
+	margin-bottom: 10px;
+}

@@ -1,0 +1,40 @@
+ body{
+            background-image: url("../SOURCES/IMG/garagejpg.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+
+        }
+        #voiture{
+            background-size: cover;
+            background-repeat: no-repeat;
+            height:400px;
+            width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 600px;
+        }
+        #b1{
+            position: absolute;
+            top:0px;
+        }
+        #dr{
+            background-image: url("../SOURCES/IMG/fleche dr.png");
+            bottom: 150px;
+            height: 150px;
+            width: 250px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            position:absolute;
+            right: 100px;
+
+        }
+        #gc{
+            background-image: url("../SOURCES/IMG/fleche gau.png");
+            bottom: 150px;
+            height:150px;
+            width:250px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            position:absolute;
+           left: 100px;
+        }

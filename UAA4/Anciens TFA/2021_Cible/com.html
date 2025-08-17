@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <link rel="stylesheet" type="text/css" href="style.css">
+	 <meta charset="utf-8">
+	 <title>Ciblator</title>
+</head>
+<body>
+
+<div id="interface">
+
+        <center>
+
+        
+
+		<center><button onclick="game()" id="démarer">Start</button></center>
+		<br>
+		<br>
+		<div id="brestart"><a href="com.html">Restart</a></div>				
+		<br>
+		<br>
+		<div id="score"><br> SCORE </div>
+
+		<div id="alert"></div>
+
+        <div id="gif"></div>
+
+        <div id="gif1"></div>
+
+        <div id="txt">Il te reste 20 chances pour pouvoir gagner !!!</div>
+
+		<canvas id="mycanvas" height="700" width="900"></canvas>
+
+	    </center> 
+
+	    <audio id="myAudio">
+  		<source type="audio/ogg">
+  		<source type="audio/mpeg">
+ 		 Your browser does not support the audio element.
+        </audio>
+
+
+	    
+</div>
+<script type="text/javascript" src="script.js">
+	
+	var audioEl2 = document.getElementById("myAudio")
+	audioEl2.volume = 0.5;
+
+</script>
+</body>
+</html>
+

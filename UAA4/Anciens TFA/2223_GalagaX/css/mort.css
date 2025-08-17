@@ -1,0 +1,103 @@
+/*codé entierement par ferre*/
+/*Projet X - 4TTr - 2023*/
+body{
+    background-image: url(../sources/DeathImg.jpg);/*fond d'écran trouvé sur google, des débris de vaisseaux dans l'espace, ça m'a pris plus d'une heure a trouver d'ailleurs*/
+    background-size: cover;
+    background-color: black;/*fond d'ecran noir pour eviter de flasher les yeux de l'utilisateurs au chargement de la page*/
+}
+#dead{
+    color: white;
+    font-family: sans-serif;
+    background-color: blue;
+    position: absolute;
+    top: 25vh;
+    left: 11%;
+    height: 10vh;
+    width: 80%;
+    font-size: 2em;
+    border-radius: 10px;    
+    margin-top: 20vh;
+    user-select: none;
+    cursor: pointer;
+    animation: borderColor 2s infinite;
+    border-width: 4px;
+    border-style: solid;
+}
+.debris{
+    position: absolute;
+    background-size: cover;
+    border-radius: 80px;
+	transition: transform 1s;
+}
+#one{
+    background-image: url(../sources/debrisOne.png);/*image du premier debris a trouver*/
+    top: 56%;
+    left: 5%;
+    height: 20vh;
+    width: 13%;
+}
+#two{
+    background-image: url(../sources/debrisTwo.png);/*image du deuxieme debris a trouver*/
+    top: 26%;
+    left: 68%;
+    height: 20vh;
+    width: 25%;
+}
+#three{
+    background-image: url(../sources/debrisThree.png);/*image du troisieme debris a trouver*/
+    top: 70%;
+    left: 56%;
+    height: 25vh;
+    width: 25%;
+}
+#four{
+    background-image: url(../sources/debrisFour.png);/*image du quatrieme debris a trouver*/
+    top: 5%;
+    left: 7%;
+    height: 13vh;
+    width: 20%;
+}
+#five{
+    background-image: url(../sources/debrisFive.png);/*image du cinquieme debris a trouver*/
+    top: 20%;
+    left: 30%;
+    height: 25vh;
+    width: 20%;
+}
+.debris:hover{
+    transform: scale(1.2);
+}
+
+@keyframes borderColor {/*un keyframes pour changer les couleurs de la bordure comme des flammes ce qui a un peu raté et pris du temps... libre a vous de modifier*/
+    0% { border-color: #b30000; }
+    3.33% { border-color: #ad0000; }
+    6.67% { border-color: #a60000; }
+    10% { border-color: #9f0000; }
+    13.33% { border-color: #980000; }
+    16.67% { border-color: #910000; }
+    20% { border-color: #8a0000; }
+    23.33% { border-color: #830000; }
+    26.67% { border-color: #7c0000; }
+    30% { border-color: #750000; }
+    33.33% { border-color: #6e0000; }
+    36.67% { border-color: #670000; }
+    40% { border-color: #600000; }
+    43.33% { border-color: #590000; }
+    46.67% { border-color: #520000; }
+    50% { border-color: #4b0000; }
+    53.33% { border-color: #440000; }
+    56.67% { border-color: #3d0000; }
+    60% { border-color: #360000; }
+    63.33% { border-color: #2f0000; }
+    66.67% { border-color: #280000; }
+    70% { border-color: #210000; }
+    73.33% { border-color: #1a0000; }
+    76.67% { border-color: #130000; }
+    80% { border-color: #0c0000; }
+    83.33% { border-color: #290101; }
+    86.67% { border-color: #530202; }
+    90% { border-color: #500101; }
+    93.33% { border-color: #870303; }
+    96.67% { border-color: #a30303; }
+    100% { border-color: #c10303; }
+  } 

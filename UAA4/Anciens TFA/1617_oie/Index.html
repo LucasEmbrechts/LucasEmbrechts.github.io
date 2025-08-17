@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/cssoie.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+	<title>Jeu de l'oie</title>
+</head>
+<body>
+	
+
+	
+
+	<div id="choixJoueur">
+		<center><h1>Nombre de joueurs</h1><br><input type="number" id="amount"></center>
+	    <div id="slider-range-max"></div>
+	    <center><img id="oie" src="css/images/img2.png"></center><br><br>
+	    <a href="menu.html"><button>Retour</button></a><br><br>
+	    <button onclick="begin(amount.value)">Jouer</button>
+	</div>
+
+	<div id="fullGame" style="display:none">
+	<div>
+    <object data="son/oie.mp3" type="audio/x-mpeg" width="0" height="0" >
+        <param name="src" value="oie.mp3" />
+        <param name="controls" value="console" />
+        <param name="autostart" value="true" />
+        <param name="loop" value="false" />
+        <script type="text/javascript" >
+            <!--
+                document.write('<embed src="son/oie.mp3" width="0" height="0" controls="console" loop="false" autostart="true" ></embed>');
+            //-->
+        </script>
+    </object>
+</div>
+		<center><h1>Traditionnel jeu de l'oie</h1></center><br><br>
+		<button onclick="lancer()">Lancer les dés</button><br>
+		<div id="dice1"></div>
+		<div id="dice2"></div><br><br><br><br><br><br><br><br>
+			<div id="playerHolder">
+				Joueur1 = <div id="explication1"></div><br><br>
+				Joueur2 = <div id="explication2"></div><br><br>
+				Joueur3 = <div id="explication3"></div><br><br>
+				Joueur4 = <div id="explication4"></div><br><br><br>
+				Ce qui se passe:<br><div id="pass"></div>
+			</div>
+		<div id="plateau"></div><br><br>
+		
+
+	</div>
+	<div id="win1" style="display: none;">
+		<center><div id="photo1"><h1>Joueur1 a gagné</h1></div>
+		</center>
+	</div>
+	<div id="win2" style="display: none;">
+		<center><div id="photo1"><h1>Joueur2 a gagné</h1></div>
+		</center>
+	</div>
+	<div id="win3" style="display: none;">
+		<center><div id="photo1"><h1>Joueur3 a gagné</h1></div>
+		</center>
+	</div>
+	<div id="win4" style="display: none;">
+		<center><div id="photo1"><h1>Joueur4 a gagné</h1></div>
+		</center>
+	</div>
+	
+	    <footer>Colinet Benjamin 4TT</footer>
+	<script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.js" ></script>
+	<script type="text/javascript" src="js/scriptoie.js"></script>
+	<script type="text/javascript" src="js/js2.js"></script>
+	 
+	</body>
+</html>

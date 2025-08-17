@@ -1,0 +1,29 @@
+body{
+	background-image:url("../SOURCES/fondmodemer.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	text-align: center;
+	margin-top: 300px;
+}
+#bouton-pause{
+	height:70px;
+	width:70px;
+	position:absolute;
+	top:20px;
+	right:20px;
+}
+#encadrer-pause{
+	text-align:center;
+	border-radius:16px;
+	background-image:url("../SOURCES/flouimage2.jpg");
+	border:solid black 3px;
+	display:none;
+	position:absolute;
+	height:450px;
+	width:550px;
+	margin-left:600px;
+	background-size:cover;
+}
+#quit{
+	margin:20px;
+}

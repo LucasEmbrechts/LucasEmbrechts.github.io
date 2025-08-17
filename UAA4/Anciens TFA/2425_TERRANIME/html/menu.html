@@ -1,0 +1,293 @@
+<!--Ryan De Roeck-->
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../sources/font/8-BIT WONDER.TTF">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Document</title>
+    <style>
+        body {
+            background-image: url('../sources/img/d3191a8f04881574b145a1167d48e9e7.jpeg');
+            background-repeat: no-repeat;
+            background-size: 100%;
+
+        }
+
+        #men {
+            margin-top: 440px;
+            margin-left: 650px;
+            height: 200px;
+            width: 500px;
+            align-content: center;
+            text-align: center;
+        }
+
+        #men input {
+            font-family: "Press Start 2P", serif;
+            position: relative;
+            padding: 10px;
+            margin-left: 50px;
+            margin-right: 50px;
+            margin-top: 50px;
+            color: rgba(255, 255, 255, 0.706);
+            opacity: 0.7;
+            font-size: 3rem;
+            /*1rem = 16pixel*/
+            background: linear-gradient(to left top, rgb(53, 199, 24), rgb(193, 32, 131));
+            transform: scale(1);
+            border: none;
+            border-radius: 20px;
+            /* Coins arrondis */
+            cursor: pointer;
+            transition:  transform 0.3s, background 0.3s, box-shadow 0.3s;
+            bottom: 200px;
+        }
+
+        #men input:hover {
+            background: linear-gradient(to left top, blue, red);
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes rotatingShadow {
+            0% {
+                box-shadow: 0px 0px 20px 3px rgba(255, 0, 0, 0.7);
+            }
+
+            25% {
+                box-shadow: 10px 10px 20px 3px rgba(0, 255, 0, 0.7);
+            }
+
+            50% {
+                box-shadow: -10px 10px 20px 3px rgba(0, 0, 255, 0.7);
+            }
+
+            75% {
+                box-shadow: -10px -10px 20px 3px rgba(255, 255, 0, 0.7);
+            }
+
+            100% {
+                box-shadow: 0px 0px 20px 3px rgba(255, 0, 0, 0.7);
+            }
+        }
+
+        #men input {
+            animation: rotatingShadow 3s linear infinite;
+        }
+
+        h1 {
+            font-family: "Press Start 2P", serif;
+            font-weight: 400;
+            font-style: normal;
+            margin-left: 700px;
+            opacity: 0.5;
+            user-select: none;
+        }
+
+        pre {
+            -moz-user-select: none;
+            user-select: none;
+            margin-left: 100px;
+            height: 100px;
+            font-weight: bold;
+        }
+    </style>
+
+    <style>
+        /* Section du Loader */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background: linear-gradient(145deg, #0d0d0d, #030303);
+            z-index: 10;
+            animation: fadeIn 2s;
+        }
+
+        #loader h1 {
+            color: cyan;
+            font-size: 4rem;
+            text-shadow: 0 0 20px cyan, 0 0 40px cyan, 0 0 80px cyan;
+            animation: neonGlow 2s infinite alternate;
+            text-align: center;
+            position: relative;
+            margin-left: 90px;
+        }
+
+        #loader p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2rem;
+            animation: textPulse 3s infinite alternate;
+            margin-top: 1rem;
+        }
+
+        /* Effet néon */
+        @keyframes neonGlow {
+            0% {
+                text-shadow: 0 0 10px cyan, 0 0 20px cyan, 0 0 30px cyan;
+            }
+
+            100% {
+                text-shadow: 0 0 30px blue, 0 0 60px blue, 0 0 90px cyan;
+            }
+        }
+
+        /* Pulse du texte */
+        @keyframes textPulse {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.6;
+            }
+        }
+
+        /* Disparition progressive */
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        /* Particules flottantes */
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            animation: floatParticle 8s infinite linear;
+            opacity: 0;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: translateY(-10vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Écran de chargement -->
+    <div id="loader">
+        <h1>TERRANIME</h1>
+        <p>Préparez-vous à vivre l'inattendu...</p>
+    </div>
+
+    <pre style="color: rgba(240, 248, 255, 0.482);">
+        _____                    _____                    _____                    _____                    _____                    _____                    _____                    _____                    _____                  
+       /\    \                  /\    \                  /\    \                  /\    \                  /\    \                  /\    \                  /\    \                  /\    \                  /\    \                 
+      /::\    \                /::\    \                /::\    \                /::\    \                /::\    \                /::\____\                /::\    \                /::\____\                /::\    \                
+      \:::\    \              /::::\    \              /::::\    \              /::::\    \              /::::\    \              /::::|   |                \:::\    \              /::::|   |               /::::\    \               
+       \:::\    \            /::::::\    \            /::::::\    \            /::::::\    \            /::::::\    \            /:::::|   |                 \:::\    \            /:::::|   |              /::::::\    \              
+        \:::\    \          /:::/\:::\    \          /:::/\:::\    \          /:::/\:::\    \          /:::/\:::\    \          /::::::|   |                  \:::\    \          /::::::|   |             /:::/\:::\    \             
+         \:::\    \        /:::/__\:::\    \        /:::/__\:::\    \        /:::/__\:::\    \        /:::/__\:::\    \        /:::/|::|   |                   \:::\    \        /:::/|::|   |            /:::/__\:::\    \            
+         /::::\    \      /::::\   \:::\    \      /::::\   \:::\    \      /::::\   \:::\    \      /::::\   \:::\    \      /:::/ |::|   |                   /::::\    \      /:::/ |::|   |           /::::\   \:::\    \           
+        /::::::\    \    /::::::\   \:::\    \    /::::::\   \:::\    \    /::::::\   \:::\    \    /::::::\   \:::\    \    /:::/  |::|   | _____    ____    /::::::\    \    /:::/  |::|___|______    /::::::\   \:::\    \          
+       /:::/\:::\    \  /:::/\:::\   \:::\    \  /:::/\:::\   \:::\____\  /:::/\:::\   \:::\____\  /:::/\:::\   \:::\    \  /:::/   |::|   |/\    \  /\   \  /:::/\:::\    \  /:::/   |::::::::\    \  /:::/\:::\   \:::\    \         
+      /:::/  \:::\____\/:::/__\:::\   \:::\____\/:::/  \:::\   \:::|    |/:::/  \:::\   \:::|    |/:::/  \:::\   \:::\____\/:: /    |::|   /::\____\/::\   \/:::/  \:::\____\/:::/    |:::::::::\____\/:::/__\:::\   \:::\____\        
+     /:::/    \::/    /\:::\   \:::\   \::/    /\::/   |::::\  /:::|____|\::/   |::::\  /:::|____|\::/    \:::\  /:::/    /\::/    /|::|  /:::/    /\:::\  /:::/    \::/    /\::/    / ~~~~~/:::/    /\:::\   \:::\   \::/    /        
+    /:::/    / \/____/  \:::\   \:::\   \/____/  \/____|:::::\/:::/    /  \/____|:::::\/:::/    /  \/____/ \:::\/:::/    /  \/____/ |::| /:::/    /  \:::\/:::/    / \/____/  \/____/      /:::/    /  \:::\   \:::\   \/____/         
+   /:::/    /            \:::\   \:::\    \            |:::::::::/    /         |:::::::::/    /            \::::::/    /           |::|/:::/    /    \::::::/    /                       /:::/    /    \:::\   \:::\    \             
+  /:::/    /              \:::\   \:::\____\           |::|\::::/    /          |::|\::::/    /              \::::/    /            |::::::/    /      \::::/____/                       /:::/    /      \:::\   \:::\____\            
+  \::/    /                \:::\   \::/    /           |::| \::/____/           |::| \::/____/               /:::/    /             |:::::/    /        \:::\    \                      /:::/    /        \:::\   \::/    /            
+   \/____/                  \:::\   \/____/            |::|  ~|                 |::|  ~|                    /:::/    /              |::::/    /          \:::\    \                    /:::/    /          \:::\   \/____/             
+                             \:::\    \                |::|   |                 |::|   |                   /:::/    /               /:::/    /            \:::\    \                  /:::/    /            \:::\    \                 
+                              \:::\____\               \::|   |                 \::|   |                  /:::/    /               /:::/    /              \:::\____\                /:::/    /              \:::\____\                
+                               \::/    /                \:|   |                  \:|   |                  \::/    /                \::/    /                \::/    /                \::/    /                \::/    /                
+                                \/____/                  \|___|                   \|___|                   \/____/                  \/____/                  \/____/                  \/____/                  \/____/                 
+                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                       
+  </pre>
+    <h1 style="color: red; ">
+        TERRANIME
+    </h1>
+    <div id="men"> 
+        <input type="button" id="play" onclick="window.location.href='spawn.html';" value="play">
+        <input type="button" id="rule" onclick="window.location.href='regle.html';" value="rule">
+        <input type="button" id="credit" onclick="window.location.href='credit.html';" value="credit">
+        <input type="button" id="setting" onclick="window.location.href='setting.html';" value="setting">
+    </div>
+    <script>
+        /*sert a ne pas pouvoir zoomer ou dezoomer*/
+        document.addEventListener('wheel', function (event) {
+            if (event.ctrlKey) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+
+        document.addEventListener('keydown', function (event) {
+            if (event.ctrlKey && (event.key === '+' || event.key === '-' || event.key === '0')) {
+                event.preventDefault();
+            }
+        });
+    </script>
+    <script>
+        // Génération des particules animées
+        const loader = document.getElementById('loader');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = `${Math.random() * 100}vw`;
+            particle.style.animationDuration = `${Math.random() * 5 + 3}s`;
+            particle.style.backgroundColor = `hsl(${Math.random() * 360}, 80%, 70%)`;
+            loader.appendChild(particle);
+        }
+
+        // Transition après 5 secondes
+        setTimeout(() => {
+            loader.style.animation = "fadeOut 1.5s forwards";
+            setTimeout(() => {
+                loader.style.display = 'none';
+
+            }, 1500);
+        }, 5000);
+    </script>
+
+</body>
+
+</html>

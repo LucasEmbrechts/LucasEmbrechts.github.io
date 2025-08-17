@@ -1,0 +1,228 @@
+<!--Ryan De Roeck-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../sources/font/8-BIT WONDER.TTF">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Document</title>
+  <link rel="stylesheet" href="../css/spawn.css">
+
+</head>
+
+<body>
+  <div id="game">
+    
+
+    
+    <button class="menu-button" onclick="toggleMenu()">Menu</button>
+    <button class="menu-button" onclick="toggleMenu()">Menu</button>
+    
+    <div class="menu" id="menu">
+      
+      <button class="btn" onclick="window.location.href='menu.html';">Menu</button>
+      <button class="btn" onclick="window.location.href='setting.html';">setting</button>
+      <button class="btn" onclick="window.location.href='regle.html';">règles</button>
+      <button class="btn" onclick="toggleMenu()">Fermer</button>
+    </div>
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    <div class="inventory" id="inventoryPage1">
+      <h2>Inventaire - Page 1</h2>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <br>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <br>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <br>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <br>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <br>
+      
+      
+      
+      <button onclick="ouvrirInventaire(2)">Page Suivante</button>
+      <button onclick="fermerInventaire()">Fermer</button>
+    </div>
+    
+    <div class="inventory" id="inventoryPage2">
+      <h2>Inventaire - Page 2</h2>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <br>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <br>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <br>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <br>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <div class="inventory-item"></div>
+      <br>
+      <button onclick="ouvrirInventaire(1)">Page Précédente</button>
+      <button onclick="fermerInventaire()">Fermer</button>
+    </div> 
+
+
+      
+    <div id="quetes">
+      <button onclick="window.location.href='spawn.html';" id="Retour">Retour</button>
+  <div id="bodyOne">
+  <h1>Tableau de Quêtes</h1>
+  
+  <div id="tableau">
+    <div class="ligne">
+      <p>Crafter une arbalète</p>
+    </div>
+    <div class="recompense">
+      <p>3 cailloux</p>
+    </div>
+    <div class="ligne">
+      <p>Crafter l'Armes Secrete</p>
+    </div>
+    <div class="recompense">
+      <p>Un peu de toutes choses fera la quête</p>
+    </div>
+  </div>
+  </div>
+    </div>
+    
+  <div id="UI">
+    <div id="moncercle"></div>
+    <div id="monbarre">
+      
+    </div>
+  </div>
+  
+  <script src="../js/crafty-min.js"></script>
+  
+  <script src="../js/game.js"></script>
+  
+  <script src="../js/monde.js"></script>
+  <script src="../js/personnage.js"></script>
+  <script src="../js/inventaire.js"></script>
+
+  
+  
+  <script>
+let monbarreElement = document.getElementById('monbarre');
+let userData;
+
+try {
+  userData = JSON.parse(localStorage.getItem("user"));
+  if (userData && userData.username) {
+    monbarre.innerHTML = userData.username;
+  } else {
+    monbarre.innerHTML = "Guest";
+  }
+} catch (e) {
+  console.warn("Données utilisateur invalides :", e);
+  userElement.innerHTML = "Guest";
+}
+
+
+    function toggleMenu() {
+      let menu = document.getElementById("menu");
+      menu.classList.toggle("open");
+    }
+    
+    /* Empêche le zoom avec la molette ou les raccourcis clavier */
+    document.addEventListener('wheel', function (event) {
+      if (event.ctrlKey) {
+        event.preventDefault();
+      }
+    }, { passive: false });
+    
+    document.addEventListener('keydown', function (event) {
+      if (event.ctrlKey && (event.key === '+' || event.key === '-' || event.key === '0')) {
+        event.preventDefault();
+      }
+    });
+  </script>
+
+
+  <script> 
+
+
+
+
+  document.addEventListener('keyup', function (event) {
+    if (event.key === 'c' || event.key === 'C') {
+     
+      window.location.href='craft.html';
+    }
+    
+  });
+  document.addEventListener('keyup', function (event) {
+    if (event.key === 'p' || event.key === 'P') {
+     
+      // Si les quetes sont ouvertes
+      if(document.getElementById("quetes").style.display == 'block'){
+        document.getElementById("quetes").style.display = "none"
+        document.getElementById("UI").style.display= 'block'
+      }
+      // Si les quetes sont fermées
+      else{
+        document.getElementById("quetes").style.display = "block"
+document.getElementById("UI").style.display= 'none'
+      }
+
+    }
+  });
+  </script>
+
+
+</body>
+
+</html>

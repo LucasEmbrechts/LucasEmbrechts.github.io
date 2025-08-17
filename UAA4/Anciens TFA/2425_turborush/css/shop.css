@@ -1,0 +1,167 @@
+/*William*/
+    html,body{
+      overflow: hidden;
+      height: 100%;
+      width: 100%;
+      margin: 0;
+    }
+  
+  #container {
+      position: absolute;
+      width: 590px; 
+      height: 300px; 
+      overflow: hidden; 
+      margin-left: 800px;
+      bottom:170px;
+      right: 650px;
+    }
+  
+  
+
+    #voiture {
+      background-size: cover;
+    width: 100%;
+      height: 100%;
+      position: absolute;
+      transition: left 0.5s ease-in-out;
+
+    }
+
+    
+
+    @font-face {
+      font-family: fridge;
+      src: url(../sources/Fridge.ttf);
+    }
+
+    * {
+      font-family: 'fridge';
+    }
+
+    #fleche {
+      background-image: url('../sources/img/flecheD.png');
+      background-size: cover;
+      width: 220px;
+      height: 140px;
+      bottom: 220px;
+      left: 1300px;
+      position: absolute;
+      z-index: 2;
+    }
+    #fleche2{
+      background-image: url('../sources/img/flecheG.png');
+      background-size:cover ;
+      width: 220px;
+      height: 140px;
+      position: absolute;
+      right: 1250px;
+      bottom: 220px;
+      
+    }
+
+    body {
+      background-image: url('../sources/img/shop.png');
+      background-repeat: no-repeat;
+      background-size: 100%;
+    }
+
+    #menuu {
+      margin-top: 980px;
+      margin-left: 1435px;
+    }
+
+    .menu {
+      padding: 0.6em 2em;
+      border: none;
+      outline: none;
+      color: rgb(255, 255, 255);
+      background: #111;
+      cursor: pointer;
+      position: relative;
+      z-index: 0;
+      border-radius: 10px;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      font-size: 30px;
+      margin-top: 60px;
+      margin-right: 20px;
+    }
+
+    .menu:before {
+      content: "";
+      background: linear-gradient(45deg,
+          #ff0000,
+          #ff7300,
+          #fffb00,
+          #48ff00,
+          #00ffd5,
+          #002bff,
+          #7a00ff,
+          #ff00c8,
+          #ff0000);
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      background-size: 400%;
+      z-index: -1;
+      filter: blur(5px);
+      -webkit-filter: blur(5px);
+      width: calc(100% + 4px);
+      height: calc(100% + 4px);
+      animation: glowing-button-85 20s linear infinite;
+      transition: opacity 0.3s ease-in-out;
+      border-radius: 10px;
+    }
+
+    @keyframes glowing-button-85 {
+      0% {
+        background-position: 0 0;
+      }
+
+      50% {
+        background-position: 400% 0;
+      }
+
+      100% {
+        background-position: 0 0;
+      }
+    }
+
+    .menu:after {
+      z-index: -1;
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #222;
+      left: 0;
+      top: 0;
+      border-radius: 10px;
+    }
+    #porte{
+
+      background-image: url('../sources/img/poh.png');
+      background-size: cover;
+      z-index: 999;
+      position: fixed;
+      animation-name: animgarage;
+      animation-duration: 5s;
+      animation-timing-function: linear;
+      animation-iteration-count: 1;
+      animation-direction: normal;
+      animation-fill-mode: forwards; /*on s'arrete a la fin*/
+
+    }
+    @keyframes animgarage {
+      0%{
+              width: 1920px;
+      height: 1080px;
+      }
+      100%{
+        width: 1920px;
+        height: 0px;
+      }
+
+      
+    }

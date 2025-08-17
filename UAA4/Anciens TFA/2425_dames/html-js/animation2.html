@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+      margin: 0;
+      background: linear-gradient(#fa0404, #000000);/* Herbe stylisée */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      
+    }
+
+    
+
+    .chargement{
+      width: 220px;
+      height: 60px;
+      background-color: aqua,rgb(219, 14, 127);
+      border: 3px solid white;
+      border-radius: 30px;
+      position: relative;
+      overflow: hidden;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+      line-height: 60px;
+      box-shadow: 0 0 10px aqua;
+    }
+
+    .barre{
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.3);
+      width: 0%;
+      animation: load 4s  forwards;
+      
+    }
+
+    .balle {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      width: 40px;
+      height: 40px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/d/d3/Soccerball.svg') no-repeat center;
+      background-size: cover;
+      animation: bounce 1s infinite ease-in-out;
+      z-index: 2;
+    }
+
+    @keyframes load {
+      from { width: 0%; }
+      to { width: 100%; }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+  </style>
+</head>
+<body>
+
+ 
+
+  <div class="chargement">
+    Chargement...
+    <div class="barre"></div>
+    <div class="balle"></div>
+  </div>
+
+
+
+    <script>
+        setTimeout(()=>{
+            window.location.href = "credit.html"
+
+        }, 5000)
+    </script>
+</body>
+</html>

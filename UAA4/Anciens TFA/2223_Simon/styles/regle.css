@@ -1,0 +1,93 @@
+/*justin;4G1;Simon: les 4 fantastiques;2022-2023*/
+body {
+	background-image: url(../images/regle.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+/*contient l'enssemble de la page*/
+#contenaire{
+	border: 1px solid black;
+	border-radius: 2px;
+	height: 300px;
+	width: 300px;
+	padding: 100px;
+	margin-left: 550px;
+	margin-top: 258px;
+	background-color: black;
+
+}
+
+/*contient le texte des règle du jeu*/
+#text {
+    border: 1px solid black;
+    border-radius: 2px;
+    height: 600px;
+    width: 850px;
+    background-color: black;
+	  color: white;
+	  margin-left:540px;
+	  margin-top: 30px;
+    opacity: 0.8;
+    font-weight : 900;
+    font-size: 25px;
+    letter-spacing: 3px;
+    text-align: center;
+
+
+
+}
+/*titre règle de la page*/
+h1{
+	text-align: center;
+	font-size: 6.5em;
+	color: black;
+	letter-spacing: -7px;
+	font-weight: 700;
+	text-transform: uppercase;
+	animation: titre 1.50s ease-out infinite;
+	text-shadow: 0px 0px 5px red , 0px 0px 7px red;
+  font-family:cursive;
+}
+
+/*animation du flash du titre*/
+@keyframes titre {
+  from {
+    text-shadow:0px 0px 10px #fff,
+      0px 0px 1px #fff, 
+      0px 0px 2px #fff,
+      0px 0px 2px #fff,
+      0px 0px 2px #fff,
+      0px 0px 2px #fff,
+      0px 0px 2px #fff,
+      0px 0px 2px #fff,
+      0px 0px 5px #fff,
+      0px 0px 5px #fff,
+      0px 0px 5px #7B96B8,
+      0px 0px 15px #7B96B8,
+      0px 10px 10px #7B96B8,
+      0px 10px 10px #7B96B8,
+      0px 10px 10px #7B96B8,
+      0px 10px 10px #7B96B8,
+      0px -10px 10px #7B96B8,
+      0px -10px 10px #7B96B8;
+  }
+}
+/*bouton pour retourner au menu*/
+#btn{
+  background-image: url(../images/menu.png);
+  height:115px ;
+  width:450px ;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-top: -210px;
+  float: left;
+  transition: 500ms;
+
+}  
+
+/*bouton pour retourner au menu animation*/
+#btn:hover{
+  filter: brightness(50%);
+  transform: scale(1.1);
+}

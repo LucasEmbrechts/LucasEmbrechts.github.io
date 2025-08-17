@@ -1,0 +1,467 @@
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="../css/jouer.css" rel="stylesheet" />
+    
+</head>
+<body>
+    <div id="boutons">
+        <div><a href="../index.html" ><button id="boutcredit">Retourner à l'accueil</button></a></div>
+        <div>    <a href="jouer.html" ><button id="boutcredit">recommencer</button></a>
+        </div>
+    </div>
+    <div id="page"></div>
+    
+    <script>
+        let numClic = 1
+        let anime;
+        let premierPion 
+        let tour = "B"
+        let jeu = [ 
+        'N', 'V', 'N', 'V', 'N', 'V', 'N', 'V', 'N', 'V', 
+        'V', 'N', 'V', 'N', 'V', 'N', 'V', 'N', 'V', 'N', 
+        'N', 'V', 'N', 'V', 'N', 'V', 'N', 'V', 'N', 'V',  
+        'V', 'N', 'V', 'N', 'V', 'N', 'V', 'N', 'V', 'N', 
+        'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V',
+        'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 
+        'B', 'V', 'B', 'V', 'B', 'V', 'B', 'V', 'B', 'V', 
+        'V', 'B', 'V', 'B', 'V', 'B', 'V', 'B', 'V', 'B', 
+        'B', 'V', 'B', 'V', 'B', 'V', 'B', 'V', 'B', 'V', 
+        'V', 'B', 'V', 'B', 'V', 'B', 'V', 'B', 'V', 'B' 
+        ];
+        
+        afficher();
+        function afficher(){
+            
+            let page=document.getElementById("page")
+            
+            page.innerHTML=""
+            let couleur1 = "fonce"
+            let couleur2 = "clair"
+            let couleur3 = ""
+            for(let i = 0;i<jeu.length;i++){
+                
+                
+                let nouveauDiv = document.createElement("div");
+                nouveauDiv.classList.add("case");
+                nouveauDiv.onclick = function() { cliquePion(i)};
+                
+                if(jeu[i] == "N"){
+                    nouveauDiv.classList.add("barca")
+                }else{
+                    if(jeu[i] == "B"){
+                        nouveauDiv.classList.add("real")
+                    }else{
+                        if(jeu[i] == "BP"){
+                            nouveauDiv.classList.add("cr7")
+                        }else{
+                            if(jeu[i] == "NP"){
+                                nouveauDiv.classList.add("messi")
+                                
+                            }
+                        }
+                    }
+                }
+                if(i%2==0){
+                    nouveauDiv.classList.add(couleur1);
+                    
+                    
+                } else{
+                    nouveauDiv.classList.add(couleur2);
+                }
+                if(i%10==9){
+                    couleur3 = couleur1
+                    couleur1 = couleur2
+                    couleur2 = couleur3
+                    
+                }
+                if(i==anime){
+                    nouveauDiv.classList.add("animation")
+                    anime = null
+                }
+                page.appendChild(nouveauDiv);
+            }
+            
+        }
+        
+        function cliquePion(numPion){
+            //CAS OU UTILISATEUR SELECTIONNE LE PION 
+            
+            
+            if(numClic == 1){
+                if(jeu[numPion] == "V"){
+                    alert("il n'y a pas de pion sur cette case")
+                    
+                }else{
+                    if((jeu[numPion] == "B" ||jeu[numPion] == "BP") && tour == "B"||(jeu[numPion] == "N" ||jeu[numPion] == "NP") && tour == "N"){
+                        anime = numPion
+                        //A TON TOUR DE JOUER
+                        numClic = 2
+                        premierPion = numPion
+                        changerTour();
+                    }else{
+                        alert("pas a ton tour  ")
+                    }
+                }
+            }
+            else{
+                
+                //CAS OU UTILISATEUR DEPLACE LE PION
+                
+                if(premierPion != numPion){
+                    
+                    if(jeu[premierPion] == "B" ){
+                        // Cas où l'utilisateru deplace en diagonale sur une case vide
+                        if( (numPion == premierPion -9 ||  numPion == premierPion - 11)&& jeu[numPion] == "V"){
+                            numClic = 1
+                            
+                            
+                            
+                            
+                            // Promotion
+                            if(numPion <= 10  ){
+                                jeu[numPion] = "BP"                      
+                            }else{
+                                jeu[numPion] = "B"
+                                
+                                
+                            }
+                            jeu[premierPion] = "V"
+                            
+                        }else{
+                            // Cas où l'utilisateru deplace en diagonale et prend un pion
+                            if((numPion == premierPion -18 ||  numPion == premierPion - 22)&& jeu[numPion] == "V"  &&(jeu[premierPion-9]=="N"||jeu[premierPion-11]=="N"||jeu[premierPion-9]=="NP"||jeu[premierPion-11]=="NP")){
+                                if(numPion == premierPion -18  &&(jeu[premierPion-9]=="N"||jeu[premierPion-9]=="NP")){
+                                    jeu[premierPion-9]="V"
+                                }else{
+                                    if(numPion == premierPion -22 && jeu[premierPion-11]=="N"||jeu[premierPion-11]=="NP"){
+                                        jeu[premierPion-11]="V"
+                                    }
+                                }
+                                numClic = 1
+                                
+                                
+                                
+                                
+                                // Promotion
+                                if(numPion <= 10  ){
+                                    jeu[numPion] = "BP"                      
+                                }else{
+                                    jeu[numPion] = "B"
+                                    
+                                    
+                                }
+                                jeu[premierPion] = "V"
+                            }else{
+                                alert("Déplacement uniquement en diagonale et sur une case vide")
+                                numClic = 1
+                                changerTour()
+                            }
+                        }
+                    }
+                    else{
+                        if(jeu[premierPion] == "N"){
+                            // Cas où l'utilisateru deplace en diagonale sur une case vide
+                            if( (numPion == premierPion +9 ||  numPion == premierPion + 11)&& jeu[numPion] == "V"){
+                                
+                                
+                                numClic = 1
+                                
+                                
+                                
+                                
+                                // Promotion
+                                if(numPion >= 90  ){
+                                    jeu[numPion] = "NP"                      
+                                }else{
+                                    jeu[numPion] = "N"
+                                    
+                                    
+                                }
+                                jeu[premierPion] = "V"
+                                
+                                
+                            }else{
+                                // Cas où l'utilisateru deplace en diagonale et prend un pion
+                                if((numPion == premierPion +18 ||  numPion == premierPion + 22)&& jeu[numPion] == "V"  &&(jeu[premierPion+9]=="B"||jeu[premierPion+11]=="B"||jeu[premierPion+9]=="BP"||jeu[premierPion+11]=="BP")){
+                                    if(numPion == premierPion +18  &&(jeu[premierPion+9]=="B"||jeu[premierPion+9]=="BP")){
+                                        jeu[premierPion+9]="V"
+                                    }else{
+                                        if(numPion == premierPion +22 && jeu[premierPion+11]=="B"||jeu[premierPion+11]=="BP"){
+                                            jeu[premierPion+11]="V"
+                                        }
+                                    }
+                                    numClic = 1
+                                    
+                                    
+                                    
+                                    
+                                    // Promotion
+                                    if(numPion >= 90  ){
+                                        jeu[numPion] = "NP"                      
+                                    }else{
+                                        jeu[numPion] = "N"
+                                        
+                                        
+                                    }
+                                    jeu[premierPion] = "V"
+                                }else{
+                                    alert("Déplacement uniquement en diagonale et sur une case vide")
+                                    numClic = 1
+                                    changerTour()
+                                }
+                                
+                            }
+                            
+                        }else{
+                            if(jeu[premierPion] == "NP"){
+                                
+                                let resultat ;
+                                if(numPion>premierPion){
+                                    resultat = numPion - premierPion
+                                }else{
+                                    resultat = premierPion - numPion
+                                }
+                                
+                                
+                                // Vérification si le déplacement se fait en diagonale
+                                if(resultat%9 ==0){
+                                    
+                                    let nbcase= resultat/9-1
+                                    // Vérification s'il n'y a pas plus d'un pion sur la trajectoire
+                                    let debut;
+                                    if(numPion>premierPion){
+                                        
+                                        debut = premierPion + 9
+                                    }else{
+                                        debut = premierPion-9
+                                    }
+                                    let nbpions = 0
+                                    let nbamis = 0
+                                    let ennemiasupprimer ;
+                                    for (let i = 0 ; i< nbcase;i++){
+                                        if(jeu[debut]!="V"){
+                                            nbpions++
+                                        }
+                                        if(jeu[debut]=="N"){
+                                            nbamis++
+                                        }
+                                        if(jeu[debut] =="B"|| jeu[debut]=="BP"){
+                                            ennemiasupprimer = debut
+                                        }
+                                        if(numPion>premierPion){
+                                            
+                                            debut = debut + 9
+                                        }else{
+                                            debut = debut-9
+                                        }
+                                    }
+                                    if(nbpions <=1&& nbamis==0){
+                                        numClic = 1
+                                        jeu[ennemiasupprimer] ="V"
+                                        jeu[numPion] = "NP"
+                                        jeu[premierPion] = "V"
+                                    }else{
+                                        alert("il y a plus de 2 pions ou des amis sur ton chemin")
+                                        numClic = 1
+                                        changerTour()
+                                    }
+                                    
+                                    
+                                }else{
+                                    if(resultat%11 ==0){
+                                        let nbcase= resultat/11-1
+                                        // Vérification s'il n'y a pas plus d'un pion sur la trajectoire
+                                        let debut;
+                                        if(numPion>premierPion){
+                                            
+                                            debut = premierPion + 11
+                                        }else{
+                                            debut = premierPion-11
+                                        }
+                                        let nbpions = 0
+                                        let nbamis = 0
+                                        // Check de la présence de pions sur la trajectoire
+                                        let ennemiasupprimer ;
+                                        for (let i = 0 ; i< nbcase;i++){
+                                            if(jeu[debut]!="V"){
+                                                nbpions++
+                                            }
+                                            if(jeu[debut]=="N"||jeu[debut]=="NP"){
+                                                nbamis++
+                                            }
+                                            if(jeu[debut] =="B"|| jeu[debut]=="BP"){
+                                                ennemiasupprimer = debut
+                                            }
+                                            if(numPion>premierPion){
+                                                
+                                                debut = debut + 11
+                                            }else{
+                                                debut = debut-11
+                                            }
+                                        }
+                                        // Trajectoire ok : o   s d'amis et moins de deux pions sur le chemin
+                                        if(nbpions <=1&& nbamis==0){
+                                            
+                                            numClic = 1
+                                            jeu[ennemiasupprimer]="V"
+                                            jeu[numPion] = "NP"
+                                            jeu[premierPion] = "V"
+                                        }else{
+                                            alert("il y a plus de 2 pions ou des amis sur ton chemin")
+                                            numClic = 1
+                                            changerTour()
+                                        }
+                                        
+                                    }
+                                }
+                                
+                            }else{
+                                if(jeu[premierPion] == "BP"){
+                                    let resultat ;
+                                    if(numPion>premierPion){
+                                        resultat = numPion - premierPion
+                                    }else{
+                                        resultat = premierPion - numPion
+                                    }
+                                    
+                                    
+                                    // Vérification si le déplacement se fait en diagonale
+                                    if(resultat%9 ==0){
+                                        
+                                        let nbcase= resultat/9-1
+                                        
+                                        // Vérification s'il n'y a pas plus d'un pion sur la trajectoire
+                                        let debut;
+                                        //Si le pion va vers le bas
+                                        if(numPion>premierPion){
+                                            
+                                            debut = premierPion + 9
+                                        }else{
+                                            debut = premierPion-9
+                                        }
+                                        let nbpions = 0
+                                        let nbamis = 0
+                                        let ennemiasupprimer ; 
+                                        
+                                        for (let i = 0 ; i< nbcase;i++){
+                                            
+                                            if(jeu[debut]!="V"){
+                                                nbpions++
+                                            }
+                                            if(jeu[debut]=="B"||jeu[debut]=="BP"){
+                                                nbamis++
+                                                
+                                            }
+                                            if(jeu[debut] =="N"|| jeu[debut]=="NP"){
+                                                ennemiasupprimer = debut
+                                            }
+                                            if(numPion>premierPion){
+                                                
+                                                debut = debut + 9
+                                            }else{
+                                                debut = debut-9
+                                            }
+                                            
+                                        }
+                                        if(nbpions <=1&& nbamis==0){
+                                            numClic = 1
+                                            jeu[ennemiasupprimer]="V"
+                                            jeu[numPion] = "BP"
+                                            jeu[premierPion] = "V"
+                                        }else{
+                                            alert("il y a plus de 2 pions ou des amis sur ton chemin")
+                                            numClic = 1
+                                            changerTour()
+                                        }
+                                        
+                                        
+                                    }else{
+                                        if(resultat%11 ==0){
+                                            let nbcase= resultat/11-1
+                                            // Vérification s'il n'y a pas plus d'un pion sur la trajectoire
+                                            let debut;
+                                            if(numPion>premierPion){
+                                                
+                                                debut = premierPion + 11
+                                            }else{
+                                                debut = premierPion-11
+                                            }
+                                            let nbpions = 0
+                                            let nbamis = 0
+                                            let ennemiasupprimer ;
+                                            for (let i = 0 ; i< nbcase;i++){
+                                                if(jeu[debut]!="V"){
+                                                    nbpions++
+                                                }
+                                                if(jeu[debut]=="B"||jeu[debut]=="BP"){
+                                                    nbamis++
+                                                } if(jeu[debut] =="N"|| jeu[debut]=="NP"){
+                                                    ennemiasupprimer = debut
+                                                }
+                                                
+                                                if(numPion>premierPion){
+                                                    
+                                                    debut = debut + 11
+                                                }else{
+                                                    debut = debut-11
+                                                }
+                                            }
+                                            if(nbpions <=1&& nbamis==0){
+                                                numClic = 1
+                                                jeu[ennemiasupprimer]="V"
+                                                jeu[numPion] = "BP"
+                                                jeu[premierPion] = "V"
+                                            }else{
+                                                alert("Déplacement uniquement en diagonale")
+                                                numClic = 1
+                                                changerTour()
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                    }
+                    
+                    
+                }else{
+                    alert("erreur tu ne peux pas te deplacer sur toi meme ")
+                    numClic = 1
+                changerTour()
+                }
+                checkFinPartie();
+            }
+            afficher();
+        }
+        
+        function changerTour(){
+            if(tour == "B"){
+                tour = "N"
+            }else{
+                tour = "B"
+            }
+        }
+        
+        function checkFinPartie(){
+            if (!jeu.includes("B") && !jeu.includes("BP")) {
+                alert("noir gagner")
+                window.location.href="index.html"
+            }  
+                
+            if (!jeu.includes("N") && !jeu.includes("NP")) {
+                alert("blanc gagner")
+                window.location.href="../index.html"
+            }
+
+            
+        }
+        
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,73 @@
+@font-face {
+  font-family: PressStart2P;
+  src: url(PressStart2P.ttf);
+}
+
+body{
+	background-image: url(../img/imageFond.jpg);
+	background-size: cover;
+	text-align: center;
+}
+
+#titre{
+	height: 90px;
+	width: 400px;
+	background-image: url(../img/bouton.png);
+	background-position: center;
+	background-size: cover;
+	margin: auto;
+	font-size: large;
+	font-family: 'PressStart2P', cursive;
+	color: white;
+	line-height: 89px;	
+}
+
+#button1{
+	height: 72px;
+	width: 282px;
+	background-image: url(../img/bouton.png);
+	background-position: center;
+	background-size: cover;
+	margin: auto;
+	font-size: large;
+	font-family: 'PressStart2P', cursive;
+	color: white;
+	line-height: 71px;
+	margin-top: 125px;
+	text-decoration: underline #815A0C;
+}
+
+#button2{
+	height: 70px;
+	width: 282px;
+	background-image: url(../img/bouton.png);
+	background-position: center;
+	background-size: cover;
+	margin: auto;
+	font-size: large;
+	font-family: 'PressStart2P', cursive;
+	color: white;
+	line-height: 69px;
+	margin-top: 40px;
+	text-decoration: underline #815A0C;
+}
+
+#button3{
+	height: 70px;
+	width: 282px;
+	background-image: url(../img/bouton.png);
+	background-position: center;
+	background-size: cover;
+	margin: auto;
+	font-size: large;
+	font-family: 'PressStart2P', cursive;
+	color: white;
+	line-height: 69px;
+	margin-top: 40px;
+	text-decoration: underline #815A0C;
+}
+
+a{
+	height: 60px;
+	width: 282px;
+}

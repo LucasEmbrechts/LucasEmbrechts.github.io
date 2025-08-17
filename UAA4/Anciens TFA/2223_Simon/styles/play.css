@@ -1,0 +1,193 @@
+/*justin ; 4G1;Simon:  les 4 fantastiques ;2022-2023*/
+
+/*bouton qui permet d'accéder au menu*/
+#btn{
+  background-image: url(../images/menu.png);
+  height:100px ;
+  width:400px ;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-top: 20px;
+  float: left;
+  margin-left: 15px;
+  transition: 500ms;
+  margin-top: 10px;
+  position: relative;
+  
+
+}
+/*bouton animation*/
+  
+#btn:hover{
+  filter: brightness(50%);
+  transform: scale(1.1);
+}
+
+body{
+background-color:gray;
+}
+
+/*div qui contient tout les personnages */
+.personnages{
+  width: 65%;
+  height: auto;
+  position: absolute;
+  margin-top: 150px;
+  margin-left: 25px;
+
+
+
+
+}
+/*petit div dans la div personnage qui contient monsieur fantastique*/
+#msrfantastique{
+  background-image: url(../images/personnages/msrfantastique.png);
+  width:600px ;
+  height: 400px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: white;
+  opacity: 0.9;
+  display:inline-block ;
+  border: 2px solid green;
+  margin: 5px;
+
+  
+}
+/*petit div dans la div personnage qui contient janestorm */
+#janestorm{
+  background-image: url(../images/personnages/femmeinvisible.png);
+  width:600px ;
+  height: 400px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: white;
+  opacity: 0.9;
+  display:inline-block ;
+  border: 2px solid blue;
+  margin: 5px;
+}
+/*petit div dans la div personnage qui contient torche humaine*/
+  #torche{
+  background-image: url(../images/personnages/torche-removebg-preview.png);
+  width:600px ;
+  height: 400px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: white;
+  opacity: 0.9;
+  display:inline-block ;
+  border: 2px solid red;
+  margin: 5px;
+  }
+/*petit div dans la div personnage qui contient choose */
+  #choose{
+  background-image: url(../images/personnages/choose.png);
+  width:600px ;
+  height: 400px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color:white;
+  opacity: 0.9;
+  display:inline-block ;
+  border: 2px solid yellow;
+  margin: 5px;
+
+
+}
+  /*bouton commencer pour démarrer la partie*/       
+  #commencer {
+    background-image: linear-gradient(to right, #314755 0%, #26a0da  51%, #314755  100%);
+    width: 15%;
+    height: 40px;
+    float: right;
+    margin-top: 200px;
+    margin-right: 100px;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: background-position 500ms;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: 0 0 20px #eee;
+    border-radius: 20px;
+    display: block;
+    font-family: cursive;
+
+    }
+/*animation du bouton*/
+    #commencer:hover {
+      background-position: right center; /* change the direction of the change here */
+      color: #fff;
+      text-decoration: none;
+    }
+/*bouton redémarrer*/
+    #redemarrer{
+      background-image: linear-gradient(to right, #314755 0%, #26a0da  51%, #314755  100%);
+      width: 15%;
+      height: 40px;
+      float: right;
+      margin-top: 400px;
+      margin-right: -375px;
+      padding: 15px 45px;
+      text-align: center;
+      text-transform: uppercase;
+      transition: 0.5s;
+      background-size: 200% auto;
+      color: white;            
+      box-shadow: 0 0 20px #eee;
+      border-radius: 20px;
+      display: block;
+      font-family: cursive;
+      }
+
+/*animation du bouton*/
+    #redemarrer:hover {
+      background-position: right center; /* change the direction of the change here */
+      color: #fff;
+      text-decoration: none;
+    }
+     
+     /*afficher l'écran perdu*/
+    #perdu{
+      z-index: 10000;
+      position: absolute;
+      width: 100%;
+      height: 100px;
+      background-color: rgba(252, 11, 3, 0.6) ;
+      background-size: 25px;
+      color: white;
+      margin-top: 25%;
+      text-align: center;
+      font-size: 60px;
+      visibility: hidden;
+      font-family: cursive;
+    }
+
+/*score*/
+    #scores{
+      font-size:50px ;
+      text-align: center;
+      height: 250px;
+      width: 25%;
+      float: right;
+      border: 1px solid;
+      margin-top: 650px;
+      margin-right: -400px;
+      border: 1px solid #333;
+      background-color: skyblue;
+      font-family: fantasy;
+      box-shadow: rgba(0,0,255, 0.4) 5px 5px, rgba(0,0,255, 0.3) 10px 10px, rgba(0,0,255, 0.2) 15px 15px, rgba(0,0,255, 0.1) 20px 20px, rgba(0,0,255, 0.05) 25px 25px;
+      
+}
+/*Texte "jouer* et "regarder"*/
+#texteguidage{
+  width: 100px;
+  height: 100px;
+  margin-bottom: 100px;
+  position: absolute; 
+  margin-left: 1500px;
+  font-size: 50px;
+  margin-top: 140px;
+
+}

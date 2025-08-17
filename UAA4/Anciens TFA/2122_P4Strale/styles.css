@@ -1,0 +1,542 @@
+@font-face{
+	font-family: police;
+	src: url(fonts/Road_Rage.otf) format("Opentype");
+}
+body{
+	background-color: #464d7a;
+	margin: 0;
+	padding: 0;
+}
+
+
+/* --------------------------- PAGE D'ACCUEIL -------------------------*/
+#index{
+	background-repeat: no-repeat;
+}
+#titre{
+	height: 230px;
+	width: 1000px;
+	margin-left: 500px;
+	margin-top: -30px;
+}
+#moi{
+	height: 822px;
+	width: 812px;
+	margin-top: 45px;
+	margin-left: 550px;
+	bottom: 0;
+}
+#jouer{
+	height: 40px;
+	width: 90px;
+	position: absolute;
+	top: 765px;
+	left: 875px;
+}
+#règles1{
+	position: absolute;
+	height: 40px;
+	width: 90px;
+	top: 845px;
+	left: 947px;
+}
+#crédits1{
+	position: absolute;
+	height: 40px;
+	width: 90px;
+	top: 925px;
+	left: 1025px;
+}
+.petit{
+	font-size: 15px;
+	margin-left: -26px;
+	margin-top: auto;
+}
+.petit:hover{
+	font-size: 15px;
+	color: black;
+
+}
+
+/* --------------------------CHOIX DES PRÉNOMS ------------------------*/
+#choix{
+	height: 60px;
+	width: 400px;
+	margin-left: 100px;
+	margin-top: 100px;
+	float: left;
+}
+#taille1{
+	height: 60px;
+	width: 400px;
+	margin-left: 400px;
+	font-family: police;
+	margin-top: 30px;
+	font-size: 2em;
+	text-align: center;
+	line-height: 60px;
+	text-decoration: none;
+	background-color: #e8aa15;
+	color: red;
+} 
+#j1{
+	margin-left: 450px;
+	margin-top: 130px;
+	color: red;
+	background-color: #e8aa15;
+	width: 220px;
+	height: 40px;
+	border: 2px solid red;
+	border-radius: 40px;
+	height: 60px;
+	font-family: police;
+	font-size: 15px;
+	float: left;
+}
+#j1:hover{
+	margin-top: 130px;
+	margin-left: 450px;
+	color: red;
+	transition: 0.33s all ease;
+	font-size: 20px;
+	border: 2px solid red;
+	border-radius: 40px;
+	height: 60px;
+	font-family: police;
+}
+#choix1{
+	
+	width: 600px;
+}
+#taille2{
+	height: 60px;
+	width: 400px;
+	margin-top: 200px;
+	margin-left: 500px;
+	font-family: police;
+	font-size: 2em;
+	text-align: center;
+	line-height: 60px;
+	text-decoration: none;
+	background-color: #e8aa15;
+	color: red;
+} 
+#j2{
+	margin-top: -60px;
+	margin-left: 950px;
+	background-color: #e8aa15;
+	transition: 0.33s all ease;
+	width: 220px;
+	color: red;
+	float: left;
+	height: 40px;
+	border: 2px solid red;
+	border-radius: 40px;
+	height: 60px;
+	font-family: police;
+	font-size: 15px;
+}
+#j2:hover{
+	margin-top: -60px;
+	margin-left: 950px;
+	font-size: 20px;
+	border: 2px solid red;
+	border-radius: 40px;
+	height: 60px;
+	color: red;
+	font-family: police;
+}
+#partie{
+	margin-top: -180px;
+	height: 70px;
+	width: 300px;
+	border-top-left-radius : 150px 70px;
+	border-top-right-radius : 150px 70px;
+	border-bottom-left-radius : 150px 70px;
+	border-bottom-right-radius : 150px 70px;
+	text-align: center;
+	background-color: #e8aa15;
+	line-height: 70px;
+	margin-left: 1400px;
+	border: 2px solid red;
+	font-family: police;
+	cursor: pointer;
+	float: left;
+}
+#menu3{
+	height: 70px;
+	width: 150px;
+	border-top-left-radius : 150px 70px;
+	border-top-right-radius : 150px 70px;
+	border-bottom-left-radius : 150px 70px;
+	border-bottom-right-radius : 150px 70px;
+	background-color: #e8aa15;
+	text-align: center;
+	line-height: 70px;
+	margin-left: 100px;
+	margin-top: 80px;
+	border: 2px solid red;
+	float: left;
+	font-family: police;
+	cursor: pointer;
+}
+
+
+
+/* ------------------------------- JEU --------------------------------*/
+#contour{
+	height: 600px;
+	width: 400px;
+	margin-left: 50px;
+	margin-top: 200px;
+	float: left;
+	overflow: hidden;
+	display: inline-block;
+}
+#prénom1{
+	border: 5px solid #e8aa15;
+	height: 30px;
+	width: 300px;
+	margin-top: 15px;
+	margin-left: 25px;
+	border-radius: 40px;	
+	line-height: 30px;
+	color: #e8aa15;
+	font-size: 30px;
+	text-align: center;
+	font-family: police;
+}
+#pionrouge{
+
+	height: 250px;
+	width: 250px;
+	margin-top: 15px;
+	margin-left: 70px;
+	cursor: pointer;
+}
+#prénom2{
+	border: 5px solid #e8aa15;
+	height: 30px;
+	width: 300px;
+	margin-top: 25px;
+	margin-left: 25px;
+	border-radius: 40px;
+	line-height: 30px;
+	color: #e8aa15;
+	font-size: 30px;
+	text-align: center;
+	font-family: police;
+}
+#pionjaune{
+	height: 250px;
+	width: 250px;
+	margin-left: 40px;
+	margin-top: -30px;
+	cursor: pointer;
+}
+#game{
+	width: 1400px;
+	height: 900px;
+	background-repeat: no-repeat;
+	background-position: 0px 230px;
+	background-size: 100%;
+	float: right;
+	margin-left: 50px;
+}
+#plateau{
+
+	margin-top: 200px;
+	height: 688px;
+	width: 800px;
+	margin-right:  10px;
+	float: left; 
+	background-repeat: no-repeat;
+	background-image: url(images/plateau.png);
+}
+#grille{
+	height: 648px;
+	width: 688px;
+	margin-top: 47.5px;
+	margin-left: 65px;
+}
+.case{
+	border: solid 1px black;
+	background-size: 100%;
+	height: 80px;
+	width: 80px;
+	border-radius: 40px;
+	border: 1px solid black;
+	float: left;
+	box-sizing: border-box;
+	margin: 5px 6px ;
+
+}
+#contour1{
+
+	height: 600px;
+	width: 350px;
+	float: right;
+	margin-right: 160px;
+	margin-top: 300px;
+}
+#nbreessais{
+	background-color: #e8aa15;
+	height: 180px;
+	width: 300px;
+	font-size: 25px;
+	border: 5px solid red;
+	font-family: police;
+}
+#phrase{
+	text-align: center;
+}
+#chronomètre{
+	background-color: #e8aa15;
+	height: 150px;
+	width: 300px;
+	margin-top: 25px;
+	font-size: 2em;
+	text-align: center;
+	line-height: 150px;
+	border: 5px solid red;
+	font-family: police;
+}
+#resultat{
+	height: 700px;
+	width: 1300px;
+	border-radius: 80px;
+	background-color: rgba(255,255,255,0.3);
+	border: solid 5px black ;
+	margin-left: 400px;
+	top: 60px;
+	position: absolute;
+	float: middle;
+	display: none;
+	z-index: 100;
+	font-size: 4em;
+	background-repeat: no-repeat;
+	font-family: police;
+}
+#homme{
+	margin-left: 100px;
+	margin-top: 85px;
+	float: left;
+}
+#homme img{
+	width: 100%;
+	height: 100%;
+}
+#nomUtilisateur{
+	height: 100px;
+	width: 700px;
+	margin-left: 40%;
+	margin-top: 90px;
+	text-align: center;	
+}
+#phraseGagner{
+	height: 100px;
+	width: 600px;
+	margin-left: 46%;
+	margin-top: 40px;
+	font-family: police;
+	font-size: 50px;
+}
+#menu2{
+	height: 70px;
+	width: 150px;
+	border-top-left-radius : 150px 70px;
+	border-top-right-radius : 150px 70px;
+	border-bottom-left-radius : 150px 70px;
+	border-bottom-right-radius : 150px 70px;
+	background-color: #e8aa15;
+	text-align: center;
+	line-height: 45px;
+	border: 2px solid red;
+	font-family: police;
+	margin-top: 150px;
+	margin-left: 230px;
+	float: left;
+}
+.recommencer{
+	height: 130px;
+	width: 130px;
+	margin-top: 125px;
+	margin-left: 150px;
+	float: left;
+}
+#egalite{
+	height: 700px;
+	width: 1300px;
+	border-radius: 80px;
+	background-color: rgba(255,255,255,0.3);
+	border: solid 5px black ;
+	margin-left: 400px;
+	top: 60px;
+	position: relative;
+	float: middle;
+	display: none;
+	z-index: 100;
+	background-repeat: no-repeat;
+	font-family: police;
+}
+#balance{
+height: 500px;
+width: 400px;
+margin-left: 100px;
+margin-top: 100px;
+position: absolute;
+}
+
+#phraseEgalite{
+height: 200px;
+width: 600px;
+margin-left: 46%;
+margin-top: 100px;
+font-family: police;
+font-size: 50px;
+position: absolute;
+}
+#menu4{
+height: 70px;
+width: 150px;
+border-top-left-radius : 150px 70px;
+border-top-right-radius : 150px 70px;
+border-bottom-left-radius : 150px 70px;
+border-bottom-right-radius : 150px 70px;
+background-color: #e8aa15;
+text-align: center;
+line-height: 70px;
+margin-top: 480px;
+border: 2px solid red;
+font-family: police;
+margin-left: 685px;
+float: left;
+position: absolute;
+}
+
+#recommencer{
+height: 130px;
+width: 130px;
+margin-left: 990px;
+float: left;
+position: absolute;
+margin-top:  455px;
+}
+
+
+
+/* ---------------------------- REGLES ET CREDITS ----------------------------*/
+header {
+	width: 1000px;
+	height: 60px;
+	margin-left: 19%;
+	border-radius: 40px;
+	border: 2px solid #e8aa15;
+	line-height: 60px;
+	font-size: 2em;
+	margin-top: 60px;
+	color: #e8aa15;
+	font-family: police;
+}
+section{
+	border: 2px solid #e8aa15;
+	height: 450px;
+	width: 800px;
+	border-radius: 40px;
+	margin-left: 10%;
+	margin-top: 30px;
+	float: left;
+	line-height: 20px;
+	text-align: center;
+	color: #e8aa15;
+	font-family: police;
+}
+#règles{
+	margin-top: 70px;
+	font-family: "police";
+}
+aside{
+
+	height: 500px;
+	width: 500px;
+	margin-left: 55%;
+	margin-top: 30px;
+	border-radius: 40px;
+	border: 2px solid #e8aa15;
+	font-family: police;
+
+}
+#boite{
+	border-radius: 38px;
+}
+#menu{
+	height: 70px;
+	width: 150px;
+	border-top-left-radius : 150px 70px;
+	border-top-right-radius : 150px 70px;
+	border-bottom-left-radius : 150px 70px;
+	border-bottom-right-radius : 150px 70px;
+	text-align: center;
+	background-color: #e8aa15;
+	line-height: 60px;
+	margin-top: -60px;
+	margin-left: 20px;
+	border: 2px solid red;
+	font-family: police;
+}
+a{
+	font-size: 20px;
+	text-decoration: none;
+	color: red;
+	font-family: police;
+}
+a:hover{
+	color: red;
+	font-size: 25px;
+	text-decoration: none;
+	color: red;
+	transition: 0.33s all ease;
+	font-family: police;
+
+}
+#fondcrédits{
+	height: 500px;
+	width: 1000px;
+	margin-left: 19%;
+	float: left;
+	border: 2px solid #e8aa15;
+}
+#crédits{
+	height: 200px;
+	width: 300px;
+	float: left;
+	margin-left: 150px;
+	margin-top: 150px;
+	font-size: 2em;
+	color: #e8aa15;
+}
+#photo{
+	margin-right: 10%;
+	margin-left: 60%;
+	margin-top: 30px;
+	height: 420px;
+	width: 370px;
+	
+}
+#menu1{
+	height: 70px;
+	width: 150px;
+	border-top-left-radius : 150px 70px;
+	border-top-right-radius : 150px 70px;
+	border-bottom-left-radius : 150px 70px;
+	border-bottom-right-radius : 150px 70px;
+	text-align: center;
+	background-color: #e8aa15;
+	line-height: 70px;
+	margin-top: 600px;
+	margin-left: 20px;
+	border: 2px solid red;
+	font-family: police;
+	cursor: pointer;
+
+}

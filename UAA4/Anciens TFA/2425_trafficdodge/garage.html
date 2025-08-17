@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="CSS/garage.css">
+</head>
+<body>
+    <div id="voiture"></div>
+    <div id="gc" onclick="clgc()"></div>
+    <div id="dr" onclick="cldr()"></div>
+    <script>
+    let voitures=["SOURCES/IMG/mazda1.png","SOURCES/IMG/jeep1.png","SOURCES/IMG/masserati1.png"]
+    let voituresJoueur = ["SOURCES/IMG/m1.png","SOURCES/IMG/vo1.png","SOURCES/IMG/vo3.png"]
+    let position=0
+    dessiner()
+    
+    
+    function dessiner(){
+        let voiture=document.getElementById("voiture")
+        voiture.style.backgroundImage='url('+voitures[position]+')'
+
+
+    }
+    function clgc(){
+        position-=1 
+        if( position<0){
+            position=4
+        }
+        localStorage.setItem("voiture",voituresJoueur[position])
+        dessiner()
+
+
+    }
+    function cldr(){
+        position=position+1
+        if(position>4){
+            position=0
+        }
+        localStorage.setItem("voiture",voituresJoueur[position])
+        dessiner()
+    }
+    
+    
+    </script>
+    <button id="b1" onclick="window.location.href='projet.html'">projet</button>
+</body>
+</html>

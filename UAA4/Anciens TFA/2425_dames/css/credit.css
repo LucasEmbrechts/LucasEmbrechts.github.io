@@ -1,0 +1,45 @@
+html{
+    height: 100%;
+    margin: 0;
+
+}
+body{
+    background-image:url("../source/imgcredit.png");
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+p{
+    color: aqua;
+}
+h1{
+    color: aqua;
+    text-align: center;
+}
+img{
+    margin-left: 476px;
+    height: 750px;
+}
+button{  
+    height: 120px;
+    width: 150px;
+    margin-left: 40%; 
+    margin-top: 620px;
+    border: solid rgb(5, 209, 209) 2px;
+    background-color: black;
+    color:white;
+    opacity: 80%;
+    font-size: 16px;
+    cursor: pointer; 
+    border-radius: 12px;
+} 
+a{
+    margin-right: 430px; 
+}
+#centrecredit{
+    margin-right: 320px;
+    text-align: center;
+}

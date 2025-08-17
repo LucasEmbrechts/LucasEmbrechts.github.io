@@ -1,0 +1,87 @@
+ html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background-image: url("../SOURCES/IMG/nom.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .loader-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1000;
+            color: yellow;
+            font-size: 2rem;
+            font-family: Arial, sans-serif;
+            transition: opacity 1s ease-in-out;
+        }
+        .loading-bar {
+            width: 300px;
+            height: 20px;
+            background: grey;
+            margin-top: 20px;
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .loading-progress {
+            width: 0;
+            height: 100%;
+            background: yellow;
+            animation: load 2s forwards;
+        }
+        @keyframes load {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+        #b2 {
+            display: none;
+            text-align: center;
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        #bb {
+            font-size: 1.5rem;
+            padding: 15px 30px;
+        }
+        #rejouer{
+            position: absolute;
+            left: 500px;
+            top:500px;
+            height: 50px;
+            width: 200px;
+            background-color: blue;
+
+        }
+        #boutton {
+            display: none;
+            justify-content: center;
+            gap: 200px;
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        #boutton button {
+            font-size: 1.5rem;
+            padding: 20px 40px;
+            animation: changeColor 3s infinite alternate;
+            transition: background-color 0.5s, color 0.5s;
+        }
+        @keyframes changeColor {
+            0% { background-color: yellow; color: black; }
+            50% { background-color: orange; color: white; }
+            100% { background-color: red; color: black; }
+        }

@@ -1,0 +1,29 @@
+@font-face{
+	font-family: indie;
+	src:url(IndieFlower.ttf);
+}
+
+body{
+	background-image: url(./img/accueil.jpg);
+	font-family: indie;
+}
+.lien{
+	top: 60px;
+	text-align: center;
+	background-image: url(./img/button.png);
+	background-repeat: no-repeat;
+	min-width: 50px;
+	height: 100px;
+	margin: 10px auto;
+	left: 500px;
+	background-position: center;
+    line-height: 100px;
+}
+
+#container{
+	width: 450px;
+	height: : 450px;
+	margin: 200px auto;
+	background-color: rgba(255,255,255,0.8);
+	padding: 40px;
+}

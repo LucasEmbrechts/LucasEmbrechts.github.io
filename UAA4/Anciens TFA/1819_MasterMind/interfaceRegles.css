@@ -1,0 +1,45 @@
+#interfaceRegles{
+	display: none;
+	text-align: justify;
+	height: 720px;
+	width: 1280px;
+	background-color: #929292;
+	margin: auto;
+	position: relative;
+	margin-top: 100px;
+}
+#boxRegles{
+	width: 1280px;
+	height: 720px;
+	background-color: white;
+	border: solid 5px black;
+}
+#reglesTitle{
+	text-align: center;
+	margin-top: 10px;
+}
+#returnPlay{
+	font-family: Army;
+	font-size: 16px;
+	color: white;
+	height: 30px;
+	width: 150px;
+	left: 35px;
+	bottom: 75px;
+	position: relative;
+	background-color: #393a3b;
+	border: none;
+	display: none;
+	border: solid 2px black;
+	cursor: pointer;
+	margin-top: -18px;
+}
+#red{
+	color: red;
+}
+#blue{
+	color: blue;
+}
+#green{
+	color: green;
+}

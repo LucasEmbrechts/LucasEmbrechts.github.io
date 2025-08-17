@@ -1,0 +1,12 @@
+body{
+    background-image: url(../source/creditSansRetour.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+}
+#retour{
+    right: 0px;
+    top: 0px;
+}
