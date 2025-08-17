@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAA7 – Bases de données</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --db-blue: #2563eb;
+            --db-cyan: #06b6d4;
+            --db-light: #f0faff;
+            --db-dark: #172554;
+            --db-accent: #0ea5e9;
+            --db-white: #ffffff;
+            --text-light: #64748b;
+        }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(133deg, #e0eafe 0%, #ccfbf1 95%);
+            font-family: 'Inter', sans-serif;
+            color: var(--db-dark);
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .header {
+            text-align: center;
+            padding: 2rem 1rem 2.2rem 1rem;
+            border-radius: 2rem;
+            background: rgba(232,245,255,0.92);
+            margin-bottom: 2.2rem;
+            box-shadow: 0 8px 36px #06b6d419;
+        }
+        .db-badge {
+            display: inline-block;
+            background: var(--db-cyan);
+            color: var(--db-dark);
+            border-radius: 14px;
+            padding: 9px 26px 11px 26px;
+            font-weight: 900;
+            font-size: 1.15rem;
+            margin-bottom: 1rem;
+            font-family: 'Inter', monospace, sans-serif;
+            letter-spacing: 0.06em;
+            box-shadow: 0 3px 16px #0891b219;
+            border: 2px solid var(--db-accent);
+            position: relative;
+        }
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--db-white);
+            background: var(--db-blue);
+            display: inline-block;
+            border-radius: 18px;
+            padding: 0.34em 1.1em;
+            box-shadow: 0 2px 12px #0ea5e948;
+            margin-bottom: 0.7rem;
+            letter-spacing: 1px;
+            border: 3px solid var(--db-accent);
+            text-shadow: 1.5px 1.5px 0 #17255498, 1px 1px 20px #0ea5e95e;
+        }
+        .header p {
+            max-width: 570px;
+            margin: 0 auto;
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 1.09rem;
+        }
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 2rem;
+        }
+        .module-card {
+            background: var(--db-white);
+            border-radius: 1.2rem;
+            box-shadow: 0 6px 24px #0ea5e918;
+            padding: 1.40rem 2rem 1.2rem 2rem;
+            border: 2px solid var(--db-cyan);
+            transition: box-shadow .19s, transform .21s;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .module-card:hover {
+            box-shadow: 0 14px 43px #06b6d425;
+            transform: translateY(-7px) scale(1.013);
+        }
+        .module-number {
+            display: inline-block;
+            background: var(--db-cyan);
+            color: var(--db-dark);
+            font-weight: 800;
+            border-radius: 22px;
+            padding: 0.24rem 1.1rem;
+            font-size: 1.01rem;
+            margin-bottom: .4rem;
+            border: 1.5px solid #0891b2;
+            letter-spacing: .04em;
+        }
+        .module-title {
+            font-size: 1.16rem;
+            font-weight: 700;
+            margin-bottom: .34rem;
+        }
+        .module-desc {
+            color: var(--text-light);
+            margin-bottom: 1.02rem;
+            font-size: 0.99rem;
+        }
+        .resource-list {
+            margin-bottom: .5rem;
+        }
+        .resource-list a {
+            display: inline-block;
+            margin-right: .7em;
+            margin-bottom: .16em;
+            background: var(--db-cyan);
+            color: var(--db-dark);
+            padding: .16em .95em;
+            border-radius: 11px;
+            font-size: .96em;
+            font-weight: 550;
+            text-decoration: none;
+            border: 1.5px solid var(--db-blue);
+            transition: background .12s, color .12s;
+        }
+        .resource-list a:hover {
+            background: var(--db-dark);
+            color: var(--db-cyan);
+            border-color: var(--db-cyan);
+        }
+        .module-link {
+            display: inline-flex;
+            align-items: center;
+            gap: .5em;
+            background: var(--db-accent);
+            color: var(--db-white);
+            font-weight: 700;
+            text-decoration: none;
+            padding: .52em 1.28em;
+            border-radius: 16px;
+            font-size: 1.06rem;
+            border: 2px solid var(--db-blue);
+            margin-bottom: .22rem;
+            box-shadow: 0 0px 7px #0ea5e956;
+            transition: background .18s, color .13s, box-shadow .14s;
+        }
+        .module-link:hover {
+            background: var(--db-dark);
+            color: var(--db-cyan);
+            box-shadow: 0 5px 20px #0891b235;
+            border-color: var(--db-cyan);
+        }
+        .footer {
+            text-align: center;
+            padding: 2.1rem 0 1rem 0;
+            color: var(--db-dark);
+            font-size: 1rem;
+            opacity: .80;
+            margin-top: 2.3rem;
+        }
+        @media (max-width: 830px) {
+            .header h1 { font-size: 1.1rem;}
+            .modules-grid { grid-template-columns: 1fr;}
+            .module-card { padding: 1rem;}
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .module-card { animation: fadeInUp 0.6s cubic-bezier(.4,0,.2,1);}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="db-badge">BD</div>
+            <div><h1>UAA7 – Bases de données</h1></div>
+            <p>
+                Introduction à la logique des bases de données relationnelles : modélisation graphique et manipulation des données avec le langage SQL.
+            </p>
+        </header>
+        <div class="modules-grid">
+            <div class="module-card">
+                <span class="module-number">1</span>
+                <div class="module-title">Modélisation conceptuelle</div>
+                <div class="module-desc">
+                    Comprendre et modéliser un système d’information en identifiant les entités, les associations et la structure conceptuelle des données (diagramme EA/MCD).
+                </div>
+                <div class="resource-list">
+                    <a href="https://www.db-main.eu/getit" download>🔗 DB-Main (UNamur)</a>
+                </div>
+            </div>
+            
+            <div class="module-card">
+                <span class="module-number">2</span>
+                <div class="module-title">Modélisation logique</div>
+                <div class="module-desc">
+                    Traduire le MCD en modèle relationnel, créer des tables, définir les clés primaires et étrangères, normaliser les données et préparer le schéma relationnel.
+                </div>
+                <!--
+                <div class="resource-list">
+                    <a href="module2/relations.pdf" download>Relations & Clés</a>
+                </div>
+                <a href="module2/index.html" class="module-link" target="_blank">📑 Explorer</a>
+            -->
+            </div>
+        
+            <div class="module-card">
+                <span class="module-number">3</span>
+                <div class="module-title">Le langage SQL</div>
+                <div class="module-desc">
+                    Initiation et pratique du langage SQL : création de bases, requêtes SELECT, filtrage, jointures, ajouts, suppressions et modifications de données.
+                </div>
+                <div class="resource-list">
+                    <a href="https://pic.crzt.fr/dbdisco" download>🔗 DB Disco</a>
+                    <a href="sql-basics-cheat-sheet-a4.pdf" download>📜 sql-basics-cheat-sheet-a4.pdf</a>
+                    <a href="entreprise.sql" download>💾 entreprise.sql</a>
+                    <a href="films.sql" download>💾 films.sql</a>
+                    <a href="zoo.sql" download>💾 zoo.sql</a>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            UAA7 — Bases de données relationnelles • Institut Notre-Dame de Beauraing • 2024-2025
+        </footer>
+    </div>
+</body>
+</html>
