@@ -1,0 +1,38 @@
+body {
+	background-color: #d3c8ab;
+}
+
+#histoire {
+	width: 450px;
+	height: auto;
+	margin: auto;
+	border: 10px solid #664d0a;
+	background-color: #fff;
+	padding: 20px;
+}
+
+
+.deco{
+	width: 150px;
+	height: auto;
+}
+
+#laterale {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 125px;
+	height: 100%;
+	background-color: #000;
+	margin: 0px;
+	padding: 0px;
+	color: white;
+}
+
+#laterale button{
+	max-width: 75px;
+	margin: 10px auto 10px auto;
+	display: block;
+}
+
+

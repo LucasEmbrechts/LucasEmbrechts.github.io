@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css?family=Rock+Salt');
+
+.heart {
+	height: 30px;
+	width: auto;
+	float: left;
+	margin: 4px 2px 5px 2px;
+}
+
+#spaceButtons {
+	display: none;
+	margin: auto;
+	width: 600px;
+}
+
+#spaceGame {
+	height: 300px;
+	width: 520px;
+	position: relative;
+	border: 5px solid #eee;
+	margin: 30px auto 30px auto;
+	
+	background-image: url("img/background.png");
+	background-size: cover;
+	display: none;
+	text-align: center;
+	box-shadow: 0px 0px 10px #888888;
+}
+
+#perso{
+	position: absolute;
+	bottom: 40px;
+	left: 200px;
+	width: 100px;
+}
+
+#mario{
+	width: inherit;
+}
+
+#mechant{
+	position: absolute;
+	bottom: 40px;
+	right: 10px;
+	width: 60px;
+	height: 60px;
+	display: none;
+	background-image: url("img/tortue.png");
+	background-size: cover;
+}
+
+#mechant:hover{
+	background-image: url("img/tortueBad.png");
+}
+
+#barreDeVie {
+	position: absolute;
+	bottom: 0px;
+	width: inherit;
+	height: 40px;
+	background: #000;
+	padding-left: 10px;
+	box-sizing : border-box;
+	text-align: center;
+	color: #fff;
+	font-size: 15px;
+	font-family: 'Rock Salt', cursive;
+}
+
+#spaceOrigin {
+	width: 200px;
+	font-family: 'Rock Salt', cursive;
+	font-weight: 400;
+	margin: auto;
+	background: linear-gradient(#0a2754, #031533); 
+	border-radius: 5px;
+	border: none;
+	color : #fff;
+	text-align: center;
+	cursor: pointer;
+}

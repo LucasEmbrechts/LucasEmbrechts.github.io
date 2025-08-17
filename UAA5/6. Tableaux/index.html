@@ -1,0 +1,26 @@
+<html>
+<head>
+	<title>Exercice Tableaux</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div id="contenu">
+		<h1>Notes de cours</h1>
+		<div id="tableauNotes"></div>
+		<div id="ajouter">
+			<input type="number" id="insertion"></input>
+			<button onclick="fctAjouter()">Ajouter cette note</button>
+		</div>
+	</div>
+	
+
+	<div id="buttons">
+		<button id="total" onclick="fctTotal()">Calculez le total</button><div id="rsltTotal" class="rslt"></div>
+		<button id="moyenne" onclick="fctMoyenne()">Calculez la moyenne</button><div id="rsltMoyenne" class="rslt"></div>
+		<button id="maximum" onclick="fctMaximum()">Calculez le maximum</button><div id="rsltMaximum" class="rslt"></div>
+		<button id="minimum" onclick="fctMinimum()">Calculez le minimum</button><div id="rsltMinimum" class="rslt"></div>
+	</div>
+
+	<script type="text/javascript" src="script.js"></script>
+</body>
+</html>

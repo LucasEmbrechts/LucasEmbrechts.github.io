@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Perso</title>
+	<meta charset="UTF-8"/>
+	<script src="script.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+<body>
+	<div id="spaceOrigin" onClick="displayDecors()">Click me!</div>
+
+	<div id="spaceButtons">
+		Attribuez un nombre de vies à votre personnage
+		<input type="number" id="nombreVies" placeholder="indiquez Quelque chose ici"/>
+		<button onClick="generateLife(nombreVies.value)">Générez la vie</button>
+	</div>
+	<div id="spaceGame">
+		<div id="perso"></div>
+		<div id="mechant" onMouseOver="toucheMechant();"></div>
+		<div id="barreDeVie"></div>
+	</div>
+</body>
+</html>

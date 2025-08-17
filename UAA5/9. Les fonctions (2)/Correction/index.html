@@ -1,0 +1,24 @@
+<html>
+<head>
+	<title>RVB Converter - Interrogation sur les fonctions</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+	<div id="wrapper">
+		<p> Insérez une couleur au format CMJN, afin de connaitre son homologue en RVB
+		<div id="formuaire">
+			<br><label>Cyan : </label>		<input id="cyan" value="0"/> %
+			<br><label>Magenta : </label>	<input id="magenta" value="0"/> %
+			<br><label>Jaune : </label>		<input id="jaune" value="0"/> %
+			<br><label>Noir : </label>		<input id="noir" value="0"/> %
+			<br><br><button onClick="convert(cyan.value, magenta.value, jaune.value, noir.value)">Convertir</button>
+		</div>
+	</div>
+
+	<div id="rslt">---</div>
+	<div id="ColoredSquare"></div>
+	
+<script type="text/javascript" src="myScript.js"></script>
+</body>
+</html>

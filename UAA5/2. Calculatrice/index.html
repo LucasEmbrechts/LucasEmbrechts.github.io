@@ -1,0 +1,45 @@
+<html>
+<head>
+	<title>Ma calculatrice</title>
+	<meta chqrset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script type="text/javascript" src="myScript.js"></script>
+</head>
+<body>
+	<div id="myCalculette">
+		<input type="number" id="operande1" name="operande1" value="" class="myInput">
+		<input type="button" value="0" onclick="ajouterNombre(0,operande1)">
+		<input type="button" value="1" onclick="ajouterNombre(1,operande1)">
+		<input type="button" value="2" onclick="ajouterNombre(2,operande1)">
+		<input type="button" value="3" onclick="ajouterNombre(3,operande1)">
+		<input type="button" value="4" onclick="ajouterNombre(4,operande1)">
+		<input type="button" value="5" onclick="ajouterNombre(5,operande1)">
+		<input type="button" value="6" onclick="ajouterNombre(6,operande1)">
+		<input type="button" value="7" onclick="ajouterNombre(7,operande1)">
+		<input type="button" value="8" onclick="ajouterNombre(8,operande1)">
+		<input type="button" value="9" onclick="ajouterNombre(9,operande1)">
+
+		<input type="number" id="operande2" name="operande2" value="" class="myInput">
+		<input type="button" value="0" onclick="ajouterNombre(0,operande2)">
+		<input type="button" value="1" onclick="ajouterNombre(1,operande2)">
+		<input type="button" value="2" onclick="ajouterNombre(2,operande2)">
+		<input type="button" value="3" onclick="ajouterNombre(3,operande2)">
+		<input type="button" value="4" onclick="ajouterNombre(4,operande2)">
+		<input type="button" value="5" onclick="ajouterNombre(5,operande2)">
+		<input type="button" value="6" onclick="ajouterNombre(6,operande2)">
+		<input type="button" value="7" onclick="ajouterNombre(7,operande2)">
+		<input type="button" value="8" onclick="ajouterNombre(8,operande2)">
+		<input type="button" value="9" onclick="ajouterNombre(9,operande2)">
+
+		<button onclick="addition(operande1.value, operande2.value)" class="myButton">+</button>
+		<button onclick="soustraction(operande1.value, operande2.value)" class="myButton">-</button>
+		<button onclick="multiplication(operande1.value, operande2.value)" class="myButton">X</button>
+		<button onclick="division(operande1.value, operande2.value)" class="myButton">/</button>
+		<button onclick="aireCercle(operande1.value)" class="myButton">Aire cercle</button>
+		<button onclick="perimetreCercle(operande1.value)" class="myButton">Périmètre cercle</button>
+		<button onclick="comparaison(operande1.value, operande2.value)" class="myButton">Comparaison</button>
+		<button onclick="parite(operande1.value)" class="myButton">Parité</button>
+		<div id="myResult" class="myInput"></div>
+	</div>
+</body>
+</html>

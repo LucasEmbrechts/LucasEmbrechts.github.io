@@ -1,0 +1,56 @@
+body{
+	font-family: 'Courier New';
+}
+
+h1{
+	text-align: center;
+}
+
+button{
+	text-align: center;
+	width: 200px;
+	font-size: 0.8em;
+	margin:10px auto;
+}
+
+#contenu{
+	width: 50%; 
+	margin: auto;
+	float: left;
+}
+
+#buttons{
+	width: 50%;
+	float: left;
+	margin-top: 50px;
+}
+
+#ajouter{
+	width: 200px; 
+	margin: 40px auto 0px auto;
+	display: block;
+	clear: both;
+}
+
+#insertion{
+	width: 200px;
+}
+
+.case{
+	height: 30px;
+	width: 100px;
+	border: 1px solid black;
+	margin: 5px auto; 
+	text-align: center; 
+	line-height: 30px;
+}
+
+.rslt{
+	text-align: center;
+	width: 200px;
+	height: 40px;
+	border: 1px dotted #ddd;
+	font-size: 2em;
+	margin-top:10px;
+	line-height: 40px; 
+}

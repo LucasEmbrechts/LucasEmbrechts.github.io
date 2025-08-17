@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventaire Minecraft</title>
+    <style>
+        @font-face { font-family: Minecraft; src: url('minecraft_font/1_Minecraft-Regular.woff'); } 
+        body {
+            font-family: 'Minecraft', sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #inventaire {
+            display: grid;
+            grid-template-columns: repeat(9, 50px);
+            grid-gap: 5px;
+        }
+
+        .case {
+            width: 50px;
+            height: 50px;
+            background-color: #333;
+            border: 1px solid #555;
+            display: flex;
+  			align-items: center;
+            font-size: 1.6em;
+            position: relative;
+            background-size:cover;
+        }
+
+        .quantite{
+            position:absolute;
+            right: 0;
+            bottom: -7px;
+            font-family:'Minecraft'
+        }
+		
+		span{
+		    user-select: none;
+			cursor: grab;
+		}
+		
+    </style>
+</head>
+<body>
+    <div id="inventaire">
+    </div>
+	
+	
+	<script>
+	
+		let inv = ["pioche.png", "hache.png", "pain.png", "brique.png"];
+		let quantite = [1,2,3,10];
+		dessiner();
+
+		
+		function dessiner(){
+			for(let i = 0; i <inv.length; i++){
+				let elem = document.createElement("div");
+				elem.className = "case";
+				elem.style.backgroundImage = "url(images/" + inv[i] + ")";
+				elem.onclick = function (){retirer(i)};
+				document.getElementById("inventaire").appendChild(elem);
+				let elem2 = document.createElement("span");
+				elem2.className = "quantite";
+				elem2.innerHTML = quantite[i];
+				elem.appendChild(elem2);
+			}
+		}
+		
+		function retirer(pos){
+			if(quantite[pos] > 0){
+				document.getElementById("inventaire").innerHTML = "";
+				quantite[pos]--;
+				dessiner();
+			}
+
+		}
+		
+		
+		
+	</script>
+	
+</body>
+</html>

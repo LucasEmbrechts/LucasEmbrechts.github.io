@@ -1,0 +1,12 @@
+body {
+	background: #222;
+}
+
+.divBelow {
+	padding: 10;
+	margin: auto;
+	margin-top: 45px;
+	border: 1px solid #fff;
+	width: 50%;
+	color: #fff;
+}

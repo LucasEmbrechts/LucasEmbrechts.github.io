@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualisation du DOM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .svg-container {
+            width: 48%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tree-svg,
+        .detached-svg {
+            display: block;
+            margin: auto;
+        }
+
+        .detached-svg {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 300px;
+            /* ou une valeur appropriée */
+            height: 100%;
+            background-color: white;
+            /* ou une couleur appropriée */
+            box-shadow: -5px 0 5px rgba(0, 0, 0, 0.2);
+            /* pour une ombre légère sur le côté */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="racine">
+        <!-- Insérer ici des balises HTML -->
+    </div>
+    <div class="svg-container">
+        <svg id="tree-svg" class="tree-svg" width="100vw" height="100vh"></svg>
+    </div>
+
+    <div class="svg-container">
+        <svg id="detached-svg" class="detached-svg" width="100vw" height="100vh"></svg>
+    </div>
+    <script src="tree.js"></script>
+</body>
+
+</html>
