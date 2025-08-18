@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAA3 – Création d’un site web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #facc15;
+            --secondary: #fffbe7;
+            --text-main: #22223b;
+            --card-bg: #f4f6fb;
+            --card-border: #e0e7ef;
+        }
+        body {
+            background: linear-gradient(120deg, #e0ecfc 0%, #fffbe7 100%);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            margin: 0;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 80vw;
+            margin: 3rem auto 0 auto;
+            padding: 2.5rem 1rem;
+            background: rgba(255,255,255,0.97);
+            border-radius: 2rem;
+            box-shadow: 0 8px 40px #2563eb16;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 2em;
+        }
+        .header h1 {
+            font-size: 2.3rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin: 0 0 0.8rem 0;
+            letter-spacing: 1px;
+        }
+        .header p {
+            font-size: 1.2rem;
+            color: #516484;
+            font-weight: 500;
+            margin: 0 0 1.7rem 0;
+        }
+        .file-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+        .dl-card {
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
+            border-radius: 1.2rem;
+            padding: 1.5rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            box-shadow: 0 4px 18px #2563eb10;
+            transition: border 0.2s, background 0.2s, box-shadow 0.2s, transform 0.2s;
+        }
+        .dl-card:hover {
+            border: 2px solid var(--primary);
+            background: #f1f5ff;
+            transform: scale(1.03) translateY(-2px);
+            box-shadow: 0 8px 32px #2563eb24;
+        }
+        .dl-icon {
+            font-size: 2.3rem;
+            color: var(--accent);
+            background: var(--primary);
+            border-radius: 1rem;
+            padding: 12px;
+            box-shadow: 0 1px 7px #1957a630;
+        }
+        .dl-info {
+            flex: 1 1 0%;
+        }
+        .dl-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.1em;
+            color: var(--primary);
+        }
+        .dl-desc {
+            color: #516484;
+            font-size: 0.98rem;
+            margin-bottom: 0;
+        }
+        .dl-link {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--text-main);
+            font-weight: 700;
+            text-decoration: none;
+            padding: 0.6em 1.2em;
+            border-radius: 999px;
+            box-shadow: 0 2px 8px #facc1540;
+            margin-left: 1.1em;
+            font-size: 1.07rem;
+            transition: background 0.2s, color 0.2s;
+            border: 2px solid transparent;
+        }
+        .dl-link:hover {
+            background: var(--primary);
+            color: #fff;
+            border: 2px solid var(--accent);
+        }
+        .footer {
+            text-align: center;
+            margin-top: 2.7rem;
+            font-size: 1rem;
+            color: #8da0b3;
+            opacity: 0.8;
+        }
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.3rem; }
+            .container { padding: 1.2rem; }
+            .file-links { gap: 1rem; }
+            .dl-card { flex-direction: column; align-items: flex-start;}
+            .dl-link { margin-left: 0; margin-top: .7em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>UAA3 – Création d’un site web</h1>
+            <p>
+                Retrouvez ici tout ce qu’il vous faut pour apprendre, réviser et pratiquer : cours complet, fiches mémo et exercices pour progresser dans le développement web.
+            </p>
+        </div>
+        <div class="file-links">
+            <div class="dl-card">
+                <span class="dl-icon">📚</span>
+                <div class="dl-info">
+                    <div class="dl-title">Cours théorique (PDF)</div>
+                    <div class="dl-desc">Support de référence pour comprendre la création de sites web et les bases du HTML/CSS.</div>
+                </div>
+                <a class="dl-link" href="4TTr_WEB.pdf" download>Ouvrir</a>
+            </div>
+            <div class="dl-card">
+                <span class="dl-icon">📝</span>
+                <div class="dl-info">
+                    <div class="dl-title">Exercices (PDF)</div>
+                    <div class="dl-desc">Un recueil de tous les exercices pratiques à faire ou à refaire pour s’améliorer.</div>
+                </div>
+                <a class="dl-link" href="Exercices_all.pdf" download>Ouvrir</a>
+            </div>
+            <div class="dl-card">
+                <span class="dl-icon">🖌️</span>
+                <div class="dl-info">
+                    <div class="dl-title">Cheat sheet CSS (PDF)</div>
+                    <div class="dl-desc">Toutes les propriétés, sélecteurs et astuces essentielles pour styliser vos pages.</div>
+                </div>
+                <a class="dl-link" href="CSS.pdf" download>Ouvrir</a>
+            </div>
+            <div class="dl-card">
+                <span class="dl-icon">⚡</span>
+                <div class="dl-info">
+                    <div class="dl-title">Cheat sheet HTML (PDF)</div>
+                    <div class="dl-desc">Les balises et attributs à connaître pour construire vos pages web rapidement.</div>
+                </div>
+                <a class="dl-link" href="HTML.pdf" download>Ouvrir</a>
+            </div>
+        </div>
+        <div class="footer">
+            UAA3 – Création d’un site web • Institut Notre-Dame de Beauraing • 2025-2026
+        </div>
+    </div>
+</body>
+</html>

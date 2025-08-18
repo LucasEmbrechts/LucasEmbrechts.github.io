@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Questions de réflexion - JavaScript</title>
+  <meta charset="utf-8" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+    :root {
+      --js-yellow: #f7df1e;
+      --js-dark: #323330;
+      --text-dark: #1f2937;
+      --text-light: #6b7280;
+      --success-color: #10b981;
+      --warning-color: #f59e0b;
+      --error-color: #ef4444;
+    }
+
+    body { 
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--js-yellow) 0%, #fff3cd 100%);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    .remark-slide-content {
+      background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
+      border-radius: 20px;
+      padding: 40px !important;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+      border: 3px solid var(--js-yellow);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .remark-slide-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--js-yellow), #f59e0b);
+      border-radius: 20px 20px 0 0;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      color: var(--js-dark);
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      text-align: center;
+      background: linear-gradient(135deg, var(--js-dark), #2d2d2a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: var(--js-dark);
+      border-left: 6px solid var(--js-yellow);
+      padding-left: 1rem;
+      margin-bottom: 2rem;
+      user-select: none;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      color: var(--warning-color);
+    }
+
+    .remark-code, .remark-inline-code { 
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--js-dark);
+      color: var(--js-yellow);
+      border-radius: 8px;
+      padding: 2px 6px;
+      font-size: 0.9em;
+    }
+
+    pre {
+      background: var(--js-dark) !important;
+      border-radius: 12px !important;
+      padding: 1.5rem !important;
+      border-left: 6px solid var(--js-yellow) !important;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+      overflow-x: auto;
+      font-size: 1rem !important;
+      line-height: 1.5 !important;
+      white-space: pre-wrap !important;
+      word-break: break-word !important;
+    }
+
+    .hljs-keyword { color: #c792ea !important; }
+    .hljs-string { color: #c3e88d !important; }
+    .hljs-number { color: #f78c6c !important; }
+    .hljs-comment { color: #546e7a !important; font-style: italic;}
+    .hljs-tag { color: #f07178 !important; }
+    .hljs-attr { color: #82aaff !important; }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-dark);
+      user-select: text;
+    }
+
+    ul {
+      font-size: 1.1rem;
+      margin-left: 1.5rem;
+      list-style-type: disc !important;
+      padding-left: 1.2rem;
+    }
+
+    ul li {
+      margin-bottom: 0.9rem;
+      color: var(--text-dark);
+    }
+
+    .example-box {
+      background: linear-gradient(135deg, rgba(247, 223, 30, 0.2), rgba(251, 191, 36, 0.15));
+      border: 2px solid var(--js-yellow);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      position: relative;
+      user-select: text;
+    }
+
+    .example-box::before {
+      content: '💡 Exemple';
+      position: absolute;
+      top: -12px;
+      left: 20px;
+      background: var(--js-yellow);
+      color: var(--js-dark);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      user-select: none;
+    }
+
+    .question-flow {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(6, 182, 212, 0.12));
+      border-radius: 15px;
+      padding: 2rem;
+      margin: 2rem 0;
+      border-left: 6px solid var(--success-color);
+      user-select: text;
+    }
+
+    .center.middle {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 80vh;
+    }
+
+    .center.middle h1 {
+      background: linear-gradient(135deg, var(--js-dark), var(--js-yellow));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 4rem;
+      margin-bottom: 2rem;
+      animation: fadeInUp 1s ease-out;
+      user-select: none;
+    }
+
+    .remark-slide-number {
+      background: var(--js-yellow) !important;
+      color: var(--js-dark) !important;
+      border-radius: 20px !important;
+      padding: 8px 16px !important;
+      font-weight: 700 !important;
+      border: 2px solid var(--js-dark) !important;
+      user-select: none;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .step-highlight {
+      background: var(--js-yellow);
+      color: var(--js-dark);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-weight: 700;
+      display: inline-block;
+      margin: 0.5rem 0;
+      user-select: none;
+    }
+
+    .code-flow {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin: 2rem 0;
+      user-select: none;
+    }
+
+    .arrow {
+      font-size: 2rem;
+      color: var(--js-yellow);
+    }
+
+    @media print {
+      .remark-slide-content {
+        background: white !important;
+        border: 2pt solid var(--js-dark) !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <textarea id="source">
+class: center, middle
+# Questions de réflexion
+## Création d'un programme JavaScript
+
+*Une méthode claire et progressive pour organiser votre code*
+
+---
+
+## Q1 : Quels sont les événements déclencheurs ?
+
+* Un clic de souris ?
+* Une touche enfoncée ?
+* Un survol de souris ?
+* Un changement de valeur ?
+* Le chargement d’une page ?
+* ...
+
+.question-flow[
+🎯 **Objectif** : Identifier précisément **quel évènement** doit déclencher votre fonction JavaScript.
+]
+
+---
+
+## Q2 : Quels sont les éléments HTML concernés ?
+
+* Un bouton ?
+* Un paragraphe ?
+* Un champ de saisie ?
+* Une image ?
+* Un lien ?
+* ...
+
+.question-flow[
+🎯 **Objectif** : Déterminer **sur quel élément** l’évènement doit se produire.
+]
+
+---
+
+## Q3 : Que se passe-t-il lors de l’évènement ?
+
+* Le texte d’un paragraphe change
+* La couleur de fond de la page évolue
+* Des résultats de calculs s’affichent
+* Une image apparaît ou disparaît
+* Un menu se déplie
+* ...
+
+.question-flow[
+🎯 **Objectif** : Définir précisément **l’action** à réaliser.
+]
+
+---
+
+## Ces 3 premières questions vous guident pour :
+
+<div class="step-highlight">Étape 1</div>
+Associer l’évènement JavaScript au bon élément HTML.
+<br>
+<div class="step-highlight">Étape 2</div>
+Donner un nom clair et évocateur à votre fonction.
+
+*Exemples de noms de fonctions :*  
+`changerTextePara()`, `changerCouleurFond()`, `afficherCalculs()`, `masquerImage()`
+
+---
+
+## Exemple pratique
+
+.example-box[
+**Si :**  
+* Question 1 : clic  
+* Question 2 : bouton  
+* Question 3 : des résultats de calculs s’affichent  
+
+**Alors :**
+
+```html
+<button onclick="afficherCalculs()">Calculer</button>
+```
+]
+
+---
+
+## Q4 : Quels sont les éléments modifiés ?
+
+* Un paragraphe ?  
+* Un titre ?  
+* Une cellule de tableau ?  
+* Un champ texte ?  
+* Une div ?  
+* ...
+
+.question-flow[
+🎯 **Action** : Ajoutez un **identifiant** à ces éléments dans le HTML, puis ciblez-les en JavaScript dans des variables (idéalement avec les mêmes noms).
+]
+
+---
+
+## Q5 : Quels autres éléments sont nécessaires ?
+
+* La valeur d’un champ ?  
+* Le texte d’un paragraphe ?  
+* Le contenu d’une liste ?  
+* Une donnée stockée ailleurs ?  
+* ...
+
+.question-flow[
+🎯 **Action** : Comme pour la question 4, attribuez des identifiants, ciblez et stockez ces éléments dans des variables JavaScript.
+]
+
+---
+
+## Q6 : Quelles modifications devez-vous réaliser ?
+
+* Changer le texte ?  
+* Modifier une couleur ?  
+* Ajuster une taille ?  
+* Ajouter ou retirer du contenu ?  
+* Calculer une valeur ?  
+* ...
+
+.question-flow[
+🎯 **Objectif** : Décrire **comment** les éléments ciblés seront modifiés dynamiquement.
+]
+
+---
+
+## Synthèse : Complétez votre fonction JavaScript
+
+.example-box[
+**Par exemple, si :**  
+* Question 4 : une cellule de tableau  
+* Question 5 : la valeur d’un champ  
+* Question 6 : calculer et afficher un résultat  
+
+**Voici un exemple de code JavaScript :**
+
+```js
+function afficherCalculs() {
+  // Question 4 : cibler l’élément à modifier
+  let cellule = document.getElementById('resultat');
+  // Question 5 : récupérer la donnée
+  let input = document.getElementById('input');
+  // Question 6 : effectuer la modification
+  cellule.innerHTML = input.value * 33.8;
+}
+```
+]
+
+---
+
+## Récapitulatif de la méthode
+
+<div class="code-flow">
+  <div>
+    <b>Questions 1-2-3</b><br>
+    🎯 Structure HTML<br>
+    📝 Nom de fonction
+  </div>
+  <div class="arrow">→</div>
+  <div>
+    <b>Questions 4-5-6</b><br>
+    🔧 Corps de fonction<br>
+    ⚙️ Logique JavaScript
+  </div>
+</div>
+
+.question-flow[
+💡 **Cette méthode vous aide à créer des programmes JavaScript robustes et structurés, étape par étape !**
+]
+
+  </textarea>
+  <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+  <script>
+    var slideshow = remark.create({
+      highlightStyle: 'atom-one-dark',
+      highlightLines: true,
+      countIncrementalSlides: false,
+      ratio: '16:9',
+      navigation: {
+        scroll: false,
+        touch: true
+      }
+    });
+  </script>
+</body>
+</html>
