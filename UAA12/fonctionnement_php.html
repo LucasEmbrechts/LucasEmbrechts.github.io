@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP Client-Serveur</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .top-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1600px;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+
+        .navigation-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .step-list {
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            font-size: 0.8em;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+            max-width: 1600px;
+            margin-bottom: 40px;
+            position: relative;
+            min-height: 500px;
+        }
+
+        .client, .server {
+            background: white;
+            color: #333;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            min-height: 500px;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .client {
+            width: 400px;
+        }
+
+        .server {
+            width: 800px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .client:hover, .server:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .server.receiving {
+            animation: serverReceive 2s ease-in-out infinite;
+        }
+
+        @keyframes serverReceive {
+            0%, 100% { 
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                transform: translateY(0);
+            }
+            50% { 
+                box-shadow: 0 15px 40px rgba(234, 67, 53, 0.6);
+                transform: translateY(-2px);
+            }
+        }
+
+        .client-icon, .server-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .client-icon {
+            color: #4285f4;
+        }
+
+        .server-icon {
+            color: #ea4335;
+        }
+
+        .server-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .server-codes {
+            display: flex;
+            gap: 20px;
+            height: 100%;
+        }
+
+        .server-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .server-section h4 {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        .server-section.php h4 {
+            background: #8892bf;
+            color: white;
+        }
+
+        .server-section.html h4 {
+            background: #e34c26;
+            color: white;
+        }
+
+        .code-zone {
+            background: #1e1e1e;
+            border-radius: 8px;
+            padding: 15px;
+            flex: 1;
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            line-height: 1.3;
+            color: #d4d4d4;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            transition: all 0.5s ease;
+        }
+
+        .code-zone.processing {
+            border-color: #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .code-zone.reading {
+            animation: codeReading 3s ease-in-out infinite;
+        }
+
+        @keyframes codeReading {
+            0%, 100% { 
+                border-color: transparent; 
+                box-shadow: 0 0 0 rgba(136, 146, 191, 0);
+            }
+            25% { 
+                border-color: #8892bf; 
+                box-shadow: 0 0 20px rgba(136, 146, 191, 0.4); 
+            }
+            50% { 
+                border-color: #ffd700; 
+                box-shadow: 0 0 25px rgba(255, 215, 0, 0.6); 
+            }
+            75% { 
+                border-color: #8892bf; 
+                box-shadow: 0 0 20px rgba(136, 146, 191, 0.4); 
+            }
+        }
+
+        .code-header {
+            background: #2d2d30;
+            margin: -15px -15px 10px -15px;
+            padding: 8px 15px;
+            font-size: 0.85em;
+            color: #fff;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .code-lang {
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            margin-right: 8px;
+        }
+
+        .code-lang.php { background: #8892bf; }
+        .code-lang.html { background: #e34c26; }
+
+        .code-content {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+            white-space: pre-wrap;
+        }
+
+        .code-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .code-content.generating {
+            animation: codeGenerate 1s ease-in-out;
+        }
+
+        .code-content.scanning {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .code-content.scanning::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(136, 146, 191, 0.4), transparent);
+            animation: scanLine 2s ease-in-out infinite;
+        }
+
+        @keyframes scanLine {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: -100%; }
+        }
+
+        @keyframes codeGenerate {
+            0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+            50% { opacity: 0.5; transform: translateY(0) scale(1.02); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .php-code { color: #569cd6; }
+        .html-code { color: #ce9178; }
+        .php-tag { color: #dcdcaa; }
+        .php-echo { color: #4ec9b0; }
+        .php-variable { color: #9cdcfe; }
+        .php-function { color: #dcdcaa; }
+        .php-string { color: #ce9178; }
+        .php-comment { color: #6a9955; font-style: italic; }
+        .html-tag { color: #92c5f8; }
+        .html-attr { color: #9cdcfe; }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            font-size: 3em;
+            color: #fff;
+            opacity: 0;
+            transition: all 0.5s ease;
+            z-index: 5;
+        }
+
+        .arrow.request {
+            left: 30%;
+            transform: translateY(-50%);
+        }
+
+        .arrow.response {
+            right: 25%;
+            transform: translateY(-50%) scaleX(-1);
+        }
+
+        .arrow.active {
+            opacity: 1;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-50%) scale(1.2); }
+        }
+
+        .arrow.response.active {
+            animation: pulseResponse 1.5s infinite;
+        }
+
+        @keyframes pulseResponse {
+            0%, 100% { transform: translateY(-50%) scaleX(-1) scale(1); }
+            50% { transform: translateY(-50%) scaleX(-1) scale(1.2); }
+        }
+
+        .moving-code {
+            position: absolute;
+            background: #1e1e1e;
+            border-radius: 8px;
+            padding: 15px;
+            color: #d4d4d4;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.4;
+            width: 350px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            opacity: 0;
+            z-index: 10;
+            pointer-events: none;
+            border: 2px solid #e34c26;
+            transition: all 0.8s ease-in-out;
+        }
+
+        .moving-code.animate {
+            opacity: 1;
+        }
+
+        .moving-code::before {
+            content: 'HTML';
+            position: absolute;
+            top: -25px;
+            left: 10px;
+            background: #e34c26;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 10px;
+        }
+
+        .transformation-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4em;
+            color: #ffd700;
+            opacity: 0;
+            z-index: 15;
+            transition: all 0.5s ease;
+        }
+
+        .transformation-icon.active {
+            opacity: 1;
+            animation: transform-spin 1s ease-in-out infinite;
+        }
+
+        @keyframes transform-spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .btn {
+            background: #4285f4;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover:not(:disabled) {
+            background: #3367d6;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn.reset {
+            background: #ea4335;
+        }
+
+        .btn.reset:hover {
+            background: #d33b2c;
+        }
+
+        .step-counter {
+            background: rgba(255,255,255,0.15);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            backdrop-filter: blur(10px);
+        }
+
+        .step {
+            opacity: 0.5;
+            transition: all 0.5s ease;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8em;
+            white-space: nowrap;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .step.active {
+            opacity: 1;
+            font-weight: bold;
+            color: #ffd700;
+            background: rgba(255, 215, 0, 0.2);
+            border-color: rgba(255, 215, 0, 0.3);
+            transform: scale(1.05);
+        }
+
+        .step.completed {
+            opacity: 0.8;
+            color: #90ee90;
+            background: rgba(144, 238, 144, 0.1);
+            border-color: rgba(144, 238, 144, 0.2);
+        }
+
+        .step.completed::before {
+            content: "✓ ";
+            color: #90ee90;
+        }
+
+        .step:hover {
+            background: rgba(255,255,255,0.15);
+            transform: scale(1.02);
+        }
+
+        .step.active:hover {
+            transform: scale(1.07);
+        }
+
+        .empty-state {
+            color: #666;
+            font-style: italic;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        @media (max-width: 1400px) {
+            .top-controls {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .step-list {
+                width: 100%;
+                max-width: 1000px;
+            }
+        }
+
+        @media (max-width: 1000px) {
+            .step-list {
+                gap: 10px;
+                font-size: 0.75em;
+            }
+            
+            .step {
+                padding: 6px 10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .step-list {
+                flex-direction: column;
+                gap: 8px;
+                align-items: stretch;
+            }
+            
+            .step {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+            }
+            
+            .server-codes {
+                flex-direction: column;
+            }
+            
+            .client, .server {
+                width: 90%;
+                max-width: 800px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔄 PHP Client-Serveur</h1>
+        <p>étape par étape</p>
+    </div>
+
+    <div class="top-controls">
+        <div class="navigation-controls">
+            <button class="btn" onclick="previousStep()" id="prev-btn" disabled>
+                ⬅️ Précédent
+            </button>
+            
+            <div class="step-counter" id="step-counter">
+                Étape 0 / 6
+            </div>
+            
+            <button class="btn" onclick="nextStep()" id="next-btn">
+                Suivant ➡️
+            </button>
+            
+            <button class="btn reset" onclick="resetDemo()">
+                🔄 Reset
+            </button>
+        </div>
+
+        <div class="step-list">
+            <div class="step" id="step1" onclick="goToStep(1)">1️⃣ Client demande PHP</div>
+            <div class="step" id="step2" onclick="goToStep(2)">2️⃣ Serveur reçoit</div>
+            <div class="step" id="step3" onclick="goToStep(3)">3️⃣ Serveur lit PHP</div>
+            <div class="step" id="step4" onclick="goToStep(4)">4️⃣ Serveur exécute</div>
+            <div class="step" id="step5" onclick="goToStep(5)">5️⃣ Serveur génère HTML</div>
+            <div class="step" id="step6" onclick="goToStep(6)">6️⃣ HTML envoyé</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="client" id="client-box">
+            <span class="client-icon">💻</span>
+            <h3>CLIENT</h3>
+            <p>Navigateur web</p>
+            <p><em>Reçoit uniquement du HTML</em></p>
+            
+            <div class="code-zone" id="client-code-zone">
+                <div class="code-header">
+                    <span class="code-lang html">HTML</span>
+                    Code reçu par le client
+                </div>
+                <div class="code-content" id="client-code">
+                    <div class="empty-state">En attente de la réponse du serveur...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow request" id="arrow-request">➡️</div>
+        <div class="arrow response" id="arrow-response">➡️</div>
+        
+        <div class="transformation-icon" id="transformation">⚙️</div>
+        
+        <div class="server" id="server-box">
+            <div class="server-header">
+                <span class="server-icon">🖥️</span>
+                <h3>SERVEUR PHP</h3>
+                <p><em>Transforme le PHP en HTML (particularisation)</em></p>
+            </div>
+            
+            <div class="server-codes">
+                <div class="server-section php">
+                    <h4>📄 FICHIER PHP (statique)</h4>
+                    <div class="code-zone" id="php-code-zone">
+                        <div class="code-header">
+                            <span class="code-lang php">PHP</span>
+                            Code source
+                        </div>
+                        <div class="code-content visible" id="php-code">
+<span class="php-tag">&lt;?php</span>
+<span class="php-comment">// Connexion à la base de données</span>
+<span class="php-variable">$pdo</span> = <span class="php-function">new</span> <span class="php-code">PDO</span>(<span class="php-string">'mysql:host=localhost;dbname=ecole'</span>, <span class="php-string">'user'</span>, <span class="php-string">'pass'</span>);
+
+<span class="php-comment">// Récupération des données de l'élève</span>
+<span class="php-variable">$stmt</span> = <span class="php-variable">$pdo</span>-><span class="php-function">prepare</span>(<span class="php-string">"SELECT nom, age, option FROM eleves WHERE id = ?"</span>);
+<span class="php-variable">$stmt</span>-><span class="php-function">execute</span>([<span class="php-echo">1</span>]);
+<span class="php-variable">$eleve</span> = <span class="php-variable">$stmt</span>-><span class="php-function">fetch</span>();
+
+<span class="php-comment">// Variables depuis la base de données</span>
+<span class="php-variable">$nom</span> = <span class="php-variable">$eleve</span>[<span class="php-string">'nom'</span>];        <span class="php-comment">// "Tom"</span>
+<span class="php-variable">$age</span> = <span class="php-variable">$eleve</span>[<span class="php-string">'age'</span>];        <span class="php-comment">// 16</span>
+<span class="php-variable">$option</span> = <span class="php-variable">$eleve</span>[<span class="php-string">'option'</span>]; <span class="php-comment">// "Informatique"</span>
+<span class="php-variable">$date</span> = <span class="php-function">date</span>(<span class="php-string">"d/m/Y H:i"</span>);
+<span class="php-tag">?&gt;</span>
+
+<span class="html-tag">&lt;!DOCTYPE html&gt;</span>
+<span class="html-tag">&lt;html&gt;</span>
+<span class="html-tag">&lt;head&gt;</span>
+    <span class="html-tag">&lt;title&gt;</span>Profil Élève<span class="html-tag">&lt;/title&gt;</span>
+<span class="html-tag">&lt;/head&gt;</span>
+<span class="html-tag">&lt;body&gt;</span>
+    <span class="html-tag">&lt;h1&gt;</span>🎓 Bonjour <span class="php-tag">&lt;?php echo</span> <span class="php-variable">$nom</span><span class="php-tag">; ?&gt;</span><span class="html-tag">&lt;/h1&gt;</span>
+    <span class="html-tag">&lt;p&gt;</span>Âge : <span class="php-tag">&lt;?php echo</span> <span class="php-variable">$age</span><span class="php-tag">; ?&gt;</span> ans<span class="html-tag">&lt;/p&gt;</span>
+    <span class="html-tag">&lt;p&gt;</span>Option : <span class="php-tag">&lt;?php echo</span> <span class="php-variable">$option</span><span class="php-tag">; ?&gt;</span><span class="html-tag">&lt;/p&gt;</span>
+    <span class="html-tag">&lt;p&gt;</span>Page générée le : <span class="php-tag">&lt;?php echo</span> <span class="php-variable">$date</span><span class="php-tag">; ?&gt;</span><span class="html-tag">&lt;/p&gt;</span>
+<span class="html-tag">&lt;/body&gt;</span>
+<span class="html-tag">&lt;/html&gt;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="server-section html">
+                    <h4>🔄 HTML GÉNÉRÉ (dynamique)</h4>
+                    <div class="code-zone" id="html-code-zone">
+                        <div class="code-header">
+                            <span class="code-lang html">HTML</span>
+                            Résultat de l'exécution PHP
+                        </div>
+                        <div class="code-content" id="html-code">
+                            <div class="empty-state">En attente de l'exécution PHP...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="moving-code" id="moving-code"></div>
+    </div>
+
+    <script>
+        let currentStep = 0;
+        const totalSteps = 6;
+
+        const htmlCode = `<span class="html-tag">&lt;!DOCTYPE html&gt;</span>
+<span class="html-tag">&lt;html&gt;</span>
+<span class="html-tag">&lt;head&gt;</span>
+    <span class="html-tag">&lt;title&gt;</span>Profil Élève<span class="html-tag">&lt;/title&gt;</span>
+<span class="html-tag">&lt;/head&gt;</span>
+<span class="html-tag">&lt;body&gt;</span>
+    <span class="html-tag">&lt;h1&gt;</span>🎓 Bonjour <span class="html-code">Tom</span><span class="html-tag">&lt;/h1&gt;</span>
+    <span class="html-tag">&lt;p&gt;</span>Âge : <span class="html-code">16</span> ans<span class="html-tag">&lt;/p&gt;</span>
+    <span class="html-tag">&lt;p&gt;</span>Option : <span class="html-code">Informatique</span><span class="html-tag">&lt;/p&gt;</span>
+    <span class="html-tag">&lt;p&gt;</span>Page générée le : <span class="html-code">${new Date().toLocaleString('fr-FR')}</span><span class="html-tag">&lt;/p&gt;</span>
+<span class="html-tag">&lt;/body&gt;</span>
+<span class="html-tag">&lt;/html&gt;</span>`;
+
+        function updateStepCounter() {
+            document.getElementById('step-counter').textContent = `Étape ${currentStep} / ${totalSteps}`;
+        }
+
+        function updateButtons() {
+            document.getElementById('prev-btn').disabled = currentStep <= 0;
+            document.getElementById('next-btn').disabled = currentStep >= totalSteps;
+        }
+
+        function updateStepDisplay() {
+            document.querySelectorAll('.step').forEach((step, index) => {
+                step.classList.remove('active', 'completed');
+                if (index + 1 === currentStep) {
+                    step.classList.add('active');
+                } else if (index + 1 < currentStep) {
+                    step.classList.add('completed');
+                }
+            });
+        }
+
+        function resetVisualState() {
+            // Reset arrows
+            document.querySelectorAll('.arrow').forEach(arrow => arrow.classList.remove('active'));
+            
+            // Reset transformation
+            document.getElementById('transformation').classList.remove('active');
+            
+            // Reset moving code
+            document.getElementById('moving-code').classList.remove('animate');
+            
+            // Reset looping animations
+            document.getElementById('server-box').classList.remove('receiving');
+            document.getElementById('php-code-zone').classList.remove('reading');
+            document.getElementById('php-code').classList.remove('scanning');
+            
+            // Reset code zones
+            document.getElementById('html-code-zone').classList.remove('processing');
+            document.getElementById('html-code').innerHTML = '<div class="empty-state">En attente de l\'exécution PHP...</div>';
+            document.getElementById('html-code').classList.remove('visible', 'generating');
+            
+            document.getElementById('client-code').innerHTML = '<div class="empty-state">En attente de la réponse du serveur...</div>';
+            document.getElementById('client-code').classList.remove('visible');
+        }
+
+        function executeStep(step) {
+            // Reset everything first
+            resetVisualState();
+            
+            switch(step) {
+                case 1:
+                    // Client demande
+                    document.getElementById('arrow-request').classList.add('active');
+                    break;
+                    
+                case 2:
+                    // Serveur reçoit la requête (animation en boucle)
+                    document.getElementById('arrow-request').classList.remove('active');
+                    document.getElementById('server-box').classList.add('receiving');
+                    break;
+                    
+                case 3:
+                    // Lecture fichier PHP (animations en boucle)
+                    document.getElementById('php-code-zone').classList.add('reading');
+                    document.getElementById('php-code').classList.add('scanning');
+                    break;
+                    
+                case 4:
+                    // Exécution PHP (animation en boucle)
+                    document.getElementById('transformation').classList.add('active');
+                    break;
+                    
+                case 5:
+                    // Génération HTML
+                    document.getElementById('html-code-zone').classList.add('processing');
+                    setTimeout(() => {
+                        document.getElementById('html-code').innerHTML = htmlCode;
+                        document.getElementById('html-code').classList.add('generating', 'visible');
+                        setTimeout(() => {
+                            document.getElementById('html-code-zone').classList.remove('processing');
+                            document.getElementById('html-code').classList.remove('generating');
+                        }, 1000);
+                    }, 500);
+                    break;
+                    
+                case 6:
+                    // Envoi vers client
+                    document.getElementById('transformation').classList.remove('active');
+                    document.getElementById('html-code').innerHTML = htmlCode;
+                    document.getElementById('html-code').classList.add('visible');
+                    
+                    // Animation de déplacement
+                    document.getElementById('arrow-response').classList.add('active');
+                    
+                    setTimeout(() => {
+                        const movingCode = document.getElementById('moving-code');
+                        const htmlZone = document.getElementById('html-code-zone');
+                        const clientZone = document.getElementById('client-code-zone');
+                        
+                        const htmlRect = htmlZone.getBoundingClientRect();
+                        const clientRect = clientZone.getBoundingClientRect();
+                        const containerRect = document.querySelector('.container').getBoundingClientRect();
+                        
+                        movingCode.innerHTML = htmlCode;
+                        movingCode.style.left = (htmlRect.left - containerRect.left + 20) + 'px';
+                        movingCode.style.top = (htmlRect.top - containerRect.top + 50) + 'px';
+                        movingCode.classList.add('animate');
+                        
+                        setTimeout(() => {
+                            movingCode.style.left = (clientRect.left - containerRect.left + 20) + 'px';
+                            movingCode.style.top = (clientRect.top - containerRect.top + 50) + 'px';
+                            
+                            setTimeout(() => {
+                                movingCode.classList.remove('animate');
+                                document.getElementById('client-code').innerHTML = htmlCode;
+                                document.getElementById('client-code').classList.add('visible');
+                                document.getElementById('arrow-response').classList.remove('active');
+                            }, 800);
+                        }, 100);
+                    }, 300);
+                    break;
+            }
+        }
+
+        function goToStep(targetStep) {
+            currentStep = targetStep;
+            updateStepCounter();
+            updateButtons();
+            updateStepDisplay();
+            executeStep(currentStep);
+        }
+
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                goToStep(currentStep + 1);
+            }
+        }
+
+        function previousStep() {
+            if (currentStep > 0) {
+                goToStep(currentStep - 1);
+            }
+        }
+
+        function resetDemo() {
+            currentStep = 0;
+            updateStepCounter();
+            updateButtons();
+            updateStepDisplay();
+            resetVisualState();
+        }
+
+        // Initialisation
+        updateStepCounter();
+        updateButtons();
+        updateStepDisplay();
+    </script>
+</body>
+</html>
