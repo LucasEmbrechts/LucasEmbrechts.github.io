@@ -4,9 +4,26 @@ const btnEl = document.getElementById("btn");
 const containerEl = document.getElementById("container");
 
 let selectedRating;
+let content = document.getElementById("content");
+let mecontent = document.getElementById("mecontent");
+let neutre = document.getElementById("neutre");
 
 function selection(value) {
   selectedRating = value;
+  content.classList.remove("active");
+  mecontent.classList.remove("active");
+  neutre.classList.remove("active");
+    switch (selectedRating) {
+    case 1:
+      mecontent.classList.add("active");
+      break;
+    case 2:
+      neutre.classList.add("active");
+      break;
+    case 3:
+      content.classList.add("active");
+      break;
+  };
 }
 
 function envoyer(){
