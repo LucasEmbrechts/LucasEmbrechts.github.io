@@ -1,0 +1,230 @@
+.butt
+{
+	width : 402px;
+	height : 248px;
+	font-size : 2em;
+	background-color: white;
+	border : none;
+	background-image : url("wakfuLogo.png");
+	text-align: center;
+	cursor : pointer;
+	margin-left: 40%;
+}
+
+#imageFond
+{
+	width : 1000px;
+	height : 550px;
+	background-image: url("wakfubackground.png");
+	margin-left: 5%;
+	position: relative;
+}
+
+#died
+{
+	width : 1000px;
+	height : 550px;
+	margin-left: 5%;
+	margin-top: -40%;
+	position: relative;
+	opacity: 0;
+}
+
+#cra
+{
+	width : 160px;
+	height : 220px;
+	margin-left: 45%;
+	margin-top: 22%;
+	position: absolute;
+}
+
+#craqueleurBoss
+{
+	width : 160px;
+	height : 250px;
+	left : 620px;
+	bottom: 30px;
+	position: absolute;
+	z-index: 1;
+}
+
+#craqueleur
+{
+	width : 160px;
+	height : 250px;
+	left : 620px;
+	bottom: 30px;
+	position: absolute;
+}
+
+#craqueleurBoss:hover
+{
+	opacity: 0;
+}
+
+#nox
+{
+	width : 75px;
+	height : 120px;
+	left: 590px;
+	bottom: 300px;
+	position: absolute;
+}
+
+#tofuEvil
+{
+	width : 35px;
+	height : 35px;
+	left: 590px;
+	bottom: 160px;
+	position: absolute;
+}
+
+#tofuNoirBoss
+{
+	width : 75px;
+	height : 75px;
+	left: 160px;
+	bottom: 400px;
+	position: absolute;
+	opacity: 0;
+	z-index: 1;
+}
+
+#tofuNoir
+{
+	width : 75px;
+	height : 75px;
+	left: 160px;
+	bottom: 400px;
+	position: absolute;
+	opacity: 1;
+}
+
+#tofuNoirBoss:hover
+{
+	opacity: 1;
+}
+
+#eliomeBoss
+{
+	width : 25px;
+	height : 35px;
+	left: 350px;
+	bottom: 170px;
+	position: absolute;
+	opacity: 0;
+	z-index: 1;
+}
+
+#eliome
+{
+	width : 25px;
+	height : 35px;
+	left: 350px;
+	bottom: 170px;
+	position: absolute;
+	opacity: 1;
+}
+
+#eliomeBoss:hover
+{
+	opacity: 1;
+}
+
+#vies
+{
+	width: 1000px;
+	height: 35px;
+	bottom: 0px;
+	position: absolute;
+	background-color: black;
+}
+
+#lives
+{
+	
+	margin-top: 7%;
+	margin-left: 84%;
+	position: absolute;
+	border: solid 3px #3FD6DB;
+	width: 150px;
+	height: 50px;
+	font-size: 2em;
+	color: #419DA0;
+}
+
+#lives:hover
+{
+	border-color: #00F7FF;
+}
+
+#textGame
+{
+	position: absolute;
+	width: 200px;
+	margin-left: 80%;
+	margin-top: 0%;
+	border: solid 3px #3FD6DB;
+	font-size: 1em;
+	padding: 5px;
+	background-color: rgba(51,213,219,0.1);
+}
+
+#ok
+{
+	position: absolute;
+	width: 55px;
+	height: 57px;
+	margin-left: 80%;
+	margin-top: 7%;
+	font-size: 1.5em;
+	text-align: center;
+	border: solid 3px #3FD6DB;
+	background-color: rgba(51,213,219,0.3);
+}
+
+#bulleConv
+{
+	width : 130px;
+	height : 130px;
+	left: 220px;
+	bottom: 430px;
+	position: absolute;
+	opacity: 0;
+}
+
+
+
+#hibouk
+{
+	width: 85px;
+	height: 120px;
+	position: absolute;
+	bottom: 100px;
+	left: 30px;
+	opacity: 0.6;
+	animation: jumping 0.8s ease-in-out infinite;
+}
+
+@keyframes jumping
+{
+     from 
+	 {
+		top: 320px;
+	}
+     50%  
+	 {
+		top: 306px;
+	}
+     to   
+	 {
+		top: 320px;
+	}
+}
+
+#eliome,#tofuNoir,#tofuEvil,#nox,#craqueleur,#cra,#imageFond,#ok,#textGame,#lives
+{
+	opacity: 0;
+}

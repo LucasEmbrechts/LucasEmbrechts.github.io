@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+	<meta charset="utf-8">
+	<title>Wakfu - Game</title>
+	<link rel="stylesheet" href="style.css">
+	<script type="text/javascript" src="script.js"></script>
+
+</head>
+<body>
+	<div id="boutton">
+		<button class="butt" onClick="wakfuGame()"></button>
+	</div>
+	<div id="rules">
+		<p id="textGame">Entrez le nombre de vies du personnage , l'Archer au centre ! (Les vies sont représentées par les DOFUS)</p>
+		<input id="lives" type="number" name="combien" value="1">
+		<button id="ok" onClick="jouer(lives.value)">OK</button>
+	</div>
+	<div id="imageFond">
+		<img id="nox" src="nox.png" alt="wakfu nox"/>
+		<img id="cra" src="cra.png" alt="wakfu cra"/>
+		<img id="craqueleur" src="craqueleur.png" alt="wakfu craqueleur"/>
+		<img id="craqueleurBoss" onmouseover="supprimerVie(lives.value)" src="craqueleur-boss.png" alt="wakfu craqueleurBoss"/>
+		<img id="tofuEvil" src="tofuEvil.png" alt="tofuEvil"/>
+		<img id="tofuNoir" src="tofuNoir.png" alt="tofuNoir"/>
+		<img id="tofuNoirBoss" src="tofuNoirBoss.png" onmouseover="bulle()" onmouseout="bulleBis()" alt="tofuNoirBoss"/> 
+		<img id="eliomeBoss" onmouseover="supprimerVie(lives.value)" src="eliome-hidden.png" alt="eliome"/>
+		<img id="eliome" src="eliome.png" alt="eliomeBoss"/>
+		<img id="bulleConv" src="bulleConv.png" alt="bulleConv"/>
+		<img id="hibouk" src="hibook.png" alt="hibouk"/>
+		<div id="vies"></div>
+	</div>
+	<img id="died" src="YOUDIED.jpg" alt="died"/>
+</body>
+</html>
