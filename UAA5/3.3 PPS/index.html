@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Pierre, papier ciseaux !</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            background: #082c6c;
+            color: #fff;
+        }
+        
+        #jeu{
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #titre{
+            font-size: 4rem;
+            z-index: 2;
+            margin-bottom: 100px;
+        }
+        
+        #score{
+            display: flex;
+            width: 30vw;
+            height: 5vw;
+            justify-content: space-evenly;
+            z-index: 1;
+            margin-bottom: 100px;
+        }
+        
+        #p-compteur, #c-compteur{
+            text-align: center;
+            font-size: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        #options{
+            display: flex;
+            width: 50vw;
+            justify-content: space-evenly;
+            margin-top: 2rem;
+        }
+        
+        button{
+            padding: 0.8rem;
+            width: 100px;
+            border-radius: 10px;
+            outline: none;
+            border: none;
+            cursor: pointer;
+            font-size: 5rem;
+        }
+        button:hover{
+            background: #0b3f9c;
+        }
+        
+        button:disabled {
+            background: gray;
+            border-color: gray;
+            cursor: none;
+        }
+        
+        #coup{
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        #resultat{
+            margin-top: 20px;
+            font-size: 1.2rem;
+            height: 20px;
+        }
+        
+        #modal-coup-ordi {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1a3d7ce2;
+            color: #fff;
+            padding: 2rem 3rem;
+            border-radius: 20px;
+            font-size: 6rem;
+            z-index: 100;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            display: none;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <section id="jeu">
+        <div id="titre">Pierre, papier, ciseaux !</div>
+        
+        <div id="score">
+            <div id="scoreJoueur">
+                <h2>Joueur</h2>
+                <p class="compteur" id="p-compteur">0</p>
+                
+            </div>
+            <div id="scoreOrdinateur">
+                <h2>Ordinateur</h2>
+                <p class="compteur" id="c-compteur">0</p>
+            </div>
+        </div>
+        
+        <div id="coup">Choisis le coup à jouer</div>
+        
+        <div>Coups restants : <span id="coupsRestants">10</span></div>
+        
+        <div id="options">
+            <button id="pierre" onclick="coupJoueur('pierre')">✊</button>
+            <button id="papier" onclick="coupJoueur('papier')">🤚</button>
+            <button id="ciseaux" onclick="coupJoueur('ciseaux')">✌️</button>
+        </div>
+        
+        <div id="resultat"></div>
+        
+        <div id="modal-coup-ordi"></div>
+    </section>
+    
+    <script>
+        let scoreJoueur = 0;
+        let scoreOrdinateur = 0;
+        let coupsRestants = 10;
+        
+        function genererCoupOrdinateur() {
+            let numChoix = Math.floor(Math.random() * 3);
+            if (numChoix === 0) return "pierre";
+            if (numChoix === 1) return "papier";
+            if (numChoix === 2) return "ciseaux";
+        }
+        
+        function coupJoueur(coupJoueur) {
+            
+            const resultat = document.getElementById('resultat');
+            const compteurJoueur = document.getElementById('p-compteur');
+            const compteurOrdi = document.getElementById('c-compteur');
+            const cRestants = document.getElementById('coupsRestants');
+            
+            if (coupsRestants === 1) {
+                coupsRestants = 0;
+                cRestants.innerHTML = coupsRestants;
+                afficherGagnant();
+                desactiverBouton();
+            } else {
+                coupsRestants--;
+                cRestants.innerHTML = coupsRestants;
+                let coupOrdinateur = genererCoupOrdinateur();
+                
+                afficherModalCoupOrdinateur(coupOrdinateur);
+                
+                if (coupOrdinateur === coupJoueur) {
+                    resultat.textContent = 'Égalité !'
+                }
+                else if (coupJoueur === 'pierre') {
+                    if (coupOrdinateur === 'papier') {
+                        resultat.textContent = "L'ordinateur gagne";
+                        scoreOrdinateur++;
+                        compteurOrdi.textContent = scoreOrdinateur;
+                        
+                    } else {
+                        resultat.textContent = "Le joueur gagne"
+                        scoreJoueur++;
+                        compteurJoueur.textContent = scoreJoueur;
+                    }
+                }
+                else if (coupJoueur === 'ciseaux') {
+                    if (coupOrdinateur === 'pierre') {
+                        resultat.textContent = "L'ordinateur gagne";
+                        scoreOrdinateur++;
+                        compteurOrdi.textContent = scoreOrdinateur;
+                    } else {
+                        resultat.textContent = "Le joueur gagne";
+                        scoreJoueur++;
+                        compteurJoueur.textContent = scoreJoueur;
+                    }
+                }
+                else if (coupJoueur === 'papier') {
+                    if (coupOrdinateur === 'ciseaux') {
+                        resultat.textContent = "L'ordinateur gagne";
+                        scoreOrdinateur++;
+                        compteurOrdi.textContent = scoreOrdinateur;
+                    } else {
+                        resultat.textContent = "Le joueur gagne";
+                        scoreJoueur++;
+                        compteurJoueur.textContent = scoreJoueur;
+                    }
+                }
+            }
+        }
+        
+        function afficherModalCoupOrdinateur(coup) {
+            const modal = document.getElementById('modal-coup-ordi');
+            let emoji = coup === "pierre" ? "✊" : coup === "papier" ? "🤚" : "✌️";
+            modal.textContent = "L'ordinateur a joué " + coup + " " + emoji;
+            modal.style.display = "block";
+            setTimeout(() => {
+                modal.style.display = "none";
+            }, 3000);
+        }
+        
+        function afficherGagnant() {
+            const resultat = document.getElementById('score');
+            if (scoreJoueur > scoreOrdinateur) {
+                resultat.innerHTML = "<h1>Le joueur a gagné la partie !</h1>"
+            } else {
+                if (scoreOrdinateur > scoreJoueur) {
+                    resultat.innerHTML = "<h1>L'ordinateur a gagné la partie !</h1>"
+                } else {
+                    resultat.innerHTML = "<h1>Egalité sur cette partie !</h1>"
+                }
+            }
+        }
+        
+        function desactiverBouton(){
+            document.getElementById("pierre").disabled = true;
+            document.getElementById("papier").disabled = true;
+            document.getElementById("ciseaux").disabled = true;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Title</title>
+    <title>Architecture MVC en PHP</title>
     <meta charset="utf-8">
     <style>
       @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
@@ -13,24 +13,71 @@
         font-family: 'Yanone Kaffeesatz';
         font-weight: normal;
       }
-      .remark-code, .remark-inline-code { font-family: 'Consolas'; }
-			  @page {
-		  size: 1210px 681px;
-		  margin: 0;
-		}
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      
+      @page {
+        size: 1210px 681px;
+        margin: 0;
+      }
 
-		@media print {
-		  .remark-slide-scaler {
-			width: 100% !important;
-			height: 100% !important;
-			transform: scale(1) !important;
-			top: 0 !important;
-			left: 0 !important;
-		  }
-		}
-    small{
-      font-size: 10px!important;
-    }
+      @media print {
+        .remark-slide-scaler {
+          width: 100% !important;
+          height: 100% !important;
+          transform: scale(1) !important;
+          top: 0 !important;
+          left: 0 !important;
+        }
+      }
+
+      small {
+        font-size: 10px!important;
+      }
+
+      .highlight {
+        background-color: #fff3cd;
+        padding: 2px 6px;
+        border-radius: 3px;
+      }
+
+      .code-box {
+        background-color: #f5f5f5;
+        padding: 15px;
+        border-left: 4px solid #0066cc;
+        margin: 10px 0;
+        font-size: 14px;
+      }
+
+      .flow-diagram {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin: 20px 0;
+        font-weight: bold;
+      }
+
+      .flow-item {
+        background: #e8f4f8;
+        padding: 15px 20px;
+        border-radius: 5px;
+        border: 2px solid #0066cc;
+      }
+
+      .arrow {
+        font-size: 24px;
+        color: #0066cc;
+      }
+
+      .container-code {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .title-slide {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
@@ -38,102 +85,418 @@
   <body>
     <textarea id="source">
 
-class: center, middle
+
+class: center, middle, title-slide
+
 
 # Programmation orientée objet :
-# architecture d'application
-<img height="200px" src="img/php_logo.png">
+# Architecture MVC en PHP + MySQL
+<div style="margin-top: 30px; font-size: 24px;">Model - View - Controller</div>
+
 
 ---
 ## Problématique
 Quel est le plat préféré des développeurs ?
-<div style="text-align: center;">
-	<img height="350px" src="img/spaghettivslasagna.jpg">
+<div style="text-align: center; margin-top: 40px;">
+  <img height="250px" src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400" alt="spaghetti code">
 </div>
+<p style="margin-top: 30px; font-size: 18px;"><strong>Du code "spaghetti"</strong> : mélange de HTML, PHP et requêtes SQL</p>
+
 
 ---
-## Problématique
-<div style="text-align: center;">
-	<img height="450px" src="img/spaghetti.jpg">
-</div>
-
----
-## Concept de "Separation of concerns (SoC)"
-<br>
-<div style="text-align: center;">
-	<img height="400px" src="img/separation-transformed.png">
-</div>
-
----
-## Concept de "Separation of concerns (SoC)"
-<br>
-<div style="text-align: center;">
-	<img height="400px" src="img/cohesion.png">
-</div>
-
----
-## Structure du projet
-<div style="text-align: center;">
-	<img height="570px" src="img/archi.png">
-</div>
-
----
-## Appels successifs 
-<div style="text-align: center;">
-	<img height="500px" src="img/archiacom.png">
-</div>
-
----
-## Transformation des exceptions 
-<div style="text-align: center;">
-	<img height="500px" src="img/archiacom.png">
-</div>
-
----
-## Un exemple concret
-### Création du modèle
-
+## Le Code "Spaghetti" (À ÉVITER ❌)
 ```php
-class Eleve {
-
-    private $id;
-    private $nom;
-    private $dateDeNaissance;
-
-    function __construct($id, $nom, $dateDeNaissance) {
-        $this->id = $id;
-        $this->nom = $nom;
-        $this->dateDeNaissance = $dateDeNaissance;
+<?php
+$db = new PDO('mysql:host=localhost;dbname=ecole', 'root', '');
+$eleve = $db->query("SELECT * FROM eleves WHERE id = " . $_GET['id'])->fetch();
+?>
+<html>
+  <h1><?= $eleve['nom'] ?> <?= $eleve['prenom'] ?></h1>
+  <p>Classe: <?= $eleve['classe'] ?></p>
+  <p>Option: <?= $eleve['option'] ?></p>
+  <?php
+    if ($_POST['action'] === 'update') {
+      $db->query("UPDATE eleves SET nom = '" . $_POST['nom'] . "' WHERE id = " . $_GET['id']);
     }
-    
-    // + getters / setters
-}
+  ?>
+</html>
 ```
+**Problèmes graves** 🔴
+- Injections SQL : Failles de sécurité critiques
+- Code impossible à maintenir : Tout mélangé
+- Pas testable : Impossible d'écrire des tests
+- Dangereux : Peut causer des accidents graves
+
+
 ---
-## Un exemple concret
-### Couche "Accès aux données"
+## Concept de "Separation of Concerns" (SoC)
+<div style="text-align: center; margin: 40px 0;">
+  <p style="font-size: 20px;"><strong>Séparer les responsabilités du code</strong></p>
+</div>
+
+.flow-diagram[
+.flow-item[**Données**] .arrow[→] .flow-item[**Logique**] .arrow[→] .flow-item[**Présentation**]
+]
+
+<div style="margin-top: 40px; font-size: 16px;">
+  <p>✓ Chaque partie a une responsabilité unique</p>
+  <p>✓ Facilite la maintenance et l'évolution</p>
+  <p>✓ Permet le travail en équipe</p>
+  <p>✓ Rend le code testable</p>
+</div>
+
+
+---
+## Le Pattern MVC
+<div style="text-align: center; margin: 30px 0;">
+  <img height="380px" src="https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500" alt="architecture diagram" style="border-radius: 8px;">
+</div>
+
+
+---
+## MVC : Les 3 Couches
+
+.container-code[
+
+#### **MODEL** 📊
+- Gère les données
+- Accès à la base de données
+- Logique métier
+- Retourne des données
+
+#### **VIEW** 🎨
+- Affiche les données
+- Code HTML/CSS
+- Reçoit les données du Controller
+- Ne fait pas de requêtes SQL
+
+]
+
+---
+## MVC : Les 3 Couches (Suite)
+
+#### **CONTROLLER** 🎮
+- Reçoit les requêtes utilisateur
+- Appelle le Model si nécessaire
+- Charge la Vue appropriée
+- Fait le lien entre Model et View
+
+<div style="margin-top: 40px; text-align: center;">
+  <strong style="font-size: 18px;">Le Controller est l'orchestrateur !</strong>
+</div>
+
+
+---
+## Flux de Données MVC
+
+.flow-diagram[
+.flow-item[Utilisateur] .arrow[Requête] .flow-item[Controller]
+]
+
+.flow-diagram[
+.flow-item[Controller] .arrow[getData()] .flow-item[Model]
+]
+
+.flow-diagram[
+.flow-item[Model] .arrow[Résultat] .flow-item[Controller]
+]
+
+.flow-diagram[
+.flow-item[Controller] .arrow[Affiche View] .flow-item[View]
+]
+
+.flow-diagram[
+.flow-item[View] .arrow[HTML] .flow-item[Utilisateur]
+]
+
+
+---
+## Architecture des Fichiers
+```
+ecole-app/
+├── index.php                  (Point d'entrée)
+├── Database.php               (Connexion MySQL)
+├── models/
+│   └── Eleve.php             (Gestion des élèves)
+├── controllers/
+│   └── EleveController.php   (Logique gestion élèves)
+└── views/
+    ├── list.php              (Tableau de tous les élèves)
+    ├── show.php              (Détails d'un élève)
+    └── classe.php            (Élèves d'une classe)
+```
+
+---
+## Étape 1️⃣ : La Connexion (Database.php)
 
 ```php
-class EleveDataAccess {
+<?php
+class Database {
+  private $pdo;
 
-    private $connexion;
+  public function __construct() {
+    $this->pdo = new PDO(
+      'mysql:host=localhost;dbname=ecole',
+      'root',
+      ''
+    );
+    $this->pdo->setAttribute(
+      PDO::ATTR_ERRMODE,
+      PDO::ERRMODE_EXCEPTION
+    );
+  }
 
-    public function __construct() {
-    	$bdd = BDConnexion::getInstance();
-    	$this->connexion = $bdd->getConnection();
-	}
-	
-	
-	
+  public function query($sql, $params = []) {
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute($params);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
 }
 ```
+
+---
+## Étape 2️⃣ : Le Modèle (models/Post.php)
+
+```php
+<?php
+class Eleve {
+  private $db;
+
+  public function __construct($database) {
+    $this->db = $database;
+  }
+
+  // Récupérer tous les élèves
+  public function getAll() {
+    return $this->db->query(
+      "SELECT * FROM eleves ORDER BY nom, prenom"
+    );
+  }
+
+  // Récupérer un élève par ID
+  public function getById($id) {
+    $result = $this->db->query(
+      "SELECT * FROM eleves WHERE id = ?",
+      [$id]
+    );
+    return $result[0] ?? null;
+  }
+
+  // Récupérer les élèves d'une classe
+  public function getByClasse($classe) {
+    return $this->db->query(
+      "SELECT * FROM eleves WHERE classe = ?",
+      [$classe]
+    );
+  }
+}
+```
+<small>Le Model gère les élèves et leurs données</small>
+
+
+---
+## Étape 3️⃣ : Le Contrôleur (controllers/PostController.php)
+
+```php
+<?php
+class EleveController {
+  private $model;
+
+  public function __construct($model) {
+    $this->model = $model;
+  }
+
+  // Action : afficher la liste
+  public function listAction() {
+    $eleves = $this->model->getAll();
+    require 'views/list.php';
+  }
+
+  // Action : afficher les détails d'un élève
+  public function showAction($id) {
+    $eleve = $this->model->getById($id);
+    require 'views/show.php';
+  }
+
+  // Action : afficher par classe
+  public function classeAction($classe) {
+    $eleves = $this->model->getByClasse($classe);
+    require 'views/classe.php';
+  }
+}
+```
+<small>Le Controller gère la logique des élèves</small>
+
+
+---
+## Étape 4️⃣ : La Vue (views/list.php)
+
+```php
+<html>
+  <head><title>Liste des Élèves</title></head>
+  <body>
+    <h1>Tous les Élèves</h1>
+    <table border="1" cellpadding="10">
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Date Naissance</th>
+        <th>Classe</th>
+        <th>Option</th>
+        <th>Actions</th>
+      </tr>
+      <?php foreach ($eleves as $eleve): ?>
+        <tr>
+          <td><?= htmlspecialchars($eleve['nom']) ?></td>
+          <td><?= htmlspecialchars($eleve['prenom']) ?></td>
+          <td><?= htmlspecialchars($eleve['date_naissance']) ?></td>
+          <td><?= htmlspecialchars($eleve['classe']) ?></td>
+          <td><?= htmlspecialchars($eleve['option']) ?></td>
+          <td>
+            <a href="?action=show&id=<?= $eleve['id'] ?>">Voir</a>
+          </td>
+        </tr>
+      <?php endforeach; ?>
+    </table>
+  </body>
+</html>
+```
+<small>La Vue affiche le tableau des élèves</small>
+
+
+---
+## Étape 5️⃣ : Le Point d'Entrée (index.php)
+
+```php
+<?php
+// 1. Charger les classes
+require 'Database.php';
+require 'models/Eleve.php';
+require 'controllers/EleveController.php';
+
+// 2. Créer la connexion
+$db = new Database();
+
+// 3. Créer le modèle avec la BD
+$model = new Eleve($db);
+
+// 4. Créer le contrôleur avec le modèle
+$controller = new EleveController($model);
+
+// 5. Router simple
+$action = $_GET['action'] ?? 'list';
+$id = $_GET['id'] ?? null;
+$classe = $_GET['classe'] ?? null;
+
+if ($action === 'list') {
+  $controller->listAction();
+} elseif ($action === 'show' && $id) {
+  $controller->showAction($id);
+} elseif ($action === 'classe' && $classe) {
+  $controller->classeAction($classe);
+}
+?>
+```
+<small>Ceci assemble tous les composants pour la gestion des élèves</small>
+
+
+---
+## Flux Complet d'une Requête
+
+URL: index.php?action=show&id=7
+
+1. Router (index.php) → détecte action=show, id=7
+2. Controller → appelle model->getById(7)
+3. Model → interroge la BDD (SELECT * FROM eleves WHERE id = 7)
+4. BDD → retourne les données de l'élève #7
+5. Model → retourne (nom, prénom, date naissance, classe, option)
+6. Controller → charge views/show.php avec l'élève
+7. Vue → affiche les détails complets de l'élève
+8. Navigateur → reçoit le HTML avec toutes les informations
+
+
+---
+## Avantages de MVC
+
+✅ **Maintenance** : Changer la vue ne touche pas au modèle
+
+✅ **Testabilité** : On peut tester le Model indépendamment
+
+✅ **Réutilisabilité** : Un Model peut servir plusieurs Vues
+
+✅ **Évolutivité** : Facile d'ajouter de nouvelles fonctionnalités
+
+✅ **Travail en équipe** : Designer sur les Vues, Dev sur Model/Controller
+
+✅ **Pas de code "spaghetti"** : Chaque partie a sa place
+
+
+---
+## MVC vs Code Spaghetti
+
+| Aspect | Spaghetti | MVC |
+|--------|-----------|-----|
+| **Localisation** | SQL partout | SQL au même endroit (Model) |
+| **Évolution** | Risqué | Sûr et isolé |
+| **Test** | Impossible | Facile pour chaque partie |
+| **Équipe** | Conflits | Travail parallèle |
+| **Performance** | Peut être rapide | Très rapide si bien conçu |
+| **Lisibilité** | Horrible | Excellent |
+
+
+---
+## Pièges à Éviter ❌
+
+❌ Mettre de la logique dans la Vue
+
+❌ Faire des requêtes SQL dans le Controller
+
+❌ Retourner un objet compliqué du Model
+
+❌ Charger plusieurs Modèles dans un Controller
+
+❌ Oublier de nettoyer les entrées utilisateur
+
+✅ Garder chaque part simple et responsable
+
+
+---
+## Prochaines Étapes
+
+1. **Autoloader PSR-4** : Charger les classes automatiquement
+
+2. **Router avancé** : Gérer les URLs propres (`/posts/5`)
+
+3. **Services** : Ajouter une couche métier
+
+4. **Dépôt** : Centraliser les requêtes BD
+
+5. **Framework** : Laravel, Symfony, Slim
+
+
+---
+class: center, middle
+
+# Questions ?
+
+<div style="margin-top: 40px; font-size: 18px;">
+  Vous avez compris le pattern MVC ?
+</div>
+
+<div style="margin-top: 60px;">
+  <p style="font-size: 16px; color: #666;">Prochaine étape : construire votre première app MVC ! 🚀</p>
+</div>
 
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
     </script>
     <script>
-      var slideshow = remark.create();
+      var slideshow = remark.create({
+        ratio: '16:9',
+        highlightStyle: 'monokai',
+        highlightLines: true
+      });
     </script>
   </body>
 </html>
