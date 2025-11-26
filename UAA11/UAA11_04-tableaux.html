@@ -154,7 +154,7 @@ void main (void){
 
   for(int i = 0; i < 5; i++){
     printf("Entrez le nombre %d :\n", i + 1);
-    scanf_s("%d", &monTableau[i]);
+    scanf("%d", &monTableau[i]);
   }
 }
 ```
@@ -213,16 +213,16 @@ char maChaine[8] = "Hello"; // ok
 ---
 ### Lecture
 
-* avec `scanf_s`
+* avec `scanf`
 
 ```c
-scanf_s("%s", maChaine, 100);
+scanf("%s", maChaine);
 ```
 
-* avec `gets_s`
+* avec `gets`
 
 ```c
-gets_s(maChaine, 100);
+gets(maChaine);
 ```
 
 ### Impression
@@ -292,12 +292,12 @@ void main(void) {
   printf("Longueur : %d\nTaille: %d\n", longueur, taille);
 
   printf("Entrez votre mot de passe :\n");
-  gets_s(mdpUtilisateur, TAILLE_MDP);
+  gets(mdpUtilisateur);
   if (strcmp(mdp, mdpUtilisateur) == 0) puts("Mot de passe correct !");
   else puts("Erreur : mot de passe incorrect");
-  strcpy_s(mdpUtilisateur, TAILLE_MDP, mdp);
+  strcpy(mdpUtilisateur, mdp);
   puts(mdpUtilisateur);
-  strcat_s(mdp, TAILLE_MDP, "2014");
+  strcat(mdp, "2014");
   puts(mdp);
 }
 ```
