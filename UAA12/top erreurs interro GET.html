@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erreurs GET - Quiz PHP</title>
+    <style>
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: #0f172a; 
+            color: #f1f5f9; 
+        }
+        .slide { 
+            width: 960px; 
+            height: 540px; 
+            margin: 20px auto; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 1.5rem; 
+        }
+        .slide-non { 
+            background: linear-gradient(135deg, #7c2d12 0%, #991b1b 100%); 
+        }
+        .slide-oui { 
+            background: linear-gradient(135deg, #065f46 0%, #047857 100%); 
+        }
+        .slide-intro {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+        }
+        h1 { 
+            font-size: 1.8rem; 
+            margin-bottom: 0.8rem; 
+            text-align: center; 
+        }
+        h2 { 
+            font-size: 1.3rem; 
+            margin-bottom: 0.6rem; 
+            text-align: center; 
+            color: #fbbf24; 
+        }
+        .code-block { 
+            background-color: #1e293b; 
+            border: 3px solid #38bdf8; 
+            border-radius: 8px; 
+            padding: 1rem; 
+            margin: 0.4rem 0; 
+            font-family: 'Courier New', monospace; 
+            font-size: 1.15rem;
+            font-weight: bold;
+            max-height: 300px; 
+            overflow-y: auto; 
+            width: 100%; 
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        /* Coloration syntaxique */
+        .comment { color: #9ca3af; font-style: italic; }
+        .keyword { color: #c084fc; }
+        .function { color: #60a5fa; }
+        .string { color: #fbbf24; }
+        .variable { color: #34d399; }
+        .operator { color: #f87171; }
+        .number { color: #fb923c; }
+        .tag { color: #38bdf8; }
+        .attribute { color: #a78bfa; }
+
+        .error-label { 
+            font-size: 1.3rem; 
+            font-weight: bold; 
+            margin-bottom: 0.5rem; 
+            text-align: center; 
+        }
+        .non-label { 
+            color: #fca5a5; 
+        }
+        .oui-label { 
+            color: #86efac; 
+        }
+        .explanation { 
+            font-size: 1rem; 
+            margin-top: 0.4rem; 
+            text-align: center; 
+            font-weight: bold; 
+            padding: 0.4rem;
+            background-color: rgba(0,0,0,0.3);
+            border-radius: 8px;
+        }
+        .consequence { 
+            font-size: 0.95rem; 
+            margin-top: 0.3rem; 
+            color: #fbbf24; 
+            text-align: center;
+            font-style: italic;
+        }
+        .result { 
+            font-size: 0.95rem; 
+            margin-top: 0.3rem; 
+            color: #86efac; 
+            text-align: center;
+            font-style: italic;
+        }
+        ul {
+            text-align: left;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-top: 1rem;
+        }
+        .intro-text {
+            font-size: 1.2rem;
+            text-align: center;
+            margin: 1rem 0;
+            line-height: 1.6;
+        }
+        .indent {
+            margin-left: 1.5rem;
+        }
+        .double-indent {
+            margin-left: 3rem;
+        }
+    </style>
+</head>
+<body>
+
+<!-- SLIDE INTRO -->
+<div class="slide slide-intro">
+    <h1>Échange de données via GET</h1>
+    <h2>Top 10 des (bêtes) erreurs</h2>
+</div>
+
+<!-- ERREUR #1 - NON -->
+<div class="slide slide-non">
+    <div class="error-label non-label">❌ ERREUR #1 : Noms des clés différents</div>
+    <h2>JS envoie "q1" mais PHP cherche "question1"</h2>
+
+    <div class="code-block"><span class="comment">// JavaScript</span><br>
+<span class="keyword">let</span> <span class="variable">q1</span> <span class="operator">=</span> <span class="function">document.getElementById</span>(<span class="string">"q1"</span>).<span class="variable">value</span>;<br>
+<span class="variable">location</span>.<span class="variable">href</span> <span class="operator">=</span> <span class="string">"quiz.php?q1="</span> <span class="operator">+</span> <span class="variable">q1</span>;<br>
+<br>
+<span class="comment">// PHP</span><br>
+<span class="keyword">if</span>(<span class="function">isset</span>(<span class="variable">$_GET</span>[<span class="string">"question1"</span>])) {<br>
+    <span class="variable indent">$reponse</span> <span class="operator">=</span> <span class="variable">$_GET</span>[<span class="string">"question1"</span>];<br>
+}</div>
+
+    <div class="explanation">❌ q1 ≠ question1</div>
+    <div class="consequence">⚠️ $_GET["question1"] n'existe jamais</div>
+</div>
+
+<!-- ERREUR #1 - OUI -->
+<div class="slide slide-oui">
+    <div class="error-label oui-label">✅ SOLUTION #1 : MÊMES noms partout</div>
+    <h2>Cohérence JavaScript ↔ PHP</h2>
+
+    <div class="code-block"><span class="comment">// JavaScript</span><br>
+<span class="keyword">let</span> <span class="variable">q1</span> <span class="operator">=</span> <span class="function">document.getElementById</span>(<span class="string">"q1"</span>).<span class="variable">value</span>;<br>
+<span class="variable">location</span>.<span class="variable">href</span> <span class="operator">=</span> <span class="string">"quiz.php?q1="</span> <span class="operator">+</span> <span class="variable">q1</span>;<br>
+<br>
+<span class="comment">// PHP</span><br>
+<span class="keyword">if</span>(<span class="function">isset</span>(<span class="variable">$_GET</span>[<span class="string">"q1"</span>])) {<br>
+    <span class="variable indent">$reponse</span> <span class="operator">=</span> <span class="variable">$_GET</span>[<span class="string">"q1"</span>];<br>
+}</div>
+
+    <div class="explanation">✅ Même nom "q1" partout</div>
+    <div class="result">✅ Données transmises correctement</div>
+</div>
+
+<!-- ERREUR #2 - NON -->
+<div class="slide slide-non">
+    <div class="error-label non-label">❌ ERREUR #2 : URL malformée</div>
+    <h2>Manque &amp; ou = dans l'URL</h2>
+
+    <div class="code-block"><span class="comment">// INCORRECT - manque &amp;</span><br>
+<span class="variable">location</span>.<span class="variable">href</span> <span class="operator">=</span> <span class="string">"quiz.php?q1="</span> <span class="operator">+</span> <span class="variable">q1</span> <span class="operator">+</span>
+               <span class="string">"q2="</span> <span class="operator">+</span> <span class="variable">q2</span>;<br>
+<br>
+<span class="comment">// INCORRECT - manque =</span><br>
+<span class="variable">location</span>.<span class="variable">href</span> <span class="operator">=</span> <span class="string">"quiz.php?q1"</span> <span class="operator">+</span> <span class="variable">q1</span> <span class="operator">+</span>
+               <span class="string">"&amp;q2"</span> <span class="operator">+</span> <span class="variable">q2</span>;</div>
+
+    <div class="explanation">❌ Sans &amp; et = l'URL est invalide</div>
+    <div class="consequence">⚠️ PHP ne peut pas lire les données</div>
+</div>
+
+<!-- ERREUR #2 - OUI -->
+<div class="slide slide-oui">
+    <div class="error-label oui-label">✅ SOLUTION #2 : &amp; entre paramètres</div>
+    <h2>Structure : ?param1=val&amp;param2=val</h2>
+
+    <div class="code-block"><span class="comment">// CORRECT</span><br>
+<span class="variable">location</span>.<span class="variable">href</span> <span class="operator">=</span> <span class="string">"quiz.php?q1="</span> <span class="operator">+</span> <span class="variable">q1</span> <span class="operator">+</span>
+               <span class="string">"&amp;q2="</span> <span class="operator">+</span> <span class="variable">q2</span> <span class="operator">+</span>
+               <span class="string">"&amp;q3="</span> <span class="operator">+</span> <span class="variable">q3</span>;</div>
+
+    <div class="explanation">✅ Chaque paramètre séparé par &amp;</div>
+    <div class="result">✅ Toutes les données transmises</div>
+</div>
+
+<!-- ERREUR #3 - NON -->
+<div class="slide slide-non">
+    <div class="error-label non-label">❌ ERREUR #3 : Pas de isset()</div>
+    <h2>Accéder à $_GET sans vérifier</h2>
+
+    <div class="code-block"><span class="comment">// INCORRECT</span><br>
+<span class="variable">$q1</span> <span class="operator">=</span> <span class="variable">$_GET</span>[<span class="string">"q1"</span>];<br>
+<span class="variable">$q2</span> <span class="operator">=</span> <span class="variable">$_GET</span>[<span class="string">"q2"</span>];<br>
+<br>
+<span class="keyword">if</span>(<span class="variable">$q1</span> <span class="operator">==</span> <span class="string">"$"</span>) {<br>
+    <span class="variable indent">$score</span><span class="operator">++</span>;<br>
+}</div>
+
+    <div class="explanation">❌ Si paramètres absents = erreur</div>
+    <div class="consequence">⚠️ "Undefined array key" - crash PHP</div>
+</div>
+
+<!-- ERREUR #3 - OUI -->
+<div class="slide slide-oui">
+    <div class="error-label oui-label">✅ SOLUTION #3 : TOUJOURS isset()</div>
+    <h2>Vérifier avant d'utiliser $_GET</h2>
+
+    <div class="code-block"><span class="comment">// CORRECT</span><br>
+<span class="keyword">if</span>(<span class="function">isset</span>(<span class="variable">$_GET</span>[<span class="string">"q1"</span>]) <span class="operator">&amp;&amp;</span>
+   <span class="function">isset</span>(<span class="variable">$_GET</span>[<span class="string">"q2"</span>])) {<br>
+    <span class="variable indent">$q1</span> <span class="operator">=</span> <span class="variable">$_GET</span>[<span class="string">"q1"</span>];<br>
+    <span class="variable indent">$q2</span> <span class="operator">=</span> <span class="variable">$_GET</span>[<span class="string">"q2"</span>];<br>
+    <span class="keyword indent">if</span>(<span class="variable">$q1</span> <span class="operator">==</span> <span class="string">"$"</span>) {<br>
+        <span class="variable double-indent">$score</span><span class="operator">++</span>;<br>
+    <span class="indent">}</span><br>
+}</div>
+
+    <div class="explanation">✅ isset() vérifie l'existence</div>
+    <div class="result">✅ Plus d'erreur lorsque l'utilisateur arrive la première fois sur la page</div>
+</div>
+
+<!-- ERREUR #4 - NON -->
+<div class="slide slide-non">
+    <div class="error-label non-label">❌ ERREUR #4 : Oublier .value</div>
+    <h2>Récupérer l'élément au lieu de la valeur</h2>
+
+    <div class="code-block"><span class="comment">// INCORRECT</span><br>
+<span class="keyword">let</span> <span class="variable">q1</span> <span class="operator">=</span> <span class="function">document.getElementById</span>(<span class="string">"q1"</span>);<br>
+<span class="keyword">let</span> <span class="variable">cb</span> <span class="operator">=</span> <span class="function">document.getElementById</span>(<span class="string">"checkbox"</span>);<br>
+<br>
+<span class="variable">location</span>.<span class="variable">href</span> <span class="operator">=</span> <span class="string">"quiz.php?q1="</span> <span class="operator">+</span> <span class="variable">q1</span> <span class="operator">+</span>
+               <span class="string">"&amp;montrer="</span> <span class="operator">+</span> <span class="variable">cb</span>;</div>
+
+    <div class="explanation">❌ q1 = élément HTML, pas le texte</div>
+    <div class="consequence">⚠️ URL = "[object HTMLInputElement]"</div>
+</div>
+
+<!-- ERREUR #4 - OUI -->
+<div class="slide slide-oui">
+    <div class="error-label oui-label">✅ SOLUTION #4 : .value et .checked</div>
+    <h2>Récupérer la vraie valeur</h2>
+
+    <div class="code-block"><span class="comment">// CORRECT</span><br>
+<span class="keyword">let</span> <span class="variable">q1</span> <span class="operator">=</span> <span class="function">document.getElementById</span>(<span class="string">"q1"</span>).<span class="variable">value</span>;<br>
+<span class="keyword">let</span> <span class="variable">cb</span> <span class="operator">=</span> <span class="function">document.getElementById</span>(<span class="string">"checkbox"</span>).<span class="variable">checked</span>;<br>
+<br>
+<span class="variable">location</span>.<span class="variable">href</span> <span class="operator">=</span> <span class="string">"quiz.php?q1="</span> <span class="operator">+</span> <span class="variable">q1</span> <span class="operator">+</span>
+               <span class="string">"&amp;montrer="</span> <span class="operator">+</span> <span class="variable">cb</span>;</div>
+
+    <div class="explanation">✅ .value = texte, .checked = true/false</div>
+    <div class="result">✅ Vraies valeurs transmises</div>
+</div>
+
+<!-- ERREUR #5 - NON -->
+<div class="slide slide-non">
+    <div class="error-label non-label">❌ ERREUR #5 : Pas de location.href</div>
+    <h2>Fonction qui ne redirige jamais</h2>
+
+    <div class="code-block"><span class="comment">// INCORRECT</span><br>
+<span class="keyword">function</span> <span class="function">envoyer</span>() {<br>
+    <span class="keyword indent">let</span> <span class="variable">q1</span> <span class="operator">=</span> <span class="function">document.getElementById</span>(<span class="string">"q1"</span>).<span class="variable">value</span>;<br>
+    <span class="keyword indent">let</span> <span class="variable">url</span> <span class="operator">=</span> <span class="string">"quiz.php?q1="</span> <span class="operator">+</span> <span class="variable">q1</span>;<br>
+    <span class="comment indent">// RIEN !</span><br>
+}</div>
+
+    <div class="explanation">❌ URL créée mais jamais utilisée</div>
+    <div class="consequence">⚠️ Rien ne se passe au clic</div>
+</div>
+
+<!-- ERREUR #5 - OUI -->
+<div class="slide slide-oui">
+    <div class="error-label oui-label">✅ SOLUTION #5 : location.href</div>
+    <h2>Rediriger vers la page PHP</h2>
+
+    <div class="code-block"><span class="comment">// CORRECT</span><br>
+<span class="keyword">function</span> <span class="function">envoyer</span>() {<br>
+    <span class="keyword indent">let</span> <span class="variable">q1</span> <span class="operator">=</span> <span class="function">document.getElementById</span>(<span class="string">"q1"</span>).<span class="variable">value</span>;<br>
+    <span class="variable indent">location</span>.<span class="variable">href</span> <span class="operator">=</span> <span class="string">"quiz.php?q1="</span> <span class="operator">+</span> <span class="variable">q1</span>;<br>
+}</div>
+
+    <div class="explanation">✅ location.href charge la nouvelle URL</div>
+    <div class="result">✅ Page rechargée avec données GET</div>
+</div>
+
+<!-- ERREUR #6 - NON -->
+<div class="slide slide-non">
+    <div class="error-label non-label">❌ ERREUR #6 : $_GET sans guillemets</div>
+    <h2>Oublier les guillemets sur la clé</h2>
+
+    <div class="code-block"><span class="comment">// INCORRECT</span><br>
+<span class="variable">$q1</span> <span class="operator">=</span> <span class="variable">$_GET</span>[question1];<br>
+<span class="variable">$q2</span> <span class="operator">=</span> <span class="variable">$_GET</span>[question2];<br>
+</div>
+
+    <div class="explanation">❌ Clés doivent être entre guillemets</div>
+    <div class="consequence">⚠️ "Use of undefined constant"</div>
+</div>
+
+<!-- ERREUR #6 - OUI -->
+<div class="slide slide-oui">
+    <div class="error-label oui-label">✅ SOLUTION #6 : Guillemets obligatoires</div>
+    <h2>Syntaxe correcte pour $_GET</h2>
+
+    <div class="code-block"><span class="comment">// CORRECT</span><br>
+<span class="variable">$q1</span> <span class="operator">=</span> <span class="variable">$_GET</span>[<span class="string">"question1"</span>];<br>
+<span class="variable">$q2</span> <span class="operator">=</span> <span class="variable">$_GET</span>[<span class="string">"question2"</span>];<br>
+<br>
+<span class="comment">// ou avec guillemets simples</span><br>
+<span class="variable">$q1</span> <span class="operator">=</span> <span class="variable">$_GET</span>[<span class="string">'question1'</span>];<br>
+<br></div>
+
+    <div class="explanation">✅ Clés = chaînes → entre guillemets</div>
+    <div class="result">✅ Syntaxe PHP valide</div>
+</div>
+
+<!-- ERREUR #7 - NON -->
+<div class="slide slide-non">
+    <div class="error-label non-label">❌ ERREUR #7 : Checkbox sans name</div>
+    <h2>Seulement un id, pas de name</h2>
+
+    <div class="code-block"><span class="comment">&lt;!-- INCORRECT --&gt;</span><br>
+&lt;<span class="tag">input</span> <span class="attribute">type</span>=<span class="string">"checkbox"</span>
+       <span class="attribute">id</span>=<span class="string">"montrer"</span>&gt;</div>
+
+    <div class="explanation">❌ Sans name, pas envoyé en GET</div>
+    <div class="consequence">⚠️ $_GET["montrer"] n'existe jamais</div>
+</div>
+
+<!-- ERREUR #7 - OUI -->
+<div class="slide slide-oui">
+    <div class="error-label oui-label">✅ SOLUTION #7 : name ET id</div>
+    <h2>name obligatoire pour GET</h2>
+
+    <div class="code-block"><span class="comment">&lt;!-- CORRECT --&gt;</span><br>
+&lt;<span class="tag">input</span> <span class="attribute">type</span>=<span class="string">"checkbox"</span>
+       <span class="attribute">id</span>=<span class="string">"montrer"</span>
+       <span class="attribute">name</span>=<span class="string">"montrer"</span>&gt;<br>
+<br>
+<span class="comment">&lt;!-- id = JS, name = GET --&gt;</span><br></div>
+
+    <div class="explanation">✅ name définit le paramètre GET</div>
+    <div class="result">✅ Paramètre récupérable en PHP</div>
+</div>
+
+<!-- ERREUR #8 - NON -->
+<div class="slide slide-non">
+    <div class="error-label non-label">❌ ERREUR #8 : Checkbox == true</div>
+    <h2>Comparer avec booléen en PHP</h2>
+
+    <div class="code-block"><span class="comment">// INCORRECT</span><br>
+<span class="keyword">if</span>(<span class="variable">$_GET</span>[<span class="string">"montrer"</span>] <span class="operator">==</span> <span class="keyword">true</span>) {<br>
+    <span class="comment indent">// afficher correctif</span><br>
+}<br>
+<br>
+<span class="variable">$montrer</span> <span class="operator">=</span> <span class="variable">$_GET</span>[<span class="string">"montrer"</span>];<br>
+<span class="keyword">if</span>(<span class="variable">$montrer</span> <span class="operator">==</span> <span class="keyword">true</span>) {<br>
+    <span class="comment indent">// ...</span><br>
+}</div>
+
+    <div class="explanation">❌ JS envoie "true"/"false" (chaînes)</div>
+    <div class="consequence">⚠️ Condition peut être fausse</div>
+</div>
+
+<!-- ERREUR #8 - OUI -->
+<div class="slide slide-oui">
+    <div class="error-label oui-label">✅ SOLUTION #8 : Comparer avec "true"</div>
+    <h2>JavaScript envoie des chaînes</h2>
+
+    <div class="code-block"><span class="comment">// CORRECT</span><br>
+<span class="keyword">if</span>(<span class="variable">$_GET</span>[<span class="string">"montrer"</span>] <span class="operator">==</span> <span class="string">"true"</span>) {<br>
+    <span class="comment">// afficher correctif</span><br>
+}<br>
+<br>
+<span class="comment">// ou mieux</span><br>
+<span class="keyword">if</span>(<span class="function">isset</span>(<span class="variable">$_GET</span>[<span class="string">"montrer"</span>]) <span class="operator">&amp;&amp;</span>
+   <span class="variable">$_GET</span>[<span class="string">"montrer"</span>] <span class="operator">==</span> <span class="string">"true"</span>) {<br>
+    <span class="comment">// ...</span><br>
+}</div>
+
+    <div class="explanation">✅ Comparer avec chaîne "true"</div>
+    <div class="result">✅ Condition fonctionne</div>
+</div>
+
+<!-- ERREUR #9 - NON -->
+<div class="slide slide-non">
+    <div class="error-label non-label">❌ ERREUR #9 : Score jamais incrémenté</div>
+    <h2>Oublier $score++</h2>
+
+    <div class="code-block"><span class="comment">// INCORRECT</span><br>
+<span class="variable">$score</span> <span class="operator">=</span> <span class="number">0</span>;<br>
+<br>
+<span class="keyword">if</span>(<span class="variable">$q1</span> <span class="operator">==</span> <span class="string">"$"</span>) {<br>
+    <span class="keyword indent">echo</span> <span class="string">"Correct !"</span>;<br>
+}<br>
+<br>
+<span class="keyword">echo</span> <span class="string">"Score : "</span> <span class="operator">.</span> <span class="variable">$score</span> <span class="operator">.</span> <span class="string">"/5"</span>;</div>
+
+    <div class="explanation">❌ Score reste à 0</div>
+    <div class="consequence">⚠️ Affiche toujours 0/5</div>
+</div>
+
+<!-- ERREUR #9 - OUI -->
+<div class="slide slide-oui">
+    <div class="error-label oui-label">✅ SOLUTION #9 : $score++</div>
+    <h2>Incrémenter à chaque bonne réponse</h2>
+
+    <div class="code-block"><span class="comment">// CORRECT</span><br>
+<span class="variable">$score</span> <span class="operator">=</span> <span class="number">0</span>;<br>
+<br>
+<span class="keyword">if</span>(<span class="variable">$q1</span> <span class="operator">==</span> <span class="string">"$"</span>) {<br>
+    <span class="keyword indent">echo</span> <span class="string">"Correct !"</span>;<br>
+    <span class="variable indent">$score</span><span class="operator">++</span>;<br>
+}<br>
+<br>
+<span class="keyword">echo</span> <span class="string">"Score : "</span> <span class="operator">.</span> <span class="variable">$score</span> <span class="operator">.</span> <span class="string">"/5"</span>;</div>
+
+    <div class="explanation">✅ $score++ augmente de 1</div>
+    <div class="result">✅ Score correct affiché</div>
+</div>
+
+<!-- ERREUR #10 - NON -->
+<div class="slide slide-non">
+    <div class="error-label non-label">❌ ERREUR #10 : OR au lieu de AND</div>
+    <h2>Utiliser || au lieu de &amp;&amp;</h2>
+
+    <div class="code-block"><span class="comment">// INCORRECT</span><br>
+<span class="keyword">if</span>(<span class="variable">$score</span> <span class="operator">&gt;=</span> <span class="number">0</span> <span class="operator">||</span> <span class="variable">$score</span> <span class="operator">&lt;=</span> <span class="number">2</span>) {<br>
+    <span class="keyword indent">echo</span> <span class="string">"Continue"</span>;<br>
+}<br>
+<br>
+<span class="keyword">if</span>(<span class="function">isset</span>(<span class="variable">$_GET</span>[<span class="string">"q1"</span>]) <span class="operator">||</span>
+   <span class="function">isset</span>(<span class="variable">$_GET</span>[<span class="string">"q2"</span>])) {<br>
+    <span class="comment indent">// Un seul suffit</span><br>
+}</div>
+
+    <div class="explanation">❌ || = vrai si UNE condition vraie</div>
+    <div class="consequence">⚠️ Toujours vrai ou trop tôt</div>
+</div>
+
+<!-- ERREUR #10 - OUI -->
+<div class="slide slide-oui">
+    <div class="error-label oui-label">✅ SOLUTION #10 : AND (&amp;&amp;)</div>
+    <h2>&amp;&amp; exige TOUTES les conditions</h2>
+
+    <div class="code-block"><span class="comment">// CORRECT</span><br>
+<span class="keyword">if</span>(<span class="variable">$score</span> <span class="operator">&gt;=</span> <span class="number">0</span> <span class="operator">&amp;&amp;</span> <span class="variable">$score</span> <span class="operator">&lt;=</span> <span class="number">2</span>) {<br>
+    <span class="keyword indent">echo</span> <span class="string">"Continue"</span>;<br>
+}<br>
+<br>
+<span class="keyword">if</span>(<span class="function">isset</span>(<span class="variable">$_GET</span>[<span class="string">"q1"</span>]) <span class="operator">&amp;&amp;</span>
+   <span class="function">isset</span>(<span class="variable">$_GET</span>[<span class="string">"q2"</span>])) {<br>
+    <span class="comment indent">// TOUS doivent exister</span><br>
+}</div>
+
+    <div class="explanation">✅ &amp;&amp; = vrai si TOUTES vraies</div>
+    <div class="result">✅ Logique correcte</div>
+</div>
+
+<!-- SLIDE RÉCAP -->
+<div class="slide slide-intro">
+    <h1>TOP 10</h1>
+    <div class="intro-text">
+        <ul style="font-size: 1rem;">
+            <li><strong>1. Noms différents</strong> : JS ≠ PHP</li>
+            <li><strong>2. URL malformée</strong> : pas &amp; ou =</li>
+            <li><strong>3. Pas isset()</strong> avant $_GET</li>
+            <li><strong>4. Pas .value/.checked</strong></li>
+            <li><strong>5. Pas location.href</strong></li>
+            <li><strong>6. $_GET sans guillemets</strong></li>
+            <li><strong>7. Checkbox sans name</strong></li>
+            <li><strong>8. Comparer avec booléen</strong></li>
+            <li><strong>9. Score pas incrémenté</strong></li>
+            <li><strong>10. OR au lieu de AND</strong></li>
+        </ul>
+        <br>
+    </div>
+</div>
+
+</body>
+</html>
