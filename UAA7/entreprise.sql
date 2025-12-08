@@ -186,6 +186,7 @@ INSERT INTO employees(employee_id,first_name,last_name,email,phone_number,hire_d
 INSERT INTO employees(employee_id,first_name,last_name,email,phone_number,hire_date,job_id,salary,manager_id,department_id,commission_pct) VALUES (204,'Hermann','Baer','hermann.baer@sqltutorial.org','515.123.8888','1994-06-07',12,10000.00,101,7, 0.01);
 INSERT INTO employees(employee_id,first_name,last_name,email,phone_number,hire_date,job_id,salary,manager_id,department_id,commission_pct) VALUES (205,'Shelley','Higgins','shelley.higgins@sqltutorial.org','515.123.8080','1994-06-07',2,12000.00,101,11, 0.8);
 INSERT INTO employees(employee_id,first_name,last_name,email,phone_number,hire_date,job_id,salary,manager_id,department_id,commission_pct) VALUES (206,'William','Gietz','william.gietz@sqltutorial.org','515.123.8181','1994-06-07',1,8300.00,205,11, 0.21);
+INSERT INTO employees(employee_id,first_name,last_name,email,phone_number,hire_date,job_id,salary,manager_id,department_id,commission_pct) VALUES (207,'John','Doe','john.doe@sqltutorial.org','515.123.8181','1994-06-07',1,8300.00,205,11,null);
 
 
 /*Data for the table dependents */
