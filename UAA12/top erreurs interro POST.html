@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erreurs POST - Quiz PHP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0f172a;
+            color: #f1f5f9;
+        }
+        .slide {
+            width: 960px;
+            height: 540px;
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            break-inside: avoid;
+        }
+        .slide-non {
+            background: linear-gradient(135deg, #7c2d12 0%, #991b1b 100%);
+        }
+        .slide-oui {
+            background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+        }
+        .slide-intro {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+        }
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+            text-align: center;
+        }
+        h2 {
+            font-size: 1.3rem;
+            margin-bottom: 0.6rem;
+            text-align: center;
+            color: #fbbf24;
+        }
+        .code-block {
+            background-color: #1e293b;
+            border: 3px solid #38bdf8;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.4rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.15rem;
+            font-weight: bold;
+            width: 100%;
+            line-height: 1.6;
+            text-align: left;
+            break-inside: avoid;
+        }
+
+        /* Coloration syntaxique */
+        .comment { color: #9ca3af; font-style: italic; }
+        .keyword { color: #c084fc; }
+        .function { color: #60a5fa; }
+        .string { color: #fbbf24; }
+        .variable { color: #34d399; }
+        .operator { color: #f87171; }
+        .number { color: #fb923c; }
+        .tag { color: #38bdf8; }
+        .attribute { color: #a78bfa; }
+
+        .error-label {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        .non-label {
+            color: #fca5a5;
+        }
+        .oui-label {
+            color: #86efac;
+        }
+        .explanation {
+            font-size: 1rem;
+            margin-top: 0.4rem;
+            text-align: center;
+            font-weight: bold;
+            padding: 0.4rem;
+            background-color: rgba(0,0,0,0.3);
+            border-radius: 8px;
+        }
+        .consequence {
+            font-size: 0.95rem;
+            margin-top: 0.3rem;
+            color: #fbbf24;
+            text-align: center;
+            font-style: italic;
+        }
+        .result {
+            font-size: 0.95rem;
+            margin-top: 0.3rem;
+            color: #86efac;
+            text-align: center;
+            font-style: italic;
+        }
+        ul {
+            text-align: left;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-top: 1rem;
+        }
+        .intro-text {
+            font-size: 1.2rem;
+            text-align: center;
+            margin: 1rem 0;
+            line-height: 1.6;
+        }
+        .indent {
+            margin-left: 1.5rem;
+        }
+        .double-indent {
+            margin-left: 3rem;
+        }
+
+@media print {
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    html, body {
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 0;
+        background-color: white;
+    }
+    @page {
+        size: A4 landscape;
+        margin: 0;
+    }
+    .slide {
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 20mm;
+        box-sizing: border-box;
+        page-break-after: always;
+        page-break-inside: avoid;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        background-color: inherit;
+    }
+    .slide:last-child {
+        page-break-after: avoid;
+    }
+    .code-block {
+        max-height: none;
+        overflow: visible;
+        page-break-inside: avoid;
+    }
+    h1, h2 {
+        page-break-after: avoid;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+<!-- SLIDE INTRO -->
+<div class="slide slide-intro">
+    <h1>Échange de données via POST</h1>
+    <h2>Top 10 des (bêtes) erreurs</h2>
+</div>
+
+<!-- ERREUR #1 - NON -->
+<div class="slide slide-non">
+    <div class="error-label non-label">❌ ERREUR #1 : Oublier method="POST"</div>
+    <h2>Formulaire sans méthode ou method incorrect</h2>
+
+    <div class="code-block"><span class="comment">&lt;!-- INCORRECT --&gt;</span><br>
+<span class="tag">&lt;form</span> <span class="attribute">action</span>=<span class="string">"reservation.php"</span><span class="tag">&gt;</span><br>
+    <span class="indent">&lt;input</span> <span class="attribute">type</span>=<span class="string">"text"</span> <span class="attribute">name</span>=<span class="string">"nom"</span><span class="tag">&gt;</span><br>
+<span class="tag">&lt;/form&gt;</span><br>
+<br>
+<span class="comment">&lt;!-- INCORRECT --&gt;</span><br>
+<span class="tag">&lt;form</span> <span class="attribute">method</span>=<span class="variable">$_POST</span><span class="tag">&gt;</span></div>
+
+    <div class="explanation">❌ Sans method="POST", les données vont en GET</div>
+    <div class="consequence">⚠️ $_POST vide - données dans l'URL</div>
+</div>
+
+<!-- ERREUR #1 - OUI -->
+<div class="slide slide-oui">
+    <div class="error-label oui-label">✅ SOLUTION #1 : Toujours method="POST"</div>
+    <h2>Méthode POST explicite dans le formulaire</h2>
+
+    <div class="code-block"><span class="comment">&lt;!-- CORRECT --&gt;</span><br>
+<span class="tag">&lt;form</span> <span class="attribute">action</span>=<span class="string">"reservation.php"</span> <span class="attribute">method</span>=<span class="string">"POST"</span><span class="tag">&gt;</span><br>
+    <span class="indent">&lt;input</span> <span class="attribute">type</span>=<span class="string">"text"</span> <span class="attribute">name</span>=<span class="string">"nom"</span><span class="tag">&gt;</span><br>
+    <span class="indent">&lt;input</span> <span class="attribute">type</span>=<span class="string">"submit"</span><span class="tag">&gt;</span><br>
+<span class="tag">&lt;/form&gt;</span></div>
+
+    <div class="explanation">✅ method="POST" ou method="post"</div>
+    <div class="result">✅ Données envoyées via POST</div>
+</div>
+
+<!-- ERREUR #2 - NON -->
+<div class="slide slide-non">
+    <div class="error-label non-label">❌ ERREUR #2 : Oublier l'attribut name</div>
+    <h2>Input sans name ou name vide</h2>
+
+    <div class="code-block"><span class="comment">&lt;!-- INCORRECT --&gt;</span><br>
+<span class="tag">&lt;input</span> <span class="attribute">type</span>=<span class="string">"text"</span> <span class="attribute">id</span>=<span class="string">"nom"</span><span class="tag">&gt;</span><br>
+<span class="tag">&lt;input</span> <span class="attribute">type</span>=<span class="string">"text"</span><span class="tag">&gt;</span><br>
+<br>
+<span class="comment">// PHP</span><br>
+<span class="variable">$nom</span> <span class="operator">=</span> <span class="variable">$_POST</span>[<span class="string">"nom"</span>];</div>
+
+    <div class="explanation">❌ Sans name, pas d'envoi au serveur</div>
+    <div class="consequence">⚠️ $_POST["nom"] n'existe jamais</div>
+</div>
+
+<!-- ERREUR #2 - OUI -->
+<div class="slide slide-oui">
+    <div class="error-label oui-label">✅ SOLUTION #2 : Attribut name obligatoire</div>
+    <h2>Chaque input doit avoir un name</h2>
+
+    <div class="code-block"><span class="comment">&lt;!-- CORRECT --&gt;</span><br>
+<span class="tag">&lt;input</span> <span class="attribute">type</span>=<span class="string">"text"</span> <span class="attribute">name</span>=<span class="string">"nom"</span> <span class="attribute">id</span>=<span class="string">"nom"</span><span class="tag">&gt;</span><br>
+<span class="tag">&lt;input</span> <span class="attribute">type</span>=<span class="string">"text"</span> <span class="attribute">name</span>=<span class="string">"date"</span><span class="tag">&gt;</span><br>
+<br>
+<span class="comment">// PHP</span><br>
+<span class="variable">$nom</span> <span class="operator">=</span> <span class="variable">$_POST</span>[<span class="string">"nom"</span>];</div>
+
+    <div class="explanation">✅ name = clé dans $_POST</div>
+    <div class="result">✅ Données transmises correctement</div>
+</div>
+
+<!-- ERREUR #3 - NON -->
+<div class="slide slide-non">
+    <div class="error-label non-label">❌ ERREUR #3 : $_POST avant isset()</div>
+    <h2>Accéder à $_POST sans vérification</h2>
+
+    <div class="code-block"><span class="comment">// INCORRECT</span><br>
+<span class="variable">$nom</span> <span class="operator">=</span> <span class="variable">$_POST</span>[<span class="string">"nom"</span>];<br>
+<span class="variable">$service</span> <span class="operator">=</span> <span class="variable">$_POST</span>[<span class="string">"service"</span>];<br>
+<br>
+<span class="keyword">echo</span> <span class="string">"Merci $nom"</span>;</div>
+
+    <div class="explanation">❌ Au chargement de la page, $_POST vide</div>
+    <div class="consequence">⚠️ "Undefined array key" - erreur PHP</div>
+</div>
+
+<!-- ERREUR #3 - OUI -->
+<div class="slide slide-oui">
+    <div class="error-label oui-label">✅ SOLUTION #3 : TOUJOURS isset()</div>
+    <h2>Vérifier avant d'utiliser $_POST</h2>
+
+    <div class="code-block"><span class="comment">// CORRECT</span><br>
+<span class="keyword">if</span>(<span class="function">isset</span>(<span class="variable">$_POST</span>[<span class="string">"nom"</span>]) <span class="operator">&amp;&amp;</span><br>
+   <span class="function">isset</span>(<span class="variable">$_POST</span>[<span class="string">"service"</span>])) {<br>
+    <span class="variable indent">$nom</span> <span class="operator">=</span> <span class="variable">$_POST</span>[<span class="string">"nom"</span>];<br>
+    <span class="variable indent">$service</span> <span class="operator">=</span> <span class="variable">$_POST</span>[<span class="string">"service"</span>];<br>
+    <span class="keyword indent">echo</span> <span class="string">"Merci $nom"</span>;<br>
+}</div>
+
+    <div class="explanation">✅ isset() vérifie que les données existent</div>
+    <div class="result">✅ Plus d'erreur au premier chargement</div>
+</div>
+
+<!-- ERREUR #4 - NON -->
+<div class="slide slide-non">
+    <div class="error-label non-label">❌ ERREUR #4 : Point-virgule après isset()</div>
+    <h2>; termine le if avant le code</h2>
+
+    <div class="code-block"><span class="comment">// INCORRECT</span><br>
+<span class="keyword">if</span>(<span class="function">isset</span>(<span class="variable">$_POST</span>[<span class="string">"nom"</span>]) <span class="operator">&amp;&amp;</span><br>
+   <span class="function">isset</span>(<span class="variable">$_POST</span>[<span class="string">"service"</span>]))<span class="operator">;</span><br>
+    <span class="variable indent">$nom</span> <span class="operator">=</span> <span class="variable">$_POST</span>[<span class="string">"nom"</span>];<br>
+    <span class="keyword indent">echo</span> <span class="string">"Merci $nom"</span>;</div>
+
+    <div class="explanation">❌ Le ; coupe le if - code s'exécute toujours</div>
+    <div class="consequence">⚠️ Erreur car $_POST utilisé sans vérification</div>
+</div>
+
+<!-- ERREUR #4 - OUI -->
+<div class="slide slide-oui">
+    <div class="error-label oui-label">✅ SOLUTION #4 : Pas de ; après if</div>
+    <h2>Le if contrôle le bloc suivant</h2>
+
+    <div class="code-block"><span class="comment">// CORRECT</span><br>
+<span class="keyword">if</span>(<span class="function">isset</span>(<span class="variable">$_POST</span>[<span class="string">"nom"</span>]) <span class="operator">&amp;&amp;</span><br>
+   <span class="function">isset</span>(<span class="variable">$_POST</span>[<span class="string">"service"</span>])){<br>
+    <span class="variable indent">$nom</span> <span class="operator">=</span> <span class="variable">$_POST</span>[<span class="string">"nom"</span>];<br>
+    <span class="keyword indent">echo</span> <span class="string">"Merci $nom"</span>;<br>
+}</div>
+
+    <div class="explanation">✅ Pas de ; - accolades directement</div>
+    <div class="result">✅ Le code s'exécute seulement si isset() vrai</div>
+</div>
+
+<!-- ERREUR #5 - NON -->
+<div class="slide slide-non">
+    <div class="error-label non-label">❌ ERREUR #5 : Syntaxe isset() incorrecte</div>
+    <h2>= au lieu de [] pour isset()</h2>
+
+    <div class="code-block"><span class="comment">// INCORRECT</span><br>
+<span class="variable">$nom</span> <span class="operator">=</span> <span class="function">isset</span>(<span class="variable">$_POST</span> <span class="operator">=</span> <span class="string">"nom"</span>);<br>
+<span class="variable">$service</span> <span class="operator">=</span> <span class="function">isset</span>(<span class="variable">$_POST</span> <span class="operator">=</span> <span class="string">"service"</span>);<br>
+<br>
+<span class="keyword">echo</span> <span class="string">"Merci $nom"</span>;</div>
+
+    <div class="explanation">❌ isset($_POST = ...) est invalide</div>
+    <div class="consequence">⚠️ Erreur de syntaxe - code ne fonctionne pas</div>
+</div>
+
+<!-- ERREUR #5 - OUI -->
+<div class="slide slide-oui">
+    <div class="error-label oui-label">✅ SOLUTION #5 : Crochets [] pour isset()</div>
+    <h2>isset() vérifie, puis assignation</h2>
+
+    <div class="code-block"><span class="comment">// CORRECT</span><br>
+<span class="keyword">if</span>(<span class="function">isset</span>(<span class="variable">$_POST</span>[<span class="string">"nom"</span>]) <span class="operator">&amp;&amp;</span><br>
+   <span class="function">isset</span>(<span class="variable">$_POST</span>[<span class="string">"service"</span>])){<br>
+    <span class="variable indent">$nom</span> <span class="operator">=</span> <span class="variable">$_POST</span>[<span class="string">"nom"</span>];<br>
+    <span class="variable indent">$service</span> <span class="operator">=</span> <span class="variable">$_POST</span>[<span class="string">"service"</span>];<br>
+    <span class="keyword indent">echo</span> <span class="string">"Merci $nom"</span>;<br>
+}</div>
+
+    <div class="explanation">✅ isset($_POST["clé"]) puis affectation</div>
+    <div class="result">✅ Syntaxe correcte</div>
+</div>
+
+<!-- ERREUR #6 - NON -->
+<div class="slide slide-non">
+    <div class="error-label non-label">❌ ERREUR #6 : Options sans value</div>
+    <h2>&lt;option&gt; sans attribut value</h2>
+
+    <div class="code-block"><span class="comment">&lt;!-- INCORRECT --&gt;</span><br>
+<span class="tag">&lt;select</span> <span class="attribute">name</span>=<span class="string">"service"</span><span class="tag">&gt;</span><br>
+    <span class="indent">&lt;option&gt;</span>Médecine générale<span class="tag">&lt;/option&gt;</span><br>
+    <span class="indent">&lt;option&gt;</span>Kinésithérapie<span class="tag">&lt;/option&gt;</span><br>
+<span class="tag">&lt;/select&gt;</span><br>
+<br>
+<span class="comment">// PHP - comparaison difficile</span><br>
+<span class="keyword">if</span>(<span class="variable">$service</span> <span class="operator">==</span> <span class="string">"Médecine générale"</span>){</div>
+
+    <div class="explanation">❌ Texte complet envoyé - sensible aux espaces/accents</div>
+    <div class="consequence">⚠️ Comparaisons fragiles</div>
+</div>
+
+<!-- ERREUR #6 - OUI -->
+<div class="slide slide-oui">
+    <div class="error-label oui-label">✅ SOLUTION #6 : Toujours value sur &lt;option&gt;</div>
+    <h2>Valeur courte et simple</h2>
+
+    <div class="code-block"><span class="comment">&lt;!-- CORRECT --&gt;</span><br>
+<span class="tag">&lt;select</span> <span class="attribute">name</span>=<span class="string">"service"</span><span class="tag">&gt;</span><br>
+    <span class="indent">&lt;option</span> <span class="attribute">value</span>=<span class="string">"medecine"</span><span class="tag">&gt;</span>Médecine générale<span class="tag">&lt;/option&gt;</span><br>
+    <span class="indent">&lt;option</span> <span class="attribute">value</span>=<span class="string">"kine"</span><span class="tag">&gt;</span>Kinésithérapie<span class="tag">&lt;/option&gt;</span><br>
+<span class="tag">&lt;/select&gt;</span><br>
+<br>
+<span class="comment">// PHP - comparaison simple</span><br>
+<span class="keyword">if</span>(<span class="variable">$service</span> <span class="operator">==</span> <span class="string">"medecine"</span>){</div>
+
+    <div class="explanation">✅ value = code simple sans accent</div>
+    <div class="result">✅ Comparaisons fiables</div>
+</div>
+
+<!-- ERREUR #7 - NON -->
+<div class="slide slide-non">
+    <div class="error-label non-label">❌ ERREUR #7 : Pas de bouton submit</div>
+    <h2>Button normal au lieu de submit</h2>
+
+    <div class="code-block"><span class="comment">&lt;!-- INCORRECT --&gt;</span><br>
+<span class="tag">&lt;form</span> <span class="attribute">method</span>=<span class="string">"post"</span><span class="tag">&gt;</span><br>
+    <span class="indent">&lt;input</span> <span class="attribute">type</span>=<span class="string">"text"</span> <span class="attribute">name</span>=<span class="string">"nom"</span><span class="tag">&gt;</span><br>
+    <span class="indent">&lt;input</span> <span class="attribute">type</span>=<span class="string">"button"</span> <span class="attribute">value</span>=<span class="string">"Envoyer"</span><span class="tag">&gt;</span><br>
+<span class="tag">&lt;/form&gt;</span><br>
+<br>
+</div>
+
+    <div class="explanation">❌ type="button" n'envoie pas le formulaire</div>
+    <div class="consequence">⚠️ Clic ne soumet rien - $_POST vide</div>
+</div>
+
+<!-- ERREUR #7 - OUI -->
+<div class="slide slide-oui">
+    <div class="error-label oui-label">✅ SOLUTION #7 : type="submit"</div>
+    <h2>Submit soumet le formulaire</h2>
+
+    <div class="code-block"><span class="comment">&lt;!-- CORRECT --&gt;</span><br>
+<span class="tag">&lt;form</span> <span class="attribute">method</span>=<span class="string">"post"</span><span class="tag">&gt;</span><br>
+    <span class="indent">&lt;input</span> <span class="attribute">type</span>=<span class="string">"text"</span> <span class="attribute">name</span>=<span class="string">"nom"</span><span class="tag">&gt;</span><br>
+    <span class="indent">&lt;input</span> <span class="attribute">type</span>=<span class="string">"submit"</span> <span class="attribute">value</span>=<span class="string">"Envoyer"</span><span class="tag">&gt;</span><br>
+<span class="tag">&lt;/form&gt;</span><br>
+<br>
+</div>
+
+    <div class="explanation">✅ type="submit" envoie le formulaire</div>
+    <div class="result">✅ Données POST transmises au clic</div>
+</div>
+
+<!-- ERREUR #8 - NON -->
+<div class="slide slide-non">
+    <div class="error-label non-label">❌ ERREUR #8 : Accolades au lieu de parenthèses</div>
+    <h2>rand(0,5){ au lieu de rand(0,5)</h2>
+
+    <div class="code-block"><span class="comment">// INCORRECT</span><br>
+<span class="variable">$nombre</span> <span class="operator">=</span> <span class="function">rand</span>(<span class="number">0</span>, <span class="number">5</span>){<br>
+    <span class="keyword indent">echo</span> <span class="string">"RES-"</span>.<span class="variable">$nombre</span>;<br>
+}</div>
+
+    <div class="explanation">❌ { } ne sont pas pour les fonctions</div>
+    <div class="consequence">⚠️ Erreur de syntaxe PHP</div>
+</div>
+
+<!-- ERREUR #8 - OUI -->
+<div class="slide slide-oui">
+    <div class="error-label oui-label">✅ SOLUTION #8 : Parenthèses pour fonctions</div>
+    <h2>( ) pour appeler rand()</h2>
+
+    <div class="code-block"><span class="comment">// CORRECT</span><br>
+<span class="variable">$nombre</span> <span class="operator">=</span> <span class="function">rand</span>(<span class="number">0</span>, <span class="number">5</span>);<br>
+<span class="keyword">echo</span> <span class="string">"RES-"</span>.<span class="variable">$nombre</span>;</div>
+
+    <div class="explanation">✅ Fonction = parenthèses ( )</div>
+    <div class="result">✅ Nombre aléatoire généré</div>
+</div>
+
+<!-- ERREUR #9 - NON -->
+<div class="slide slide-non">
+    <div class="error-label non-label">❌ ERREUR #9 : Syntaxe for en JavaScript</div>
+    <h2>let dans une boucle PHP</h2>
+
+    <div class="code-block"><span class="comment">// INCORRECT - mélange JS et PHP</span><br>
+<span class="keyword">for</span>(<span class="keyword">let</span> <span class="variable">$i</span>=<span class="number">0</span>; <span class="variable">$i</span>&lt;<span class="number">6</span>; <span class="variable">$i</span>++){<br>
+    <span class="keyword indent">echo</span> <span class="function">rand</span>(<span class="number">0</span>,<span class="number">9</span>);<br>
+}</div>
+
+    <div class="explanation">❌ let est JavaScript, pas PHP</div>
+    <div class="consequence">⚠️ Erreur de syntaxe</div>
+</div>
+
+<!-- ERREUR #9 - OUI -->
+<div class="slide slide-oui">
+    <div class="error-label oui-label">✅ SOLUTION #9 : Syntaxe PHP pure</div>
+    <h2>for($i=...) en PHP</h2>
+
+    <div class="code-block"><span class="comment">// CORRECT</span><br>
+<span class="keyword">for</span>(<span class="variable">$i</span>=<span class="number">0</span>; <span class="variable">$i</span>&lt;<span class="number">6</span>; <span class="variable">$i</span>++){<br>
+    <span class="keyword indent">echo</span> <span class="function">rand</span>(<span class="number">0</span>,<span class="number">9</span>);<br>
+}<br>
+<br>
+<span class="comment">// ou</span><br>
+<span class="keyword">for</span>(<span class="variable">$cpt</span>=<span class="number">1</span>; <span class="variable">$cpt</span>&lt;=<span class="number">6</span>; <span class="variable">$cpt</span>++){<br>
+    <span class="keyword indent">echo</span> <span class="function">rand</span>(<span class="number">0</span>,<span class="number">9</span>);<br>
+}</div>
+
+    <div class="explanation">✅ Pas de let - juste $variable</div>
+    <div class="result">✅ Boucle PHP correcte</div>
+</div>
+
+<!-- ERREUR #10 - NON -->
+<div class="slide slide-non">
+    <div class="error-label non-label">❌ ERREUR #10 : Variables utilisées avant isset()</div>
+    <h2>echo avec variables non vérifiées</h2>
+
+    <div class="code-block"><span class="comment">// INCORRECT</span><br>
+<span class="keyword">if</span>(<span class="function">isset</span>(<span class="variable">$_POST</span>[<span class="string">"nom"</span>])){<br>
+    <span class="variable indent">$nom</span> <span class="operator">=</span> <span class="variable">$_POST</span>[<span class="string">"nom"</span>];<br>
+}<br>
+<span class="keyword">echo</span> <span class="string">"Merci $nom"</span>;<br>
+<span class="keyword">echo</span> <span class="string">"Service $service le $date"</span>;</div>
+
+    <div class="explanation">❌ Variables utilisées en dehors du if</div>
+    <div class="consequence">⚠️ Variables undefined au 1er chargement</div>
+</div>
+
+<!-- ERREUR #10 - OUI -->
+<div class="slide slide-oui">
+    <div class="error-label oui-label">✅ SOLUTION #10 : echo DANS le if</div>
+    <h2>Afficher seulement si données présentes</h2>
+
+    <div class="code-block"><span class="comment">// CORRECT</span><br>
+<span class="keyword">if</span>(<span class="function">isset</span>(<span class="variable">$_POST</span>[<span class="string">"nom"</span>]) <span class="operator">&amp;&amp;</span><br>
+   <span class="function">isset</span>(<span class="variable">$_POST</span>[<span class="string">"service"</span>]) <span class="operator">&amp;&amp;</span><br>
+   <span class="function">isset</span>(<span class="variable">$_POST</span>[<span class="string">"date"</span>])){<br>
+    <span class="variable indent">$nom</span> <span class="operator">=</span> <span class="variable">$_POST</span>[<span class="string">"nom"</span>];<br>
+    <span class="variable indent">$service</span> <span class="operator">=</span> <span class="variable">$_POST</span>[<span class="string">"service"</span>];<br>
+    <span class="variable indent">$date</span> <span class="operator">=</span> <span class="variable">$_POST</span>[<span class="string">"date"</span>];<br>
+    <span class="keyword indent">echo</span> <span class="string">"Merci $nom"</span>;<br>
+    <span class="keyword indent">echo</span> <span class="string">"Service $service le $date"</span>;<br>
+}</div>
+
+    <div class="explanation">✅ Tout le code dans le if</div>
+    <div class="result">✅ Pas d'erreur variable undefined</div>
+</div>
+
+<!-- SLIDE RÉCAP -->
+<div class="slide slide-intro">
+    <h1>TOP 10</h1>
+    <div class="intro-text">
+        <ul style="font-size: 1rem;">
+            <li><strong>1. Oublier method="POST"</strong> dans le form</li>
+            <li><strong>2. Oublier name</strong> sur les inputs</li>
+            <li><strong>3. $_POST avant isset()</strong></li>
+            <li><strong>4. Point-virgule après isset()</strong></li>
+            <li><strong>5. isset($_POST = "nom")</strong> au lieu de []</li>
+            <li><strong>6. &lt;option&gt; sans value</strong></li>
+            <li><strong>7. Pas de submit</strong> - type="button"</li>
+            <li><strong>8. rand(){} au lieu de rand()</strong></li>
+            <li><strong>9. Syntaxe for JavaScript</strong> (let)</li>
+            <li><strong>10. Variables utilisées hors if</strong></li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>
