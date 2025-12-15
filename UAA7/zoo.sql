@@ -360,7 +360,7 @@ INSERT INTO Soin (numPuceAnimal, nomSoigneur, dateSoin, description, cout) VALUE
 (1054, 'Lucas Petit', '2025-08-25', 'Suivi comportemental', 62.00),
 (1055, 'Alice Dupont', '2025-09-10', 'Vaccination de base', 78.00),
 (1055, 'Michel Leroy', '2025-10-18', 'Contrôle nutrition', 82.00),
-(1056, 'Claire Dubois', '2025-07-05', 'Bilan santé complet', 105.00),
+(1056, 'Claire Dubois', '2025-07-05', 'Bilan santé', 105.00),
 (1056, 'Emma Petit', '2025-11-20', 'Nettoyage dentaire', 88.00),
 (1057, 'Paul Moreau', '2025-06-12', 'Évaluation nutritionnelle', 98.00),
 (1057, 'Sophie Martin', '2025-09-28', 'Contrôle dentaire', 92.00),
