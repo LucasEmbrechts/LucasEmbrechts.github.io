@@ -336,3 +336,53 @@ INSERT INTO Regime (numPuceAnimal, aliment, quantite) VALUES
 (1049, 114, 24.10),
 (1050, 114, 25.10);
 
+-- ANIMAUX sans date de naissance
+INSERT INTO Animal (numPuce, nomAnimal, poids, sexe, dateNaissance, nomEspece) VALUES
+(1051, 'Shadow', 178.50, 'M', NULL, 'Lion'),
+(1052, 'Luna', 155.00, 'F', NULL, 'Lion'),
+(1053, 'Jumbo', 5100.00, 'M', NULL, 'Éléphant'),
+(1054, 'Pingu', 31.50, 'M', NULL, 'Pingouin'),
+(1055, 'Stripes', 370.00, 'F', NULL, 'Zèbre'),
+(1056, 'Koko', 128.00, 'F', NULL, 'Gorille'),
+(1057, 'Necky', 980.00, 'M', NULL, 'Girafe'),
+(1058, 'Blaze', 255.00, 'M', NULL, 'Tigre');
+
+
+-- SOINS pour les nouveaux animaux
+INSERT INTO Soin (numPuceAnimal, nomSoigneur, dateSoin, description, cout) VALUES
+(1051, 'Alice Dupont', '2025-08-15', 'Examen initial', 95.00),
+(1051, 'Michel Leroy', '2025-09-20', 'Évaluation nutritionnelle', 68.00),
+(1052, 'Claire Dubois', '2025-07-22', 'Contrôle santé général', 87.50),
+(1052, 'Julien Bernard', '2025-10-05', 'Observation comportementale', 75.00),
+(1053, 'Emma Petit', '2025-06-18', 'Détartrage des dents', 125.00),
+(1053, 'Paul Moreau', '2025-11-12', 'Bilan nutrition', 110.00),
+(1054, 'Sophie Martin', '2025-05-30', 'Examen dentaire', 55.00),
+(1054, 'Lucas Petit', '2025-08-25', 'Suivi comportemental', 62.00),
+(1055, 'Alice Dupont', '2025-09-10', 'Vaccination de base', 78.00),
+(1055, 'Michel Leroy', '2025-10-18', 'Contrôle nutrition', 82.00),
+(1056, 'Claire Dubois', '2025-07-05', 'Bilan santé complet', 105.00),
+(1056, 'Emma Petit', '2025-11-20', 'Nettoyage dentaire', 88.00),
+(1057, 'Paul Moreau', '2025-06-12', 'Évaluation nutritionnelle', 98.00),
+(1057, 'Sophie Martin', '2025-09-28', 'Contrôle dentaire', 92.00),
+(1058, 'Julien Bernard', '2025-08-08', 'Analyse comportementale', 115.00),
+(1058, 'Alice Dupont', '2025-10-22', 'Examen vétérinaire', 135.00);
+
+
+-- REGIMES pour les nouveaux animaux
+INSERT INTO Regime (numPuceAnimal, aliment, quantite) VALUES
+(1051, 111, 7.20),
+(1051, 114, 3.50),
+(1052, 111, 6.30),
+(1052, 116, 4.00),
+(1053, 113, 128.00),
+(1053, 115, 12.00),
+(1054, 112, 2.15),
+(1054, 117, 0.80),
+(1055, 113, 135.00),
+(1055, 116, 8.50),
+(1056, 117, 1.80),
+(1056, 114, 5.20),
+(1057, 116, 8.00),
+(1057, 113, 95.00),
+(1058, 111, 7.50),
+(1058, 112, 3.00);
