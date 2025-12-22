@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balle rebondissante</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .instructions {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        #game-container {
+            width: 600px;
+            height: 400px;
+            background-color: white;
+            border: 4px solid #2c3e50;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        #balle {
+            width: 30px;
+            height: 30px;
+            background-color: #e74c3c;
+            border-radius: 50%;
+            position: absolute;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .info {
+            margin-top: 20px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-family: monospace;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>⚽ Balle rebondissante</h1>
+
+    <div class="instructions">
+        <p>La balle se déplace toute seule et rebondit sur les bords !</p>
+    </div>
+
+    <div id="game-container">
+        <div id="balle"></div>
+    </div>
+
+    <div class="info">
+        Position : X = <span id="pos-x"></span> px, Y = <span id="pos-y"></span> px
+    </div>
+
+    <script>
+        const balle = document.getElementById('balle');
+        const posXDisplay = document.getElementById('pos-x');
+        const posYDisplay = document.getElementById('pos-y');
+
+        // Position de la balle
+        let x = 100;
+        let y = 100;
+
+        // Vitesse de déplacement (direction)
+        let vitesseX = 2;
+        let vitesseY = 2;
+
+        function animer() {
+            // Déplace la balle
+            x += vitesseX;
+            y += vitesseY;
+
+            // Rebond sur les bords gauche et droit
+            if (x <= 0 || x >= 570) {
+                vitesseX = -vitesseX;  // Inverse la direction horizontale
+            }
+
+            // Rebond sur les bords haut et bas
+            if (y <= 0 || y >= 370) {
+                vitesseY = -vitesseY;  // Inverse la direction verticale
+            }
+
+            // Met à jour la position
+            balle.style.left = x + 'px';
+            balle.style.top = y + 'px';
+            posXDisplay.innerHTML = Math.round(x);
+            posYDisplay.innerHTML = Math.round(y);
+
+            requestAnimationFrame(animer);
+        }
+
+        animer();
+    </script>
+</body>
+</html>

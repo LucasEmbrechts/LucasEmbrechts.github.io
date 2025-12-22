@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pluie de carrés</title>
+
+    <style>
+        /* Réinitialisation des marges */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .instructions {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        /* Zone de jeu */
+        #game-container {
+            width: 600px;
+            height: 400px;
+            background-color: white;
+            border: 4px solid #2c3e50;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Style pour les carrés qui tombent */
+        .carre {
+            width: 40px;
+            height: 40px;
+            background-color: #3498db;
+            border-radius: 5px;
+            position: absolute;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* Affichage du compteur */
+        .stats-display {
+            margin-top: 20px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-family: monospace;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🌧️ Pluie de carrés</h1>
+
+    <div class="instructions">
+        <p>Regardez les carrés tomber du ciel !</p>
+        <p>Ils apparaissent aléatoirement et descendent automatiquement</p>
+    </div>
+
+    <div id="game-container"></div>
+
+    <div class="stats-display">
+        Carrés actifs : <span id="count">0</span>
+    </div>
+
+    <script>
+        const container = document.getElementById('game-container');
+        const countDisplay = document.getElementById('count');
+
+        let carres = [];
+
+        // Crée un nouveau carré toutes les secondes
+        setInterval(function() {
+            const carre = document.createElement('div');
+            carre.classList.add('carre');
+            carre.style.left = Math.random() * 560 + 'px';
+            carre.style.top = '-50px';
+
+            const couleurs = ['#3498db', '#e74c3c', '#2ecc71', '#f39c12', '#9b59b6'];
+            carre.style.backgroundColor = couleurs[Math.floor(Math.random() * 5)];
+
+            container.appendChild(carre);
+            carres.push({ element: carre, y: -50 });
+        }, 1000);
+
+        // Fait tomber les carrés
+        function animer() {
+            for (let i = carres.length - 1; i >= 0; i--) {
+                carres[i].y += 2;
+                carres[i].element.style.top = carres[i].y + 'px';
+
+                if (carres[i].y > 400) {
+                    carres[i].element.remove();
+                    carres.splice(i, 1);
+                }
+            }
+
+            countDisplay.innerHTML = carres.length;
+            requestAnimationFrame(animer);
+        }
+
+        animer();
+    </script>
+</body>
+</html>

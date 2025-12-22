@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Déplacement au clavier</title>
+
+    <style>
+        /* Réinitialisation des marges pour tout le document */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Style du corps de la page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Titre principal */
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        /* Instructions pour l'utilisateur */
+        .instructions {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        /* Zone de jeu - le conteneur avec bordure */
+        #game-container {
+            width: 600px;
+            height: 400px;
+            background-color: white;
+            border: 4px solid #2c3e50;
+            border-radius: 10px;
+            position: relative; /* Important : permet le positionnement absolu de l'élément à l'intérieur */
+            overflow: hidden; /* Empêche tout débordement visuel */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        /* L'élément qu'on va déplacer - un carré bleu */
+        #player {
+            width: 50px;
+            height: 50px;
+            background-color: #3498db;
+            border-radius: 5px;
+            position: absolute; /* Positionnement absolu pour pouvoir le déplacer librement */
+            top: 175px; /* Position initiale Y (centré verticalement : 400/2 - 50/2 = 175) */
+            left: 275px; /* Position initiale X (centré horizontalement : 600/2 - 50/2 = 275) */
+            transition: background-color 0.2s; /* Animation douce quand la couleur change */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* Effet visuel quand on appuie sur une touche */
+        #player.moving {
+            background-color: #2980b9;
+        }
+
+        /* Affichage de la position actuelle */
+        .position-display {
+            margin-top: 20px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-family: monospace;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête de la page -->
+    <h1>🎮 Déplacement au clavier</h1>
+
+    <!-- Instructions pour l'utilisateur -->
+    <div class="instructions">
+        <p>Utilisez les <strong>flèches directionnelles</strong> pour déplacer le carré bleu</p>
+        <p>⬆️ ⬇️ ⬅️ ➡️</p>
+    </div>
+
+    <!-- Zone de jeu -->
+    <div id="game-container">
+        <!-- L'élément à déplacer -->
+        <div id="player"></div>
+    </div>
+
+    <!-- Affichage de la position -->
+    <div class="position-display">
+        Position : X = <span id="pos-x"></span> px, Y = <span id="pos-y"></span> px
+    </div>
+
+    <script>
+        // Récupération des éléments HTML
+        const player = document.getElementById('player');
+        const posXDisplay = document.getElementById('pos-x');
+        const posYDisplay = document.getElementById('pos-y');
+
+        // Position du carré
+        let x = 275;
+        let y = 175;
+
+        // Vitesse de déplacement
+        const vitesse = 3;
+
+        // Quelles touches sont enfoncées ?
+        let haut = false;
+        let bas = false;
+        let gauche = false;
+        let droite = false;
+
+        // Boucle principale : s'exécute 60 fois par seconde
+        function bouger() {
+            // Déplace selon les touches enfoncées
+            if (haut && y > 0) y -= vitesse;
+            if (bas && y < 350) y += vitesse;
+            if (gauche && x > 0) x -= vitesse;
+            if (droite && x < 550) x += vitesse;
+
+            // Met à jour la position du carré à l'écran
+            player.style.left = x + 'px';
+            player.style.top = y + 'px';
+            posXDisplay.textContent = Math.round(x);
+            posYDisplay.textContent = Math.round(y);
+
+            // Change la couleur si le carré bouge
+            if (haut || bas || gauche || droite) {
+                player.classList.add('moving');
+            } else {
+                player.classList.remove('moving');
+            }
+
+            // Répète cette fonction 60 fois par seconde
+            requestAnimationFrame(bouger);
+        }
+
+        // Quand on appuie sur une touche
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowUp') haut = true;
+            if (event.key === 'ArrowDown') bas = true;
+            if (event.key === 'ArrowLeft') gauche = true;
+            if (event.key === 'ArrowRight') droite = true;
+            event.preventDefault(); // Empêche le défilement de la page
+        });
+
+        // Quand on relâche une touche
+        document.addEventListener('keyup', function(event) {
+            if (event.key === 'ArrowUp') haut = false;
+            if (event.key === 'ArrowDown') bas = false;
+            if (event.key === 'ArrowLeft') gauche = false;
+            if (event.key === 'ArrowRight') droite = false;
+        });
+
+        // Démarre le programme
+        bouger();
+    </script>
+</body>
+</html>

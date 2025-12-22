@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détection de collision</title>
+
+    <style>
+        /* Réinitialisation des marges */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .instructions {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        /* Zone de jeu */
+        #game-container {
+            width: 600px;
+            height: 400px;
+            background-color: white;
+            border: 4px solid #2c3e50;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Carré bleu que l'on contrôle */
+        #player {
+            width: 50px;
+            height: 50px;
+            background-color: #3498db;
+            border-radius: 5px;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* Carré rouge statique (obstacle) */
+        #obstacle {
+            width: 80px;
+            height: 80px;
+            background-color: #e74c3c;
+            border-radius: 5px;
+            position: absolute;
+            top: 160px;
+            left: 260px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* Effet quand il y a collision */
+        #player.collision {
+            background-color: #f39c12;
+            transform: scale(0.9);
+        }
+
+        /* Affichage du statut */
+        .status-display {
+            margin-top: 20px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        .collision-indicator {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: #27ae60;
+            margin-right: 10px;
+        }
+
+        .collision-indicator.active {
+            background-color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎯 Détection de collision</h1>
+
+    <div class="instructions">
+        <p>Utilisez les <strong>flèches directionnelles</strong> pour déplacer le carré bleu</p>
+        <p>Essayez de toucher le carré rouge !</p>
+        <p>⬆️ ⬇️ ⬅️ ➡️</p>
+    </div>
+
+    <div id="game-container">
+        <div id="player"></div>
+        <div id="obstacle"></div>
+    </div>
+
+    <div class="status-display">
+        <span class="collision-indicator" id="indicator"></span>
+        <span id="status-text">Pas de collision</span>
+    </div>
+
+    <script>
+        // Récupération des éléments HTML
+        const player = document.getElementById('player');
+        const obstacle = document.getElementById('obstacle');
+        const statusText = document.getElementById('status-text');
+        const indicator = document.getElementById('indicator');
+
+        // Position du carré bleu (joueur)
+        let x = 50;
+        let y = 50;
+
+        // Position et taille de l'obstacle rouge (fixe)
+        const obstacleX = 260;
+        const obstacleY = 160;
+        const obstacleTaille = 80;
+
+        // Taille du joueur
+        const playerTaille = 50;
+
+        // Vitesse de déplacement
+        const vitesse = 3;
+
+        // Quelles touches sont enfoncées ?
+        let haut = false;
+        let bas = false;
+        let gauche = false;
+        let droite = false;
+
+        // Boucle principale
+        function bouger() {
+            // Déplace selon les touches enfoncées
+            if (haut && y > 0) y -= vitesse;
+            if (bas && y < 350) y += vitesse;
+            if (gauche && x > 0) x -= vitesse;
+            if (droite && x < 550) x += vitesse;
+
+            // Met à jour la position du carré
+            player.style.left = x + 'px';
+            player.style.top = y + 'px';
+
+            // Détection de collision directement dans la boucle
+            // Un carré touche l'autre si les 4 conditions sont vraies :
+            if (x + playerTaille > obstacleX &&       // Bord droit du joueur > bord gauche obstacle
+                x < obstacleX + obstacleTaille &&     // Bord gauche du joueur < bord droit obstacle
+                y + playerTaille > obstacleY &&       // Bord bas du joueur > bord haut obstacle
+                y < obstacleY + obstacleTaille) {     // Bord haut du joueur < bord bas obstacle
+                // Il y a collision !
+                player.classList.add('collision');
+                indicator.classList.add('active');
+                statusText.textContent = 'COLLISION DÉTECTÉE !';
+            } else {
+                // Pas de collision
+                player.classList.remove('collision');
+                indicator.classList.remove('active');
+                statusText.textContent = 'Pas de collision';
+            }
+
+            // Répète 60 fois par seconde
+            requestAnimationFrame(bouger);
+        }
+
+        // Quand on appuie sur une touche
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowUp') haut = true;
+            if (event.key === 'ArrowDown') bas = true;
+            if (event.key === 'ArrowLeft') gauche = true;
+            if (event.key === 'ArrowRight') droite = true;
+            event.preventDefault();
+        });
+
+        // Quand on relâche une touche
+        document.addEventListener('keyup', function(event) {
+            if (event.key === 'ArrowUp') haut = false;
+            if (event.key === 'ArrowDown') bas = false;
+            if (event.key === 'ArrowLeft') gauche = false;
+            if (event.key === 'ArrowRight') droite = false;
+        });
+
+        // Démarre le programme
+        bouger();
+    </script>
+</body>
+</html>

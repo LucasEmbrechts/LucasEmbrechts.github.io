@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compteur de points</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .compteur-container {
+            background-color: white;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        #points {
+            font-size: 80px;
+            font-weight: bold;
+            color: #3498db;
+            margin: 20px 0;
+        }
+
+        .label {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .info {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #ecf0f1;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>⏱️ Compteur de points</h1>
+
+    <div class="compteur-container">
+        <div class="label">Points</div>
+        <div id="points">0</div>
+        <div class="info">+1 point toutes les secondes</div>
+    </div>
+
+    <script>
+        const pointsDisplay = document.getElementById('points');
+        let points = 0;
+
+        // Ajoute 1 point toutes les secondes (1000 ms)
+        setInterval(function() {
+            points++;
+            pointsDisplay.innerHTML = points;
+        }, 1000);
+    </script>
+</body>
+</html>
