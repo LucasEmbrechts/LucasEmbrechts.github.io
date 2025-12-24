@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif';}
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Consolas'; }
+			  @page {
+		  size: 1210px 681px;
+		  margin: 0;
+		}
+
+		@media print {
+		  .remark-slide-scaler {
+			width: 100% !important;
+			height: 100% !important;
+			transform: scale(1) !important;
+			top: 0 !important;
+			left: 0 !important;
+		  }
+		}
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# Conception et gestion de projet :
+# SCRUM
+
+<img height="300px" src="img/scrum.png">
+---
+## Qu'est-ce que SCRUM ?
+
+Développement **itératif** et **progressif** du logiciel tout en maintenant une liste totalement transparente de **mises à jour** ou de **corrections**.
+<div style="text-align:center; margin-top:50px">
+<img height="300px" src="img/activities.png">
+</div>
+---
+## SCRUM
+<div style="text-align:center; margin-top:50px">
+<img height="400px" src="img/scrum_schema.png">
+</div>
+---
+## SCRUM
+<div style="text-align:center; margin-top:50px">
+<img height="400px" src="img/ceremonies.png">
+</div>
+---
+## SCRUM : items
+
+Au lancement du projet, on découpe le système en items :
+
+* **les tâches techniques** :
+	* créer la base de données
+	* initialiser le git
+	* etc.
+* **les user stories** : 
+	* en tant qu'utilisateur, je souhaite pouvoir consulter la liste des produits
+	* en tant qu'administrateur, je souhaite pouvoir enregistrer des nouveaux utilisateurs
+	* etc.
+---
+## SCRUM : product backlog
+
+Les user stories constituent le product backlog dans lequel ces user stories sont priorisées.
+On détermine également l'effort nécessaire .
+Exemples :
+
+<table>
+<tbody>
+<tr>
+<th>User story</th>
+<th>Priorité</th>
+<th>Effort</th>
+</tr>
+<tr>
+<td>En tant qu'utilisateur, je souhaite pouvoir consulter la liste des produits</td>
+<td>100</td>
+<td>10</td>
+</tr>
+<tr>
+<td>En tant qu'administrateur, je souhaite pouvoir enregistrer des nouveaux utilisateurs</td>
+<td>30</td>
+<td>50</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
+---
+## SCRUM : sprint
+
+* Un **sprint** est une itération d'une durée fixe (à déterminer au début du projet).
+
+* À chaque fin de sprint correspond un **livrable**.
+---
+## SCRUM : sprint planning
+
+* Le **sprint planning** se déroule avant chaque sprint.
+
+* Il s'agit d'une réunion à laquelle participe toute l'équipe.
+
+* On discute de ce que l'équipe de dév. pourra livrer en fin de sprint et comment l'équipe va y arriver.
+---
+## SCRUM : sprint backlog
+
+* À la fin du sprint planning, les items sélectionnés du product backlog constituent le **sprint backlog**.
+---
+## SCRUM : daily scrum
+* Le *daily scrum* se déroule tous les jours pendant un sprint
+* On parle de :
+	* ce qui a été fait durant les 24 dernières heures
+	* ce qui va être fait durant les 24 prochaines heures
+	* partage de connaissances, etc.
+---
+## SCRUM : sprint review
+* Le **sprint review** se déroule en fin de sprint
+* On fait le point sur ce qui a été fait durant le sprint
+* On fait le point sur ce qui n'a pas été fait durant le sprint
+* Démonstration éventuelle
+---
+## SCRUM : sprint retrospective
+* Le sprint retrospective se déroule juste après le sprint review
+
+<div style="text-align:center; margin-top:50px">
+<img height="430px" src="img/modele_retrospective.png">
+</div>
+---
+## SCRUM : itération
+
+Et après que fait-on ?
+<br>
+--
+
+**On recommence !!**
+
+---
+## Sources des images
+* https://www.momentup.com/blog/what-is-agile-scrum-methodology-and-how-can-it-help-your-startup
+* https://www.tuleap.org/fr/agile/comprendre-methode-agile-scrum-10-minutes
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
