@@ -1,0 +1,15 @@
+#tombe
+{
+	color: white;
+	height: 20px;
+	display: inline-block;
+	background-color: black;
+	border-radius: 15px;
+	padding: 3px 20px;
+	transition: 5s;
+}
+
+#tombe:hover
+{
+	height: 95vh;
+}

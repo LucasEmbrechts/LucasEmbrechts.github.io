@@ -1,0 +1,69 @@
+body
+{
+	font-family: monospace;
+}
+
+.conteneur
+{
+	display: inline-block;
+	padding: 45px;
+	border: 3px solid black;
+	border-radius: 15px;
+	background-color: lightgrey;
+}
+
+.clignote1
+{
+	display: inline-block;
+	background-color: white;
+	position: relative;
+	height: 55px;
+	width: 55px;
+	border-radius: 45px;
+	border: 3px solid black;
+	animation: clignote;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate-reverse;		/* J'ai mis ça, c'est plus joli */
+}
+
+.clignote2
+{
+	display: inline-block;
+	height: 55px;
+	width: 55px;
+	border-radius: 45px;
+	border: 3px solid black;
+	animation: clignote;
+	animation-delay: 0.5s;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate-reverse;
+}
+
+.clignote3
+{
+	display: inline-block;
+	height: 55px;
+	width: 55px;
+	border-radius: 45px;
+	border: 3px solid black;
+	animation: clignote;
+	animation-delay: 1s;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate-reverse;
+}
+
+@keyframes clignote
+{
+	0%
+	{
+		background-color: black;
+	}
+
+	100%
+	{
+		background-color: white;
+	}
+}

@@ -1,0 +1,74 @@
+body
+{
+	text-align: center;
+	background-color: black;
+	color: deeppink;
+	font-family: monospace;
+/*	background-image: url(http://musicandmusic.m.u.pic.centerblog.net/o/4776c99e.jpg);
+	background-repeat: no-repeat;*/
+}
+
+h1
+{
+	padding: 35px;
+	text-shadow: 0px 0px 8px deeppink;
+	animation: secoue 2s infinite linear alternate;
+	color: black;
+}
+
+a
+{
+	text-decoration: none;
+	font-size: 25px;
+	color: deeppink;
+}
+
+a:hover
+{
+	font-size: 35px;
+	text-shadow: 0px 0px 5px deeppink;
+}
+
+li
+{
+	list-style: none;
+	padding: 10px;
+}
+
+ul
+{
+	padding: inherit;
+}
+
+footer
+{
+	padding-top: 155px;
+}
+
+@keyframes secoue
+{
+	0%
+	{
+		letter-spacing: 1px;
+	}
+
+	25%
+	{
+		letter-spacing: 2px;
+	}
+
+	50%
+	{
+		letter-spacing: 3px;
+	}
+
+	75%
+	{
+		letter-spacing: 4px;
+	}
+
+	100%
+	{
+		letter-spacing: 5px;
+	}
+}

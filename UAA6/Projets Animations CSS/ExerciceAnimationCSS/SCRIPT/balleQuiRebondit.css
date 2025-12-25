@@ -1,0 +1,90 @@
+body
+{
+	font-family: monospace;
+}
+
+.conteneur
+{
+	height: 300px;
+	width: 45px;
+	border: 5px solid green;
+	margin: 25px;
+	display: block;
+}
+
+.rebond
+{
+	height: 45px;
+	width: 45px;
+	background-color: green;
+	border-radius: 50px;
+	position: relative;
+	animation-name: rebond;
+	animation-duration: 3s;
+	animation-iteration-count: infinite;
+	animation-timing-function: cubic-bezier(0.2,-0.3,0.8,1);
+}
+
+@keyframes rebond
+{
+	0%
+	{
+		top: 0px;
+	}
+
+	10%
+	{
+		top: 255px;
+	}
+
+	20%
+	{
+		top: 160px;
+	}
+
+	30%
+	{
+		top: 255px;
+	}
+
+	40%
+	{
+		top: 195px;
+	}
+
+	50%
+	{
+		top: 255px;
+	}
+
+	60%
+	{
+		top: 220px;
+	}
+
+	70%
+	{
+		top: 255px;
+	}
+
+	80%
+	{
+		top: 250px;
+	}
+
+	90%
+	{
+		top: 255px;
+	}
+
+	100%
+	{
+		top: 255px;
+	}
+}
+
+img
+{
+	height: 40px;
+	padding: 4px;
+}

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let's Run !</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+			background-image: url('Background.png');
+			background-size:cover;
+			background-repeat: no-repeat;
+        }
+
+        #plateau {
+            height: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: url('ground.png');
+        }
+
+        .deplacementRun {
+
+            position: relative;
+            animation-name: deplacement_run;
+            animation-duration: 10s;
+            animation-timing-function: linear;
+            animation-fill-mode: forwards;
+        }
+
+
+        .persoShoot {
+            height: 100px;
+            animation-name: shoot;
+            animation-duration: 1s;
+            background-repeat: no-repeat;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        .persoRun {
+            height: 100px;
+            animation-name: run;
+            animation-duration: 1s;
+            background-repeat: no-repeat;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        #boutons {
+            position: relative;
+            bottom: 400px;
+            text-align: center;
+        }
+
+        button {
+            font-size: 50px;
+        }
+
+        @keyframes run {
+            0% {
+                background-image: url('course_01.png');
+            }
+
+            16.67% {
+                background-image: url('course_02.png');
+            }
+
+            33.33% {
+                background-image: url('course_03.png');
+            }
+
+            50% {
+                background-image: url('course_04.png');
+            }
+
+            66.67% {
+                background-image: url('course_05.png');
+            }
+
+            83.33% {
+                background-image: url('course_06.png');
+            }
+
+            100% {
+                background-image: url('course_01.png');
+            }
+        }
+
+        @keyframes jump {
+            0% {
+                background-image: url('jump_01.png');
+            }
+
+            100% {
+                background-image: url('jump_02.png');
+            }
+
+        }
+
+        @keyframes shoot {
+            0% {
+                background-image: url('shoot_01.png');
+            }
+
+            16.67% {
+                background-image: url('shoot_02.png');
+            }
+
+            33.33% {
+                background-image: url('shoot_03.png');
+            }
+
+            50% {
+                background-image: url('shoot_04.png');
+            }
+
+            66.67% {
+                background-image: url('shoot_05.png');
+            }
+
+            83.33% {
+                background-image: url('shoot_06.png');
+            }
+
+            100% {
+                background-image: url('shoot_01.png');
+            }
+
+        }
+
+        @keyframes deplacement_run {
+            0% {
+                top: 260px;
+                left: 0px;
+            }
+
+            100% {
+                top: 260px;
+                left: 2000px;
+            }
+        }
+
+        @keyframes deplacement_jump {
+            0% {
+                top: 260px;
+                left: 100px;
+            }
+
+            50% {
+                top: 200px;
+                left: 100px;
+            }
+
+            100% {
+                top: 260px;
+                left: 100px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="plateau">
+        <div id="deplacement">
+            <div id="perso">
+            </div>
+        </div>
+    </div>
+    <div id="boutons">
+        <button onclick="run()">Run !</button>
+        <button onclick="shoot()">Shoot !</button>
+    </div>
+    <script>
+        function run() {
+            document.getElementById("deplacement").classList.remove();
+            document.getElementById("deplacement").className = "deplacementRun";
+            document.getElementById("perso").className = "persoRun";
+        }
+        function shoot() {
+            document.getElementById("deplacement").className = "deplacementRun";
+            document.getElementById("perso").className = "persoShoot";
+        }
+    </script>
+</body>
+
+</html>

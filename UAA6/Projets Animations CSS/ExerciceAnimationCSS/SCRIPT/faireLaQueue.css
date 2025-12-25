@@ -1,0 +1,107 @@
+body
+{
+	font-family: monospace;
+	text-align: center;
+}
+
+h1
+{
+	position: relative;
+	top: 200px;
+}
+
+.conteneur
+{
+	position: relative;
+	height: 450px;
+	width: 740px;
+	border: 3px solid black;
+	border-radius: 15px;
+	background-color: lightgrey;
+}
+
+div > div
+{
+	padding-top: 5px;
+	position: absolute;
+	display: inline-block;
+	font-size: 25px;
+	font-weight: bolder;
+	top: 20px;
+	left: 20px;
+	height: 35px;
+	width: 35px;
+	border: 3px solid black;
+	border-radius: 15px;
+	animation: queue 8s infinite linear;
+	background-color: magenta;
+}
+
+.item1
+{
+	z-index: 7;
+}
+
+.item2
+{
+	animation-delay: 1s;
+	z-index: 6;
+}
+
+.item3
+{
+	animation-delay: 2s;
+	z-index: 5;
+}
+
+.item4
+{
+	animation-delay: 3s;
+	z-index: 4;
+}
+
+.item5
+{
+	animation-delay: 4s;
+	z-index: 3;
+}
+
+.item6
+{
+	animation-delay: 5s;
+	z-index: 2;
+}
+
+@keyframes queue
+{
+	0%
+	{
+		top: 20px;
+		left: 20px;
+		transform: rotate(0deg);
+	}
+
+	25%
+	{
+		top: 20px;
+		left: 670px;
+		transform: rotate(360deg);
+		background-color: lime;
+	}
+
+	50%
+	{
+		top: 380px;
+		left: 670px;
+		transform: rotate(720deg);
+		background-color: deeppink;
+	}
+
+	75%
+	{
+		top: 380px;
+		left: 20px;
+		transform: rotate(360deg);
+		background-color: springgreen;
+	}
+}

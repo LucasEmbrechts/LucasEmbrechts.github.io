@@ -1,0 +1,48 @@
+body{
+  background-color:#8D9B91;
+  margin:0;
+  padding:0;
+}
+svg{
+  display:block;
+  margin:0 auto;
+  width:700px;
+  animation-name: floating;
+  animation-duration: 5s;
+  animation-delay: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes floating{
+  0%{transform:translateY(0px)}
+  50%{transform:translateY(50px)}
+  100%{transform:translateY(0px)}
+}
+
+#steam1{
+	animation-name: puff;
+  	animation-duration: 2s;
+  	animation-timing-function: linear;
+  	animation-iteration-count: infinite;
+}
+
+@keyframes puff{
+  0%{opacity:0; y:0}
+  50%{opacity:1; transform:translateX(-30px)}
+  100%{opacity:0; transform:translateX(-50px) }
+}
+
+#steam2{
+	animation-name: puffpuff;
+  	animation-duration: 2.5s;
+  	animation-timing-function: linear;
+  	animation-delay: 1s;
+  	animation-iteration-count: infinite;
+}
+
+@keyframes puffpuff{
+  0%{opacity:0; y:0}
+  50%{opacity:1; transform:translateX(-30px)}
+  100%{opacity:0; transform:translateX(-50px) }
+}

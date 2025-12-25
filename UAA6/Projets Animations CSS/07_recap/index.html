@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #cube {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            transition: transform 1s ease;
+        }
+
+        /* Animation pour le changement de couleur */
+        @keyframes colorChange {
+            0% {
+                background-color: red;
+            }
+            50% {
+                background-color: blue;
+            }
+            100% {
+                background-color: red;
+            }
+        }
+        
+        /* Animation pour l'opacité */
+        @keyframes opacityChange {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Animation pour la rotation */
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(180deg);
+            }
+        }
+
+        /* Animation pour le déplacement de droite à gauche et vice versa */
+        @keyframes move {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(100px);
+            }
+        }
+
+        .color {
+            animation: colorChange 2s;
+        }
+
+        .rotate {
+            animation: rotate 2s;
+        }
+
+        .move {
+            animation: move 2s;
+        }
+        
+        .opacity{
+        	animation: opacityChange 2s;
+        }
+    </style>
+    <title>Example</title>
+</head>
+<body>
+    <div id="cube"></div>
+
+    <button onclick="color()">Changer la couleur</button>
+    <button onclick="rotate()">Faire tourner</button>
+    <button onclick="move()">Déplacer de droite à gauche</button>
+    <button onclick="opacity()">Changer l'opacité</button>
+
+    <script>
+        function color() {
+            var cube = document.getElementById("cube");
+            cube.className = "color";
+        }
+
+        function rotate() {
+            var cube = document.getElementById("cube");
+            cube.className = "rotate";
+        }
+
+        function move() {
+            var cube = document.getElementById("cube");
+            cube.className = "move";
+        }
+        
+        function opacity(){
+        	var cube = document.getElementById("cube");
+            cube.className = "opacity";
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+/*Estheban-Suray*/
+div{
+	border-radius:100px;
+	position:absolute;
+	background-color:orangered;
+	height:50px;
+	width:50px;
+}
+.test{
+	animation-name: b1
+	
+}
+#b1{
+	left:100px;
+	top:150px;
+	animation-iteration-count:infinite;
+	animation-duration:2s;
+	animation-direction:none;
+	animation-fill-mode:forwards;
+}
+#b2{
+	top:150px;
+	left:200px;
+	animation-iteration-count:infinite;
+	animation-duration:2s;
+	animation-direction:none;
+	animation-fill-mode:forwards;
+
+}
+#b3{
+	top:150px;
+	left:300px;
+	animation-iteration-count:infinite;
+	animation-duration:2s;
+	animation-direction:none;
+	animation-fill-mode:forwards;
+}
+#b4{
+	top:150px;
+	left:400px;
+	animation-iteration-count:infinite;
+	animation-duration:2s;
+	animation-direction:none;
+	animation-fill-mode:forwards;
+}
+#b5{
+	top:150px;
+	left:500px;
+	animation-iteration-count:infinite;
+	animation-duration:2s;
+	animation-direction:none;
+	animation-fill-mode:forwards;
+}
+#b6{
+	top:150px;
+	left:600px;
+	animation-iteration-count:infinite;
+	animation-duration:2s;
+	animation-direction:none;
+	animation-fill-mode:forwards;
+}
+#b7{
+	top:150px;
+	left:700px;
+	animation-iteration-count:infinite;
+	animation-duration:2s;
+	animation-direction:none;
+	animation-fill-mode:forwards;
+}
+#b8{
+	top:150px;
+	left:800px;
+	animation-iteration-count:infinite;
+	animation-duration:2s;
+	animation-direction:none;
+	animation-fill-mode:forwards;
+}
+#b9{
+	top:150px;
+	left:900px;
+	animation-iteration-count:infinite;
+	animation-duration:2s;
+	animation-direction:none;
+	animation-fill-mode:forwards;
+}
+#b10{
+	top:150px;
+	left:1000px;
+	animation-iteration-count:infinite;
+	animation-duration:2s;
+	animation-direction:none;
+	animation-fill-mode:forwards;
+}
+#b11{
+	top:150px;
+	left:1100px;
+	animation-iteration-count:infinite;
+	animation-duration:2s;
+	animation-direction:none;
+	animation-fill-mode:forwards;
+}
+#b12{
+	top:150px;
+	left:1200px;
+	animation-iteration-count:infinite;
+	animation-duration:2s;
+	animation-direction:none;
+	animation-fill-mode:forwards;
+}
+#b13{
+	top:150px;
+	left:1300px;
+	animation-iteration-count:infinite;
+	animation-duration:2s;
+	animation-direction:none;
+	animation-fill-mode:forwards;
+}
+#b14{
+	top:150px;
+	left:1400px;
+	animation-iteration-count:infinite;
+	animation-duration:2s;
+	animation-direction:none;
+	animation-fill-mode:forwards;
+}
+#b15{
+	top:150px;
+	left:1500px;
+	animation-iteration-count:infinite;
+	animation-duration:2s;
+	animation-direction:none;
+	animation-fill-mode:forwards;
+}
+@keyframes b1{
+	0%{
+		transform: translate(0px,0px)scale(1.0);
+		
+	}
+	50%{
+		transform:translate(0px,100px)scale(0.5);
+		background-color:red;
+		
+	}
+	100%{
+		transform:translate(0px,0px)scale(1.0);
+		
+	}
+}

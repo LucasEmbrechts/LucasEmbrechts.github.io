@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balles</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        #wrapper{
+            width: 1250px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            top:30%
+        }
+
+        .circle {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+            background-color: turquoise;
+            animation-name: anim;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+            transform-origin: center center;
+        }
+
+        @keyframes anim {
+            0% {
+                transform: translate(0px, 0px) scale(1);
+                opacity: 1;
+                background-color: turquoise;
+            }
+
+            50% {
+                transform: translate(0px, 200px) scale(.4);
+                opacity: .5;
+                background-color: blue;
+            }
+
+            100% {
+                transform: translate(0px, 0px) scale(1);
+                opacity: 1;
+                background-color: turquoise;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <script>
+        let balles = document.getElementsByClassName("circle");
+        let l = 0;
+        let delay = 0;
+        for (let i = 0; i < balles.length; i++) {
+            balles[i].style.left = l + "px";
+            balles[i].style.animationDelay = delay + "s";
+            l += 150;
+            delay += 0.1;
+        }
+    </script>
+</body>
+
+</html>
