@@ -69,10 +69,22 @@
       font-weight: 500;
       font-size: 1.14rem;
     }
+    .section-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin: 3rem 0 1.5rem 0;
+      text-align: center;
+      padding: 1rem;
+      background: rgba(209,250,229,0.5);
+      border-radius: 1rem;
+      border-left: 5px solid var(--primary-color);
+    }
     .ex-list-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
       gap: 2rem;
+      margin-bottom: 2rem;
     }
     .ex-card {
       background: var(--primary-light);
@@ -120,28 +132,6 @@
       color: var(--primary-color);
       border-color: var(--primary-color);
     }
-    .ex-open-link {
-      display: inline-flex;
-      align-items: center;
-      gap: .5em;
-      background: var(--primary-color);
-      color: white;
-      font-weight: 700;
-      text-decoration: none;
-      padding: .5em 1.35em;
-      border-radius: 17px;
-      font-size: 1.02rem;
-      border: 2px solid var(--primary-dark);
-      margin-bottom: .22rem;
-      box-shadow: 0 0px 7px rgba(16,185,129,0.6);
-      transition: background .16s, color .12s, box-shadow .18s;
-    }
-    .ex-open-link:hover {
-      background: var(--primary-dark);
-      color: var(--primary-color);
-      box-shadow: 0 5px 20px rgba(16,185,129,0.44);
-      border-color: var(--primary-color);
-    }
     .footer {
       text-align: center;
       padding: 2.3rem 0 1.4rem 0;
@@ -154,6 +144,7 @@
       .header h1 { font-size: 1.3rem;}
       .ex-list-grid { grid-template-columns: 1fr;}
       .ex-card { padding: 1rem;}
+      .section-title { font-size: 1.5rem;}
     }
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px);}
@@ -172,35 +163,146 @@
         Maîtrisez les transitions, animations et le déploiement de sites web !
       </p>
     </header>
+
+    <!-- Section Documents généraux -->
     <div class="ex-list-grid">
       <div class="ex-card">
-        <div class="ex-title">Documents utiles</div>
+        <div class="ex-title">📋 Consignes UAA6</div>
         <div class="ex-desc">
-          Ressources générales
+          Document de consignes pour l'évaluation sommative
         </div>
         <div class="resource-list">
-          <a href="UAA6_Sommative.pdf" target="_blank">📄 UAA6 : consignes</a>
-        </div>
-      </div>
-      <div class="ex-card">
-        <div class="ex-title">Animation CSS</div>
-        <div class="ex-desc">
-          Cours et ressources sur les animations et transitions CSS
-        </div>
-        <div class="resource-list">
-          <a href="Animation_Cours.pdf" target="_blank">📄 Cours Animation CSS</a>
-        </div>
-      </div>
-      <div class="ex-card">
-        <div class="ex-title">Mise en ligne</div>
-        <div class="ex-desc">
-          Guide complet pour mettre en ligne votre site web
-        </div>
-        <div class="resource-list">
-          <a href="MiseEnLigne_Cours.pdf" target="_blank">📄 Cours Mise en ligne</a>
+          <a href="UAA6_Sommative.pdf" target="_blank">Télécharger les consignes</a>
         </div>
       </div>
     </div>
+
+    <!-- Section Animation CSS -->
+    <h2 class="section-title">🎨 Animation CSS</h2>
+    <div class="ex-list-grid">
+      <div class="ex-card">
+        <div class="ex-title">📄 Cours Animation CSS</div>
+        <div class="ex-desc">
+          Théorie complète sur les animations et transitions CSS
+        </div>
+        <div class="resource-list">
+          <a href="Animation_Cours.pdf" target="_blank">Télécharger le cours</a>
+        </div>
+      </div>
+      <div class="ex-card">
+        <div class="ex-title">00 - Démo de base</div>
+        <div class="ex-desc">
+          Introduction aux animations CSS avec une démo simple
+        </div>
+        <div class="resource-list">
+          <a href="Projets Animations CSS/00_demoDeBase/index.html" target="_blank">Voir le projet</a>
+        </div>
+      </div>
+      <div class="ex-card">
+        <div class="ex-title">01 - Barre de chargement</div>
+        <div class="ex-desc">
+          Créer une animation de barre de chargement
+        </div>
+        <div class="resource-list">
+          <a href="Projets Animations CSS/01_exercice_chargement/chargement.html" target="_blank">Voir le projet</a>
+        </div>
+      </div>
+      <div class="ex-card">
+        <div class="ex-title">02 - Let's Run</div>
+        <div class="ex-desc">
+          Animation de personnage qui court avec sprites
+        </div>
+        <div class="resource-list">
+          <a href="Projets Animations CSS/02_exercice_letsRun/run.html" target="_blank">Voir le projet</a>
+        </div>
+      </div>
+      <div class="ex-card">
+        <div class="ex-title">03 - Balles rebondissantes</div>
+        <div class="ex-desc">
+          Animation de balles avec effets de rebond
+        </div>
+        <div class="resource-list">
+          <a href="Projets Animations CSS/03_exercice_balles/balles.html" target="_blank">Version 1</a>
+          <a href="Projets Animations CSS/03_exercice_balles/balles2.html" target="_blank">Version 2</a>
+        </div>
+      </div>
+      <div class="ex-card">
+        <div class="ex-title">04 - L'usine</div>
+        <div class="ex-desc">
+          Projet d'animation complexe d'une usine
+        </div>
+        <div class="resource-list">
+          <a href="Projets Animations CSS/04_usine/eleve/index.html" target="_blank">Version élève</a>
+          <a href="Projets Animations CSS/04_usine/solution/index.html" target="_blank">Solution</a>
+        </div>
+      </div>
+      <div class="ex-card">
+        <div class="ex-title">05 - Transformations</div>
+        <div class="ex-desc">
+          Exercices sur les transformations CSS (rotate, scale, translate)
+        </div>
+        <div class="resource-list">
+          <a href="Projets Animations CSS/05_transform/index.html" target="_blank">Voir le projet</a>
+        </div>
+      </div>
+      <div class="ex-card">
+        <div class="ex-title">06 - Loader</div>
+        <div class="ex-desc">
+          Créer un loader animé
+        </div>
+        <div class="resource-list">
+          <a href="Projets Animations CSS/06_load/loader.html" target="_blank">Voir le projet</a>
+        </div>
+      </div>
+      <div class="ex-card">
+        <div class="ex-title">07 - Récapitulatif</div>
+        <div class="ex-desc">
+          Synthèse des animations CSS
+        </div>
+        <div class="resource-list">
+          <a href="Projets Animations CSS/07_recap/index.html" target="_blank">Voir le projet</a>
+        </div>
+      </div>
+      <div class="ex-card">
+        <div class="ex-title">Exercices variés</div>
+        <div class="ex-desc">
+          Collection d'exercices d'animation CSS
+        </div>
+        <div class="resource-list">
+          <a href="Projets Animations CSS/ExerciceAnimationCSS/index.html" target="_blank">Index</a>
+          <a href="Projets Animations CSS/ExerciceAnimationCSS/carreQuiTourne.html" target="_blank">Carré tournant</a>
+          <a href="Projets Animations CSS/ExerciceAnimationCSS/balleQuiRebondit.html" target="_blank">Balle</a>
+          <a href="Projets Animations CSS/ExerciceAnimationCSS/menuQuiTombe.html" target="_blank">Menu</a>
+          <a href="Projets Animations CSS/ExerciceAnimationCSS/loader.html" target="_blank">Loader</a>
+          <a href="Projets Animations CSS/ExerciceAnimationCSS/faireLaQueue.html" target="_blank">File d'attente</a>
+          <a href="Projets Animations CSS/ExerciceAnimationCSS/animation3D.html" target="_blank">Animation 3D</a>
+        </div>
+      </div>
+      <div class="ex-card">
+        <div class="ex-title">Labyrinthe</div>
+        <div class="ex-desc">
+          Projet de labyrinthe animé
+        </div>
+        <div class="resource-list">
+          <a href="Projets Animations CSS/labyrinth/index.html" target="_blank">Voir le projet</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Mise en ligne -->
+    <h2 class="section-title">🌐 Mise en ligne</h2>
+    <div class="ex-list-grid">
+      <div class="ex-card">
+        <div class="ex-title">📄 Cours Mise en ligne</div>
+        <div class="ex-desc">
+          Guide complet pour déployer votre site web
+        </div>
+        <div class="resource-list">
+          <a href="MiseEnLigne_Cours.pdf" target="_blank">Télécharger le cours</a>
+        </div>
+      </div>
+    </div>
+
     <footer class="footer">
       UAA6 : Animation et Mise en ligne • Institut Notre-Dame de Beauraing • © 2025-2026
     </footer>

@@ -3,34 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Labyrinthe Animé</title>
     <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #2c3e50;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
         #laby{
             background-image: url('laby.png');
             background-size: cover;
             width: 626px;
             height: 626px;
+            position: relative;
+            border: 3px solid #34495e;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
+
         #perso{
             width: 20px;
             height: 20px;
-            background-color: red;
+            background-color: #e74c3c;
+            border-radius: 50%;
             animation-name: deplacement;
-            animation-duration: 15s;
+            animation-duration: 20s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
             position: absolute;
+            box-shadow: 0 0 10px rgba(231, 76, 60, 0.8);
         }
 
         @keyframes deplacement{
-            0%{
-                transform: translateY(450px);
+            /* Départ en bas à gauche */
+            0% {
+                transform: translate(10px, 450px);
             }
-            6%{
-                transform: translateY(450px) translateX(50px);
+            /* Monter */
+            8% {
+                transform: translate(10px, 300px);
             }
+            /* Aller à droite */
+            16% {
+                transform: translate(200px, 300px);
+            }
+            /* Descendre */
+            24% {
+                transform: translate(200px, 450px);
+            }
+            /* Aller à droite */
+            32% {
+                transform: translate(350px, 450px);
+            }
+            /* Monter */
+            40% {
+                transform: translate(350px, 200px);
+            }
+            /* Aller à gauche */
+            48% {
+                transform: translate(150px, 200px);
+            }
+            /* Monter */
+            56% {
+                transform: translate(150px, 100px);
+            }
+            /* Aller à droite */
+            64% {
+                transform: translate(400px, 100px);
+            }
+            /* Descendre */
+            72% {
+                transform: translate(400px, 350px);
+            }
+            /* Aller à droite */
+            80% {
+                transform: translate(550px, 350px);
+            }
+            /* Monter */
+            88% {
+                transform: translate(550px, 50px);
+            }
+            /* Aller à droite vers sortie */
+            96% {
+                transform: translate(600px, 50px);
+            }
+            /* Retour au début */
+            100% {
+                transform: translate(10px, 450px);
+            }
+        }
+
+        h1 {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
     </style>
 </head>
 <body>
+    <h1>🎯 Labyrinthe Animé CSS</h1>
     <div id="laby">
         <div id="perso"></div>
     </div>
