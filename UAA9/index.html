@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAA9 - Projet et cahier des charges</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #92400e;
+            --secondary-color: #b45309;
+            --accent-color: #d97706;
+            --success-color: #059669;
+            --warning-color: #f59e0b;
+            --error-color: #b91c1c;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #92400e 0%, #b45309 50%, #d97706 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #f3f4f6, #e5e7eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            line-height: 1.1;
+        }
+
+        .header .web-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-color), var(--warning-color));
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(217, 119, 6, 0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .module-card {
+            background: var(--bg-white);
+            border-radius: 25px;
+            padding: 2.5rem;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            border-radius: 25px 25px 0 0;
+        }
+
+        .module-card::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(146, 64, 14, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            transition: all 0.5s ease;
+        }
+
+        .module-card:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.2);
+        }
+
+        .module-card:hover::after {
+            width: 150px;
+            height: 150px;
+            opacity: 0.8;
+        }
+
+        .module-card.consignes::before {
+            background: linear-gradient(90deg, #92400e, #b45309);
+        }
+        .module-card.grilles::before {
+            background: linear-gradient(90deg, #b45309, #d97706);
+        }
+        .module-card.projets::before {
+            background: linear-gradient(90deg, #d97706, #f59e0b);
+        }
+        .module-card.bibliotheque::before {
+            background: linear-gradient(90deg, #059669, #10b981);
+        }
+        .module-card.ressources::before {
+            background: linear-gradient(90deg, #f59e0b, #fbbf24);
+        }
+
+        .module-number {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(146, 64, 14, 0.1), rgba(217, 119, 6, 0.1));
+            color: var(--primary-color);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            border: 2px solid rgba(146, 64, 14, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .module-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .module-icon {
+            font-size: 2.2rem;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+
+        .module-description {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            position: relative;
+            z-index: 2;
+        }
+
+        .module-topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .topic-tag {
+            background: linear-gradient(135deg, rgba(146, 64, 14, 0.1), rgba(217, 119, 6, 0.1));
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid rgba(146, 64, 14, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .topic-tag:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(146, 64, 14, 0.3);
+        }
+
+        .module-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 6px 20px rgba(146, 64, 14, 0.3);
+            position: relative;
+            z-index: 2;
+            margin-bottom: 10px;
+            margin-right: 10px;
+        }
+
+        .module-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(146, 64, 14, 0.4);
+        }
+
+        .footer {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2.8rem;
+            }
+
+            .header p {
+                font-size: 1.1rem;
+            }
+
+            .modules-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .module-card {
+                padding: 2rem;
+                transform: none;
+            }
+
+            .module-card:hover {
+                transform: translateY(-10px);
+            }
+
+            .module-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .module-card {
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .module-card:nth-child(1) { animation-delay: 0.1s; }
+        .module-card:nth-child(2) { animation-delay: 0.2s; }
+        .module-card:nth-child(3) { animation-delay: 0.3s; }
+        .module-card:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <div class="web-badge">UAA9 - Projet et cahier des charges</div>
+                <h1>Projet de développement</h1>
+                <p>Apprenez à concevoir et documenter un projet informatique : rédaction de cahier des charges, analyse des besoins, conception d'interfaces, modélisation des données et documentation technique complète.</p>
+            </div>
+        </header>
+
+        <div class="modules-grid">
+            <div class="module-card consignes">
+                <h2 class="module-title">
+                    <span class="module-icon">📋</span>
+                    Consignes du projet
+                </h2>
+                <p class="module-description">
+                    Document complet avec toutes les consignes et étapes du projet TFA : objectifs, livrables, échéances et critères d'évaluation.
+                </p>
+                <a href="5TTr_TFA_consignes.pdf" class="module-link" target="_blank">
+                    Consignes TFA →
+                </a>
+            </div>
+
+            <div class="module-card grilles">
+                <h2 class="module-title">
+                    <span class="module-icon">✅</span>
+                    Grilles d'évaluation
+                </h2>
+                <p class="module-description">
+                    Grilles détaillées pour chaque livrable du projet : description des données, interfaces et cas d'utilisation, structures et énumérations.
+                </p>
+                <a href="evaluations/5TTr_TFAGrille_DescriptionDesDonnees.pdf" class="module-link" target="_blank">
+                    Grille - Description des données →
+                </a>
+                <a href="evaluations/5TTr_TFAGrille_InterfacesEtCasUtilisation.pdf" class="module-link" target="_blank">
+                    Grille - Interfaces et cas d'utilisation →
+                </a>
+                <a href="evaluations/5TTr_TFAGrille_StructuresEnum.pdf" class="module-link" target="_blank">
+                    Grille - Structures et énumérations →
+                </a>
+            </div>
+
+            <div class="module-card projets">
+                <h2 class="module-title">
+                    <span class="module-icon">🎬</span>
+                    Projet Cinéma
+                </h2>
+                <p class="module-description">
+                    Projet de l'année : conception et développement d'une application de gestion de cinéma. Consultez les spécifications, fichiers sources et ressources pour mener à bien votre projet.
+                </p>
+                <a href="Projet Cinéma/fichiers/films.txt" class="module-link" download="films.txt">
+                    Fichier films.txt →
+                </a>
+                <a href="Projet Cinéma/fichiers/salles.txt" class="module-link" download="salles.txt">
+                    Fichier salles.txt →
+                </a>
+                <a href="Projet Cinéma/fichiers/seances.txt" class="module-link" download="seances.txt">
+                    Fichier seances.txt →
+                </a>
+                <a href="Projet Cinéma/Cahiers des charges (à compléter).odt" class="module-link" target="_blank">
+                    Cahier des charges à compléter →
+                </a>
+                <a href="Projet Cinéma/jeu_essai_projet_cinema.pdf" class="module-link" target="_blank">
+                    Jeu d'essai →
+                </a>
+            </div>
+
+            <div class="module-card bibliotheque" style="display: none;">
+                <h2 class="module-title">
+                    <span class="module-icon">📚</span>
+                    Projet Bibliothèque
+                </h2>
+                <p class="module-description">
+                    Projet alternatif : conception et développement d'une application de gestion de bibliothèque. Consultez les spécifications, fichiers sources et ressources pour mener à bien votre projet.
+                </p>
+                <a href="Projet Bibliothèque/Bibliotheque_Sources.txt" class="module-link" download="Bibliotheque_Sources.txt">
+                    Fichier sources (TXT) →
+                </a>
+                <a href="Projet Bibliothèque/Cahiers des charges (à compléter).odt" class="module-link" target="_blank">
+                    Cahier des charges à compléter →
+                </a>
+                <a href="Projet Bibliothèque/jeu_essai_projet_biblio.odt" class="module-link" target="_blank">
+                    Jeu d'essai →
+                </a>
+                <a href="https://github.com/LucasEmbrechts/Bibliotheque-INDBG/blob/main/biblio.h" class="module-link" target="_blank">
+                    Fichier biblio.h (GitHub) →
+                </a>
+            </div>
+
+            <div class="module-card ressources">
+                <h2 class="module-title">
+                    <span class="module-icon">🔧</span>
+                    Ressources utiles
+                </h2>
+                <p class="module-description">
+                    Outils en ligne pratiques pour la conception et la documentation de votre projet.
+                </p>
+                <a href="https://asciiflow.com/#/" class="module-link" target="_blank">
+                    ASCIIFlow - Diagrammes en texte →
+                </a>
+            </div>
+
+        </div>
+
+        <footer class="footer">
+            <p>UAA9 : Projet et cahier des charges • Institut Notre-Dame de Beauraing • © 2025-2026</p>
+        </footer>
+    </div>
+
+    <script>
+        // Animation d'apparition des cartes au scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.module-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Effet de parallaxe subtil sur le header
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('.header');
+            if (header) {
+                header.style.transform = `translateY(${scrolled * 0.1}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
