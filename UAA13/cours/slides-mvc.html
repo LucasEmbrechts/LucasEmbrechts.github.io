@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture MVC - Model-View-Controller</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/moon.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/monokai.min.css">
+    <style>
+        .reveal {
+            font-size: 32px;
+        }
+        .reveal h1 {
+            font-size: 2.5em;
+            color: #42affa;
+        }
+        .reveal h2 {
+            font-size: 1.8em;
+            color: #42affa;
+        }
+        .reveal h3 {
+            font-size: 1.4em;
+            color: #a8d8ff;
+        }
+        .reveal code {
+            background: #1e1e1e;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        .reveal pre code {
+            max-height: 650px;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+        .box {
+            background: rgba(66, 175, 250, 0.1);
+            border: 2px solid #42affa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .box-danger {
+            background: rgba(250, 66, 66, 0.1);
+            border: 2px solid #fa4242;
+        }
+        .box-success {
+            background: rgba(66, 250, 66, 0.1);
+            border: 2px solid #42fa42;
+        }
+        .fragment.highlight-current-blue {
+            opacity: 0.5;
+        }
+        .fragment.highlight-current-blue.current-fragment {
+            opacity: 1;
+            color: #42affa;
+        }
+        table {
+            font-size: 0.7em;
+            margin: 20px auto;
+        }
+        table th {
+            background: #42affa;
+            color: white;
+        }
+        table td {
+            border: 1px solid #555;
+            padding: 10px;
+        }
+        .emoji {
+            font-size: 1.5em;
+        }
+        .flow-diagram {
+            font-family: monospace;
+            font-size: 0.55em;
+            text-align: left;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .small-text {
+            font-size: 0.7em;
+        }
+        .medium-text {
+            font-size: 0.85em;
+        }
+        .mvc-diagram {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .mvc-component {
+            flex: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px 15px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+        .mvc-component:hover {
+            transform: translateY(-10px);
+        }
+        .mvc-component h3 {
+            color: white;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+        .mvc-component p {
+            color: #e0e0e0;
+            font-size: 0.8em;
+            margin: 3px 0;
+        }
+        .mvc-component.model {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        .mvc-component.controller {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        .mvc-component.view {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        .mvc-arrow {
+            font-size: 2em;
+            color: #42affa;
+        }
+        .flow-step {
+            background: rgba(66, 175, 250, 0.15);
+            border-left: 4px solid #42affa;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .flow-step:hover {
+            background: rgba(66, 175, 250, 0.25);
+            transform: translateX(10px);
+        }
+        .flow-step h4 {
+            color: #42affa;
+            margin: 0 0 8px 0;
+            font-size: 0.9em;
+        }
+        .flow-step p {
+            margin: 3px 0;
+            font-size: 0.75em;
+            line-height: 1.3;
+        }
+        .flow-arrow {
+            text-align: center;
+            color: #42affa;
+            font-size: 1.2em;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- SLIDE 1 : TITRE -->
+            <section>
+                <h1>Architecture MVC</h1>
+                <h3>Model-View-Controller</h3>
+            </section>
+
+            <!-- SLIDE 2 : OBJECTIFS -->
+            <section>
+                <h2>Objectifs d'apprentissage</h2>
+                <ul>
+                    <li class="fragment">Comprendre pourquoi séparer le code en composants</li>
+                    <li class="fragment">Identifier les responsabilités du Model, View et Controller</li>
+                    <li class="fragment">Créer une application PHP organisée selon MVC</li>
+                    <li class="fragment">Naviguer dans un projet MVC existant</li>
+                </ul>
+            </section>
+
+            <!-- SLIDE 3 : QU'EST-CE QU'UNE ARCHITECTURE ? -->
+            <section>
+                <h2>Qu'est-ce qu'une architecture logicielle ?</h2>
+                <div class="two-columns">
+                    <div>
+                        <h3>Comme le plan d'une maison</h3>
+                        <ul>
+                            <li class="fragment">Définit où placer chaque chose</li>
+                            <li class="fragment">Permet le travail en équipe</li>
+                            <li class="fragment">Facilite les modifications futures</li>
+                        </ul>
+                    </div>
+                    <div class="fragment">
+                        <div class="box">
+                            <strong>MVC</strong> est l'une des architectures les plus populaires pour les applications web
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 4 : LE PROBLÈME - CODE SPAGHETTI -->
+            <section>
+                <h2>Le problème : Code "Spaghetti"</h2>
+                <pre><code class="php" data-trim data-line-numbers="|3-4|7-9|12-13|16-25">
+&lt;?php
+// inscription.php - MAUVAIS EXEMPLE
+// Connexion à la base de données
+$conn = new mysqli("localhost", "root", "", "monsite");
+
+// Traitement du formulaire
+if($_POST) {
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+
+    // Requête SQL (pas sécurisée !)
+    $sql = "INSERT INTO users (username, email, password)
+            VALUES ('$username', '$email', '$password')";
+    $conn->query($sql);
+}
+?&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+    &lt;h1&gt;Inscription&lt;/h1&gt;
+    &lt;form method="POST"&gt;
+        &lt;input type="text" name="username"&gt;
+        &lt;button&gt;S'inscrire&lt;/button&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                </code></pre>
+            </section>
+
+            <!-- SLIDE 5 : PROBLÈMES DU CODE SPAGHETTI -->
+            <section>
+                <h2>Les problèmes de ce code</h2>
+                <table>
+                    <tr>
+                        <th>Problème</th>
+                        <th>Conséquence</th>
+                    </tr>
+                    <tr class="fragment">
+                        <td>Code mélangé</td>
+                        <td>Difficile de s'y retrouver (HTML + PHP + SQL)</td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>Injection SQL</td>
+                        <td>Très dangereux, un hacker peut voler la BD</td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>Duplication</td>
+                        <td>Si 10 pages, on copie-colle 10 fois</td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>Difficile à tester</td>
+                        <td>Impossible de tester juste la validation</td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>Travail en équipe</td>
+                        <td>Un designer ne peut pas toucher au HTML</td>
+                    </tr>
+                </table>
+            </section>
+
+            <!-- SLIDE 6 : LA SOLUTION MVC -->
+            <section>
+                <h2>La solution : MVC</h2>
+                <div class="box-success">
+                    <p>Au lieu de tout mettre dans un fichier, on <strong>sépare en 3 parties</strong></p>
+                </div>
+                <div class="mvc-diagram fragment">
+                    <div class="mvc-component model">
+                        <h3>MODEL</h3>
+                        <p><strong>Données</strong></p>
+                        <p style="margin-top: 15px;">User.php</p>
+                        <p>• create()</p>
+                        <p>• update()</p>
+                        <p>• delete()</p>
+                    </div>
+                    <div class="mvc-arrow">↔</div>
+                    <div class="mvc-component controller">
+                        <h3>CONTROLLER</h3>
+                        <p><strong>Logique</strong></p>
+                        <p style="margin-top: 15px;">UserController.php</p>
+                        <p>• register()</p>
+                        <p>• login()</p>
+                        <p>• validate()</p>
+                    </div>
+                    <div class="mvc-arrow">↔</div>
+                    <div class="mvc-component view">
+                        <h3>VIEW</h3>
+                        <p><strong>Affichage</strong></p>
+                        <p style="margin-top: 15px;">views/register.php</p>
+                        <p>• HTML/CSS</p>
+                        <p>• Formulaires</p>
+                        <p>• Messages</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 7 : ANALOGIE DU RESTAURANT -->
+            <section>
+                <h2>Analogie : Un restaurant</h2>
+                <div style="font-size: 0.8em;">
+                    <div class="fragment box">
+                        <h3>VIEW = Serveur</h3>
+                        <p>Prend la commande du client<br>Apporte les plats</p>
+                    </div>
+                    <div class="fragment box">
+                        <h3>CONTROLLER = Chef cuisinier</h3>
+                        <p>Reçoit la commande<br>Décide quoi faire<br>Coordonne l'équipe</p>
+                    </div>
+                    <div class="fragment box">
+                        <h3>MODEL = Cuisinier / Garde-manger</h3>
+                        <p>Prépare les ingrédients<br>Stocke dans le frigo<br>Récupère ce qui est demandé</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 8 : RÈGLES D'OR -->
+            <section>
+                <h2>Règles d'or de MVC</h2>
+                <div class="box-danger fragment" data-fragment-index="1">
+                    <h3>Le Model ne connaît PAS la View</h3>
+                    <p class="small-text">(le cuisinier ne sort jamais de sa cuisine)</p>
+                </div>
+                <div class="box-danger fragment" data-fragment-index="2">
+                    <h3>La View ne parle PAS directement au Model</h3>
+                    <p class="small-text">(le serveur ne va pas lui-même au garde-manger)</p>
+                </div>
+                <div class="box-success fragment" data-fragment-index="3">
+                    <h3>Le Controller orchestre tout</h3>
+                    <p class="small-text">(le chef coordonne l'équipe)</p>
+                </div>
+            </section>
+
+            <!-- SLIDE 9 : ORGANISATION DES FICHIERS -->
+            <section>
+                <h2>Organisation des fichiers</h2>
+                <pre class="fragment"><code class="text" data-trim>
+sample-php/
+│
+├── config/                      [CONFIGURATION]
+│   └── Database.php            → Connexion à MySQL
+│
+├── models/                      [MODEL - Données]
+│   └── User.php                → Gestion des utilisateurs
+│
+├── controllers/                 [CONTROLLER - Logique]
+│   └── UserController.php      → Actions utilisateur
+│
+├── views/                       [VIEW - Interface HTML/CSS]
+│   ├── register.php            → Page inscription
+│   ├── login.php               → Page connexion
+│   ├── profile.php             → Page profil
+│   ├── edit.php                → Page modification
+│   └── css/
+│       └── style.css           → Styles
+│
+└── database/                    [BASE DE DONNÉES]
+    └── schema.sql              → Structure de la table users
+                </code></pre>
+            </section>
+
+            <!-- SLIDE 10 : CONVENTION DE NOMMAGE -->
+            <section>
+                <h2>Convention de nommage</h2>
+                <table>
+                    <tr>
+                        <th>Type de fichier</th>
+                        <th>Convention</th>
+                        <th>Exemple</th>
+                    </tr>
+                    <tr class="fragment">
+                        <td>Model</td>
+                        <td>Singulier, Majuscule</td>
+                        <td><code>User.php</code>, <code>Product.php</code></td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>Controller</td>
+                        <td>Nom + "Controller"</td>
+                        <td><code>UserController.php</code></td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>View</td>
+                        <td>Verbe d'action minuscules</td>
+                        <td><code>register.php</code>, <code>login.php</code></td>
+                    </tr>
+                    <tr class="fragment">
+                        <td>Config</td>
+                        <td>Nom descriptif</td>
+                        <td><code>Database.php</code></td>
+                    </tr>
+                </table>
+            </section>
+
+            <!-- SLIDE 11 : LE MODEL - INTRO -->
+            <section>
+                <h2>Le MODEL</h2>
+                <h3>Gérer les données</h3>
+                <div class="box fragment">
+                    <p>Le Model s'occupe de <strong>tout ce qui concerne les données</strong></p>
+                    <ul>
+                        <li>Stockage (sauvegarder dans la BD)</li>
+                        <li>Récupération (chercher des infos)</li>
+                        <li>Modification (mettre à jour)</li>
+                        <li>Suppression (effacer)</li>
+                        <li>Validation (vérifier que c'est correct)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- SLIDE 12 : STRUCTURE DU MODEL -->
+            <section>
+                <h2>Structure de la classe User</h2>
+                <pre><code class="php" data-trim data-line-numbers="|3-4|6-10|12-14|16-20|22-23">
+&lt;?php
+class User {
+    // 1. CONNEXION À LA BD
+    private $conn;
+    private $table_name = "users";
+
+    // 2. PROPRIÉTÉS (colonnes de la table)
+    private $id;
+    private $username;
+    private $email;
+    private $password;
+
+    // 3. CONSTRUCTEUR
+    public function __construct($db) {
+        $this->conn = $db;
+    }
+
+    // 4. GETTERS & SETTERS
+    public function getId() { return $this->id; }
+    public function setId($id) { $this->id = $id; }
+
+    // 5. MÉTHODES CRUD
+    public function create() { ... }
+    public function getById() { ... }
+    public function update() { ... }
+    public function delete() { ... }
+}
+?&gt;
+                </code></pre>
+            </section>
+
+            <!-- SLIDE 13 : MÉTHODE CREATE -->
+            <section>
+                <h2>Méthode create() - Détails</h2>
+                <pre><code class="php" data-trim data-line-numbers="|2-5|7-8|10-12|14-15|17-20|22-26">
+public function create() {
+    // 1. PRÉPARER LA REQUÊTE SQL
+    $query = "INSERT INTO " . $this->table_name . "
+              SET username = :username,
+                  email = :email,
+                  password = :password";
+
+    // 2. PRÉPARER (protection injection SQL)
+    $stmt = $this->conn->prepare($query);
+
+    // 3. NETTOYER LES DONNÉES (sécurité XSS)
+    $this->username = htmlspecialchars(strip_tags($this->username));
+    $this->email = htmlspecialchars(strip_tags($this->email));
+
+    // 4. HASHER LE MOT DE PASSE
+    $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
+
+    // 5. LIER LES PARAMÈTRES
+    $stmt->bindParam(":username", $this->username);
+    $stmt->bindParam(":email", $this->email);
+    $stmt->bindParam(":password", $password_hash);
+
+    // 6. EXÉCUTER
+    if($stmt->execute()) {
+        $this->id = $this->conn->lastInsertId();
+        return true;
+    }
+    return false;
+}
+                </code></pre>
+            </section>
+
+            <!-- SLIDE 14 : SÉCURITÉ - INJECTION SQL -->
+            <section>
+                <h2>Point sécurité : Injection SQL</h2>
+                <div class="two-columns">
+                    <div>
+                        <div class="box-danger">
+                            <h3>DANGER</h3>
+                            <pre><code class="php" data-trim>
+// Vulnérable
+$email = $_POST['email'];
+// Si email = "test' OR '1'='1"
+
+$query = "SELECT * FROM users
+          WHERE email = '$email'";
+// Résultat :
+// SELECT * FROM users
+// WHERE email = 'test' OR '1'='1'
+
+// → Renvoie TOUS les users !
+                            </code></pre>
+                        </div>
+                    </div>
+                    <div class="fragment">
+                        <div class="box-success">
+                            <h3>SÉCURISÉ</h3>
+                            <pre><code class="php" data-trim>
+// Protégé
+$query = "SELECT * FROM users
+          WHERE email = :email";
+
+$stmt = $conn->prepare($query);
+$stmt->bindParam(":email", $email);
+$stmt->execute();
+
+// Si email = "test' OR '1'='1"
+// La BD cherche littéralement
+// cet email bizarre
+// → Pas d'injection possible
+                            </code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 15 : VALIDATION -->
+            <section>
+                <h2>Validation des données</h2>
+                <pre><code class="php" data-trim data-line-numbers="|3-6|8-11|13-16">
+public static function validate($data) {
+    $errors = [];
+
+    // Username
+    if(!isset($data['username']) || strlen($data['username']) < 3) {
+        $errors[] = "Le username doit contenir au moins 3 caractères";
+    }
+
+    // Email
+    if(!isset($data['email']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "L'email n'est pas valide";
+    }
+
+    // Password
+    if(!isset($data['password']) || strlen($data['password']) < 6) {
+        $errors[] = "Le mot de passe doit contenir au moins 6 caractères";
+    }
+
+    return $errors;
+}
+                </code></pre>
+            </section>
+
+            <!-- SLIDE 16 : LE CONTROLLER - INTRO -->
+            <section>
+                <h2>Le CONTROLLER</h2>
+                <h3>La logique métier</h3>
+                <div class="box fragment">
+                    <p>Le Controller est le <strong>chef d'orchestre</strong></p>
+                    <ul>
+                        <li>Recevoir les demandes de la View</li>
+                        <li>Valider les données reçues</li>
+                        <li>Vérifications métier (ex: email déjà utilisé ?)</li>
+                        <li>Appeler les Models</li>
+                        <li>Préparer la réponse</li>
+                        <li>Gérer les erreurs</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- SLIDE 17 : STRUCTURE DU CONTROLLER -->
+            <section>
+                <h2>Structure UserController</h2>
+                <pre><code class="php" data-trim data-line-numbers="|5-6|8-14|16-21">
+&lt;?php
+require_once __DIR__ . '/../config/Database.php';
+require_once __DIR__ . '/../models/User.php';
+
+class UserController {
+    private $db;      // Connexion BD
+    private $user;    // Instance du Model
+
+    public function __construct() {
+        $database = new Database();
+        $this->db = $database->getConnection();
+
+        $this->user = new User($this->db);
+    }
+
+    // Méthodes d'action
+    public function register($data) { ... }
+    public function login($data) { ... }
+    public function getProfile($user_id) { ... }
+    public function updateUser($data) { ... }
+    public function deleteUser($user_id) { ... }
+}
+?&gt;
+                </code></pre>
+            </section>
+
+            <!-- SLIDE 18 : MÉTHODE REGISTER - PARTIE 1 -->
+            <section>
+                <h2>Méthode register() - Étape 1</h2>
+                <h3 class="small-text">Validation</h3>
+                <pre><code class="php" data-trim data-line-numbers="|2-3|5-10">
+public function register($data) {
+    // ÉTAPE 1 : VALIDATION
+    $errors = User::validate($data);
+
+    if(!empty($errors)) {
+        return [
+            'success' => false,
+            'errors' => $errors
+        ];
+    }
+
+    // ... suite
+}
+                </code></pre>
+            </section>
+
+            <!-- SLIDE 19 : MÉTHODE REGISTER - PARTIE 2 -->
+            <section>
+                <h2>Méthode register() - Étape 2</h2>
+                <h3 class="small-text">Vérification métier</h3>
+                <pre><code class="php" data-trim data-line-numbers="|2-3|5-10">
+    // ÉTAPE 2 : VÉRIFICATION MÉTIER
+    $this->user->setEmail($data['email']);
+
+    if($this->user->emailExists()) {
+        return [
+            'success' => false,
+            'message' => 'Cet email est déjà utilisé'
+        ];
+    }
+
+    // ... suite
+                </code></pre>
+            </section>
+
+            <!-- SLIDE 20 : MÉTHODE REGISTER - PARTIE 3 -->
+            <section>
+                <h2>Méthode register() - Étape 3</h2>
+                <h3 class="small-text">Création</h3>
+                <pre><code class="php" data-trim data-line-numbers="|2-5|7-13|15-20">
+    // ÉTAPE 3 : CRÉATION
+    $this->user->setUsername($data['username']);
+    $this->user->setEmail($data['email']);
+    $this->user->setPassword($data['password']);
+
+    if($this->user->create()) {
+        // Succès !
+        return [
+            'success' => true,
+            'message' => 'Utilisateur créé avec succès',
+            'user_id' => $this->user->getId()
+        ];
+    } else {
+        // Erreur
+        return [
+            'success' => false,
+            'message' => 'Erreur lors de la création'
+        ];
+    }
+}
+                </code></pre>
+            </section>
+
+            <!-- SLIDE 21 : LA VIEW - INTRO -->
+            <section>
+                <h2>La VIEW</h2>
+                <h3>L'interface utilisateur</h3>
+                <div class="box fragment">
+                    <p>La View est la <strong>partie visuelle</strong> de l'application</p>
+                    <ul>
+                        <li>Afficher les formulaires (HTML/CSS)</li>
+                        <li>Récupérer les données saisies par l'utilisateur</li>
+                        <li>Appeler le Controller approprié</li>
+                        <li>Afficher les résultats et messages</li>
+                    </ul>
+                </div>
+                <p class="fragment small-text">
+                    <em>C'est ce que l'utilisateur voit et avec quoi il interagit</em>
+                </p>
+            </section>
+
+            <!-- SLIDE 22 : EXEMPLE DE VIEW - PARTIE 1 -->
+            <section>
+                <h2>Exemple : views/register.php (partie PHP)</h2>
+                <pre><code class="php" data-trim data-line-numbers="|2-3|5-13|15-16">
+&lt;?php
+// Si le formulaire a été soumis
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // 1. RÉCUPÉRATION DES DONNÉES du formulaire
+    $data = [
+        'username' => $_POST['username'],
+        'email' => $_POST['email'],
+        'password' => $_POST['password']
+    ];
+
+    // 2. APPEL DU CONTROLLER
+    require_once __DIR__ . '/../controllers/UserController.php';
+    $controller = new UserController();
+    $response = $controller->register($data);
+
+    // 3. On a maintenant $response avec success/message
+}
+?&gt;
+                </code></pre>
+            </section>
+
+            <!-- SLIDE 22b : EXEMPLE DE VIEW - PARTIE 2 -->
+            <section>
+                <h2>Exemple : views/register.php (partie HTML)</h2>
+                <pre><code class="html" data-trim data-line-numbers="|7-17|20-32">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+    &lt;title&gt;Inscription&lt;/title&gt;
+    &lt;link rel="stylesheet" href="css/style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Créer un compte&lt;/h1&gt;
+
+    &lt;!-- 4. AFFICHAGE DES MESSAGES --&gt;
+    &lt;?php if(isset($response)): ?&gt;
+        &lt;div class="alert"&gt;
+            &lt;?= $response['message'] ?&gt;
+        &lt;/div&gt;
+    &lt;?php endif; ?&gt;
+
+    &lt;!-- 5. FORMULAIRE HTML --&gt;
+    &lt;form method="POST" action="register.php"&gt;
+        &lt;label&gt;Nom d'utilisateur&lt;/label&gt;
+        &lt;input type="text" name="username" required&gt;
+
+        &lt;label&gt;Email&lt;/label&gt;
+        &lt;input type="email" name="email" required&gt;
+
+        &lt;label&gt;Mot de passe&lt;/label&gt;
+        &lt;input type="password" name="password" required&gt;
+
+        &lt;button type="submit"&gt;S'inscrire&lt;/button&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                </code></pre>
+            </section>
+
+            <!-- SLIDE 23 : SÉPARATION HTML ET PHP -->
+            <section>
+                <h2>Séparation dans la View</h2>
+                <div class="two-columns">
+                    <div>
+                        <div class="box">
+                            <h3>Partie PHP (début)</h3>
+                            <ul class="small-text">
+                                <li>Traitement du formulaire</li>
+                                <li>Appel du Controller</li>
+                                <li>Récupération de la réponse</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="box">
+                            <h3>Partie HTML (après)</h3>
+                            <ul class="small-text">
+                                <li>Affichage du formulaire</li>
+                                <li>Affichage des messages</li>
+                                <li>Mise en forme CSS</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-success fragment" style="margin-top: 30px;">
+                    <p><strong>Règle :</strong> La View ne contient PAS de logique complexe, juste de l'affichage !</p>
+                </div>
+            </section>
+
+            <!-- SLIDE 24 : CE QUE LA VIEW NE DOIT PAS FAIRE -->
+            <section>
+                <h2>Ce que la View NE DOIT PAS faire</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px;">
+                    <div>
+                        <div class="box-danger fragment" style="margin: 10px 0; height: 150px; padding: 15px; overflow: hidden;">
+                            <h3 style="font-size: 1em; margin: 0 0 10px 0;">❌ PAS de requêtes SQL</h3>
+                            <pre style="margin: 0;"><code class="php" style="font-size: 0.85em;">$query = "SELECT * FROM users";</code></pre>
+                        </div>
+                        <div class="box-danger fragment" style="margin: 10px 0; height: 150px; padding: 15px; overflow: hidden;">
+                            <h3 style="font-size: 1em; margin: 0 0 10px 0;">❌ PAS de logique métier</h3>
+                            <pre style="margin: 0;"><code class="php" style="font-size: 0.85em;">if(strlen($password) < 6) {
+    // validation...
+}</code></pre>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="box-success fragment" style="margin: 10px 0; height: 310px; padding: 20px; display: flex; flex-direction: column; justify-content: center; overflow: hidden;">
+                            <h3 style="font-size: 1.1em; margin: 0 0 15px 0;">✓ Seulement de l'affichage</h3>
+                            <pre style="margin: 0 0 15px 0;"><code class="php" style="font-size: 0.85em;">&lt;?php if(isset($message)): ?&gt;
+    &lt;p&gt;&lt;?= $message ?&gt;&lt;/p&gt;
+&lt;?php endif; ?&gt;</code></pre>
+                            <p style="margin: 0; font-size: 0.8em; font-style: italic;">
+                                La View ne fait qu'afficher les données, sans les traiter
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 25 : FLUX COMPLET - INTRO -->
+            <section>
+                <h2>Le flux de données complet</h2>
+                <h3>Suivons une inscription de A à Z</h3>
+                <div class="fragment box">
+                    <p>Utilisateur remplit le formulaire :</p>
+                    <ul>
+                        <li>Username : "alice"</li>
+                        <li>Email : "alice@example.com"</li>
+                        <li>Password : "motdepasse123"</li>
+                    </ul>
+                    <p>Il appuie sur "S'inscrire"</p>
+                </div>
+            </section>
+
+            <!-- SLIDE 26 : FLUX ÉTAPE 1 - VIEW -->
+            <section>
+                <h2>Flux - Étape 1 : VIEW</h2>
+                <div class="flow-step fragment">
+                    <h4>👤 UTILISATEUR</h4>
+                    <p>Remplit le formulaire | Username: "alice" | Email: "alice@example.com"</p>
+                    <p>Clique sur "S'inscrire"</p>
+                </div>
+                <div class="flow-arrow fragment">↓</div>
+                <div class="flow-step fragment">
+                    <h4>🌐 NAVIGATEUR</h4>
+                    <p>Envoie POST → views/register.php</p>
+                </div>
+                <div class="flow-arrow fragment">↓</div>
+                <div class="flow-step fragment">
+                    <h4>📄 VIEW : views/register.php</h4>
+                    <p>1. Vérifie POST ✓ | 2. Récupère $_POST | 3. Crée $data</p>
+                    <p>4. Instancie UserController | 5. Appelle register($data)</p>
+                </div>
+            </section>
+
+            <!-- SLIDE 27 : FLUX ÉTAPE 2 - CONTROLLER VALIDATION -->
+            <section>
+                <h2>Flux - Étape 2 : Controller (Validation)</h2>
+                <div class="flow-step fragment">
+                    <h4>🎛️ CONTROLLER : UserController::register($data)</h4>
+                    <p>Reçoit les données de la View</p>
+                </div>
+                <div class="flow-arrow fragment">↓</div>
+                <div class="flow-step fragment">
+                    <h4>✅ VALIDATION</h4>
+                    <p>User::validate($data)</p>
+                    <p>✓ username (>= 3 chars) | ✓ email (format OK) | ✓ password (>= 6 chars)</p>
+                    <p><strong>$errors = []</strong> → Validation réussie !</p>
+                </div>
+            </section>
+
+            <!-- SLIDE 28 : FLUX ÉTAPE 3 - VÉRIFICATION MÉTIER -->
+            <section>
+                <h2>Flux - Étape 3 : Vérification métier</h2>
+                <div class="flow-step fragment">
+                    <h4>🎛️ CONTROLLER : Vérification métier</h4>
+                    <p>setEmail("alice@example.com") | Appelle emailExists()</p>
+                </div>
+                <div class="flow-arrow fragment">↓</div>
+                <div class="flow-step fragment">
+                    <h4>📦 MODEL : User::emailExists()</h4>
+                    <p>SELECT * FROM users WHERE email = :email</p>
+                </div>
+                <div class="flow-arrow fragment">↓</div>
+                <div class="flow-step fragment">
+                    <h4>🗄️ BASE DE DONNÉES</h4>
+                    <p>Recherche email 'alice@example.com' → <strong>0 ligne</strong> → ✓ Email libre !</p>
+                </div>
+            </section>
+
+            <!-- SLIDE 29 : FLUX ÉTAPE 4 - CRÉATION -->
+            <section>
+                <h2>Flux - Étape 4 : Création</h2>
+                <div class="flow-step fragment">
+                    <h4>🎛️ CONTROLLER : Préparation</h4>
+                    <p>setUsername("alice") | setEmail("alice@...") | setPassword("...") | Appelle create()</p>
+                </div>
+                <div class="flow-arrow fragment">↓</div>
+                <div class="flow-step fragment">
+                    <h4>📦 MODEL : User::create()</h4>
+                    <p>1. Nettoie (htmlspecialchars) | 2. Hash password ($2y$10$abc...)</p>
+                    <p>3. INSERT INTO users VALUES ('alice', 'alice@...', '$2y$10$...')</p>
+                </div>
+                <div class="flow-arrow fragment">↓</div>
+                <div class="flow-step fragment">
+                    <h4>🗄️ BASE DE DONNÉES</h4>
+                    <p><strong>1 ligne insérée ✓</strong> | ID auto-généré : 3</p>
+                </div>
+            </section>
+
+            <!-- SLIDE 30 : FLUX ÉTAPE 5 - RETOUR -->
+            <section>
+                <h2>Flux - Étape 5 : Retour à l'utilisateur</h2>
+                <div class="flow-step fragment">
+                    <h4>📦 MODEL → 🎛️ CONTROLLER</h4>
+                    <p>return true (ID = 3)</p>
+                </div>
+                <div class="flow-arrow fragment">↓</div>
+                <div class="flow-step fragment">
+                    <h4>🎛️ CONTROLLER : Prépare réponse</h4>
+                    <p>['success' => true, 'message' => 'Utilisateur créé', 'user_id' => 3]</p>
+                </div>
+                <div class="flow-arrow fragment">↓</div>
+                <div class="flow-step fragment">
+                    <h4>📄 VIEW : Génère HTML</h4>
+                    <p>&lt;div class="alert"&gt;Utilisateur créé avec succès&lt;/div&gt;</p>
+                </div>
+                <div class="flow-arrow fragment">↓</div>
+                <div class="flow-step fragment">
+                    <h4>🌐 NAVIGATEUR → 👤 UTILISATEUR</h4>
+                    <p><strong>Affiche : "Inscription réussie !"</strong></p>
+                </div>
+            </section>
+
+            <!-- SLIDE 31 : SCHÉMA RÉCAPITULATIF -->
+            <section>
+                <h2>Récapitulatif du flux</h2>
+                <div class="medium-text">
+                    <table>
+                        <tr>
+                            <th>Composant</th>
+                            <th>Action</th>
+                        </tr>
+                        <tr class="fragment">
+                            <td>Client</td>
+                            <td>Envoie POST avec données</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td>View</td>
+                            <td>Récupère données formulaire ($_POST), instancie Controller</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td>Controller</td>
+                            <td>Valide, vérifie email via Model</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td>Model</td>
+                            <td>Requête SELECT (email libre ?)</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td>Controller</td>
+                            <td>Remplit User, appelle create()</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td>Model</td>
+                            <td>Hash password, INSERT en BD</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td>Database</td>
+                            <td>Stocke, génère ID</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td>Model → Controller</td>
+                            <td>Retourne succès + ID</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td>Controller → View</td>
+                            <td>Prépare réponse</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td>View → Navigateur</td>
+                            <td>Génère HTML avec message de succès</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SLIDE 32 : POINTS CLÉS -->
+            <section>
+                <h2>Points clés du MVC</h2>
+                <ul>
+                    <li class="fragment">✓ <strong>Séparation claire</strong> : Chaque composant a son rôle</li>
+                    <li class="fragment">✓ <strong>Sécurité</strong> : Validation, requêtes préparées, hash</li>
+                    <li class="fragment">✓ <strong>Traçabilité</strong> : On suit facilement le parcours d'une requête</li>
+                    <li class="fragment">✓ <strong>Testabilité</strong> : Chaque méthode peut être testée individuellement</li>
+                    <li class="fragment">✓ <strong>Maintenabilité</strong> : Changement de BD ? On ne touche que le Model</li>
+                </ul>
+            </section>
+
+            <!-- SLIDE 33 : POUR ALLER PLUS LOIN -->
+            <section>
+                <h2>Pour aller plus loin</h2>
+                <div class="two-columns small-text">
+                    <div>
+                        <h3>Améliorations possibles</h3>
+                        <ul>
+                            <li class="fragment">Authentification par tokens (JWT)</li>
+                            <li class="fragment">Router (URL propres)</li>
+                            <li class="fragment">Middleware (vérifications communes)</li>
+                            <li class="fragment">ORM (Doctrine, Eloquent)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Frameworks MVC</h3>
+                        <ul>
+                            <li class="fragment"><strong>Laravel</strong> (PHP) - Le plus populaire</li>
+                            <li class="fragment"><strong>Symfony</strong> (PHP) - Professionnel</li>
+                            <li class="fragment"><strong>CodeIgniter</strong> (PHP) - Léger</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 34 : ERREURS À ÉVITER -->
+            <section>
+                <h2>Erreurs à éviter</h2>
+                <div class="box-danger fragment">
+                    <p>Mettre du SQL dans le Controller</p>
+                    <p class="small-text">→ Ça va dans le Model</p>
+                </div>
+                <div class="box-danger fragment">
+                    <p>Mettre du HTML dans le Controller</p>
+                    <p class="small-text">→ Ça va dans la View</p>
+                </div>
+                <div class="box-danger fragment">
+                    <p>Appeler directement le Model depuis la View</p>
+                    <p class="small-text">→ Passer par le Controller</p>
+                </div>
+                <div class="box-danger fragment">
+                    <p>Oublier la sécurité</p>
+                    <p class="small-text">→ Toujours requêtes préparées + hash</p>
+                </div>
+            </section>
+
+            <!-- SLIDE 35 : CONCLUSION -->
+            <section>
+                <h2>Conclusion</h2>
+                <div class="box-success">
+                    <p><strong>MVC</strong> est bien plus qu'une organisation de fichiers</p>
+                    <p>C'est une <strong>mentalité de développement</strong> qui permet de :</p>
+                    <ul>
+                        <li>Structurer vos projets professionnellement</li>
+                        <li>Sécuriser vos applications</li>
+                        <li>Collaborer efficacement</li>
+                        <li>Maintenir et faire évoluer facilement</li>
+                    </ul>
+                </div>
+                <p class="fragment" style="margin-top: 50px;">
+                    <strong>La meilleure façon d'apprendre :</strong> PRATIQUER !
+                </p>
+            </section>
+
+            <!-- SLIDE 36 : MERCI -->
+            <section>
+                <h1>Merci !</h1>
+                <h3>Des questions ?</h3>
+                <p style="margin-top: 100px; font-size: 0.8em;">
+                    <strong>Projet de référence :</strong> sample-php<br>
+                    <strong>Ressources :</strong> <a href="https://phptherightway.com/" target="_blank">PHP The Right Way</a>
+                </p>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: true,
+            transition: 'slide',
+            plugins: [ RevealHighlight, RevealNotes ],
+            width: 1280,
+            height: 720,
+            margin: 0.1,
+            minScale: 0.2,
+            maxScale: 2.0
+        });
+    </script>
+</body>
+</html>
