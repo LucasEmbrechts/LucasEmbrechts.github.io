@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>UAA12 - MySQL et PHP</title>
+    <meta charset="utf-8">
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+      :root {
+        --primary-color: #6366f1;
+        --secondary-color: #8b5cf6;
+        --accent-color: #06b6d4;
+        --text-dark: #1f2937;
+        --text-light: #6b7280;
+        --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --code-bg: #1e293b;
+        --code-text: #e2e8f0;
+        --success-color: #10b981;
+        --warning-color: #f59e0b;
+        --error-color: #ef4444;
+        --mysql-color: #00758f;
+        --mysql-orange: #f29111;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background: var(--bg-gradient);
+        color: var(--text-dark);
+        line-height: 1.6;
+      }
+
+      .remark-slide-content {
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        border-radius: 20px;
+        padding: 40px !important;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .remark-slide-content::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(90deg, var(--mysql-color), var(--mysql-orange), var(--accent-color));
+        border-radius: 20px 20px 0 0;
+      }
+
+      h1, h2, h3 {
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--mysql-color), var(--mysql-orange));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-top: 0;
+        margin-bottom: 1rem;
+      }
+
+      h1 {
+        font-size: 3rem;
+        text-align: center;
+        text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        font-size: 2.2rem;
+        border-bottom: 3px solid var(--mysql-orange);
+        padding-bottom: 0.5rem;
+      }
+
+      h3 {
+        font-size: 1.6rem;
+        color: var(--secondary-color);
+      }
+
+      h4 {
+        font-size: 1.3rem;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-top: 0;
+        margin-bottom: 1rem;
+      }
+
+      .remark-code, .remark-inline-code {
+        font-family: 'JetBrains Mono', monospace;
+        background: var(--code-bg);
+        color: var(--code-text);
+        border-radius: 8px;
+        padding: 2px 6px;
+        font-size: 0.9em;
+      }
+
+      pre {
+        background: var(--code-bg) !important;
+        border-radius: 12px !important;
+        padding: 1rem !important;
+        border-left: 5px solid var(--mysql-orange) !important;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+        overflow-x: auto;
+      }
+
+      .hljs-keyword { color: #c792ea !important; }
+      .hljs-string { color: #c3e88d !important; }
+      .hljs-number { color: #f78c6c !important; }
+      .hljs-comment { color: #546e7a !important; }
+      .hljs-tag { color: #f07178 !important; }
+      .hljs-attr { color: #82aaff !important; }
+
+      p {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        color: var(--text-dark);
+      }
+
+      ul {
+        font-size: 1.1rem;
+        margin-left: 1rem;
+        list-style: none !important;
+        padding-left: 0;
+      }
+
+      ul li {
+        margin-bottom: 0.8rem;
+        position: relative;
+        padding-left: 2rem;
+      }
+
+      ul li::before {
+        content: '→';
+        color: var(--mysql-color);
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+        top: 0;
+        transition: transform 0.2s ease;
+      }
+
+      ul li:hover::before {
+        transform: translateX(3px);
+      }
+
+      ol {
+        counter-reset: item;
+        padding-left: 0;
+        list-style: none;
+      }
+
+      ol li {
+        display: block;
+        margin-bottom: 1rem;
+        padding-left: 3rem;
+        position: relative;
+      }
+
+      ol li::before {
+        content: counter(item);
+        counter-increment: item;
+        background: linear-gradient(135deg, var(--mysql-color), var(--mysql-orange));
+        color: white;
+        border-radius: 50%;
+        width: 2rem;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-weight: 600;
+        font-size: 0.9rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      a {
+        color: var(--mysql-color);
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border-bottom: 2px solid transparent;
+      }
+
+      a:hover {
+        color: var(--mysql-orange);
+        border-bottom-color: var(--mysql-orange);
+      }
+
+      img {
+        border-radius: 12px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        max-width: 100%;
+      }
+
+      img:hover {
+        transform: scale(1.02);
+      }
+
+      .logo-top-left {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        max-width: 90px;
+        opacity: 0.9;
+        z-index: 1000;
+      }
+
+      .title-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        gap: 1rem;
+      }
+
+      .main-title {
+        font-size: 2.5rem !important;
+        text-align: center;
+        margin-bottom: 0.5rem;
+      }
+
+      .subtitle {
+        font-size: 2rem !important;
+        text-align: center;
+        border-bottom: none !important;
+        background: linear-gradient(135deg, var(--mysql-orange), var(--accent-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .centered-image {
+        max-height: 200px;
+        margin-top: 1rem;
+      }
+
+      /* Concept cards */
+      .concept-card {
+        background: white;
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        border: 2px solid rgba(0, 117, 143, 0.2);
+        margin: 1rem 0;
+      }
+
+      .concept-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.8rem;
+        border-bottom: 2px solid rgba(0, 117, 143, 0.1);
+      }
+
+      .concept-icon {
+        font-size: 2rem;
+      }
+
+      .concept-title {
+        font-size: 1.3rem;
+        color: var(--mysql-color);
+        margin: 0;
+        font-weight: 700;
+      }
+
+      /* Step cards */
+      .step-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin: 1rem 0;
+      }
+
+      .step-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.2rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        border-left: 4px solid var(--mysql-orange);
+        transition: all 0.3s ease;
+      }
+
+      .step-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+      }
+
+      .step-number {
+        background: linear-gradient(135deg, var(--mysql-color), var(--mysql-orange));
+        color: white;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        margin-bottom: 0.8rem;
+      }
+
+      .step-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-bottom: 0.5rem;
+      }
+
+      .step-desc {
+        font-size: 0.95rem;
+        color: var(--text-light);
+      }
+
+      /* Function cards */
+      .function-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin: 1rem 0;
+      }
+
+      .function-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        border: 2px solid rgba(0, 117, 143, 0.15);
+      }
+
+      .function-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .function-icon {
+        font-size: 1.3rem;
+      }
+
+      .function-name {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1rem;
+        color: var(--mysql-color);
+        font-weight: 600;
+      }
+
+      .function-desc {
+        font-size: 0.9rem;
+        color: var(--text-light);
+        margin-bottom: 0.8rem;
+      }
+
+      .function-card pre {
+        margin: 0 !important;
+        font-size: 0.8rem !important;
+        padding: 0.8rem !important;
+      }
+
+      /* Warning box */
+      .warning-box {
+        background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.05));
+        border-left: 4px solid var(--warning-color);
+        border-radius: 12px;
+        padding: 1rem 1.5rem;
+        margin: 1rem 0;
+      }
+
+      .warning-header {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .warning-icon {
+        font-size: 1.5rem;
+      }
+
+      .warning-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--warning-color);
+        margin: 0;
+      }
+
+      .warning-text {
+        color: var(--text-dark);
+        font-size: 1rem;
+      }
+
+      /* Success box */
+      .success-box {
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
+        border-left: 4px solid var(--success-color);
+        border-radius: 12px;
+        padding: 1rem 1.5rem;
+        margin: 1rem 0;
+      }
+
+      .success-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--success-color);
+        margin: 0 0 0.5rem 0;
+      }
+
+      /* Flow diagram */
+      .flow-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        margin: 2rem 0;
+      }
+
+      .flow-item {
+        background: white;
+        border-radius: 12px;
+        padding: 1rem 1.5rem;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        border: 2px solid rgba(0, 117, 143, 0.2);
+      }
+
+      .flow-icon {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .flow-label {
+        font-weight: 600;
+        color: var(--text-dark);
+      }
+
+      .flow-arrow {
+        font-size: 2rem;
+        color: var(--mysql-orange);
+      }
+
+      /* Table styles */
+      .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0;
+        font-size: 0.95rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .styled-table thead tr {
+        background: linear-gradient(135deg, var(--mysql-color), var(--mysql-orange));
+        color: white;
+        text-align: left;
+      }
+
+      .styled-table th, .styled-table td {
+        padding: 0.8rem 1rem;
+        border: 1px solid #ddd;
+      }
+
+      .styled-table tbody tr {
+        background: white;
+      }
+
+      .styled-table tbody tr:hover {
+        background: #f0f9ff;
+      }
+
+      /* Small code */
+      .small-code pre {
+        font-size: 0.75rem !important;
+        line-height: 1.4 !important;
+      }
+
+      .small-code code {
+        font-size: 0.75rem !important;
+      }
+
+      .smaller-code pre {
+        font-size: 0.65rem !important;
+        line-height: 1.3 !important;
+      }
+
+      .smaller-code code {
+        font-size: 0.65rem !important;
+      }
+
+      /* Default code size reduced */
+      pre {
+        font-size: 0.8rem !important;
+      }
+
+      .remark-code {
+        font-size: 0.8rem !important;
+      }
+
+      /* Comparison grid */
+      .comparison-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        margin: 1rem 0;
+      }
+
+      .comparison-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.2rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      }
+
+      .comparison-card.good {
+        border: 2px solid var(--success-color);
+      }
+
+      .comparison-card.bad {
+        border: 2px solid var(--error-color);
+      }
+
+      .comparison-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.8rem;
+        font-weight: 700;
+      }
+
+      .comparison-card.good .comparison-header {
+        color: var(--success-color);
+      }
+
+      .comparison-card.bad .comparison-header {
+        color: var(--error-color);
+      }
+
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle
+
+<img src="img/indbg.jpg" class="logo-top-left" alt="Logo">
+<div class="title-container">
+  <h1 class="main-title">Développement d'un site web dynamique</h1>
+  <h2 class="subtitle">MySQL et PHP</h2>
+  <img src="img/mysql.png" class="centered-image" alt="Logo MySQL" style="max-height: 150px;">
+</div>
+
+---
+### On parle de quoi ?
+
+1. Introduction aux bases de données
+2. Connexion à MySQL avec PHP
+3. Exécuter des requêtes SQL
+4. Récupérer et afficher les résultats
+5. Sécurité : les injections SQL
+
+---
+### Pourquoi une base de données ?
+
+<div class="concept-card">
+<div class="concept-header">
+<span class="concept-icon">🗄️</span>
+<h4 class="concept-title">Stocker des données de manière permanente</h4>
+</div>
+<p>Une base de données permet de conserver les informations même après la fin du script.</p>
+</div>
+
+<div class="step-grid">
+<div class="step-card">
+<div class="step-number">1</div>
+<div class="step-title">Utilisateurs</div>
+<div class="step-desc">Logins, mots de passe, profils</div>
+</div>
+<div class="step-card">
+<div class="step-number">2</div>
+<div class="step-title">Produits</div>
+<div class="step-desc">Catalogue, prix, stock</div>
+</div>
+<div class="step-card">
+<div class="step-number">3</div>
+<div class="step-title">Commandes</div>
+<div class="step-desc">Historique des achats</div>
+</div>
+<div class="step-card">
+<div class="step-number">4</div>
+<div class="step-title">Articles</div>
+<div class="step-desc">Blog, actualités, contenu</div>
+</div>
+</div>
+
+---
+### Architecture Client-Serveur-BDD
+
+<div class="flow-container">
+<div class="flow-item">
+<div class="flow-icon">🌐</div>
+<div class="flow-label">Navigateur</div>
+</div>
+<span class="flow-arrow">⇄</span>
+<div class="flow-item">
+<div class="flow-icon">⚙️</div>
+<div class="flow-label">Serveur PHP</div>
+</div>
+<span class="flow-arrow">⇄</span>
+<div class="flow-item">
+<div class="flow-icon">🗄️</div>
+<div class="flow-label">MySQL</div>
+</div>
+</div>
+
+<div class="concept-card">
+<p><strong>Le navigateur</strong> envoie une requête au serveur</p>
+<p><strong>PHP</strong> traite la requête et interroge la base de données</p>
+<p><strong>MySQL</strong> renvoie les données à PHP</p>
+<p><strong>PHP</strong> génère le HTML et l'envoie au navigateur</p>
+</div>
+
+---
+### Les étapes en PHP
+
+<div class="step-grid">
+<div class="step-card">
+<div class="step-number">1</div>
+<div class="step-title">Connexion</div>
+<div class="step-desc">Se connecter à la base de données MySQL</div>
+</div>
+<div class="step-card">
+<div class="step-number">2</div>
+<div class="step-title">Requête</div>
+<div class="step-desc">Envoyer une requête SQL</div>
+</div>
+<div class="step-card">
+<div class="step-number">3</div>
+<div class="step-title">Résultat</div>
+<div class="step-desc">Récupérer et traiter les données</div>
+</div>
+<div class="step-card">
+<div class="step-number">4</div>
+<div class="step-title">Fermeture</div>
+<div class="step-desc">Fermer la connexion</div>
+</div>
+</div>
+
+---
+### Étape 1 : Connexion à MySQL
+
+```php
+<?php
+$connexion = mysqli_connect("localhost", "utilisateur", "motdepasse", "nom_base");
+
+if (!$connexion) {
+    die("Erreur de connexion : " . mysqli_connect_error());
+}
+
+echo "Connexion réussie !";
+?>
+```
+
+<div class="warning-box">
+<div class="warning-header">
+<span class="warning-icon">⚠️</span>
+<h4 class="warning-title">Paramètres de connexion</h4>
+</div>
+<p class="warning-text">localhost, utilisateur, mot de passe et nom de la base doivent correspondre à votre configuration MySQL.</p>
+</div>
+
+---
+### mysqli_connect() - Paramètres
+
+<table class="styled-table">
+<thead>
+<tr>
+<th>Paramètre</th>
+<th>Description</th>
+<th>Exemple</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>serveur</code></td>
+<td>Adresse du serveur MySQL</td>
+<td>"localhost"</td>
+</tr>
+<tr>
+<td><code>utilisateur</code></td>
+<td>Nom d'utilisateur MySQL</td>
+<td>"root"</td>
+</tr>
+<tr>
+<td><code>motdepasse</code></td>
+<td>Mot de passe de l'utilisateur</td>
+<td>"monmdp123"</td>
+</tr>
+<tr>
+<td><code>base</code></td>
+<td>Nom de la base de données</td>
+<td>"ma_boutique"</td>
+</tr>
+</tbody>
+</table>
+
+---
+### Étape 2 : Exécuter une requête SELECT
+
+```php
+<?php
+$connexion = mysqli_connect("localhost", "root", "", "boutique");
+
+$sql = "SELECT * FROM produits";
+$resultat = mysqli_query($connexion, $sql);
+
+if ($resultat) {
+    echo "Requête exécutée avec succès !";
+} else {
+    echo "Erreur : " . mysqli_error($connexion);
+}
+?>
+```
+
+---
+### Étape 3 : Récupérer les résultats
+
+```php
+<?php
+$sql = "SELECT * FROM produits";
+$resultat = mysqli_query($connexion, $sql);
+
+// Parcourir tous les résultats
+while ($ligne = mysqli_fetch_assoc($resultat)) {
+    echo $ligne['nom'] . " - " . $ligne['prix'] . " euros<br>";
+}
+?>
+```
+
+<div class="concept-card">
+<div class="concept-header">
+<span class="concept-icon">🔄</span>
+<h4 class="concept-title">mysqli_fetch_assoc()</h4>
+</div>
+<p>Récupère une ligne du résultat sous forme de tableau associatif. Retourne <code>NULL</code> quand il n'y a plus de lignes.</p>
+</div>
+
+---
+### Exemple : Afficher dans un tableau HTML
+
+.small-code[
+```php
+<?php
+$connexion = mysqli_connect("localhost", "root", "", "boutique");
+$resultat = mysqli_query($connexion, "SELECT * FROM produits");
+?>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Prix</th>
+    </tr>
+    <?php
+    while ($produit = mysqli_fetch_assoc($resultat)) {
+        echo "<tr>";
+        echo "<td>" . $produit['id'] . "</td>";
+        echo "<td>" . $produit['nom'] . "</td>";
+        echo "<td>" . $produit['prix'] . " euros</td>";
+        echo "</tr>";
+    }
+    ?>
+</table>
+```
+]
+
+---
+### Étape 4 : Fermer la connexion
+
+```php
+<?php
+$connexion = mysqli_connect("localhost", "root", "", "boutique");
+
+// ... vos requêtes ...
+
+mysqli_close($connexion);
+?>
+```
+
+<div class="success-box">
+<h4 class="success-title">Bonne pratique</h4>
+<p>Toujours fermer la connexion à la fin du script pour libérer les ressources.</p>
+</div>
+
+---
+### Exemple complet
+
+```php
+<?php
+// 1. Connexion
+$connexion = mysqli_connect("localhost", "root", "", "boutique");
+if (!$connexion) {
+    die("Erreur : " . mysqli_connect_error());
+}
+// 2. Requête
+$sql = "SELECT * FROM produits WHERE prix < 100";
+$resultat = mysqli_query($connexion, $sql);
+// 3. Affichage des résultats
+if (mysqli_num_rows($resultat) > 0) {
+    while ($produit = mysqli_fetch_assoc($resultat)) {
+        echo $produit['nom'] . " : " . $produit['prix'] . " euros<br>";
+    }
+} else {
+    echo "Aucun produit trouvé.";
+}
+// 4. Fermeture
+mysqli_close($connexion);
+?>
+```
+
+---
+### Requête INSERT
+
+```php
+<?php
+$connexion = mysqli_connect("localhost", "root", "", "boutique");
+
+$sql = "INSERT INTO produits (nom, prix) VALUES ('T-shirt', 29.99)";
+
+if (mysqli_query($connexion, $sql)) {
+    echo "Produit ajouté avec succès !";
+    echo "ID du nouveau produit : " . mysqli_insert_id($connexion);
+} else {
+    echo "Erreur : " . mysqli_error($connexion);
+}
+
+mysqli_close($connexion);
+?>
+```
+
+---
+### Requête UPDATE
+
+```php
+<?php
+$connexion = mysqli_connect("localhost", "root", "", "boutique");
+
+$sql = "UPDATE produits SET prix = 24.99 WHERE id = 5";
+
+if (mysqli_query($connexion, $sql)) {
+    echo "Produit mis à jour !";
+    echo mysqli_affected_rows($connexion) . " ligne(s) modifiée(s)";
+} else {
+    echo "Erreur : " . mysqli_error($connexion);
+}
+
+mysqli_close($connexion);
+?>
+```
+
+---
+### Requête DELETE
+
+```php
+<?php
+$connexion = mysqli_connect("localhost", "root", "", "boutique");
+
+$sql = "DELETE FROM produits WHERE id = 5";
+
+if (mysqli_query($connexion, $sql)) {
+    echo "Produit supprimé !";
+    echo mysqli_affected_rows($connexion) . " ligne(s) supprimée(s)";
+} else {
+    echo "Erreur : " . mysqli_error($connexion);
+}
+
+mysqli_close($connexion);
+?>
+```
+
+---
+### Fonctions utiles
+
+<div class="function-grid">
+<div class="function-card">
+<div class="function-header">
+<span class="function-icon">🔢</span>
+<span class="function-name">mysqli_num_rows()</span>
+</div>
+<p class="function-desc">Nombre de lignes retournées par SELECT</p>
+</div>
+<div class="function-card">
+<div class="function-header">
+<span class="function-icon">✏️</span>
+<span class="function-name">mysqli_affected_rows()</span>
+</div>
+<p class="function-desc">Nombre de lignes affectées par INSERT/UPDATE/DELETE</p>
+</div>
+<div class="function-card">
+<div class="function-header">
+<span class="function-icon">🆔</span>
+<span class="function-name">mysqli_insert_id()</span>
+</div>
+<p class="function-desc">ID auto-incrémenté du dernier INSERT</p>
+</div>
+<div class="function-card">
+<div class="function-header">
+<span class="function-icon">❌</span>
+<span class="function-name">mysqli_error()</span>
+</div>
+<p class="function-desc">Message d'erreur de la dernière requête</p>
+</div>
+</div>
+
+---
+### Danger : Injection SQL
+
+<div class="warning-box">
+<div class="warning-header">
+<span class="warning-icon">🚨</span>
+<h4 class="warning-title">JAMAIS de variables directement dans une requête !</h4>
+</div>
+</div>
+
+```php
+<?php
+// DANGEREUX - Ne JAMAIS faire ça !
+$nom = $_POST['nom'];
+$sql = "SELECT * FROM utilisateurs WHERE nom = '$nom'";
+?>
+```
+
+<p>Si l'utilisateur entre : <code>' OR '1'='1</code></p>
+<p>La requête devient : <code>SELECT * FROM utilisateurs WHERE nom = '' OR '1'='1'</code></p>
+<p><strong>Résultat :</strong> Accès à TOUS les utilisateurs !</p>
+
+---
+### Solution : Requêtes préparées
+
+```php
+<?php
+$connexion = mysqli_connect("localhost", "root", "", "boutique");
+
+// Préparer la requête avec un placeholder (?)
+$sql = "SELECT * FROM users WHERE email = ?";
+$stmt = mysqli_prepare($connexion, $sql);
+
+// Lier le paramètre ("s" = string)
+mysqli_stmt_bind_param($stmt, "s", $_POST['email']);
+
+// Exécuter et récupérer le résultat
+mysqli_stmt_execute($stmt);
+$resultat = mysqli_stmt_get_result($stmt);
+?>
+```
+
+<div class="success-box">
+<h4 class="success-title">Requêtes préparées</h4>
+<p>Les données sont automatiquement échappées et sécurisées !</p>
+</div>
+
+---
+### Types de paramètres
+
+<table class="styled-table">
+<thead>
+<tr>
+<th>Lettre</th>
+<th>Type</th>
+<th>Exemple</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>String (chaîne)</td>
+<td>"alice@example.com"</td>
+</tr>
+<tr>
+<td><code>i</code></td>
+<td>Integer (entier)</td>
+<td>42</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td>Double (décimal)</td>
+<td>19.99</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td>Blob (binaire)</td>
+<td>Fichiers, images</td>
+</tr>
+</tbody>
+</table>
+
+```php
+// Exemples
+mysqli_stmt_bind_param($stmt, "s", $email);        // 1 string
+mysqli_stmt_bind_param($stmt, "si", $nom, $id);    // 1 string, 1 int
+mysqli_stmt_bind_param($stmt, "ssd", $nom, $email, $prix); // 2 strings, 1 double
+```
+
+---
+### INSERT avec requête préparée
+
+.small-code[
+```php
+<?php
+$connexion = mysqli_connect("localhost", "root", "", "boutique");
+
+$nom = "Bob Martin";
+$email = "bob@example.com";
+
+// Préparer la requête INSERT
+$sql = "INSERT INTO users (nom, email) VALUES (?, ?)";
+$stmt = mysqli_prepare($connexion, $sql);
+
+// Lier les paramètres (ss = 2 strings)
+mysqli_stmt_bind_param($stmt, "ss", $nom, $email);
+
+// Exécuter
+if (mysqli_stmt_execute($stmt)) {
+    echo "Utilisateur ajouté ! ID : " . mysqli_insert_id($connexion);
+}
+
+mysqli_stmt_close($stmt);
+mysqli_close($connexion);
+?>
+```
+]
+
+---
+### UPDATE avec requête préparée
+
+.small-code[
+```php
+<?php
+$connexion = mysqli_connect("localhost", "root", "", "boutique");
+
+$nouveau_nom = "Alice Dupont";
+$id = 1;
+
+// Préparer la requête UPDATE
+$sql = "UPDATE users SET nom = ? WHERE id = ?";
+$stmt = mysqli_prepare($connexion, $sql);
+
+// Lier les paramètres (si = string, integer)
+mysqli_stmt_bind_param($stmt, "si", $nouveau_nom, $id);
+
+// Exécuter
+if (mysqli_stmt_execute($stmt)) {
+    echo mysqli_stmt_affected_rows($stmt) . " ligne(s) modifiée(s)";
+}
+
+mysqli_stmt_close($stmt);
+mysqli_close($connexion);
+?>
+```
+]
+
+---
+### DELETE avec requête préparée
+
+```php
+<?php
+$connexion = mysqli_connect("localhost", "root", "", "boutique");
+
+$id = 5;
+
+// Préparer la requête DELETE
+$sql = "DELETE FROM users WHERE id = ?";
+$stmt = mysqli_prepare($connexion, $sql);
+
+// Lier le paramètre (i = integer)
+mysqli_stmt_bind_param($stmt, "i", $id);
+
+// Exécuter
+if (mysqli_stmt_execute($stmt)) {
+    echo mysqli_stmt_affected_rows($stmt) . " ligne(s) supprimée(s)";
+}
+
+mysqli_stmt_close($stmt);
+mysqli_close($connexion);
+?>
+```
+
+---
+### Exemple complet avec formulaire
+
+```php
+<?php
+$connexion = mysqli_connect("localhost", "root", "", "boutique");
+if (isset($_POST['nom'])) {
+    // Préparer la requête
+    $sql = "INSERT INTO produits (nom, prix) VALUES (?, ?)";
+    $stmt = mysqli_prepare($connexion, $sql);
+    // Lier les paramètres
+    mysqli_stmt_bind_param($stmt, "sd", $_POST['nom'], $_POST['prix']);
+    if (mysqli_stmt_execute($stmt)) {
+        echo "Produit ajouté !";
+    }
+    mysqli_stmt_close($stmt);
+}
+?>
+<form method="POST" action="">
+    <input type="text" name="nom" placeholder="Nom du produit">
+    <input type="number" name="prix" step="0.01" placeholder="Prix">
+    <button type="submit">Ajouter</button>
+</form>
+```
+
+---
+### Récapitulatif des fonctions
+
+<table class="styled-table">
+<thead>
+<tr>
+<th>Fonction</th>
+<th>Utilité</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mysqli_connect()</code></td>
+<td>Ouvrir une connexion</td>
+</tr>
+<tr>
+<td><code>mysqli_prepare()</code></td>
+<td>Préparer une requête sécurisée</td>
+</tr>
+<tr>
+<td><code>mysqli_stmt_bind_param()</code></td>
+<td>Lier les paramètres à la requête</td>
+</tr>
+<tr>
+<td><code>mysqli_stmt_execute()</code></td>
+<td>Exécuter la requête préparée</td>
+</tr>
+<tr>
+<td><code>mysqli_stmt_get_result()</code></td>
+<td>Récupérer le résultat d'un SELECT</td>
+</tr>
+<tr>
+<td><code>mysqli_fetch_assoc()</code></td>
+<td>Récupérer une ligne</td>
+</tr>
+<tr>
+<td><code>mysqli_stmt_close()</code></td>
+<td>Fermer le statement</td>
+</tr>
+<tr>
+<td><code>mysqli_close()</code></td>
+<td>Fermer la connexion</td>
+</tr>
+</tbody>
+</table>
+
+---
+### Bonnes pratiques
+
+1. **Toujours** vérifier si la connexion a réussi
+2. **Toujours** utiliser les requêtes préparées avec des données utilisateur
+3. **Toujours** fermer les statements avec `mysqli_stmt_close()`
+4. **Toujours** fermer la connexion à la fin avec `mysqli_close()`
+5. **Ne jamais** afficher les erreurs SQL en production
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
