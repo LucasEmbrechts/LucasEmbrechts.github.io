@@ -108,7 +108,7 @@
       }
 
       .hljs-keyword { color: #c792ea !important; }
-      .hljs-string { color: #c3e88d !important; }
+      .hljs-string { color: #50b54a !important; }
       .hljs-number { color: #f78c6c !important; }
       .hljs-comment { color: #546e7a !important; }
       .hljs-tag { color: #f07178 !important; }
@@ -4482,6 +4482,22 @@ setcookie('clé', '', time() - 3600);
 </div>
 
 ---
+## htmlspecialchars() - Protection XSS
+
+Fonction PHP qui **échappe les caractères HTML spéciaux** pour éviter les injections XSS (Cross-Site Scripting).
+
+### Caractères échappés :
+- `&` → `&amp;`
+- `<` → `&lt;`
+- `>` → `&gt;`
+- `"` → `&quot;`
+- `'` → `&#039;`
+
+```php
+echo "Bonjour " . htmlspecialchars($_COOKIE['nom']) . " !";
+```
+
+---
 ## Cookies - Exemple complet
 
 .small-code[
@@ -4493,18 +4509,21 @@ if (isset($_POST['nom'])) {
 ?>
 <!DOCTYPE html>
 <html>
-  <body>
+<body>
     <form method="POST" action="index.php">
         <input type="text" name="nom">
         <button type="submit">Enregistrer</button>
     </form>
     <?php
     if (isset($_COOKIE['nom'])) {
-        echo "<p>Bonjour " . $_COOKIE['nom'] . " !</p>";
+        echo "<p>Bonjour " . htmlspecialchars($_COOKIE['nom']) . " !</p>";
+    } elseif (isset($_POST['nom'])) {
+        echo "<p>Bonjour " . htmlspecialchars($_POST['nom']) . " !</p>";
     }
     ?>
 </body>
 </html>
+
 ```
 ]
 
