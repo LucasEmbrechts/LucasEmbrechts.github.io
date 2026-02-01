@@ -1089,11 +1089,12 @@ class: center, middle
 ---
 ## On parle de quoi ?
 1. <a href="UAA12-tableaux.html#3">Tableaux : concepts</a>
-2. <a href="UAA12-tableaux.html#8">Tableaux multidimensionnels</a>
-3. <a href="UAA12-tableaux.html#10">Décomposition de valeurs</a>
-4. <a href="UAA12-tableaux.html#11">Parcours d'un tableau</a>
-5. <a href="UAA12-tableaux.html#13">Tableaux et superglobales PHP</a>
-6. <a href="UAA12-tableaux.html#17">Exemple : Panier d'achat</a>
+2. <a href="UAA12-tableaux.html#10">Tableaux multidimensionnels</a>
+3. <a href="UAA12-tableaux.html#12">Décomposition de valeurs</a>
+4. <a href="UAA12-tableaux.html#13">Parcours d'un tableau</a>
+5. <a href="UAA12-tableaux.html#15">Fonctions utiles</a>
+6. <a href="UAA12-tableaux.html#17">Tableaux et superglobales PHP</a>
+7. <a href="UAA12-tableaux.html#20">Exemple : Panier d'achat</a>
 
 ---
 ## Tableaux : concepts
@@ -1344,6 +1345,63 @@ foreach($famille as $role => $prenom){
 }
 
 ```
+
+---
+## Fonctions utiles
+
+### Recherche et vérification
+
+.smaller-code[
+```php
+$fruits = ['pomme', 'banane', 'cerise', 'datte'];
+
+// Vérifier si une valeur existe dans le tableau
+in_array('banane', $fruits);        // true
+in_array('fraise', $fruits);        // false
+
+// Rechercher une valeur → retourne sa clé (ou false)
+array_search('cerise', $fruits);    // 2
+array_search('fraise', $fruits);    // false
+
+// Vérifier si une clé existe
+array_key_exists('père', $famille); // true
+
+// Nombre d'éléments
+count($fruits);                     // 4
+
+// Afficher le contenu d'un tableau (debug)
+print_r($fruits);
+// Array ( [0] => pomme [1] => banane [2] => cerise [3] => datte )
+```
+]
+
+---
+## Fonctions utiles
+
+### Manipulation
+
+.smaller-code[
+```php
+$fruits = ['pomme', 'banane', 'cerise'];
+
+// Ajouter à la fin
+array_push($fruits, 'datte');     // [..., 'datte']
+
+// Retirer et retourner le dernier élément
+$dernier = array_pop($fruits);    // 'datte'
+
+// Fusionner deux tableaux
+$all = array_merge($fruits, ['kiwi', 'mangue']);
+
+// Réindexer les clés numériques (après un unset par ex.)
+unset($fruits[1]);                // trou dans les index !
+$fruits = array_values($fruits);  // réindexé : 0, 1, ...
+
+// Trier
+sort($fruits);   // tri croissant
+rsort($fruits);  // tri décroissant
+```
+]
 
 ---
 ## Tableaux et superglobales PHP
