@@ -1172,9 +1172,9 @@ En PHP, les tableaux sont des tableaux associatifs **(clé → valeur)**.
 ### Tableau à index numérique
 
 ```php
-$famille = ['Homer', 'Bart', 'Lisa', 'Marge'];
-// syntaxe alternative :
-$famille = array('Homer', 'Bart', 'Lisa', 'Marge');
+$famille = ['Homer', 'Bart', 'Lisa', 'Marge']; //Syntaxe 1
+$famille = array('Homer', 'Bart', 'Lisa', 'Marge'); //Syntaxe 2
+
 $h = $famille[0];  // 'Homer'
 $b = $famille[1];  // 'Bart'
 $l = $famille[2];  // 'Lisa'
@@ -1206,11 +1206,8 @@ $m = $famille['mère'];   // 'Marge'
 ### Création d'un tableau vide
 
 ```php
-// Syntaxe 1 :
-$famille = [];
-
-// Syntaxe 2 :
-$famille = array();
+$famille = []; // Syntaxe 1
+$famille = array(); // Syntaxe 2
 ```
 ---
 ## Tableaux : concepts
@@ -1218,7 +1215,8 @@ $famille = array();
 
 ```php
 // pour les tableaux à index numérique :
-array_push($famille, 'Maggie');
+array_push($famille, 'Maggie'); // Syntaxe 1
+$famille[] = 'Maggie'; // Syntaxe 2
 
 // pour les tableaux à index non numérique :
 $famille['fille2'] = 'Maggie';
@@ -1313,9 +1311,9 @@ list($fam1,$fam2) = $familles;
 ---
 ## Parcours d'un tableau
 
-### À index numérique
+### À index numérique — avec l'index
 
-→ utilisation de `for` pour itérer
+→ utilisation de `for` quand on a **besoin de l'index**
 
 → utilisation de `count` pour obtenir la taille du tableau
 
@@ -1327,23 +1325,56 @@ for($i = 0 ; $i < count($familles) ; $i++){
 ```
 ---
 ## Parcours d'un tableau
-### À index numérique / non numérique
 
-→ utilisation de `foreach` pour itérer
+### À index numérique — sans l'index
+
+→ utilisation de `foreach` quand on n'a **pas besoin de l'index**
 
 ```php
+$familles = ['Simpson', 'Van Houten', 'Flanders'];
+foreach($familles as $famille){
+  echo "$famille\n";
+}
+```
+→ on déclare une variable `$famille` (le nom n'a pas d'importance) qui prend comme valeur **chaque élément du tableau à tour de rôle**, à chaque itération de la boucle
+---
+## Parcours d'un tableau
+### À index non numérique — avec la clé
 
+→ utilisation de `foreach` avec `$clé => $valeur` quand on a **besoin de la clé**
+
+```php
 $famille = array(
-'père' => 'Homer',
-'fils' => 'Bart',
-'fille' => 'Lisa',
-'mère' => 'Marge'
+  'père' => 'Homer',
+  'fils' => 'Bart',
+  'fille' => 'Lisa',
+  'mère' => 'Marge'
 );
 
 foreach($famille as $role => $prenom){
   echo "$prenom dans le role du / de la $role\n";
 }
+```
 
+→ `$role` prend la **clé** à chaque itération, `$prenom` prend la **valeur** associée
+
+---
+## Parcours d'un tableau
+### À index non numérique — sans la clé
+
+→ utilisation de `foreach` simple quand on n'a **pas besoin de la clé**
+
+```php
+$famille = array(
+  'père' => 'Homer',
+  'fils' => 'Bart',
+  'fille' => 'Lisa',
+  'mère' => 'Marge'
+);
+
+foreach($famille as $prenom){
+  echo "$prenom\n";
+}
 ```
 
 ---
