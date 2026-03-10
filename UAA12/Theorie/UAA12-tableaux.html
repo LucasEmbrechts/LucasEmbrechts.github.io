@@ -1311,7 +1311,7 @@ list($fam1,$fam2) = $familles;
 ---
 ## Parcours d'un tableau
 
-### À index numérique — avec l'index
+### À index numérique — avec l'index (version 1)
 
 → utilisation de `for` quand on a **besoin de l'index**
 
@@ -1321,6 +1321,19 @@ list($fam1,$fam2) = $familles;
 $familles = ['Simpson', 'Van Houten', 'Flanders'];
 for($i = 0 ; $i < count($familles) ; $i++){
   echo "$i -> $familles[$i]\n";
+}
+```
+---
+## Parcours d'un tableau
+
+### À index numérique — avec l'index (version 2)
+
+→ utilisation de `foreach`
+
+```php
+$familles = ['Simpson', 'Van Houten', 'Flanders'];
+foreach($familles as $i => $famille){
+  echo "$i -> $famille\n";
 }
 ```
 ---
