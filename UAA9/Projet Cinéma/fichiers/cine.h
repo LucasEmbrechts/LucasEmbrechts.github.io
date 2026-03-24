@@ -15,7 +15,7 @@
 * @note Le fichier salles.txt est structuré de la manière suivante :
 *       numSalle | capacite
 * @note Le fichier seances.txt est structuré de la manière suivante :
-*       titre|dateSeance|heureDebut|numSalle
+*       titre|dateSeance|heureDebut|numSalle|version
 * @warning Les fichiers doivent être encodés au format UTF-8 sans BOM.
 * @warning Les fichiers doivent terminer par une nouvelle ligne.
 */
@@ -36,6 +36,7 @@
 
 #define TAILLE_TITRE 100
 #define TAILLE_GENRE 100
+#define TAILLE_VERSION 10
 
 
 struct film {
@@ -59,6 +60,7 @@ struct seance {
     int dateSeance;
     int heureDebut;
     int numSalle;
+    char version[TAILLE_VERSION];
 };
 
 typedef struct seance Seance;
@@ -246,9 +248,15 @@ int obtenirListeSeances(Seance seances[]) {
                     if (token != NULL) {
                         seanceBD.numSalle = atoi(token);
 
-                        seances[iSeance] = seanceBD;
-                        iSeance++;
-                        nbSeances++;
+                        token = strtok(NULL, "|");
+                        if (token != NULL) {
+                            token[strcspn(token, "\n")] = '\0';
+                            strcpy(seanceBD.version, token);
+
+                            seances[iSeance] = seanceBD;
+                            iSeance++;
+                            nbSeances++;
+                        }
                     }
                 }
             }
@@ -626,11 +634,17 @@ Seance obtenirSeance(char titreRecherche[], int dateSeanceRecherche, int heureDe
                     if (token != NULL) {
                         seanceBD.numSalle = atoi(token);
 
-                        if (strcmp(seanceBD.titre, titreRecherche) == 0 &&
-                            seanceBD.dateSeance == dateSeanceRecherche &&
-                            seanceBD.heureDebut == heureDebutRecherche) {
-                            fclose(pTabSeances);
-                            return seanceBD;
+                        token = strtok(NULL, "|");
+                        if (token != NULL) {
+                            token[strcspn(token, "\n")] = '\0';
+                            strcpy(seanceBD.version, token);
+
+                            if (strcmp(seanceBD.titre, titreRecherche) == 0 &&
+                                seanceBD.dateSeance == dateSeanceRecherche &&
+                                seanceBD.heureDebut == heureDebutRecherche) {
+                                fclose(pTabSeances);
+                                return seanceBD;
+                            }
                         }
                     }
                 }
@@ -661,11 +675,12 @@ bool insererSeance(Seance seanceAjout) {
         return false;
     }
 
-    fprintf(pTabSeances, "%s|%d|%d|%d\n",
+    fprintf(pTabSeances, "%s|%d|%d|%d|%s\n",
             seanceAjout.titre,
             seanceAjout.dateSeance,
             seanceAjout.heureDebut,
-            seanceAjout.numSalle);
+            seanceAjout.numSalle,
+            seanceAjout.version);
 
     fclose(pTabSeances);
     return true;
@@ -743,11 +758,12 @@ bool modifierSeance(Seance seance) {
         if (strcmp(titreLigne, seance.titre) == 0 &&
             dateSeanceLigne == seance.dateSeance &&
             heureDebutLigne == seance.heureDebut) {
-            fprintf(pTemp, "%s|%d|%d|%d\n",
+            fprintf(pTemp, "%s|%d|%d|%d|%s\n",
                     seance.titre,
                     seance.dateSeance,
                     seance.heureDebut,
-                    seance.numSalle);
+                    seance.numSalle,
+                    seance.version);
             seanceModifie = true;
         } else {
             fputs(ligne, pTemp);
