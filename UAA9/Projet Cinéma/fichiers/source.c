@@ -1,4 +1,3 @@
-#include "biblio.h"
 #include "cine.h"
 #include "colors.h"
 #include <stdio.h>
@@ -277,8 +276,9 @@ void testerSeances(void) {
     int nbSeances = obtenirListeSeances(seances);
     printf("Nombre de seances: %d\n", nbSeances);
     for (int i = 0; i < nbSeances; i++) {
-        printf("  - %s | Date: %d | Heure: %04d | Salle %d\n",
-               seances[i].titre, seances[i].dateSeance, seances[i].heureDebut, seances[i].numSalle);
+        printf("  - %s | Date: %d | Heure: %04d | Salle %d | %s\n",
+               seances[i].titre, seances[i].dateSeance,
+               seances[i].heureDebut, seances[i].numSalle, seances[i].version);
     }
 
     // 2. Rechercher une séance existante
@@ -286,9 +286,9 @@ void testerSeances(void) {
     Seance seanceRecherche = obtenirSeance("Wonka", 20230803, 1400);
     if (strcmp(seanceRecherche.titre, "") != 0 && seanceRecherche.dateSeance != -1) {
         green();
-        printf("  Seance trouvee: %s | Date: %d | Heure: %04d | Salle %d\n",
+        printf("  Seance trouvee: %s | Date: %d | Heure: %04d | Salle %d | %s\n",
                seanceRecherche.titre, seanceRecherche.dateSeance,
-               seanceRecherche.heureDebut, seanceRecherche.numSalle);
+               seanceRecherche.heureDebut, seanceRecherche.numSalle, seanceRecherche.version);
         reset();
     } else {
         red();
@@ -303,6 +303,7 @@ void testerSeances(void) {
     nouvelleSeance.dateSeance = 20231231;
     nouvelleSeance.heureDebut = 2000;
     nouvelleSeance.numSalle = 1;
+    strcpy(nouvelleSeance.version, "VF");
 
     if (insererSeance(nouvelleSeance)) {
         green();
@@ -312,9 +313,9 @@ void testerSeances(void) {
         // Vérifier l'insertion
         Seance seanceInsere = obtenirSeance("Test Seance", 20231231, 2000);
         if (strcmp(seanceInsere.titre, "") != 0) {
-            printf("  Verification: %s | Date: %d | Heure: %04d | Salle %d\n",
+            printf("  Verification: %s | Date: %d | Heure: %04d | Salle %d | %s\n",
                    seanceInsere.titre, seanceInsere.dateSeance,
-                   seanceInsere.heureDebut, seanceInsere.numSalle);
+                   seanceInsere.heureDebut, seanceInsere.numSalle, seanceInsere.version);
         }
     } else {
         red();
@@ -328,6 +329,7 @@ void testerSeances(void) {
     nouvelleSeance.dateSeance = 20231231;
     nouvelleSeance.heureDebut = 2000;
     nouvelleSeance.numSalle = 2; // Changement de salle
+    strcpy(nouvelleSeance.version, "VOST");
 
     if (modifierSeance(nouvelleSeance)) {
         green();
@@ -337,9 +339,9 @@ void testerSeances(void) {
         // Vérifier la modification
         Seance seanceModifie = obtenirSeance("Test Seance", 20231231, 2000);
         if (strcmp(seanceModifie.titre, "") != 0) {
-            printf("  Verification: %s | Date: %d | Heure: %04d | Salle %d\n",
+            printf("  Verification: %s | Date: %d | Heure: %04d | Salle %d | %s\n",
                    seanceModifie.titre, seanceModifie.dateSeance,
-                   seanceModifie.heureDebut, seanceModifie.numSalle);
+                   seanceModifie.heureDebut, seanceModifie.numSalle, seanceModifie.version);
         }
     } else {
         red();
