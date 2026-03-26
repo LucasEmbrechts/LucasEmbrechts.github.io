@@ -996,7 +996,7 @@ if (mysqli_num_rows($resultat) > 0) {
 <div class="comparison-card bad">
 <div class="comparison-header">👤 Ce que l'attaquant entre</div>
 <p style="font-size:0.95rem; margin-bottom:0.3rem;"><strong>Email :</strong></p>
-<code>' OR '1'='1' -- </code>
+<code>' OR '1'='1' #</code>
 <p style="font-size:0.95rem; margin: 0.5rem 0 0.3rem;"><strong>Mot de passe :</strong> <em>(n'importe quoi)</em></p>
 <code>blabla</code>
 </div>
@@ -1004,10 +1004,10 @@ if (mysqli_num_rows($resultat) > 0) {
 <div class="comparison-header">💥 Requête générée</div>
 <p style="font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:var(--error-color); margin:0;">
 SELECT * FROM utilisateurs<br>
-WHERE email = <strong>'' OR '1'='1' --</strong><br>
+WHERE email = <strong>'' OR '1'='1' #</strong><br>
 AND mdp = 'blabla'
 </p>
-<p style="font-size:0.9rem; margin-top:0.5rem;">Le <code>--</code> est un commentaire SQL : tout ce qui suit est <strong>ignoré</strong>, y compris la vérification du mot de passe.</p>
+<p style="font-size:0.9rem; margin-top:0.5rem;">Le <code>#</code> est un commentaire SQL (MySQL/MariaDB) : tout ce qui suit est <strong>ignoré</strong>, y compris la vérification du mot de passe.</p>
 </div>
 </div>
 
