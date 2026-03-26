@@ -108,7 +108,7 @@
       }
 
       .hljs-keyword { color: #c792ea !important; }
-      .hljs-string { color: #c3e88d !important; }
+      .hljs-string { color: #ffcb6b !important; }
       .hljs-number { color: #f78c6c !important; }
       .hljs-comment { color: #546e7a !important; }
       .hljs-tag { color: #f07178 !important; }
@@ -666,12 +666,20 @@ echo "Connexion réussie !";
 ?>
 ```
 
-<div class="warning-box">
-<div class="warning-header">
-<span class="warning-icon">⚠️</span>
-<h4 class="warning-title">Paramètres de connexion</h4>
+<div class="concept-card" style="padding: 0.8rem 1rem; margin: 0.5rem 0;">
+<div class="concept-header" style="margin-bottom: 0.4rem; padding-bottom: 0.4rem;">
+<span class="concept-icon" style="font-size: 1.4rem;">🔌</span>
+<h4 class="concept-title" style="font-size: 1rem;">mysqli_connect()</h4>
 </div>
-<p class="warning-text">localhost, utilisateur, mot de passe et nom de la base doivent correspondre à votre configuration MySQL.</p>
+<p style="font-size: 0.95rem; margin: 0;">Établit une connexion avec un serveur MySQL. Retourne un objet de connexion en cas de succès, ou <code>false</code> en cas d'échec. En cas d'échec, <code>mysqli_connect_error()</code> retourne le message d'erreur.</p>
+</div>
+
+<div class="warning-box" style="padding: 0.6rem 1rem; margin: 0.5rem 0;">
+<div class="warning-header" style="margin-bottom: 0.3rem;">
+<span class="warning-icon" style="font-size: 1.1rem;">⚠️</span>
+<h4 class="warning-title" style="font-size: 0.95rem;">Paramètres de connexion</h4>
+</div>
+<p class="warning-text" style="font-size: 0.9rem; margin: 0;">localhost, utilisateur, mot de passe et nom de la base doivent correspondre à votre configuration MySQL.</p>
 </div>
 
 ---
@@ -726,6 +734,14 @@ if ($resultat) {
 }
 ?>
 ```
+
+<div class="concept-card">
+<div class="concept-header">
+<span class="concept-icon">📡</span>
+<h4 class="concept-title">mysqli_query()</h4>
+</div>
+<p>Envoie une requête SQL au serveur MySQL. Retourne un objet résultat pour SELECT, ou <code>true</code>/<code>false</code> pour INSERT, UPDATE, DELETE.</p>
+</div>
 
 ---
 ### Étape 3 : Récupérer les résultats
@@ -791,9 +807,12 @@ mysqli_close($connexion);
 ?>
 ```
 
-<div class="success-box">
-<h4 class="success-title">Bonne pratique</h4>
-<p>Toujours fermer la connexion à la fin du script pour libérer les ressources.</p>
+<div class="concept-card" style="padding: 0.8rem 1rem; margin: 0.5rem 0;">
+<div class="concept-header" style="margin-bottom: 0.4rem; padding-bottom: 0.4rem;">
+<span class="concept-icon" style="font-size: 1.4rem;">🔒</span>
+<h4 class="concept-title" style="font-size: 1rem;">mysqli_close()</h4>
+</div>
+<p style="font-size: 0.95rem; margin: 0;">Ferme la connexion au serveur MySQL et libère les ressources associées. Bonne pratique : toujours l'appeler à la fin du script.</p>
 </div>
 
 ---
@@ -917,50 +936,120 @@ mysqli_close($connexion);
 </div>
 
 ---
-### Danger : Injection SQL
+### Les injections SQL : une menace réelle
 
-<div class="warning-box">
-<div class="warning-header">
-<span class="warning-icon">🚨</span>
-<h4 class="warning-title">JAMAIS de variables directement dans une requête !</h4>
+<div class="comparison-grid" style="grid-template-columns: 1fr 1fr; align-items: center; margin: 0.5rem 0;">
+<div>
+<img src="img/yahoo-hack.jpg" alt="Yahoo - 400,000 passwords leaked" style="width:100%; border-radius:12px;">
+</div>
+<div class="concept-card" style="margin: 0; padding: 0.8rem 1rem;">
+<div class="concept-header" style="margin-bottom: 0.4rem; padding-bottom: 0.4rem;">
+<span class="concept-icon" style="font-size:1.2rem;">🎯</span>
+<h4 class="concept-title" style="font-size:0.95rem;">Qu'est-ce qu'une injection SQL ?</h4>
+</div>
+<p style="font-size:0.85rem; margin: 0 0 0.5rem 0;">Une attaque où un utilisateur malveillant <strong>insère du code SQL</strong> dans un champ de formulaire pour manipuler la requête exécutée par le serveur.</p>
+<div class="concept-header" style="margin-bottom: 0.4rem; padding-bottom: 0.4rem; border-top: 2px solid rgba(0,117,143,0.1); padding-top: 0.4rem;">
+<span class="concept-icon" style="font-size:1.2rem;">📰</span>
+<h4 class="concept-title" style="font-size:0.95rem;">Yahoo, 2012</h4>
+</div>
+<p style="font-size:0.85rem; margin: 0 0 0.3rem 0;">Un hacker a extrait <strong>400 000 identifiants et mots de passe</strong> via une injection SQL. Les mots de passe étaient stockés <strong>en clair</strong>.</p>
+<a href="https://www.bbc.com/news/technology-18811300" target="_blank" style="font-size:0.8rem; display:inline-block; margin-bottom: 0.4rem;">📎 Source : BBC News</a>
+<div class="warning-box" style="padding: 0.4rem 0.8rem; margin: 0;">
+<p class="warning-text" style="margin:0; font-size:0.82rem;">🚨 Ce type d'attaque est encore l'une des plus répandues aujourd'hui.</p>
 </div>
 </div>
-
-```php
-<?php
-// DANGEREUX - Ne JAMAIS faire ça !
-$nom = $_POST['nom'];
-$sql = "SELECT * FROM utilisateurs WHERE nom = '$nom'";
-?>
-```
-
-<p>Si l'utilisateur entre : <code>' OR '1'='1</code></p>
-<p>La requête devient : <code>SELECT * FROM utilisateurs WHERE nom = '' OR '1'='1'</code></p>
-<p><strong>Résultat :</strong> Accès à TOUS les utilisateurs !</p>
+</div>
 
 ---
-### Solution : Requêtes préparées
+### Danger : Injection SQL
 
+.small-code[
 ```php
 <?php
 $connexion = mysqli_connect("localhost", "root", "", "boutique");
 
-// Préparer la requête avec un placeholder (?)
-$sql = "SELECT * FROM users WHERE email = ?";
+// ⚠️ La variable vient directement du formulaire !
+$email = $_POST['email'];
+$mdp   = $_POST['mdp'];
+
+$sql = "SELECT * FROM utilisateurs WHERE email = '$email' AND mdp = '$mdp'";
+$resultat = mysqli_query($connexion, $sql);
+
+if (mysqli_num_rows($resultat) > 0) {
+    echo "Connecté !";  // ← l'attaquant arrive ici
+} else {
+    echo "Email ou mot de passe incorrect.";
+}
+?>
+<form method="POST">
+    <input type="text"     name="email" placeholder="Email">
+    <input type="password" name="mdp"   placeholder="Mot de passe">
+    <button type="submit">Se connecter</button>
+</form>
+```
+]
+
+---
+### Injection SQL — Comment ça marche ?
+
+<div class="comparison-grid">
+<div class="comparison-card bad">
+<div class="comparison-header">👤 Ce que l'attaquant entre</div>
+<p style="font-size:0.95rem; margin-bottom:0.3rem;"><strong>Email :</strong></p>
+<code>' OR '1'='1' -- </code>
+<p style="font-size:0.95rem; margin: 0.5rem 0 0.3rem;"><strong>Mot de passe :</strong> <em>(n'importe quoi)</em></p>
+<code>blabla</code>
+</div>
+<div class="comparison-card bad">
+<div class="comparison-header">💥 Requête générée</div>
+<p style="font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:var(--error-color); margin:0;">
+SELECT * FROM utilisateurs<br>
+WHERE email = <strong>'' OR '1'='1' --</strong><br>
+AND mdp = 'blabla'
+</p>
+<p style="font-size:0.9rem; margin-top:0.5rem;">Le <code>--</code> est un commentaire SQL : tout ce qui suit est <strong>ignoré</strong>, y compris la vérification du mot de passe.</p>
+</div>
+</div>
+
+<div class="warning-box" style="padding: 0.6rem 1rem; margin: 0.5rem 0;">
+<div class="warning-header" style="margin-bottom: 0.2rem;">
+<span class="warning-icon" style="font-size: 1.1rem;">🚨</span>
+<h4 class="warning-title" style="font-size: 0.95rem;">Résultat</h4>
+</div>
+<p class="warning-text" style="font-size: 0.9rem; margin: 0;"><code>'1'='1'</code> est toujours vrai → tous les utilisateurs sont retournés → <code>mysqli_num_rows() > 0</code> → <strong>l'attaquant est connecté en tant qu'administrateur sans connaître aucun mot de passe.</strong></p>
+</div>
+
+---
+### Solution : Requêtes préparées
+
+.small-code[
+```php
+<?php
+$connexion = mysqli_connect("localhost", "root", "", "boutique");
+
+// Les ? remplacent les variables — jamais de variables directement !
+$sql = "SELECT * FROM utilisateurs WHERE email = ? AND mdp = ?";
 $stmt = mysqli_prepare($connexion, $sql);
 
-// Lier le paramètre ("s" = string)
-mysqli_stmt_bind_param($stmt, "s", $_POST['email']);
+// Lier les paramètres ("ss" = 2 strings)
+mysqli_stmt_bind_param($stmt, "ss", $_POST['email'], $_POST['mdp']);
 
 // Exécuter et récupérer le résultat
 mysqli_stmt_execute($stmt);
 $resultat = mysqli_stmt_get_result($stmt);
+
+if (mysqli_num_rows($resultat) > 0) {
+    echo "Connecté !";
+} else {
+    echo "Email ou mot de passe incorrect.";
+}
 ?>
 ```
+]
 
 <div class="success-box">
-<h4 class="success-title">Requêtes préparées</h4>
-<p>Les données sont automatiquement échappées et sécurisées !</p>
+<h4 class="success-title">Pourquoi c'est sécurisé ?</h4>
+<p>Les <code>?</code> sont des emplacements réservés. MySQL reçoit la requête et les données <strong>séparément</strong> — les données ne peuvent jamais modifier la structure de la requête.</p>
 </div>
 
 ---
@@ -1013,19 +1102,19 @@ mysqli_stmt_bind_param($stmt, "ssd", $nom, $email, $prix); // 2 strings, 1 doubl
 <?php
 $connexion = mysqli_connect("localhost", "root", "", "boutique");
 
-$nom = "Bob Martin";
-$email = "bob@example.com";
+$nom = "T-shirt";
+$prix = 29.99;
 
 // Préparer la requête INSERT
-$sql = "INSERT INTO users (nom, email) VALUES (?, ?)";
+$sql = "INSERT INTO produits (nom, prix) VALUES (?, ?)";
 $stmt = mysqli_prepare($connexion, $sql);
 
-// Lier les paramètres (ss = 2 strings)
-mysqli_stmt_bind_param($stmt, "ss", $nom, $email);
+// Lier les paramètres (sd = string, double)
+mysqli_stmt_bind_param($stmt, "sd", $nom, $prix);
 
 // Exécuter
 if (mysqli_stmt_execute($stmt)) {
-    echo "Utilisateur ajouté ! ID : " . mysqli_insert_id($connexion);
+    echo "Produit ajouté ! ID : " . mysqli_insert_id($connexion);
 }
 
 mysqli_stmt_close($stmt);
@@ -1042,15 +1131,15 @@ mysqli_close($connexion);
 <?php
 $connexion = mysqli_connect("localhost", "root", "", "boutique");
 
-$nouveau_nom = "Alice Dupont";
+$nouveau_prix = 24.99;
 $id = 1;
 
 // Préparer la requête UPDATE
-$sql = "UPDATE users SET nom = ? WHERE id = ?";
+$sql = "UPDATE produits SET prix = ? WHERE id = ?";
 $stmt = mysqli_prepare($connexion, $sql);
 
-// Lier les paramètres (si = string, integer)
-mysqli_stmt_bind_param($stmt, "si", $nouveau_nom, $id);
+// Lier les paramètres (di = double, integer)
+mysqli_stmt_bind_param($stmt, "di", $nouveau_prix, $id);
 
 // Exécuter
 if (mysqli_stmt_execute($stmt)) {
@@ -1073,7 +1162,7 @@ $connexion = mysqli_connect("localhost", "root", "", "boutique");
 $id = 5;
 
 // Préparer la requête DELETE
-$sql = "DELETE FROM users WHERE id = ?";
+$sql = "DELETE FROM produits WHERE id = ?";
 $stmt = mysqli_prepare($connexion, $sql);
 
 // Lier le paramètre (i = integer)
@@ -1106,6 +1195,7 @@ if (isset($_POST['nom'])) {
     }
     mysqli_stmt_close($stmt);
 }
+mysqli_close($connexion);
 ?>
 <form method="POST" action="">
     <input type="text" name="nom" placeholder="Nom du produit">
@@ -1115,7 +1205,38 @@ if (isset($_POST['nom'])) {
 ```
 
 ---
-### Récapitulatif des fonctions
+### Se protéger des injections SQL
+
+<div class="step-grid">
+<div class="step-card">
+<div class="step-number">1</div>
+<div class="step-title">Requêtes préparées</div>
+<div class="step-desc">Ne jamais insérer de variables directement dans une requête. Utiliser <code>mysqli_prepare()</code> et les placeholders <code>?</code>.</div>
+</div>
+<div class="step-card">
+<div class="step-number">2</div>
+<div class="step-title">Valider les données</div>
+<div class="step-desc">Vérifier le type et le format des données reçues avant de les utiliser (<code>is_numeric()</code>, <code>filter_var()</code>…).</div>
+</div>
+<div class="step-card">
+<div class="step-number">3</div>
+<div class="step-title">Limiter les droits</div>
+<div class="step-desc">L'utilisateur MySQL de l'application ne doit avoir que les droits strictement nécessaires (pas de <code>DROP</code>, pas de <code>CREATE</code>…).</div>
+</div>
+<div class="step-card">
+<div class="step-number">4</div>
+<div class="step-title">Masquer les erreurs</div>
+<div class="step-desc">Ne jamais afficher les erreurs SQL en production — elles donnent des informations précieuses à un attaquant.</div>
+</div>
+</div>
+
+<div class="success-box">
+<h4 class="success-title">La règle d'or</h4>
+<p>Ne jamais faire confiance aux données venant de l'utilisateur. Toujours valider, toujours utiliser les requêtes préparées.</p>
+</div>
+
+---
+### Récapitulatif — Fonctions communes
 
 <table class="styled-table">
 <thead>
@@ -1129,6 +1250,66 @@ if (isset($_POST['nom'])) {
 <td><code>mysqli_connect()</code></td>
 <td>Ouvrir une connexion</td>
 </tr>
+<tr>
+<td><code>mysqli_connect_error()</code></td>
+<td>Message d'erreur de connexion</td>
+</tr>
+<tr>
+<td><code>mysqli_fetch_assoc()</code></td>
+<td>Récupérer une ligne du résultat</td>
+</tr>
+<tr>
+<td><code>mysqli_insert_id()</code></td>
+<td>ID du dernier INSERT</td>
+</tr>
+<tr>
+<td><code>mysqli_close()</code></td>
+<td>Fermer la connexion</td>
+</tr>
+</tbody>
+</table>
+
+---
+### Récapitulatif — Requêtes non préparées
+
+<table class="styled-table">
+<thead>
+<tr>
+<th>Fonction</th>
+<th>Utilité</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mysqli_query()</code></td>
+<td>Exécuter une requête SQL</td>
+</tr>
+<tr>
+<td><code>mysqli_num_rows()</code></td>
+<td>Nombre de lignes retournées (SELECT)</td>
+</tr>
+<tr>
+<td><code>mysqli_affected_rows()</code></td>
+<td>Lignes affectées (INSERT/UPDATE/DELETE)</td>
+</tr>
+<tr>
+<td><code>mysqli_error()</code></td>
+<td>Message d'erreur de la dernière requête</td>
+</tr>
+</tbody>
+</table>
+
+---
+### Récapitulatif — Requêtes préparées
+
+<table class="styled-table">
+<thead>
+<tr>
+<th>Fonction</th>
+<th>Utilité</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td><code>mysqli_prepare()</code></td>
 <td>Préparer une requête sécurisée</td>
@@ -1146,16 +1327,12 @@ if (isset($_POST['nom'])) {
 <td>Récupérer le résultat d'un SELECT</td>
 </tr>
 <tr>
-<td><code>mysqli_fetch_assoc()</code></td>
-<td>Récupérer une ligne</td>
+<td><code>mysqli_stmt_affected_rows()</code></td>
+<td>Lignes affectées (INSERT/UPDATE/DELETE)</td>
 </tr>
 <tr>
 <td><code>mysqli_stmt_close()</code></td>
 <td>Fermer le statement</td>
-</tr>
-<tr>
-<td><code>mysqli_close()</code></td>
-<td>Fermer la connexion</td>
 </tr>
 </tbody>
 </table>
