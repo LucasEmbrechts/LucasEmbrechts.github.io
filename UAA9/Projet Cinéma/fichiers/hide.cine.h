@@ -15,7 +15,7 @@
 * @note Le fichier salles.txt est structuré de la manière suivante :
 *       numSalle | capacite
 * @note Le fichier seances.txt est structuré de la manière suivante :
-*       titre|dateSeance|heureDebut|numSalle
+*       titre|dateSeance|heureDebut|numSalle|version
 * @warning Les fichiers doivent être encodés au format UTF-8 sans BOM.
 * @warning Les fichiers doivent terminer par une nouvelle ligne.
 */
@@ -36,6 +36,7 @@
 
 #define TAILLE_TITRE 100
 #define TAILLE_GENRE 100
+#define TAILLE_VERSION 10
 
 
 struct film {
@@ -59,6 +60,7 @@ struct seance {
     int dateSeance;
     int heureDebut;
     int numSalle;
+    char version[TAILLE_VERSION];
 };
 
 typedef struct seance Seance;
@@ -80,6 +82,12 @@ Seance obtenirSeance(char titre[], int dateSeance, int heureDebut);
 bool insererSeance(Seance seanceAjout);
 bool supprimerSeance(char titre[], int dateSeance, int heureDebut);
 bool modifierSeance(Seance seance);
+
+int extraireAnneeYYYYDepuisDateYYYYMMDD(int date);
+int obtenirDateYYYYMMDDDuSysteme(void) ;
+int extraireMoisMMDepuisDateYYYYMMDD(int date);
+int extraireJourDDDepuisDateYYYYMMDD(int date);
+int calculerNbJours(int dateStartYYYYMMDD, int dateEndYYYYMMDD);
 
 /**
  * Vérifie l'existence et crée si nécessaire les fichiers du cinéma
@@ -246,9 +254,15 @@ int obtenirListeSeances(Seance seances[]) {
                     if (token != NULL) {
                         seanceBD.numSalle = atoi(token);
 
-                        seances[iSeance] = seanceBD;
-                        iSeance++;
-                        nbSeances++;
+                        token = strtok(NULL, "|");
+                        if (token != NULL) {
+                            token[strcspn(token, "\n")] = '\0';
+                            strcpy(seanceBD.version, token);
+
+                            seances[iSeance] = seanceBD;
+                            iSeance++;
+                            nbSeances++;
+                        }
                     }
                 }
             }
@@ -626,11 +640,17 @@ Seance obtenirSeance(char titreRecherche[], int dateSeanceRecherche, int heureDe
                     if (token != NULL) {
                         seanceBD.numSalle = atoi(token);
 
-                        if (strcmp(seanceBD.titre, titreRecherche) == 0 &&
-                            seanceBD.dateSeance == dateSeanceRecherche &&
-                            seanceBD.heureDebut == heureDebutRecherche) {
-                            fclose(pTabSeances);
-                            return seanceBD;
+                        token = strtok(NULL, "|");
+                        if (token != NULL) {
+                            token[strcspn(token, "\n")] = '\0';
+                            strcpy(seanceBD.version, token);
+
+                            if (strcmp(seanceBD.titre, titreRecherche) == 0 &&
+                                seanceBD.dateSeance == dateSeanceRecherche &&
+                                seanceBD.heureDebut == heureDebutRecherche) {
+                                fclose(pTabSeances);
+                                return seanceBD;
+                            }
                         }
                     }
                 }
@@ -661,11 +681,12 @@ bool insererSeance(Seance seanceAjout) {
         return false;
     }
 
-    fprintf(pTabSeances, "%s|%d|%d|%d\n",
+    fprintf(pTabSeances, "%s|%d|%d|%d|%s\n",
             seanceAjout.titre,
             seanceAjout.dateSeance,
             seanceAjout.heureDebut,
-            seanceAjout.numSalle);
+            seanceAjout.numSalle,
+            seanceAjout.version);
 
     fclose(pTabSeances);
     return true;
@@ -743,11 +764,12 @@ bool modifierSeance(Seance seance) {
         if (strcmp(titreLigne, seance.titre) == 0 &&
             dateSeanceLigne == seance.dateSeance &&
             heureDebutLigne == seance.heureDebut) {
-            fprintf(pTemp, "%s|%d|%d|%d\n",
+            fprintf(pTemp, "%s|%d|%d|%d|%s\n",
                     seance.titre,
                     seance.dateSeance,
                     seance.heureDebut,
-                    seance.numSalle);
+                    seance.numSalle,
+                    seance.version);
             seanceModifie = true;
         } else {
             fputs(ligne, pTemp);
@@ -766,4 +788,101 @@ bool modifierSeance(Seance seance) {
     }
 
     return seanceModifie;
+}
+
+/**
+ * Donne la date actuelle du système au format YYYYMMDD
+ * @return La date actuelle au format YYYYMMDD
+ */
+int obtenirDateYYYYMMDDDuSysteme(void) {
+	time_t now;
+	struct tm *current_date;
+	char buffer[9];
+	int dateYYYYMMDD;
+
+	time(&now);
+	current_date = localtime(&now);
+	strftime(buffer, 9, "%Y%m%d", current_date);
+	dateYYYYMMDD = atoi(buffer);
+	return dateYYYYMMDD;
+}
+
+/**
+ * Extrait l'année d'une date au format YYYYMMDD
+ * @param date La date au format YYYYMMDD
+ * @return L'année extraite
+ */
+int extraireAnneeYYYYDepuisDateYYYYMMDD(int date) {
+	return date / 10000;
+}
+
+
+/**
+ * Extrait le mois d'une date au format YYYYMMDD
+ * @param date La date au format YYYYMMDD
+ * @return Le mois extrait
+ */
+int extraireMoisMMDepuisDateYYYYMMDD(int date) {
+	int year = date / 10000;
+	return (date - (year * 10000)) / 100;
+
+}
+
+/**
+ * Extrait le jour d'une date au format YYYYMMDD
+ * @param date La date au format YYYYMMDD
+ * @return Le jour extrait
+ */
+int extraireJourDDDepuisDateYYYYMMDD(int date) {
+	int year = date / 10000;
+	int month = (date - (year * 10000)) / 100;
+	return (date - (year * 10000) - month * 100);
+}
+
+
+/**
+ * Calcule le nombre de jours entre deux dates au format YYYYMMDD
+ * @param dateStartYYYYMMDD La date de début au format YYYYMMDD
+ * @param dateEndYYYYMMDD La date de fin au format YYYYMMDD
+ * @return Le nombre de jours entre les deux dates
+ */
+int calculerNbJours(int dateStartYYYYMMDD, int dateEndYYYYMMDD) {
+	time_t now;
+	struct tm date1;
+	struct tm date2;
+	double seconds;
+	int extractedDay;
+	int extractedMonth;
+	int extractedYear;
+
+	time(&now);
+
+	date1 = *localtime(&now);
+	date2 = *localtime(&now);
+
+
+    extractedYear = extraireAnneeYYYYDepuisDateYYYYMMDD(dateStartYYYYMMDD);
+    extractedMonth = extraireMoisMMDepuisDateYYYYMMDD(dateStartYYYYMMDD);
+    extractedDay = extraireJourDDDepuisDateYYYYMMDD(dateStartYYYYMMDD);
+	date1.tm_hour = 0;
+	date1.tm_min = 0;
+	date1.tm_sec = 0;
+	date1.tm_mon = extractedMonth - 1;
+	date1.tm_mday = extractedDay;
+	date1.tm_year = extractedYear - 1900;
+
+
+    extractedYear = extraireAnneeYYYYDepuisDateYYYYMMDD(dateEndYYYYMMDD);
+    extractedMonth = extraireMoisMMDepuisDateYYYYMMDD(dateEndYYYYMMDD);
+    extractedDay = extraireJourDDDepuisDateYYYYMMDD(dateEndYYYYMMDD);
+	date2.tm_hour = 0;
+	date2.tm_min = 0;
+	date2.tm_sec = 0;
+	date2.tm_mon = extractedMonth - 1;
+	date2.tm_mday = extractedDay;
+	date2.tm_year = extractedYear - 1900;
+
+	seconds = difftime(mktime(&date2), mktime(&date1));
+
+	return seconds / 86400;
 }
