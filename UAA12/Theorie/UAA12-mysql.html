@@ -1095,6 +1095,74 @@ mysqli_stmt_bind_param($stmt, "ssd", $nom, $email, $prix); // 2 strings, 1 doubl
 ```
 
 ---
+### SELECT avec requête préparée<br>/ plusieurs résultats
+
+.small-code[
+```php
+<?php
+$connexion = mysqli_connect("localhost", "root", "", "boutique");
+
+$categorie = $_GET['categorie'];
+
+// Préparer la requête SELECT
+$sql = "SELECT * FROM produits WHERE categorie = ?";
+$stmt = mysqli_prepare($connexion, $sql);
+
+// Lier le paramètre (s = string)
+mysqli_stmt_bind_param($stmt, "s", $categorie);
+
+// Exécuter et récupérer le résultat
+mysqli_stmt_execute($stmt);
+$resultat = mysqli_stmt_get_result($stmt);
+
+// Parcourir toutes les lignes avec une boucle while
+while ($ligne = mysqli_fetch_assoc($resultat)) {
+    echo $ligne['nom'] . " — " . $ligne['prix'] . " €<br>";
+}
+
+mysqli_stmt_close($stmt);
+mysqli_close($connexion);
+?>
+```
+]
+
+---
+### SELECT avec requête préparée<br>/ un seul résultat
+
+.small-code[
+```php
+<?php
+$connexion = mysqli_connect("localhost", "root", "", "boutique");
+
+$id = $_GET['id'];
+
+// Préparer la requête SELECT (recherche par clé primaire → 1 seul résultat)
+$sql = "SELECT * FROM produits WHERE id = ?";
+$stmt = mysqli_prepare($connexion, $sql);
+
+// Lier le paramètre (i = integer)
+mysqli_stmt_bind_param($stmt, "i", $id);
+
+// Exécuter et récupérer le résultat
+mysqli_stmt_execute($stmt);
+$resultat = mysqli_stmt_get_result($stmt);
+
+// Récupérer l'unique ligne directement
+$ligne = mysqli_fetch_assoc($resultat);
+
+if ($ligne) {
+    echo $ligne['nom'] . " — " . $ligne['prix'] . " €";
+} else {
+    echo "Produit introuvable.";
+}
+
+mysqli_stmt_close($stmt);
+mysqli_close($connexion);
+?>
+```
+]
+
+---
 ### INSERT avec requête préparée
 
 .small-code[
