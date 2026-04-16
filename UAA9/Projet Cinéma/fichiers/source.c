@@ -7,6 +7,7 @@ void afficherMenu(void);
 void testerFilms(void);
 void testerSalles(void);
 void testerSeances(void);
+void testerReservations(void);
 void testerUtilitairesDates(void);
 
 int main(void){
@@ -38,6 +39,9 @@ int main(void){
                 testerSeances();
                 break;
             case 4:
+                testerReservations();
+                break;
+            case 5:
                 testerUtilitairesDates();
                 break;
             case 0:
@@ -62,7 +66,8 @@ void afficherMenu(void) {
     printf("1. Tester les fonctions FILMS\n");
     printf("2. Tester les fonctions SALLES\n");
     printf("3. Tester les fonctions SEANCES\n");
-    printf("4. Tester les utilitaires de DATES\n");
+    printf("4. Tester les fonctions RESERVATIONS\n");
+    printf("5. Tester les utilitaires de DATES\n");
     printf("0. Quitter\n");
     printf("========================================\n");
 }
@@ -369,6 +374,105 @@ void testerSeances(void) {
 
     green();
     printf("\n=== FIN DES TESTS SEANCES ===\n");
+    reset();
+}
+
+void testerReservations(void) {
+    cyan();
+    printf("\n=== TEST DES FONCTIONS RESERVATIONS ===\n");
+    reset();
+
+    // 1. Lister toutes les réservations
+    printf("\n1. Liste de toutes les reservations:\n");
+    Reservation reservations[100];
+    int nbReservations = obtenirListeReservations(reservations);
+    printf("Nombre de reservations: %d\n", nbReservations);
+    for (int i = 0; i < nbReservations; i++) {
+        printf("  - Salle %d | Date: %d | Heure: %04d | A:%d E:%d S:%d | %s %s | Gold: %s\n",
+               reservations[i].numSalle, reservations[i].date, reservations[i].heure,
+               reservations[i].nbAdultes, reservations[i].nbEnfants, reservations[i].nbSeniors,
+               reservations[i].prenom, reservations[i].nom,
+               reservations[i].gold ? "Oui" : "Non");
+    }
+
+    // 2. Insérer une nouvelle réservation
+    printf("\n2. Insertion d'une nouvelle reservation (Dupont Jean):\n");
+    Reservation nouvelleReservation;
+    nouvelleReservation.numSalle = 1;
+    nouvelleReservation.date = 20231215;
+    nouvelleReservation.heure = 1400;
+    nouvelleReservation.nbAdultes = 2;
+    nouvelleReservation.nbEnfants = 1;
+    nouvelleReservation.nbSeniors = 0;
+    strcpy(nouvelleReservation.nom, "Dupont");
+    strcpy(nouvelleReservation.prenom, "Jean");
+    nouvelleReservation.gold = false;
+
+    if (insererReservation(nouvelleReservation)) {
+        green();
+        printf("  Reservation inseree avec succes!\n");
+        reset();
+
+        // Vérifier l'insertion
+        Reservation reservationInseree = obtenirReservation(1, 20231215, 1400, "Dupont", "Jean");
+        if (reservationInseree.numSalle != -1) {
+            printf("  Verification: Salle %d | Date: %d | Heure: %04d | A:%d E:%d S:%d | %s %s | Gold: %s\n",
+                   reservationInseree.numSalle, reservationInseree.date, reservationInseree.heure,
+                   reservationInseree.nbAdultes, reservationInseree.nbEnfants, reservationInseree.nbSeniors,
+                   reservationInseree.prenom, reservationInseree.nom,
+                   reservationInseree.gold ? "Oui" : "Non");
+        }
+    } else {
+        red();
+        printf("  Erreur lors de l'insertion\n");
+        reset();
+    }
+
+    // 3. Modifier la réservation
+    printf("\n3. Modification de la reservation (Dupont Jean -> gold, +1 adulte):\n");
+    nouvelleReservation.nbAdultes = 3;
+    nouvelleReservation.gold = true;
+
+    if (modifierReservation(nouvelleReservation)) {
+        green();
+        printf("  Reservation modifiee avec succes!\n");
+        reset();
+
+        // Vérifier la modification
+        Reservation reservationModifiee = obtenirReservation(1, 20231215, 1400, "Dupont", "Jean");
+        if (reservationModifiee.numSalle != -1) {
+            printf("  Verification: Salle %d | Date: %d | Heure: %04d | A:%d E:%d S:%d | %s %s | Gold: %s\n",
+                   reservationModifiee.numSalle, reservationModifiee.date, reservationModifiee.heure,
+                   reservationModifiee.nbAdultes, reservationModifiee.nbEnfants, reservationModifiee.nbSeniors,
+                   reservationModifiee.prenom, reservationModifiee.nom,
+                   reservationModifiee.gold ? "Oui" : "Non");
+        }
+    } else {
+        red();
+        printf("  Erreur lors de la modification\n");
+        reset();
+    }
+
+    // 4. Supprimer la réservation
+    printf("\n4. Suppression de la reservation (Dupont Jean):\n");
+    if (supprimerReservation(1, 20231215, 1400, "Dupont", "Jean")) {
+        green();
+        printf("  Reservation supprimee avec succes!\n");
+        reset();
+
+        // Vérifier la suppression
+        Reservation reservationSupprimee = obtenirReservation(1, 20231215, 1400, "Dupont", "Jean");
+        if (reservationSupprimee.numSalle == -1) {
+            printf("  Verification: Reservation bien supprimee\n");
+        }
+    } else {
+        red();
+        printf("  Erreur lors de la suppression\n");
+        reset();
+    }
+
+    green();
+    printf("\n=== FIN DES TESTS RESERVATIONS ===\n");
     reset();
 }
 

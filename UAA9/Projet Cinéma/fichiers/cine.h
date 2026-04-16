@@ -9,13 +9,15 @@
 * ainsi que des fonctions utilitaires pour manipuler des dates.
 * @author Lucas Embrechts
 * @date 2025-12-26
-* @note Les fichiers utilisés sont : films.txt, salles.txt et seances.txt.
+* @note Les fichiers utilisés sont : films.txt, salles.txt, seances.txt et reservations.txt.
 * @note Le fichier films.txt est structuré de la manière suivante :
 *       titre|genre|duree|ageMinimum
 * @note Le fichier salles.txt est structuré de la manière suivante :
 *       numSalle | capacite
 * @note Le fichier seances.txt est structuré de la manière suivante :
 *       titre|dateSeance|heureDebut|numSalle|version
+* @note Le fichier reservations.txt est structuré de la manière suivante :
+*       numSalle|date|heure|nbAdultes|nbEnfants|nbSeniors|nom|prenom|gold
 * @warning Les fichiers doivent être encodés au format UTF-8 sans BOM.
 * @warning Les fichiers doivent terminer par une nouvelle ligne.
 */
@@ -32,11 +34,14 @@
 #define NOM_FICHIER_FILMS "films.txt"
 #define NOM_FICHIER_SALLES "salles.txt"
 #define NOM_FICHIER_SEANCES "seances.txt"
+#define NOM_FICHIER_RESERVATIONS "reservations.txt"
 
 
 #define TAILLE_TITRE 100
 #define TAILLE_GENRE 100
 #define TAILLE_VERSION 10
+#define TAILLE_NOM 100
+#define TAILLE_PRENOM 100
 
 
 struct film {
@@ -65,6 +70,20 @@ struct seance {
 
 typedef struct seance Seance;
 
+struct reservation {
+    int numSalle;
+    int date;
+    int heure;
+    int nbAdultes;
+    int nbEnfants;
+    int nbSeniors;
+    char nom[TAILLE_NOM];
+    char prenom[TAILLE_PRENOM];
+    bool gold;
+};
+
+typedef struct reservation Reservation;
+
 
 bool ouvertureFichiersCinema(void);
 int obtenirListeFilms(Film films[]);
@@ -82,6 +101,11 @@ Seance obtenirSeance(char titre[], int dateSeance, int heureDebut);
 bool insererSeance(Seance seanceAjout);
 bool supprimerSeance(char titre[], int dateSeance, int heureDebut);
 bool modifierSeance(Seance seance);
+int obtenirListeReservations(Reservation reservations[]);
+Reservation obtenirReservation(int numSalle, int date, int heure, char nom[], char prenom[]);
+bool insererReservation(Reservation reservationAjout);
+bool supprimerReservation(int numSalle, int date, int heure, char nom[], char prenom[]);
+bool modifierReservation(Reservation reservation);
 
 int extraireAnneeYYYYDepuisDateYYYYMMDD(int date);
 int obtenirDateYYYYMMDDDuSysteme(void) ;
@@ -117,6 +141,14 @@ bool ouvertureFichiersCinema(void) {
         pTabSeances = fopen(NOM_FICHIER_SEANCES, "r+");
     }
     fclose(pTabSeances);
+
+    FILE* pTabReservations = fopen(NOM_FICHIER_RESERVATIONS, "r+");
+    if (pTabReservations == NULL) {
+        pTabReservations = fopen(NOM_FICHIER_RESERVATIONS, "a+");
+        fclose(pTabReservations);
+        pTabReservations = fopen(NOM_FICHIER_RESERVATIONS, "r+");
+    }
+    fclose(pTabReservations);
 
     return true;
 }
@@ -788,6 +820,308 @@ bool modifierSeance(Seance seance) {
     }
 
     return seanceModifie;
+}
+
+/**
+ * Rempli un tableau de réservations à partir du fichier des réservations
+ * @param reservations un tableau de réservations vide
+ * @return Le nombre de réservations dans le tableau
+ */
+int obtenirListeReservations(Reservation reservations[]) {
+    FILE* pTabReservations;
+    int nbReservations = 0;
+    Reservation reservationBD;
+    char ligne[512];
+    char* token;
+    char* pLigne;
+    int iReservation = 0;
+
+    pTabReservations = fopen(NOM_FICHIER_RESERVATIONS, "r");
+    if (pTabReservations != NULL) {
+
+    fgets(ligne, sizeof(ligne), pTabReservations);
+    pLigne = ligne;
+    while (!feof(pTabReservations)) {
+
+        token = strtok(pLigne, "|");
+        if (token != NULL) {
+            reservationBD.numSalle = atoi(token);
+
+            token = strtok(NULL, "|");
+            if (token != NULL) {
+                reservationBD.date = atoi(token);
+
+                token = strtok(NULL, "|");
+                if (token != NULL) {
+                    reservationBD.heure = atoi(token);
+
+                    token = strtok(NULL, "|");
+                    if (token != NULL) {
+                        reservationBD.nbAdultes = atoi(token);
+
+                        token = strtok(NULL, "|");
+                        if (token != NULL) {
+                            reservationBD.nbEnfants = atoi(token);
+
+                            token = strtok(NULL, "|");
+                            if (token != NULL) {
+                                reservationBD.nbSeniors = atoi(token);
+
+                                token = strtok(NULL, "|");
+                                if (token != NULL) {
+                                    strcpy(reservationBD.nom, token);
+
+                                    token = strtok(NULL, "|");
+                                    if (token != NULL) {
+                                        strcpy(reservationBD.prenom, token);
+
+                                        token = strtok(NULL, "|");
+                                        if (token != NULL) {
+                                            token[strcspn(token, "\n")] = '\0';
+                                            reservationBD.gold = atoi(token) != 0;
+
+                                            reservations[iReservation] = reservationBD;
+                                            iReservation++;
+                                            nbReservations++;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        fgets(ligne, sizeof(ligne), pTabReservations);
+        pLigne = ligne;
+    }
+}
+    fclose(pTabReservations);
+    return nbReservations;
+}
+
+/**
+ * Obtient une réservation à partir de son numéro de salle, date, heure, nom et prénom
+ * @param numSalleRecherche Le numéro de la salle
+ * @param dateRecherche La date au format YYYYMMDD
+ * @param heureRecherche L'heure au format HHMM
+ * @param nomRecherche Le nom du client
+ * @param prenomRecherche Le prénom du client
+ * @return La réservation trouvée ou une réservation "invalide" si non trouvée (numSalle = -1)
+ */
+Reservation obtenirReservation(int numSalleRecherche, int dateRecherche, int heureRecherche, char nomRecherche[], char prenomRecherche[]) {
+    FILE* pTabReservations;
+    Reservation reservationBD;
+    char ligne[512];
+    char* token;
+    char* pLigne;
+
+    memset(&reservationBD, 0, sizeof(Reservation));
+    reservationBD.numSalle = -1;
+
+    pTabReservations = fopen(NOM_FICHIER_RESERVATIONS, "r");
+    if (pTabReservations == NULL) {
+        return reservationBD;
+    }
+
+    fgets(ligne, sizeof(ligne), pTabReservations);
+    pLigne = ligne;
+    while (!feof(pTabReservations)) {
+        token = strtok(pLigne, "|");
+        if (token != NULL) {
+            reservationBD.numSalle = atoi(token);
+
+            token = strtok(NULL, "|");
+            if (token != NULL) {
+                reservationBD.date = atoi(token);
+
+                token = strtok(NULL, "|");
+                if (token != NULL) {
+                    reservationBD.heure = atoi(token);
+
+                    token = strtok(NULL, "|");
+                    if (token != NULL) {
+                        reservationBD.nbAdultes = atoi(token);
+
+                        token = strtok(NULL, "|");
+                        if (token != NULL) {
+                            reservationBD.nbEnfants = atoi(token);
+
+                            token = strtok(NULL, "|");
+                            if (token != NULL) {
+                                reservationBD.nbSeniors = atoi(token);
+
+                                token = strtok(NULL, "|");
+                                if (token != NULL) {
+                                    strcpy(reservationBD.nom, token);
+
+                                    token = strtok(NULL, "|");
+                                    if (token != NULL) {
+                                        strcpy(reservationBD.prenom, token);
+
+                                        token = strtok(NULL, "|");
+                                        if (token != NULL) {
+                                            token[strcspn(token, "\n")] = '\0';
+                                            reservationBD.gold = atoi(token) != 0;
+
+                                            if (reservationBD.numSalle == numSalleRecherche &&
+                                                reservationBD.date == dateRecherche &&
+                                                reservationBD.heure == heureRecherche &&
+                                                strcmp(reservationBD.nom, nomRecherche) == 0 &&
+                                                strcmp(reservationBD.prenom, prenomRecherche) == 0) {
+                                                fclose(pTabReservations);
+                                                return reservationBD;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        fgets(ligne, sizeof(ligne), pTabReservations);
+        pLigne = ligne;
+    }
+
+    fclose(pTabReservations);
+
+    memset(&reservationBD, 0, sizeof(Reservation));
+    reservationBD.numSalle = -1;
+    return reservationBD;
+}
+
+/**
+ * Insère une nouvelle réservation dans le fichier des réservations
+ * @param reservationAjout La réservation à ajouter
+ * @return true si l'insertion a réussi, false sinon
+ */
+bool insererReservation(Reservation reservationAjout) {
+    FILE* pTabReservations = fopen(NOM_FICHIER_RESERVATIONS, "a");
+
+    if (pTabReservations == NULL) {
+        return false;
+    }
+
+    fprintf(pTabReservations, "%d|%d|%d|%d|%d|%d|%s|%s|%d\n",
+            reservationAjout.numSalle,
+            reservationAjout.date,
+            reservationAjout.heure,
+            reservationAjout.nbAdultes,
+            reservationAjout.nbEnfants,
+            reservationAjout.nbSeniors,
+            reservationAjout.nom,
+            reservationAjout.prenom,
+            reservationAjout.gold ? 1 : 0);
+
+    fclose(pTabReservations);
+    return true;
+}
+
+/**
+ * Supprime une réservation du fichier des réservations
+ * @param numSalle Le numéro de la salle
+ * @param date La date au format YYYYMMDD
+ * @param heure L'heure au format HHMM
+ * @param nom Le nom du client
+ * @param prenom Le prénom du client
+ * @return true si la suppression a réussi, false sinon
+ */
+bool supprimerReservation(int numSalle, int date, int heure, char nom[], char prenom[]) {
+    FILE* pTabReservations = fopen(NOM_FICHIER_RESERVATIONS, "r");
+    FILE* pTemp = fopen("temp.txt", "w");
+    char ligne[512];
+    bool reservationSupprime = false;
+
+    if (pTabReservations == NULL || pTemp == NULL) {
+        if (pTabReservations) fclose(pTabReservations);
+        if (pTemp) fclose(pTemp);
+        return false;
+    }
+
+    while (fgets(ligne, sizeof(ligne), pTabReservations)) {
+        int numSalleLigne, dateLigne, heureLigne;
+        char nomLigne[TAILLE_NOM], prenomLigne[TAILLE_PRENOM];
+        sscanf(ligne, "%d|%d|%d|%*d|%*d|%*d|%[^|]|%[^|]|", &numSalleLigne, &dateLigne, &heureLigne, nomLigne, prenomLigne);
+
+        if (numSalleLigne != numSalle || dateLigne != date || heureLigne != heure ||
+            strcmp(nomLigne, nom) != 0 || strcmp(prenomLigne, prenom) != 0) {
+            fputs(ligne, pTemp);
+        } else {
+            reservationSupprime = true;
+        }
+    }
+
+    fclose(pTabReservations);
+    fclose(pTemp);
+
+    if (reservationSupprime) {
+        if (remove(NOM_FICHIER_RESERVATIONS) != 0 || rename("temp.txt", NOM_FICHIER_RESERVATIONS) != 0) {
+            return false;
+        }
+    } else {
+        remove("temp.txt");
+    }
+
+    return reservationSupprime;
+}
+
+/**
+ * Modifie une réservation dans le fichier des réservations
+ * @param reservation La réservation modifiée (identifiée par numSalle, date, heure, nom et prenom)
+ * @return true si la modification a réussi, false sinon
+ */
+bool modifierReservation(Reservation reservation) {
+    FILE* pTabReservations = fopen(NOM_FICHIER_RESERVATIONS, "r");
+    FILE* pTemp = fopen("temp.txt", "w");
+    char ligne[512];
+    bool reservationModifie = false;
+
+    if (pTabReservations == NULL || pTemp == NULL) {
+        if (pTabReservations) fclose(pTabReservations);
+        if (pTemp) fclose(pTemp);
+        return false;
+    }
+
+    while (fgets(ligne, sizeof(ligne), pTabReservations)) {
+        int numSalleLigne, dateLigne, heureLigne;
+        char nomLigne[TAILLE_NOM], prenomLigne[TAILLE_PRENOM];
+        sscanf(ligne, "%d|%d|%d|%*d|%*d|%*d|%[^|]|%[^|]|", &numSalleLigne, &dateLigne, &heureLigne, nomLigne, prenomLigne);
+
+        if (numSalleLigne == reservation.numSalle && dateLigne == reservation.date &&
+            heureLigne == reservation.heure && strcmp(nomLigne, reservation.nom) == 0 &&
+            strcmp(prenomLigne, reservation.prenom) == 0) {
+            fprintf(pTemp, "%d|%d|%d|%d|%d|%d|%s|%s|%d\n",
+                    reservation.numSalle,
+                    reservation.date,
+                    reservation.heure,
+                    reservation.nbAdultes,
+                    reservation.nbEnfants,
+                    reservation.nbSeniors,
+                    reservation.nom,
+                    reservation.prenom,
+                    reservation.gold ? 1 : 0);
+            reservationModifie = true;
+        } else {
+            fputs(ligne, pTemp);
+        }
+    }
+
+    fclose(pTabReservations);
+    fclose(pTemp);
+
+    if (reservationModifie) {
+        if (remove(NOM_FICHIER_RESERVATIONS) != 0 || rename("temp.txt", NOM_FICHIER_RESERVATIONS) != 0) {
+            return false;
+        }
+    } else {
+        remove("temp.txt");
+    }
+
+    return reservationModifie;
 }
 
 /**
