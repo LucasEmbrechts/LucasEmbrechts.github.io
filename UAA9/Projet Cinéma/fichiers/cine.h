@@ -101,6 +101,9 @@ Seance obtenirSeance(char titre[], int dateSeance, int heureDebut);
 bool insererSeance(Seance seanceAjout);
 bool supprimerSeance(char titre[], int dateSeance, int heureDebut);
 bool modifierSeance(Seance seance);
+Seance obtenirSeanceParSalle(int dateSeance, int heureDebut, int numSalle);
+bool supprimerSeanceParSalle(int dateSeance, int heureDebut, int numSalle);
+bool modifierSeanceParSalle(Seance seance);
 int obtenirListeReservations(Reservation reservations[]);
 Reservation obtenirReservation(int numSalle, int date, int heure, char nom[], char prenom[]);
 bool insererReservation(Reservation reservationAjout);
@@ -796,6 +799,171 @@ bool modifierSeance(Seance seance) {
         if (strcmp(titreLigne, seance.titre) == 0 &&
             dateSeanceLigne == seance.dateSeance &&
             heureDebutLigne == seance.heureDebut) {
+            fprintf(pTemp, "%s|%d|%d|%d|%s\n",
+                    seance.titre,
+                    seance.dateSeance,
+                    seance.heureDebut,
+                    seance.numSalle,
+                    seance.version);
+            seanceModifie = true;
+        } else {
+            fputs(ligne, pTemp);
+        }
+    }
+
+    fclose(pTabSeances);
+    fclose(pTemp);
+
+    if (seanceModifie) {
+        if (remove(NOM_FICHIER_SEANCES) != 0 || rename("temp.txt", NOM_FICHIER_SEANCES) != 0) {
+            return false;
+        }
+    } else {
+        remove("temp.txt");
+    }
+
+    return seanceModifie;
+}
+
+/**
+ * Obtient une séance à partir de sa date, heure et numéro de salle
+ * @param dateSeanceRecherche La date de la séance au format YYYYMMDD
+ * @param heureDebutRecherche L'heure de début au format HHMM
+ * @param numSalleRecherche Le numéro de la salle
+ * @return La séance trouvée ou une séance "invalide" si non trouvée (titre vide, dateSeance = -1)
+ */
+Seance obtenirSeanceParSalle(int dateSeanceRecherche, int heureDebutRecherche, int numSalleRecherche) {
+    FILE* pTabSeances;
+    Seance seanceBD;
+    char ligne[256];
+    char* token;
+    char* pLigne;
+
+    memset(&seanceBD, 0, sizeof(Seance));
+    strcpy(seanceBD.titre, "");
+    seanceBD.dateSeance = -1;
+
+    pTabSeances = fopen(NOM_FICHIER_SEANCES, "r");
+    if (pTabSeances == NULL) {
+        return seanceBD;
+    }
+
+    fgets(ligne, sizeof(ligne), pTabSeances);
+    pLigne = ligne;
+    while (!feof(pTabSeances)) {
+        token = strtok(pLigne, "|");
+        if (token != NULL) {
+            strcpy(seanceBD.titre, token);
+
+            token = strtok(NULL, "|");
+            if (token != NULL) {
+                seanceBD.dateSeance = atoi(token);
+
+                token = strtok(NULL, "|");
+                if (token != NULL) {
+                    seanceBD.heureDebut = atoi(token);
+
+                    token = strtok(NULL, "|");
+                    if (token != NULL) {
+                        seanceBD.numSalle = atoi(token);
+
+                        token = strtok(NULL, "|");
+                        if (token != NULL) {
+                            token[strcspn(token, "\n")] = '\0';
+                            strcpy(seanceBD.version, token);
+
+                            if (seanceBD.dateSeance == dateSeanceRecherche &&
+                                seanceBD.heureDebut == heureDebutRecherche &&
+                                seanceBD.numSalle == numSalleRecherche) {
+                                fclose(pTabSeances);
+                                return seanceBD;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        fgets(ligne, sizeof(ligne), pTabSeances);
+        pLigne = ligne;
+    }
+
+    fclose(pTabSeances);
+
+    memset(&seanceBD, 0, sizeof(Seance));
+    strcpy(seanceBD.titre, "");
+    seanceBD.dateSeance = -1;
+    return seanceBD;
+}
+
+/**
+ * Supprime une séance du fichier des séances via sa date, heure et numéro de salle
+ * @param dateSeance La date de la séance au format YYYYMMDD
+ * @param heureDebut L'heure de début au format HHMM
+ * @param numSalle Le numéro de la salle
+ * @return true si la suppression a réussi, false sinon
+ */
+bool supprimerSeanceParSalle(int dateSeance, int heureDebut, int numSalle) {
+    FILE* pTabSeances = fopen(NOM_FICHIER_SEANCES, "r");
+    FILE* pTemp = fopen("temp.txt", "w");
+    char ligne[256];
+    bool seanceSupprime = false;
+
+    if (pTabSeances == NULL || pTemp == NULL) {
+        if (pTabSeances) fclose(pTabSeances);
+        if (pTemp) fclose(pTemp);
+        return false;
+    }
+
+    while (fgets(ligne, sizeof(ligne), pTabSeances)) {
+        int dateSeanceLigne, heureDebutLigne, numSalleLigne;
+        sscanf(ligne, "%*[^|]|%d|%d|%d|", &dateSeanceLigne, &heureDebutLigne, &numSalleLigne);
+
+        if (dateSeanceLigne != dateSeance || heureDebutLigne != heureDebut || numSalleLigne != numSalle) {
+            fputs(ligne, pTemp);
+        } else {
+            seanceSupprime = true;
+        }
+    }
+
+    fclose(pTabSeances);
+    fclose(pTemp);
+
+    if (seanceSupprime) {
+        if (remove(NOM_FICHIER_SEANCES) != 0 || rename("temp.txt", NOM_FICHIER_SEANCES) != 0) {
+            return false;
+        }
+    } else {
+        remove("temp.txt");
+    }
+
+    return seanceSupprime;
+}
+
+/**
+ * Modifie une séance dans le fichier des séances, identifiée par sa date, heure et numéro de salle
+ * @param seance La séance modifiée (identifiée par dateSeance, heureDebut et numSalle)
+ * @return true si la modification a réussi, false sinon
+ */
+bool modifierSeanceParSalle(Seance seance) {
+    FILE* pTabSeances = fopen(NOM_FICHIER_SEANCES, "r");
+    FILE* pTemp = fopen("temp.txt", "w");
+    char ligne[256];
+    bool seanceModifie = false;
+
+    if (pTabSeances == NULL || pTemp == NULL) {
+        if (pTabSeances) fclose(pTabSeances);
+        if (pTemp) fclose(pTemp);
+        return false;
+    }
+
+    while (fgets(ligne, sizeof(ligne), pTabSeances)) {
+        int dateSeanceLigne, heureDebutLigne, numSalleLigne;
+        sscanf(ligne, "%*[^|]|%d|%d|%d|", &dateSeanceLigne, &heureDebutLigne, &numSalleLigne);
+
+        if (dateSeanceLigne == seance.dateSeance &&
+            heureDebutLigne == seance.heureDebut &&
+            numSalleLigne == seance.numSalle) {
             fprintf(pTemp, "%s|%d|%d|%d|%s\n",
                     seance.titre,
                     seance.dateSeance,
