@@ -228,11 +228,11 @@ int obtenirListeSalles(Salle salles[]) {
     pLigne = ligne;
     while (!feof(pTabSalles)) {
 
-        token = strtok(pLigne, " |");
+        token = strtok(pLigne, "|");
         if (token != NULL) {
             salleBD.numSalle = atoi(token);
 
-            token = strtok(NULL, " |");
+            token = strtok(NULL, "|");
             if (token != NULL) {
                 salleBD.capacite = atoi(token);
 
@@ -498,11 +498,11 @@ Salle obtenirSalle(int numSalleRecherche) {
     fgets(ligne, sizeof(ligne), pTabSalles);
     pLigne = ligne;
     while (!feof(pTabSalles)) {
-        token = strtok(pLigne, " |");
+        token = strtok(pLigne, "|");
         if (token != NULL) {
             salleBD.numSalle = atoi(token);
 
-            token = strtok(NULL, " |");
+            token = strtok(NULL, "|");
             if (token != NULL) {
                 salleBD.capacite = atoi(token);
 
