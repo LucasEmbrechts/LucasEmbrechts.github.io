@@ -118,7 +118,7 @@ int calculerNbJours(int dateStartYYYYMMDD, int dateEndYYYYMMDD);
 
 /**
  * Vérifie l'existence et crée si nécessaire les fichiers du cinéma
- * @return true si tous les fichiers sont accessibles, false sinon
+ * @return false si des fichiers obligatoires n'existent pas, true sinon
  */
 bool ouvertureFichiersCinema(void) {
     FILE* pTabFilms = fopen(NOM_FICHIER_FILMS, "r+");
@@ -131,9 +131,7 @@ bool ouvertureFichiersCinema(void) {
 
     FILE* pTabSalles = fopen(NOM_FICHIER_SALLES, "r+");
     if (pTabSalles == NULL) {
-        pTabSalles = fopen(NOM_FICHIER_SALLES, "a+");
-        fclose(pTabSalles);
-        pTabSalles = fopen(NOM_FICHIER_SALLES, "r+");
+        return false;
     }
     fclose(pTabSalles);
 
