@@ -279,6 +279,108 @@
                 transform: translateY(0);
             }
         }
+
+        /* Section packs d'archivage */
+        .archive-section {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .archive-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .archive-header h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.4rem;
+        }
+
+        .archive-header p {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 1rem;
+        }
+
+        .archive-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .archive-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.8rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-top: 4px solid var(--card-color);
+        }
+
+        .archive-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.3rem;
+        }
+
+        .archive-uaa {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.55);
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.02em;
+        }
+
+        .archive-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.4rem;
+            background: var(--card-color);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+            min-height: 48px;
+        }
+
+        .archive-btn:hover:not(:disabled) {
+            filter: brightness(1.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .archive-btn:disabled {
+            opacity: 0.75;
+            cursor: not-allowed;
+            transform: none;
+            filter: none;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .archive-btn .spinner {
+            animation: spin 1s linear infinite;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .archive-section { padding: 1.5rem; }
+            .archive-grid { grid-template-columns: 1fr; }
+        }
     </style>
     <script>
 // Vérifier si on accède via github.io au lieu du domaine personnalisé
@@ -291,6 +393,39 @@ if (window.location.hostname.includes('.github.io')) {
 </head>
 <body>
     <div class="container">
+        <section class="archive-section">
+            <div class="archive-header">
+                <h2>Packs d'archivage fin d'année</h2>
+                <p>Téléchargez l'ensemble de vos cours et exercices en un seul fichier .zip</p>
+            </div>
+            <div class="archive-grid">
+                <div class="archive-card" style="--card-color: #6366f1">
+                    <h3>4ième année</h3>
+                    <p class="archive-uaa">UAA 3 &bull; 4 &bull; 5 &bull; 6 &bull; 7 &bull; 8</p>
+                    <button id="btn-4ieme" class="archive-btn" onclick="downloadPack('4ieme')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        <span>Télécharger le pack</span>
+                    </button>
+                </div>
+                <div class="archive-card" style="--card-color: #8b5cf6">
+                    <h3>5ième année</h3>
+                    <p class="archive-uaa">UAA 9 &bull; 11 &bull; 12</p>
+                    <button id="btn-5ieme" class="archive-btn" onclick="downloadPack('5ieme')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        <span>Télécharger le pack</span>
+                    </button>
+                </div>
+                <div class="archive-card" style="--card-color: #06b6d4">
+                    <h3>6ième année</h3>
+                    <p class="archive-uaa">UAA 12 &bull; 13 &bull; 14</p>
+                    <button id="btn-6ieme" class="archive-btn" onclick="downloadPack('6ieme')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        <span>Télécharger le pack</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
         <main class="courses-grid">
             <div class="course-card" style="">
                 <div class="course-number">3</div>
@@ -387,5 +522,105 @@ if (window.location.hostname.includes('.github.io')) {
             <p>Technique de Transition Informatique • Institut Notre-Dame de Beauraing • © 2025-2026</p>
         </footer>
     </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+const PACKS = {
+    '4ieme': {
+        filename: 'Pack_4ieme_2025-2026.zip',
+        files: [
+            'UAA5/4TTr_JS_00_Cours_Everything.pdf',
+            'UAA6/Animation_Cours.pdf',
+            'UAA6/MiseEnLigne_Cours.pdf',
+            'UAA7/UAA7_Bases_de_données.pdf',
+            'UAA8/4TTr_Securite.pdf'
+        ]
+    },
+    '5ieme': {
+        filename: 'Pack_5ieme_2025-2026.zip',
+        files: [
+            'UAA11/UAA11_Exercices_all.pdf',
+            'UAA12/Exercices/UAA12_Exercices_Serie1.pdf',
+            'UAA12/Exercices/UAA12_Exercices_Serie2.pdf',
+            'UAA12/Exercices/UAA12_Exercices_Serie3.pdf',
+            'UAA12/Exercices/UAA12_Exercices_Serie4.pdf',
+            'UAA12/Exercices/UAA12_Exercices_Serie5.pdf',
+            'UAA12/Exercices/UAA12_Exercices_Serie6.pdf',
+        ]
+    },
+    '6ieme': {
+        filename: 'Pack_6ieme_2025-2026.zip',
+        files: [
+            'UAA12/Exercices/UAA12_Exercices_Serie1.pdf',
+            'UAA12/Exercices/UAA12_Exercices_Serie2.pdf',
+            'UAA12/Exercices/UAA12_Exercices_Serie3.pdf',
+            'UAA12/Exercices/UAA12_Exercices_Serie4.pdf',
+            'UAA12/Exercices/UAA12_Exercices_Serie5.pdf',
+            'UAA12/Exercices/UAA12_Exercices_Serie6.pdf',
+            'UAA13/cours/SCRUM.pdf',
+            'UAA13/cours/Sprint retrospective.pdf',
+            'UAA14/UAA14_Exercices_Recap.pdf',
+            'UAA14/UAA14_Exercices_Serie1.pdf',
+            'UAA14/UAA14_Exercices_Serie2.pdf',
+            'UAA14/UAA14_Exercices_Serie3.pdf',
+            'UAA14/UAA14_Exercices_Serie4.pdf',
+            'UAA14/UAA14_Exercices_Serie5.pdf',
+            'UAA14/UAA14_Exercices_Serie6.pdf'
+        ]
+    }
+};
+
+const DOWNLOAD_SVG = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
+const SPINNER_SVG = `<svg class="spinner" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>`;
+
+function encodePath(path) {
+    return path.split('/').map(encodeURIComponent).join('/');
+}
+
+async function downloadPack(classKey) {
+    const pack = PACKS[classKey];
+    const btn = document.getElementById(`btn-${classKey}`);
+    const originalHTML = btn.innerHTML;
+
+    btn.disabled = true;
+
+    const zip = new JSZip();
+    const folder = zip.folder(`Pack_${classKey}`);
+
+    for (let i = 0; i < pack.files.length; i++) {
+        const filePath = pack.files[i];
+        btn.innerHTML = `${SPINNER_SVG}<span>${i + 1}/${pack.files.length} fichiers...</span>`;
+        try {
+            const res = await fetch(encodePath(filePath));
+            if (res.ok) {
+                folder.file(filePath, await res.blob());
+            } else {
+                console.warn(`Non trouvé : ${filePath}`);
+            }
+        } catch (e) {
+            console.warn(`Erreur fetch : ${filePath}`, e);
+        }
+    }
+
+    btn.innerHTML = `${SPINNER_SVG}<span>Compression...</span>`;
+
+    const blob = await zip.generateAsync(
+        { type: 'blob', compression: 'DEFLATE', compressionOptions: { level: 6 } },
+        ({ percent }) => {
+            btn.innerHTML = `${SPINNER_SVG}<span>Compression ${Math.round(percent)}%</span>`;
+        }
+    );
+
+    const url = URL.createObjectURL(blob);
+    const a = Object.assign(document.createElement('a'), { href: url, download: pack.filename });
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    btn.disabled = false;
+    btn.innerHTML = originalHTML;
+}
+</script>
 </body>
 </html>
