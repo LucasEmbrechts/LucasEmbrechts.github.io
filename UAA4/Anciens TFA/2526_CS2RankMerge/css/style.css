@@ -1,0 +1,336 @@
+/* Style général de la page */
+body {
+    margin: 0; /* Enlève les marges par défaut du navigateur */
+    background-color: black; /* Fond noir */
+    color: white; /* Texte en blanc */
+    font-family: 'Arial Black', sans-serif; /* Police d'écriture */
+    overflow: hidden; /* Empêche l'apparition de barres de défilement (scroll) */
+}
+
+/* Classe pour les conteneurs d'images de fond (comme le menu) */
+.conteneur-image {
+    position: relative; /* Permet de positionner des éléments enfants par rapport à ce conteneur */
+    width: 100vw; /* Prend 100% de la largeur de l'écran (viewport width) */
+    height: 56.25vw; /* Garde un ratio 16:9 par rapport à la largeur */
+    background-image: url('../sources/menu_background.jpg'); /* Correction du chemin */
+    background-size: contain; /* L'image s'adapte sans être coupée */
+    background-position: center; /* Centre l'image */
+    background-repeat: no-repeat; /* Ne répète pas l'image */
+    margin: auto; /* Centre le conteneur horizontalement */
+}
+
+/* --- STYLES DES DIFFÉRENTS ÉCRANS DU JEU --- */
+/* Chaque écran a sa propre image de fond (Correction des chemins avec ../) */
+#ecran-credits {
+    background-image: url('../sources/crédits_background.jpg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: black;
+}
+
+#ecran-regles {
+    background-image: url('../sources/règles_background.jpg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: black;
+}
+
+#ecran-jeu {
+    background-image:  url('../sources/grille-4x4.jpg'); /* Fond par défaut pour le jeu (grille 4x4) */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* --- STYLES DES TEXTES ET IMAGES DE VICTOIRE / DÉFAITE --- */
+/* Ces éléments sont cachés par défaut (display: none) et centrés sur la grille */
+#défaite-texte {
+    display: none;
+    position: absolute;
+    top: 195px;
+    left: 650px;
+    width: 32.5%;
+    height: 60%;
+    z-index: 10; /* Place le texte au-dessus des autres éléments */
+    justify-content: center; /* Centre le contenu horizontalement */
+    align-items: center; /* Centre le contenu verticalement */
+}
+
+#défaite-image { width: 200%; } /* Agrandit l'image de défaite */
+
+#victoire-texte {
+    display: none;
+    position: absolute;
+    top: 195px;
+    left: 650px;
+    width: 32.5%;
+    height: 60%;
+    z-index: 10;
+    justify-content: center;
+    align-items: center;
+}
+
+#victoire-image { width: 200%; }
+
+/* --- CLASSE GLOBALE POUR LES PAGES --- */
+/* S'assure que les pages couvrent tout l'écran, mais sont invisibles au départ */
+.page {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99; /* Par-dessus le reste */
+}
+
+/* --- STYLES DES BOUTONS ET ZONES CLIQUABLES --- */
+/* Positionne les boutons du menu principal */
+.zone-boutons {
+    position: absolute;
+    top: 24.5%;
+    left: 50%;
+    transform: translateX(-50%); /* Centre parfaitement au milieu */
+    width: 25.5%;
+    height: 55%;
+    display: flex; /* Utilise Flexbox pour aligner les boutons en colonne */
+    flex-direction: column;
+    justify-content: space-between; /* Espace uniformément les boutons */
+}
+
+/* Rends les boutons transparents (ils se superposent sur l'image de fond qui a le "dessin" du bouton) */
+.bouton-invisible {
+    width: 100%;
+    height: 26%;
+    cursor: pointer; /* Change le curseur en petite main */
+    background: transparent;
+    border: none;
+}
+
+/* Style pour les textes des règles et des crédits */
+.contenu-cadre {
+    position: absolute;
+    left: 50%;
+    width: 42%;
+    text-align: center;
+    color: #2e2e2e; /* Gris foncé */
+    text-transform: uppercase; /* Met le texte en majuscules */
+}
+
+#ecran-credits .contenu-cadre {
+    top: 50%;
+    transform: translate(-50%, -85%);
+}
+
+#ecran-regles .contenu-cadre {
+    top: 50%;
+    transform: translate(-50%, -55%);
+}
+
+/* Titres dans les cadres */
+.contenu-cadre h2 {
+    font-size: 3.5vw; /* Taille proportionnelle à la largeur de l'écran */
+    margin-bottom: 20px;
+    border-bottom: 3px solid #2e2e2e; /* Souligne le titre */
+    display: inline-block;
+}
+
+/* Paragraphes dans les cadres */
+.contenu-cadre p {
+    font-size: 1.25vw;
+    margin: 10px 0;
+    font-weight: 900;
+    line-height: 1.3;
+}
+
+.nom { color: #555; }
+
+/* Zone invisible en bas pour retourner au menu depuis les règles/crédits */
+.zone-retour-invisible {
+    position: absolute;
+    bottom: 6%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16%;
+    height: 10%;
+    cursor: pointer;
+}
+
+/* --- GRILLE DE JEU (STYLE PRINCIPAL DU 2048) --- */
+#Grille-de-jeu {
+    position: absolute;
+    top: 205px;
+    left: 600px;
+    width: 697px;
+    height: 650px;
+    display: grid; /* Utilise le système de grille CSS pour placer les cases */
+    filter: blur(0px); /* Pas de flou au départ (sera utilisé pour le game over) */
+    /* Par défaut, une grille de 4 colonnes et 4 lignes (1fr = 1 fraction de l'espace disponible) */
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 7px; /* Espace entre les cases */
+    padding: 15px;
+}
+
+/* Modification de la grille si on choisit le mode 6x6 */
+#Grille-de-jeu.grille-6x6 {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 5px; /* Les cases sont plus petites, donc on réduit l'espace */
+}
+
+/* Modification de la grille si on choisit le mode 8x8 */
+#Grille-de-jeu.grille-8x8 {
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    gap: 3px;
+}
+
+/* Style individuel de chaque "case" de la grille */
+.grid-cell {
+    background-color: rgba(255, 255, 255, 0.1); /* Fond légèrement blanc et transparent */
+    border-radius: 6px; /* Bords arrondis */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    user-select: none; /* Empêche de sélectionner l'image avec la souris */
+}
+
+/* Style de l'image (le grade) à l'intérieur d'une case */
+.grid-cell img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* L'image s'adapte sans être déformée */
+}
+
+/* --- ANIMATION POP LORS DE L'APPARITION D'UNE NOUVELLE CASE --- */
+/* ---                         Maël                           --- */                                      
+.pop-animation {
+    /* Lance l'animation 'popCase' qui dure 0.25 seconde avec un rebond (cubic-bezier) */
+    animation: popCase 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+/* Définition des étapes de l'animation 'popCase' */
+@keyframes popCase {
+    0% {
+        transform: scale(0); /* Part d'une taille de 0 (invisible) */
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1); /* Arrive à sa taille normale */
+        opacity: 1;
+    }
+}
+
+/* --- INTERFACE DU JEU (Boutons retour, score, etc.) --- */
+.conteneur-boutons-bas {
+    position: absolute;
+    bottom: 3%;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Espace entre les boutons en bas */
+    width: 100%;
+}
+
+.zone-retour-invisible-jeux {
+    width: 10%;
+    height: 65px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+}
+
+.score-text {
+    position: absolute;
+    top: 1.6%;
+    left: 62.2%;
+    width: 8%;
+    height: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5vw;
+    font-weight: bold;
+    color: #2e2e2e;
+    margin: 0;
+}
+
+#score {
+    position: absolute;
+    top: 1.8%;
+    left: 69.9%;
+    width: 8%;
+    height: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5vw;
+    font-weight: bold;
+    color: #2e2e2e;
+    margin: 0;
+}
+
+.bouton_niveau {
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    position: absolute;
+    top: 6.5%;
+    left: 69.9%;
+    width: 7%;
+    height: 4%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5vw;
+    font-weight: bold;
+    color: #000000;
+    margin: 0;
+}
+
+#écran-séléction-niveau {
+    /* Correction du chemin + correction du nom exact 'sélection-niveau.jpg' vu sur ta capture */
+    background-image: url('../sources/séléction-niveau.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: black;
+}
+
+.zone-boutons-selection {
+    position: absolute;
+    top: 26%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 28%;
+    height: 56%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* --- ANIMATION DU SCORE FLOTTANT (+2) --- */
+/* ---            Timéo                 --- */
+.score-popup {
+    position: absolute;
+    font-size: 1.2vw;
+    font-weight: bold;
+    color: #4CAF50; /* Vert */
+    pointer-events: none; /* La souris passe au travers */
+    animation: envol 0.8s ease-out forwards; /* Lance l'animation 'envol' */
+    z-index: 100;
+}
+
+/* Le texte monte et disparaît */
+@keyframes envol {
+    0% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-50px) scale(1.5); }
+}

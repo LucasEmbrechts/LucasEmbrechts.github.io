@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Simple CS2</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div id="ecran-menu" class="conteneur-image">
+        <div class="zone-boutons">
+            <button class="bouton-invisible" onclick="afficherJeu()"></button>
+            <button class="bouton-invisible" onclick="afficherCredits()"></button>
+            <button class="bouton-invisible" onclick="afficherRegles()"></button>
+        </div>
+    </div>
+
+    <div id="ecran-jeu" class="page">
+        <div id="défaite-texte">
+            <img id="défaite-image" src="sources/défaite text.png" alt="">
+        </div>
+        <div id="victoire-texte">
+            <img id="victoire-image" src="sources/victoire text.png" alt="">
+        </div>
+        
+        <div id="Grille-de-jeu"></div>
+        
+        <div class="conteneur-boutons-bas">
+            <div class="zone-retour-invisible-jeux" onclick="retourAuMenu()">Retour</div>
+            <div class="zone-retour-invisible-jeux" onclick="nouvellepartie()">Rejouer</div>
+        </div>
+        
+        <p id="score-text" class="score-text">score </p>
+        <span id="score">0</span>
+        
+        <button class="bouton_niveau" onclick="Choisir_Niveau()">Niveau</button>
+    </div>
+
+    <div id="ecran-credits" class="page">
+        <div class="contenu-cadre">
+            <h2>ÉQUIPE</h2>
+            <p>Programmation : <span class="nom">Maël et Timéo</span></p>
+            <p>Design Graphique : <span class="nom">Gemini</span></p>
+            <a href="https://discord.gg/zc9yVJ6zCB" target="_blank" style="color: #2e2e2e; font-size: 1vw;">Signaler un bug</a>
+        </div>
+        <div class="zone-retour-invisible" onclick="retourAuMenu()"></div>
+    </div>
+
+    <div id="ecran-regles" class="page">
+        <div class="contenu-cadre">
+            <p>BUT : Fusionnez les grades pour atteindre le rang Global Elite.</p>
+            <p>JOUER : Utilisez les flèches du clavier pour déplacer les tuiles.</p>
+            <p>FUSION : Deux tuiles identiques créent un rang supérieur.</p>
+            <p>FIN : Grille pleine et bloquée égale défaite.</p>
+        </div>
+        <div class="zone-retour-invisible" onclick="retourAuMenu()"></div>
+    </div>
+
+    <div id="écran-séléction-niveau" class="page">
+        <div class="zone-boutons-selection">
+            <button class="bouton-invisible" onclick="choisir(0)"></button>
+            <button class="bouton-invisible" onclick="choisir(1)"></button>
+            <button class="bouton-invisible" onclick="choisir(2)"></button>
+        </div>
+    </div>
+
+    <script src="js/javascript.js"></script>
+
+</body>
+
+</html>
