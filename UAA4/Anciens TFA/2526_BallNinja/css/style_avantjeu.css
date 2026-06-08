@@ -1,0 +1,83 @@
+body {
+        margin: 0;
+        height: 100vh;
+        font-family: 'Arial Black', sans-serif;
+        background-image: url(../sources/fondAvantJeu.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        
+      }
+      
+      .menu {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+      
+      /* Boutons principaux */
+      .btn {
+        margin-top: 10px;
+        font-size: 23px;
+        text-shadow: 0 0 10px rgba(0,0,0,0.8);
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        cursor: pointer;
+        text-align: center;
+        transition: transform 0.2s ease;
+      }
+      
+      
+      .btn:hover {
+        transform: scale(1.08);
+      }
+      
+      /* START GAME */
+      .start {
+        position: absolute;
+        left: 25%;
+        bottom: 15%;
+        background: radial-gradient(circle, #1aff1a, #0a7a0a);
+        box-shadow: 0 0 30px #1aff1a;
+      }
+      
+      /* SCORES */
+      .scores {
+        position: absolute;
+        right: 25%;
+        bottom: 15%;
+        background: radial-gradient(circle, #2aa3ff, #004e92);
+        box-shadow: 0 0 30px #2aa3ff;
+      }
+      
+      /* Icônes */
+      .icon {
+        width: 70px;
+        height: 70px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: absolute;
+      }
+      /* Bouton retour */
+      .back-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        padding: 10px 18px;
+        background: linear-gradient(#ffb347, #ff7a18);
+        border-radius: 8px;
+        font-weight: bold;
+        color: #3a1d00;
+        cursor: pointer;
+        box-shadow: 0 0 10px rgba(0,0,0,0.6);
+      }
+      
+      .back-btn:hover {
+        transform: scale(1.05);
+      }

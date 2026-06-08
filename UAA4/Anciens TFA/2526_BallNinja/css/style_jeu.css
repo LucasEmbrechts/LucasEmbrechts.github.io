@@ -1,0 +1,494 @@
+
+        html *{
+            user-select: none;
+        }
+        
+        html, body{
+            height: 100%;
+            width: 100%;
+            margin: 0;
+        }
+        #body{
+            overflow: hidden;
+            background-size: cover;
+            background-image: url(../sources/terrain-tennis.png);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transition: background-image 1s ease-in-out;
+            filter: blur(20px);
+        }
+        #mort {
+            position: fixed; /* se place par-dessus le jeu */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            z-index: 999;
+            
+        }
+        #debut {
+            position: fixed; /* se place par-dessus le jeu */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 999;
+            text-align: center;
+            
+            
+        }
+        @keyframes anim-trajet-tennis-droite{
+            from{transform: translateX(0px);}
+            to{transform: translateX(500px);}
+        }
+        @keyframes anim-trajet-tennis-gauche{
+            from{transform: translateX(0px);}
+            to{transform: translateX(-500px);}
+        }
+        @keyframes anim-tennis{
+            0%{
+                transform: translateY(0px);
+            }
+            
+            50%{
+                transform: translateY(-900px);
+            }
+            
+            100%{
+                transform: translateY(300px)
+            }
+        }
+        @keyframes anim-trajet-basket-droite{
+            from{transform: translateX(0);}
+            to{transform: translateX(1920px);}
+        }
+        @keyframes anim-trajet-basket-gauche{
+            from{transform: translateX(0);}
+            to{transform: translateX(-1920px);}
+        }
+        @keyframes anim-basket {
+            0%{
+                transform: translateY(-100px);
+            }
+            
+            50%{
+                transform: translateY(-700px);
+            }
+            
+            100%{
+                transform: translateY(-100px);
+            }
+        }
+        @keyframes anim-trajet-rugby {
+            from{left: -100px;}
+            to{left: 1920px;}
+        }
+        @keyframes anim-rugby {
+            
+        }
+        @keyframes anim-trajet-volant-droite{
+            from{transform: translateX(0px)}
+            to{transform: translateX(200px);}
+        }
+        @keyframes anim-trajet-volant-gauche{
+            from{transform: translateX(0px)}
+            to{transform: translateX(-200px);}
+        }
+        @keyframes anim-volant{
+            0%{
+                transform: translateY(100px);
+            }
+            
+            45%{
+                transform: translateY(-900px) rotate(-180deg);
+            }
+            
+            50%{
+                transform: translateY(-900px) rotate(0deg);
+            }
+            
+            100%{
+                transform: translateY(300px) rotate(0deg);
+            }
+            
+        }
+        @keyframes anim-trajet-foot-droite{
+            from{transform: translateX(0px);}
+            to{transform: translateX(600px);}
+        }
+        @keyframes anim-trajet-foot-gauche{
+            from{transform: translateX(0px);}
+            to{transform: translateX(-600px);}
+        }
+        @keyframes anim-foot{
+            0%{
+                transform: translateY(0px);
+            }
+            
+            50%{
+                transform: translateY(-900px);
+            }
+            100%{
+                transform: translateY(300px);
+            }
+        }
+        @keyframes anim-trajet-bowling-droite{
+            from{transform: translateX(0px);}
+            to{transform: translateX(600px);}
+        }
+        @keyframes anim-trajet-bowling-gauche{
+            from{transform: translateX(0px);}
+            to{transform: translateX(-600px);}
+        }
+        @keyframes anim-bowling{
+            0%{
+                transform: translateY(0px);
+            }
+            
+            50%{
+                transform: translateY(-800px);
+            }
+            100%{
+                transform: translateY(400px);
+            }
+        }
+        @keyframes anim-trajet-eau{
+            from{transform: translateX(0px);}
+            to{transform: translateX(0px);}
+        }
+        @keyframes anim-eau{
+            0%{
+                transform: translateY(-1250px);
+            }
+            100%{
+                transform: translateY(400px);
+            }
+        }
+        .trajet-balle-basket-droite{
+            animation-name: anim-trajet-basket-droite;
+            animation-duration: 5s;
+            animation-iteration-count: 1;
+            animation-timing-function: linear;
+            bottom: 0px;
+            position: absolute;
+        }
+        .trajet-balle-basket-gauche{
+            animation-name: anim-trajet-basket-gauche;
+            animation-duration: 5s;
+            animation-iteration-count: 1;
+            animation-timing-function: linear;
+            bottom: 0px;
+            position: absolute;
+        }
+        .balle-basket{
+            animation-name: anim-basket;
+            animation-duration: 2.5s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: 2;
+            width: 100px;
+            height: 100px;
+            background-size: cover;
+            background-image: url(../sources/basket.png);
+            position: absolute;
+            bottom: -200px;
+            user-select: none;
+        }
+        .trajet-balle-tennis-droite{
+            animation-name: anim-trajet-tennis-droite;
+            animation-duration: 5s;
+            animation-timing-function: ease-in-out;
+            bottom: 0px;
+            position: absolute;
+        }
+        .trajet-balle-tennis-gauche{
+            animation-name: anim-trajet-tennis-gauche;
+            animation-duration: 5s;
+            animation-timing-function: ease-in-out;
+            bottom: 0px;
+            position: absolute;
+        }
+        .balle-tennis{
+            animation-name: anim-tennis;
+            animation-duration: 5s;
+            animation-timing-function: ease-in-out;
+            bottom: -200px;
+            background-image: url(../sources/tennis.png);
+            background-size: cover;
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            user-select: none;
+        }
+        .balle-rugby{
+            animation-name: anim-rugby;
+            animation-duration: 3s;
+            animation-timing-function: ease-in-out;
+            width: 192px;
+            height: 108px;
+            background-size: cover;
+            background-image: url(../sources/rugby.png);
+            position: absolute;
+        }
+        .trajet-balle-rugby{
+            animation-name: anim-trajet-rugby;
+            animation-fill-mode:forwards;
+            animation-duration: 3s;
+            animation-timing-function: linear;
+            position: absolute;
+        }
+        .balle-volant{
+            animation-name: anim-volant;
+            animation-duration: 5s;
+            transition-timing-function: ease-out;
+            left: 100px;
+            bottom: -200px;
+            background-image: url(../sources/volant.png);
+            background-size: cover;
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            user-select: none;
+        }
+        .trajet-balle-volant-droite{
+            animation-name: anim-trajet-volant-droite;
+            animation-duration: 5s;
+            transition-timing-function: ease-out;
+            bottom: 0px;
+            position: absolute;
+        }
+        .trajet-balle-volant-gauche{
+            animation-name: anim-trajet-volant-gauche;
+            animation-duration: 5s;
+            transition-timing-function: ease-out;
+            bottom: 0px;
+            position: absolute;
+        }
+        
+        
+        .trajet-balle-foot-droite{
+            animation-name: anim-trajet-foot-droite;
+            animation-duration: 5s;
+            animation-timing-function: ease-in-out;
+            bottom: 0px;
+            position: absolute;
+        }
+        .trajet-balle-foot-gauche{
+            animation-name: anim-trajet-foot-gauche;
+            animation-duration: 5s;
+            animation-timing-function: ease-in-out;
+            bottom: 0px;
+            position: absolute;
+        }
+        .balle-foot{
+            animation-name: anim-foot;
+            animation-duration: 5s;
+            animation-timing-function: ease-in-out;
+            bottom: -200px;
+            background-image: url(../sources/foot.png);
+            background-size: cover;
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            user-select: none;
+        }
+        .trajet-balle-bowling-gauche{
+            animation-name: anim-trajet-bowling-gauche;
+            animation-duration: 5s;
+            animation-timing-function: ease-in-out;
+            bottom: 0px;
+            position: absolute;
+        }
+        .trajet-balle-bowling-droite{
+            animation-name: anim-trajet-bowling-droite;
+            animation-duration: 5s;
+            animation-timing-function: ease-in-out;
+            bottom: 0px;
+            position: absolute;
+        }
+        
+        .balle-bowling{
+            animation-name: anim-bowling;
+            animation-duration: 5s;
+            animation-timing-function: ease-in-out;
+            bottom: -200px;
+            background-image: url(../sources/bowling.png);
+            background-size: cover;
+            width: 150px;
+            height: 150px;
+            position: absolute;
+            user-select: none;
+        }
+        .trajet-balle-eau{
+            animation-name: anim-trajet-eau;
+            animation-duration: 3s;
+            animation-timing-function: ease-in-out;
+            bottom: 0px;
+            position: absolute;
+        }
+        .balle-eau{
+            animation-name: anim-eau;
+            animation-duration: 3s;
+            animation-timing-function: ease-in-out;
+            bottom: -200px;
+            background-image: url(../sources/ballondeau.png);
+            background-size: cover;
+            width: 150px;
+            height: 150px;
+            position: absolute;
+            user-select: none;
+        }
+        #score{
+            top: 20px;
+            position: relative;
+            height: 50px;
+            width: 100px;
+            left: 70px;
+            user-select: none;
+            font-family: "Stencil Std", "Stencil", fantasy;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 40px;
+        }
+        #espacevie{
+            width: 200px;
+            height: 100px;
+            user-select: none;
+        }
+        #coeurs{
+            position: absolute;
+            display: flex;
+            gap: 10px;
+            right: 20px;
+            top: 30px;
+            
+            
+        }
+        .heart{
+            width: 60px;
+            height: 60px;
+            background-image: url(../sources/heart.png);
+            background-size: cover;
+        }
+        
+        
+        .mort-text {
+            font-family: "Courier New", monospace;
+            font-size: 40px;
+            color: black;
+            letter-spacing: 6px;
+            text-transform: lowercase;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .mort-text::before,
+        .mort-text::after {
+            content: "✦";
+            font-size: 20px;
+            margin: 0 15px;
+        }
+        #rejouer-btn {    /* c'est le bouton rejouer */
+        
+        position: absolute;
+        top: 120px;
+        right: 350px;
+        padding: 10px 18px;
+        background: linear-gradient(#ffb347, #ff7a18);
+        border-radius: 8px;
+        font-weight: bold;
+        color: #3a1d00;
+        cursor: pointer;
+        box-shadow: 0 0 10px rgba(0,0,0,0.6);
+        z-index: 999;
+    }
+    
+    #rejouer-btn:hover {
+        transform: scale(1.05);
+    }
+    #menu-btn {    
+        position: absolute;
+        top: 120px;
+        right: 120px;
+        padding: 10px 18px;
+        background: linear-gradient(#ffb347, #ff7a18);
+        border-radius: 8px;
+        font-weight: bold;
+        color: #3a1d00;
+        cursor: pointer;
+        box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    }
+    
+    #menu-btn:hover {
+        transform: scale(1.05);
+    }
+    #lancer-btn {    
+        
+        
+        padding: 10px 18px;
+        background: linear-gradient(#ffb347, #ff7a18);
+        border-radius: 8px;
+        font-weight: bold;
+        color: #3a1d00;
+        cursor: pointer;
+        box-shadow: 0 0 10px rgba(0,0,0,0.6);
+        z-index: 999;
+    }
+    
+    #lancer-btn:hover {
+        transform: scale(1.05);
+    }
+    
+    
+    @keyframes anim-explosion{
+        0%{
+            opacity: 100%;
+        }
+        50%{
+            opacity: 50%;
+        }
+        100%{
+            opacity: 0%;
+        }
+    }
+    .explosion{
+        pointer-events: none;
+        animation-name: anim-explosion;
+        animation-duration: 5s;
+        animation-fill-mode: forwards;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: 1;
+        position: fixed;
+        z-index: 999;
+        display: block;
+        background-size: cover;
+        background-image: url(../sources/exlposion.png);
+        width: 1800px;
+        height: 900px;
+    }
+    #nom{
+        height: 30px;
+        width: 300px;
+        text-align: center;  
+        background: linear-gradient(#ffb347, #ff7a18);
+        border-radius: 8px;
+        font-weight: bold;
+        color: #3a1d00;
+        cursor: pointer;
+        box-shadow: 0 0 10px rgba(0,0,0,0.6);
+        z-index: 999;
+        margin-right: 20px;
+    }
+    #bestscore{
+        top: 30px;
+        position: relative;
+        height: 50px;
+        width: 300px;
+        left: 70px;
+        user-select: none;
+        font-family: "Stencil Std", "Stencil", fantasy;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 40px;
+    }
+    
+    

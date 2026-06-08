@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style_jeu.css">
+</head>
+<body>
+    <div id="debut">
+        <div class="mort-text">quel est ton nom ?</div>
+        <input type="text" id="nom">
+        <button id="lancer-btn" onclick="start()">Lancer la partie</button>
+    </div>
+    <div id="mort">
+        <div class="mort-text">tu es mort</div>
+        <div class="mort-text" id="mort_score"></div>
+        <a href="AvantJeu.html"><div id="rejouer-btn">rejouer</div></a>
+        <a href="index.html"> <div id="menu-btn">Menu</div></a>
+    </div>
+    <div id="body">
+        
+        
+        <div id="score">0</div>
+        <div id="bestscore"></div>
+        <div id="coeurs"></div> 
+        
+        <div id="explosion"></div>
+    </div>
+    <script src="js/jeu_script.js"></script>
+</body>
+</html>

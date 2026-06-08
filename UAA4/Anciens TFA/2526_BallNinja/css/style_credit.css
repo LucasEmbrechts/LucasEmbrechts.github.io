@@ -1,0 +1,71 @@
+body{
+            background-image: url(../sources/BackCredit2.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        #credit{
+            position: absolute;
+            top: 300px;
+            margin-left: 780px;
+            text-align: center;
+            color: #FDE6A1;
+            font-size: 25px;
+        }
+        #boutton-73{
+            position: absolute;
+            height: 90px;
+            width: 220px;
+
+        }
+        #boutton-74{
+            position: absolute;
+            top: 500px;
+            left: 150px;
+            height: 90px;
+            width: 220px;
+        }
+        #boutton-75{
+            position: absolute;
+            top: 500px;
+            right: 150px;
+            height: 90px;
+            width: 220px;
+        }
+        .button-73 {
+            border: 10px solid #193d75;
+            appearance: none;
+            background-color: #FFFFFF;
+            border-radius: 40em;
+            box-shadow: #ADCFFF 0 -12px 6px inset;
+            box-sizing: border-box;
+            color: #413e59;
+            cursor: pointer;
+            display: inline-block;
+            font-family: -apple-system,sans-serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            letter-spacing: -.24px;
+            margin: 0;
+            outline: none;
+            padding: 1rem 1.3rem;
+            quotes: auto;
+            text-decoration: none;
+            transition: all .15s;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        .button-73:hover {
+            background-color: #FFC229;
+            box-shadow: #FF6314 0 -6px 8px inset;
+            transform: scale(1.125);
+            border: 10px solid #600f1b;
+        }
+
+        .button-73:active {
+            transform: scale(1.025);
+        }

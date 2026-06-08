@@ -1,0 +1,52 @@
+body{
+            background-image: url(../sources/imageregle.png);
+            background-size: cover;
+            background-repeat: no-repeat; 
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        #boutton-73{
+            position: absolute;
+            left: 10px;
+            top: 500px;
+            height: 140px;
+            width: 240px;
+        }
+        #button-73 {
+            border: 10px solid #193d75;
+            appearance: none;
+            background-color: #FFFFFF;
+            border-radius: 40em;
+            box-shadow: #ADCFFF 0 -12px 6px inset;
+            box-sizing: border-box;
+            color: #413e59;
+            cursor: pointer;
+            display: inline-block;
+            font-family: -apple-system,sans-serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            letter-spacing: -.24px;
+            margin: 0;
+            outline: none;
+            padding: 1rem 1.3rem;
+            quotes: auto;
+            text-decoration: none;
+            transition: all .15s;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+
+        }
+
+        #button-73:hover {
+            background-color: #FFFFFF;
+            box-shadow: #ADCFFF 0 -6px 8px inset;
+            transform: scale(1.125);
+            border: 10px solid #193d75;
+        }
+
+        #button-73:active {
+            transform: scale(1.025);
+        }
