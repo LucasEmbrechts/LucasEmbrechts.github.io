@@ -1,0 +1,238 @@
+<!--
+
+
+<audio id="..." src="..." loop>
+  Intègre un fichier audio dans la page.
+  src="..." = le chemin vers le fichier son (.mp3, .ogg...).
+  loop = la musique recommence automatiquement quand elle se termine.
+  Sans l'attribut "controls", le lecteur est invisible (on le contrôle via JavaScript).
+
+<span>
+  Conteneur INLINE (en ligne) sans signification particulière.
+  Contrairement à <div>, il ne crée pas de nouvelle ligne.
+  Utilisé pour cibler un morceau de texte dans une phrase et lui appliquer du style.
+  Exemple : "Score : <span id='score'>0</span>/10"
+
+<button onclick="...">
+  Crée un bouton cliquable.
+  onclick="..." = le code JavaScript à exécuter quand on clique dessus.
+  On peut mettre n'importe quelle fonction JavaScript entre les guillemets.
+
+<strong>
+  Met le texte en GRAS.
+  Différent de <b> : <strong> indique aussi que le texte est IMPORTANT
+  (utilisé par les lecteurs d'écran pour les malvoyants).
+
+
+display: flex
+  Active le mode "Flexbox" : les éléments enfants se placent
+  automatiquement en ligne ou en colonne selon les règles qu'on définit.
+  justify-content: center → centre horizontalement.
+  align-items: center    → centre verticalement.
+  flex-direction: column → les éléments se placent en colonne (l'un sous l'autre).
+  gap: 20px              → espace entre les éléments enfants.
+
+display: grid
+  Mode "Grille" : permet de placer les éléments dans une grille 2D.
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr))
+    → crée autant de colonnes que possible, chacune faisant au moins 110px.
+
+display: none
+  Cache complètement l'élément (il n'est plus visible ET ne prend plus de place).
+  display: none !important → le !important force cette règle même si d'autres règles
+  essaient de l'écraser.
+
+z-index: 1000
+  Contrôle l'ordre de superposition des éléments (comme des calques Photoshop).
+  Plus le nombre est grand, plus l'élément est "au-dessus" des autres.
+
+background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%)
+  Crée un dégradé de couleurs en fond.
+  135deg = angle du dégradé.
+  #f093fb = couleur de départ (0%).
+  #f5576c = couleur d'arrivée (100%).
+
+background-size: cover
+  L'image de fond s'étire pour couvrir tout l'élément, sans laisser de blanc,
+  même si l'image est plus petite que l'écran. Elle peut être rognée.
+
+animation: gradientShiftEasy 3s ease infinite
+  Lance une animation CSS.
+  gradientShiftEasy = nom de l'animation (définie avec @keyframes).
+  3s = durée de l'animation.
+  ease = la vitesse accélère puis ralentit.
+  infinite = elle boucle sans s'arrêter.
+
+transition: transform 0.2s
+  Ajoute une animation fluide quand une propriété CSS change.
+  Ici, si "transform" change (ex: au survol), le changement prend 0.2 secondes
+  au lieu d'être instantané.
+
+transform: scale(1.05)
+  Agrandit l'élément de 5% par rapport à sa taille normale.
+  Souvent utilisé avec :hover pour donner un effet "grossissement au survol".
+
+transform: translateY(-5px)
+  Déplace l'élément de 5 pixels vers le HAUT.
+  translateX → déplace horizontalement.
+  translateY → déplace verticalement.
+
+
+border-radius: 15px
+  Arrondit les coins de l'élément.
+  Plus le nombre est grand, plus les coins sont ronds.
+  border-radius: 50% → fait un cercle parfait.
+
+cursor: pointer
+  Change le curseur de la souris en "main" quand on survole l'élément.
+  Indique visuellement que l'élément est cliquable.
+cursor: not-allowed
+  Change le curseur en "interdit" (cercle barré).
+
+opacity: 0.5
+  Rend l'élément semi-transparent (0 = invisible, 1 = pleinement visible).
+
+filter: grayscale(0.8)
+  Applique un filtre visuel sur l'élément.
+  grayscale(0.8) = retire 80% des couleurs (presque noir et blanc).
+
+object-fit: cover
+  Pour les images : elle remplit son conteneur sans se déformer,
+  en étant rognée si nécessaire. Similaire à background-size: cover.
+
+overflow: hidden
+  Cache tout ce qui dépasse des bords de l'élément.
+
+-->
+<!DOCTYPE html>
+<html lang="fr">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cache-cache royal</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!--debut de partie daniel-->
+  <audio id="son-menu" src="../son menu/Voicy_Clash Royale Soundtrack - Menu A (1).mp3" loop></audio>
+  <audio id="son-carte"></audio>
+  <!--fin de partie de daniel et commencemant de max-->
+  <div id="ecran-menu">
+    <h1>🏆 CACHE-CACHE ROYALE 🏆</h1>
+
+    <div style="font-size: 1.5em; margin-bottom: 10px; color: #ffd93d;">SCORES :</div>
+    <div class="liste-scores">
+      <div style="color: #84fab0;">😊 <strong>Facile: <span id="meilleur-score-facile">-</span>/10</div> </strong>
+      <br>
+      <div style="color: #ffd89b;">😐 <strong>Normal: <span id="meilleur-score-normal">-</span>/10</div> </strong>
+      <br>
+      <div style="color: #ff6b6b;">😈 <strong>Difficile: <span id="meilleur-score-difficile">-</span>/10</div> </strong>
+      <div id="mode-expert" style="color: #a855f7;">👑 <strong> <span id="meilleur-score-expert">-</span>/15</div>
+      </strong>
+    </div>
+
+    <div class="menu-boutons">
+      <button class="btn" onclick="lancerMusique(); afficherOptions()">JOUER</button>
+      <button class="btn" onclick="lancerMusique(); afficherRegles()">RÈGLES</button>
+      <button class="btn" onclick="lancerMusique(); afficherCredits()">CRÉDITS</button>
+    </div>
+  </div>
+
+  <div id="ecran-credits" class="cache">
+    <h1>CRÉDITS</h1>
+    <div class="credits">
+      <p><strong>Conception • Programmation • Design</strong></p>
+      <p style="font-size: 1.5em; margin-top: 20px;">Max Dardenne & Daniel Deneffe</p>
+      <p style="font-size: 1.5em; margin-top: 20px;">4TTr💻</p>
+      <p style="font-size: 1.5em; margin-top: 20px;">🎉2025 → 2026🎉</p>
+    </div>
+    <button class="btn" onclick="retourMenu()" style="margin-top: 30px;">RETOUR</button>
+  </div>
+
+  <div id="ecran-regles" class="cache">
+    <h1>RÈGLES DU JEU</h1>
+    <div class="contenu-credits">
+      <p>🎯 <strong>Objectif :</strong> Trouve le bon bouton parmi les cartes de Clash Royale</p>
+      <p>⏱️ Tu as un temps limité pour trouver le bon bouton</p>
+      <p>🏆 Complète 10 rounds et obtiens le meilleur score possible</p>
+      <p>🐌 Un temps d'attente de 0.5 secondes est actif au niveau facile et moyen entre les click des cartes</p>
+      <p>⚡ Une seul carte fonctionne par round, les autres sont des leurres</p>
+      <p>📊 Ton score est enregistré à la fin de la partie dans l'écran d'acceuil</p>
+
+      <p style="margin-top:20px; color:#ffd93d; font-size: 1.2em;">
+        🏅 <strong>Système de titres :</strong>
+      </p>
+      <p style="margin-left: 20px;">✨ <strong>Apprenti Maître</strong> : Score parfait (10/10) en Facile</p>
+      <p style="margin-left: 20px;">🌟 <strong>Champion</strong> : Score parfait (10/10) en Normal</p>
+      <p style="margin-left: 20px;">⚡ <strong>Maître Expert</strong> : Score parfait (10/10) en Difficile</p>
+      <p style="margin-left: 20px;">👑 <strong>Légende Absolue</strong> : Score parfait (15/15) en Expert</p>
+
+      <p style="margin-top:20px; color:#ffd93d; font-size: 1.1em;">
+        👑 <strong>Niveau Expert :</strong>
+        Obtiens 10/10 dans tous les modes pour débloquer le mode Expert — 15 rounds avec seulement 5 secondes
+        par round !
+      </p>
+    </div>
+    <br>
+    <button class="btn" onclick="retourMenu()">RETOUR</button>
+  </div>
+  <!--fin de partie de Max et daniel reprend-->
+  <div id="ecran-options" class="cache">
+    <h1>CHOISIS TA DIFFICULTÉ</h1>
+    <div class="boutons-difficulte">
+      <button class="btn" id="bouton-facile" onclick="choisirDifficulte(15)"
+        style="background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);">
+        😊 FACILE (15 sec)
+      </button>
+      <button class="btn" id="bouton-normal" onclick="choisirDifficulte(10)"
+        style="background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%); margin-top: 15px;">
+        😐 NORMAL (10 sec)
+      </button>
+      <button class="btn" id="bouton-difficile" onclick="choisirDifficulte(7)"
+        style="background: linear-gradient(135deg, #ff6b6b 0%, #c92a2a 100%); margin-top: 15px;">
+        😈 DIFFICILE (8 sec)
+      </button>
+      <button class="btn" id="bouton-expert" onclick="choisirDifficulte(5)"
+        style="background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%); margin-top: 15px;">
+        👑 EXPERT (5 sec - 15 rounds)
+      </button>
+    </div>
+    <div style="display: flex; gap: 20px; justify-content: center; margin-top: 30px;">
+      <button class="btn" onclick="retourMenu()">RETOUR</button>
+      <button class="btn" onclick="lancerJeu()"
+        style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">LANCER</button>
+    </div>
+  </div>
+  <div id="ecran-jeu" class="cache">
+    <div class="entete-du-jeu">
+      <div>Round : <span id="affichage-round">1/10</span></div>
+      <div id="affichage-chrono" class="chrono-du-jeu">10</div>
+      <div>Points : <span id="affichage-score">0/10</span></div>
+    </div>
+
+    <div id="boite-indice" class="boite-indice cache"></div>
+    <div id="grille-des-cartes" class="grille-des-cartes"></div>
+    <div id="boite-message" class="boite-message cache"></div>
+  </div>
+
+  <div id="ecran-fin" class="cache">
+    <h1>FIN DU JEU</h1>
+    <div id="boite-recompense"></div>
+    <div class="score-final">
+      Score final : <span id="texte-score-final"></span>
+    </div>
+    <button class="btn" onclick="retourMenu()">MENU</button>
+  </div>
+
+  <img id="bouton-son" src="img/boutton son allumé.png" onclick="toggleSon()" title="Couper/Activer le son">
+
+  <script src="js/script.js"></script>
+
+</body>
+
+</html>
+<!--fin de la partie de daniel-->
