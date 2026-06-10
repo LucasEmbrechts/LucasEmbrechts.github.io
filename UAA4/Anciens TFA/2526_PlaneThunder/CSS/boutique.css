@@ -1,0 +1,238 @@
+body {
+    background-color: black;
+    margin: 0;
+    text-align: center;
+}
+#menu {
+    background-image: url(../sources/img/fondboutique.jpg);
+    height: 100vh;
+    width: 100vw;
+    padding-top: 0px;
+    background-size: cover;
+    background-position: center;
+}
+#retour {
+    position: absolute;  /*Permet de le mettre ou on veut*/
+    border: solid black 2px;
+    border-radius: 5px;
+    background-color: rgb(255, 218, 33);
+    left: 10px;
+    top: 10px;
+    padding: 0.5px;
+    opacity: 0.9;  /*Rend un peur transparent 0-1*/
+    cursor: pointer;
+    transition: opacity 0.3s, transform 0.3s; 
+    text-decoration: none;
+}
+#retour:hover {
+    opacity: 0.7;
+    transform: scale(0.95);    
+}
+
+#navigation {
+    width: 470px;
+    height: 320px;
+    background-color: rgb(217, 217, 217);
+    border-radius: 15px;
+    right: 60px;
+    bottom: 70px;
+    position: absolute;  
+    opacity: 0.95;
+    box-shadow: solid black 1px 1px 1px 1px;
+    border: solid black 2px;
+}
+#Titreavion {
+    cursor: default;
+    color: rgb(49, 49, 49);
+    transition: opacity 0.3s, transform 0.3s; /* Animation de transition pour l'opacité et la transformation */
+}
+#fleche_gauche {
+    width: 100px;
+    height: 100px;
+    position: absolute;  /* obliger pour que l'avion bouge */
+    background-size: contain; /* bonne taille (si desactiver l'avion serais énorme) */
+    background-repeat: no-repeat; /*pour ne pas avoir plusieurs avions*/
+    top: -7px;
+    left: -5px;
+    cursor: pointer; /*Affiche le differament le curseur*/
+    transition: opacity 0.3s, transform 0.3s; /* Animation de transition pour l'opacité et la transformation */
+}
+#fleche_gauche:hover {
+    opacity: 0.7;
+    transform: scale(0.8);    
+}
+#fleche_droite {
+    width: 100px;
+    height: 100px;
+    position: absolute;  /* obliger pour que l'avion bouge */
+    background-size: contain; /* bonne taille (si desactiver l'avion serais énorme) */
+    background-repeat: no-repeat; /*pour ne pas avoir plusieurs avions*/
+    top: -7px;
+    right: -5px;
+    cursor: pointer;
+    transition: opacity 0.3s, transform 0.3s; /* Animation de transition pour l'opacité et la transformation */
+}
+#fleche_droite:hover {
+    opacity: 0.7;
+    transform: scale(0.8);    
+}
+
+#NomStat,#BarStat {
+    position: absolute;
+}
+#NomStat {
+    left: 10px;
+    padding-top: 5px;
+    margin: 5px;
+    font: bold 15px Arial, sans-serif 
+}
+#divbarMania {
+    left: 200px;
+    top: 22px;
+    width: 200px;
+    background-color: gray;
+    height: 10px;
+    position: absolute;
+    border-radius: 5px;
+}
+#divbarSante {
+    left: 200px;
+    top: 60px;
+    width: 200px;
+    background-color: gray;
+    height: 10px;
+    position: absolute;
+    border-radius: 5px;
+}
+#divbarPuissancefeu {
+    left: 200px;
+    top: 105px;
+    width: 200px;
+    background-color: gray;
+    height: 10px;
+    position: absolute;
+    border-radius: 5px;
+}
+#divbarStockcarburant {
+    left: 200px;
+    top: 140px;
+    width: 200px;
+    background-color: gray;
+    height: 10px;
+    position: absolute;
+    border-radius: 5px;
+}
+#barMania {
+    background-color: yellow;
+    height: 10px;
+    border-radius: 5px;
+    transition: width 0.5s;
+}
+#barSante {
+    background-color: yellow;
+    height: 10px;
+    border-radius: 5px;
+    transition: width 0.5s;
+}
+#barPuissancefeu {
+    background-color: yellow;
+    height: 10px;
+    border-radius: 5px;
+    transition: width 0.5s;
+}
+#barStockcarburant {
+    background-color: yellow;
+    height: 10px;
+    border-radius: 5px;
+    transition: width 0.5s;
+}
+
+#avion {
+    width: 360px;
+    height: 220px;
+    top: 255px;
+    left: 30px;
+    background-image: url("../sources/img/avion1.png");
+    background-size: contain; /* bonne taille (si desactiver l'avion serais énorme) */
+    background-repeat: no-repeat; /*pour ne pas avoir plusieurs avions*/
+    position: absolute;  /* obliger pour que l'avion bouge */
+    transition: transform 0.3s,width 0.3s,height 0.3s; /* Animation de transition pour la transformation */
+}
+#avion:hover {
+    transform: scale(1.05); /* Agrandit légèrement l'avion au survol */
+}
+#argent {
+    background-color: yellow;
+    right: 5px;
+    top: 2px;
+    position: absolute;  
+    display: flex;        /* Alignement horizontal */
+    border-radius: 5px;
+    padding: 3px;
+    align-items: center; 
+}
+#argent p {
+    margin: 0;
+    cursor: default;
+    font: bold 14px Arial, sans-serif;
+}
+#imgargent {
+    width: 22px;
+    height: 15px;
+}
+#prix {
+    background-color: yellow;
+    top: 270px;
+    right: 280px;
+    position: absolute;  
+    display: flex;        /* Alignement horizontal */
+    border-radius: 15px;
+    padding: 5px;
+    align-items: center; 
+    height: 20px;
+    font: bold 14px Arial, sans-serif;
+}
+#argentprix {
+    margin: 0;
+}
+#selectionner {
+    font: bold 14px Arial, sans-serif;
+    width: 100px;
+    height: 30px;
+    top: 270px;
+    position: absolute;
+    right: 350px;
+    border-radius: 15px;
+    background-color: grey;
+    transition: opacity 0.3s, transform 0.3s; /* Animation de transition pour l'opacité et la transformation */
+}
+#deselectionner {
+    font: bold 14px Arial, sans-serif;
+    width: 120px;
+    height: 30px;
+    top: 270px;
+    position: absolute;
+    right: 345px;
+    border-radius: 15px;
+    background-color: grey;
+    transition: opacity 0.3s, transform 0.3s; /* Animation de transition pour l'opacité et la transformation */
+}
+#selectionner:hover, #deselectionner:hover {
+    opacity: 0.7;
+    transform: scale(0.95);    
+}
+#acheter {
+    font: bold 14px Arial, sans-serif;
+    width: 80px;
+    height: 30px;
+    top: 270px;
+    position: absolute;
+    right: 370px;
+    border-radius: 15px;
+    background-color: rgb(27, 101, 0);
+    transition: opacity 0.3s, transform 0.3s; /* Animation de transition pour l'opacité et la transformation */
+}
+#acheter:hover {
+    opacity: 0.7;
+    transform: scale(0.95);    
+}

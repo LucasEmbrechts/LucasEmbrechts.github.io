@@ -1,0 +1,80 @@
+body {
+    background: black; 
+    margin: 0;
+    text-align: center;
+}
+
+#parametres {
+    background-image: url(../sources/img/fond.png);
+    height: 100vh;
+    width: 100vw;
+    padding-top: 0px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#menuparametres {
+    background-color: white;
+    width: calc(100% - 300px);
+    height: calc(100% - 150px);
+    border-radius: 10px;
+    opacity: 0.9;
+    position: relative;
+}
+#xparametres {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    cursor: pointer;    /* permet de pointer avc la fleche */
+    font-weight: bold;   /* gras */
+    font-size: 30px;
+    font-family: 'Luckiest Guy', cursive;
+    z-index: 10;
+    transition: all 0.2s;
+}
+#xparametres:hover {
+    transform: scale(1.2);
+}
+#txtparametres {
+    position: absolute;
+    top: 100px;
+    bottom: 10px;
+    padding: 30px;
+    text-align: left;
+    font-family: 'Luckiest Guy', cursive;
+    overflow-y: auto;   /* scroll vertical */
+}
+
+
+#titre {
+    font-size: 90px;
+    margin: 0px;
+    padding-top: 10px;
+    padding-bottom: 120px;
+    opacity: 0.9;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    position: relative;
+    text-align: center;
+}
+
+button {
+    padding: 15px;
+    margin: 3px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border-radius: 5px;
+    border: 0;
+    width: 155px;
+    font-size: large;
+    opacity: 0.9;
+    cursor: pointer;
+    transition: opacity 0.2s,width 0.2s;
+}
+
+button:hover {
+    opacity: 0.5;
+    width: 145px;
+}

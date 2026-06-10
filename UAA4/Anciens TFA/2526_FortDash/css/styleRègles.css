@@ -1,0 +1,39 @@
+body{
+    background-color: rgb(169, 111, 223);
+}
+#tt{
+            text-align: center;
+        }
+        h1{
+            font-size: 100px;
+        }
+        #para{
+            font-size: 25px
+        }
+        button {
+            color: rgb(0, 0, 0);
+            padding: 10px 20px;
+            /* Espacement intérieur */
+            border: none;
+            /* Supprime la bordure par défaut */
+            border-radius: 5px;
+            /* Coins arrondis */
+            font-size: 16px;
+            cursor: pointer;
+            /* Change le curseur en main */
+            transition: background-color 0.3s ease;
+            /* Transition douce */
+            
+
+        }
+
+        /* Effet au survol (hover) */
+        button:hover {
+            background-color: #5296e0;
+        }
+
+        /* Effet au clic (active) */
+        button:active {
+            transform: scale(0.98);
+            /* Réduit légèrement la taille */
+        }

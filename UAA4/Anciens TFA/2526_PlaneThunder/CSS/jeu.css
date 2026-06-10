@@ -1,0 +1,333 @@
+        /* Réinitialisation des marges pour tout le document */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            overflow: hidden;
+        }
+
+        #game-container {
+            background-color: #8eccff;
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* L'élément qu'on va déplacer - l'avion */
+        #player {
+            width: 180px;
+            height: 63px;
+            position: absolute;  /* obliger pour que l'avion bouge */
+            top: 175px;
+            left: 275px;
+            background-size: contain; /* bonne taille (si desactiver l'avion serais énorme) */
+            background-repeat: no-repeat; /*pour ne pas avoir plusieurs avions*/
+            transition: transform 0.2s, background-image 0.2s; /* transition pour adoucir la rotation */
+        }
+
+
+
+
+        .obstacle {
+            position: absolute;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        .batiment{
+            bottom: -38px;
+        }
+
+
+
+        #pause{
+            margin-left: 1860px;
+            height: 60px;
+            width: 60px;
+            cursor: pointer;
+            transition: height 0.5s,width 0.5s;
+        }
+        #pause:hover {
+            height: 50px;
+            width: 50px;
+        }
+        #menupause {
+            height: 200px;
+            width: 200px;
+            text-align: center;
+            margin-left: 860px;
+            margin-top: 350px;
+            position: absolute;
+            top: 0;
+        }
+        #mort {
+            height: 200px;
+            width: 200px;
+            text-align: center;
+            margin-left: 860px;
+            margin-top: 350px;
+            position: absolute;
+            top: 0;
+        }
+
+
+
+
+        button {
+            border: solid black;
+            padding: 15px;
+            margin: 3px;
+            background-color: rgb(255, 255, 255);
+            color: rgb(0, 0, 0);
+            border-radius: 5px;
+            border: 0;
+            width: 155px;
+            font-size: large;
+            opacity: 0.9;
+            cursor: pointer;
+            transition: opacity 0.2s,width 0.2s;
+        }
+        button:hover {
+            opacity: 0.5;
+            width: 145px;
+        }
+
+
+
+        #fondvie {
+            width: 155px;
+            height: 27px;
+            background-color: rgb(177, 177, 177);
+            top: 3.5px;
+            left: 5px;
+            border-radius: 3px;
+            position: absolute;
+            display: flex;
+            transition: transform 0.2s;
+        }
+        #fondvie:hover {
+            transform: scale(0.95);
+        }
+        #barrevie {
+            width: 100%;
+            height: 27px;
+            background-color: rgb(87, 240, 100);
+            border-radius: 3px;
+            display: block;
+            transition: width 0.2s, transform 0.2s;
+        }
+        #barrevie:hover {
+            transform: scale(1);
+        }
+        #heart {
+            width: 27px;
+            height: 27px;
+            transition: transform 0.2s;
+        }
+        #heart:hover {
+            transform: scale(0.95);
+        }
+
+
+
+        #fondcarburant {
+            width: 155px;
+            height: 27px;
+            background-color: rgb(177, 177, 177);
+            top: 3.5px;
+            left: 195px;
+            border-radius: 3px;
+            position: absolute;
+            display: flex;
+            transition: transform 0.2s;
+        }
+        #fondcarburant:hover {
+            transform: scale(0.95);
+        }
+        #barrecarburant {
+            width: 100%;
+            height: 27px;
+            background-color: rgb(240, 87, 87);
+            border-radius: 3px;
+            display: block;
+            transition: width 0.2s, transform 0.2s;
+        }
+        #barrecarburant:hover {
+            transform: scale(1);
+        }
+
+
+        #divscore {
+            padding: 2px;
+            right: 100px;
+            background-color: rgb(255, 169, 39);
+            top: 10px;
+            border-radius: 3px;
+            position: absolute;
+            display: flex;
+            align-items: center; 
+        }
+        #score {
+            font-weight: bold;
+            font-family: 'Luckiest Guy', cursive;
+            cursor: default;
+        }
+        #divargenthtml {
+            padding: 2px;
+            right: 220px;
+            background-color: rgb(26, 133, 35);
+            top: 10px;
+            border-radius: 3px;
+            position: absolute;
+            display: flex;
+            align-items: center; 
+        }
+        #argenthtml {
+            font-weight: bold;
+            font-family: 'Luckiest Guy', cursive;
+            cursor: default;
+        }
+        #vitesse {
+            padding: 2px;
+            left: 10px;
+            background-color: rgb(49, 49, 49);
+            bottom: 10px;
+            border-radius: 3px;
+            position: absolute;
+            display: flex;
+            align-items: center; 
+        }
+        #vitessep {
+            font-weight: bold;
+            font-family: 'Luckiest Guy', cursive;
+            color: white;
+            cursor: default;
+        }
+        #multiplicateurdiv {
+            padding: 3px;
+            right: 10px;
+            background-color: rgb(255, 169, 39);
+            bottom: 10px;
+            border-radius: 3px;
+            position: absolute;
+            display: flex;
+            align-items: center; 
+        }
+        #multiplicateur {
+            font-weight: bold;
+            font-family: 'Luckiest Guy', cursive;
+            cursor: default;
+        }
+        #debug {
+            right: 60px;
+            background-color: rgba(0, 0, 0, 0.75);
+            bottom: 10px;
+            border-radius: 15px;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            margin: 100px;
+            cursor: default;
+            opacity: 0.9;
+        }
+        #jaugevie {
+            padding: 5px;
+            font-weight: bold;
+            font-family: 'Luckiest Guy', cursive;
+            background-color: rgb(87, 240, 100);
+        }
+        #jaugecarburant {
+            padding: 5px;
+            font-weight: bold;
+            font-family: 'Luckiest Guy', cursive;
+            background-color: rgb(240, 87, 87);
+        }
+        #vitesse_temps {
+            padding: 5px;
+            font-weight: bold;
+            font-family: 'Luckiest Guy', cursive;
+            background-color: rgb(116, 116, 116);
+        }
+        #x_y {
+            padding: 5px;
+            font-weight: bold;
+            font-family: 'Luckiest Guy', cursive;
+            background-color: rgb(255, 238, 0);
+        }
+        #scoredebug {
+            padding: 5px;
+            font-weight: bold;
+            font-family: 'Luckiest Guy', cursive;
+            background-color: rgb(255, 169, 39);
+        }
+        #argentdebug {
+            padding: 5px;
+            font-weight: bold;
+            font-family: 'Luckiest Guy', cursive;
+            background-color: rgb(26, 133, 35);
+        }
+        #multdebug {
+            padding: 5px;
+            font-weight: bold;
+            font-family: 'Luckiest Guy', cursive;
+            background-color: rgb(255, 176, 252);
+        }
+        #Mortdebug {
+            padding: 5px;
+            font-weight: bold;
+            font-family: 'Luckiest Guy', cursive;
+            background-color: rgb(77, 74, 255);
+        }
+        #Pausedebug {
+            padding: 5px;
+            font-weight: bold;
+            font-family: 'Luckiest Guy', cursive;
+            background-color: rgb(255, 57, 255);
+        }
+        #Keydebug {
+            padding: 5px;
+            font-weight: bold;
+            font-family: 'Luckiest Guy', cursive;
+            background-color: rgb(76, 255, 106);
+        }
+        #aviondebug {
+            padding: 5px;
+            font-weight: bold;
+            font-family: 'Luckiest Guy', cursive;
+            background-color: rgb(254, 254, 254);
+        }
+        #vitess_deplac {
+            padding: 5px;
+            font-weight: bold;
+            font-family: 'Luckiest Guy', cursive;
+            background-color: rgb(255, 169, 238);
+        }
+        #dureetotaldebug {
+            padding: 5px;
+            font-weight: bold;
+            font-family: 'Luckiest Guy', cursive;
+            background-color: rgb(0, 255, 255);
+        }
+        #perte {
+            padding: 5px;
+            font-weight: bold;
+            font-family: 'Luckiest Guy', cursive;
+            background-color: rgb(151, 151, 151);
+        }
+
+
+
+
+        @keyframes camera-shake {
+            0%   { transform: translate(0px, 0px); }
+            25%  { transform: translate(1px, 0.5px); }
+            50%  { transform: translate(-1px, -0.5px); }
+            75%  { transform: translate(0.5px, 1px); }
+            100% { transform: translate(0px, 0px); }
+        }
+        
+
+        .camera-effect {
+            animation: camera-shake 0.5s infinite; /*camera-shake 0.5s a l infini*/
+        }

@@ -1,0 +1,49 @@
+body {
+            background-image: url(../image/chargement.jpg);
+            height: 100vh;
+            width: 100vw;
+            padding-top: 0px;
+            background-size: cover;
+            background-position: center;   
+            overflow: hidden;
+            
+        }
+
+        #para {
+            text-align: center;
+            color: white;
+            font-size: 100px;
+        }
+
+        #fleche {
+            left: 0px;
+           
+        }
+
+        button {
+            color: rgb(0, 0, 0);
+            padding: 10px 20px;
+            /* Espacement intérieur */
+            border: none;
+            /* Supprime la bordure par défaut */
+            border-radius: 5px;
+            /* Coins arrondis */
+            font-size: 16px;
+            cursor: pointer;
+            /* Change le curseur en main */
+            transition: background-color 0.3s ease;
+            /* Transition douce */
+            
+
+        }
+
+        /* Effet au survol (hover) */
+        button:hover {
+            background-color: #5296e0;
+        }
+
+        /* Effet au clic (active) */
+        button:active {
+            transform: scale(0.98);
+            /* Réduit légèrement la taille */
+        }

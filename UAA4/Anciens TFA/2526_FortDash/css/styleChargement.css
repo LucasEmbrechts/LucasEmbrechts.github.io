@@ -1,0 +1,35 @@
+@keyframes barre{
+    0%{
+        width: 0%;
+    }
+    100%{
+        width: 100%;
+    }
+}
+#tout{
+    border: 3px solid white;
+    border-radius: 5px;
+    top: 800px;
+    height: 50px;
+    width: 800px;
+    position: absolute;
+    left: 550px;
+}
+body{
+    background-color: rgb(189, 250, 206);
+    text-align: center;
+}
+#barre{
+    color: blue;
+    height: 50px;
+    width: 800px;
+    width: 100%;
+    height: inherit;
+    background-color: blue;
+    animation-name: barre;
+    animation-delay: Os;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    
+}
+/*ecran de chargement

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/styleTuto.css">
+</head>
+
+<body>
+    <div id="fleche"><a href="Game.html"><button><img src="image/plaque-braille-fleche-horizontale-gauche-ig-3772.jpg"
+                    height="100px"></button></a></div>
+    <div id="game">
+    </div>
+    <p id="argent">V-Bucks : <span id="valeurX" class="compteur">0</span></p>
+    
+ 
+    <div id="pause"><button onclick="pause()"><img src="image/pause.png"></button></div>
+    <div id="imgPause">
+        <div class="overlay">
+            <div class="blur-box">
+                <button onclick="play()">Reprendre</button>
+                <a href="tuto.html"><button>Recommencer</button></a>
+                <a href="index.html"><button>Menu principal</button></a>
+                <a href="Game.html"><button>Niveaux</button></a>
+            </div>
+        </div>
+    </div>
+    <div id="pv">PV : <span id="vie">100</span></div>
+    <script type="text/javascript" src="lib/crafty-min.js"></script>
+    <script src="js/scriptTuto.js"></script>
+
+</body>
+
+</html>

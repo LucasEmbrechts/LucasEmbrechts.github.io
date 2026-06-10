@@ -1,0 +1,76 @@
+html,
+body {
+    text-align: center;
+    overflow: hidden;
+    height: 100%;
+    background-image: url(../image/landscape_comp.jpeg);
+}
+
+button {
+    color: rgb(0, 0, 0);
+    padding: 10px 20px;
+    /* Espacement intérieur */
+    border: none;
+    /* Supprime la bordure par défaut */
+    border-radius: 5px;
+    /* Coins arrondis */
+    font-size: 16px;
+    cursor: pointer;
+    /* Change le curseur en main */
+    transition: background-color 0.3s ease;
+    /* Transition douce */
+}
+
+/* Effet au survol (hover) */
+button:hover {
+    background-color: #5296e0;
+}
+
+/* Effet au clic (active) */
+button:active {
+    transform: scale(0.98);
+    /* Réduit légèrement la taille */
+}
+
+/* Centrage absolu du conteneur principal */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Optionnel: une image de fond pour voir l'effet de flou */
+}
+
+/* Le carré flou */
+.blur-box {
+    width: 300px;
+    height: 200px;
+    background-color: rgba(255, 255, 255, 0.3);
+    /* Fond semi-transparent */
+    backdrop-filter: blur(10px);
+    /* L'effet de flou (magie) */
+    -webkit-backdrop-filter: blur(10px);
+    /* Compatibilité Safari */
+    border-radius: 15px;
+    /* Coins arrondis */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Bordure "verre" */
+    /* Centrer les boutons à l'intérieur */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    /* Ombre légère */
+}
+
+#textmort {
+    margin-top: 150px;
+    font-size: 75px;
+    color: rgb(132, 22, 22);
+}
