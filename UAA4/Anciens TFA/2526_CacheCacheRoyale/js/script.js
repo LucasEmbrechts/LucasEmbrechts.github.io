@@ -291,7 +291,7 @@ function afficherMessageDepart() {
         }
     }, 1000);
 }
-
+/*fin de partie de daniel et max commence ------------------------------------------------------------------------------------------------*/
 function mettreAJourAffichage() {
     document.getElementById('affichage-round').textContent = roundActuel + '/' + nombreRounds;
     document.getElementById('affichage-score').textContent = scoreJoueur + '/' + nombreRounds;
@@ -386,7 +386,7 @@ function gererClicCarte(index, carteCliquee) {
         }
     }
 }
-
+/*fin de la partie de max et daniel reprend----------------------------------------------------------------------*/
 function activerCooldown() {
     clicBloque = true;
 
@@ -501,7 +501,7 @@ function mauvaiseReponse() {
         afficherMessage('😫Dommage tu as pas eu assez de temps😫<br>Prochaine manche dans  :');
     }
 }
-
+/*fin de parite de daniel max reprend---------------------------------------------------------------------------------------------------------------*/
 function afficherMessage(message) {
     document.getElementById('grille-des-cartes').innerHTML = '';
     document.getElementById('boite-indice').classList.add('cache');
