@@ -1,0 +1,26 @@
+/* Style du body pour centrer tous les éléments */
+        body {
+            background-image: url(../sources/gameover.png);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-repeat: no-repeat;
+        }
+
+        /* Style des boutons */
+        button {
+            background-image: url(../sources/noir2.png);
+            color: rgba(255, 0, 0, 0.568);
+            width: 150px;
+            height: 70px;
+            cursor: pointer;
+            margin: 15px;
+            font-size: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 30px;
+        }

@@ -1,0 +1,192 @@
+        #elemPlateau {
+            width: 450px;
+            margin: 16px auto;
+            margin-top: 160px
+        }
+        
+        .portail-orange {
+            background-image: url('../sources/Pb.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        .portail-bleu {
+            background-image: url('../sources/Po.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        .os {
+            background-image: url('../sources/os.jpg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        .coeur {
+            background-image: url('../sources/C.png');
+            background-size:50%;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .coeur2 {
+            background-image: url('../sources/C2.png');
+            background-size:50%;
+            background-repeat: no-repeat;
+            background-position: center;
+            
+        }
+        
+        .etoile {
+            background-image: url('../sources/E.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        .trou {
+            background-image: url('../sources/T.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        body{
+            background-image: url(../sources/fondjeu2.png);
+            text-align: center;
+            font-size: 45px;
+        }
+        .cell{
+            width: 148px;
+            height: 148px;
+            border: 1px solid #444;
+            background-color: #ffffff;
+            display: inline-block;
+        }
+        /*gaspard*/
+        h1{
+            color: azure;
+        }
+        button{
+            color: rgb(255, 255, 255);
+            width: 100px;
+            height: 50px;
+            cursor: pointer;
+            margin: 15px;
+            font-size: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+        }
+        u{
+            color: azure;
+        }
+        .lazer{
+            height: 148px;
+            width: 148px;
+            position: absolute;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: none;
+        }
+        #lazer0{
+            left: 745px;
+            top: 350px;
+            background-image: url(../sources/lazerV.gif);
+        }
+        #lazer1{
+            left: 745px;
+            top: 350px;
+            background-image: url(../sources/lazerH.gif);
+        }
+        
+        #lazer2{
+            left: 900px;
+            top: 350px;
+            background-image: url(../sources/lazerV.gif);
+        }
+        #lazer3{
+            left: 900px;
+            top: 350px;
+            background-image: url(../sources/lazerH.gif);
+         }
+        
+         #lazer4{
+            left: 1050px;
+            top: 350px;
+            background-image: url(../sources/lazerV.gif);
+          }
+        #lazer5{
+            left: 1050px;
+            top: 350px;
+            background-image: url(../sources/lazerH.gif);
+          }
+        
+          #lazer6{
+            left: 750px;
+            top: 500px;
+            background-image: url(../sources/lazerV.gif);
+          }
+        #lazer7{
+            left: 750px;
+            top: 500px;
+            background-image: url(../sources/lazerH.gif);
+          }
+        
+          #lazer8{
+            left: 900px;
+            top: 500px;
+            background-image: url(../sources/lazerV.gif);
+          }
+        #lazer9{
+            left: 900px;
+            top: 500px;
+            background-image: url(../sources/lazerH.gif);
+          }
+        
+        #lazer10{
+            left: 1050px;
+            top: 500px;
+            background-image: url(../sources/lazerV.gif);
+          }
+        #lazer11{
+            left: 1050px;
+            top: 500px;
+            background-image: url(../sources/lazerH.gif);
+          }
+        
+          #lazer12{
+            left: 750px;
+            top: 650px;
+            background-image: url(../sources/lazerV.gif);
+          }
+        #lazer13{
+            left: 750px;
+            top: 650px;
+            background-image: url(../sources/lazerH.gif);
+          }
+        
+          #lazer14{
+            left: 900px;
+            top: 650px;
+            background-image: url(../sources/lazerV.gif);
+          }
+        #lazer15{
+            left: 900px;
+            top: 650px;
+            background-image: url(../sources/lazerH.gif);
+          }
+        
+        #lazer16{
+            left: 1050px;
+            top: 650px;
+            background-image: url(../sources/lazerV.gif);
+          }
+        #lazer17{
+            left: 1050px;
+            top: 650px;
+            background-image: url(../sources/lazerH.gif);
+          }

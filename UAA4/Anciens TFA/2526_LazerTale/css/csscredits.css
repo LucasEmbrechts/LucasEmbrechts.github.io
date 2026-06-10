@@ -1,0 +1,36 @@
+      body{
+        margin: 0;
+        background-image: url("../sources/credit.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 1080px;
+        width: 1920px;
+        background-image: url(../sources/credit.png);
+        text-align: center;
+        display: flex;
+        justify-content: center; 
+        align-items: center;   
+        flex-direction: column;  
+        height: 100vh;
+         }
+         h1{
+            font-family: sans;
+           font-size: 40px;
+           color: blueviolet;
+           text-align: center;
+           height: 115px;
+         }
+         button{
+            background-image: url(../sources/bleu2.jpg);
+            width: 150px;
+            height: 60px; 
+            cursor: pointer;
+            margin-top: 30px;
+            font-size: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            border-radius: 30px;
+         }

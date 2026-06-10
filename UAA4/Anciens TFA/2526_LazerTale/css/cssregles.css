@@ -1,0 +1,32 @@
+        body{
+        background-image: url('../sources/regles.png');
+        background-image: url(../sources/Regle.png);
+        text-align: center;
+        display: flex;
+        justify-content: center; 
+        align-items: center;   
+        flex-direction: column;
+        background-repeat: no-repeat;    
+        height: 1050px
+        }
+        button{
+            width: 150px;
+            height: 60px; 
+            cursor: pointer;
+            margin-top: 30px;
+            font-size: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            background-image: url('jaune\ texturer.avif');  
+            border-radius: 30px;
+        }
+        h2{
+           font-family: sans;
+           font-size: 35px;
+        }
+        h1{
+            font-size: 50px;
+            color: azure;
+        }
