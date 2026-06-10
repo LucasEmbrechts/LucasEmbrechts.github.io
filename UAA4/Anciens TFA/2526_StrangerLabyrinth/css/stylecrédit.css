@@ -1,0 +1,28 @@
+body{
+    margin:0;
+    height:100vh;
+    background-image:url(../img/4216.png);
+    background-size:cover;
+    background-position:center;
+    color:white;
+    font-family:Verdana;
+    text-align:center;
+}
+
+button{
+    position:absolute;
+    top:30px;
+    left:30px;
+    width:140px;
+    height:45px;
+    background:black;
+    color:white;
+    border:2px solid red;
+    cursor:pointer;
+    box-shadow:0 0 10px red;
+}
+
+button:hover{
+    background:red;
+    color:black;
+}

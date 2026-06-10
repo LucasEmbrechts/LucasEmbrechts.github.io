@@ -1,0 +1,53 @@
+        /* Reset pour éviter les marges par défaut */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            background-image: url('../img/4862.jpg');
+            background-size: cover;
+            background-position: center;
+            
+            /* Positionnement en haut à gauche (à 30px des bords) */
+            padding: 30px; 
+            
+            /* Flexbox pour aligner proprement les boutons l'un sous l'autre */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 35px; /* Grand espace entre les boutons comme demandé */
+        }
+
+        /* Style propre appliqué directement sur les liens */
+        .btn-menu {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 220px;
+            height: 60px;
+            font-size: 20px;
+            background: black;
+            color: white;
+            border: 2px solid red;
+            cursor: pointer;
+            font-family: Verdana, sans-serif;
+            letter-spacing: 2px;
+            text-decoration: none; /* Supprime le soulignement du lien */
+            box-shadow: 0 0 15px red;
+            transition: 0.3s;
+        }
+
+        .btn-menu:hover {
+            background: red;
+            color: black;
+            box-shadow: 0 0 25px red;
+            transform: scale(1.05);
+        }

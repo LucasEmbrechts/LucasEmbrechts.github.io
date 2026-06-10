@@ -1,0 +1,41 @@
+body{
+    margin:0;
+    height:100vh;
+    background-image:url(../img/4237.png);
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    align-items:center;
+}
+
+.menu{
+    margin-left:120px;
+    display:flex;
+    flex-direction:column;
+    gap:40px;
+}
+
+button{
+    width:200px;
+    height:60px;
+    font-size:20px;
+    background:black;
+    color:white;
+    border:2px solid red;
+    cursor:pointer;
+    font-family:Verdana;
+    letter-spacing:2px;
+    box-shadow:0 0 10px red;
+    transition:0.3s;
+}
+
+button:hover{
+    background:red;
+    color:black;
+    box-shadow:0 0 20px red;
+    transform:scale(1.05);
+}
+
+a{
+    text-decoration:none;
+}

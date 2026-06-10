@@ -1,0 +1,49 @@
+body {
+    background-image: url('../img/Temps.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* style bouton */
+button {
+    width: 250px;
+    height: 70px;
+    font-size: 22px;
+    font-family: Verdana;
+
+    background: black;
+    color: white;
+    border: 2px solid red;
+    border-radius: 10px;
+
+    cursor: pointer;
+    box-shadow: 0 0 15px red;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: red;
+    color: black;
+    transform: scale(1.1);
+    box-shadow: 0 0 25px red, 0 0 50px red;
+}
+
+/* bouton REJOUER (sous le texte) */
+#div1 {
+    position: absolute;
+    top: 85%;              /* descend sous le texte */
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* bouton MENU (en haut à droite) */
+#div2 {
+    position: absolute;
+    top: 20px;
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rejoindre</title>
+    <style>
+        /* Reset de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Le conteneur HTML prend tout l'écran et centre le bloc de 1920x1080 */
+        html {
+            height: 100%;
+            background-color: #0b0b0b; /* Fond noir à l'extérieur si l'écran est plus grand */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Le Body devient une box rigide de 1920x1080 */
+        body {
+            width: 1920px;
+            height: 1080px;
+            min-width: 1920px;
+            min-height: 1080px;
+            
+            background-image: url('img/1052.png');
+            background-size: cover;
+            background-position: center;
+            font-family: Verdana, sans-serif;
+            
+            /* Positionnement du bouton en haut à gauche de cette box */
+            padding: 30px; 
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        /* Style du bouton "Rejoindre" */
+        .btn-menu {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 200px;
+            height: 60px;
+            font-size: 20px;
+            background: black;
+            color: white;
+            border: 2px solid red;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 0 15px red;
+            transition: 0.3s;
+        }
+
+        .btn-menu:hover {
+            background: red;
+            color: black;
+            box-shadow: 0 0 25px red;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <a href="menu.html" class="btn-menu">Rejoindre</a>
+
+</body>
+</html>

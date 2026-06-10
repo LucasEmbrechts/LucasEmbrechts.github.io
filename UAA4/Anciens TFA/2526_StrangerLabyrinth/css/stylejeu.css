@@ -1,0 +1,195 @@
+        body {
+            background-image: url(../img/fondperso.png);
+            background-size:cover;
+            background-position:center;
+            font-family:Verdana;
+            margin:0;
+            height:100vh;
+        }
+        html,body {
+            overflow: hidden;
+            height: 100%;
+            margin: 0;
+            position: relative;
+        }
+        
+        .case {
+            width: 50px;
+            height: 50px;
+            display: inline-block;
+        }
+        @keyframes animeperso {
+            0% {
+                background-image: url(../img/dustinmort1.png);
+                }
+            12% {
+                background-image: url(../img/dustinmort2.png);
+            }
+            25% {
+                background-image: url(../img/dustinmort3.png);
+            }
+            37% {
+                background-image: url(../img/dustinmort4.png);
+            }
+            50% {
+                background-image: url(../img/dustinmort5.png);
+            }
+            62% {
+                background-image: url(../img/dustinmort6.png);
+            }
+            75% {
+                background-image: url(../img/dustinmort7.png);
+            }
+            100% {
+                background-image: url(../img/dustinmort8.png);
+            }
+        }
+
+        @keyframes animepiege {
+            0% {
+                background-image: url(../img/dustin1.png);
+                }
+            32% {
+                background-image: url(../img/dustin2.png);
+            }
+            64% {
+                background-image: url(../img/dustin3.png);
+            }
+            100% {
+                background-image: url(../img/dustin4.png);
+            }
+
+        }
+        .trou {
+    animation-name: animepiege;
+    animation-duration : 5s;
+    animation-timing-function: linear;
+    animation-iteration-count : infinite;
+    animation-direction :normal;
+    background-size: contain;
+    background-repeat: no-repeat;
+        }
+        .perso {
+    animation-name: animeperso;
+    animation-duration : 5s;
+    animation-timing-function: linear;
+    animation-iteration-count : infinite;
+    animation-direction :normal;
+    background-size: contain;
+    background-repeat: no-repeat;
+            
+}
+        #plateau {
+            background-color: white;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 25vh;
+        }
+        #timer {
+            position: absolute;
+            top: 15%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 100px;
+            background-color: white;
+            border: solid 4px black;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        #pieces-display {
+            position: absolute;
+            top: 15%;
+            left: 78%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            background-color: white;
+            border: solid 4px gold;
+            padding: 20px;
+            border-radius: 15px;
+        }
+#pauseMenu {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.4);
+
+    display: none;
+
+    align-items: center;
+
+    z-index: 999;
+}
+#pauseBox {
+    background: rgba(0,0,0,0.9);
+    padding: 50px;
+    border-radius: 25px;
+    text-align: center;
+    margin-left: 50px;
+    border: 4px solid red;
+    box-shadow: 0 0 30px red;
+}
+
+#pauseBox h1 {
+    font-size: 70px;
+    color: red;
+    text-shadow: 0 0 20px red;
+    margin-bottom: 30px;
+}
+
+#pauseBox p {
+    color: white;
+    font-size: 20px;
+}
+
+#pauseBox button {
+    display: block;
+    margin: 20px auto;
+    padding: 15px 45px;
+
+    font-size: 28px;
+    font-family: Verdana;
+
+    background: black;
+    color: red;
+
+    border: 3px solid red;
+    border-radius: 15px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+#pauseBox button:hover{
+    background:red;
+    color:black;
+    box-shadow:0 0 20px red;
+    transform:scale(1.05);
+}
+#levelSelect {
+    margin-top: 20px;
+}
+
+.levelBtn {
+    display: block;
+    margin: 10px auto;
+    padding: 15px 45px;
+    font-size: 24px;
+    font-family: Verdana;
+    background: black;
+    color: red;
+    border: 3px solid red;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.levelBtn:hover {
+    background: red;
+    color: black;
+    box-shadow: 0 0 20px red;
+}

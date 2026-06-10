@@ -1,0 +1,81 @@
+body{
+    margin:0;
+    height:100vh;
+    background-image:url(../img/règles.png);
+    background-size:cover;
+    background-position:center;
+    color:red;
+    font-family:Verdana;
+    text-align:center;
+
+    /* AJOUT */
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* TON CONTENEUR + AMÉLIORATIONS */
+.regles{
+    margin-top:120px;
+    max-width:900px;
+    margin-left:auto;
+    margin-right:auto;
+
+    /* AJOUT */
+    padding:25px;
+    background:rgba(0,0,0,0.75);
+    border:2px solid red;
+    box-shadow:0 0 20px red;
+    border-radius:10px;
+    max-height:80vh;
+    overflow-y:auto;
+}
+
+/* TITRES */
+h1{
+    text-shadow:0 0 10px red;
+}
+
+h2{
+    margin-top:30px;
+}
+
+/* TEXTE */
+p{
+    font-size:18px;
+    line-height:1.5; /* AJOUT */
+}
+
+.engras{
+    font-weight:bold;
+}
+
+/* BOUTON */
+button{
+    position:absolute;
+    top:30px;
+    left:30px;
+    width:140px;
+    height:45px;
+    background:black;
+    color:white;
+    border:2px solid red;
+    cursor:pointer;
+    box-shadow:0 0 10px red;
+    font-size:16px;
+}
+
+button:hover{
+    background:red;
+    color:black;
+}
+
+/* SCROLLBAR STYLÉE (AJOUT) */
+.regles::-webkit-scrollbar{
+    width:8px;
+}
+
+.regles::-webkit-scrollbar-thumb{
+    background:red;
+    border-radius:5px;
+}
