@@ -179,6 +179,75 @@ la forme « 7 x 1 = 7 », « 7 x 2 = 14 », etc. (un résultat par ligne, utilis
 - « FizzBuzz » s'il est divisible par 3 **et** par 5 ;
 - sinon, le nombre lui-même.
 
+### Exercice 2.7 : produire des balises avec attributs (drill)
+
+> Générer une balise HTML qui contient des attributs (`value="..."`, `href="..."`, `src="..."`) depuis
+> PHP oblige à jongler entre **guillemets** `"`, **apostrophes** `'` et **concaténation** `.`. C'est une
+> source d'erreurs très fréquente : entraîne-toi sur chaque cas.
+
+Deux techniques existent — pratique **les deux** à chaque fois :
+
+- **apostrophes + concaténation** : `echo '<img src="' . $url . '">';`
+- **guillemets + interpolation** (les `"` du HTML doivent alors être échappés en `\"`, ou remplacés
+  par des `'`) : `echo "<img src=\"$url\">";`
+
+Pour chaque ligne ci-dessous, produis **exactement** le HTML attendu, avec les deux techniques :
+
+| Variables | HTML à produire |
+|---|---|
+| `$url = 'chat.jpg';` | `<img src="chat.jpg">` |
+| `$c = 'blue';` | `<p style="color:blue">Texte</p>` |
+| `$ville = 'Liège';` | `<input type="text" name="ville" value="Liège">` |
+| `$href = 'accueil.php'; $txt = 'Retour';` | `<a href="accueil.php">Retour</a>` |
+
+### Exercice 2.8 : des attributs dynamiques dans une boucle
+
+**Étape 1.** Déclare `$fruits = ['pomme', 'poire', 'cerise'];`.
+
+**Étape 2.** À l'aide d'une boucle, génère un menu déroulant : pour chaque fruit, produis une balise
+`<option value="pomme">pomme</option>` (la valeur de l'attribut `value` **et** le texte affiché valent
+le nom du fruit). N'oublie pas d'entourer le tout par `<select>` … `</select>`.
+
+**Étape 3.** Même principe, mais produis cette fois une case à cocher par fruit :
+`<input type="checkbox" name="fruits[]" value="pomme"> pomme<br>`.
+
+### Exercice 2.9 : corrige les quotes (debug)
+
+Chacune des lignes suivantes **devrait** produire une balise HTML correcte, mais contient une erreur de
+guillemets / apostrophes / concaténation. Repère l'erreur et corrige-la.
+
+```php
+<?php
+$nom = 'Bob';
+$url = 'page.php';
+$v   = 'rouge';
+
+echo '<input type="text" value=$nom>';                       // 1
+echo "<a href=$url>clic</a>";                                // 2
+echo '<option value="' . $v '">' . $v . '</option>';         // 3
+?>
+```
+
+Pour chacune, indique **ce qui ne va pas** puis donne la version corrigée.
+
+### Exercice 2.10 : attribuer une classe CSS selon une condition
+
+> Très utile en pratique : on choisit **dynamiquement** la classe CSS d'une balise selon une condition,
+> pour la mettre en forme différemment. Le nom de la classe est calculé dans une variable, puis inséré
+> dans l'attribut `class="..."` (encore du jonglage guillemets / concaténation !).
+
+**Étape 1.** Dans le `<head>`, crée deux classes : `.positif { color: green; }` et
+`.negatif { color: red; }`.
+
+**Étape 2.** Soit `$temperatures = [12, -3, 8, -1, 20];`. Pour chaque température, affiche un paragraphe
+dont la **classe dépend du signe** : `<p class="positif">12</p>` si la valeur est supérieure ou égale
+à 0, sinon `<p class="negatif">-3</p>`. (Détermine d'abord le nom de la classe dans une variable, puis
+insère-le dans l'attribut.)
+
+**Étape 3.** Ajoute une classe `.gras { font-weight: bold; }` et affiche **en gras** uniquement les
+températures dont la valeur absolue dépasse 10. Astuce : une balise peut recevoir plusieurs classes,
+séparées par une espace, comme `class="positif gras"`.
+
 ---
 
 ## Série 3 — Les tableaux
@@ -269,6 +338,27 @@ valeurs), puis affiche-le en bas du tableau.
 **Étape 2.** Parcours le tableau et affiche uniquement les personnes **majeures** (18 ans et plus).
 
 **Étape 3.** Compte et affiche combien de personnes sont majeures et combien sont mineures.
+
+### Exercice 3.7 : le bulletin de la classe
+
+> Cet exercice utilise **deux boucles imbriquées** pour parcourir un tableau à deux niveaux.
+
+**Étape 1.** Déclare un tableau 2D `$classe` qui associe chaque élève à un tableau de notes
+(matière => note) :
+
+```php
+$classe = [
+    'Alice' => ['Math' => 15, 'Français' => 12, 'Sciences' => 18],
+    'Bob'   => ['Math' => 9,  'Français' => 14, 'Sciences' => 11],
+    'Chloé' => ['Math' => 17, 'Français' => 16, 'Sciences' => 13],
+];
+```
+
+**Étape 2.** À l'aide de **deux boucles `foreach` imbriquées**, affiche pour chaque élève son nom,
+suivi de la liste de ses matières et de ses notes (une liste de listes en HTML).
+
+**Étape 3.** Présente plutôt les mêmes données dans un tableau HTML `<table>` : une ligne par élève
+et une colonne par matière.
 
 ---
 
@@ -373,6 +463,52 @@ ainsi une donnée en GET (l'URL) **et** une donnée en POST (le formulaire).
 
 **Étape 4.** À la soumission, affiche « Commande confirmée : 2 × Pizza ». (Récupère le plat dans
 `$_GET` et la quantité dans `$_POST`.)
+
+### Exercice 4.8 : trouve et corrige les erreurs (formulaires GET / POST)
+
+> Chaque extrait ci-dessous contient une **erreur classique** rencontrée avec les formulaires et les
+> méthodes GET / POST. Pour chacun, dis **ce qui ne va pas** puis donne la version corrigée.
+
+Côté HTML :
+
+```html
+<!-- 1 -->
+<form action="reservation.php">
+    <input type="text" name="nom">
+    <input type="submit">
+</form>
+
+<!-- 2 -->
+<input type="text" id="ville">
+
+<!-- 3 -->
+<select name="service">
+    <option>Médecine générale</option>
+    <option>Kinésithérapie</option>
+</select>
+
+<!-- 4 -->
+<input type="button" value="Envoyer">
+```
+
+Côté PHP :
+
+```php
+// 5
+$nom = $_POST["nom"];
+echo "Bonjour $nom";
+
+// 6
+$ville = $_GET[ville];
+
+// 7  (on veut que les DEUX données existent)
+if (isset($_POST["nom"]) || isset($_POST["service"])) {
+    // ...
+}
+
+// 8  (rediriger avec deux paramètres)
+header("Location: quiz.php?q1=" . $q1 . "q2=" . $q2);
+```
 
 ---
 
@@ -588,6 +724,17 @@ livre correspondant. Comme la requête ne renvoie qu'une ligne, **inutile de bou
 **Étape 3.** Gère le cas où l'`id` ne correspond à aucun livre (par exemple `fiche.php?id=999`) :
 vérifie avec `mysqli_num_rows` et, s'il n'y a pas de résultat, affiche « Livre introuvable. » ou
 redirige vers le catalogue.
+
+### Exercice 6.8 : supprimer un livre (DELETE)
+
+**Étape 1.** Dans le catalogue (exercice 6.1), ajoute à côté de chaque livre un bouton « Supprimer »
+(un formulaire `POST` transmettant l'`id` du livre).
+
+**Étape 2.** À la réception de l'`id`, exécute une requête `DELETE FROM livres WHERE id = ?` à l'aide
+d'une **requête préparée**.
+
+**Étape 3.** Après la suppression, redirige vers le catalogue pour vérifier que le livre a bien
+disparu.
 
 ---
 
@@ -806,6 +953,95 @@ for ($i = 1; $i <= 30; $i++) {
 ?>
 ```
 
+**2.7** — les deux techniques pour chaque cas :
+```php
+<?php
+// a) $url = 'chat.jpg';  ->  <img src="chat.jpg">
+echo '<img src="' . $url . '">';     // apostrophes + concaténation
+echo "<img src=\"$url\">";           // guillemets + interpolation (" échappés)
+echo "<img src='$url'>";             // variante : ' dans le HTML (pas d'échappement)
+
+// b) $c = 'blue';  ->  <p style="color:blue">Texte</p>
+echo '<p style="color:' . $c . '">Texte</p>';
+echo "<p style=\"color:$c\">Texte</p>";
+
+// c) $ville = 'Liège';  ->  <input type="text" name="ville" value="Liège">
+echo '<input type="text" name="ville" value="' . $ville . '">';
+echo "<input type=\"text\" name=\"ville\" value=\"$ville\">";
+
+// d) $href='accueil.php'; $txt='Retour';  ->  <a href="accueil.php">Retour</a>
+echo '<a href="' . $href . '">' . $txt . '</a>';
+echo "<a href=\"$href\">$txt</a>";
+?>
+```
+
+**2.8**
+```php
+<?php
+$fruits = ['pomme', 'poire', 'cerise'];
+
+// Étape 2 : menu déroulant
+echo '<select name="fruit">';
+foreach ($fruits as $fruit) {
+    echo '<option value="' . $fruit . '">' . $fruit . '</option>';
+}
+echo '</select>';
+
+// Étape 3 : cases à cocher
+foreach ($fruits as $fruit) {
+    echo '<input type="checkbox" name="fruits[]" value="' . $fruit . '"> ' . $fruit . '<br>';
+}
+?>
+```
+
+**2.9**
+```php
+<?php
+$nom = 'Bob';
+$url = 'page.php';
+$v   = 'rouge';
+
+// 1) FAUX : echo '<input type="text" value=$nom>';
+//    -> en apostrophes $nom n'est PAS interprété, et la valeur n'a pas de guillemets
+echo '<input type="text" value="' . $nom . '">';        // CORRECT
+
+// 2) FAUX : echo "<a href=$url>clic</a>";
+//    -> l'attribut href doit être entouré de guillemets
+echo "<a href=\"$url\">clic</a>";                        // CORRECT
+
+// 3) FAUX : echo '<option value="' . $v '">' . $v . '</option>';
+//    -> il manque un point de concaténation après $v
+echo '<option value="' . $v . '">' . $v . '</option>';  // CORRECT
+?>
+```
+
+**2.10**
+```html
+<style>
+.positif { color: green; }
+.negatif { color: red; }
+.gras    { font-weight: bold; }
+</style>
+```
+```php
+<?php
+$temperatures = [12, -3, 8, -1, 20];
+foreach ($temperatures as $t) {
+    // Étape 2 : la classe dépend du signe
+    if ($t >= 0) {
+        $classe = 'positif';
+    } else {
+        $classe = 'negatif';
+    }
+    // Étape 3 : on ajoute la classe "gras" si |t| > 10
+    if (abs($t) > 10) {
+        $classe = $classe . ' gras';
+    }
+    echo '<p class="' . $classe . '">' . $t . '</p>';
+}
+?>
+```
+
 ### Corrigés — Série 3
 
 **3.1**
@@ -888,6 +1124,39 @@ foreach ($personnes as $p) {
     else $mineurs++;
 }
 echo "<p>$majeurs majeur(s), $mineurs mineur(s).</p>";
+?>
+```
+
+**3.7**
+```php
+<?php
+$classe = [
+    'Alice' => ['Math' => 15, 'Français' => 12, 'Sciences' => 18],
+    'Bob'   => ['Math' => 9,  'Français' => 14, 'Sciences' => 11],
+    'Chloé' => ['Math' => 17, 'Français' => 16, 'Sciences' => 13],
+];
+
+// Étape 2 : liste de listes (deux foreach imbriqués)
+foreach ($classe as $eleve => $notes) {
+    echo "<p><b>$eleve</b></p>";
+    echo '<ul>';
+    foreach ($notes as $matiere => $note) {
+        echo "<li>$matiere : $note</li>";
+    }
+    echo '</ul>';
+}
+
+// Étape 3 : présentation en tableau HTML
+echo '<table border="1">';
+echo '<tr><th>Élève</th><th>Math</th><th>Français</th><th>Sciences</th></tr>';
+foreach ($classe as $eleve => $notes) {
+    echo "<tr><td>$eleve</td>";
+    foreach ($notes as $note) {
+        echo "<td>$note</td>";
+    }
+    echo '</tr>';
+}
+echo '</table>';
 ?>
 ```
 
@@ -1035,6 +1304,29 @@ if (isset($_POST['quantite'])) {                                   // étape 4
 }
 ?>
 ```
+
+**4.8** — erreur repérée puis correction :
+
+1. Il manque `method="POST"` sur le `<form>` → sans lui les données partent en GET.
+   `<form action="reservation.php" method="POST">`
+2. L'input n'a pas d'attribut `name` → il n'est pas envoyé (`$_POST["ville"]` n'existera jamais).
+   `<input type="text" name="ville" id="ville">`
+3. Les `<option>` n'ont pas de `value` → c'est le texte (avec accents/espaces) qui est envoyé.
+   `<option value="medecine">Médecine générale</option>` etc.
+4. `type="button"` ne soumet pas le formulaire → utiliser `type="submit"`.
+   `<input type="submit" value="Envoyer">`
+5. `$_POST` utilisé sans `isset` → « Undefined array key » au premier chargement.
+   ```php
+   if (isset($_POST["nom"])) {
+       $nom = $_POST["nom"];
+       echo "Bonjour $nom";
+   }
+   ```
+6. La clé de `$_GET` est sans guillemets → erreur. Il faut `$ville = $_GET["ville"];`.
+7. `||` rend la condition vraie si **une seule** donnée existe → utiliser `&&`.
+   `if (isset($_POST["nom"]) && isset($_POST["service"])) {`
+8. Il manque le `&` entre les deux paramètres de l'URL.
+   `header("Location: quiz.php?q1=" . $q1 . "&q2=" . $q2);`
 
 ### Corrigés — Série 5
 
@@ -1338,6 +1630,22 @@ if (mysqli_num_rows($res) == 0) {
     $livre = mysqli_fetch_assoc($res);   // une seule ligne : pas de boucle
     echo "<h1>" . htmlspecialchars($livre['titre']) . "</h1>";
     echo "<p>{$livre['auteur']} — {$livre['genre']} ({$livre['annee']})</p>";
+}
+?>
+```
+
+**6.8**
+```php
+<?php
+// Dans catalogue.php, à côté de chaque livre :
+// <form method="POST"><button name="suppr" value="{$l['id']}">Supprimer</button></form>
+
+if (isset($_POST['suppr'])) {
+    $stmt = mysqli_prepare($conn, 'DELETE FROM livres WHERE id = ?');
+    mysqli_stmt_bind_param($stmt, 'i', $_POST['suppr']);
+    mysqli_stmt_execute($stmt);
+    header('Location: catalogue.php');
+    exit;
 }
 ?>
 ```
