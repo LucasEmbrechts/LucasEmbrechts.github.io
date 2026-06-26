@@ -510,6 +510,21 @@ if (isset($_POST["nom"]) || isset($_POST["service"])) {
 header("Location: quiz.php?q1=" . $q1 . "q2=" . $q2);
 ```
 
+### Exercice 4.9 : plusieurs cases à cocher (tableau en POST)
+
+> Quand plusieurs cases à cocher partagent le **même `name` suivi de `[]`**, PHP reçoit leurs valeurs
+> dans un **tableau**. Il faut donc le parcourir avec une boucle.
+
+**Étape 1.** Crée un formulaire (`POST`) proposant des suppléments pour une pizza : au moins quatre
+cases à cocher partageant le `name` `supplements[]`, par exemple
+`<input type="checkbox" name="supplements[]" value="fromage"> Fromage`.
+
+**Étape 2.** À la soumission, si des suppléments ont été cochés (`isset($_POST['supplements'])`),
+parcours le tableau reçu avec un `foreach` et affiche la liste des suppléments choisis.
+
+**Étape 3.** Affiche aussi le **nombre** de suppléments choisis (`count`). Si aucune case n'est cochée,
+affiche « Aucun supplément. ».
+
 ---
 
 ## Série 5 — Cookies et sessions
@@ -735,6 +750,21 @@ d'une **requête préparée**.
 
 **Étape 3.** Après la suppression, redirige vers le catalogue pour vérifier que le livre a bien
 disparu.
+
+### Exercice 6.9 : colorer les lignes selon la disponibilité
+
+> On croise ici la **base de données** et le **CSS conditionnel** (exercice 2.10) : la classe d'une
+> ligne du tableau dépend d'une valeur lue dans la base.
+
+**Étape 1.** Dans le `<head>`, crée deux classes : `.dispo { background: #d4f7d4; }` (vert clair) et
+`.rupture { background: #f7d4d4; }` (rouge clair).
+
+**Étape 2.** Affiche les livres (`SELECT * FROM livres`) dans un tableau HTML. Pour chaque ligne
+`<tr>`, attribue la classe `dispo` si le champ `disponible` vaut 1, sinon la classe `rupture`.
+Détermine le nom de la classe dans une variable, puis insère-le dans l'attribut `class="..."`.
+
+**Étape 3.** Dans une colonne supplémentaire, affiche le texte « Disponible » ou « Emprunté » selon le
+même critère.
 
 ---
 
@@ -1328,6 +1358,29 @@ if (isset($_POST['quantite'])) {                                   // étape 4
 8. Il manque le `&` entre les deux paramètres de l'URL.
    `header("Location: quiz.php?q1=" . $q1 . "&q2=" . $q2);`
 
+**4.9**
+```php
+<form method="POST">
+    <label><input type="checkbox" name="supplements[]" value="fromage"> Fromage</label>
+    <label><input type="checkbox" name="supplements[]" value="champignons"> Champignons</label>
+    <label><input type="checkbox" name="supplements[]" value="olives"> Olives</label>
+    <label><input type="checkbox" name="supplements[]" value="piment"> Piment</label>
+    <button>Commander</button>
+</form>
+<?php
+if (isset($_POST['supplements'])) {
+    echo '<p>Tu as choisi ' . count($_POST['supplements']) . ' supplément(s) :</p>';
+    echo '<ul>';
+    foreach ($_POST['supplements'] as $supplement) {
+        echo '<li>' . htmlspecialchars($supplement) . '</li>';
+    }
+    echo '</ul>';
+} else {
+    echo '<p>Aucun supplément.</p>';
+}
+?>
+```
+
 ### Corrigés — Série 5
 
 **5.1**
@@ -1647,6 +1700,35 @@ if (isset($_POST['suppr'])) {
     header('Location: catalogue.php');
     exit;
 }
+?>
+```
+
+**6.9**
+```html
+<style>
+.dispo   { background: #d4f7d4; }
+.rupture { background: #f7d4d4; }
+</style>
+```
+```php
+<?php
+$res = mysqli_query($conn, 'SELECT * FROM livres');
+echo '<table border="1">';
+while ($l = mysqli_fetch_assoc($res)) {
+    // la classe ET le texte dépendent de la disponibilité
+    if ($l['disponible']) {
+        $classe = 'dispo';
+        $etat = 'Disponible';
+    } else {
+        $classe = 'rupture';
+        $etat = 'Emprunté';
+    }
+    echo '<tr class="' . $classe . '">';
+    echo '<td>' . htmlspecialchars($l['titre']) . '</td>';
+    echo '<td>' . $etat . '</td>';
+    echo '</tr>';
+}
+echo '</table>';
 ?>
 ```
 
