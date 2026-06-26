@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UAA12 - Dossier de révision</title>
+<!-- Page générée à partir de Exercices/UAA12_Exercices_Revision.md (voir build_revision.py) -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{
+  --primary-color:#6366f1;--secondary-color:#8b5cf6;--accent-color:#06b6d4;
+  --text-dark:#1f2937;--text-light:#6b7280;--php-color:#777bb4;
+  --bg-gradient:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:var(--bg-gradient);color:var(--text-dark);line-height:1.65;}
+
+/* Barre d'outils */
+.toolbar{position:sticky;top:0;z-index:1000;display:flex;gap:1rem;align-items:center;justify-content:space-between;
+  padding:0.8rem 1.5rem;background:rgba(31,41,55,0.85);backdrop-filter:blur(10px);}
+.toolbar .left{display:flex;gap:0.8rem;align-items:center;}
+.toolbar a,.toolbar button{display:inline-flex;align-items:center;gap:0.4rem;border:none;cursor:pointer;
+  font-family:'Inter',sans-serif;font-weight:600;font-size:0.9rem;padding:0.6rem 1.1rem;border-radius:12px;
+  text-decoration:none;transition:all .25s ease;}
+.toolbar .btn-back{background:rgba(255,255,255,0.12);color:#fff;}
+.toolbar .btn-back:hover{background:rgba(255,255,255,0.22);}
+.toolbar .btn-pdf{background:linear-gradient(135deg,var(--primary-color),var(--secondary-color));color:#fff;
+  box-shadow:0 4px 15px rgba(99,102,241,.35);}
+.toolbar .btn-pdf:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(99,102,241,.45);}
+.toolbar .title{color:#e5e7eb;font-weight:500;font-size:0.95rem;}
+
+/* Zone document */
+.wrap{max-width:920px;margin:2.5rem auto;padding:0 1.5rem;}
+.paper{background:#fff;border-radius:18px;box-shadow:0 20px 50px rgba(0,0,0,.18);padding:3.5rem 3rem;}
+
+/* Typographie du contenu */
+#content h1{font-size:2.2rem;font-weight:800;color:var(--text-dark);margin:0 0 .4rem;line-height:1.2;}
+#content h2{font-size:1.6rem;font-weight:700;margin:2.6rem 0 1rem;padding-bottom:.4rem;
+  border-bottom:3px solid;border-image:linear-gradient(90deg,var(--primary-color),var(--accent-color)) 1;}
+#content h3{font-size:1.2rem;font-weight:700;color:var(--secondary-color);margin:1.8rem 0 .6rem;}
+#content p{margin:.7rem 0;}
+#content ul,#content ol{margin:.6rem 0 .6rem 1.4rem;}
+#content li{margin:.3rem 0;}
+#content a{color:var(--primary-color);text-decoration:none;border-bottom:1px solid rgba(99,102,241,.3);}
+#content a:hover{border-bottom-color:var(--primary-color);}
+#content strong{color:var(--text-dark);font-weight:700;}
+#content hr{border:none;border-top:1px solid #e5e7eb;margin:2.4rem 0;}
+
+/* Code */
+#content code{font-family:'JetBrains Mono',monospace;font-size:.88em;background:#f1f0fb;color:var(--php-color);
+  padding:.12em .4em;border-radius:6px;}
+#content pre{background:#1e2330;border-radius:12px;padding:1.1rem 1.3rem;overflow-x:auto;margin:1rem 0;
+  border-left:4px solid var(--php-color);}
+#content pre code{display:block;background:none;color:#e5e7eb;padding:0;font-size:.85rem;line-height:1.55;}
+
+/* Tableaux */
+#content table{border-collapse:collapse;width:100%;margin:1.2rem 0;font-size:.92rem;}
+#content th{background:linear-gradient(135deg,var(--primary-color),var(--secondary-color));color:#fff;
+  text-align:left;padding:.6rem .8rem;}
+#content td{padding:.55rem .8rem;border-bottom:1px solid #eef0f4;}
+#content tr:nth-child(even) td{background:#fafafe;}
+
+/* Citations / notes */
+#content blockquote{margin:1rem 0;padding:.8rem 1.2rem;background:#f7f7ff;border-left:4px solid var(--accent-color);
+  border-radius:0 10px 10px 0;color:#374151;}
+#content blockquote p{margin:.3rem 0;}
+
+@media(max-width:768px){
+  .paper{padding:2rem 1.3rem;}
+  .toolbar .title{display:none;}
+  #content h1{font-size:1.7rem;}
+}
+
+/* Impression / PDF */
+@media print{
+  @page{margin:1.5cm;}
+  body{background:#fff;}
+  .toolbar{display:none !important;}
+  .wrap{margin:0;max-width:none;padding:0;}
+  .paper{box-shadow:none;border-radius:0;padding:0;}
+  #content h2,#content h3{break-after:avoid;}
+  #content pre,#content table,#content blockquote{break-inside:avoid;}
+  #content pre{background:#f4f4f8;border-left:4px solid var(--php-color);}
+  #content pre code{color:#1e2330;}
+  #content a{color:var(--text-dark);border:none;}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="left">
+    <a href="../index.html" class="btn-back">&larr; Retour UAA12</a>
+    <span class="title">Dossier de révision &mdash; toutes les séries</span>
+  </div>
+  <button class="btn-pdf" onclick="window.print()">&#128424;&#65039; Télécharger en PDF</button>
+</div>
+<div class="wrap">
+  <div class="paper">
+    <article id="content">Chargement&hellip;</article>
+  </div>
+</div>
+
+<textarea id="src" hidden># Développement d'un site web dynamique (UAA12)
+
+## Dossier d'exercices de révision — toutes les séries
+
+&gt; Ce dossier rassemble des exercices **inédits** mais de **difficulté équivalente** à
+&gt; ceux des séries 1 à 6. Son but n'est **pas** d'introduire de nouveaux concepts, mais
+&gt; de **réviser** l'ensemble des thématiques abordées au cours de l'UAA12. Chaque série
+&gt; propose au minimum 5 exercices, suivis de 2 exercices récapitulatifs qui mobilisent
+&gt; plusieurs séries à la fois.
+&gt;
+&gt; Les **corrigés** sont regroupés en **annexe**, à la fin du document. Essaie de réaliser
+&gt; chaque exercice par toi-même avant de t'y référer.
+
+---
+
+### Objets d'apprentissage couverts
+
+- ✔ Élaborer un formulaire sur la base d'une structure donnée.
+- ✔ Construire une page WEB dynamique à l'aide du langage PHP.
+- ✔ Construire une page WEB dynamique à l'aide du langage JavaScript.
+- ✔ Concevoir un formulaire répondant aux exigences d'un cahier des charges.
+- ✔ Associer des balises HTML de formulaires à leur sémantique.
+- ✔ Se connecter à une base de données relationnelle à l'aide du langage PHP.
+- ✔ Exécuter des requêtes de lecture et d'écriture à une base de données relationnelle.
+- ✔ Formuler la syntaxe des requêtes à une base de données relationnelle (SQL).
+- ✔ Décrire le rôle d'un cookie et d'une session.
+- ✔ Caractériser et se protéger des attaques WEB les plus courantes.
+
+### Aperçu des séries
+
+| Série | Thématique | Concepts révisés |
+|------|-----------|------------------|
+| 1 | Rappels &amp; introduction au PHP | balises `&lt;?php ?&gt;`, `echo`, `date()`, CSS, JS |
+| 2 | Bases de PHP | types, variables, chaînes, conditions, boucles |
+| 3 | Les tableaux | tableaux indexés, associatifs, 2D, `foreach` |
+| 4 | Échange de données | formulaires, `GET` / `POST`, `$_GET` / `$_POST` |
+| 5 | Cookies &amp; sessions | `setcookie`, `$_COOKIE`, `$_SESSION`, sécurité |
+| 6 | Bases de données | `mysqli`, `SELECT` / `INSERT`, requêtes préparées |
+
+---
+
+## Série 1 — Rappels et introduction au PHP
+
+&gt; **Objet d'apprentissage :** Construire une page WEB dynamique à l'aide du langage PHP.
+
+### Exercice 1.1 : la page qui dit bonjour
+
+**Étape 1.** Crée un fichier `bonjour.php` et place-y une structure HTML5 valide (`&lt;!doctype html&gt;`,
+`&lt;html&gt;`, `&lt;head&gt;`, `&lt;body&gt;`). Dans le `&lt;body&gt;`, affiche un titre `&lt;h1&gt;` contenant le texte
+« Bienvenue sur mon site ! ».
+
+**Étape 2.** Sous le titre, ajoute un paragraphe qui affiche, **à l'aide de PHP** (`echo`), la
+phrase : « Cette page a été générée à HH:MM. » où `HH:MM` est l'heure courante (fonction `date`).
+
+**Étape 3.** Ajoute un second paragraphe qui souhaite une bonne journée différente selon le moment :
+« Bonne matinée ! » avant 12h, sinon « Bon après-midi ! ». Utilise `date('G')` (heure de 0 à 23)
+et une structure `if / else`.
+
+### Exercice 1.2 : carte de visite stylée
+
+**Étape 1.** Crée `carte.php`. Affiche, dans une `&lt;div&gt;`, ton prénom (`&lt;h2&gt;`), ton métier rêvé
+(`&lt;p&gt;`) et une adresse e-mail fictive (`&lt;p&gt;`).
+
+**Étape 2.** Crée un fichier `carte.css` et lie-le à la page. Applique les règles suivantes :
+
+- le fond de la page est de couleur `teal` ;
+- la `&lt;div&gt;` fait 400px de largeur, est centrée, possède un rembourrage de 20px, un fond blanc et
+  des coins arrondis de 10px ;
+- le prénom (`&lt;h2&gt;`) est affiché en `teal` et centré.
+
+**Étape 3.** À l'aide de PHP, ajoute en bas de la carte un paragraphe « Profil consulté le JJ/MM/AAAA »
+en utilisant la fonction `date` avec le bon format.
+
+### Exercice 1.3 : le compteur de mots
+
+**Étape 1.** Dans un fichier `compteur.php`, déclare une variable `$phrase` contenant une phrase de
+ton choix (au moins 6 mots).
+
+**Étape 2.** Affiche la phrase dans un paragraphe.
+
+**Étape 3.** Sous la phrase, affiche « Cette phrase contient N caractères. » où `N` est obtenu grâce
+à la fonction `strlen`. Renseigne-toi si nécessaire :
+&lt;https://www.w3schools.com/php/func_string_strlen.asp&gt;
+
+### Exercice 1.4 : afficher / cacher avec JavaScript
+
+**Étape 1.** Reprends la page `bonjour.php` de l'exercice 1.1.
+
+**Étape 2.** Ajoute un bouton « Afficher / cacher l'heure ». Au clic, le paragraphe contenant l'heure
+doit apparaître ou disparaître (utilise JavaScript et la propriété `style.display`).
+
+**Étape 3.** Donne un identifiant (`id`) au paragraphe de l'heure afin de pouvoir le cibler depuis
+JavaScript avec `document.getElementById`.
+
+### Exercice 1.5 : pair ou impair
+
+**Étape 1.** Dans un fichier `parite.php`, crée une variable `$nombre` initialisée à `7`.
+
+**Étape 2.** À l'aide d'une structure conditionnelle et de l'opérateur modulo `%`, affiche un
+paragraphe indiquant « 7 est un nombre impair. » (ou « pair » selon la valeur).
+
+**Étape 3.** Teste ton code en changeant la valeur de `$nombre` (essaie `0`, `10`, `13`).
+
+---
+
+## Série 2 — Les bases de PHP
+
+&gt; **Objet d'apprentissage :** Construire une page WEB dynamique à l'aide du langage PHP.
+
+### Exercice 2.1 : types et affichage
+
+**Étape 1.** Utilise l'outil en ligne &lt;https://onlinephp.io/&gt; pour cet exercice.
+
+**Étape 2.** Écris un script qui déclare une variable `$x = 42` et affiche, sur trois lignes :
+
+- la valeur de `$x` et son type, à l'aide de `gettype` ;
+- le résultat de `var_export($x)` ;
+- le résultat de `var_dump($x)`.
+
+**Étape 3.** Recommence l'exercice en initialisant successivement `$x` avec : `3.14`, `"coucou"`,
+`true`, `false`, `null`. Observe la manière dont PHP affiche chaque type.
+
+### Exercice 2.2 : guillemets contre apostrophes
+
+**Étape 1.** Déclare `$prenom = 'Donald';` et `$age = 80;`.
+
+**Étape 2.** Affiche la phrase « Donald a 80 ans. » en utilisant des **guillemets** (`"`) et
+l'interpolation de variables.
+
+**Étape 3.** Affiche exactement la même phrase, mais cette fois avec des **apostrophes** (`'`) et la
+**concaténation** (`.`). Quelle est la différence entre les deux approches ?
+
+### Exercice 2.3 : la calculatrice de TVA
+
+**Étape 1.** Déclare une variable `$prixHT = 100;` (prix hors taxes en euros).
+
+**Étape 2.** Calcule le montant de la TVA (21 %) dans une variable `$tva`, puis le prix TTC dans
+`$prixTTC`.
+
+**Étape 3.** Affiche un récapitulatif lisible :
+
+```
+Prix HT  : 100 €
+TVA (21%): 21 €
+Prix TTC : 121 €
+```
+
+### Exercice 2.4 : la table de multiplication
+
+**Étape 1.** Déclare une variable `$n = 7;`.
+
+**Étape 2.** À l'aide d'une boucle `for`, affiche la table de multiplication de `$n` de 1 à 10, sous
+la forme « 7 x 1 = 7 », « 7 x 2 = 14 », etc. (un résultat par ligne, utilise `&lt;br&gt;`).
+
+**Étape 3.** Transforme ton code pour qu'il fonctionne avec une boucle `while` à la place du `for`.
+
+### Exercice 2.5 : deviner la mention
+
+**Étape 1.** Déclare une variable `$note = 14;` (note sur 20).
+
+**Étape 2.** À l'aide d'une structure `if / elseif / else`, affiche la mention correspondante :
+
+- moins de 10 : « Échec » ;
+- de 10 à 11,9 : « Satisfaction » ;
+- de 12 à 13,9 : « Distinction » ;
+- de 14 à 15,9 : « Grande distinction » ;
+- 16 et plus : « La plus grande distinction ».
+
+**Étape 3.** Vérifie ton code en testant plusieurs valeurs de `$note` (5, 10, 13, 14, 18).
+
+### Exercice 2.6 : FizzBuzz
+
+**Étape 1.** À l'aide d'une boucle, parcours les nombres de 1 à 30.
+
+**Étape 2.** Pour chaque nombre, affiche :
+
+- « Fizz » s'il est divisible par 3 ;
+- « Buzz » s'il est divisible par 5 ;
+- « FizzBuzz » s'il est divisible par 3 **et** par 5 ;
+- sinon, le nombre lui-même.
+
+---
+
+## Série 3 — Les tableaux
+
+&gt; **Objet d'apprentissage :** Construire une page WEB dynamique à l'aide du langage PHP.
+
+### Exercice 3.1 : la liste de courses
+
+**Étape 1.** Déclare un tableau indexé `$courses` contenant : `'pain'`, `'lait'`, `'œufs'`,
+`'café'`, `'pommes'`.
+
+**Étape 2.** Affiche le contenu du tableau sous la forme d'une liste HTML à puces (`&lt;ul&gt;` / `&lt;li&gt;`)
+à l'aide d'une boucle `foreach`.
+
+**Étape 3.** Sous la liste, affiche « Tu as N articles dans ton panier. » où `N` est obtenu avec la
+fonction `count`.
+
+### Exercice 3.2 : le bulletin
+
+**Étape 1.** Déclare un tableau associatif `$notes` reliant des matières à des notes :
+
+```php
+$notes = [
+    'Mathématiques' =&gt; 14,
+    'Français'      =&gt; 11,
+    'Informatique'  =&gt; 18,
+    'Histoire'      =&gt; 9,
+];
+```
+
+**Étape 2.** Affiche un tableau HTML (`&lt;table&gt;`) à deux colonnes : la matière et la note.
+
+**Étape 3.** Calcule et affiche la moyenne des notes (somme des valeurs divisée par le nombre de
+matières). Utilise les fonctions `array_sum` et `count`.
+
+### Exercice 3.3 : le top des langages
+
+**Étape 1.** Déclare un tableau indexé `$langages` contenant au moins 6 langages de programmation,
+dans le désordre.
+
+**Étape 2.** Trie le tableau par ordre alphabétique avec la fonction `sort`, puis affiche-le sous
+forme de liste numérotée (`&lt;ol&gt;`).
+
+**Étape 3.** Affiche en gras le **premier** et le **dernier** élément du tableau trié (utilise les
+index appropriés et la fonction `count`).
+
+### Exercice 3.4 : annuaire 2D
+
+**Étape 1.** Complète la définition du tableau 2D suivant pour stocker un petit annuaire :
+
+```php
+&lt;?php
+$contacts = [
+    'Picsou'  =&gt; ['tel' =&gt; '0470 11 22 33', 'ville' =&gt; 'Donaldville'],
+    'Donald'  =&gt; ['tel' =&gt; '0470 44 55 66', 'ville' =&gt; 'Donaldville'],
+    // ajoute 'Géo Trouvetou' et 'Gontran'
+];
+?&gt;
+```
+
+**Étape 2.** Affiche chaque contact sous la forme « Picsou — 0470 11 22 33 (Donaldville) » à l'aide
+d'une boucle `foreach`.
+
+**Étape 3.** Modifie ton script pour afficher uniquement les contacts habitant « Donaldville ».
+
+### Exercice 3.5 : le panier additionné
+
+**Étape 1.** Déclare un tableau associatif reliant des produits à leur prix :
+
+```php
+$panier = [
+    'Café'      =&gt; 4.50,
+    'Croissant' =&gt; 1.20,
+    'Jus'       =&gt; 2.80,
+];
+```
+
+**Étape 2.** Affiche chaque produit avec son prix dans un tableau HTML.
+
+**Étape 3.** Calcule le total du panier à l'aide d'une boucle `foreach` (en additionnant les
+valeurs), puis affiche-le en bas du tableau.
+
+### Exercice 3.6 : le filtre des majeurs
+
+**Étape 1.** Déclare un tableau 2D `$personnes`, chaque personne ayant un `nom` et un `age`
+(crée-en au moins 5, avec des âges variés).
+
+**Étape 2.** Parcours le tableau et affiche uniquement les personnes **majeures** (18 ans et plus).
+
+**Étape 3.** Compte et affiche combien de personnes sont majeures et combien sont mineures.
+
+---
+
+## Série 4 — Échange de données (GET / POST)
+
+&gt; **Objets d'apprentissage :** Élaborer un formulaire sur la base d'une structure donnée ·
+&gt; Concevoir un formulaire répondant aux exigences d'un cahier des charges ·
+&gt; Associer des balises HTML de formulaires à leur sémantique.
+
+### Exercice 4.1 : la recherche en GET
+
+**Étape 1.** Crée un fichier `recherche.php` contenant un formulaire avec `method="GET"`, un champ
+texte nommé `q` et un bouton « Rechercher ».
+
+**Étape 2.** Côté PHP, si une recherche est reçue (`isset($_GET['q'])`), affiche « Tu as recherché :
+… ». Sinon, affiche « Aucune recherche effectuée. ».
+
+**Étape 3.** Observe l'URL après la soumission : repère le paramètre `?q=...`.
+
+**Étape 4.** Sous le formulaire, propose trois suggestions de recherche sous forme de **liens**
+(« informatique », « cuisine », « voyage »). Chaque lien doit pointer vers `recherche.php` en passant
+directement le mot-clé dans l'URL (par exemple `recherche.php?q=cuisine`) : c'est donc à toi de
+**construire l'URL** côté serveur. Vérifie qu'un clic relance bien la recherche.
+
+### Exercice 4.2 : la calculatrice en POST
+
+**Étape 1.** Crée `calcul.php` avec un formulaire `method="POST"` comportant deux champs numériques
+(`a` et `b`) et un bouton « Additionner ».
+
+**Étape 2.** Côté PHP, si les deux valeurs sont reçues, affiche « a + b = résultat ».
+
+**Étape 3.** Ajoute un menu déroulant (`&lt;select&gt;`) permettant de choisir l'opération (`+`, `-`, `*`,
+`/`) et adapte le calcul en conséquence. Pense à gérer la division par zéro.
+
+### Exercice 4.3 : le formulaire d'inscription
+
+**Étape 1.** Crée un formulaire d'inscription (`method="POST"`) avec, au minimum : un nom, un e-mail
+(`type="email"`), un mot de passe (`type="password"`) et une case à cocher « J'accepte les
+conditions ».
+
+**Étape 2.** Associe correctement chaque champ à un `&lt;label&gt;` (attribut `for` / `id`) et utilise des
+attributs `name` cohérents.
+
+**Étape 3.** Côté PHP, après soumission, valide les données et affiche **un message d'erreur précis
+selon le cas** : « Le nom est obligatoire. » si le nom est vide, « L'adresse e-mail est obligatoire. »
+si l'e-mail est vide, « Tu dois accepter les conditions. » si la case n'est pas cochée. Plusieurs
+erreurs peuvent s'afficher en même temps.
+
+**Étape 4.** Si **toutes** les données sont valides, ne réaffiche pas le formulaire : redirige
+l'utilisateur vers une page `merci.php` à l'aide de `header('Location: merci.php')` (suivi de
+`exit;`). Rappelle-toi que `header` doit être appelée **avant** tout affichage HTML.
+
+### Exercice 4.4 : le quiz à un formulaire
+
+**Étape 1.** Crée un formulaire posant une question à choix multiple à l'aide de boutons radio
+(`type="radio"`), par exemple : « Quel langage s'exécute côté serveur ? » avec les options PHP,
+JavaScript, CSS.
+
+**Étape 2.** Côté PHP, après soumission, compare la réponse reçue à la bonne réponse et affiche
+« Bravo ! » ou « Mauvaise réponse, la bonne était : PHP. ».
+
+**Étape 3.** Ajoute deux questions supplémentaires et affiche un score sur 3.
+
+### Exercice 4.5 : convertisseur de température
+
+**Étape 1.** Crée un formulaire `method="GET"` avec un champ pour saisir une température en degrés
+Celsius.
+
+**Étape 2.** Côté PHP, convertis la valeur reçue en Fahrenheit (`F = C × 9/5 + 32`) et affiche le
+résultat.
+
+**Étape 3.** Vérifie que la valeur reçue est bien numérique (`is_numeric`) avant de calculer ; sinon,
+affiche un message d'erreur.
+
+### Exercice 4.6 : le formulaire qui se souvient
+
+**Étape 1.** Reprends le formulaire d'inscription de l'exercice 4.3.
+
+**Étape 2.** Fais en sorte qu'après une soumission, les champs texte conservent la valeur entrée par
+l'utilisateur (utilise l'attribut `value="..."` rempli avec la valeur de `$_POST`).
+
+**Étape 3.** Protège l'affichage de ces valeurs avec la fonction `htmlspecialchars` (on verra
+pourquoi en série 5 !).
+
+### Exercice 4.7 : du catalogue à la commande
+
+&gt; Cet exercice met en relation **deux pages** : une page qui liste, et une page qui agit sur l'élément
+&gt; choisi. C'est un schéma que tu retrouveras partout.
+
+**Étape 1.** Crée `menu.php` qui déclare un tableau de plats (`['Pizza', 'Burger', 'Tacos']`) et les
+affiche sous forme de liste. Le **nom de chaque plat est un lien** vers `commande.php` en passant le
+nom du plat en GET (par exemple `commande.php?plat=Pizza`). Pense à `urlencode` / `htmlspecialchars`
+sur le nom passé dans l'URL.
+
+**Étape 2.** Crée `commande.php`. Si **aucun** plat n'est passé en GET, l'utilisateur n'a rien à
+commander : redirige-le immédiatement vers `menu.php` (`header('Location: menu.php'); exit;`).
+
+**Étape 3.** Sinon, affiche « Tu commandes : PLAT » puis un formulaire (`method="POST"`) demandant le
+nombre de portions. Astuce : le `action` du formulaire doit **conserver le plat en GET** tout en
+envoyant la quantité en POST, soit `action="commande.php?plat=Pizza"`. Une même requête transporte
+ainsi une donnée en GET (l'URL) **et** une donnée en POST (le formulaire).
+
+**Étape 4.** À la soumission, affiche « Commande confirmée : 2 × Pizza ». (Récupère le plat dans
+`$_GET` et la quantité dans `$_POST`.)
+
+---
+
+## Série 5 — Cookies et sessions
+
+&gt; **Objets d'apprentissage :** Décrire le rôle d'un cookie · Construire une page dynamique avec PHP
+&gt; et JavaScript · Caractériser les attaques WEB les plus courantes.
+
+### Exercice 5.1 : le cookie de bienvenue
+
+**Étape 1.** Crée une page `bienvenue.php` avec un formulaire (`POST`) demandant le prénom de
+l'utilisateur.
+
+**Étape 2.** À la soumission, stocke le prénom dans un cookie `prenom` (fonction `setcookie`,
+durée de validité : 7 jours).
+
+**Étape 3.** À chaque chargement de la page, si le cookie `prenom` existe (`$_COOKIE`), affiche
+« Content de te revoir, PRENOM ! » ; sinon, affiche le formulaire.
+
+&gt; ⚠️ Rappel : `setcookie` doit être appelée **avant** tout affichage HTML (avant `&lt;!doctype html&gt;`).
+
+### Exercice 5.2 : le thème clair / sombre
+
+**Étape 1.** Crée une page proposant deux boutons : « Thème clair » et « Thème sombre ».
+
+**Étape 2.** Au clic, stocke le choix dans un cookie `theme` (« clair » ou « sombre »).
+
+**Étape 3.** Côté PHP, lis le cookie `theme` et applique la couleur de fond et de texte
+correspondante à la page (fond blanc / texte noir, ou fond noir / texte blanc). La valeur par défaut
+est le thème clair.
+
+### Exercice 5.3 : le compteur de visites
+
+**Étape 1.** Crée une page `compteur.php` utilisant un cookie `visites`.
+
+**Étape 2.** À chaque chargement, incrémente la valeur du cookie de 1 et affiche « Tu as visité
+cette page N fois. ».
+
+**Étape 3.** Ajoute un bouton « Réinitialiser » qui supprime le cookie (en lui donnant une date
+d'expiration passée).
+
+### Exercice 5.4 : mini-connexion avec session
+
+**Étape 1.** Crée `login.php` avec un formulaire (`POST`) demandant un nom d'utilisateur et un mot de
+passe. Le couple valide est `admin` / `1234` (codé en dur, c'est un exercice !).
+
+**Étape 2.** Si les identifiants sont corrects, démarre une session (`session_start`) et stocke
+`$_SESSION['connecte'] = true;` puis redirige vers `accueil.php`.
+
+**Étape 3.** Sur `accueil.php`, vérifie que `$_SESSION['connecte']` est vrai : si oui, affiche
+« Espace membre » ; sinon, renvoie vers `login.php`. Ajoute un lien « Déconnexion » qui détruit la
+session (`session_destroy`).
+
+### Exercice 5.5 : le panier de session
+
+**Étape 1.** Crée une page listant 3 produits, chacun accompagné d'un bouton « Ajouter au panier ».
+
+**Étape 2.** À l'aide d'une session, stocke dans `$_SESSION['panier']` (un tableau) les produits
+ajoutés.
+
+**Étape 3.** Affiche en permanence le contenu du panier ainsi que le nombre total d'articles. Ajoute
+un bouton « Vider le panier ».
+
+### Exercice 5.6 : repérer la faille XSS
+
+**Étape 1.** Crée une page `commentaire.php` avec un formulaire (`POST`) permettant de saisir un
+commentaire, qui est ensuite ré-affiché tel quel sur la page.
+
+**Étape 2.** Saisis comme commentaire : `&lt;script&gt;alert('piraté');&lt;/script&gt;`. Que se passe-t-il ?
+Décris en une phrase l'attaque que tu viens de réaliser (faille **XSS**).
+
+**Étape 3.** Corrige la faille en filtrant l'affichage avec `htmlspecialchars`. Vérifie que le script
+n'est plus exécuté.
+
+### Exercice 5.7 : ma fiche profil
+
+&gt; Ici on stocke en session **plusieurs informations liées** à un même utilisateur, et on fait en sorte
+&gt; qu'il ne doive pas les ré-encoder à chaque visite.
+
+**Étape 1.** Crée `profil.php` avec un formulaire (`POST`, vers la même page) demandant le pseudo,
+l'e-mail et la ville de l'utilisateur. N'oublie pas `session_start()` en tout début de fichier.
+
+**Étape 2.** À la soumission, enregistre les trois champs en session (par exemple
+`$_SESSION['pseudo']`, `$_SESSION['email']`, `$_SESSION['ville']`).
+
+**Étape 3.** Si l'utilisateur revient sur la page alors qu'il est **déjà identifié** (les données
+existent déjà en session), affiche au-dessus du formulaire : « Tu es identifié en tant que PSEUDO.
+Tu peux modifier tes informations ci-dessous. ». De plus, **pré-remplis** chaque champ du formulaire
+avec la valeur stockée en session (attribut `value="..."`, protégé par `htmlspecialchars`) : il peut
+ainsi corriger une donnée et la **mettre à jour**.
+
+**Étape 4.** Ajoute un bouton « Déconnexion ». Au clic, il doit : détruire la session
+(`session_destroy`), **supprimer** un éventuel cookie `derniere_visite`, puis rediriger vers
+`profil.php`. Vérifie qu'après déconnexion le formulaire est de nouveau vide.
+
+---
+
+## Série 6 — Exploitation de bases de données
+
+&gt; **Objets d'apprentissage :** Se connecter à une base de données relationnelle à l'aide de PHP ·
+&gt; Exécuter des requêtes de lecture et d'écriture · Formuler la syntaxe SQL · Se protéger des attaques
+&gt; WEB les plus courantes.
+
+&gt; **Mise en place commune.** Dans phpMyAdmin, crée une base `biblio` puis exécute :
+&gt;
+&gt; ```sql
+&gt; CREATE TABLE livres (
+&gt;     id INT AUTO_INCREMENT PRIMARY KEY,
+&gt;     titre VARCHAR(150),
+&gt;     auteur VARCHAR(100),
+&gt;     genre VARCHAR(50),
+&gt;     annee INT,
+&gt;     disponible BOOLEAN
+&gt; );
+&gt;
+&gt; INSERT INTO livres VALUES
+&gt; (NULL, 'Le Seigneur des Anneaux', 'Tolkien',   'Fantasy',     1954, 1),
+&gt; (NULL, '1984',                    'Orwell',    'Dystopie',    1949, 1),
+&gt; (NULL, 'Le Petit Prince',         'Saint-Exupéry', 'Conte',   1943, 0),
+&gt; (NULL, 'Dune',                    'Herbert',   'Science-fiction', 1965, 1),
+&gt; (NULL, 'Fahrenheit 451',          'Bradbury',  'Dystopie',    1953, 0);
+&gt; ```
+
+### Exercice 6.1 : afficher le catalogue
+
+**Étape 1.** Crée `catalogue.php` et établis la connexion à la base `biblio` :
+
+```php
+&lt;?php
+$conn = mysqli_connect('localhost', 'root', '', 'biblio');
+if (!$conn) {
+    die('Erreur de connexion : ' . mysqli_connect_error());
+}
+?&gt;
+```
+
+**Étape 2.** Exécute la requête `SELECT * FROM livres` et affiche tous les livres dans un tableau
+HTML (colonnes : titre, auteur, genre, année).
+
+**Étape 3.** Ajoute une colonne « Disponible » affichant « Oui » ou « Non » selon la valeur du champ
+`disponible`.
+
+### Exercice 6.2 : le filtre du catalogue
+
+**Étape 1.** Reprends la connexion à `biblio`. Au-dessus du tableau des livres, place un formulaire
+(`POST` vers la même page) contenant une liste déroulante des genres, une case à cocher « Uniquement
+les livres disponibles » et un bouton « Filtrer ».
+
+**Étape 2.** Les options de la liste déroulante ne doivent **pas** être écrites en dur : récupère-les
+depuis la base avec `SELECT DISTINCT genre FROM livres` (pour éviter les doublons) et ajoute en tête
+une option « Tous les genres ».
+
+**Étape 3.** À la soumission, affiche les livres correspondant aux filtres choisis. Quatre cas sont
+possibles : un genre + la case cochée, un genre seul, la case cochée seule, ou aucun filtre. Construis
+la clause `WHERE` en conséquence (et trie le résultat par année croissante avec `ORDER BY`).
+
+### Exercice 6.3 : ajouter un livre (INSERT)
+
+**Étape 1.** Crée un formulaire (`POST`) permettant de saisir le titre, l'auteur, le genre et l'année
+d'un nouveau livre.
+
+**Étape 2.** À la soumission, insère le livre dans la table à l'aide d'une requête `INSERT INTO`.
+
+**Étape 3.** Après l'insertion, redirige l'utilisateur vers le catalogue (exercice 6.1) à l'aide de
+`header('Location: catalogue.php'); exit;` pour vérifier que le livre apparaît bien.
+
+### Exercice 6.4 : la recherche sécurisée (requête préparée)
+
+**Étape 1.** Crée un formulaire de recherche (`GET`) avec un champ `auteur`.
+
+**Étape 2.** Récupère tous les livres de cet auteur à l'aide d'une **requête préparée** (`mysqli_prepare`,
+`bind_param`, `execute`). Explique en une phrase pourquoi on n'insère **jamais** directement la valeur
+reçue dans la chaîne SQL.
+
+**Étape 3.** Avant d'afficher les résultats, vérifie avec `mysqli_num_rows` s'il y en a au moins un.
+Si la recherche ne renvoie **aucun** livre, affiche « Aucun livre trouvé pour cet auteur. » au lieu
+d'un tableau vide.
+
+**Étape 4.** Teste ta recherche en saisissant comme auteur : `' OR '1'='1`. Avec une requête préparée,
+l'injection ne fonctionne pas : décris ce qu'il se serait passé sans protection (**injection SQL**).
+
+### Exercice 6.5 : marquer un livre comme emprunté (UPDATE)
+
+**Étape 1.** Dans le catalogue, ajoute à côté de chaque livre disponible un bouton « Emprunter »
+(formulaire `POST` transmettant l'`id` du livre).
+
+**Étape 2.** À la réception de l'`id`, exécute une requête `UPDATE` qui passe le champ `disponible`
+à `0` pour ce livre (utilise une requête préparée).
+
+**Étape 3.** Ajoute symétriquement un bouton « Rendre » pour les livres indisponibles, qui repasse
+`disponible` à `1`.
+
+### Exercice 6.6 : statistiques de la bibliothèque
+
+**Étape 1.** Affiche le **nombre total** de livres (`SELECT COUNT(*) FROM livres`).
+
+**Étape 2.** Affiche le nombre de livres **par genre** (`GROUP BY genre`).
+
+**Étape 3.** Affiche l'**année du livre le plus ancien** et celle du plus récent (`MIN` / `MAX`).
+
+### Exercice 6.7 : la fiche d'un livre
+
+&gt; Jusqu'ici tes requêtes renvoyaient **plusieurs** lignes (une boucle). Ici, tu vas en récupérer une
+&gt; **seule**.
+
+**Étape 1.** Dans le catalogue (exercice 6.1), transforme le titre de chaque livre en lien vers
+`fiche.php` en passant l'`id` du livre en GET (`fiche.php?id=3`).
+
+**Étape 2.** Dans `fiche.php`, récupère l'`id` reçu en GET (avec une **requête préparée**) et lis le
+livre correspondant. Comme la requête ne renvoie qu'une ligne, **inutile de boucler** : un seul
+`mysqli_fetch_assoc` suffit. Affiche le titre, l'auteur, le genre et l'année.
+
+**Étape 3.** Gère le cas où l'`id` ne correspond à aucun livre (par exemple `fiche.php?id=999`) :
+vérifie avec `mysqli_num_rows` et, s'il n'y a pas de résultat, affiche « Livre introuvable. » ou
+redirige vers le catalogue.
+
+---
+
+## Exercices récapitulatifs
+
+&gt; Ces deux exercices mobilisent **plusieurs séries** en même temps. Prends le temps de relire les
+&gt; exercices concernés avant de te lancer.
+
+### Récap A : le mini-blog (séries 1 → 5, sans base de données)
+
+**Cahier des charges.** Réalise un mini-blog où l'utilisateur peut écrire des billets. Les billets
+sont conservés le temps de la session.
+
+1. **(Série 4)** Crée un formulaire (`POST`) avec un champ « titre » et une zone de texte
+   « contenu », plus un bouton « Publier ».
+2. **(Série 5)** À la soumission, ajoute le billet (un tableau associatif `['titre' =&gt; ..., 'contenu'
+   =&gt; ..., 'date' =&gt; ...]`) dans `$_SESSION['billets']`.
+3. **(Séries 1 &amp; 2)** Horodate chaque billet avec la fonction `date`.
+4. **(Série 3)** Affiche tous les billets enregistrés en parcourant le tableau de session avec une
+   boucle `foreach` (du plus récent au plus ancien).
+5. **(Série 5 — sécurité)** Protège l'affichage du titre et du contenu avec `htmlspecialchars` pour
+   éviter toute faille XSS.
+6. **(Série 5)** Ajoute un cookie `auteur` retenant le pseudo de l'utilisateur, affiché en signature
+   de chaque nouveau billet.
+7. **Bonus (JS) :** ajoute un bouton « Mode sombre » qui inverse les couleurs de la page côté
+   JavaScript.
+
+### Récap B : le gestionnaire de tâches (séries 1 → 6, avec base de données)
+
+&gt; **Mise en place.** Dans phpMyAdmin, crée une base `taches` puis :
+&gt;
+&gt; ```sql
+&gt; CREATE TABLE taches (
+&gt;     id INT AUTO_INCREMENT PRIMARY KEY,
+&gt;     intitule VARCHAR(200),
+&gt;     priorite VARCHAR(20),
+&gt;     faite BOOLEAN DEFAULT 0,
+&gt;     creee_le DATE
+&gt; );
+&gt; ```
+
+**Cahier des charges.** Réalise une « to-do list » complète et persistante.
+
+1. **(Série 6)** Connecte-toi à la base `taches`.
+2. **(Séries 4 &amp; 6)** Crée un formulaire (`POST`) permettant d'ajouter une tâche (intitulé + priorité
+   choisie dans un `&lt;select&gt;` : basse / moyenne / haute). À la soumission, insère la tâche via une
+   **requête préparée**, en renseignant `creee_le` avec `date('Y-m-d')`.
+3. **(Séries 3 &amp; 6)** Affiche toutes les tâches dans un tableau HTML, triées par date de création
+   (`ORDER BY`).
+4. **(Série 6 — UPDATE)** Ajoute pour chaque tâche un bouton « Terminer » qui passe le champ `faite`
+   à `1` (requête préparée). Affiche les tâches terminées d'un style différent (barrées, en gris).
+5. **(Série 6 — DELETE)** Ajoute un bouton « Supprimer » qui retire la tâche de la base
+   (`DELETE FROM ... WHERE id = ?`, requête préparée).
+6. **(Série 5)** Avant d'accéder à la page, exige une connexion via une session (réutilise la
+   mini-connexion de l'exercice 5.4).
+7. **(Série 6 — sécurité)** Vérifie que **toutes** les requêtes utilisant des données utilisateur sont
+   préparées, et que tout affichage de données issues de la base passe par `htmlspecialchars`.
+
+---
+
+## Annexe — Corrigés
+
+&gt; Les corrigés ci-dessous proposent **une** solution possible. D'autres approches correctes existent.
+&gt; Le code se concentre sur la logique demandée ; pense à l'intégrer dans une structure HTML complète
+&gt; lorsque c'est pertinent.
+
+### Corrigés — Série 1
+
+**1.1**
+```php
+&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Bienvenue sur mon site !&lt;/h1&gt;
+    &lt;p&gt;Cette page a été générée à &lt;?php echo date('H:i'); ?&gt;.&lt;/p&gt;
+    &lt;p&gt;
+        &lt;?php
+        if (date('G') &lt; 12) echo 'Bonne matinée !';
+        else echo 'Bon après-midi !';
+        ?&gt;
+    &lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+```
+
+**1.2** (extrait PHP + CSS)
+```php
+&lt;div class="carte"&gt;
+    &lt;h2&gt;Lucas&lt;/h2&gt;
+    &lt;p&gt;Développeur web&lt;/p&gt;
+    &lt;p&gt;lucas@exemple.be&lt;/p&gt;
+    &lt;p&gt;Profil consulté le &lt;?php echo date('d/m/Y'); ?&gt;&lt;/p&gt;
+&lt;/div&gt;
+```
+```css
+body { background-color: teal; }
+.carte {
+    width: 400px; margin: auto; padding: 20px;
+    background: white; border-radius: 10px;
+}
+.carte h2 { color: teal; text-align: center; }
+```
+
+**1.3**
+```php
+&lt;?php
+$phrase = "Le PHP est un langage de programmation côté serveur.";
+echo "&lt;p&gt;$phrase&lt;/p&gt;";
+echo "&lt;p&gt;Cette phrase contient " . strlen($phrase) . " caractères.&lt;/p&gt;";
+?&gt;
+```
+
+**1.4**
+```html
+&lt;button onclick="toggleHeure()"&gt;Afficher / cacher l'heure&lt;/button&gt;
+&lt;p id="heure"&gt;Il est &lt;?php echo date('H:i'); ?&gt;&lt;/p&gt;
+&lt;script&gt;
+function toggleHeure() {
+    var p = document.getElementById('heure');
+    if (p.style.display == 'none') {
+        p.style.display = 'block';
+    } else {
+        p.style.display = 'none';
+    }
+}
+&lt;/script&gt;
+```
+
+**1.5**
+```php
+&lt;?php
+$nombre = 7;
+if ($nombre % 2 == 0) {
+    echo "&lt;p&gt;$nombre est un nombre pair.&lt;/p&gt;";
+} else {
+    echo "&lt;p&gt;$nombre est un nombre impair.&lt;/p&gt;";
+}
+?&gt;
+```
+
+### Corrigés — Série 2
+
+**2.1**
+```php
+&lt;?php
+$x = 42;
+echo "\$x vaut $x et est de type " . gettype($x) . "\n";
+echo "var_export : "; var_export($x); echo "\n";
+echo "var_dump : "; var_dump($x);
+?&gt;
+```
+
+**2.2**
+```php
+&lt;?php
+$prenom = 'Donald';
+$age = 80;
+echo "$prenom a $age ans.";          // guillemets : interpolation
+echo $prenom . ' a ' . $age . ' ans.'; // apostrophes : concaténation
+// Les guillemets interprètent les variables, pas les apostrophes.
+?&gt;
+```
+
+**2.3**
+```php
+&lt;?php
+$prixHT = 100;
+$tva = $prixHT * 0.21;
+$prixTTC = $prixHT + $tva;
+echo "Prix HT  : $prixHT €&lt;br&gt;";
+echo "TVA (21%): $tva €&lt;br&gt;";
+echo "Prix TTC : $prixTTC €";
+?&gt;
+```
+
+**2.4**
+```php
+&lt;?php
+$n = 7;
+for ($i = 1; $i &lt;= 10; $i++) echo "$n x $i = " . ($n * $i) . "&lt;br&gt;";
+
+// Variante while :
+$i = 1;
+while ($i &lt;= 10) { echo "$n x $i = " . ($n * $i) . "&lt;br&gt;"; $i++; }
+?&gt;
+```
+
+**2.5**
+```php
+&lt;?php
+$note = 14;
+if ($note &lt; 10)        echo 'Échec';
+elseif ($note &lt; 12)    echo 'Satisfaction';
+elseif ($note &lt; 14)    echo 'Distinction';
+elseif ($note &lt; 16)    echo 'Grande distinction';
+else                   echo 'La plus grande distinction';
+?&gt;
+```
+
+**2.6**
+```php
+&lt;?php
+for ($i = 1; $i &lt;= 30; $i++) {
+    if ($i % 15 == 0) {
+        echo 'FizzBuzz';
+    } elseif ($i % 3 == 0) {
+        echo 'Fizz';
+    } elseif ($i % 5 == 0) {
+        echo 'Buzz';
+    } else {
+        echo $i;
+    }
+    echo '&lt;br&gt;';
+}
+?&gt;
+```
+
+### Corrigés — Série 3
+
+**3.1**
+```php
+&lt;?php
+$courses = ['pain', 'lait', 'œufs', 'café', 'pommes'];
+echo '&lt;ul&gt;';
+foreach ($courses as $article) echo "&lt;li&gt;$article&lt;/li&gt;";
+echo '&lt;/ul&gt;';
+echo '&lt;p&gt;Tu as ' . count($courses) . ' articles dans ton panier.&lt;/p&gt;';
+?&gt;
+```
+
+**3.2**
+```php
+&lt;?php
+$notes = ['Mathématiques' =&gt; 14, 'Français' =&gt; 11, 'Informatique' =&gt; 18, 'Histoire' =&gt; 9];
+echo '&lt;table border="1"&gt;';
+foreach ($notes as $matiere =&gt; $note) echo "&lt;tr&gt;&lt;td&gt;$matiere&lt;/td&gt;&lt;td&gt;$note&lt;/td&gt;&lt;/tr&gt;";
+echo '&lt;/table&gt;';
+$moyenne = array_sum($notes) / count($notes);
+echo "&lt;p&gt;Moyenne : " . round($moyenne, 2) . "&lt;/p&gt;";
+?&gt;
+```
+
+**3.3**
+```php
+&lt;?php
+$langages = ['PHP', 'Python', 'C', 'JavaScript', 'Ruby', 'Go'];
+sort($langages);
+echo '&lt;ol&gt;';
+foreach ($langages as $l) echo "&lt;li&gt;$l&lt;/li&gt;";
+echo '&lt;/ol&gt;';
+echo "&lt;p&gt;&lt;b&gt;Premier :&lt;/b&gt; {$langages[0]} — &lt;b&gt;Dernier :&lt;/b&gt; {$langages[count($langages)-1]}&lt;/p&gt;";
+?&gt;
+```
+
+**3.4**
+```php
+&lt;?php
+$contacts = [
+    'Picsou'        =&gt; ['tel' =&gt; '0470 11 22 33', 'ville' =&gt; 'Donaldville'],
+    'Donald'        =&gt; ['tel' =&gt; '0470 44 55 66', 'ville' =&gt; 'Donaldville'],
+    'Géo Trouvetou' =&gt; ['tel' =&gt; '0470 77 88 99', 'ville' =&gt; 'Donaldville'],
+    'Gontran'       =&gt; ['tel' =&gt; '0470 00 11 22', 'ville' =&gt; 'Riville'],
+];
+foreach ($contacts as $nom =&gt; $infos) {
+    if ($infos['ville'] == 'Donaldville') {   // étape 3 : filtre
+        echo "$nom — {$infos['tel']} ({$infos['ville']})&lt;br&gt;";
+    }
+}
+?&gt;
+```
+
+**3.5**
+```php
+&lt;?php
+$panier = ['Café' =&gt; 4.50, 'Croissant' =&gt; 1.20, 'Jus' =&gt; 2.80];
+$total = 0;
+echo '&lt;table border="1"&gt;';
+foreach ($panier as $produit =&gt; $prix) {
+    echo "&lt;tr&gt;&lt;td&gt;$produit&lt;/td&gt;&lt;td&gt;$prix €&lt;/td&gt;&lt;/tr&gt;";
+    $total += $prix;
+}
+echo "&lt;tr&gt;&lt;td&gt;&lt;b&gt;Total&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;$total €&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;";
+?&gt;
+```
+
+**3.6**
+```php
+&lt;?php
+$personnes = [
+    ['nom' =&gt; 'Alice', 'age' =&gt; 22], ['nom' =&gt; 'Bob', 'age' =&gt; 15],
+    ['nom' =&gt; 'Chloé', 'age' =&gt; 19], ['nom' =&gt; 'David', 'age' =&gt; 12],
+    ['nom' =&gt; 'Emma', 'age' =&gt; 31],
+];
+$majeurs = 0; $mineurs = 0;
+foreach ($personnes as $p) {
+    if ($p['age'] &gt;= 18) { echo "{$p['nom']} ({$p['age']} ans)&lt;br&gt;"; $majeurs++; }
+    else $mineurs++;
+}
+echo "&lt;p&gt;$majeurs majeur(s), $mineurs mineur(s).&lt;/p&gt;";
+?&gt;
+```
+
+### Corrigés — Série 4
+
+**4.1**
+```php
+&lt;form method="GET"&gt;
+    &lt;input type="text" name="q"&gt;
+    &lt;button type="submit"&gt;Rechercher&lt;/button&gt;
+&lt;/form&gt;
+&lt;?php
+if (isset($_GET['q']) &amp;&amp; $_GET['q'] !== '')
+    echo 'Tu as recherché : ' . htmlspecialchars($_GET['q']);
+else
+    echo 'Aucune recherche effectuée.';
+?&gt;
+```
+
+**4.2**
+```php
+&lt;form method="POST"&gt;
+    &lt;input type="number" name="a"&gt; &lt;input type="number" name="b"&gt;
+    &lt;select name="op"&gt;&lt;option&gt;+&lt;/option&gt;&lt;option&gt;-&lt;/option&gt;&lt;option&gt;*&lt;/option&gt;&lt;option&gt;/&lt;/option&gt;&lt;/select&gt;
+    &lt;button&gt;Calculer&lt;/button&gt;
+&lt;/form&gt;
+&lt;?php
+if (isset($_POST['a']) &amp;&amp; isset($_POST['b'])) {
+    $a = (float)$_POST['a'];
+    $b = (float)$_POST['b'];
+    if ($_POST['op'] == '+') {
+        echo $a + $b;
+    } elseif ($_POST['op'] == '-') {
+        echo $a - $b;
+    } elseif ($_POST['op'] == '*') {
+        echo $a * $b;
+    } elseif ($_POST['op'] == '/') {
+        if ($b == 0) {
+            echo 'Division par zéro !';
+        } else {
+            echo $a / $b;
+        }
+    }
+}
+?&gt;
+```
+
+**4.3** (extrait)
+```php
+&lt;form method="POST"&gt;
+    &lt;label for="nom"&gt;Nom :&lt;/label&gt;&lt;input id="nom" name="nom"&gt;&lt;br&gt;
+    &lt;label for="mail"&gt;E-mail :&lt;/label&gt;&lt;input id="mail" name="mail" type="email"&gt;&lt;br&gt;
+    &lt;label for="mdp"&gt;Mot de passe :&lt;/label&gt;&lt;input id="mdp" name="mdp" type="password"&gt;&lt;br&gt;
+    &lt;label&gt;&lt;input type="checkbox" name="cgu"&gt; J'accepte les conditions&lt;/label&gt;&lt;br&gt;
+    &lt;button&gt;S'inscrire&lt;/button&gt;
+&lt;/form&gt;
+&lt;?php
+// Le traitement (validation + redirection) doit être placé AVANT tout HTML.
+if (isset($_POST['nom'])) {
+    $erreurs = [];
+    if (empty($_POST['nom']))      $erreurs[] = 'Le nom est obligatoire.';
+    if (empty($_POST['mail']))     $erreurs[] = "L'adresse e-mail est obligatoire.";
+    if (!isset($_POST['cgu']))     $erreurs[] = 'Tu dois accepter les conditions.';
+
+    if (empty($erreurs)) {
+        header('Location: merci.php'); exit;   // étape 4 : tout est valide
+    }
+    foreach ($erreurs as $e) echo "&lt;p style='color:red'&gt;$e&lt;/p&gt;";  // un message par cas
+}
+?&gt;
+```
+
+**4.4** (principe)
+```php
+&lt;form method="POST"&gt;
+    &lt;p&gt;Quel langage s'exécute côté serveur ?&lt;/p&gt;
+    &lt;label&gt;&lt;input type="radio" name="q1" value="PHP"&gt; PHP&lt;/label&gt;
+    &lt;label&gt;&lt;input type="radio" name="q1" value="JS"&gt; JavaScript&lt;/label&gt;
+    &lt;label&gt;&lt;input type="radio" name="q1" value="CSS"&gt; CSS&lt;/label&gt;
+    &lt;button&gt;Valider&lt;/button&gt;
+&lt;/form&gt;
+&lt;?php
+if (isset($_POST['q1'])) {
+    if ($_POST['q1'] == 'PHP') {
+        echo 'Bravo !';
+    } else {
+        echo 'Mauvaise réponse, la bonne était : PHP.';
+    }
+}
+?&gt;
+```
+
+**4.5**
+```php
+&lt;form method="GET"&gt;&lt;input name="c" type="text"&gt;&lt;button&gt;Convertir&lt;/button&gt;&lt;/form&gt;
+&lt;?php
+if (isset($_GET['c'])) {
+    if (is_numeric($_GET['c'])) {
+        $f = $_GET['c'] * 9 / 5 + 32;
+        echo "$_GET[c] °C = $f °F";
+    } else {
+        echo 'Valeur invalide.';
+    }
+}
+?&gt;
+```
+
+**4.6** (principe) — pré-remplissage sécurisé :
+```php
+&lt;?php
+$nom = '';
+if (isset($_POST['nom'])) {
+    $nom = $_POST['nom'];
+}
+?&gt;
+&lt;input name="nom" value="&lt;?php echo htmlspecialchars($nom); ?&gt;"&gt;
+```
+
+**4.7** (`menu.php`)
+```php
+&lt;?php
+$plats = ['Pizza', 'Burger', 'Tacos'];
+echo '&lt;ul&gt;';
+foreach ($plats as $plat) {
+    echo '&lt;li&gt;&lt;a href="commande.php?plat=' . urlencode($plat) . '"&gt;';
+    echo htmlspecialchars($plat) . '&lt;/a&gt;&lt;/li&gt;';
+}
+echo '&lt;/ul&gt;';
+?&gt;
+```
+(`commande.php`)
+```php
+&lt;?php
+if (!isset($_GET['plat'])) { header('Location: menu.php'); exit; } // étape 2
+$plat = $_GET['plat'];
+
+if (isset($_POST['quantite'])) {                                   // étape 4
+    echo "Commande confirmée : " . (int)$_POST['quantite'] .
+         " × " . htmlspecialchars($plat);
+} else {                                                           // étape 3
+    echo "&lt;p&gt;Tu commandes : " . htmlspecialchars($plat) . "&lt;/p&gt;";
+    // l'action garde le plat en GET et envoie la quantité en POST
+    echo '&lt;form method="POST" action="commande.php?plat=' . urlencode($plat) . '"&gt;';
+    echo '&lt;input type="number" name="quantite"&gt;&lt;button&gt;Commander&lt;/button&gt;&lt;/form&gt;';
+}
+?&gt;
+```
+
+### Corrigés — Série 5
+
+**5.1**
+```php
+&lt;?php
+if (isset($_POST['prenom'])) {
+    setcookie('prenom', $_POST['prenom'], time() + 7*24*3600);
+}
+echo '&lt;!doctype html&gt;&lt;html&gt;&lt;body&gt;';
+if (isset($_COOKIE['prenom'])) {
+    echo '&lt;p&gt;Content de te revoir, ' . htmlspecialchars($_COOKIE['prenom']) . ' !&lt;/p&gt;';
+} else {
+    echo '&lt;form method="POST"&gt;&lt;input name="prenom"&gt;&lt;button&gt;Valider&lt;/button&gt;&lt;/form&gt;';
+}
+echo '&lt;/body&gt;&lt;/html&gt;';
+?&gt;
+```
+
+**5.2**
+```php
+&lt;?php
+if (isset($_POST['theme'])) {
+    setcookie('theme', $_POST['theme'], time() + 3600*24*30);
+}
+
+$theme = 'clair';
+if (isset($_POST['theme'])) {
+    $theme = $_POST['theme'];
+} elseif (isset($_COOKIE['theme'])) {
+    $theme = $_COOKIE['theme'];
+}
+
+$bg = 'white';
+$fg = 'black';
+if ($theme == 'sombre') {
+    $bg = 'black';
+    $fg = 'white';
+}
+
+echo '&lt;body style="background:' . $bg . ';color:' . $fg . '"&gt;';
+echo '&lt;form method="POST"&gt;';
+echo '&lt;button name="theme" value="clair"&gt;Thème clair&lt;/button&gt;';
+echo '&lt;button name="theme" value="sombre"&gt;Thème sombre&lt;/button&gt;';
+echo '&lt;/form&gt;&lt;/body&gt;';
+?&gt;
+```
+
+**5.3**
+```php
+&lt;?php
+if (isset($_POST['reset'])) {
+    setcookie('visites', '', time() - 3600);
+    $n = 0;
+} else {
+    $n = 1;
+    if (isset($_COOKIE['visites'])) {
+        $n = $_COOKIE['visites'] + 1;
+    }
+    setcookie('visites', $n, time() + 3600*24*365);
+}
+echo "&lt;p&gt;Tu as visité cette page $n fois.&lt;/p&gt;";
+?&gt;
+&lt;form method="POST"&gt;&lt;button name="reset" value="1"&gt;Réinitialiser&lt;/button&gt;&lt;/form&gt;
+```
+
+**5.4** (`login.php`)
+```php
+&lt;?php
+session_start();
+if (isset($_POST['user'])) {
+    if ($_POST['user'] == 'admin' &amp;&amp; $_POST['pass'] == '1234') {
+        $_SESSION['connecte'] = true;
+        header('Location: accueil.php');
+        exit;
+    } else {
+        $erreur = 'Identifiants incorrects.';
+    }
+}
+?&gt;
+&lt;form method="POST"&gt;&lt;input name="user"&gt;&lt;input name="pass" type="password"&gt;&lt;button&gt;Connexion&lt;/button&gt;&lt;/form&gt;
+&lt;?php
+if (isset($erreur)) {
+    echo $erreur;
+}
+?&gt;
+```
+(`accueil.php`)
+```php
+&lt;?php
+session_start();
+if (empty($_SESSION['connecte'])) { header('Location: login.php'); exit; }
+echo '&lt;h1&gt;Espace membre&lt;/h1&gt;&lt;a href="logout.php"&gt;Déconnexion&lt;/a&gt;';
+// logout.php : session_start(); session_destroy(); header('Location: login.php');
+?&gt;
+```
+
+**5.5**
+```php
+&lt;?php
+session_start();
+if (!isset($_SESSION['panier'])) $_SESSION['panier'] = [];
+if (isset($_POST['ajout'])) $_SESSION['panier'][] = $_POST['ajout'];
+if (isset($_POST['vider'])) $_SESSION['panier'] = [];
+?&gt;
+&lt;form method="POST"&gt;
+    &lt;button name="ajout" value="Café"&gt;Ajouter Café&lt;/button&gt;
+    &lt;button name="ajout" value="Thé"&gt;Ajouter Thé&lt;/button&gt;
+    &lt;button name="ajout" value="Eau"&gt;Ajouter Eau&lt;/button&gt;
+    &lt;button name="vider" value="1"&gt;Vider&lt;/button&gt;
+&lt;/form&gt;
+&lt;p&gt;Panier (&lt;?php echo count($_SESSION['panier']); ?&gt;) :
+&lt;?php echo implode(', ', $_SESSION['panier']); ?&gt;&lt;/p&gt;
+```
+
+**5.6**
+```php
+&lt;?php
+// Étape 2 : affichage NON sécurisé -&gt; le &lt;script&gt; s'exécute = faille XSS.
+// Étape 3 : correction :
+if (isset($_POST['com']))
+    echo '&lt;p&gt;' . htmlspecialchars($_POST['com']) . '&lt;/p&gt;';
+?&gt;
+&lt;form method="POST"&gt;&lt;textarea name="com"&gt;&lt;/textarea&gt;&lt;button&gt;Envoyer&lt;/button&gt;&lt;/form&gt;
+```
+&gt; Une faille **XSS** (Cross-Site Scripting) permet à un visiteur d'injecter du code JavaScript qui
+&gt; sera exécuté dans le navigateur des autres utilisateurs. `htmlspecialchars` neutralise les
+&gt; caractères `&lt;`, `&gt;`, `&amp;`, `"` et désamorce l'attaque.
+
+**5.7** (`profil.php`)
+```php
+&lt;?php
+session_start();
+
+if (isset($_POST['deconnexion'])) {           // étape 4 : déconnexion complète
+    session_destroy();
+    setcookie('derniere_visite', '', time() - 3600);
+    header('Location: profil.php'); exit;
+}
+if (isset($_POST['pseudo'])) {                 // étapes 2 &amp; 3 : stocker / mettre à jour
+    $_SESSION['pseudo'] = $_POST['pseudo'];
+    $_SESSION['email']  = $_POST['email'];
+    $_SESSION['ville']  = $_POST['ville'];
+}
+
+$pseudo = '';
+$email  = '';
+$ville  = '';
+if (isset($_SESSION['pseudo'])) {
+    $pseudo = $_SESSION['pseudo'];
+    $email  = $_SESSION['email'];
+    $ville  = $_SESSION['ville'];
+}
+
+if (isset($_SESSION['pseudo'])) {
+    echo '&lt;p&gt;Tu es identifié en tant que ' . htmlspecialchars($pseudo) . '.';
+    echo ' Tu peux modifier tes informations ci-dessous.&lt;/p&gt;';
+}
+
+echo '&lt;form method="POST"&gt;';
+echo '&lt;input name="pseudo" value="' . htmlspecialchars($pseudo) . '"&gt;';
+echo '&lt;input name="email" value="' . htmlspecialchars($email) . '"&gt;';
+echo '&lt;input name="ville" value="' . htmlspecialchars($ville) . '"&gt;';
+echo '&lt;button&gt;Enregistrer&lt;/button&gt;';
+echo '&lt;button name="deconnexion" value="1"&gt;Déconnexion&lt;/button&gt;';
+echo '&lt;/form&gt;';
+?&gt;
+```
+
+### Corrigés — Série 6
+
+**6.1**
+```php
+&lt;?php
+$conn = mysqli_connect('localhost', 'root', '', 'biblio');
+if (!$conn) die('Erreur : ' . mysqli_connect_error());
+$res = mysqli_query($conn, 'SELECT * FROM livres');
+echo '&lt;table border="1"&gt;&lt;tr&gt;&lt;th&gt;Titre&lt;/th&gt;&lt;th&gt;Auteur&lt;/th&gt;&lt;th&gt;Genre&lt;/th&gt;&lt;th&gt;Année&lt;/th&gt;&lt;th&gt;Dispo&lt;/th&gt;&lt;/tr&gt;';
+while ($l = mysqli_fetch_assoc($res)) {
+    if ($l['disponible']) {
+        $dispo = 'Oui';
+    } else {
+        $dispo = 'Non';
+    }
+    echo "&lt;tr&gt;&lt;td&gt;{$l['titre']}&lt;/td&gt;&lt;td&gt;{$l['auteur']}&lt;/td&gt;&lt;td&gt;{$l['genre']}&lt;/td&gt;&lt;td&gt;{$l['annee']}&lt;/td&gt;&lt;td&gt;$dispo&lt;/td&gt;&lt;/tr&gt;";
+}
+echo '&lt;/table&gt;';
+?&gt;
+```
+
+**6.2**
+```php
+&lt;?php
+// Liste déroulante alimentée par la base (sans doublons)
+$genres = mysqli_query($conn, 'SELECT DISTINCT genre FROM livres');
+echo '&lt;form method="POST"&gt;&lt;select name="genre"&gt;&lt;option value=""&gt;Tous les genres&lt;/option&gt;';
+while ($g = mysqli_fetch_assoc($genres)) echo "&lt;option&gt;{$g['genre']}&lt;/option&gt;";
+echo '&lt;/select&gt;';
+echo '&lt;label&gt;&lt;input type="checkbox" name="dispo"&gt; Uniquement disponibles&lt;/label&gt;';
+echo '&lt;button&gt;Filtrer&lt;/button&gt;&lt;/form&gt;';
+
+// Construction de la clause WHERE selon les filtres reçus
+$sql = 'SELECT * FROM livres';
+$conditions = [];
+if (!empty($_POST['genre'])) $conditions[] = "genre = '" . mysqli_real_escape_string($conn, $_POST['genre']) . "'";
+if (isset($_POST['dispo']))  $conditions[] = 'disponible = 1';
+if ($conditions) $sql .= ' WHERE ' . implode(' AND ', $conditions);
+$sql .= ' ORDER BY annee ASC';
+
+$res = mysqli_query($conn, $sql);
+while ($l = mysqli_fetch_assoc($res)) echo "{$l['titre']} ({$l['annee']})&lt;br&gt;";
+?&gt;
+```
+
+**6.3**
+```php
+&lt;form method="POST"&gt;
+    &lt;input name="titre"&gt;&lt;input name="auteur"&gt;&lt;input name="genre"&gt;&lt;input name="annee" type="number"&gt;
+    &lt;button&gt;Ajouter&lt;/button&gt;
+&lt;/form&gt;
+&lt;?php
+if (isset($_POST['titre'])) {
+    $stmt = mysqli_prepare($conn, 'INSERT INTO livres (titre, auteur, genre, annee, disponible) VALUES (?, ?, ?, ?, 1)');
+    mysqli_stmt_bind_param($stmt, 'sssi', $_POST['titre'], $_POST['auteur'], $_POST['genre'], $_POST['annee']);
+    mysqli_stmt_execute($stmt);
+    header('Location: catalogue.php'); exit;
+}
+?&gt;
+```
+
+**6.4**
+```php
+&lt;form method="GET"&gt;&lt;input name="auteur"&gt;&lt;button&gt;Rechercher&lt;/button&gt;&lt;/form&gt;
+&lt;?php
+if (isset($_GET['auteur'])) {
+    $stmt = mysqli_prepare($conn, 'SELECT * FROM livres WHERE auteur = ?');
+    mysqli_stmt_bind_param($stmt, 's', $_GET['auteur']);
+    mysqli_stmt_execute($stmt);
+    $res = mysqli_stmt_get_result($stmt);
+    if (mysqli_num_rows($res) == 0) {                 // étape 3 : aucun résultat
+        echo 'Aucun livre trouvé pour cet auteur.';
+    } else {
+        while ($l = mysqli_fetch_assoc($res)) {
+            echo "{$l['titre']}&lt;br&gt;";
+        }
+    }
+}
+?&gt;
+```
+&gt; On n'insère jamais directement une valeur reçue dans la chaîne SQL : un utilisateur malveillant
+&gt; pourrait saisir `' OR '1'='1` pour modifier le sens de la requête (**injection SQL**) et accéder à
+&gt; toutes les données. La requête préparée sépare le code SQL des données, ce qui neutralise l'attaque.
+
+**6.5**
+```php
+&lt;?php
+if (isset($_POST['emprunter'])) {
+    $stmt = mysqli_prepare($conn, 'UPDATE livres SET disponible = 0 WHERE id = ?');
+    mysqli_stmt_bind_param($stmt, 'i', $_POST['emprunter']);
+    mysqli_stmt_execute($stmt);
+}
+if (isset($_POST['rendre'])) {
+    $stmt = mysqli_prepare($conn, 'UPDATE livres SET disponible = 1 WHERE id = ?');
+    mysqli_stmt_bind_param($stmt, 'i', $_POST['rendre']);
+    mysqli_stmt_execute($stmt);
+}
+// Dans la boucle d'affichage :
+// si $l['disponible'] vaut 1 : afficher un bouton name="emprunter" value="{$l['id']}"
+// sinon : afficher un bouton name="rendre" value="{$l['id']}"
+?&gt;
+```
+
+**6.6**
+```php
+&lt;?php
+$total = mysqli_fetch_assoc(mysqli_query($conn, 'SELECT COUNT(*) AS n FROM livres'));
+echo "Total : {$total['n']} livres&lt;br&gt;";
+
+$res = mysqli_query($conn, 'SELECT genre, COUNT(*) AS n FROM livres GROUP BY genre');
+while ($g = mysqli_fetch_assoc($res)) echo "{$g['genre']} : {$g['n']}&lt;br&gt;";
+
+$bornes = mysqli_fetch_assoc(mysqli_query($conn, 'SELECT MIN(annee) AS min, MAX(annee) AS max FROM livres'));
+echo "Du plus ancien ({$bornes['min']}) au plus récent ({$bornes['max']}).";
+?&gt;
+```
+
+**6.7** (`fiche.php`) — récupération d'un **seul** résultat :
+```php
+&lt;?php
+// dans catalogue.php : &lt;a href="fiche.php?id=&lt;?php echo $l['id']; ?&gt;"&gt;&lt;?php echo $l['titre']; ?&gt;&lt;/a&gt;
+if (!isset($_GET['id'])) { header('Location: catalogue.php'); exit; }
+
+$stmt = mysqli_prepare($conn, 'SELECT * FROM livres WHERE id = ?');
+mysqli_stmt_bind_param($stmt, 'i', $_GET['id']);
+mysqli_stmt_execute($stmt);
+$res = mysqli_stmt_get_result($stmt);
+
+if (mysqli_num_rows($res) == 0) {
+    echo 'Livre introuvable.';
+} else {
+    $livre = mysqli_fetch_assoc($res);   // une seule ligne : pas de boucle
+    echo "&lt;h1&gt;" . htmlspecialchars($livre['titre']) . "&lt;/h1&gt;";
+    echo "&lt;p&gt;{$livre['auteur']} — {$livre['genre']} ({$livre['annee']})&lt;/p&gt;";
+}
+?&gt;
+```
+
+### Corrigés — Exercices récapitulatifs
+
+**Récap A — mini-blog (principe)**
+```php
+&lt;?php
+session_start();
+if (!isset($_SESSION['billets'])) $_SESSION['billets'] = [];
+if (isset($_POST['titre'])) {
+    if (isset($_POST['auteur'])) {
+        setcookie('auteur', $_POST['auteur'], time() + 3600*24*30);
+    }
+
+    $auteur = 'Anonyme';
+    if (isset($_COOKIE['auteur'])) {
+        $auteur = $_COOKIE['auteur'];
+    }
+    if (isset($_POST['auteur'])) {
+        $auteur = $_POST['auteur'];
+    }
+
+    $_SESSION['billets'][] = [
+        'titre'   =&gt; $_POST['titre'],
+        'contenu' =&gt; $_POST['contenu'],
+        'auteur'  =&gt; $auteur,
+        'date'    =&gt; date('d/m/Y H:i'),
+    ];
+}
+
+$auteurCookie = '';
+if (isset($_COOKIE['auteur'])) {
+    $auteurCookie = $_COOKIE['auteur'];
+}
+?&gt;
+&lt;form method="POST"&gt;
+    &lt;input name="titre" placeholder="Titre"&gt;
+    &lt;input name="auteur" value="&lt;?php echo htmlspecialchars($auteurCookie); ?&gt;"&gt;
+    &lt;textarea name="contenu"&gt;&lt;/textarea&gt;
+    &lt;button&gt;Publier&lt;/button&gt;
+&lt;/form&gt;
+&lt;?php
+// Affichage du plus récent au plus ancien
+foreach (array_reverse($_SESSION['billets']) as $b) {
+    echo '&lt;article&gt;&lt;h3&gt;' . htmlspecialchars($b['titre']) . '&lt;/h3&gt;';
+    echo '&lt;p&gt;' . htmlspecialchars($b['contenu']) . '&lt;/p&gt;';
+    echo '&lt;small&gt;' . htmlspecialchars($b['auteur']) . ' — ' . $b['date'] . '&lt;/small&gt;&lt;/article&gt;';
+}
+?&gt;
+```
+&gt; Points de vigilance : `htmlspecialchars` partout où on ré-affiche une saisie (anti-XSS),
+&gt; `session_start()` tout en haut, `setcookie` avant tout HTML.
+
+**Récap B — gestionnaire de tâches (principe)**
+
+```php
+&lt;?php
+session_start();
+if (empty($_SESSION['connecte'])) { header('Location: login.php'); exit; } // série 5
+$conn = mysqli_connect('localhost', 'root', '', 'taches');
+
+// Ajout (série 4 + 6, requête préparée)
+if (isset($_POST['intitule'])) {
+    $stmt = mysqli_prepare($conn, 'INSERT INTO taches (intitule, priorite, faite, creee_le) VALUES (?, ?, 0, ?)');
+    $aujourdhui = date('Y-m-d');
+    mysqli_stmt_bind_param($stmt, 'sss', $_POST['intitule'], $_POST['priorite'], $aujourdhui);
+    mysqli_stmt_execute($stmt);
+}
+// Terminer
+if (isset($_POST['finir'])) {
+    $stmt = mysqli_prepare($conn, 'UPDATE taches SET faite = 1 WHERE id = ?');
+    mysqli_stmt_bind_param($stmt, 'i', $_POST['finir']);
+    mysqli_stmt_execute($stmt);
+}
+// Supprimer
+if (isset($_POST['suppr'])) {
+    $stmt = mysqli_prepare($conn, 'DELETE FROM taches WHERE id = ?');
+    mysqli_stmt_bind_param($stmt, 'i', $_POST['suppr']);
+    mysqli_stmt_execute($stmt);
+}
+?&gt;
+&lt;form method="POST"&gt;
+    &lt;input name="intitule"&gt;
+    &lt;select name="priorite"&gt;&lt;option&gt;basse&lt;/option&gt;&lt;option&gt;moyenne&lt;/option&gt;&lt;option&gt;haute&lt;/option&gt;&lt;/select&gt;
+    &lt;button&gt;Ajouter&lt;/button&gt;
+&lt;/form&gt;
+&lt;table border="1"&gt;
+&lt;?php
+$res = mysqli_query($conn, "SELECT * FROM taches ORDER BY creee_le");
+while ($t = mysqli_fetch_assoc($res)) {
+    $style = '';
+    if ($t['faite']) {
+        $style = 'text-decoration:line-through;color:gray';
+    }
+    echo "&lt;tr style='$style'&gt;&lt;td&gt;" . htmlspecialchars($t['intitule']) . "&lt;/td&gt;&lt;td&gt;{$t['priorite']}&lt;/td&gt;&lt;td&gt;";
+    if (!$t['faite']) {
+        echo "&lt;form method='POST'&gt;&lt;button name='finir' value='{$t['id']}'&gt;Terminer&lt;/button&gt;&lt;/form&gt;";
+    }
+    echo "&lt;form method='POST'&gt;&lt;button name='suppr' value='{$t['id']}'&gt;Supprimer&lt;/button&gt;&lt;/form&gt;&lt;/td&gt;&lt;/tr&gt;";
+}
+?&gt;
+&lt;/table&gt;
+```
+&gt; Tous les paramètres issus de l'utilisateur passent par des **requêtes préparées**, et tout texte
+&gt; affiché depuis la base est filtré par `htmlspecialchars`.
+
+---
+
+## Références
+
+Les présents exercices ont été élaborés en s'inspirant de la méthode des séries 1 à 6 de l'UAA12 et
+des ressources suivantes :
+
+- Forbes, A. (2013). *The Joy of PHP: A Beginner's Guide to Programming Interactive Web Sites.*
+- Vaswani, V. (2021). *PHP: A Beginner's Guide.*
+- Documentation officielle PHP : &lt;https://www.php.net/manual/fr/&gt;
+- W3Schools — PHP Tutorial : &lt;https://www.w3schools.com/php/&gt;
+- Cours de « Développement d'applications WEB » (2018), Hénallux.
+
+*Dev. d'un site WEB dynamique (UAA12) — Dossier de révision (toutes séries)*
+</textarea>
+<script src="vendor/marked.min.js"></script>
+<script>
+  const source = document.getElementById('src').value;
+  marked.setOptions({ gfm:true, breaks:false });
+  document.getElementById('content').innerHTML = marked.parse(source);
+  document.title = 'UAA12 - Dossier de révision';
+  // Ouvre directement la boîte d'impression / PDF si on arrive via ?print
+  if (location.search.indexOf('print') !== -1 || location.hash.indexOf('print') !== -1) {
+    setTimeout(() => window.print(), 400);
+  }
+</script>
+</body>
+</html>
