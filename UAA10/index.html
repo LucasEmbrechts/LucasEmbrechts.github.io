@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAA10 - Traitement de l'information</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3730a3;
+            --secondary-color: #4f46e5;
+            --accent-color: #6366f1;
+            --success-color: #059669;
+            --warning-color: #f59e0b;
+            --error-color: #b91c1c;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #3730a3 0%, #4f46e5 50%, #6366f1 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #f3f4f6, #e5e7eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            line-height: 1.1;
+        }
+
+        .header .web-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .part-title {
+            color: white;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            padding-left: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .part-title .part-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.6rem;
+            height: 2.6rem;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            font-size: 1.4rem;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .module-card {
+            background: var(--bg-white);
+            border-radius: 25px;
+            padding: 2.5rem;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            border-radius: 25px 25px 0 0;
+        }
+
+        .module-card::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(55, 48, 163, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            transition: all 0.5s ease;
+        }
+
+        .module-card:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.2);
+        }
+
+        .module-card:hover::after {
+            width: 150px;
+            height: 150px;
+            opacity: 0.8;
+        }
+
+        .module-card.theorie::before {
+            background: linear-gradient(90deg, #3730a3, #4f46e5);
+        }
+        .module-card.documents::before {
+            background: linear-gradient(90deg, #4f46e5, #6366f1);
+        }
+        .module-card.exercices::before {
+            background: linear-gradient(90deg, #6366f1, #818cf8);
+        }
+
+        .module-number {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(55, 48, 163, 0.1), rgba(99, 102, 241, 0.1));
+            color: var(--primary-color);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            border: 2px solid rgba(55, 48, 163, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .module-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .module-icon {
+            font-size: 2.2rem;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+
+        .module-description {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            position: relative;
+            z-index: 2;
+        }
+
+        .module-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 6px 20px rgba(55, 48, 163, 0.3);
+            position: relative;
+            z-index: 2;
+            margin-bottom: 10px;
+            margin-right: 10px;
+        }
+
+        .module-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(55, 48, 163, 0.4);
+        }
+
+        .footer {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2.8rem;
+            }
+
+            .header p {
+                font-size: 1.1rem;
+            }
+
+            .modules-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .module-card {
+                padding: 2rem;
+                transform: none;
+            }
+
+            .module-card:hover {
+                transform: translateY(-10px);
+            }
+
+            .module-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .module-card {
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .module-card:nth-child(1) { animation-delay: 0.1s; }
+        .module-card:nth-child(2) { animation-delay: 0.2s; }
+        .module-card:nth-child(3) { animation-delay: 0.3s; }
+        .module-card:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <div class="web-badge">UAA10 - Traitement de l'information</div>
+                <h1>Traitement de l'information</h1>
+                <p>Ce cours se compose de deux parties : la représentation et le codage de l'information par la machine, puis l'algèbre de Boole et les circuits logiques qui en découlent.</p>
+            </div>
+        </header>
+
+        <h2 class="part-title"><span class="part-badge">1</span> Traitement de l'information</h2>
+        <div class="modules-grid">
+            <div class="module-card theorie">
+                <h2 class="module-title">
+                    <span class="module-icon">📽️</span>
+                    Théorie (diaporamas)
+                </h2>
+                <p class="module-description">
+                    Cours présentés sous forme de diaporamas interactifs. Naviguez avec les flèches du clavier.
+                </p>
+                <a href="1. Traitement de l'information/Théorie/src/01_TraitementDeLInfo_TraitementFormel.html" class="module-link" target="_blank">
+                    1. Traitement formel →
+                </a>
+                <a href="1. Traitement de l'information/Théorie/src/02_TraitementDeLInfo_CodageNombres.html" class="module-link" target="_blank">
+                    2. Codage des nombres →
+                </a>
+                <a href="1. Traitement de l'information/Théorie/src/03_TraitementDeLInfo_EnMemoire.html" class="module-link" target="_blank">
+                    3. En mémoire →
+                </a>
+                <a href="1. Traitement de l'information/Théorie/src/04_TraitementDeLInfo_CodageImages.html" class="module-link" target="_blank">
+                    4. Codage des images →
+                </a>
+                <a href="1. Traitement de l'information/Théorie/src/05_CodeDetecteurs.html" class="module-link" target="_blank">
+                    5. Codes détecteurs →
+                </a>
+            </div>
+
+            <div class="module-card documents">
+                <h2 class="module-title">
+                    <span class="module-icon">📄</span>
+                    Documents de référence
+                </h2>
+                <p class="module-description">
+                    Fiches et documents PDF détaillant les principaux systèmes de codage et de contrôle vus au cours.
+                </p>
+                <a href="1. Traitement de l'information/5TTr_TraitementInfo02_ASCII.pdf" class="module-link" target="_blank">
+                    ASCII →
+                </a>
+                <a href="1. Traitement de l'information/5TTr_TraitementInfo03_IEEE754.pdf" class="module-link" target="_blank">
+                    IEEE 754 →
+                </a>
+                <a href="1. Traitement de l'information/5TTr_TraitementInfo04_IBAN.pdf" class="module-link" target="_blank">
+                    IBAN →
+                </a>
+                <a href="1. Traitement de l'information/5TTr_TraitementInfo05_ISBN.pdf" class="module-link" target="_blank">
+                    ISBN →
+                </a>
+                <a href="1. Traitement de l'information/5TTr_TraitementInfo06_Hamming.pdf" class="module-link" target="_blank">
+                    Hamming →
+                </a>
+            </div>
+
+            <div class="module-card exercices">
+                <h2 class="module-title">
+                    <span class="module-icon">✏️</span>
+                    Exercices
+                </h2>
+                <p class="module-description">
+                    Séries d'exercices pour t'entraîner sur le traitement formel, le codage des nombres et la représentation en mémoire.
+                </p>
+                <a href="1. Traitement de l'information/Exercices/01_TraitementDeLInfo_TraitementFormel_Exercices.odt" class="module-link" target="_blank">
+                    1. Traitement formel →
+                </a>
+                <a href="1. Traitement de l'information/Exercices/02_TraitementDeLInfo_CodageNombres_Exercices.odt" class="module-link" target="_blank">
+                    2. Codage des nombres →
+                </a>
+                <a href="1. Traitement de l'information/Exercices/03_TraitementDeLInfo_EnMemoire_Exercices.odt" class="module-link" target="_blank">
+                    3. En mémoire →
+                </a>
+            </div>
+
+        </div>
+
+        <h2 class="part-title"><span class="part-badge">2</span> L'algèbre de Boole</h2>
+        <div class="modules-grid">
+            <div class="module-card theorie">
+                <h2 class="module-title">
+                    <span class="module-icon">📽️</span>
+                    Théorie
+                </h2>
+                <p class="module-description">
+                    Introduction à l'algèbre de Boole : variables et opérateurs logiques, tables de vérité, simplification d'expressions et lien avec les circuits logiques.
+                </p>
+                <a href="2. L'algèbre de boole/Théorie/src/EMBRECHTS_AlgèbreDeBoole.html" class="module-link" target="_blank">
+                    Diaporama →
+                </a>
+                <a href="2. L'algèbre de boole/Théorie/5TTr_AlgBool01_introduction.odt" class="module-link" target="_blank">
+                    Introduction →
+                </a>
+                <a href="2. L'algèbre de boole/Théorie/relations_formulaire.pdf" class="module-link" target="_blank">
+                    Formulaire des relations →
+                </a>
+            </div>
+
+            <div class="module-card exercices">
+                <h2 class="module-title">
+                    <span class="module-icon">✏️</span>
+                    Exercices
+                </h2>
+                <p class="module-description">
+                    Série d'exercices sur l'algèbre de Boole, accompagnée de circuits logiques à ouvrir avec Logisim.
+                </p>
+                <a href="2. L'algèbre de boole/Exercices/L'algèbre de boole - exercices.odt" class="module-link" target="_blank">
+                    Feuille d'exercices →
+                </a>
+                <a href="2. L'algèbre de boole/Exercices/Circuits logiques/logisim.jar" class="module-link" download="logisim.jar">
+                    Logisim (.jar) →
+                </a>
+                <a href="2. L'algèbre de boole/Exercices/Circuits logiques/situation3.circ" class="module-link" download="situation3.circ">
+                    Circuit : situation 3 →
+                </a>
+                <a href="2. L'algèbre de boole/Exercices/Circuits logiques/add complet.circ" class="module-link" download="add complet.circ">
+                    Circuit : additionneur complet →
+                </a>
+                <a href="2. L'algèbre de boole/Exercices/Circuits logiques/7segments.circ" class="module-link" download="7segments.circ">
+                    Circuit : afficheur 7 segments →
+                </a>
+            </div>
+
+        </div>
+
+        <footer class="footer">
+            <p>UAA10 : Traitement de l'information • Institut Notre-Dame de Beauraing • © 2025-2026</p>
+        </footer>
+    </div>
+
+    <script>
+        // Animation d'apparition des cartes au scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.module-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Effet de parallaxe subtil sur le header
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('.header');
+            if (header) {
+                header.style.transform = `translateY(${scrolled * 0.1}px)`;
+            }
+        });
+    </script>
+</body>
+</html>

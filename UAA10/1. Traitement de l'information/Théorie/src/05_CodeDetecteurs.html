@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Consolas'; }
+			  @page {
+		  size: 1210px 681px;
+		  margin: 0;
+		}
+
+		@media print {
+		  .remark-slide-scaler {
+			width: 100% !important;
+			height: 100% !important;
+			transform: scale(1) !important;
+			top: 0 !important;
+			left: 0 !important;
+		  }
+		}
+    small{
+      font-size: 10px!important;
+    }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# Le traitement de l'information
+## Codes détecteurs et correcteurs d'erreur
+<img height="350px" src="img/data_processing.png">
+---
+## Situation
+
+Imaginez que vous êtes dans une salle de classe moderne, où chaque élève dispose d'une tablette ou d'un ordinateur portable. Le professeur a décidé de faire une activité interactive en ligne, où chaque élève doit se connecter à un site web pour répondre à des questions en temps réel. Les élèves sont excités à l'idée de commencer.
+
+<img height="350px" src="img/image-salle.webp">
+
+---
+## Situation
+
+Mais soudain, un problème survient : alors que les élèves commencent à se connecter, plusieurs d'entre eux rencontrent des problèmes. Certains voient des messages d'erreur, d'autres ne peuvent pas charger le site, et quelques-uns constatent que leurs réponses ne sont pas enregistrées correctement. La frustration monte dans la classe.
+
+<img height="350px" src="img/network-issues.jpg">
+
+---
+## Situation
+
+À votre avis, pourquoi une telle situation ?
+--
+
+* **Plusieurs émetteurs wifi sont installés dans l'école** : les signaux se chevauchent, créant des interférences.
+--
+
+* **Trop d'appareils sont connectés sur le même réseau** : le réseau est surchargé
+--
+
+* **D'autres appareils et gadgets sont présents** : les appareils tels que les téléphones sans fil, les fours à micro-ondes ou d'autres appareils sans fil peuvent créer des interférences avec les signaux Wi-Fi. Cela est dû au fait que ces appareils sans fil fonctionnent sur la même bande de fréquences que le réseau Wi-Fi.
+--
+
+* **Obstacles physiques** : les murs épais de la salle de classe bloquent le signal, rendant la connexion instable.
+--
+
+<img height="250px" src="img/wifi-crash.jpg">
+
+
+---
+## Qu'est-ce qu'un code correcteur ?
+
+* Un code correcteur est une technique de codage **basée sur la redondance**.
+* Elle est destinée à **corriger les erreurs de transmission d’un message** sur une voie de communication peu fiable. 
+* La théorie des codes d’erreurs ne se limite pas qu’aux communications classiques (radio, câbles, fibre, …) mais également aux supports de stockage comme les disques compacts, la mémoire RAM et d’autres application où l’intégrité des données est importante. 
+
+---
+## Pourquoi ces techniques de détection d’erreurs et de correction codage existent-elles? 
+
+<span style="color: red;font-size: 200%;">Ls canaux de trasmissian sont impazfaits !</span>       
+
+Par exemple : la probabilité d’erreur sur un ligne de téléphone est de 10<sup>-7</sup> , cela peut même atteindre 10<sup>-4</sup>. 
+Avec un taux d’erreur à 10<sup>-6</sup> et un connexion à 1Mo/s => 8bits seront erronés par seconde. 
+---
+## Schéma général de communication
+
+<div style="text-align: center;margin-top: 50px;">
+<img height="200px" src="img/Un-schema-general-du-systeme-de-la-communication-selon-Shannon-1948-p380.png">
+</div>
+
+* Le message à transmettre est d’abord codé en un message. Le codage introduit un supplément d’information (redondances).
+* Le message est envoyé sur le canal de transmission. 
+* À cause de l’imperfection du canal, le message reçu n’est pas forcément identique au message envoyé : il peut contenir des erreurs.
+* Le message reçu est ensuite décodé : des erreurs éventuelles peuvent être détectées et corrigées.
+* Le message décodé est identique au message d’origine si il n’y a pas eu trop d’erreurs dans la transmission.
+---
+## Principe général
+
+* Chaque suite de bits à transmettre est augmentée par une autre suite de bits dite « de redondance » ou « de contrôle ». 
+* Pour chaque suite de k bits transmise, on ajoute r bits. 
+* On dit alors que l’on utilise un code C(n,k) pour n = k+r
+* A la réception, les bits ajoutés permettent d’effectuer des contrôles.
+---
+## Exemples de la vie courante
+### Le numéro de compte bancaire belge
+
+<img height="250px" src="img/iban.jpg">
+
+En Belgique, l'IBAN est formé de 16 caractères : il se compose d'abord des lettres "BE" suivies de 2 chiffres, puis des 12 chiffres du numéro de compte national.
+
+Par exemple, le numéro de compte belge<br>`539-0075470-34` devient `BE68 5390 0754 7034`.
+---
+## Exemples de la vie courante
+### Le numéro de compte bancaire belge
+
+Algorithme de vérification de l'IBAN : démonstration au tableau.
+---
+## Exemples de la vie courante
+### Le code ISBN-10
+
+<img height="250px" src="img/isbn-10.jpg">
+
+L'ISBN (International Standard Book Number) est un numéro international qui permet d'identifier, de manière unique, chaque livre publié. Il est destiné à simplifier la gestion informatique des livres dans les bibliothèques, librairies, etc.
+---
+## Exemples de la vie courante
+### Le code ISBN-10
+
+Algorithme de vérification de l'ISBN-10 : démonstration au tableau.
+
+---
+## Exemples de la vie courante
+### Le code EAN-13
+
+Le code EAN-13 (European Article Numbering) est un code-barres à 13 chiffres qui identifie un produit unique (ou emballage) selon un système européen.
+
+<img height="400px" src="img/ean13.jpg">
+
+---
+## Exemples de la vie courante
+### Le code EAN-13
+
+Algorithme de vérification de l'EAN-13 : démonstration au tableau.
+---
+## La distance de Hamming
+
+* Utilisée en informatique, en traitement du signal et dans les télécommunications.
+* Elle joue un rôle important  dans la théorie des codes correcteurs. 
+
+La distance de Hamming permet de **quantifier la différence entre deux séquences de symboles**. À deux suites de symboles de même longueur, elle associe le nombre de positions où les deux suites diffèrent. C'est une distance au sens mathématique du terme. 
+
+Exemples :
+
+* La distance de Hamming entre 1011101 et 1001001 est 2.
+* La distance de Hamming entre 2143896 et 2233796 est 3.
+* La distance de Hamming entre "ramer" et "cases" est 3.
+---
+## Sources des images
+
+* https://www.fastcabling.com
+* https://qnextech.com/wp-content/uploads/2023/09/IQTouch-C-%E5%9B%BE2-2-1024x889.jpg
+* https://www.researchgate.net/figure/Un-schema-general-du-systeme-de-la-communication-selon-Shannon-1948-p380_fig1_278636682
+* https://www.adminfin.be/wp-content/uploads/2015/11/iban_image_blog_BE_FR.jpg
+* https://tritonstore.com.au/wp-content/uploads/Anatomy-of-EAN-13-Barcode.jpg
+    </textarea>
+    <script src="remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
