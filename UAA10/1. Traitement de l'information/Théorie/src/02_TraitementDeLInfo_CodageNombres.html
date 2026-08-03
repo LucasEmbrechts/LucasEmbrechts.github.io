@@ -91,16 +91,71 @@ class: center, middle
 ---
 ## Le "demi-additionneur" en circuit logique
 
-<div style="text-align: center; margin-top: 100px;">
-  <img height="350px" src="img/half-adder.png">
+<div style="text-align: center;">
+  <img height="370px" src="img/half-adder.png">
+</div>
+
+---
+## Le "demi-additionneur" en circuit logique
+
+Additionner deux bits A et B produit **deux** résultats, exactement comme au tableau : le chiffre écrit (la **somme**) et le chiffre reporté dans la colonne suivante (la **retenue**). En binaire, 1 + 1 = 0, je retiens 1.
+
+* La **somme** vaut 1 quand **un seul** des deux bits vaut 1 → porte **XOR** (OU exclusif)
+
+* La **retenue** vaut 1 uniquement quand **les deux** bits valent 1 → porte **AND** (ET)
+
+Sur le schéma : les deux interrupteurs de gauche sont les bits A et B, les deux ampoules de droite affichent la retenue et la somme. Le circuit ne "calcule" rien : il applique mécaniquement deux règles logiques → **du traitement purement formel**.
+
+---
+## Le "demi-additionneur" en circuit logique
+
+Sa table de vérité tient en quatre lignes :
+
+```
+  A   B   |  retenue   somme        (en binaire)
+ ---------+------------------
+  0   0   |     0        0            0 + 0 = 00
+  0   1   |     0        1            0 + 1 = 01
+  1   0   |     0        1            1 + 0 = 01
+  1   1   |     1        0            1 + 1 = 10
+```
+
+Sa limite : il n'a que **deux** entrées. Il sait donc traiter la colonne la plus à droite d'une addition, mais pas les suivantes, puisqu'il est incapable de recevoir la retenue venue de la colonne précédente.
+
+<span style="font-size:150%; color:red;">→ D'où l'additionneur complet</span>
+
+---
+## L' "additionneur complet" en circuit logique
+
+<div style="text-align: center;">
+  <img height="500px" src="img/full-adder.png">
 </div>
 
 ---
 ## L' "additionneur complet" en circuit logique
 
-<div style="text-align: center; margin-top: 50px;">
-  <img height="450px" src="img/full-adder.png">
-</div>
+L'additionneur complet ajoute une **troisième entrée** : la **retenue entrante** (celle produite par la colonne précédente). Il additionne donc A + B + retenue entrante, et fournit à son tour une somme et une **retenue sortante**.
+
+* **somme** = A XOR B XOR retenue entrante → les deux portes XOR du schéma
+
+* **retenue sortante** = 1 dès qu'au moins deux des trois entrées valent 1 → les deux portes AND, regroupées par la porte OR
+
+Sur le schéma : trois interrupteurs à gauche (A, B et la retenue entrante), les deux mêmes ampoules à droite.
+
+---
+## L' "additionneur complet" en circuit logique
+
+En **mettant bout à bout n additionneurs complets** — la retenue sortante de l'un devenant la retenue entrante du suivant — on obtient un circuit capable d'additionner deux nombres de n bits.
+
+C'est ce que contient l'unité de calcul (l'ALU) d'un processeur : additionner des nombres de 32 ou 64 bits ne demande que la répétition de ce même petit circuit.
+
+Quelques conséquences à retenir :
+
+* Toutes les opérations arithmétiques se ramènent à des **combinaisons de portes logiques**, elles-mêmes réalisées avec des transistors.
+
+* La soustraction ne nécessite aucun circuit supplémentaire : grâce au **complément à deux**, soustraire revient à additionner l'opposé.
+
+* Le nombre d'additionneurs chaînés fixe la taille des nombres manipulés : au-delà, la dernière retenue est perdue → **dépassement de capacité** (*overflow*).
 
 ---
 ## La base hexadécimale
