@@ -43,6 +43,21 @@ class: center, middle
 # Le traitement de l'information
 <img height="350px" src="img/data_processing.png">
 ---
+## Quelques questions de réflexion...
+
+* À l'heure actuelle, pensez-vous qu'un ordinateur puisse penser comme un être humain ? Et pourquoi ? (Basez vos arguments sur des réalités / l'actualité)
+
+* Pouvez-vous expliquer comment, physiquement, un fichier est stocké sur l'ordinateur ?
+
+* Vous possédez une image en format numérique (.jpg) : pouvez-vous expliquer comment, depuis le fichier source, celle-ci s'affiche à l'écran ?
+
+* Vos parents vous proposent un nouveau logiciel. Il en existe deux versions, la version 32 bits et la version 64 bits. Laquelle choisissez-vous ? Et pourquoi ?
+
+* Quelle est la différence entre un nombre entier et un nombre flottant ?
+
+* Même question, mais pour l'informatique : quelle sera la différence dans un ordinateur entre un nombre entier et un nombre flottant ?
+
+---
 ## Vous avez dit "Informatique" ?
 <div style="margin-bottom:150px;"></div>
 <img height="150px" src="img/informatique.png">
@@ -110,6 +125,19 @@ Pour qu'une information soit traitée par un ordinateur, elle doit être **conve
 Les ordinateurs ne comprennent pas l'information de la même manière qu'un humain. Ils ne peuvent pas saisir les nuances, les émotions ou le contexte derrière les données qu'ils traitent. Par conséquent, le traitement de l'information par un ordinateur est essentiellement **un processus mécanique et algorithmique**, où les résultats dépendent entièrement des instructions programmées et des données fournies, sans place pour l'interprétation subjective.
 
 ---
+## Le formalisme au quotidien
+
+Ces limites expliquent une foule de comportements que vous croisez tous les jours :
+
+* **Traitement de texte** : ce qu'est un mot, une phrase, un paragraphe est défini par des **délimiteurs**, pas par le sens. D'où les surprises du correcteur orthographique.
+
+* **Tableur** : la reconnaissance du type d'une donnée (nombre, date, texte) est **implicite**, déduite de la forme de ce que vous encodez.
+
+* **Base de données** : aucun enregistrement ne répond au critère `nom = DUPONT` alors que vous êtes certain d'avoir encodé Monsieur *Dupont*...
+
+* **Commandes** : pourquoi certains langages ou logiciels acceptent-ils les majuscules *et* les minuscules, et d'autres non ?
+
+---
 ## Exercice pratique : traitements formels et informels
 
 * Si on vous demande, à vous être humain, les anagrammes du mot CRANE, que proposerez vous comme réponse ? Que serait capable de faire un « ordinateur » face à la même situation ?
@@ -133,12 +161,36 @@ Les ordinateurs ne comprennent pas l'information de la même manière qu'un huma
 
 * Pour être possible, tout traitement d’une information par un « ordinateur » doit être décrit de manière purement formelle.
 
-* Ce n’est pas à l’ordinateur que l’utilisateur est confronté, mais au couple indissociable « ordinateur-logiciel » (« hardware-software »), un exécutant sans cesse en évolution au cours d’une même session de travail. 
+* Ce n’est pas à l’ordinateur que l’utilisateur est confronté, mais au couple indissociable « ordinateur-logiciel » (« hardware-software »), un exécutant sans cesse en évolution au cours d’une même session de travail.
+
+---
+## Traitement formel de l’information : idées maîtresses
+
+Bien comprendre ces trois principes, c'est **gagner en autonomie** face à la machine :
+
+* appréhender de manière plus correcte **l'évolution technologique**, tant logicielle que matérielle ;
+
+* être capable d'**anticiper** les capacités attendues d'un programme (ce qu'il peut faire, et surtout ce qu'il ne pourra jamais faire) ;
+
+* savoir **s'adapter** au passage d'une version à une autre, d'un logiciel à un autre du même type, d'un type de produit à un autre, voire d'un type d'ordinateur à l'autre.
+
+<span style="font-size:130%">→ Ces principes justifient le sens donné ici au mot *ordinateur* : une machine capable de traiter des informations de manière formelle, pour autant qu'on lui ait préalablement indiqué **comment** mener à bien ce traitement.</span>
 
 ---
 ## Traitement formel de l’information : idées maîtresses
 
-L'ordinateur fonctionne avec un code binaire. C’est à dire qu’il ne supporte que deux symboles. Impossible donc pour eux d’encoder notre alphabet complet.
+Les supports de stockage — disquettes, floppies, clés USB, cartes SD, disques durs internes — fonctionnent tous de la même manière depuis le début de leur existence. Seules leur **vitesse de transfert** et leur **capacité** ont augmenté au fil du temps.
+
+<div style="text-align:center; margin-top:30px;">
+  <img height="160px" src="img/floppy_disks.png">
+  <img height="160px" src="img/usb_key.png">
+  <img height="160px" src="img/hdd.png">
+</div>
+
+---
+## Traitement formel de l’information : idées maîtresses
+
+L'ordinateur, comme tous ces supports, fonctionne avec un code binaire. C’est à dire qu’il ne supporte que deux symboles. Impossible donc pour eux d’encoder notre alphabet complet.
 
 Comment transformeriez-vous un message de votre langue (qui possède plus de 26 caractères et tous ses symboles) en une suite de deux symboles ? De quoi avez-vous besoin pour que cela soit compréhensible pour quelqu’un d’autre ? 
 
@@ -268,9 +320,31 @@ Une suite de 3 symboles offre 8 possibilités :
 
 
 ---
+## La communication par code idéale
+
+Bien entendu, il faut tenir compte du **système complet** : lettres majuscules, minuscules, chiffres, symboles de ponctuation, signes d'opération. Nous arrivons à un total d'environ **120 caractères**, soit 2<sup>7</sup> = 128 possibilités.
+
+Les symboles x et □ sont comparables aux états électriques ou magnétiques **0** et **1** : au-delà d'un certain seuil, le signal correspond à la valeur 1 ; en deçà, à la valeur 0. Ce sont, en d'autres termes, les **chiffres binaires**.
+
+Quelle que soit la nature de l'information traitée par un ordinateur (image, son, texte, vidéo), elle l'est toujours sous la forme d'**un ensemble de nombres écrits en base 2**.
+
+--
+
+<span style="font-size:150%; color:red">→ Vous venez de définir le code ASCII.</span>
+
+---
 ## La table ASCII
 
 <img height="500px" src="img/ascii.jpg">
+
+---
+## De l'ASCII à l'Unicode
+
+* Le code que nous venons de construire suffit pour l'alphabet de base, mais **pas pour les caractères accentués**, ni pour les autres alphabets.
+
+* Une suite de **16 symboles** est alors nécessaire pour coder le système complet.
+
+* Le code **Unicode**, sur 16 bits, regroupe la quasi-totalité des alphabets existants (arabe, arménien, cyrillique, hébreu, grec, latin...) et il est **compatible avec le code ASCII**.
 
 
 ---
@@ -287,11 +361,6 @@ Une suite de 3 symboles offre 8 possibilités :
 * Un code doit respecter **une syntaxe** (les règles d'écriture) pour porter **une sémantique** (la signification) : une erreur de syntaxe empêche la lecture, une erreur de sémantique fausse le résultat.
 
 * Avec x symboles différents et un espace de n positions, on peut représenter **x<sup>n</sup> combinaisons** : la capacité de stockage détermine directement la quantité d'information représentable.
-
----
-## Sources des images
-
-* https://e7.pngegg.com/pngimages/953/956/png-clipart-computer-icons-data-processing-symbol-binary-file-binary-miscellaneous-text.png
     </textarea>
     <script src="remark-latest.min.js">
     </script>

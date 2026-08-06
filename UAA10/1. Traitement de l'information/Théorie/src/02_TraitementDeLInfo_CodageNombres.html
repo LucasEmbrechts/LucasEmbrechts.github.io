@@ -212,9 +212,9 @@ Que valent ces nombres en décimal ?
 * Nombre entier naturel = nombres positifs ou nul
 * Codage sur n bits → représentation des nombres entre 0 et 2<sup>n</sup>-1
 * Exemples :
-  * 9 = 00000101
+  * 9 = 00001001
   * 128 = 10000000
-  * 255 = 111111111
+  * 255 = 11111111
 
 ### Entiers relatifs
 * Nombre entier relatif = nombres entiers pouvant être négatifs
@@ -237,6 +237,40 @@ Ainsi, si on code un entier naturel sur 4 bits, le nombre le plus grand sera 011
 <div style="text-align: center; margin-top: 100px;">
   <img height="350px" src="img/relatifs.png">
 </div>
+---
+## Le principe du complément à deux
+
+Pour coder un entier relatif **négatif** sur n bits :
+
+1. Écrire la **valeur absolue** du nombre en base 2. Le bit de poids fort doit être égal à 0.
+2. **Inverser les bits** : les 0 deviennent des 1 et vice versa. C'est le *complément à un*.
+3. **Ajouter 1** au résultat (les dépassements sont ignorés).
+
+Cette opération correspond au calcul de **2<sup>n</sup> - |x|**, où n est la longueur de la représentation et |x| la valeur absolue du nombre à coder.
+
+Ainsi, sur 8 bits, -1 s'écrit comme 256 - 1 = 255 = `11111111`.
+
+---
+## Le principe du complément à deux
+### Exemple : coder -19 sur 8 bits
+
+```
+1. écrire 19 en binaire        →  00010011
+2. écrire son complément à 1   →  11101100
+3. ajouter 1                   →  11101101
+```
+
+La représentation binaire de -19 sur 8 bits est donc `11101101`.
+
+On remarquera qu'en additionnant un nombre et son complément à deux, on obtient 0 :
+
+```
+    00010011
+  + 11101101
+  ----------
+  (1)00000000     ← la retenue de 1 est éliminée
+```
+
 ---
 ## La représentation des nombres entiers
 ### Entiers relatifs
@@ -324,6 +358,29 @@ Exemple avec 0,325
 
 ---
 ## La représentation des nombres réels
+### Quand un arrondi tue : le missile Patriot
+
+Le **25 février 1991**, pendant la Guerre du Golfe, une batterie américaine de missiles Patriot, à Dharan (Arabie Saoudite), échoue dans l'interception d'un missile Scud irakien. Le Scud frappe un baraquement de l'armée américaine et **tue 28 soldats**.
+---
+## La représentation des nombres réels
+### Quand un arrondi tue : le missile Patriot
+La commission d'enquête conclut à un calcul incorrect du temps de parcours, dû à **un problème d'arrondi** :
+
+* Les nombres étaient représentés **en virgule fixe sur 24 bits**.
+
+* Le temps était compté par l'horloge interne du système **en dixièmes de seconde**.
+
+* Or 1/10 n'a pas d'écriture finie en binaire :
+`1/10 = 0,1`<sub>10</sub> `= 0,0001100110011001100110011...`<sub>2</sub>
+
+* L'ordinateur de bord arrondissait donc 1/10 à 24 chiffres → une petite erreur à chaque dixième de seconde.
+
+* Au moment de l'attaque, la batterie était allumée depuis **environ 100 heures** : les erreurs d'arrondi accumulées atteignaient **0,34 s**. Pendant ce temps, un missile Scud parcourt environ **500 m**.
+
+<span style="color: red;">→ Le Patriot est passé à côté de sa cible.</span>
+
+---
+## La représentation des nombres réels
 ### Conversion base 10 → base 2
 
 Existe-t-il des nombres à développement décimal fini en base 2 ?
@@ -345,8 +402,6 @@ Oui !
 On observe donc une limite : **certains nombres réels ne peuvent pas être exactement représentés en binaire...**
 
 → démonstration au tableau
-
-→ démonstration au tableau
 ---
 ## La représentation des nombres entiers
 ### Base 2 → Base 16
@@ -362,10 +417,19 @@ On observe donc une limite : **certains nombres réels ne peuvent pas être exac
 ### Base 16 → Base 2
 
 * il suffit de lire chaque symbole et de les convertir en binaire
-
+---
+## La représentation des nombres entiers
 ### Exercices
 
 * Donnez la méthode pour passer de la base décimale à la base hexadécimale (dans les deux sens).
+
+* Complétez le tableau ci-dessous. L'indice indique la base dans laquelle le nombre est écrit.
+
+|                            | **Base 2** | **Base 10** | **Base 16** |
+|:---------------------------|:----------:|:-----------:|:-----------:|
+| 1001010110<sub>2</sub>     |     —      |      ?      |      ?      |
+| 2002<sub>10</sub>          |     ?      |      —      |      ?      |
+| A1C4<sub>16</sub>          |     ?      |      ?      |      —      |
 
 * Écrivez en Javascript un programme permettant de convertir un nombre d'une base de départ d vers une base d'arrivée a (d et a compris entre 2 et 16).
 

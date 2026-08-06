@@ -83,7 +83,11 @@ Mais soudain, un problème survient : alors que les élèves commencent à se co
 
 * Un code correcteur est une technique de codage **basée sur la redondance**.
 * Elle est destinée à **corriger les erreurs de transmission d’un message** sur une voie de communication peu fiable. 
-* La théorie des codes d’erreurs ne se limite pas qu’aux communications classiques (radio, câbles, fibre, …) mais également aux supports de stockage comme les disques compacts, la mémoire RAM et d’autres application où l’intégrité des données est importante. 
+* La théorie des codes d’erreurs ne se limite pas qu’aux communications classiques (radio, câbles, fibre, …) mais également aux supports de stockage comme les disques compacts, la mémoire RAM et d’autres application où l’intégrité des données est importante.
+
+<div style="text-align: center;">
+<img height="250px" src="img/erreur_binaire.png">
+</div>
 
 ---
 ## Pourquoi ces techniques de détection d’erreurs et de correction codage existent-elles? 
@@ -105,12 +109,35 @@ Avec un taux d’erreur à 10<sup>-6</sup> et un connexion à 1Mo/s => 8bits ser
 * Le message reçu est ensuite décodé : des erreurs éventuelles peuvent être détectées et corrigées.
 * Le message décodé est identique au message d’origine si il n’y a pas eu trop d’erreurs dans la transmission.
 ---
+## Schéma général de communication
+
+Le même schéma, vu du côté du codage :
+
+<div style="text-align: center;">
+<img height="280px" src="img/chaine_communication.png">
+</div>
+
+* Le codeur ajoute au message une **information de contrôle** : c'est la redondance.
+* La **source perturbatrice** agit sur le canal et introduit les erreurs.
+* Si le décodeur détecte une erreur qu'il ne peut pas corriger, il ne lui reste qu'une solution : **demander la retransmission** du message.
+---
 ## Principe général
 
 * Chaque suite de bits à transmettre est augmentée par une autre suite de bits dite « de redondance » ou « de contrôle ». 
 * Pour chaque suite de k bits transmise, on ajoute r bits. 
 * On dit alors que l’on utilise un code C(n,k) pour n = k+r
 * A la réception, les bits ajoutés permettent d’effectuer des contrôles.
+---
+## Exemples de la vie courante
+
+Le premier système de code détecteur d'erreur est la **checksum** (somme de contrôle). Cette technique compose souvent la base de systèmes de détection d'erreurs plus complexes, que nous verrons plus loin.
+
+Il en existe bien d'autres, dans des systèmes plus larges que le seul binaire. En voici trois que vous croisez tous les jours :
+
+* le **numéro de compte IBAN**
+* le **code CPP** (communication structurée d'un virement)
+* le **code ISBN** d'un livre
+
 ---
 ## Exemples de la vie courante
 ### Le numéro de compte bancaire belge
@@ -120,11 +147,39 @@ Avec un taux d’erreur à 10<sup>-6</sup> et un connexion à 1Mo/s => 8bits ser
 En Belgique, l'IBAN est formé de 16 caractères : il se compose d'abord des lettres "BE" suivies de 2 chiffres, puis des 12 chiffres du numéro de compte national.
 
 Par exemple, le numéro de compte belge<br>`539-0075470-34` devient `BE68 5390 0754 7034`.
+
+|  **BE**  | **2 chiffres**  |  **12 chiffres**  |
+|:------------:|:---------------:|:-----------------:|
+| Code du pays | Clé de contrôle | Numéro de compte  |
 ---
 ## Exemples de la vie courante
 ### Le numéro de compte bancaire belge
 
 Algorithme de vérification de l'IBAN : démonstration au tableau.
+
+Pour mémoire :
+
+1. Déplacer les **4 premiers caractères** à la fin du compte.
+2. Remplacer les lettres par des chiffres au moyen d'une table de conversion (A = 10, B = 11, C = 12, etc.).
+3. Appliquer le **modulo 97** à ce nombre.
+4. Si le résultat donne **1**, le numéro est correct.
+
+<span style="color: red;">→ Testez avec votre propre numéro de compte !</span>
+---
+## Exemples de la vie courante
+### Le numéro de compte bancaire belge
+
+**Énoncé** : Alice souhaite rembourser Thomas via virement bancaire. Celui-ci lui a indiqué différents numéros de compte sur un bout de papier. Lequel est correct ?
+
+<div style="font-size: 150%; margin-top: 50px;">
+
+* `BE41 0630 1234 5610`
+
+* `BE71 0961 2335 6769`
+
+* `BE68 5390 0754 7034`
+
+</div>
 ---
 ## Exemples de la vie courante
 ### Le code ISBN-10
@@ -164,6 +219,36 @@ Exemples :
 * La distance de Hamming entre 1011101 et 1001001 est 2.
 * La distance de Hamming entre 2143896 et 2233796 est 3.
 * La distance de Hamming entre "ramer" et "cases" est 3.
+---
+## La distance de Hamming
+
+Sur des mots de 3 bits, elle se lit directement sur un cube : chaque arête relie deux mots dont la distance vaut 1.
+
+<div style="text-align: center; margin-top: 30px;">
+<img height="330px" src="img/hamming_cube.png">
+</div>
+
+Aller de `000` à `111` demande donc de parcourir 3 arêtes : leur distance de Hamming vaut 3.
+---
+## Exercice de synthèse
+
+Nous sommes en pleine ère numérique. Qu'est-ce que cela veut dire ? Tout simplement qu'une partie énorme des informations échangées à travers la planète est matériellement représentée sous la forme de nombres.
+
+Messages électroniques, téléphonie mobile, transactions bancaires, téléguidage de satellites, télétransmission d'images, disques CD ou DVD : dans tous ces exemples, l'information est traduite en suites de chiffres binaires. Par exemple, dans le code ASCII, le A majuscule est codé par l'octet `01000001`, le B majuscule par `01000010`, etc.
+
+Un problème majeur de la transmission de l'information est celui des erreurs. Il suffit d'une petite rayure sur un disque, d'une perturbation de l'appareillage ou d'un quelconque phénomène parasite pour que le message transmis comporte des erreurs, c'est-à-dire des « 0 » malencontreusement changés en « 1 », ou inversement.
+
+<span style="color: red;">Or l'un des nombreux atouts du numérique est la possibilité de détecter, et même de corriger, de telles erreurs.</span>
+---
+## Exercice de synthèse
+
+1. Proposez une solution de base pour **détecter** une erreur.
+
+2. En critiquant les forces et les faiblesses de cette méthode, proposez une solution qui permette de détecter mais également de **corriger** l'erreur émise.
+
+3. Illustrez votre explication en codant la lettre « j », qui se traduit par 106 dans la table ASCII.
+
+4. Dans quel cas le message demanderait-il une **retransmission** ?
 ---
 ## Sources des images
 
