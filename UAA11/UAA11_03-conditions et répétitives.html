@@ -23,6 +23,27 @@
 			left: 0 !important;
 		  }
 		}
+    
+      /* Tableaux markdown */
+      .remark-slide-content table {
+        border-collapse: collapse;
+        margin: 0.7em 0;
+        font-size: 0.82em;
+      }
+      .remark-slide-content th,
+      .remark-slide-content td {
+        border: 1px solid #b4b4b4;
+        padding: 4px 10px;
+        text-align: left;
+        vertical-align: top;
+      }
+      .remark-slide-content th {
+        background: #ececec;
+        font-weight: bold;
+        font-family: 'Yanone Kaffeesatz';
+        font-size: 1.15em;
+      }
+      .remark-slide-content tbody tr:nth-child(even) { background: #f7f7f7; }
     </style>
     <link href="../vendor/bootstrap.min.css" rel="stylesheet">
     <script src="../vendor/bootstrap.bundle.min.js"></script>
@@ -259,12 +280,15 @@ Pourquoi la seconde est-elle fausse ? C évalue de gauche à droite :
 
 Les **lois de De Morgan** permettent de passer d'une condition à son contraire.
 
-| Condition | Sa négation |
-| --- | --- |
-| `a && b` | `!a` OU `!b` |
-| `a` OU `b` | `!a && !b` |
-| `x == 5` | `x != 5` |
-| `x >= 10` | `x < 10` |
+<table>
+<thead><tr><th>Condition</th><th>Sa négation</th></tr></thead>
+<tbody>
+<tr><td><code>a &amp;&amp; b</code></td><td><code>!a || !b</code></td></tr>
+<tr><td><code>a || b</code></td><td><code>!a &amp;&amp; !b</code></td></tr>
+<tr><td><code>x == 5</code></td><td><code>x != 5</code></td></tr>
+<tr><td><code>x &gt;= 10</code></td><td><code>x &lt; 10</code></td></tr>
+</tbody>
+</table>
 
 ```c
 // "je continue tant que la saisie n'est PAS valide"
@@ -273,7 +297,7 @@ Les **lois de De Morgan** permettent de passer d'une condition à son contraire.
 while(n < 1 || n > 5){ ... }
 ```
 
-→ On inverse **chaque** comparaison **et** on échange `&&` et OU. Oublier l'un des deux est l'erreur classique.
+→ On inverse **chaque** comparaison **et** on échange `&&` et `||`. Oublier l'un des deux est l'erreur classique.
 
 → Ce réflexe servira surtout pour le **contrôle de saisie**, dans la partie itérative.
 ---
@@ -592,9 +616,7 @@ while(i <= 10){                do{                              printf("%d ", i)
 | Le compteur est déclaré... | avant la boucle | avant la boucle | **dans** la boucle |
 | La plus adaptée quand... | le nombre de tours est inconnu | il faut agir **au moins une fois** | le nombre de tours est **connu** |
 
-→ `do…while` se termine par un `;` après la parenthèse. Les deux autres, non.
-
-→ Le compteur d'un `for` **n'existe plus** après la boucle : `printf("%d", i)` après le `for` est une erreur.
+→ `do…while` se termine par un `;` après la parenthèse ; les deux autres, non. Le compteur d'un `for` **n'existe plus** après la boucle.
 ---
 ### Choisir la bonne boucle
 
@@ -790,18 +812,19 @@ do{
 ---
 ### Valide si... / je continue tant que...
 
-| Je veux... | Valide si... | Je continue tant que... |
-| --- | --- | --- |
-| un chiffre entre 1 et 5 | `n >= 1 && n <= 5` | `n < 1 OU n > 5` |
-| `'O'` ou `'N'` | `c == 'O' OU c == 'N'` | `c != 'O' && c != 'N'` |
-| un nombre de 10 à 20 inclus | `n >= 10 && n <= 20` | `n < 10 OU n > 20` |
-| un jour de la semaine (1-7) | `j >= 1 && j <= 7` | `j < 1 OU j > 7` |
-| un nombre divisible par 3 ou 5 | `n%3==0 OU n%5==0` | `n%3!=0 && n%5!=0` |
-| une lettre (maj. ou min.) | `(c>='A'&&c<='Z') OU (c>='a'&&c<='z')` | la négation des deux |
+<table>
+<thead><tr><th>Je veux...</th><th>Valide si...</th><th>Je continue tant que...</th></tr></thead>
+<tbody>
+<tr><td>un chiffre entre 1 et 5</td><td><code>n &gt;= 1 &amp;&amp; n &lt;= 5</code></td><td><code>n &lt; 1 || n &gt; 5</code></td></tr>
+<tr><td><code>'O'</code> ou <code>'N'</code></td><td><code>c == 'O' || c == 'N'</code></td><td><code>c != 'O' &amp;&amp; c != 'N'</code></td></tr>
+<tr><td>un nombre de 10 à 20 inclus</td><td><code>n &gt;= 10 &amp;&amp; n &lt;= 20</code></td><td><code>n &lt; 10 || n &gt; 20</code></td></tr>
+<tr><td>un jour de la semaine (1-7)</td><td><code>j &gt;= 1 &amp;&amp; j &lt;= 7</code></td><td><code>j &lt; 1 || j &gt; 7</code></td></tr>
+<tr><td>un nombre divisible par 3 ou 5</td><td><code>n%3==0 || n%5==0</code></td><td><code>n%3!=0 &amp;&amp; n%5!=0</code></td></tr>
+<tr><td>une lettre (maj. ou min.)</td><td><code>(c&gt;='A'&amp;&amp;c&lt;='Z') || (c&gt;='a'&amp;&amp;c&lt;='z')</code></td><td>la négation des deux</td></tr>
+</tbody>
+</table>
 
-→ Dans ce tableau, `OU` se note en C avec **deux barres verticales**.
-
-→ Un `&&` qui devient un OU, un OU qui devient un `&&` : ce sont les **lois de De Morgan**.
+→ Un `&&` qui devient un `||`, un `||` qui devient un `&&` : ce sont les **lois de De Morgan**.
 ---
 ### Deux conditions d'arrêt
 
@@ -954,12 +977,7 @@ if(total == 0){
 name: chiffres
 ## L'arithmétique des chiffres
 
-Deux opérations suffisent à parcourir les chiffres d'un nombre, **du dernier au premier** :
-
-```c
-int chiffre = n % 10;   // le chiffre des unités
-n = n / 10;             // on supprime ce chiffre
-```
+Deux opérations suffisent à parcourir les chiffres d'un nombre, **du dernier au premier** : `n % 10` donne le chiffre des unités, `n / 10` le supprime.
 
 ```c
 int n = 4527, somme = 0;

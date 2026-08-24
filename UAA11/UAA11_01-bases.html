@@ -23,6 +23,27 @@
 			left: 0 !important;
 		  }
 		}
+    
+      /* Tableaux markdown */
+      .remark-slide-content table {
+        border-collapse: collapse;
+        margin: 0.7em 0;
+        font-size: 0.82em;
+      }
+      .remark-slide-content th,
+      .remark-slide-content td {
+        border: 1px solid #b4b4b4;
+        padding: 4px 10px;
+        text-align: left;
+        vertical-align: top;
+      }
+      .remark-slide-content th {
+        background: #ececec;
+        font-weight: bold;
+        font-family: 'Yanone Kaffeesatz';
+        font-size: 1.15em;
+      }
+      .remark-slide-content tbody tr:nth-child(even) { background: #f7f7f7; }
     </style>
     <link href="../vendor/bootstrap.min.css" rel="stylesheet">
     <script src="../vendor/bootstrap.bundle.min.js"></script>
@@ -851,17 +872,20 @@ name: priorite
 
 Du plus prioritaire au moins prioritaire :
 
-| Priorité | Opérateurs |
-| --- | --- |
-| 1 | `( )` |
-| 2 | `(type)` (casting), `++`, `--`, `!` |
-| 3 | `*`, `/`, `%` |
-| 4 | `+`, `-` |
-| 5 | `<`, `<=`, `>`, `>=` |
-| 6 | `==`, `!=` |
-| 7 | `&&` (ET logique) |
-| 8 | OU logique (deux barres verticales) |
-| 9 | `=`, `+=`, `-=`, `*=`, `/=`, `%=` |
+<table>
+<thead><tr><th>Priorité</th><th>Opérateurs</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><code>( )</code></td></tr>
+<tr><td>2</td><td><code>(type)</code> (casting), <code>++</code>, <code>--</code>, <code>!</code></td></tr>
+<tr><td>3</td><td><code>*</code>, <code>/</code>, <code>%</code></td></tr>
+<tr><td>4</td><td><code>+</code>, <code>-</code></td></tr>
+<tr><td>5</td><td><code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code></td></tr>
+<tr><td>6</td><td><code>==</code>, <code>!=</code></td></tr>
+<tr><td>7</td><td><code>&amp;&amp;</code></td></tr>
+<tr><td>8</td><td><code>||</code></td></tr>
+<tr><td>9</td><td><code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>%=</code></td></tr>
+</tbody>
+</table>
 
 ```c
 2 + 3 * 4 % 5
