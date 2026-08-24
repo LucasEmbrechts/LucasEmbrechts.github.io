@@ -29,24 +29,27 @@
   </head>
   <body>
     <textarea id="source">
-
 class: center, middle
 
 # Programmation procédurale :
 # les caractères
 <img height="200px" src="img/logo.png">
 ---
+name: sommaire
 
 ## On parle de quoi ?
 
-1. <a href="UAA11-ch3.html#3">Codification</a>
-2. <a href="UAA11-ch3.html#4">Lecture</a>
-3. <a href="UAA11-ch3.html#5">Le problème du tampon (buffer)</a>
-4. <a href="UAA11-ch3.html#8">Impression</a>
-5. <a href="UAA11-ch3.html#9">Fonctions</a>
+1. <a href="#codification">Codification</a>
+2. <a href="#ascii">Un caractère est un entier</a>
+3. <a href="#arith">Arithmétique sur les codes ASCII</a>
+4. <a href="#lecture">Lecture</a>
+5. <a href="#tampon">Le problème du tampon (buffer)</a>
+6. <a href="#impression">Impression</a>
+7. <a href="#classer">Classer un caractère sans librairie</a>
+8. <a href="#fonctions">Fonctions de `ctype.h`</a>
+9. <a href="#exercices">Exercices</a>
 ---
-
-
+name: codification
 ## Codification d'un caractère
 
 ```c
@@ -61,6 +64,83 @@ void main(void) {
 }
 ```
 ---
+name: ascii
+## Un caractère est un entier
+
+Un `char` occupe **1 octet**. Ce qu'il contient n'est pas une lettre : c'est un **nombre**, le **code ASCII** de cette lettre.
+
+```c
+char c = 'A';
+printf("%c\n", c);   // A    ← on demande d'afficher le caractère
+printf("%d\n", c);   // 65   ← on demande d'afficher le nombre
+printf("%X\n", c);   // 41   ← le même nombre, en hexadécimal
+```
+
+→ `%c` et `%d` affichent **la même variable** de deux façons différentes.
+
+Les trois plages à retenir :
+
+| Plage | Premier | Dernier | Remarque |
+| --- | --- | --- | --- |
+| chiffres `'0'` → `'9'` | 48 | 57 | contigus |
+| majuscules `'A'` → `'Z'` | 65 | 90 | contiguës |
+| minuscules `'a'` → `'z'` | 97 | 122 | contiguës |
+
+→ L'écart entre une majuscule et sa minuscule est **toujours 32** : `'a' - 'A' == 32`.
+
+→ Le caractère `'0'` (code 48) n'est **pas** le nombre `0`.
+---
+name: arith
+## Arithmétique sur les codes ASCII
+
+Puisqu'un caractère est un entier, on peut **calculer** avec.
+
+```c
+char c = 'A';
+
+char suivant   = c + 1;    // 'B'
+char precedent = c - 1;    // '@'
+char minuscule = c + 32;   // 'a'
+char majuscule = 'a' - 32; // 'A'
+
+int ecart      = 'z' - 'a';   // 25 : il y a 26 lettres, donc 25 d'écart
+int rang       = c - 'A';     // 0  : A est la 1re lettre (rang 0)
+int valeur     = '7' - '0';   // 7  : du caractère au nombre qu'il représente
+char chiffre   = 3 + '0';     // '3' : du nombre au caractère
+```
+
+→ `c + 1` est un **`int`** : pour le réafficher comme un caractère, il faut `%c` ou un `(char)`.
+
+```c
+printf("%d\n", 'A' + 1);          // 66
+printf("%c\n", 'A' + 1);          // B
+printf("%c\n", (char)('A' + 1));  // B
+```
+---
+## Exercice : majuscule vers minuscule
+
+Demandez une lettre **majuscule** et affichez la minuscule correspondante, **sans `<ctype.h>`**. Affichez aussi le caractère précédent et le suivant.
+
+```c
+#include <stdio.h>
+
+void main(void){
+  char c;
+
+  printf("Entrez une lettre majuscule : ");
+  scanf(" %c", &c);
+
+  printf("Minuscule  : %c\n", c + 32);
+  printf("Precedent  : %c\n", c - 1);
+  printf("Suivant    : %c\n", c + 1);
+}
+```
+
+→ Que se passe-t-il si l'utilisateur entre `'A'` ? Et `'Z'` ? Le programme sort de la plage des lettres : c'est à vous de le vérifier avec une condition.
+
+→ `" %c"` (avec un espace) : l'espace demande à `scanf` d'ignorer les blancs en attente, dont le `\n` de la saisie précédente.
+---
+name: lecture
 ## Lecture d'un caractère
 
 Lire un caractère peut se faire de deux manières différentes.
@@ -82,6 +162,7 @@ void main(void) {
 	c = getchar();
 ```
 ---
+name: tampon
 ## Le problème du tampon (buffer)
 
 Lors d'une lecture via `scanf_s`, l'entièreté des caractères entrés sur la console est enregistrée.
@@ -142,6 +223,7 @@ void viderTampon(void)
 }
 ```
 ---
+name: impression
 ## Impression d'un caractère
 
 L'impression d'un caractère peut se faire de deux manières différentes.
@@ -170,8 +252,35 @@ void main (void){
     putchar(c); // imprime c ET passe à la ligne
 }
 ```
-
 ---
+name: classer
+## Classer un caractère sans librairie
+
+Puisque les trois plages sont **contiguës**, un simple encadrement suffit.
+
+```c
+char c;
+printf("Entrez un caractere : ");
+scanf(" %c", &c);
+
+if(c >= 'A' && c <= 'Z'){
+  printf("Lettre majuscule");
+} else if(c >= 'a' && c <= 'z'){
+  printf("Lettre minuscule");
+} else if(c >= '0' && c <= '9'){
+  printf("Chiffre");
+} else {
+  printf("Autre symbole");
+}
+```
+
+→ On écrit `c >= 'A' && c <= 'Z'` et **jamais** `'A' <= c <= 'Z'` : en C, cette seconde écriture compile mais ne teste pas ce que vous croyez.
+
+→ Comparer des caractères, c'est comparer leurs codes ASCII. `'B' > 'A'` est donc vrai, et `'a' > 'Z'` aussi.
+
+→ Trois caractères sont **dans l'ordre alphabétique** si `c1 <= c2 && c2 <= c3`.
+---
+name: fonctions
 ## Fonctions
 
 En C, il existe un grand nombre de fonctions prédéfinies pouvant être utilisées avec des caractères.
@@ -202,7 +311,32 @@ printf("Caractère transformé : ");
 putchar(toupper(++c));
 ```
 ---
+name: exercices
+## Exercice : code ASCII et hexadécimal
 
+Demandez un caractère et affichez son code ASCII et son code hexadécimal, sous la forme :
+
+```
+caractere A		code ASCII = 65		hexadecimal = 41
+```
+
+```c
+#include <stdio.h>
+
+void main(void){
+  char c;
+
+  printf("Entrez un caractere : ");
+  scanf(" %c", &c);
+
+  printf("caractere %c\t\tcode ASCII = %d\t\thexadecimal = %X\n", c, c, c);
+}
+```
+
+→ `\t` produit la tabulation qui aligne les trois colonnes.
+
+→ La **même variable** `c` est passée trois fois, avec trois codes de formatage différents.
+---
 Exercice : traduire le DA suivant.
 
 ```da
@@ -221,6 +355,7 @@ Exercice : traduire le DA suivant.
 │╙──
 └──────────
 ```
+    
     </textarea>
     <script src="../vendor/remark-latest.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
