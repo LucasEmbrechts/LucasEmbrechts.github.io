@@ -139,14 +139,14 @@ void main(void){     // le point d'entrée du programme
 name: erreurs
 ## Les trois familles d'erreurs
 
-Une grande partie du livret consiste à **repérer une erreur**. Encore faut-il savoir de quelle erreur il s'agit.
+Encore faut-il savoir de quelle erreur il s'agit.
 
 ### 1. L'erreur de compilation
 
 Le programme **ne se construit pas**. Le compilateur refuse et indique la ligne.
 
 ```c
-printf("Il reste %d essais.\n" compteur);   // virgule manquante
+int total = 10   // point-virgule manquant
 ```
 
 ### 2. L'avertissement (*warning*)
@@ -154,8 +154,8 @@ printf("Il reste %d essais.\n" compteur);   // virgule manquante
 Le programme **se construit quand même**, mais le compilateur signale un risque.
 
 ```c
-float temperature = 18.6;
-printf("Il fait %d degres.", temperature);  // %d avec un float
+float x = 2.5;
+printf("%d", x);   // un float affiché avec %d
 ```
 ---
 ### 3. L'erreur de logique
@@ -163,13 +163,13 @@ printf("Il fait %d degres.", temperature);  // %d avec un float
 Le programme se construit, s'exécute... et donne un **résultat faux**. Le compilateur ne dit rien.
 
 ```c
-int total = 250, nbArticles = 4;
-printf("Prix moyen : %.2f", total / nbArticles);   // division entière : 62 et non 62.50
+int a = 7, b = 2;
+float r = a / b;   // r vaut 3.0 et non 3.5 : division entière
 ```
 
 → Cette troisième famille est la plus dangereuse : **rien ne vous prévient**.
 
-→ C'est pour cela que le livret vous demande sans cesse de **prédire l'affichage avant d'exécuter**.
+→ C'est pour cela qu'il faut toujours **prédire l'affichage avant d'exécuter**, puis confronter la prédiction au résultat réel.
 ---
 ## Les trois familles d'erreurs
 
@@ -188,26 +188,26 @@ name: compilateur
 ## Lire un message du compilateur
 
 ```
-prog.c:6:28: error: expected ')' before 'compteur'
-    6 |   printf("Il reste %d essais.\n" compteur);
-      |                                  ^~~~~~~~
+prog.c:6:14: error: expected ';' before '}' token
+    6 |   int total = 10
+      |              ^
 ```
 
 Un message se lit toujours de la même façon :
 
 1. **le fichier** : `prog.c`
-2. **la ligne et la colonne** : `6:28`
+2. **la ligne et la colonne** : `6:14`
 3. **la gravité** : `error` (bloquant) ou `warning` (non bloquant)
-4. **le diagnostic** : `expected ')' before ...`
+4. **le diagnostic** : `expected ';' before ...`
 
 → Corrigez **toujours la première erreur de la liste** puis recompilez : une seule erreur en provoque souvent dix autres.
 
 → N'ignorez jamais un `warning` : c'est presque toujours une future erreur de logique.
 ---
 name: methode
-## Méthode de travail pour le livret
+## Méthode de travail
 
-Pour chaque exercice de lecture de code :
+Devant un programme à **lire** :
 
 1. **Je lis** le programme en entier avant de juger.
 2. **Je trace à la main** : je note l'état de chaque variable, ligne par ligne.
@@ -215,7 +215,7 @@ Pour chaque exercice de lecture de code :
 4. **Je compile ensuite** pour confronter ma prédiction au résultat réel.
 5. **Si je me suis trompé, je cherche pourquoi** : c'est là qu'on apprend.
 
-Pour chaque exercice d'écriture de programme :
+Devant un programme à **écrire** :
 
 1. Quelles sont les **données** ? De quel **type** ?
 2. Quel est le **résultat** attendu, et sous quelle **forme** ?
