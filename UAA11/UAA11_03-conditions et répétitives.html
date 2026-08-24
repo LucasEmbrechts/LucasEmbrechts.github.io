@@ -37,29 +37,33 @@ class: center, middle
 ---
 name: sommaire
 
-## On parle de quoi ?
+## On parle de quoi ? (1/2)
 
 ### Les structures conditionnelles
 1. <a href="#alternatives">Alternatives</a>
 2. <a href="#operateurs">Opérateurs</a>
 3. <a href="#pseudo">Du pseudo-code au C</a>
-4. <a href="#cascade">Les cascades `else if`</a>
-5. <a href="#simplifications">Simplifications</a>
-6. <a href="#switch">Alternative `switch`</a>
-7. <a href="#fallthrough">`switch` : cases groupés et `break`</a>
+4. <a href="#intervalles">Intervalles et lois de De Morgan</a>
+5. <a href="#cascade">Les cascades `else if`</a>
+6. <a href="#simplifications">Simplifications</a>
+7. <a href="#switch">Alternative `switch`</a>
+8. <a href="#fallthrough">`switch` : cases groupés et `break`</a>
+---
+## On parle de quoi ? (2/2)
 
 ### Les structures itératives
-8. <a href="#repetitives">Répétitives</a>
-9. <a href="#comparatif">`while`, `do…while`, `for` : le tableau comparatif</a>
-10. <a href="#pieges">Les pièges classiques</a>
-11. <a href="#saisie">Le contrôle de saisie</a>
-12. <a href="#accumulateur">Les accumulateurs</a>
-13. <a href="#sentinelle">Les boucles à sentinelle</a>
-14. <a href="#chiffres">L'arithmétique des chiffres</a>
-15. <a href="#imbriquees">Les boucles imbriquées</a>
-16. <a href="#classiques">Les algorithmes classiques</a>
-17. <a href="#hasard">Le hasard : `rand`</a>
-18. <a href="#synthese">Exercices de synthèse</a>
+9. <a href="#repetitives">Répétitives</a>
+10. <a href="#comparatif">`while`, `do…while`, `for` : le tableau comparatif</a>
+11. <a href="#compter">Compter les tours</a>
+12. <a href="#pieges">Les pièges classiques</a>
+13. <a href="#saisie">Le contrôle de saisie</a>
+14. <a href="#accumulateur">Les accumulateurs</a>
+15. <a href="#sentinelle">Les boucles à sentinelle</a>
+16. <a href="#chiffres">L'arithmétique des chiffres</a>
+17. <a href="#imbriquees">Les boucles imbriquées</a>
+18. <a href="#classiques">Les algorithmes classiques</a>
+19. <a href="#hasard">Le hasard : `rand`</a>
+20. <a href="#synthese">Exercices de synthèse</a>
 ---
 name: alternatives
 ## Alternatives
@@ -187,7 +191,7 @@ Le livret vous demande de traduire des diagrammes d'action. La correspondance es
 
 → Le piège numéro un : traduire le `=` du pseudo-code par un `=` en C alors qu'il s'agit d'un **test**.
 ---
-## Du pseudo-code au C : un exemple
+### Du pseudo-code au C : un exemple
 
 ```da
 ┌── if (age ≥ 18 AND permis = 'O')
@@ -203,6 +207,10 @@ if(age >= 18 && permis == 'O'){
   printf("Vous pouvez louer une voiture.");
 }
 ```
+
+→ `AND` devient `&&`, et le `=` du pseudo-code, qui est un **test**, devient `==`.
+---
+### Du pseudo-code au C : un `if` dans un `else`
 
 ```da
 ┌── if (NOT abonne)
@@ -246,8 +254,10 @@ Pourquoi la seconde est-elle fausse ? C évalue de gauche à droite :
 → puis il teste `1 <= 64`, ce qui est **toujours vrai**
 
 → la condition est donc vraie quelle que soit la note.
+---
+### Nier une condition composée
 
-### Négation d'une condition composée (lois de De Morgan)
+Les **lois de De Morgan** permettent de passer d'une condition à son contraire.
 
 | Condition | Sa négation |
 | --- | --- |
@@ -257,11 +267,15 @@ Pourquoi la seconde est-elle fausse ? C évalue de gauche à droite :
 | `x >= 10` | `x < 10` |
 
 ```c
-// "continuer tant que la saisie n'est PAS valide"
-// valide  :  n >= 1 && n <= 5
-// invalide:  n < 1 || n > 5
+// "je continue tant que la saisie n'est PAS valide"
+// valide   :  n >= 1 && n <= 5
+// invalide :  n < 1 || n > 5
 while(n < 1 || n > 5){ ... }
 ```
+
+→ On inverse **chaque** comparaison **et** on échange `&&` et OU. Oublier l'un des deux est l'erreur classique.
+
+→ Ce réflexe servira surtout pour le **contrôle de saisie**, dans la partie itérative.
 ---
 ### Exercice
 
@@ -293,7 +307,7 @@ if(a == 0 || b == 0){
 name: cascade
 ## Les cascades `else if`
 
-Un élève obtient une note sur 100. Affichez : « Insuffisant » (< 50), « Satisfaisant » (50 à 64), « Bien » (65 à 79), « Tres bien » (80 à 89), « Excellent » (90 et plus).
+Un élève obtient une note sur 100 : « Insuffisant » (< 50), « Satisfaisant » (50-64), « Bien » (65-79), « Tres bien » (80-89), « Excellent » (90 et plus).
 
 ```c
 if(note < 50){
@@ -310,8 +324,6 @@ if(note < 50){
 ```
 
 → Grâce au `else`, arriver sur `note < 65` signifie qu'on sait déjà que `note >= 50` : **inutile de le retester**.
-
-→ Les conditions doivent être écrites **dans l'ordre**, du plus restrictif au plus large (ou l'inverse), sans trou ni chevauchement.
 ---
 ### Et sans les `else` ?
 
@@ -341,7 +353,7 @@ if(note >= 50 && note < 65) printf("Satisfaisant");
 ---
 ### Cascade et tarification
 
-Le prix d'un envoi dépend du poids : jusqu'à 50 g → 1,10 € ; jusqu'à 100 g → 1,80 € ; jusqu'à 350 g → 3,20 € ; jusqu'à 1 kg → 5,50 € ; au-delà → 8,90 €.
+Le prix d'un envoi dépend du poids : jusqu'à 50 g → 1,10 € ; 100 g → 1,80 € ; 350 g → 3,20 € ; 1 kg → 5,50 € ; au-delà → 8,90 €.
 
 ```c
 float tarif;
@@ -360,9 +372,7 @@ if(poids <= 50){
 printf("Tarif : %.2f euros", tarif);
 ```
 
-→ Le schéma « une cascade qui **affecte** une variable, puis **un seul** `printf` à la fin » est plus court et plus sûr que cinq `printf` dispersés.
-
-→ Attention aux **tarifs par tranches** (les photocopies du livret) : là, on ne choisit pas un tarif, on **cumule** plusieurs tranches.
+→ Une cascade qui **affecte** une variable, puis **un seul** `printf` : plus court et plus sûr que cinq `printf` dispersés. Attention aux tarifs **par tranches** (les photocopies du livret) : là, on **cumule** les tranches.
 ---
 name: simplifications
 ## Simplifications
@@ -437,10 +447,18 @@ switch(mois){
     printf("Mois invalide\n");
 }
 ```
+---
+### Le rôle exact du `break`
 
 → Sept `case` partagent **un seul** bloc d'instructions : c'est ce qu'on appelle le *fall-through*.
 
-→ Ce programme contient **trois** `break`. Si on les supprimait tous, `mois = 1` exécuterait toutes les affectations jusqu'au bout et `nbJours` finirait à 0.
+→ Ce programme contient **trois** `break`. Si on les supprimait tous, `mois = 1` exécuterait `nbJours = 31`, puis `nbJours = 30`, puis `nbJours = 28`, puis le `default` : `nbJours` finirait à **0**.
+
+→ Un `case` avec des instructions et **sans** `break` enchaîne sur le suivant : c'est l'oubli le plus fréquent.
+
+→ Le `default` joue le rôle du dernier `else` : il attrape tout ce qui n'a pas été prévu.
+
+→ Même exercice avec les **saisons** : décembre, janvier et février partagent un bloc, mars, avril et mai un autre, etc.
 ---
 ### Les limites du `switch`
 
@@ -471,20 +489,17 @@ switch(note){
 float a, b;
 char op;
 
-printf("Premier nombre : ");   scanf("%f", &a);
+printf("Premier nombre : ");       scanf("%f", &a);
 printf("Operateur (+ - * /) : ");  scanf(" %c", &op);
-printf("Deuxieme nombre : ");  scanf("%f", &b);
+printf("Deuxieme nombre : ");      scanf("%f", &b);
 
 switch(op){
   case '+': printf("%.2f + %.2f = %.2f", a, b, a + b);  break;
   case '-': printf("%.2f - %.2f = %.2f", a, b, a - b);  break;
   case '*': printf("%.2f * %.2f = %.2f", a, b, a * b);  break;
   case '/':
-    if(b == 0){
-      printf("Erreur : division par zero");
-    } else {
-      printf("%.2f / %.2f = %.2f", a, b, a / b);
-    }
+    if(b == 0)  printf("Erreur : division par zero");
+    else        printf("%.2f / %.2f = %.2f", a, b, a / b);
     break;
   default: printf("Operateur inconnu");
 }
@@ -593,11 +608,7 @@ while(i <= 10){                do{                              printf("%d ", i)
 | Chercher un diviseur d'un nombre | `while` | on s'arrête dès qu'on trouve |
 | Afficher les 26 lettres de l'alphabet | `for` | nombre de tours connu (26) |
 
-→ Question à se poser : **« est-ce que je connais d'avance le nombre de tours ? »**
-
-→ Si oui → `for`. Si non → `while`, sauf s'il faut agir au moins une fois → `do…while`.
-
-→ Les trois sont **interchangeables** : n'importe quelle boucle peut s'écrire avec n'importe laquelle des trois.
+→ La question à se poser : **« est-ce que je connais d'avance le nombre de tours ? »** Si oui → `for`. Si non → `while`, sauf s'il faut agir au moins une fois → `do…while`.
 ---
 ### Traduire une boucle d'une forme à l'autre
 
@@ -618,6 +629,8 @@ for(int i = 1, j = 20; i < j; i++, j--){     int i = 1, j = 20;
                                                i++;  j--;
                                              }
 ```
+---
+### Traduire une boucle (suite)
 
 ```c
 // (c) while  →  do…while
@@ -630,6 +643,8 @@ while(n < 0){                            scanf("%d", &n);
 ```
 
 → Le `do…while` évite la **saisie dupliquée** avant et dans la boucle : c'est son intérêt principal.
+
+→ Les trois formes sont **interchangeables**. Choisir la bonne, c'est choisir celle qui rend l'intention la plus lisible.
 ---
 name: compter
 ### Compter les tours d'une boucle
@@ -666,6 +681,8 @@ while(i < 5){
 for(int i = 0; i < 5; i++);      // ← ce ; est le corps de la boucle !
   printf("%d ", i);              // s'exécute UNE fois... et i n'existe plus
 ```
+---
+### Les pièges classiques : les tests
 
 ```c
 // (c) Le test != avec un pas qui saute la cible
@@ -677,7 +694,7 @@ for(int i = 0; i != 10; i += 3){ // 0, 3, 6, 9, 12, 15... on ne tombe JAMAIS sur
 ```c
 // (d) Le test != avec un réel
 for(float x = 0; x != 1.0; x += 0.1){   // 0.1 n'est pas représentable exactement
-  printf("%.1f ", x);                   // BOUCLE INFINIE
+  printf("%.1f ", x);                    // BOUCLE INFINIE
 }
 ```
 
@@ -704,8 +721,10 @@ for(int i = 0; i < 5; i++){
   total += note;
   printf("Moyenne : %.2f\n", (float)total / i);   // affiché à CHAQUE tour,
 }                                                  // et division par 0 au 1er tour
-// → sortir le printf de la boucle et diviser par 5
 ```
+→ Il faut sortir le `printf` de la boucle et diviser par 5.
+---
+### Les pièges classiques (fin)
 
 ```c
 // (g) La condition inversée
@@ -713,10 +732,12 @@ int age;
 do{
   printf("Age : ");  scanf("%d", &age);
 } while(age > 0 && age < 120);   // on redemande tant que l'âge est VALIDE !
-// → while(age <= 0 || age >= 120);
 ```
+→ Correction : `while(age <= 0 || age >= 120);`
 
-→ Devant un `do…while`, relisez-vous à voix haute : « je **continue tant que**... ».
+→ Devant un `do…while`, relisez-vous à voix haute : « je **continue tant que**... ». Si la phrase décrit une situation correcte, la condition est inversée.
+
+→ Récapitulatif des sept pièges : compteur non modifié, `;` fantôme, `!=` qui rate sa cible, `!=` sur un réel, accumulateur non initialisé, calcul mal placé, condition inversée.
 ---
 name: break
 ## L'instruction `break`
@@ -763,20 +784,22 @@ do{
 
 → On demande **d'abord**, on teste **ensuite** : c'est exactement ce que fait le `do…while`.
 
-→ Avec un `while`, il faudrait écrire la saisie **deux fois** (avant la boucle et dans la boucle).
+→ Avec un `while`, il faudrait écrire la saisie **deux fois** : avant la boucle, puis dans la boucle.
 
-**La condition du `while` est la négation de la condition de validité :**
+→ La condition du `while` est la **négation** de la condition de validité.
+---
+### Valide si... / je continue tant que...
 
 | Je veux... | Valide si... | Je continue tant que... |
 | --- | --- | --- |
 | un chiffre entre 1 et 5 | `n >= 1 && n <= 5` | `n < 1 OU n > 5` |
 | `'O'` ou `'N'` | `c == 'O' OU c == 'N'` | `c != 'O' && c != 'N'` |
-| un nombre entre 10 et 20 inclus | `n >= 10 && n <= 20` | `n < 10 OU n > 20` |
+| un nombre de 10 à 20 inclus | `n >= 10 && n <= 20` | `n < 10 OU n > 20` |
 | un jour de la semaine (1-7) | `j >= 1 && j <= 7` | `j < 1 OU j > 7` |
+| un nombre divisible par 3 ou 5 | `n%3==0 OU n%5==0` | `n%3!=0 && n%5!=0` |
 | une lettre (maj. ou min.) | `(c>='A'&&c<='Z') OU (c>='a'&&c<='z')` | la négation des deux |
-| un nombre divisible par 3 ou par 5 | `n%3==0 OU n%5==0` | `n%3!=0 && n%5!=0` |
 
-→ Dans le tableau, `OU` se note en C avec **deux barres verticales**.
+→ Dans ce tableau, `OU` se note en C avec **deux barres verticales**.
 
 → Un `&&` qui devient un OU, un OU qui devient un `&&` : ce sont les **lois de De Morgan**.
 ---
@@ -799,7 +822,11 @@ do{
     printf("Code errone. Il vous reste %d tentative(s).\n", 3 - tentatives);
   }
 } while(!correct && tentatives < 3);
+```
+---
+### Deux conditions d'arrêt (suite)
 
+```c
 if(correct){
   printf("Bienvenue !");
 } else {
@@ -809,7 +836,9 @@ if(correct){
 
 → La boucle continue tant que **ni** l'une **ni** l'autre condition d'arrêt n'est atteinte : `!correct && tentatives < 3`.
 
-→ Après la boucle, il faut **savoir pourquoi** on est sorti : c'est le rôle du booléen `correct`.
+→ Après la boucle, il faut **savoir pourquoi** on est sorti : c'est le rôle du booléen `correct`. Sans lui, impossible de distinguer le succès de l'échec.
+
+→ Vous retrouverez cette structure dans le distributeur automatique et dans le jeu du nombre à deviner.
 ---
 name: accumulateur
 ## Les accumulateurs
@@ -828,15 +857,12 @@ Un **accumulateur** est une variable déclarée **avant** la boucle, mise à jou
 int n, somme = 0;
 printf("Jusqu'ou ? ");  scanf("%d", &n);
 
-for(int i = 1; i <= n; i++){
-  somme += i;
-}
+for(int i = 1; i <= n; i++)  somme += i;
+
 printf("Somme = %d", somme);      // pour n = 5 : 15
 ```
 
 → `0` pour une somme, `1` pour un produit : sinon tout est écrasé ou annulé.
-
-→ **Ne jamais** initialiser un maximum à `0` : avec une série de nombres tous négatifs, le programme répondrait `0`, qui ne fait pas partie de la série.
 ---
 ### Le maximum, correctement
 
@@ -879,11 +905,16 @@ while(n != 0){                // 0 = la sentinelle
   printf("Nombre (0 pour terminer) : ");
   scanf("%d", &n);            // lecture SUIVANTE en FIN de corps
 }
+```
+---
+### Les trois règles de la sentinelle
 
+```c
 if(compteur == 0){
   printf("Aucun nombre saisi.");
 } else {
-  printf("%d nombres, somme = %d, moyenne = %.2f", compteur, somme, (float)somme / compteur);
+  printf("%d nombres, somme = %d, moyenne = %.2f",
+         compteur, somme, (float)somme / compteur);
 }
 ```
 
@@ -892,6 +923,8 @@ if(compteur == 0){
 → La sentinelle **ne fait pas partie** des données : elle n'est ni comptée, ni additionnée.
 
 → Toujours prévoir le cas où la sentinelle est saisie **d'emblée** : ici, la division par `compteur` planterait.
+
+→ La moyenne de notes du livret utilise le même schéma, avec une **note négative** comme sentinelle.
 ---
 ### Sentinelle : compter et calculer des pourcentages
 
@@ -917,8 +950,6 @@ if(total == 0){
 ```
 
 → `100.0 * positifs / total` et non `100 * positifs / total` : sinon, division entière.
-
-→ La moyenne de notes du livret utilise exactement le même schéma, avec une **note négative** comme sentinelle.
 ---
 name: chiffres
 ## L'arithmétique des chiffres
@@ -947,10 +978,8 @@ printf("%d", somme);    // 18
 | 2 | 45 | 2 | 9 |
 | 3 | 4 | 5 | 14 |
 | 4 | 0 | 4 | 18 |
-
-→ La boucle s'arrête quand `n` atteint 0 : c'est la **division entière** qui garantit la terminaison.
 ---
-### Les variantes du même schéma
+### Compter et inverser
 
 ```c
 // Compter les chiffres
@@ -967,25 +996,41 @@ while(n > 0){
   n /= 10;
 }
 ```
-→ C'est aussi la solution du **palindrome** : on compare le nombre inversé au nombre de départ. Attention à conserver une copie de `n`, qui est détruit par la boucle.
+→ C'est aussi la solution du **palindrome** : on compare le nombre inversé au nombre de départ. Attention à conserver une copie de `n`, que la boucle détruit.
+---
+### Convertir en binaire
 
 ```c
-// Convertir en binaire : 13 → 1101
-while(n > 0){ printf("%d", n % 2);  n /= 2; }
+// 13 → 1101
+while(n > 0){
+  printf("%d", n % 2);
+  n /= 2;
+}
 ```
-→ Les restes sortent **à l'envers** (1011 au lieu de 1101). Sans tableau, on reconstruit le nombre comme pour l'inversion, ou on divise d'abord par la plus grande puissance de 2.
+
+| Tour | `n` | `n % 2` |
+| --- | --- | --- |
+| début | 13 | |
+| 1 | 6 | 1 |
+| 2 | 3 | 0 |
+| 3 | 1 | 1 |
+| 4 | 0 | 1 |
+
+→ Les restes sortent **à l'envers** : ce code affiche `1011` au lieu de `1101`.
+
+→ Sans tableau, on reconstruit le nombre comme pour l'inversion, ou on divise d'abord par la plus grande puissance de 2 inférieure à `n`.
 ---
 name: imbriquees
 ## Les boucles imbriquées
 
-Une boucle **dans** une boucle : la boucle intérieure effectue **tous** ses tours à chaque tour de la boucle extérieure.
+Une boucle **dans** une boucle : l'intérieure effectue **tous** ses tours à chaque tour de l'extérieure.
 
 ```c
 for(int ligne = 1; ligne <= hauteur; ligne++){     // 1 tour = 1 ligne
   for(int etoile = 1; etoile <= ligne; etoile++){  // 1 tour = 1 caractère
     printf("*");
   }
-  printf("\n");                                     // fin de ligne
+  printf("\n");                                    // fin de ligne
 }
 ```
 
@@ -994,14 +1039,9 @@ for(int ligne = 1; ligne <= hauteur; ligne++){     // 1 tour = 1 ligne
 **
 ***
 ****
-*****
 ```
 
-→ La boucle **extérieure** gère les lignes, l'**intérieure** gère les colonnes.
-
-→ Le `printf("\n")` se place **entre les deux boucles** : après la boucle intérieure, dans la boucle extérieure.
-
-→ Deux compteurs, deux noms différents : `ligne` et `etoile`, jamais deux fois `i`.
+→ La boucle **extérieure** gère les lignes, l'**intérieure** gère les colonnes. Le `printf("\n")` se place après la boucle intérieure, dans la boucle extérieure. Deux compteurs, deux noms différents.
 ---
 ### Les quatre variantes
 
@@ -1046,12 +1086,9 @@ for(int l = 1; l <= 10; l++){
 ----+----------------------------------------
   1 |   1   2   3   4   5   6   7   8   9  10
   2 |   2   4   6   8  10  12  14  16  18  20
-  3 |   3   6   9  12  15  18  21  24  27  30
 ```
 
 → C'est `%4d` (largeur fixe) qui aligne les colonnes, pas des espaces tapés à la main.
-
-→ L'en-tête et le séparateur s'écrivent **avant** la double boucle.
 ---
 name: synthese
 ## Exercices de synthèse
@@ -1097,6 +1134,9 @@ void main(void){
       }
     }
   } else {
+```
+---
+```c
     printf("Entrez la vitesse limite sur le lieu de l'infraction :\n");
     scanf_s("%d", &limite);
 
@@ -1148,7 +1188,6 @@ void main (void){
 ---
 name: classiques
 ## Les algorithmes classiques
-
 ### Fibonacci (itératif)
 
 Chaque terme est la somme des deux précédents : 0, 1, 1, 2, 3, 5, 8, 13...
@@ -1169,11 +1208,11 @@ else{
 }
 ```
 
-→ Trois variables suffisent : inutile de conserver toute la suite.
-
-→ L'ordre des trois affectations est **critique** : intervertir `a = b` et `b = suivant` casse tout.
+→ Trois variables suffisent, et l'ordre des trois affectations est **critique**.
 ---
-### PGCD (algorithme d'Euclide) et puissance
+### PGCD : l'algorithme d'Euclide
+
+Tant que `b` n'est pas nul, on remplace le couple `(a, b)` par `(b, a % b)`.
 
 ```c
 int a = 48, b = 18, reste;
@@ -1186,7 +1225,16 @@ while(b != 0){
 printf("PGCD = %d", a);     // 6
 ```
 
+| Tour | a | b | a % b |
+| --- | --- | --- | --- |
+| début | 48 | 18 | 12 |
+| 1 | 18 | 12 | 6 |
+| 2 | 12 | 6 | 0 |
+| 3 | 6 | 0 | — |
+
 → La condition d'arrêt porte sur `b`, mais le résultat se trouve dans `a`.
+---
+### Calculer une puissance sans `pow()`
 
 ```c
 int base, n;
@@ -1199,7 +1247,9 @@ for(int i = 1; i <= n; i++){
 
 → Si `n` vaut 0, la boucle ne tourne pas et `resultat` reste à **1** : c'est mathématiquement correct.
 
-→ Si `n` est négatif, la boucle ne tourne pas non plus et le programme répond 1, ce qui est **faux**. Il faut soit refuser la saisie, soit travailler en réel avec `1.0 / puissance`.
+→ Si `n` est négatif, la boucle ne tourne pas non plus et le programme répond 1, ce qui est **faux**. Il faut soit refuser la saisie, soit travailler en réel et calculer `1.0 / puissance`.
+
+→ `long long` plutôt que `int` : les puissances débordent très vite.
 ---
 ### Test de primalité
 
@@ -1219,6 +1269,8 @@ Un nombre est **premier** s'il est supérieur à 1 et n'admet **aucun diviseur**
 │ Sortir estPremier
 └──────────
 ```
+---
+### Test de primalité : l'implémentation
 
 ```c
 int n, d = 2;
@@ -1229,30 +1281,40 @@ while(d * d <= n && estPremier){
   if(n % d == 0)  estPremier = false;
   d++;
 }
-printf(estPremier ? "le nombre insere est premier" : "le nombre insere n'est pas premier");
+
+if(estPremier)  printf("le nombre insere est premier");
+else            printf("le nombre insere n'est pas premier");
 ```
 
-→ Tester jusqu'à `d * d <= n` (c'est-à-dire jusqu'à la racine carrée) suffit : si `n = a * b`, l'un des deux facteurs est forcément inférieur à √n.
+→ Tester jusqu'à `d * d <= n` (c'est-à-dire jusqu'à la racine carrée) suffit : si `n = a * b`, l'un des deux facteurs est forcément inférieur ou égal à √n.
 
 → Le `&& estPremier` arrête la boucle **dès qu'un diviseur est trouvé** : inutile de continuer.
 ---
-### Nombre parfait et suite de Syracuse
+### Le nombre parfait
+
+Un nombre est **parfait** si la somme de ses diviseurs stricts vaut le nombre lui-même (6 = 1 + 2 + 3).
 
 ```c
-// Un nombre est parfait si la somme de ses diviseurs stricts vaut le nombre (6 = 1+2+3)
 for(int n = 2; n < 10000; n++){
   int somme = 0;
+
   for(int d = 1; d <= n / 2; d++){
     if(n % d == 0)  somme += d;
   }
+
   if(somme == n)  printf("%d est parfait\n", n);
 }
 ```
 
 → Une boucle imbriquée où la boucle intérieure possède son **propre accumulateur**, remis à zéro à chaque tour extérieur.
 
+→ Chercher jusqu'à `n / 2` suffit : aucun diviseur strict ne peut dépasser la moitié du nombre.
+---
+### La suite de Syracuse
+
+Pair → on divise par 2 ; impair → on multiplie par 3 et on ajoute 1. On répète jusqu'à atteindre 1.
+
 ```c
-// Syracuse : pair → /2, impair → *3+1, jusqu'à atteindre 1
 int n, etapes = 0, maximum;
 printf("Depart ? ");  scanf("%d", &n);
 maximum = n;                          // le départ est le maximum provisoire
@@ -1268,7 +1330,7 @@ while(n != 1){
 printf("\n%d etapes, maximum atteint : %d", etapes, maximum);
 ```
 
-→ Testez avec 27 : 111 étapes, et un maximum de 9232.
+→ Testez avec 27 : **111 étapes**, et un maximum de **9232**.
 
 → Personne n'a jamais démontré que cette suite atteint toujours 1. Votre boucle pourrait donc, en théorie, ne jamais s'arrêter.
 ---
@@ -1282,8 +1344,8 @@ name: hasard
 void main(void){
   srand(time(0));            // à faire UNE SEULE FOIS, au début du programme
 
-  int des      = rand() % 6 + 1;         // entre 1 et 6
-  int pourcent = rand() % 101;           // entre 0 et 100
+  int des      = rand() % 6 + 1;                // entre 1 et 6
+  int pourcent = rand() % 101;                  // entre 0 et 100
   int degats   = rand() % (20 - 10 + 1) + 10;   // entre 10 et 20
 }
 ```
@@ -1294,22 +1356,14 @@ La formule générale pour un entier entre `min` et `max` inclus :
 rand() % (max - min + 1) + min
 ```
 
-→ `rand()` seul donne un très grand nombre : c'est le `%` qui le ramène dans la plage voulue.
-
-→ `srand(time(0))` initialise le générateur avec l'heure courante. **Sans** cet appel, le programme tire exactement la **même** série à chaque exécution.
-
-→ Appeler `srand` dans une boucle est une erreur : la graine ne changerait pas et tous les tirages seraient identiques.
+→ `srand(time(0))` initialise le générateur avec l'heure courante. **Sans** cet appel, le programme tire la **même** série à chaque exécution. L'appeler dans une boucle est une erreur : tous les tirages deviendraient identiques.
 ---
 ## Exercices de synthèse
 ### Le distributeur automatique
 
-Solde initial : 500 €. L'utilisateur dispose de **3 tentatives** pour demander un montant retirable.
-
 ```c
 int solde = 500, montant, tentatives = 0;
 bool retraitOk = false;
-
-printf("=== DISTRIBUTEUR AUTOMATIQUE ===\nSolde disponible : %d euros\n\n", solde);
 
 do{
   printf("Montant a retirer : ");
@@ -1325,13 +1379,23 @@ do{
     printf("Tentative %d sur 3\n\n", tentatives);
   }
 } while(!retraitOk && tentatives < 3);
+```
+---
+### Le distributeur automatique (suite)
 
-if(!retraitOk)  printf("Nombre maximum de tentatives atteint. Carte bloquee !");
+```c
+if(!retraitOk){
+  printf("Nombre maximum de tentatives atteint. Carte bloquee !");
+}
 ```
 
-→ Encore le schéma des **deux conditions d'arrêt** : le succès, ou l'épuisement des tentatives.
+→ Encore le schéma des **deux conditions d'arrêt** : le succès (`retraitOk`), ou l'épuisement des tentatives.
 
-→ Le compteur n'est incrémenté **que** dans la branche d'échec.
+→ Le compteur `tentatives` n'est incrémenté **que** dans la branche d'échec : un retrait réussi ne consomme pas de tentative.
+
+→ Après la boucle, le booléen `retraitOk` sert à **savoir pourquoi** on est sorti.
+
+→ Comparez avec le code PIN : c'est exactement la même structure, avec un test différent.
 ---
 ## Exercices de synthèse
 ### Le combat
@@ -1351,7 +1415,11 @@ while(pvJoueur > 0 && pvEnnemi > 0){
   pvEnnemi -= degats;
   if(pvEnnemi < 0)  pvEnnemi = 0;
   printf("Vous infligez %d degats !\nEnnemi : %d PV restants\n", degats, pvEnnemi);
+```
+---
+### Le combat (suite)
 
+```c
   if(pvEnnemi > 0){                            // il ne riposte que s'il est vivant
     degats = rand() % 11 + 8;                  // 8 à 18
     pvJoueur -= degats;
@@ -1363,6 +1431,12 @@ while(pvJoueur > 0 && pvEnnemi > 0){
 }
 printf("\n--- Fin du combat ---\n%s\n", pvJoueur > 0 ? "Victoire !" : "Defaite !");
 ```
+
+→ La boucle s'arrête dès que **l'un des deux** tombe à zéro : `pvJoueur > 0 && pvEnnemi > 0`.
+
+→ Le test `if(pvEnnemi > 0)` évite que l'ennemi riposte alors qu'il vient d'être vaincu.
+
+→ `if(pvEnnemi < 0) pvEnnemi = 0;` empêche l'affichage de points de vie négatifs.
 ---
 ## Exercices de synthèse
 ### Deviner un nombre
@@ -1385,9 +1459,7 @@ if(proposition == secret)  printf("Trouve en %d essais !", essais);
 else                       printf("Perdu ! Le nombre etait %d", secret);
 ```
 
-→ La stratégie optimale est la **dichotomie** : proposer à chaque coup le milieu de l'intervalle restant.
-
-→ Chaque proposition divise l'intervalle par deux : 100 → 50 → 25 → 13 → 7 → 4 → 2 → 1. **Sept coups** suffisent toujours, car 2⁷ = 128 > 100.
+→ La stratégie optimale est la **dichotomie** : proposer le milieu de l'intervalle restant. Chaque coup divise l'intervalle par deux, donc **sept coups** suffisent toujours (2⁷ = 128 > 100).
 ---
 name: recap
 ## Pour vous entraîner

@@ -165,11 +165,9 @@ void main(void) {
 name: tampon
 ## Le problème du tampon (buffer)
 
-Lors d'une lecture via `scanf_s`, l'entièreté des caractères entrés sur la console est enregistrée.
+Lors d'une lecture via `scanf_s`, l'entièreté des caractères entrés sur la console est enregistrée : lorsque l'utilisateur appuie sur ENTER, le saut de ligne `\n` est enregistré lui aussi.
 
-Ainsi, lorsque l'utilisateur appuie sur ENTER pour valider son entrée, le caractère de saut de ligne `\n` est également enregistré.
-
-Après chaque `scanf_s` il reste donc un caractère à lire dans le tampon. Le `scanf` suivant (dans une boucle par exemple), utilisera ce caractère restant comme caractère à lire !
+Après chaque `scanf_s` il reste donc un caractère à lire dans le tampon, et le `scanf` suivant l'utilisera comme caractère à lire !
 
 ```c
 void main (void){
@@ -227,30 +225,22 @@ name: impression
 ## Impression d'un caractère
 
 L'impression d'un caractère peut se faire de deux manières différentes.
-
 ### Avec `printf`
 
 ```c
-void main (void){
-    char c;
-
-    printf("Entrez un caractère :\n");
-    scanf_s("%c", &c, 1);
-    printf("Le caractère entré est %c\n", c);
-}
+char c;
+printf("Entrez un caractère :\n");
+scanf_s("%c", &c, 1);
+printf("Le caractère entré est %c\n", c);
 ```
-
 ### Avec `putchar`
 
 ```c
-void main (void){
-    char c;
-
-    printf("Entrez un caractère :\n");
-    scanf_s("%c", &c, 1); // ou c = getchar();
-    printf("Le caractère entré est : ");
-    putchar(c); // imprime c ET passe à la ligne
-}
+char c;
+printf("Entrez un caractère :\n");
+scanf_s("%c", &c, 1);   // ou c = getchar();
+printf("Le caractère entré est : ");
+putchar(c);             // imprime c ET passe à la ligne
 ```
 ---
 name: classer
@@ -273,12 +263,24 @@ if(c >= 'A' && c <= 'Z'){
   printf("Autre symbole");
 }
 ```
+---
+### Comparer des caractères
 
 → On écrit `c >= 'A' && c <= 'Z'` et **jamais** `'A' <= c <= 'Z'` : en C, cette seconde écriture compile mais ne teste pas ce que vous croyez.
 
-→ Comparer des caractères, c'est comparer leurs codes ASCII. `'B' > 'A'` est donc vrai, et `'a' > 'Z'` aussi.
+→ Comparer deux caractères, c'est comparer leurs **codes ASCII**. `'B' > 'A'` est donc vrai, et `'a' > 'Z'` aussi, puisque 97 > 90.
 
-→ Trois caractères sont **dans l'ordre alphabétique** si `c1 <= c2 && c2 <= c3`.
+→ Trois caractères sont **dans l'ordre alphabétique** si :
+
+```c
+if(c1 <= c2 && c2 <= c3){
+  printf("Les caracteres sont ranges dans l'ordre alphabetique");
+} else {
+  printf("Les caracteres ne sont pas ranges");
+}
+```
+
+→ Attention : cet ordre est celui de la table ASCII. `'Z'` y précède `'a'`, ce qui n'est pas l'ordre d'un dictionnaire.
 ---
 name: fonctions
 ## Fonctions
