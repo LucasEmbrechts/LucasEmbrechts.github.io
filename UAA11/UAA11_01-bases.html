@@ -67,11 +67,17 @@ name: sommaire
 5. <a href="#formatage">Les codes de formatage</a>
 6. <a href="#largeur">Largeur, précision et alignement</a>
 7. <a href="#echappement">Les caractères d'échappement</a>
-8. <a href="#operateurs">Opérateurs</a>
-9. <a href="#conversion">Division entière et conversions</a>
-10. <a href="#priorite">Priorité des opérateurs</a>
-11. <a href="#lecture">Lecture</a>
-12. <a href="#synthese">Exercices de synthèse</a>
+8. <a href="#lecture">Lecture</a>
+9. <a href="#operateurs">Opérateurs</a>
+10. <a href="#conversion">Division entière et conversions</a>
+11. <a href="#pieges">Deux pièges du calcul entier</a>
+12. <a href="#incrdecr">Post- et pré-incrémentation</a>
+13. <a href="#priorite">Priorité des opérateurs</a>
+14. <a href="#charentier">Un caractère est un entier</a>
+15. <a href="#arith">Arithmétique sur les codes ASCII</a>
+16. <a href="#tampon">Le problème du tampon</a>
+17. <a href="#ctype">Les fonctions de `ctype.h`</a>
+18. <a href="#synthese">Exercices de synthèse</a>
 ---
 name: main
 
@@ -289,6 +295,35 @@ finPhrase = 'c';
 estComplet = false; 
 ```
 ---
+### Affectation
+
+Une affectation a toujours la forme `maVariable = monExpression`
+
+Une expression peut prendre plusieurs formes :
+
+* une valeur
+
+```c
+int maVariable = 1;
+```
+
+* une opération
+
+```c
+int maVariable = 10 + 15;
+```
+
+* une variable
+
+```c
+int maVariable = 1;
+int monAutreVariable = 2;
+
+maVariable = monAutreVariable;
+maVariable = monAutreVariable + 5;
+
+```
+---
 ### Déclaration d'une constante
 
 Une **constante** est une variable dont sa **valeur ne peut pas changer** pendant toute l'exécution du programme.
@@ -328,35 +363,6 @@ name: mathh
 → Elle porte un **nom** : `M_PI` se relit mieux que `3.14159265`.
 
 → Elle se corrige **en un seul endroit** (un taux, un prix, un seuil).
----
-### Affectation
-
-Une affectation a toujours la forme `maVariable = monExpression`
-
-Une expression peut prendre plusieurs formes :
-
-* une valeur
-
-```c
-int maVariable = 1;
-```
-
-* une opération
-
-```c
-int maVariable = 10 + 15;
-```
-
-* une variable
-
-```c
-int maVariable = 1;
-int monAutreVariable = 2;
-
-maVariable = monAutreVariable;
-maVariable = monAutreVariable + 5;
-
-```
 ---
 name: formatage
 ## Impression (suite)
@@ -430,6 +436,14 @@ printf("Nombre d'inscrits en info : %d\nNombre d'inscrits en sciences : %d\n", n
       <td class="tg-0pky">`char`</td>
       <td class="tg-dvpl">%c</td>
     </tr>
+    <tr>
+      <td class="tg-0pky">`bool`</td>
+      <td class="tg-dvpl">%d</td>
+    </tr>
+    <tr>
+      <td class="tg-0pky">entier en hexadécimal</td>
+      <td class="tg-dvpl">%X</td>
+    </tr>
   </tbody>
   </table>
   <table class="tg">
@@ -476,6 +490,10 @@ printf("Nombre d'inscrits en info : %d\nNombre d'inscrits en sciences : %d\n", n
       </tr>
     </tbody>
   </table>
+
+<div style="clear:both;"></div>
+
+→ Un `bool` n'a pas de code propre : il s'affiche avec `%d`, qui donne `0` pour `false` et `1` pour `true`.
 ---
 name: largeur
 ## Largeur, précision et alignement
@@ -542,6 +560,51 @@ name: printfregles
 | variable non déclarée | erreur de compilation |
 
 → Seules les deux dernières lignes sont refusées par le compilateur. Les trois premières produisent un programme qui se lance et affiche n'importe quoi.
+---
+name: lecture
+## Lecture
+
+La lecture se fait via le clavier en utilisant la fonction `scanf` ou `scanf_s` qui se trouvent dans la librairie `stdio.h`.
+
+```c
+int nbEtudiants;
+scanf_s("%d", &nbEtudiants);
+```
+
+```c
+int nbEtudiants;
+printf("Entrez le nombre d'inscrits : ");
+scanf_s("%d", &nbEtudiants);
+```
+
+```c
+int abscisse, ordonnee;
+printf("Entrez les coordonnées (x,y) :");
+scanf_s("(%d,%d)", &abscisse, &ordonnee);
+```
+
+→ Ne pas oublier l'opérateur d'adressage `&` !
+---
+name: scanfregles
+## `scanf` : les trois règles
+
+1. **Toujours** l'opérateur d'adressage `&` devant la variable (sauf pour un tableau).
+2. Le code de formatage doit correspondre **exactement** au type de la variable.
+3. Autant de codes que de variables, dans le **même ordre**.
+
+```c
+int a; float b;
+scanf("%d %f", &a, &b);
+```
+
+```c
+char c;
+scanf(" %c", &c);       // l'espace avant %c ignore les blancs en attente
+```
+
+→ Une erreur de `&` ou de code de formatage ne se voit **pas** à la compilation : le programme plante ou lit n'importe quoi.
+
+→ L'espace avant `%c` évite le problème du <a href="#tampon">**tampon**</a>, expliqué dans la partie consacrée aux caractères.
 ---
 name: operateurs
 ## Opérateurs
@@ -652,6 +715,36 @@ float a = (float)(1 / 3);   // la division entière a déjà eu lieu : a contien
 
 → Le casting `(int)` **tronque**, il n'arrondit pas : `(int)5.9` vaut 5.
 ---
+name: pieges
+### Deux pièges du calcul entier
+
+**1. Diviser par zéro**
+
+```c
+int a = 10, b = 0;
+printf("%d", a / b);   // le programme s'arrête brutalement
+```
+
+→ Le compilateur ne signale **rien** : `/` et `%` par zéro font planter le programme à l'exécution.
+
+→ Toute division dont le diviseur vient de l'utilisateur doit donc être **vérifiée avant** d'être effectuée.
+
+**2. Le modulo d'un nombre négatif**
+
+En C, le reste prend le **signe du dividende** (le nombre de gauche).
+
+| Expression | Valeur | Pourquoi |
+| --- | --- | --- |
+| `7 / 2` | 3 | troncature |
+| `-7 / 2` | -3 | la troncature se fait **vers zéro**, pas vers le bas |
+| `7 % 2` | 1 | |
+| `-7 % 2` | **-1** | signe du dividende `-7` |
+| `7 % -2` | **1** | signe du dividende `7` |
+
+→ `a % 2` ne vaut donc pas toujours `0` ou `1` : si `a` est négatif, il vaut `0` ou `-1`.
+
+→ La règle vérifiée dans tous les cas : `(a / b) * b + (a % b)` redonne toujours `a`.
+---
 ### Incrémentation
 
 * Post-incrémentation 
@@ -712,6 +805,29 @@ nombreMoinsUn = nombre--;
 printf("nombre : %d\nnombreMoinsUn :%d\n", nombre, nombreMoinsUn);
 ```
 ---
+name: incrdecr
+### Post- ou pré- : quelle valeur ?
+
+`n++` et `++n` modifient **tous les deux** `n` de la même façon. Ce qui change, c'est la **valeur de l'expression**.
+
+| Écriture | Valeur de l'expression | Effet sur `n` |
+| --- | --- | --- |
+| `n++` | l'**ancienne** valeur de `n` | `n` augmente de 1 |
+| `++n` | la **nouvelle** valeur de `n` | `n` augmente de 1 |
+| `n--` | l'**ancienne** valeur de `n` | `n` diminue de 1 |
+| `--n` | la **nouvelle** valeur de `n` | `n` diminue de 1 |
+
+```c
+int n = 4, b;
+
+b = n++;   // on lit, PUIS on incrémente : b vaut 4, n vaut 5
+
+n = 4;
+b = ++n;   // on incrémente, PUIS on lit : b vaut 5, n vaut 5
+```
+
+→ Seule sur sa ligne (`n++;`), la position du `++` ne change **rien**. La différence n'apparaît que si l'expression est **utilisée** : affectation, comparaison ou `printf`.
+---
 name: priorite
 ### Priorité des opérateurs
 
@@ -739,68 +855,201 @@ Du plus prioritaire au moins prioritaire :
 name: charentier
 ### Un caractère est un entier
 
-Un `char` contient le **code ASCII** du caractère. Les opérateurs arithmétiques s'y appliquent donc.
+Un `char` occupe **1 octet**. Ce qu'il contient n'est pas une lettre : c'est un **nombre**, le **code ASCII** de cette lettre.
+
+Les trois plages à retenir :
+
+| Plage | Premier | Dernier | Remarque |
+| --- | --- | --- | --- |
+| chiffres `'0'` → `'9'` | 48 | 57 | contigus |
+| majuscules `'A'` → `'Z'` | 65 | 90 | contiguës |
+| minuscules `'a'` → `'z'` | 97 | 122 | contiguës |
+
+→ Les codes d'une même plage se suivent **sans trou** : c'est ce qui rend le calcul possible.
+
+→ L'écart entre une majuscule et sa minuscule est **toujours 32**.
+
+→ Le caractère `'0'` (code 48) n'est **pas** le nombre `0`.
+---
+name: codification
+### Codification : trois façons de lire le même octet
+
+Une même variable `char` s'affiche de trois façons, selon le code de formatage :
+
+| Code | Ce qui est affiché |
+| --- | --- |
+| `%c` | le caractère |
+| `%d` | son code ASCII, en décimal |
+| `%X` | son code ASCII, en hexadécimal |
 
 ```c
 char c = 'A';
 printf("%c", c);   // A
 printf("%d", c);   // 65
+printf("%X", c);   // 41
 ```
 
-| Plage | Codes |
-| --- | --- |
-| `'0'` ... `'9'` | 48 ... 57 |
-| `'A'` ... `'Z'` | 65 ... 90 |
-| `'a'` ... `'z'` | 97 ... 122 |
-
-→ Une opération sur un `char` produit un **`int`** : `'A' + 1` vaut 66, et s'affiche `B` avec `%c`.
-
-→ Ce sujet est développé dans le module **02 - les caractères**.
+→ La variable ne change pas : c'est la **façon de la lire** qui change.
 ---
-name: lecture
-## Lecture
+name: arith
+### Arithmétique sur les codes ASCII
 
-La lecture se fait via le clavier en utilisant la fonction `scanf` ou `scanf_s` qui se trouvent dans la librairie `stdio.h`.
+Puisqu'un caractère est un entier, les opérateurs arithmétiques s'y appliquent.
+
+| Écriture | Résultat | Type |
+| --- | --- | --- |
+| `c + 1` | le caractère suivant dans la table | `int` |
+| `c - 1` | le caractère précédent | `int` |
+| `c + 32` | la minuscule, si `c` est une majuscule | `int` |
+| `c - 32` | la majuscule, si `c` est une minuscule | `int` |
+| `c - 'A'` | le rang de `c` dans l'alphabet, à partir de 0 | `int` |
+| `c - '0'` | le nombre que représente le chiffre `c` | `int` |
+| `'z' - 'a'` | l'écart entre deux caractères | `int` |
+
+→ Le résultat est un **`int`**, pas un `char` : pour le réafficher comme un caractère, il faut `%c` ou une conversion `(char)`.
 
 ```c
-int nbEtudiants;
-scanf_s("%d", &nbEtudiants);
+printf("%d", 'A' + 1);   // 66
+printf("%c", 'A' + 1);   // B
 ```
-
-```c
-int nbEtudiants;
-printf("Entrez le nombre d'inscrits : ");
-scanf_s("%d", &nbEtudiants);
-```
-
-```c
-int abscisse, ordonnee;
-printf("Entrez les coordonnées (x,y) :");
-scanf_s("(%d,%d)", &abscisse, &ordonnee);
-```
-
-→ Ne pas oublier l'opérateur d'adressage `&` !
 ---
-name: scanfregles
-## `scanf` : les trois règles
+name: lecturechar
+## Lire un caractère
 
-1. **Toujours** l'opérateur d'adressage `&` devant la variable (sauf pour un tableau).
-2. Le code de formatage doit correspondre **exactement** au type de la variable.
-3. Autant de codes que de variables, dans le **même ordre**.
+Lire un caractère peut se faire de deux manières différentes.
 
-```c
-int a; float b;
-scanf("%d %f", &a, &b);
-```
+### Avec `scanf_s`
 
 ```c
 char c;
-scanf(" %c", &c);       // l'espace avant %c ignore les blancs en attente
+printf("Entrez un caractere : ");
+scanf_s("%c", &c, 1);
 ```
 
-→ Une erreur de `&` ou de code de formatage ne se voit **pas** à la compilation : le programme plante ou lit n'importe quoi.
+### Avec `getchar`
 
-→ L'espace avant `%c` évite le problème du **tampon**, développé dans le module 02.
+```c
+char c;
+printf("Entrez un caractere : ");
+c = getchar();
+```
+
+→ `getchar` ne prend aucun argument et **renvoie** le caractère lu : pas de `&`, pas de code de formatage.
+---
+name: tampon
+## Le problème du tampon (buffer)
+
+Lors d'une lecture via `scanf_s`, l'entièreté des caractères entrés sur la console est enregistrée : lorsque l'utilisateur appuie sur ENTER, le saut de ligne `\n` est enregistré lui aussi.
+
+Après chaque `scanf_s` il reste donc un caractère à lire dans le tampon, et le `scanf` suivant l'utilisera comme caractère à lire !
+
+```c
+void main (void){
+  char reponse;
+  printf("Entrez un caractère :\n");
+  scanf_s("%c", &reponse, 1);
+  printf("Vous avez entré %c\n", reponse);
+  
+  printf("Entrez un caractère :\n");
+  scanf_s("%c", &reponse,1);
+  printf("Vous avez entré %c\n", reponse);
+  
+  printf("Une ligne vide est apparue comme par magie !");
+}
+```
+---
+## Le problème du tampon (buffer)
+Pour résoudre ce problème, il suffit de "vider" le tampon en lisant tous les caractères restant.
+
+```c
+void main (void){
+  char reponse;
+  printf("Entrez un caractère :\n");
+  scanf_s("%c", &reponse,1);
+
+  // ici, le buffer contient un \n
+
+  printf("Vous avez entré %c\n", reponse);
+  
+  viderTampon(); // on vide le tampon : le \n disparaît du buffer
+
+  printf("Entrez un caractère :\n");
+  scanf_s("%c", &reponse, 1);
+  printf("Vous avez entré %c\n", reponse);
+  
+  printf("La ligne vide a disparu !");
+}
+```
+---
+## Le problème du tampon (buffer)
+
+```c
+void viderTampon(void)
+{
+	int c;
+	do
+	{
+		c = getchar();
+	} while (c != '\n' && c != EOF);
+}
+```
+
+→ Cette fonction se recopie telle quelle. La boucle `do ... while` qu'elle utilise est expliquée au module **02 - conditions et répétitives**.
+
+→ Pour un simple `scanf`, l'écriture `scanf(" %c", &c)` (avec un espace avant `%c`) suffit dans la plupart des cas.
+---
+name: impressionchar
+## Imprimer un caractère
+
+L'impression d'un caractère peut se faire de deux manières différentes.
+
+### Avec `printf`
+
+```c
+char c;
+printf("Entrez un caractère :\n");
+scanf_s("%c", &c, 1);
+printf("Le caractère entré est %c\n", c);
+```
+
+### Avec `putchar`
+
+```c
+char c;
+printf("Entrez un caractère :\n");
+scanf_s("%c", &c, 1);   // ou c = getchar();
+printf("Le caractère entré est : ");
+putchar(c);             // imprime c ET passe à la ligne
+```
+---
+name: ctype
+## Fonctions de vérification (`ctype.h`)
+
+En C, il existe un grand nombre de fonctions prédéfinies pouvant être utilisées avec des caractères.
+
+* `isalnum` : vérifie si un caractère est alphanumérique
+* `isalpha` : vérifie si un caractère est une lettre de l'alphabet
+* `isdigit` : vérifie si un caractère est un chiffre
+* `islower` : vérifie si le caractère est une lettre de l'alphabet en minuscule
+* `isupper` : vérifie si le caractère est une lettre de l'alphabet en majuscule
+* `isspace` : vérifie si le caractère est un espace
+* `isxdigit` : vérifie si le caractère fait partie du système hexadécimal
+---
+## Fonctions de transformation (`ctype.h`)
+
+* `tolower` : transforme le caractère en minuscule
+* `toupper` : transforme le caractère en majuscule
+
+Que fait le code suivant ?
+
+```c
+char c;
+
+printf("Entrez un caractère : ");
+c = getchar();
+printf("Caractère transformé : ");
+putchar(toupper(++c));
+```
 ---
 name: synthese
 ## Exercices de synthèse
@@ -830,12 +1079,12 @@ Le chapitre **« Exercices pratiques, premières instructions »** du livret s'a
 | --- | --- |
 | Déclarer et typer les variables | <a href="#capacite">capacité</a>, <a href="#conversionimpl">conversions</a>, <a href="#choisirtype">choisir le type</a> |
 | Afficher et saisir | <a href="#formatage">formatage</a>, <a href="#printfregles">règles de printf</a>, <a href="#scanfregles">règles de scanf</a> |
-| Les opérateurs et les conversions | <a href="#composee">affectation composée</a>, <a href="#conversion">division entière</a>, <a href="#priorite">priorité</a> |
-| Lire et déboguer un programme | <a href="#largeur">largeur</a>, <a href="#echappement">échappement</a> |
+| Les opérateurs et les conversions | <a href="#composee">affectation composée</a>, <a href="#conversion">division entière</a>, <a href="#pieges">pièges du calcul entier</a>, <a href="#incrdecr">post/pré-incrémentation</a>, <a href="#priorite">priorité</a> |
+| Lire et déboguer un programme | <a href="#largeur">largeur</a>, <a href="#echappement">échappement</a>, <a href="#printfregles">règles de printf</a> |
 | Premiers programmes complets | <a href="#main">structure</a>, <a href="#lecture">lecture</a> |
-| Division entière et modulo | <a href="#operateurs">opérateurs</a>, <a href="#conversion">division entière</a> |
+| Division entière et modulo | <a href="#operateurs">opérateurs</a>, <a href="#conversion">division entière</a>, <a href="#pieges">modulo négatif, division par zéro</a> |
 | Formules et calculs | <a href="#priorite">priorité</a>, <a href="#mathh">`math.h`</a> |
-| Le code ASCII | <a href="#charentier">caractère = entier</a> |
+| Le code ASCII | <a href="#charentier">caractère = entier</a>, <a href="#codification">décimal et hexadécimal</a>, <a href="#arith">arithmétique ASCII</a>, <a href="#ctype">`ctype.h`</a> |
     </textarea>
     <script src="../vendor/remark-latest.min.js">
     </script>

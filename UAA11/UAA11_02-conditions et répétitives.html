@@ -65,10 +65,11 @@ name: sommaire
 2. <a href="#operateurs">Opérateurs</a>
 3. <a href="#pseudo">Du pseudo-code au C</a>
 4. <a href="#intervalles">Intervalles et lois de De Morgan</a>
-5. <a href="#cascade">Les cascades `else if`</a>
-6. <a href="#simplifications">Simplifications</a>
-7. <a href="#switch">Alternative `switch`</a>
-8. <a href="#fallthrough">`switch` : cases groupés et `break`</a>
+5. <a href="#comparerchar">Comparer des caractères</a>
+6. <a href="#cascade">Les cascades `else if`</a>
+7. <a href="#simplifications">Simplifications</a>
+8. <a href="#switch">Alternative `switch`</a>
+9. <a href="#fallthrough">`switch` : cases groupés et `break`</a>
 ---
 ## On parle de quoi ? (2/2)
 
@@ -228,6 +229,30 @@ Les **lois de De Morgan** permettent de passer d'une condition à son contraire.
 
 → Ce réflexe sert dès qu'il faut écrire « je continue **tant que** ce n'est pas valide ».
 ---
+name: comparerchar
+### Comparer des caractères
+
+Comparer deux caractères, c'est comparer leurs **codes ASCII** (module 01).
+
+```c
+'B' > 'A'     // vrai : 66 > 65
+'a' > 'Z'     // vrai : 97 > 90
+```
+
+Tester l'appartenance à une plage, c'est donc tester un **intervalle** :
+
+```c
+c >= 'A' && c <= 'Z'     // c est une majuscule
+c >= 'a' && c <= 'z'     // c est une minuscule
+c >= '0' && c <= '9'     // c est un chiffre
+```
+
+→ Comme pour les nombres, on n'écrit **jamais** `'A' <= c <= 'Z'` : la condition serait toujours vraie.
+
+→ L'ordre obtenu est celui de la **table ASCII**, où `'Z'` (90) précède `'a'` (97). Ce n'est **pas** l'ordre d'un dictionnaire : `'Zebre'` y passe avant `'abeille'`.
+
+→ Pour comparer sans tenir compte de la casse, on ramène les deux caractères au même camp avec `toupper` ou `tolower`.
+---
 ### Exercice
 
 Créez un programme qui prend en entrée deux entiers (a et b) et qui affiche le message :
@@ -376,7 +401,7 @@ switch(x){
 
 | Le `switch` accepte | Le `switch` refuse |
 | --- | --- |
-| un `int`, un `char` | un `float`, un `double` |
+| un `int`, un `char` | un `float`, un `double`, une chaîne de caractères |
 | une valeur constante par `case` | un intervalle, une comparaison |
 | plusieurs `case` groupés | une variable dans le `case` |
 
@@ -697,6 +722,27 @@ Exemple : si l'utilisateur entre la hauteur 5, le triangle aura la forme suivant
  *********
 ```
 ---
+## Exercices de synthèse
+
+Traduire le diagramme d'action suivant.
+
+```da
+┌─── * Mon programme
+│ Obtenir c
+│╔══ while(c ≠ '\n')
+│║┌── if (c = 'a')
+│║│ c = 'z'
+│║├── else if(c = 'A')
+│║│ c = 'Z'
+│║├── else
+│║│ c devient la précédente
+│║└──
+│║ Sortir c
+│║ Obtenir c
+│╙──
+└──────────
+```
+---
 name: recap
 ## Pour vous entraîner
 
@@ -706,7 +752,7 @@ name: recap
 | Premières conditions | <a href="#alternatives">alternatives</a>, <a href="#operateurs">opérateurs</a> |
 | If / Else en cascade | <a href="#cascade">cascades</a> |
 | La structure Switch | <a href="#switch">switch</a>, <a href="#fallthrough">cases groupés</a>, <a href="#limites">limites</a> |
-| La logique composée | <a href="#intervalles">intervalles et De Morgan</a> |
+| La logique composée | <a href="#intervalles">intervalles et De Morgan</a>, <a href="#comparerchar">comparer des caractères</a> |
 | Comprendre les structures itératives | <a href="#comparatif">tableau comparatif</a>, <a href="#compter">compter les tours</a> |
 | Lire et déboguer une boucle | <a href="#pieges">les pièges</a> |
 | Les boucles à compteur | <a href="#repetitives">répétitives</a> |

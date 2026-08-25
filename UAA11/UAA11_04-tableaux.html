@@ -38,15 +38,19 @@ class: center, middle
 <img height="200px" src="img/logo.png">
 ---
 
+name: sommaire
+
 ## On parle de quoi ?
 
-1. <a href="UAA11-ch4.html#3">Qu'est ce qu'un tableau ?</a>
-2. <a href="UAA11-ch4.html#4">Déclaration</a>
-3. <a href="UAA11-ch4.html#7">Initialisation</a>
-4. <a href="UAA11-ch4.html#8">Lecture/Impression</a>
-5. <a href="UAA11-ch4.html#10">Chaînes de caractères</a>
-6. <a href="UAA11-ch4.html#14">Tableaux et constantes symboliques</a>
+1. <a href="#quest">Qu'est ce qu'un tableau ?</a>
+2. <a href="#declaration">Déclaration</a>
+3. <a href="#initialisation">Initialisation</a>
+4. <a href="#lecture">Lecture / Impression</a>
+5. <a href="#define">Tableaux et constantes symboliques</a>
+
+→ Les **chaînes de caractères** sont des tableaux de `char` : elles font l'objet du module **03**.
 ---
+name: quest
 
 ## Qu'est-ce qu'un tableau ?
 
@@ -55,6 +59,7 @@ Un tableau est un **ensemble d'éléments successifs** en mémoire centrale acce
 <img height="300px" src="img/array3.png">
 
 ---
+name: declaration
 ## Déclaration
 
 Un tableau est caractérisé par :
@@ -116,6 +121,7 @@ void main (void){
 ```
 
 ---
+name: initialisation
 ## Initialisation
 
 L'initialisation d'un tableau peut se faire :
@@ -146,6 +152,7 @@ void main void(){
 → <span style="color:red;">il n'existe pas de valeur par défaut !</span>
 
 ---
+name: lecture
 ## Lecture
 
 ```c
@@ -175,79 +182,7 @@ void main (void){
 }
 ```
 ---
-## Chaînes de caractères
-
-En C, il n'existe pas de type "chaine de caractères" (comme le type `String` en Java par exemple).
-
-En C, un chaine de caractère est stockée sous la forme d'un **tableau de caractères**. Une chaîne de caractère se termine **toujours** par le caractère de fin de chaine `\0` (code 0 de la table ASCII).
-
-Lors d'une déclaration sans taille spécifiée, l'ordinateur réserve automatiquement le nombre d'octets nécessaires (moyennant une assignation directe).
-
-```c
-// comme ça
-char maChaine[] = "Hello";
-// ou comme ça
-char maChaine[] = {'H', 'e', 'l', 'l', 'o', '\0'};
-```
-
-<img width="700px" src="img/array4.png">
----
-## Chaînes de caractères
-
-On peut également spécifier explicitement la taille de la chaine.
-
-```c
-// comme ça
-char maChaine[7] = "Hello";
-// ou comme ça
-char maChaine[7] = {'H', 'e', 'l', 'l', 'o', '\0'};
-```
-
-<span style="color:red">Attention</span> : il faut toujours prévoir un octet supplémentaire pour le stockage du `\0` !
-
-```c
-char maChaine[7] = "Hello"; // ok
-char maChaine[6] = "Hello"; // ko !
-char maChaine[8] = "Hello"; // ok
-```
----
-### Lecture
-
-* avec `scanf`
-
-```c
-scanf("%s", maChaine);
-```
-
-* avec `gets`
-
-```c
-gets(maChaine);
-```
-
-### Impression
-
-* avec `printf`
-
-```c
-printf("%s", maChaine);
-```
-
-* avec `puts`
-
-```c
-puts(maChaine);
-```
----
-### Fonctions utilitaires
-
-Ces fonctions prédéfinies se trouvent `string.h` ou `stdlib.h`.
-
-* `int strlen(chaine)` : donne la taille de la chaine de caractères
-* `strcpy(chaineDestination , chaineSource)` : copie une chaine de caractères dans un tableau
-* `strcat(chaineDestination , chaineSource)` : concatène deux chaines de caractères
-* `int strcmp(chaine, autreChaine)` : compare deux chaines de caractères
----
+name: define
 ## Tableaux et constantes symboliques
 
 Une **constante symbolique** permet de **remplacer**, dans le code, **des constantes par un texte significatif**.
@@ -265,43 +200,42 @@ Le syntaxe est :
 Exemple :
 
 ```c
-#define TAILLE_NOM 100
+#define NB_ELEVES 24
 #define NB_COURS 10
 
 void main (void){
-  char nom[TAILLE_NOM];
-  char deuxiemeNom[TAILLE_NOM];
+  int pointsFrancais[NB_ELEVES];
+  int pointsMaths[NB_ELEVES];
   int codeCours[NB_COURS];
 }
 ```
+
+→ Déjà rencontrées au module **03** pour dimensionner les chaînes : la raison est la même, la taille d'un tableau doit être connue **avant** l'exécution.
 ---
 ## Un exemple final
 
 ```c
-#include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
-#define TAILLE_MDP 50
+#define NB_NOTES 5
 
 void main(void) {
-  char mdp[TAILLE_MDP] = "INDBG2022";
-  char mdpUtilisateur[TAILLE_MDP];
-  int longueur = strlen(mdp);
-  int taille = sizeof(mdp); // sizeof(char) = 1
+  int notes[NB_NOTES];
+  int total = 0;
+  int max = 0;
 
-  printf("Longueur : %d\nTaille: %d\n", longueur, taille);
+  for (int i = 0; i < NB_NOTES; i++) {
+    printf("Note %d : ", i + 1);
+    scanf("%d", &notes[i]);
+    total = total + notes[i];
+    if (notes[i] > max) max = notes[i];
+  }
 
-  printf("Entrez votre mot de passe :\n");
-  gets(mdpUtilisateur);
-  if (strcmp(mdp, mdpUtilisateur) == 0) puts("Mot de passe correct !");
-  else puts("Erreur : mot de passe incorrect");
-  strcpy(mdpUtilisateur, mdp);
-  puts(mdpUtilisateur);
-  strcat(mdp, "2014");
-  puts(mdp);
+  printf("Moyenne : %.2f\n", (float) total / NB_NOTES);
+  printf("Meilleure note : %d\n", max);
 }
 ```
 
+→ `(float)` **avant** la division : sans lui, `total / NB_NOTES` serait une division entière.
 
     </textarea>
     <script src="../vendor/remark-latest.min.js"></script>

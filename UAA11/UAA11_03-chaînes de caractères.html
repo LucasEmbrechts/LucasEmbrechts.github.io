@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Consolas'; }
+	  @media print {
+		  .remark-slide-scaler {
+			width: 100% !important;
+			height: 100% !important;
+			transform: scale(1) !important;
+			top: 0 !important;
+			left: 0 !important;
+		  }
+		}
+    
+      /* Tableaux markdown */
+      .remark-slide-content table {
+        border-collapse: collapse;
+        margin: 0.7em 0;
+        font-size: 0.82em;
+      }
+      .remark-slide-content th,
+      .remark-slide-content td {
+        border: 1px solid #b4b4b4;
+        padding: 4px 10px;
+        text-align: left;
+        vertical-align: top;
+      }
+      .remark-slide-content th {
+        background: #ececec;
+        font-weight: bold;
+        font-family: 'Yanone Kaffeesatz';
+        font-size: 1.15em;
+      }
+      .remark-slide-content tbody tr:nth-child(even) { background: #f7f7f7; }
+    </style>
+    <link href="../vendor/bootstrap.min.css" rel="stylesheet">
+    <script src="../vendor/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle
+
+# Programmation procédurale :
+# les chaînes de caractères
+<img height="200px" src="img/logo.png">
+---
+name: sommaire
+
+## On parle de quoi ? (1/2)
+
+1. <a href="#quest">Une chaîne, c'est quoi ?</a>
+2. <a href="#quote">`'A'` ou `"A"` ?</a>
+3. <a href="#declarer">Déclarer une chaîne</a>
+4. <a href="#taille">Taille réservée et longueur utile</a>
+5. <a href="#erreurs">Les déclarations fautives</a>
+6. <a href="#acces">Accéder aux caractères</a>
+7. <a href="#imprimer">Imprimer une chaîne</a>
+8. <a href="#saisir">Saisir une chaîne : `scanf` et `fgets`</a>
+9. <a href="#retour">Le `\n` laissé par `fgets`</a>
+---
+## On parle de quoi ? (2/2)
+
+10. <a href="#stringh">Les fonctions de `string.h`</a>
+11. <a href="#strcpy">`strcpy` : copier</a>
+12. <a href="#strcat">`strcat` : concaténer</a>
+13. <a href="#strcmp">`strcmp` : comparer</a>
+14. <a href="#ordre">L'ordre ASCII et la casse</a>
+15. <a href="#debordement">Le débordement</a>
+16. <a href="#define">Les constantes symboliques</a>
+17. <a href="#synthese">Exercices de synthèse</a>
+---
+name: quest
+## Une chaîne, c'est quoi ?
+
+En C, il n'existe **pas** de type « chaîne de caractères » (comme `String` en Java ou en Python).
+
+Une chaîne est un **tableau de `char`** terminé par le caractère `'\0'` (code ASCII 0).
+
+```c
+char maChaine[] = "Hello";
+// est exactement équivalent à
+char maChaine[] = {'H', 'e', 'l', 'l', 'o', '\0'};
+```
+
+<img width="700px" src="img/array4.png">
+
+→ Ce `'\0'` invisible n'est pas décoratif : c'est **lui, et lui seul**, qui indique à `printf` et à toutes les fonctions de `<string.h>` où la chaîne s'arrête.
+
+→ Sans `'\0'`, ces fonctions continuent à lire la mémoire **au-delà** du tableau.
+---
+name: quote
+## `'A'` ou `"A"` ?
+
+Les apostrophes et les guillemets ne sont **pas** interchangeables.
+
+| Écriture | C'est... | Type | Octets |
+| --- | --- | --- | --- |
+| `'A'` | un caractère | `char` | 1 |
+| `"A"` | une chaîne | `char[2]` | 2 (`'A'` + `'\0'`) |
+| `'0'` | un caractère (code 48) | `char` | 1 |
+| `"0"` | une chaîne | `char[2]` | 2 |
+| `'\0'` | le caractère de fin de chaîne (code 0) | `char` | 1 |
+| `""` | la chaîne vide | `char[1]` | 1 (le `'\0'` seul) |
+| `"Bonjour"` | une chaîne | `char[8]` | 8 |
+
+→ Une chaîne occupe **toujours un octet de plus** que le nombre de caractères visibles.
+
+→ `'AB'` n'est ni l'un ni l'autre : c'est une écriture que le compilateur accepte mais dont le résultat n'a aucun sens. Un `char` ne contient **qu'un** caractère.
+---
+name: declarer
+## Déclarer une chaîne
+
+* **sans taille** : l'ordinateur compte pour vous (l'initialisation est alors obligatoire)
+
+```c
+char maChaine[] = "Hello";        // 6 octets réservés
+```
+
+* **avec une taille explicite** : il faut prévoir la place du `'\0'`
+
+```c
+char maChaine[7] = "Hello";   // ok : 5 lettres + '\0' + 1 case libre
+char maChaine[6] = "Hello";   // ok, tout juste
+char maChaine[5] = "Hello";   // KO : plus de place pour le '\0'
+```
+
+* **vide, à remplir plus tard** : à initialiser malgré tout
+
+```c
+char reponse[50] = "";        // chaîne vide, valide
+char reponse[50];             // déclarée, mais son contenu est du hasard
+```
+
+→ Il n'existe **pas** de valeur par défaut : un tableau non initialisé contient ce qui traînait en mémoire.
+---
+name: taille
+## Taille réservée et longueur utile
+
+Deux mesures différentes, qu'on confond souvent :
+
+| | Ce que ça mesure | Compte le `'\0'` ? |
+| --- | --- | --- |
+| `sizeof(t)` | les octets **réservés** en mémoire | oui |
+| `strlen(t)` | les caractères **avant** le `'\0'` | non |
+
+```c
+char mot[20] = "Bonjour";
+
+printf("%d\n", sizeof(mot));       // 20 : la taille du tableau
+printf("%d\n", strlen(mot));       // 7  : la longueur du texte
+printf("%d\n", sizeof("Bonjour")); // 8  : 7 lettres + '\0'
+printf("%d\n", strlen("Bonjour")); // 7
+```
+
+→ `sizeof` est décidé **à la compilation** et ne change jamais. `strlen` **parcourt** la chaîne à chaque appel, jusqu'au `'\0'`.
+
+→ La place restante dans le tableau vaut donc `sizeof(t) - strlen(t) - 1`.
+---
+name: erreurs
+## Les déclarations fautives
+
+| Déclaration | Verdict |
+| --- | --- |
+| `char a[] = "Salut";` | ok, 6 octets |
+| `char b[10] = "Salut";` | ok, 10 octets réservés, 5 utilisés |
+| `char c[5] = "Salut";` | **KO** : pas de place pour le `'\0'` |
+| `char d[6] = {'S','a','l','u','t','\0'};` | ok |
+| `char e[5] = {'S','a','l','u','t'};` | **danger** : tableau valide, mais **pas** une chaîne |
+| `char f[] = 'abcdefg';` | **KO** : apostrophes au lieu de guillemets |
+| `char g[10] = 'x';` | **KO** : `'x'` est un caractère, pas une chaîne |
+| `char h[4] = "'o'";` | ok : 3 caractères visibles + `'\0'` |
+
+→ Le cas `e` est le plus vicieux : il **compile**, mais `printf("%s", e)` affichera la suite de la mémoire jusqu'au premier `0` rencontré.
+
+→ Les caractères d'échappement comptent pour **un** : `"un\ndeux\n"` occupe 10 octets, pas 12.
+---
+name: acces
+## Accéder aux caractères
+
+Une chaîne est un tableau : ses cases se lisent et s'écrivent avec `[ ]`, de `0` à `strlen - 1`.
+
+```c
+char mot[] = "Ecole";
+
+printf("%c\n", mot[0]);   // E
+printf("%c\n", mot[4]);   // e
+printf("%d\n", mot[0]);   // 69  (le code ASCII)
+printf("%s\n", mot + 2);  // ole : on démarre l'affichage à la case 2
+```
+
+**Couper une chaîne**, c'est simplement déplacer son `'\0'` :
+
+```c
+char mot[] = "Ecole";
+mot[3] = '\0';
+
+printf("%s\n", mot);           // Eco
+printf("%d\n", strlen(mot));   // 3  : la longueur change
+printf("%d\n", sizeof(mot));   // 6  : la taille réservée, elle, ne change pas
+```
+
+→ Les lettres `'l'` et `'e'` sont **toujours** en mémoire : elles ne sont simplement plus lues.
+
+→ `printf("%s", mot[0])` est une **erreur** : `mot[0]` est un `char`, il faut `%c`.
+---
+name: imprimer
+## Imprimer une chaîne
+
+* avec `printf` et le code `%s`
+
+```c
+printf("%s", maChaine);
+```
+
+* avec `puts` : imprime la chaîne **et** passe à la ligne
+
+```c
+puts(maChaine);
+```
+
+**Aligner des colonnes** : `%s` accepte une largeur, comme les autres codes.
+
+```c
+printf("| %-20s |\n", "Nom");
+printf("| %-20s |\n", "Jean Dubois");
+```
+
+```
+| Nom                  |
+| Jean Dubois          |
+```
+
+→ `%20s` aligne à droite, `%-20s` aligne à gauche. C'est ainsi qu'on obtient une fiche ou un tableau propre.
+---
+name: saisir
+## Saisir une chaîne
+
+* avec `scanf` : **sans** le `&` (un tableau est déjà une adresse)
+
+```c
+char nom[50];
+scanf("%s", nom);       // et surtout pas &nom
+```
+
+* avec `fgets` : la lecture d'une **ligne** entière
+
+```c
+char nom[50];
+fgets(nom, 50, stdin);  // au plus 49 caractères + le '\0'
+```
+
+| | `scanf("%s", …)` | `fgets(…)` |
+| --- | --- | --- |
+| s'arrête à... | le premier **espace** | le retour à la ligne |
+| limite la taille saisie ? | **non** | oui (2ᵉ argument) |
+| conserve le `\n` final ? | non | **oui** |
+| nécessite le `&` ? | non | non |
+
+→ `scanf("%s", nom)` sur `Jean Dupont` ne lit que `Jean` : le reste attend dans le tampon.
+
+→ `scanf("%s", …)` reste acceptable pour un **mot unique dont on maîtrise la longueur**. Dès qu'il y a un espace ou une saisie libre, c'est `fgets`.
+
+→ `gets` existe mais ne doit **jamais** être utilisé : il ne limite pas la taille et a été retiré du langage.
+---
+name: retour
+## Le `\n` laissé par `fgets`
+
+`fgets` conserve le retour à la ligne dans la chaîne. Il fait donc partie de la longueur :
+
+```c
+char nom[50];
+fgets(nom, 50, stdin);          // l'utilisateur tape "Jean"
+printf("Bonjour %s !\n", nom);  // "Bonjour Jean\n !" : le ! part à la ligne
+printf("%d\n", strlen(nom));    // 5, et non 4
+```
+
+La correction tient en une ligne :
+
+```c
+nom[strlen(nom) - 1] = '\0';
+```
+
+→ `strlen(nom)` donne la position du `'\0'`; `strlen(nom) - 1` est donc la **dernière case utile**, celle du `\n`. On y écrit un `'\0'` : la chaîne se termine un caractère plus tôt.
+
+→ **Attention** : si l'utilisateur valide sans rien saisir, la chaîne vaut `"\n"`, `strlen` vaut 1, et on écrit en case 0. Si elle valait `""`, `strlen` vaudrait 0 et on écrirait en case **-1** : hors du tableau.
+---
+## Mélanger `fgets` et `scanf`
+
+Le `scanf("%d", …)` laisse le `\n` de la touche ENTER dans le tampon. Le `fgets` **suivant** le lit aussitôt et rend la main sans rien demander.
+
+```c
+int age;
+char nom[50];
+
+printf("Votre age : ");
+scanf("%d", &age);
+
+printf("Votre nom : ");
+fgets(nom, 50, stdin);   // ne s'arrête pas : il lit le \n resté du scanf
+```
+
+→ Même cause que le problème du **tampon** vu au module 01, mêmes remèdes : vider le tampon après le `scanf`, ou saisir **tout** en `fgets`.
+
+→ La règle simple : ne pas mélanger. Dans un même programme, on saisit soit tout avec `fgets`, soit tout avec `scanf`.
+---
+name: stringh
+## Les fonctions de `string.h`
+
+```c
+#include <string.h>
+```
+
+| Fonction | Rôle | Valeur renvoyée |
+| --- | --- | --- |
+| `strlen(s)` | longueur du texte (sans le `'\0'`) | un `int` |
+| `strcpy(dest, src)` | **remplace** le contenu de `dest` par celui de `src` | l'adresse de `dest` |
+| `strcat(dest, src)` | **ajoute** `src` à la fin de `dest` | l'adresse de `dest` |
+| `strcmp(s1, s2)` | compare le **contenu** de deux chaînes | `0` si identiques |
+
+→ Ces fonctions s'arrêtent toutes au `'\0'` et n'ont **aucun** moyen de connaître la taille réservée : c'est au programmeur de vérifier que la destination est assez grande.
+
+→ Dans `strcpy` et `strcat`, la destination est **toujours** le premier argument.
+---
+name: strcpy
+## `strcpy` : copier
+
+L'affectation `=` ne fonctionne **pas** entre deux chaînes.
+
+```c
+char a[20], b[20] = "Bonjour";
+
+a = b;              // ERREUR de compilation
+strcpy(a, b);       // correct : a contient maintenant "Bonjour"
+```
+
+→ Pourquoi ? `a` est un **tableau** : son nom désigne l'adresse de sa première case, et cette adresse ne peut pas être modifiée. `=` ne fonctionne que sur **une case à la fois** : `a[0] = 'C';` est parfaitement légal.
+
+→ `strcpy` recopie **case par case**, jusqu'au `'\0'` inclus. Les deux tableaux restent **indépendants** : modifier `a[0]` ensuite ne change rien à `b`.
+
+```c
+strcpy(a, b);
+a[0] = 'C';
+printf("%s / %s", a, b);   // Conjour / Bonjour
+```
+---
+name: strcat
+## `strcat` : concaténer
+
+`strcat(dest, src)` écrit `src` **à partir du `'\0'`** de `dest`, puis replace un `'\0'` à la fin.
+
+```c
+char nomComplet[50] = "Jean";
+strcat(nomComplet, " ");
+strcat(nomComplet, "Dubois");
+puts(nomComplet);            // Jean Dubois
+```
+
+→ L'espace ne vient de nulle part : il faut le **concaténer** explicitement.
+
+→ `dest` doit déjà contenir une **chaîne valide**, même vide. Sur un tableau non initialisé, `strcat` cherche un `'\0'` n'importe où en mémoire et écrit à cet endroit :
+
+```c
+char resultat[50];             // contenu au hasard
+strcat(resultat, "Bonjour");   // comportement imprévisible
+```
+
+→ La bonne façon de démarrer une construction de chaîne :
+
+```c
+char resultat[50] = "";        // ou strcpy(resultat, "");
+```
+---
+name: strcmp
+## `strcmp` : comparer
+
+`==` compile sans erreur mais **ne compare pas le texte**.
+
+```c
+char a[10] = "chat", b[10] = "chat";
+
+printf("%d\n", a == b);          // 0 : FAUX, alors que le texte est identique
+printf("%d\n", strcmp(a, b));    // 0 : les contenus sont identiques
+printf("%p\n", a);               // 0x7ffc... l'adresse de a
+printf("%p\n", b);               // 0x7ffc... une AUTRE adresse
+```
+
+→ `a` et `b` sont deux tableaux **distincts**, à deux endroits de la mémoire. `a == b` compare leurs **adresses**, jamais leur contenu — et deux tableaux différents n'ont jamais la même adresse.
+
+**La règle** : deux chaînes se comparent **toujours** avec `strcmp`, jamais avec `==`.
+
+→ Piège de lecture : `strcmp` renvoie `0` quand les chaînes sont **égales**, et `0` signifie **faux** en C. La condition « les mots sont identiques » s'écrit donc :
+
+```c
+if (strcmp(a, b) == 0) { ... }     // et surtout pas if (strcmp(a, b))
+```
+---
+name: ordre
+## L'ordre ASCII et la casse
+
+`strcmp` compare **caractère par caractère**, en s'arrêtant au premier qui diffère, et rend le résultat de la soustraction de leurs **codes ASCII**.
+
+| Appel | Signe | Pourquoi |
+| --- | --- | --- |
+| `strcmp("abc", "abd")` | négatif | `'c'` (99) < `'d'` (100) |
+| `strcmp("abd", "abc")` | positif | l'inverse |
+| `strcmp("abc", "abc")` | **nul** | aucune différence |
+| `strcmp("abc", "abcd")` | négatif | la 1ʳᵉ s'arrête plus tôt : `'\0'` (0) < `'d'` |
+| `strcmp("Zebre", "abeille")` | négatif | `'Z'` (90) < `'a'` (97) |
+| `strcmp("chat", "Chat")` | positif | `'c'` (99) > `'C'` (67) |
+| `strcmp("", "a")` | négatif | la chaîne vide vient avant tout |
+
+→ Toutes les **majuscules** précèdent donc toutes les **minuscules** : ce n'est pas l'ordre d'un dictionnaire.
+
+→ Pour comparer sans tenir compte de la casse **sans modifier les chaînes**, on ramène les caractères au même camp au moment du test, avec `toupper` ou `tolower` (`ctype.h`, module 01).
+---
+name: debordement
+## Le débordement
+
+Aucune fonction de `string.h` ne vérifie la taille de la destination.
+
+```c
+char petit[5];
+strcpy(petit, "Une chaine beaucoup trop longue");
+```
+
+→ Le programme **compile** sans le moindre avertissement.
+
+→ Il s'exécute, et écrit 32 octets dans une zone qui en réserve 5 : les 27 octets suivants en mémoire sont écrasés. Selon ce qui s'y trouvait, le programme affiche n'importe quoi, plante immédiatement, ou plus loin — sans aucun rapport visible avec la cause.
+
+**Avant chaque `strcpy` ou `strcat`, une seule question :** la destination est-elle assez grande pour le résultat **plus** le `'\0'` ?
+
+| Opération | Taille minimale de `dest` |
+| --- | --- |
+| `strcpy(dest, src)` | `strlen(src) + 1` |
+| `strcat(dest, src)` | `strlen(dest) + strlen(src) + 1` |
+---
+name: define
+## Les constantes symboliques
+
+Une **constante symbolique** remplace, dans le code, une valeur par un **texte significatif**. Elle se place au début du fichier source.
+
+```c
+#define TAILLE_NOM 128
+#define TAILLE_MDP 50
+
+void main (void){
+  char nom[TAILLE_NOM];
+  char prenom[TAILLE_NOM];
+  char motDePasse[TAILLE_MDP];
+}
+```
+
+→ La taille d'un tableau doit être connue **avant** l'exécution : elle ne peut pas être une variable.
+
+→ Un seul endroit à modifier si la taille change, et un `fgets(nom, TAILLE_NOM, stdin)` qui reste juste automatiquement.
+
+→ Par convention, une constante symbolique s'écrit en **MAJUSCULES**, et sa ligne ne se termine **pas** par un point-virgule.
+---
+name: synthese
+## Un exemple complet
+
+```c
+#include <stdio.h>
+#include <string.h>
+#define TAILLE_MDP 50
+
+void main(void) {
+  char mdp[TAILLE_MDP] = "INDBG2026";
+  char saisie[TAILLE_MDP];
+
+  printf("Longueur : %d - Taille : %d\n", strlen(mdp), sizeof(mdp));
+
+  printf("Entrez votre mot de passe : ");
+  fgets(saisie, TAILLE_MDP, stdin);
+  saisie[strlen(saisie) - 1] = '\0';     // on retire le \n
+
+  if (strcmp(mdp, saisie) == 0) puts("Mot de passe correct !");
+  else puts("Erreur : mot de passe incorrect");
+}
+```
+---
+## Exercices de synthèse
+
+Écris un programme qui demande un prénom et un nom, puis construit **dans une seule variable** le nom complet sous la forme `Prenom NOM`, à l'aide de `strcpy` et `strcat`.
+
+* D'où vient l'espace entre les deux mots ?
+* Quelle taille faut-il réserver pour la chaîne résultat ?
+* Que se passe-t-il si elle est trop petite ?
+---
+## Exercices de synthèse
+
+Une école attribue à chaque élève un identifiant : première lettre du prénom + nom + année d'inscription.
+
+```
+Prenom : Jean
+Nom    : Dubois
+Annee  : 2026
+Identifiant : jdubois2026
+```
+
+* Pour placer un **seul** caractère en début de chaîne, passe par une chaîne de deux cases :
+
+```c
+char temp[2];
+temp[0] = prenom[0];
+temp[1] = '\0';
+strcpy(identifiant, temp);
+```
+
+* L'année est un entier et `strcat` attend une chaîne : comment faire ?
+* Limite la partie « nom » aux 5 premiers caractères : `nom[5] = '\0';`. Pourquoi cela fonctionne-t-il ? Et si le nom compte moins de 5 lettres ?
+---
+name: recap
+## Pour vous entraîner
+
+Le chapitre **« Les chaînes de caractères »** du livret s'appuie sur ces notions :
+
+| Section du livret | Slides |
+| --- | --- |
+| Comprendre ce qu'est une chaîne | <a href="#quest">le `'\0'`</a>, <a href="#quote">`'A'` ou `"A"`</a>, <a href="#taille">`sizeof` et `strlen`</a>, <a href="#erreurs">déclarations fautives</a> |
+| Lire et déboguer | <a href="#acces">accéder aux caractères</a>, <a href="#imprimer">`%s`</a>, <a href="#strcmp">`strcmp`</a> |
+| La saisie d'une chaîne | <a href="#saisir">`scanf` et `fgets`</a>, <a href="#retour">le `\n` final</a> |
+| Manipuler les chaînes | <a href="#strcpy">`strcpy`</a>, <a href="#strcat">`strcat`</a>, <a href="#debordement">débordement</a> |
+| Comparer | <a href="#strcmp">`strcmp`</a>, <a href="#ordre">ordre ASCII et casse</a> |
+| Synthèse et dépassements | <a href="#define">`#define`</a>, <a href="#acces">déplacer le `'\0'`</a>, <a href="#strcat">construire une chaîne</a> |
+    </textarea>
+    <script src="../vendor/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
