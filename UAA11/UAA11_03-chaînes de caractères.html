@@ -200,7 +200,14 @@ printf("%d\n", mot[0]);   // 69  (le code ASCII)
 printf("%s\n", mot + 2);  // ole : on démarre l'affichage à la case 2
 ```
 
-**Couper une chaîne**, c'est simplement déplacer son `'\0'` :
+→ Une case contient un `char` : `%c` pour l'afficher, `%d` pour son code ASCII.
+
+→ `printf("%s", mot[0])` est donc une **erreur** : `%s` attend une chaîne, pas une case.
+---
+name: couper
+## Couper une chaîne
+
+Couper une chaîne, c'est simplement **déplacer son `'\0'`**.
 
 ```c
 char mot[] = "Ecole";
@@ -213,7 +220,7 @@ printf("%d\n", sizeof(mot));   // 6  : la taille réservée, elle, ne change pas
 
 → Les lettres `'l'` et `'e'` sont **toujours** en mémoire : elles ne sont simplement plus lues.
 
-→ `printf("%s", mot[0])` est une **erreur** : `mot[0]` est un `char`, il faut `%c`.
+→ C'est ainsi qu'on tronque un mot : `nom[5] = '\0';` le limite à ses 5 premières lettres.
 ---
 name: imprimer
 ## Imprimer une chaîne
@@ -261,6 +268,13 @@ char nom[50];
 fgets(nom, 50, stdin);  // au plus 49 caractères + le '\0'
 ```
 
+→ `scanf("%s", nom)` sur `Jean Dupont` ne lit que `Jean` : le reste attend dans le tampon.
+
+→ `gets` existe mais ne doit **jamais** être utilisé : il ne limite pas la taille et a été retiré du langage.
+---
+name: saisircomp
+### `scanf` ou `fgets` ?
+
 | | `scanf("%s", …)` | `fgets(…)` |
 | --- | --- | --- |
 | s'arrête à... | le premier **espace** | le retour à la ligne |
@@ -268,11 +282,9 @@ fgets(nom, 50, stdin);  // au plus 49 caractères + le '\0'
 | conserve le `\n` final ? | non | **oui** |
 | nécessite le `&` ? | non | non |
 
-→ `scanf("%s", nom)` sur `Jean Dupont` ne lit que `Jean` : le reste attend dans le tampon.
+→ `scanf("%s", …)` reste acceptable pour un **mot unique dont on maîtrise la longueur**.
 
-→ `scanf("%s", …)` reste acceptable pour un **mot unique dont on maîtrise la longueur**. Dès qu'il y a un espace ou une saisie libre, c'est `fgets`.
-
-→ `gets` existe mais ne doit **jamais** être utilisé : il ne limite pas la taille et a été retiré du langage.
+→ Dès qu'il y a un **espace** dans la saisie (un nom composé, une phrase) ou que la longueur n'est pas maîtrisée, c'est `fgets`.
 ---
 name: retour
 ## Le `\n` laissé par `fgets`
@@ -534,7 +546,7 @@ Le chapitre **« Les chaînes de caractères »** du livret s'appuie sur ces not
 | La saisie d'une chaîne | <a href="#saisir">`scanf` et `fgets`</a>, <a href="#retour">le `\n` final</a> |
 | Manipuler les chaînes | <a href="#strcpy">`strcpy`</a>, <a href="#strcat">`strcat`</a>, <a href="#debordement">débordement</a> |
 | Comparer | <a href="#strcmp">`strcmp`</a>, <a href="#ordre">ordre ASCII et casse</a> |
-| Synthèse et dépassements | <a href="#define">`#define`</a>, <a href="#acces">déplacer le `'\0'`</a>, <a href="#strcat">construire une chaîne</a> |
+| Synthèse et dépassements | <a href="#define">`#define`</a>, <a href="#couper">déplacer le `'\0'`</a>, <a href="#strcat">construire une chaîne</a> |
     </textarea>
     <script src="../vendor/remark-latest.min.js">
     </script>
