@@ -716,9 +716,7 @@ float a = (float)(1 / 3);   // la division entière a déjà eu lieu : a contien
 → Le casting `(int)` **tronque**, il n'arrondit pas : `(int)5.9` vaut 5.
 ---
 name: pieges
-### Deux pièges du calcul entier
-
-**1. Diviser par zéro**
+### Premier piège : diviser par zéro
 
 ```c
 int a = 10, b = 0;
@@ -727,9 +725,12 @@ printf("%d", a / b);   // le programme s'arrête brutalement
 
 → Le compilateur ne signale **rien** : `/` et `%` par zéro font planter le programme à l'exécution.
 
-→ Toute division dont le diviseur vient de l'utilisateur doit donc être **vérifiée avant** d'être effectuée.
+→ Ce n'est ni un avertissement ni un résultat faux : le programme **s'arrête**.
 
-**2. Le modulo d'un nombre négatif**
+→ Toute division dont le diviseur vient de l'utilisateur doit donc être **vérifiée avant** d'être effectuée.
+---
+name: modulo
+### Second piège : le modulo d'un nombre négatif
 
 En C, le reste prend le **signe du dividende** (le nombre de gauche).
 
@@ -1082,7 +1083,7 @@ Le chapitre **« Exercices pratiques, premières instructions »** du livret s'a
 | Les opérateurs et les conversions | <a href="#composee">affectation composée</a>, <a href="#conversion">division entière</a>, <a href="#pieges">pièges du calcul entier</a>, <a href="#incrdecr">post/pré-incrémentation</a>, <a href="#priorite">priorité</a> |
 | Lire et déboguer un programme | <a href="#largeur">largeur</a>, <a href="#echappement">échappement</a>, <a href="#printfregles">règles de printf</a> |
 | Premiers programmes complets | <a href="#main">structure</a>, <a href="#lecture">lecture</a> |
-| Division entière et modulo | <a href="#operateurs">opérateurs</a>, <a href="#conversion">division entière</a>, <a href="#pieges">modulo négatif, division par zéro</a> |
+| Division entière et modulo | <a href="#operateurs">opérateurs</a>, <a href="#conversion">division entière</a>, <a href="#pieges">division par zéro</a>, <a href="#modulo">modulo négatif</a> |
 | Formules et calculs | <a href="#priorite">priorité</a>, <a href="#mathh">`math.h`</a> |
 | Le code ASCII | <a href="#charentier">caractère = entier</a>, <a href="#codification">décimal et hexadécimal</a>, <a href="#arith">arithmétique ASCII</a>, <a href="#ctype">`ctype.h`</a> |
     </textarea>
