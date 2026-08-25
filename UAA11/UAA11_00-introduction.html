@@ -127,14 +127,17 @@ void main(void){     // le point d'entrée du programme
 
 | Librairie | Ce qu'elle apporte |
 | --- | --- |
-| `stdio.h` | `printf`, `scanf`, `getchar`, `putchar` |
+| `stdio.h` | `printf`, `scanf`, `getchar`, `putchar`, `fgets`, et les fichiers |
 | `stdbool.h` | le type `bool` et les valeurs `true` / `false` |
-| `math.h` | `sqrt`, `pow`, la constante `M_PI` |
-| `ctype.h` | `isdigit`, `isalpha`, `toupper`, `tolower` |
-| `stdlib.h` | `rand`, `srand`, `system` |
+| `string.h` | `strlen`, `strcpy`, `strcat`, `strcmp` |
+| `math.h` | `sqrt`, `pow`, `fabs`, la constante `M_PI` |
+| `ctype.h` | `isdigit`, `isalpha`, `isupper`, `toupper`, `tolower` |
+| `stdlib.h` | `rand`, `srand`, `abs`, `system` |
 | `time.h` | `time` (pour initialiser le générateur aléatoire) |
 
 → Oublier un `#include`, c'est une erreur de compilation : le compilateur ne connaît pas la fonction que vous utilisez.
+
+→ Une librairie s'inclut **une seule fois**, en tête de fichier, et sans `;`.
 ---
 name: erreurs
 ## Les trois familles d'erreurs
@@ -221,20 +224,6 @@ Devant un programme à **écrire** :
 2. Quel est le **résultat** attendu, et sous quelle **forme** ?
 3. Quelles **opérations** relient les deux ?
 4. J'écris, je compile, je teste avec les **cas limites** (0, une valeur négative, une valeur énorme).
----
-## Bon à savoir
-
-→ Compilez avec les avertissements activés :
-
-```
-gcc -Wall -Wextra prog.c -o prog
-```
-
-→ Sous Visual Studio, `scanf` et `printf` peuvent être refusés au profit de `scanf_s` et `printf_s` : les deux écritures apparaissent dans ce cours.
-
-→ Sous Windows, `system("pause");` en fin de `main` empêche la console de se refermer immédiatement.
-
-→ Un programme qui compile n'est pas un programme qui fonctionne.
     </textarea>
     <script src="../vendor/remark-latest.min.js">
     </script>
