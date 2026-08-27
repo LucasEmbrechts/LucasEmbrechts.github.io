@@ -439,6 +439,70 @@ $vPicnic = new Voiture(80, "CPS-001", "Toyota", "Picnic");
 $vPicnic->remplirCarburant(30);
 ```
 ---
+## Appel de méthodes
+### Appeler une méthode depuis une autre méthode
+
+Jusqu'ici, nous avons toujours appelé une méthode **depuis l'extérieur** de la classe :
+
+```php
+$vPicnic->obtenirNomComplet();
+```
+
+Mais une méthode peut aussi appeler **une autre méthode de la même classe**.
+
+→ sur quel objet ? Sur l'objet courant, donc … `$this` !
+
+```php
+$this->obtenirNomComplet();
+```
+
+→ <span style="color: red;">`$this->` sert aussi bien pour les variables d'instance que pour les méthodes</span>
+
+---
+## Appel de méthodes
+### Appeler une méthode depuis une autre méthode
+
+```php
+class Voiture {
+
+  private $marque;
+  private $modele;
+  private $jauge;
+
+  function obtenirNomComplet() {
+    return $this->marque . " " . $this->modele;
+  }
+
+  // Cette méthode réutilise obtenirNomComplet()
+  function decrire() {
+    return $this->obtenirNomComplet() . " (" . $this->jauge . " litres)";
+  }
+}
+```
+
+```php
+$vPicnic = new Voiture(80, "CPS-001", "Toyota", "Picnic");
+echo $vPicnic->decrire();   // Toyota Picnic (80 litres)
+```
+
+---
+## Appel de méthodes
+### Pourquoi réutiliser ses propres méthodes ?
+
+Sans réutilisation, le code de `obtenirNomComplet()` est **recopié** :
+
+```php
+function decrire() {
+  return $this->marque . " " . $this->modele . " (" . $this->jauge . " litres)";
+}
+```
+
+→ si un jour le nom complet doit s'écrire autrement (ex. "Toyota - Picnic"),
+il y a **deux** endroits à modifier… et donc un risque d'oubli.
+
+→ <span style="color: red;">Principe du « point de modification unique » : chaque règle n'est écrite qu'à un seul endroit du programme.</span>
+
+---
 ## Variable d'instance ou méthode ?
 
 → <span style="color: red;">Toute caractéristique dérivable ou calculable à partir d'autres doit être déclarée sous forme de méthode</span>
@@ -496,7 +560,7 @@ class Entrainement {
 ```
 ---
 ## Portée des variables
-```Java
+```php
 class Entrainement{
 
   // temps est un argument de la méthode :
@@ -517,6 +581,7 @@ class Entrainement{
 * Exercice 1 (Série 2)
 * Exercice 2 (Série 2)
 * Exercice 3 (Série 2)
+* Exercice 4 (Série 2)
 
 <img height="400px" src="img/fast.gif">
 
@@ -594,11 +659,11 @@ $voitureJaugeVide = new Voiture("1-AAA-111", "Toyota", "Picnic");
 ---
 ## Arguments facultatifs / Valeur par défaut
 ```php
-//création d'une voiture avec une jauge pleine
-Voiture voitPleine = new Voiture(50, "1-ZZZ-123", "Kia", "Sportage");
+// création d'une voiture avec une jauge pleine
+$voitPleine = new Voiture("1-ZZZ-123", "Kia", "Sportage", 50);
 
 // création d'une voiture avec une jauge vide
-Voiture voitVide = new Voiture("1-ABC-123", "Opel", "Adam");
+$voitVide = new Voiture("1-ABC-123", "Opel", "Adam");
 ```
 
 ---
@@ -622,12 +687,112 @@ class Voiture {
 ```
 
 ---
+## Arguments facultatifs / Valeur par défaut
+### Retour sur l'exercice 3 (Série 1)
+
+Souviens-toi : tu avais écrit **deux** méthodes `sePrésenter` …
+
+```php
+function sePrésenter() { /* affichage en français */ }
+
+function sePrésenter($langue) { /* français, anglais ou néerlandais */ }
+```
+
+… et PHP a refusé : **deux méthodes ne peuvent pas porter le même nom**.
+
+Pire : leur code était quasiment identique (deux endroits à modifier).
+
+---
+## Arguments facultatifs / Valeur par défaut
+### Retour sur l'exercice 3 (Série 1)
+
+La valeur par défaut règle les deux problèmes d'un coup :
+
+```php
+// 1 = français, 2 = anglais, 3 = néerlandais
+function sePrésenter($langue = 1) {
+  // une seule méthode, un seul code
+}
+```
+
+```php
+$moi->sePrésenter();    // en français (valeur par défaut)
+$moi->sePrésenter(2);   // en anglais
+```
+
+→ <span style="color: red;">C'est exactement le « point de modification unique » dont parlait l'énoncé de l'exercice.</span>
+
+---
+## Arguments facultatifs / Valeur par défaut
+### Attention : une valeur par défaut doit être **fixe**
+
+Une salle de spectacle est caractérisée par un nom, une capacité et un nombre de places encore libres.
+
+À sa création, une salle est vide : les places libres valent donc la capacité.
+
+Tentation :
+
+```php
+function __construct($nom, $capacite, $placesLibres = $capacite) {
+  // ...
+}
+```
+
+→ <span style="color: red;">Erreur ! Une valeur par défaut ne peut pas dépendre d'un autre argument ni d'une variable d'instance : ce doit être une valeur fixe (`0`, `100`, `""`, `true`, `null`, …)</span>
+
+---
+## Arguments facultatifs / Valeur par défaut
+### La solution : `null` + test
+
+On met `null` par défaut, puis on décide **dans le corps** de la méthode :
+
+```php
+function __construct($nom, $capacite, $placesLibres = null) {
+  $this->nom = $nom;
+  $this->capacite = $capacite;
+
+  if ($placesLibres === null) {          // aucune valeur fournie
+    $this->placesLibres = $capacite;
+  } else {
+    $this->placesLibres = $placesLibres;
+  }
+}
+```
+
+```php
+$salleRouge = new Salle("Rouge", 250);        // 250 places libres
+$salleBleue = new Salle("Bleue", 120, 40);    // 40 places libres
+```
+
+---
+## Arguments facultatifs / Valeur par défaut
+### La solution : `null` + test
+
+Même principe pour les méthodes. Ici, `réserver()` sans argument doit réserver **toutes** les places encore libres :
+
+```php
+function réserver($nombre = null) {
+  if ($nombre === null) {
+    $nombre = $this->placesLibres;   // dépend de l'état de l'objet
+  }
+  $this->placesLibres -= $nombre;
+}
+```
+
+```php
+$salleRouge->réserver(30);   // réserve 30 places
+$salleRouge->réserver();     // réserve tout le reste
+```
+
+→ <span style="color: red;">À retenir : valeur par défaut **fixe** → directement dans la signature ; valeur par défaut **calculée** → `null` + test.</span>
+
+---
 ## Coding time !
 
 ### Todo :
 
-* Exercice 4 (Série 2)
 * Exercice 5 (Série 2)
+* Exercice 6 (Série 2)
 * Exercice 1 (Série 3)
 
 <img height="400px" src="img/fast.gif">
