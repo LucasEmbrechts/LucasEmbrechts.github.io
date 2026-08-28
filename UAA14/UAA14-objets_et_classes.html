@@ -369,11 +369,52 @@ class Voiture {
 ```
 
 ---
+## Encapsulation et information hiding
+### Des accesseurs valables pour toutes les v.i
+
+Écrire un `if` par variable d'instance devient vite pénible : douze v.i, c'est vingt-quatre `if`.
+
+Or en PHP, le **nom** d'une variable d'instance peut lui-même être rangé dans une variable :
+
+```php
+$propriete = "jauge";
+echo $vPicnic->$propriete;   // affiche la jauge
+```
+
+→ <span style="color: red;">`$objet->$propriete` va chercher la v.i **dont le nom est contenu** dans `$propriete`</span>
+
+---
+## Encapsulation et information hiding
+### Des accesseurs valables pour toutes les v.i
+
+```php
+class Voiture {
+
+  private $jauge;
+  private $marque;
+  private $modele;
+
+  function __get($propriete) {
+    return $this->$propriete;
+  }
+
+  function __set($propriete, $valeur) {
+    $this->$propriete = $valeur;
+  }
+}
+```
+
+→ deux méthodes, et la classe peut avoir autant de v.i qu'on veut
+
+→ <span style="color: red;">Attention : sous cette forme, plus aucun contrôle n'est possible… on y revient dans l'exercice !</span>
+
+---
 ## Coding time !
 
 ### Todo :
 
 * Exercice 2 (Série 1)
+* Exercice 3 (Série 1)
 
 <img height="400px" src="img/fast.gif">
 ---
@@ -468,6 +509,8 @@ class Voiture {
   private $marque;
   private $modele;
   private $jauge;
+
+  // ... (constructeur)
 
   function obtenirNomComplet() {
     return $this->marque . " " . $this->modele;
@@ -573,15 +616,65 @@ class Entrainement{
 }
 ```
 ---
+## Plusieurs objets à la fois
+
+Jusqu'ici, chaque objet avait sa propre variable :
+
+```php
+$vPicnic = new Voiture(80, "CPS-001", "Toyota", "Picnic");
+$vAdam   = new Voiture(10, "1-ABC-123", "Opel", "Adam");
+```
+
+→ *et si le garage en compte deux cents ?*
+
+<span style="color: red;">Un tableau peut contenir des objets exactement comme il contient des entiers ou des chaines de caractères.</span>
+
+```php
+$garage = array();
+array_push($garage, new Voiture(80, "CPS-001", "Toyota", "Picnic"));
+array_push($garage, new Voiture(10, "1-ABC-123", "Opel", "Adam"));
+```
+
+---
+## Plusieurs objets à la fois
+
+Un tableau d'objets se parcourt comme n'importe quel autre tableau :
+
+```php
+foreach ($garage as $voiture) {
+  echo $voiture->obtenirNomComplet() . "\n";
+}
+```
+
+→ à chaque tour, `$voiture` désigne **un objet** du tableau : on peut donc appeler ses méthodes.
+
+---
+## Plusieurs objets à la fois
+
+Un calcul qui porte sur **l'ensemble** des objets s'écrit en dehors de la classe :
+
+```php
+$total = 0;
+foreach ($garage as $voiture) {
+  $total = $total + $voiture->jauge;
+}
+echo "Carburant total du garage : " . $total;
+```
+
+→ <span style="color: red;">une méthode de `Voiture` ne connaît qu'une seule voiture : la sienne. Elle ne peut donc pas calculer un total sur tout le garage.</span>
+
+---
 ## Coding time !
 
 ### Todo :
 
-* Exercice 3 (Série 1)
+* Exercice 4 (Série 1)
 * Exercice 1 (Série 2)
 * Exercice 2 (Série 2)
 * Exercice 3 (Série 2)
 * Exercice 4 (Série 2)
+* Exercice 5 (Série 2)
+* Exercice 6 (Série 2)
 
 <img height="400px" src="img/fast.gif">
 
@@ -688,7 +781,7 @@ class Voiture {
 
 ---
 ## Arguments facultatifs / Valeur par défaut
-### Retour sur l'exercice 3 (Série 1)
+### Retour sur l'exercice 4 (Série 1)
 
 Souviens-toi : tu avais écrit **deux** méthodes `sePrésenter` …
 
@@ -704,7 +797,7 @@ Pire : leur code était quasiment identique (deux endroits à modifier).
 
 ---
 ## Arguments facultatifs / Valeur par défaut
-### Retour sur l'exercice 3 (Série 1)
+### Retour sur l'exercice 4 (Série 1)
 
 La valeur par défaut règle les deux problèmes d'un coup :
 
@@ -791,9 +884,13 @@ $salleRouge->réserver();     // réserve tout le reste
 
 ### Todo :
 
-* Exercice 5 (Série 2)
-* Exercice 6 (Série 2)
+* Exercice 5 (Série 1)
+* Exercice 7 (Série 2)
+* Exercice 8 (Série 2)
+* Exercice 9 (Série 2)
 * Exercice 1 (Série 3)
+* Exercice 2 (Série 3)
+* Exercice 3 (Série 3)
 
 <img height="400px" src="img/fast.gif">
 
@@ -861,7 +958,7 @@ class Conducteur
 
 ### Todo :
 
-* Exercice 2 (Série 3)
+* Exercice 4 (Série 3)
 
 <img height="400px" src="img/fast.gif">
 
