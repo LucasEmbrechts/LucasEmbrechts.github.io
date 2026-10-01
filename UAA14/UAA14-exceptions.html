@@ -299,6 +299,76 @@ class Catalogue {
 → <span style="color: red;">Chaque partie du programme lance les erreurs de son propre vocabulaire.</span>
 
 ---
+## Une exception attendue n'est pas une erreur
+
+Une méthode qui cherche quelque chose lance souvent une exception quand elle ne trouve rien. Mais « rien trouvé » n'est pas toujours un problème : parfois, c'est **la réponse que l'on espérait**.
+
+Une bibliothèque n'accepte une réservation que si le livre n'est pas déjà réservé :
+
+```php
+function reserver($titre, $lecteur) {
+  try {
+    $this->catalogue->obtenirReservation($titre);
+    // on a trouvé une réservation : le livre est déjà pris
+    throw new LivreDejaReserveException("$titre est déjà réservé");
+  } catch (ReservationIntrouvableException $e) {
+    // aucune réservation : c'est exactement ce qu'on voulait
+    $this->catalogue->enregistrerReservation($titre, $lecteur);
+  }
+}
+```
+
+→ la `ReservationIntrouvableException` est attrapée **et consommée** : elle ne sort pas de `reserver`.
+
+→ la `LivreDejaReserveException`, elle, n'est pas du type attrapé : elle traverse le `catch` et remonte à l'appelant.
+
+---
+## Une exception attendue n'est pas une erreur
+
+Même idée pour fournir une **valeur par défaut** :
+
+```php
+try {
+  $nbEmprunts = $bibliotheque->compterEmprunts($lecteur);
+} catch (LecteurIntrouvableException $e) {
+  $nbEmprunts = 0;    // pas encore inscrit : zéro emprunt
+}
+echo "Emprunts : $nbEmprunts";
+```
+
+→ <span style="color: red;">On attrape une exception là où l'on sait quoi en faire. Si l'on ne sait pas, on la laisse passer.</span>
+
+→ attrape toujours le type **précis** : un `catch (Exception $e)` dans `reserver` attraperait aussi la `LivreDejaReserveException`… lancée trois lignes plus haut, et le livre serait réservé deux fois.
+
+---
+## Annuler, puis relancer
+
+Certaines opérations se font en plusieurs étapes. Si l'une d'elles échoue, les étapes déjà faites doivent être **défaites** : c'est tout ou rien.
+
+```php
+function inscrireClasse($eleves) {
+  $inscrits = array();
+  try {
+    foreach ($eleves as $eleve) {
+      $this->inscrire($eleve);
+      array_push($inscrits, $eleve);
+    }
+  } catch (Exception $e) {
+    foreach ($inscrits as $eleve) {
+      $this->desinscrire($eleve);    // on défait ce qui a été fait
+    }
+    throw $e;                        // et on relance la MÊME exception
+  }
+}
+```
+
+→ la méthode ne sait pas traiter l'erreur : elle l'attrape **seulement pour remettre les choses en ordre**, puis la laisse continuer son chemin.
+
+→ `throw $e;` relance l'exception attrapée, avec son type et son message d'origine : l'appelant sait toujours pourquoi l'opération a échoué.
+
+→ ici, `catch (Exception $e)` est voulu : quelle que soit l'erreur, il faut annuler.
+
+---
 ## Un `try` dans un `try`
 
 Toutes les erreurs ne se valent pas. Un mot de passe incorrect est une erreur **de l'utilisateur** : on lui explique ce qui ne va pas. Une base de données en panne est une erreur **technique** : on ne peut rien lui expliquer d'utile.
@@ -340,6 +410,10 @@ try {
 * Exercice 5 (Série 6)
 
 * Exercice 6 (Série 6)
+
+* Exercice 7 (Série 6)
+
+* Exercice 8 (Série 6)
 
 <img height="400px" src="img/fast.gif">
 
