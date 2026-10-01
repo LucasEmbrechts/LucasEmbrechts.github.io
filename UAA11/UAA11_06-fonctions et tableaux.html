@@ -81,6 +81,8 @@ La référence (l'adresse) d'un tableau correspond toujours à l'adresse du prem
 ## Passage par référence
 
 ```c
+void imprimePremier(int tab[]);
+
 void main(void){
   int mesEntiers[] = {19,17,18};
   imprimePremier(mesEntiers);
@@ -216,7 +218,7 @@ En effet, puisqu'il est passé par référence (et pas par copie), on peut direc
 
 ```c
 #define TAILLE_TAB 10
-void initialisation(int tab[]);
+void initialisation(int tab[], int taille);
 
 void main (void){
   int tab[TAILLE_TAB];
