@@ -299,6 +299,32 @@ class Catalogue {
 → <span style="color: red;">Chaque partie du programme lance les erreurs de son propre vocabulaire.</span>
 
 ---
+## Un `try` dans un `try`
+
+Toutes les erreurs ne se valent pas. Un mot de passe incorrect est une erreur **de l'utilisateur** : on lui explique ce qui ne va pas. Une base de données en panne est une erreur **technique** : on ne peut rien lui expliquer d'utile.
+
+On peut séparer les deux en plaçant un `try` à l'intérieur d'un autre :
+
+```php
+try {
+  try {
+    $compte = $logique->connecter($email, $mdp);
+    echo "Bienvenue !";
+  } catch (MdpIncorrectException $e) {
+    echo "Mot de passe incorrect";
+  }
+} catch (ErreurBDException $e) {
+  echo "Service indisponible, réessayez plus tard";
+}
+```
+
+→ une `MdpIncorrectException` est attrapée par le `catch` **intérieur**.
+
+→ une `ErreurBDException` n'y trouve pas de `catch` à sa mesure : elle traverse le `try` intérieur et est attrapée par le `catch` **extérieur**.
+
+→ <span style="color: red;">Le `try` extérieur peut entourer plusieurs actions : une seule panne technique, un seul endroit pour la traiter.</span>
+
+---
 ## Coding time !
 
 ### Todo :
@@ -308,6 +334,12 @@ class Catalogue {
 * Exercice 2 (Série 6)
 
 * Exercice 3 (Série 6)
+
+* Exercice 4 (Série 6)
+
+* Exercice 5 (Série 6)
+
+* Exercice 6 (Série 6)
 
 <img height="400px" src="img/fast.gif">
 
