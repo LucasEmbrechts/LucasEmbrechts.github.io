@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atelier Boole – Partie 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="atelier.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Atelier : l'algèbre de Boole</h1>
+    <p>Partie 1 · Découvrir les bases (avant le cours) · environ 1 h 30 à 1 h 50</p>
+    <div class="barre">
+      <div class="progression" aria-label="progression"><div id="barre"></div></div>
+      <span id="compteur"></span>
+      <button class="btn clair" id="btn-rappels">📘 Mon formulaire</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <nav class="plan" id="plan"></nav>
+  <section id="contenu"></section>
+</main>
+
+<div class="voile" id="voile"></div>
+<aside class="rappels" id="rappels" aria-label="Mon formulaire">
+  <div style="display:flex;justify-content:space-between;align-items:center;">
+    <h2>📘 Mon formulaire</h2>
+    <button class="btn contour petit" id="fermer-rappels">Fermer ✕</button>
+  </div>
+  <p style="color:var(--muted);margin-top:0">Ce formulaire se remplit au fur et à mesure de tes découvertes.</p>
+  <table class="props" id="table-notions"></table>
+  <h3>D'une table de vérité à une expression</h3>
+  <p id="aide-table"></p>
+  <h3>Écrire au clavier</h3>
+  <p>Utilise les boutons sous chaque case, ou ces raccourcis :</p>
+  <table class="props">
+    <tr><td>∧ (ET)</td><td class="formule">&amp;  ou  *</td></tr>
+    <tr><td>∨ (OU)</td><td class="formule">|  ou  +</td></tr>
+    <tr><td>¬ (NON)</td><td class="formule">!  ou  ~</td></tr>
+  </table>
+</aside>
+
+<script src="atelier-logique.js"></script>
+<script src="atelier-decouvertes.js"></script>
+<script>
+window.ATELIER_CONFIG = {
+ "cle": "atelier-boole-partie1",
+ "chapitres": [
+  0,
+  1
+ ],
+ "facultatives": [],
+ "toutDebloque": false,
+ "notionsInitiales": [],
+ "accueil": "<h2>Partie 1 : découvrir les bases</h2><p>Tu n'as pas encore vu l'algèbre de Boole en classe ? <b>C'est normal, et c'est voulu !</b> Dans cette première partie, c'est toi qui vas <b>découvrir</b> les bases, comme un chercheur : tu observes des situations, tu remplis des tables, tu compares… et tu formules toi-même la règle. Ce n'est qu'ensuite que la page t'en donne le nom officiel. Grâce à ce travail, tu arriveras au cours avec une longueur d'avance.</p><h3>Ce que tu vas découvrir</h3><ul><li>les valeurs de vérité et les tables de vérité ;</li><li>les trois opérateurs ET, OU et NON ;</li><li>la priorité des opérateurs.</li></ul><h3>Comment ça marche ?</h3><ul><li>Cette partie contient <b>7 activités</b> en 2 chapitres (environ <b>1 h 30 à 1 h 50</b>). Fais-les <b>dans l'ordre</b> : chaque découverte sert pour la suivante. Tu peux les répartir sur deux séances.</li><li>Pour chaque étape, réponds puis clique sur <b>Vérifier</b>. Si ta réponse est fausse, la page te montre <b>une situation où elle ne fonctionne pas</b> : réfléchis, corrige et réessaie autant de fois que nécessaire.</li><li>Bloqué ? Le bouton <b>Coup de pouce</b> donne une aide de plus en plus précise. Essaie toujours d'abord sans.</li><li>Ta progression est enregistrée dans ce navigateur, sur cet appareil : tu peux t'arrêter et reprendre plus tard.</li><li>Quand tu as réussi toutes les étapes d'une activité, le cadre <b>« Ce que tu viens de découvrir »</b> s'ouvre, et la règle s'ajoute à <b>📘 Mon formulaire</b> (en haut de la page).</li></ul><h3>Ton cahier</h3><p>Télécharge ou imprime le <a href='Atelier_Partie1_Cahier.pdf' target='_blank'><b>cahier de la partie 1</b></a>. Recopie-y tes tables, tes réponses validées et surtout <b>les règles que tu découvres, avec tes propres mots</b>. <b>C'est ce cahier que tu rendras à ton professeur.</b></p><h3>Écrire une expression</h3><p>Tu découvriras les symboles <span class='formule'>∧</span>, <span class='formule'>∨</span> et <span class='formule'>¬</span> au fil des activités. Pour les écrire, clique sur les boutons sous chaque case, ou utilise les touches <span class='formule'>&amp;</span>, <span class='formule'>|</span> et <span class='formule'>!</span>.</p>",
+ "bravo": "<h2>🎉 Bravo, tu as terminé la partie 1 !</h2><p>Tu connais maintenant les opérateurs ET, OU, NON et la priorité. Rends ton <a href='Atelier_Partie1_Cahier.pdf' target='_blank'>cahier de la partie 1</a> à ton professeur : la suite se passe en classe !</p>"
+};
+</script>
+<script src="atelier-app.js"></script>
+</body>
+</html>

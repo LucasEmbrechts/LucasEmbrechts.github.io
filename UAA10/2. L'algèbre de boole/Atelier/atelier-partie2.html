@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atelier Boole – Partie 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="atelier.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Atelier : l'algèbre de Boole</h1>
+    <p>Partie 2 · Réinvestir (après le cours) · environ 1 h 30 à 1 h 50</p>
+    <div class="barre">
+      <div class="progression" aria-label="progression"><div id="barre"></div></div>
+      <span id="compteur"></span>
+      <button class="btn clair" id="btn-rappels">📘 Mon formulaire</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <nav class="plan" id="plan"></nav>
+  <section id="contenu"></section>
+</main>
+
+<div class="voile" id="voile"></div>
+<aside class="rappels" id="rappels" aria-label="Mon formulaire">
+  <div style="display:flex;justify-content:space-between;align-items:center;">
+    <h2>📘 Mon formulaire</h2>
+    <button class="btn contour petit" id="fermer-rappels">Fermer ✕</button>
+  </div>
+  <p style="color:var(--muted);margin-top:0">Ce formulaire se remplit au fur et à mesure de tes découvertes.</p>
+  <table class="props" id="table-notions"></table>
+  <h3>D'une table de vérité à une expression</h3>
+  <p id="aide-table"></p>
+  <h3>Écrire au clavier</h3>
+  <p>Utilise les boutons sous chaque case, ou ces raccourcis :</p>
+  <table class="props">
+    <tr><td>∧ (ET)</td><td class="formule">&amp;  ou  *</td></tr>
+    <tr><td>∨ (OU)</td><td class="formule">|  ou  +</td></tr>
+    <tr><td>¬ (NON)</td><td class="formule">!  ou  ~</td></tr>
+  </table>
+</aside>
+
+<script src="atelier-logique.js"></script>
+<script src="atelier-decouvertes.js"></script>
+<script>
+window.ATELIER_CONFIG = {
+ "cle": "atelier-boole-partie2",
+ "chapitres": [
+  5
+ ],
+ "facultatives": [
+  "chauffage"
+ ],
+ "toutDebloque": true,
+ "notionsInitiales": [],
+ "accueil": "<h2>Partie 2 : réinvestir</h2><p>Tu as découvert les opérateurs, puis vu en classe les propriétés, les théorèmes et les lois de De Morgan. Il est temps de les <b>utiliser</b> ! Tu joues le rôle d'un ingénieur qui programme la maison connectée de ta famille : portail, lampes, alarme… Pour chaque appareil, tu dois trouver, puis simplifier, l'expression booléenne qui le commande.</p><h3>Comment ça marche ?</h3><ul><li>Cette partie contient <b>5 missions</b> (environ <b>1 h 30 à 1 h 50</b>), plus un <b>défi facultatif</b> pour ceux qui veulent aller plus loin. Fais-les dans l'ordre.</li><li>Pour chaque étape, réponds puis clique sur <b>Vérifier</b>. Si ta réponse est fausse, la page te montre <b>une situation où elle ne fonctionne pas</b> : réfléchis, corrige et réessaie autant de fois que nécessaire.</li><li>Bloqué ? Le bouton <b>Coup de pouce</b> donne une aide de plus en plus précise. Essaie toujours d'abord sans.</li><li>Ta progression est enregistrée dans ce navigateur, sur cet appareil : tu peux t'arrêter et reprendre plus tard.</li><li>Le bouton <b>📘 Mon formulaire</b> (en haut) contient toutes les règles du cours.</li></ul><h3>Ton cahier</h3><p>Télécharge ou imprime le <a href='Atelier_Partie2_Cahier.pdf' target='_blank'><b>cahier de la partie 2</b></a>. Recopie-y tes réponses validées, tes simplifications <b>avec le nom de la propriété utilisée à chaque ligne</b>, et réponds aux questions ✍️. <b>C'est ce cahier que tu rendras à ton professeur.</b></p>",
+ "bravo": "<h2>🎉 Bravo, tu as terminé l'atelier !</h2><p>N'oublie pas de rendre ton <a href='Atelier_Partie2_Cahier.pdf' target='_blank'>cahier de la partie 2</a> à ton professeur. Tu as encore du temps ? Essaie le défi facultatif « Le chauffage » !</p>"
+};
+</script>
+<script src="atelier-app.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atelier Boole – Découvertes en classe</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="atelier.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Atelier : l'algèbre de Boole</h1>
+    <p>Découvertes pour la classe · propriétés, théorèmes et lois de De Morgan</p>
+    <div class="barre">
+      <div class="progression" aria-label="progression"><div id="barre"></div></div>
+      <span id="compteur"></span>
+      <button class="btn clair" id="btn-rappels">📘 Mon formulaire</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <nav class="plan" id="plan"></nav>
+  <section id="contenu"></section>
+</main>
+
+<div class="voile" id="voile"></div>
+<aside class="rappels" id="rappels" aria-label="Mon formulaire">
+  <div style="display:flex;justify-content:space-between;align-items:center;">
+    <h2>📘 Mon formulaire</h2>
+    <button class="btn contour petit" id="fermer-rappels">Fermer ✕</button>
+  </div>
+  <p style="color:var(--muted);margin-top:0">Ce formulaire se remplit au fur et à mesure de tes découvertes.</p>
+  <table class="props" id="table-notions"></table>
+  <h3>D'une table de vérité à une expression</h3>
+  <p id="aide-table"></p>
+  <h3>Écrire au clavier</h3>
+  <p>Utilise les boutons sous chaque case, ou ces raccourcis :</p>
+  <table class="props">
+    <tr><td>∧ (ET)</td><td class="formule">&amp;  ou  *</td></tr>
+    <tr><td>∨ (OU)</td><td class="formule">|  ou  +</td></tr>
+    <tr><td>¬ (NON)</td><td class="formule">!  ou  ~</td></tr>
+  </table>
+</aside>
+
+<script src="atelier-logique.js"></script>
+<script src="atelier-decouvertes.js"></script>
+<script>
+window.ATELIER_CONFIG = {
+ "cle": "atelier-boole-classe",
+ "chapitres": [
+  2,
+  3,
+  4
+ ],
+ "facultatives": [],
+ "toutDebloque": false,
+ "notionsInitiales": [
+  "valeurs",
+  "ET",
+  "OU",
+  "NON",
+  "Priorité"
+ ],
+ "accueil": "<h2>Découvertes pour la classe</h2><p>Ces activités accompagnent le cours : on y découvre ensemble, à partir des tables de vérité, les <b>propriétés</b> (commutativité, associativité, éléments neutres et absorbants, complémentarité, idempotence, distributivité), les <b>théorèmes</b> (involution, absorption, inclusion, allègement) et les <b>lois de De Morgan</b>.</p><h3>Comment ça marche ?</h3><ul><li>Pour chaque activité, on compare des tables de vérité, on formule la règle, puis on la nomme : elle s'ajoute alors à <b>📘 Mon formulaire</b>. Les notions de la partie 1 (opérateurs et priorité) y sont déjà.</li><li>Pour chaque étape, réponds puis clique sur <b>Vérifier</b>. Si ta réponse est fausse, la page te montre <b>une situation où elle ne fonctionne pas</b> : réfléchis, corrige et réessaie autant de fois que nécessaire.</li><li>Bloqué ? Le bouton <b>Coup de pouce</b> donne une aide de plus en plus précise. Essaie toujours d'abord sans.</li><li>Ta progression est enregistrée dans ce navigateur, sur cet appareil : tu peux t'arrêter et reprendre plus tard.</li></ul><p>Pour garder une trace, utilise la <a href='Atelier_Classe_Fiche.pdf' target='_blank'><b>fiche des découvertes</b></a>.</p>",
+ "bravo": "<h2>🎉 Toutes les découvertes sont faites !</h2><p>Tu connais maintenant toutes les propriétés, les théorèmes et les lois de De Morgan. Place à la <a href='atelier-partie2.html'>partie 2</a> pour les réinvestir !</p>"
+};
+</script>
+<script src="atelier-app.js"></script>
+</body>
+</html>

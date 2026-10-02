@@ -106,11 +106,11 @@
 
   // Mesures utilisées pour vérifier qu'une expression est « assez simplifiée »
   function mesurer(a) {
-    var m = { variables: 0, operateurs: 0, negGroupe: false, doubleNeg: false };
+    var m = { variables: 0, operateurs: 0, parentheses: 0, constantes: 0, negGroupe: false, doubleNeg: false };
     (function parcours(n, parent) {
       if (n.op === "var") { m.variables++; return; }
-      if (n.op === "const") return;
-      if (n.op === "()") { parcours(n.x, parent); return; }
+      if (n.op === "const") { m.constantes++; return; }
+      if (n.op === "()") { m.parentheses++; parcours(n.x, parent); return; }
       m.operateurs++;
       if (n.op === "¬") {
         var x = n.x;
@@ -122,6 +122,23 @@
       parcours(n.g, n); parcours(n.d, n);
     })(a, null);
     return m;
+  }
+
+  // Vérifie qu'une expression (déjà jugée équivalente) respecte les contraintes de forme d'une étape.
+  // Renvoie la liste des remarques (vide si tout est respecté).
+  function verifierContraintes(arbre, k) {
+    k = k || {};
+    var m = mesurer(arbre), r = [];
+    if (k.variablesMax !== undefined && m.variables > k.variablesMax)
+      r.push(k.variablesMax === 0 ? "le résultat ne devrait plus contenir de variable (ce n'est qu'un 0 ou un 1)" : "ton résultat contient encore " + m.variables + " variable" + (m.variables > 1 ? "s" : "") + " (objectif : " + k.variablesMax + " au maximum)");
+    if (k.operateursMax !== undefined && m.operateurs > k.operateursMax)
+      r.push(k.operateursMax === 0 ? "le résultat doit s'écrire sans aucun opérateur (∧, ∨, ¬)" : "ton résultat contient " + m.operateurs + " opérateurs (objectif : " + k.operateursMax + " au maximum)");
+    if (k.parenthesesMax !== undefined && m.parentheses > k.parenthesesMax)
+      r.push(k.parenthesesMax === 0 ? "écris-le sans aucune parenthèse (pense à la priorité des opérateurs)" : "il reste trop de parenthèses");
+    if (k.pasNegGroupe && m.negGroupe) r.push("il reste un ¬ devant une parenthèse");
+    if (k.pasDoubleNeg && m.doubleNeg) r.push("il reste une double négation ¬¬");
+    if (k.negGroupe && !m.negGroupe) r.push("la consigne demande de placer un ¬ devant toute l'expression, entre parenthèses");
+    return r;
   }
 
   // Toutes les combinaisons, dans l'ordre du cours (0 0 0, 0 0 1, …)
@@ -400,7 +417,7 @@
   ];
 
   var API = {
-    normaliser: normaliser, analyser: analyser, evaluer: evaluer, ecrire: ecrire, mesurer: mesurer,
+    normaliser: normaliser, analyser: analyser, evaluer: evaluer, ecrire: ecrire, mesurer: mesurer, verifierContraintes: verifierContraintes,
     combinaisons: combinaisons, comparer: comparer, PROPRIETES: PROPRIETES, MISSIONS: MISSIONS
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
