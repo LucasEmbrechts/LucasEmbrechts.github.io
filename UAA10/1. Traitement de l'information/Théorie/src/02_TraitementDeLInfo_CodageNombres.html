@@ -272,6 +272,34 @@ On remarquera qu'en additionnant un nombre et son complément à deux, on obtien
 ```
 
 ---
+## Le principe du complément à deux
+### Combien d'octets ?
+
+* On choisit la taille avec la **plage** : 1 octet = [-128, 127], 2 octets = [-32768, 32767].
+* Le bit de gauche doit toujours être le **bon bit de signe**.
+  * 128 = `10000000` tient sur 8 bits... mais ce mot vaut -128 en complément à 2 !
+  * Il faut donc 2 octets : 128 = `00000000 10000000`.
+* Les **bits non significatifs** dépendent du signe (*extension du signe*) :
+  * devant un nombre **positif**, on ajoute des **0** : 5 = `101` = `00000101`
+  * devant un nombre **négatif**, on ajoute des **1** : -5 = `1011` = `11111011`
+
+---
+## Le principe du complément à deux
+### Exemple : coder -500 sur le nombre minimum d'octets
+
+-500 est dans [-32768, 32767] mais pas dans [-128, 127] → **2 octets**.
+
+```
+1. écrire 500 en binaire sur 16 bits  →  00000001 11110100
+2. écrire son complément à 1          →  11111110 00001011
+3. ajouter 1                          →  11111110 00001100
+```
+
+**Attention au piège :** si on code 500 sur 10 bits seulement (`0111110100` → `1000001100`), il faut ensuite compléter avec des **1** : `11111110 00001100`.
+
+En complétant avec des 0, on obtiendrait `00000010 00001100` = **+524** !
+
+---
 ## La représentation des nombres entiers
 ### Entiers relatifs
 
