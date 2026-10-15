@@ -19,10 +19,10 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y libreoffice
 
-    - name: Convert ODT files to PDF
+    - name: Convert ODT and DOCX files to PDF
       run: |
         # Utiliser find avec des conditions plus strictes et une boucle while plus sûre
-        find . -type f -name "*.odt" -print0 | while IFS= read -r -d '' file; do
+        find . -type f \( -name "*.odt" -o -name "*.docx" \) -not -name "~\$*" -print0 | while IFS= read -r -d '' file; do
           if [ -f "$file" ] && [ -r "$file" ]; then
             echo "Converting $file to PDF..."
             libreoffice --headless --convert-to pdf "$file" --outdir "$(dirname "$file")" || {
