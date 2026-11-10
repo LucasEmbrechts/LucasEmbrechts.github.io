@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entraînement Exceptions - UAA14</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #7c2d12;
+    --secondary: #ea580c;
+    --accent: #dc2626;
+    --ok: #059669;
+    --ok-bg: #ecfdf5;
+    --ko: #b91c1c;
+    --ko-bg: #fef2f2;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --card: #ffffff;
+    --line: #e5e7eb;
+    --code-bg: #1e1b2e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { min-height: 100%; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #7c2d12 0%, #a16207 50%, #ea580c 100%) fixed;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 16px; padding-bottom: 48px; }
+
+  /* Barre du haut */
+  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 8px; color: #fff; margin-bottom: 16px; }
+  .topbar a, .topbar button.link { color: #fff; text-decoration: none; font-weight: 600; font-size: .95rem; opacity: .9; background: none; border: none; cursor: pointer; font-family: inherit; padding: 6px 0; }
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+  .chip { background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.3); padding: 4px 10px; border-radius: 999px; font-size: .82rem; font-weight: 700; white-space: nowrap; }
+
+  .panel { background: var(--card); border-radius: 20px; padding: 20px; box-shadow: 0 20px 40px rgba(0,0,0,.18); }
+
+  /* Accueil */
+  .hero { text-align: center; color: #fff; margin: 8px 0 20px; }
+  .hero h1 { font-size: clamp(1.7rem, 6vw, 2.6rem); font-weight: 800; line-height: 1.15; }
+  .hero p { opacity: .9; margin-top: 6px; }
+  .level { background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25); border-radius: 16px; padding: 12px 16px; color: #fff; margin-bottom: 16px; }
+  .level-top { display: flex; justify-content: space-between; font-weight: 700; font-size: .95rem; }
+  .xpbar { height: 10px; background: rgba(255,255,255,.25); border-radius: 99px; margin-top: 8px; overflow: hidden; }
+  .xpbar > div { height: 100%; background: linear-gradient(90deg, #fde68a, #fbbf24); border-radius: 99px; transition: width .6s ease; }
+
+  .modes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .mode {
+    background: var(--card); border: none; border-radius: 18px; padding: 16px; text-align: left; cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0,0,0,.15); font-family: inherit; color: var(--text);
+    transition: transform .15s ease, box-shadow .15s ease; display: flex; flex-direction: column; gap: 4px; min-height: 130px;
+  }
+  .mode:hover { transform: translateY(-3px); box-shadow: 0 16px 30px rgba(0,0,0,.2); }
+  .mode:active { transform: scale(.98); }
+  .mode .ico { font-size: 1.8rem; }
+  .mode b { font-size: 1.05rem; }
+  .mode span.d { color: var(--muted); font-size: .86rem; }
+  .mode .best { margin-top: auto; font-size: .78rem; font-weight: 700; color: var(--secondary); }
+  .mode.wide { grid-column: 1 / -1; min-height: auto; flex-direction: row; align-items: center; gap: 14px; }
+  .mode.wide .txt { display: flex; flex-direction: column; }
+  .mode[disabled] { opacity: .55; cursor: default; transform: none; }
+  .foot { text-align: center; color: rgba(255,255,255,.75); font-size: .8rem; margin-top: 24px; }
+  .foot button { background: none; border: none; color: inherit; text-decoration: underline; cursor: pointer; font-family: inherit; font-size: inherit; }
+
+  /* Jeu */
+  .progress { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; color: #fff; font-weight: 700; font-size: .9rem; }
+  .progress .bar { flex: 1; height: 10px; background: rgba(255,255,255,.25); border-radius: 99px; overflow: hidden; }
+  .progress .bar > div { height: 100%; background: #fff; border-radius: 99px; transition: width .35s ease; }
+  .combo { background: #fbbf24; color: #7c2d12; padding: 2px 9px; border-radius: 99px; font-size: .8rem; }
+  .combo.hide { visibility: hidden; }
+
+  .tag { display: inline-block; font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--secondary); margin-bottom: 6px; }
+  .question { font-size: 1.12rem; font-weight: 700; margin-bottom: 14px; }
+  code { font-family: 'JetBrains Mono', Consolas, monospace; background: #fff1e6; color: var(--primary); padding: 1px 5px; border-radius: 5px; font-size: .88em; }
+  pre.code {
+    background: var(--code-bg); color: #e5e7eb; padding: 14px; border-radius: 12px; overflow-x: auto;
+    font-family: 'JetBrains Mono', Consolas, monospace; font-size: .82rem; line-height: 1.55; margin-bottom: 14px; tab-size: 2;
+  }
+  pre.code .k { color: #f472b6; font-weight: 600; }
+  pre.code .s { color: #86efac; }
+  pre.code .v { color: #93c5fd; }
+  pre.code .c { color: #8b8aa0; font-style: italic; }
+  pre.code .n { color: #fdba74; }
+  pre.code .t { color: #fde047; }
+
+  .options { display: grid; gap: 10px; }
+  .opt {
+    width: 100%; text-align: left; padding: 13px 14px; border-radius: 14px; border: 2px solid var(--line); background: #fff;
+    font-family: inherit; font-size: .98rem; color: var(--text); cursor: pointer; display: flex; gap: 10px; align-items: flex-start;
+    transition: border-color .12s ease, background .12s ease, transform .1s ease;
+  }
+  .opt:hover:not([disabled]) { border-color: var(--secondary); background: #fff7ed; }
+  .opt:active:not([disabled]) { transform: scale(.99); }
+  .opt .key { flex: none; width: 24px; height: 24px; border-radius: 7px; background: #f3f4f6; color: var(--muted); font-size: .78rem; font-weight: 800; display: grid; place-items: center; margin-top: 1px; }
+  .opt pre { font-family: 'JetBrains Mono', Consolas, monospace; font-size: .85rem; white-space: pre-wrap; word-break: break-word; }
+  .opt.good { border-color: var(--ok); background: var(--ok-bg); }
+  .opt.good .key { background: var(--ok); color: #fff; }
+  .opt.bad { border-color: var(--ko); background: var(--ko-bg); animation: shake .35s; }
+  .opt.bad .key { background: var(--ko); color: #fff; }
+  .opt[disabled] { cursor: default; }
+  @keyframes shake { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+
+  .feedback { margin-top: 14px; border-radius: 14px; padding: 12px 14px; font-size: .95rem; display: none; }
+  .feedback.show { display: block; animation: pop .25s ease; }
+  .feedback.good { background: var(--ok-bg); color: #065f46; }
+  .feedback.bad { background: var(--ko-bg); color: #7f1d1d; }
+  .feedback b { display: block; margin-bottom: 2px; }
+  @keyframes pop { from { transform: scale(.97); opacity: 0; } to { transform: none; opacity: 1; } }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: none; cursor: pointer; font-family: inherit;
+    font-weight: 700; font-size: 1rem; padding: 13px 22px; border-radius: 999px; color: #fff;
+    background: linear-gradient(135deg, var(--primary), var(--secondary)); box-shadow: 0 6px 18px rgba(124,45,18,.3);
+  }
+  .btn:active { transform: scale(.98); }
+  .btn.ghost { background: #f3f4f6; color: var(--text); box-shadow: none; }
+  .btn.full { width: 100%; margin-top: 14px; }
+  .hint { color: var(--muted); font-size: .78rem; text-align: center; margin-top: 10px; }
+  @media (hover: none) { .hint.kbd { display: none; } }
+
+  /* Cartes */
+  .flip { perspective: 1200px; cursor: pointer; user-select: none; }
+  .flip-inner { position: relative; min-height: 290px; transition: transform .5s cubic-bezier(.4,.2,.2,1); transform-style: preserve-3d; }
+  .flip.on .flip-inner { transform: rotateY(180deg); }
+  .face {
+    position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 20px; padding: 24px;
+    display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,.18);
+  }
+  .face.front { background: #fff; }
+  .face.front .question { font-size: 1.3rem; margin: 0; }
+  .face.back { background: #fffbeb; transform: rotateY(180deg); font-size: 1.02rem; }
+  .face .small { position: absolute; bottom: 14px; left: 0; right: 0; color: var(--muted); font-size: .8rem; }
+  .face .tag { position: absolute; top: 16px; left: 0; right: 0; }
+  .card-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+  .card-actions .btn { width: 100%; }
+  .btn.no { background: #fff; color: var(--ko); box-shadow: 0 6px 18px rgba(0,0,0,.12); }
+  .btn.yes { background: var(--ok); box-shadow: 0 6px 18px rgba(5,150,105,.3); }
+
+  /* Chrono */
+  .timer { font-size: 2.6rem; font-weight: 800; color: #fff; text-align: center; line-height: 1; margin-bottom: 4px; font-variant-numeric: tabular-nums; }
+  .timer.low { color: #fde68a; animation: pulse 1s infinite; }
+  @keyframes pulse { 50% { transform: scale(1.08); } }
+  .statement { font-size: 1.2rem; font-weight: 700; text-align: center; min-height: 120px; display: grid; place-items: center; padding: 8px; }
+  .vf { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+  .vf button { padding: 20px; font-size: 1.15rem; border-radius: 16px; }
+  .vf .f { background: var(--ko); box-shadow: 0 6px 18px rgba(185,28,28,.3); }
+  .vf .v { background: var(--ok); box-shadow: 0 6px 18px rgba(5,150,105,.3); }
+  .panel.flash-good { animation: flashG .35s; }
+  .panel.flash-bad { animation: flashB .35s; }
+  @keyframes flashG { 0% { box-shadow: 0 0 0 6px var(--ok); } }
+  @keyframes flashB { 0% { box-shadow: 0 0 0 6px var(--ko); } }
+  .score-live { text-align: center; color: #fff; font-weight: 700; margin-bottom: 12px; }
+
+  /* Résultats */
+  .result { text-align: center; }
+  .result .big { font-size: 3rem; font-weight: 800; color: var(--primary); line-height: 1.1; }
+  .result .stars { font-size: 2rem; letter-spacing: 4px; margin: 6px 0; }
+  .result .msg { color: var(--muted); margin-bottom: 8px; }
+  .result .xp { display: inline-block; background: #fef3c7; color: #92400e; font-weight: 800; padding: 4px 12px; border-radius: 99px; margin: 6px 0 4px; }
+  .result .record { color: var(--secondary); font-weight: 800; }
+  .review { text-align: left; margin-top: 18px; border-top: 1px solid var(--line); padding-top: 14px; }
+  .review h3 { font-size: 1rem; margin-bottom: 10px; }
+  .review .item { background: #f9fafb; border-radius: 12px; padding: 10px 12px; margin-bottom: 8px; font-size: .9rem; }
+  .review .item .r { color: var(--ok); font-weight: 700; margin-top: 4px; }
+  .review .item pre { font-family: 'JetBrains Mono', Consolas, monospace; font-size: .8rem; white-space: pre-wrap; }
+  .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+
+  .confetti { position: fixed; top: -40px; font-size: 1.6rem; pointer-events: none; z-index: 50; animation: fall linear forwards; }
+  @keyframes fall { to { transform: translateY(110vh) rotate(540deg); } }
+
+  @media (max-width: 420px) {
+    .modes { grid-template-columns: 1fr; }
+    .mode { min-height: auto; }
+    .panel { padding: 16px; }
+    pre.code { font-size: .76rem; padding: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+
+<script>
+/* =========================================================================
+   CONTENU — tout est ici : ajoute / modifie librement les questions.
+   Les `backticks` dans les textes deviennent du code.
+   ========================================================================= */
+
+// --- Cartes mémoire -------------------------------------------------------
+const CARTES = [
+  { q: "Que fait `throw new Exception(\"…\")` ?", a: "Il **lance** une exception : la fonction s'arrête immédiatement (aucune ligne suivante, pas même le `return`) et l'exception remonte vers l'appelant." },
+  { q: "Que signifie « Uncaught exception » ?", a: "Exception **non attrapée** : personne ne l'a attrapée, le programme s'arrête sur une erreur fatale." },
+  { q: "Quel mot-clé faut-il écrire pour propager une exception en PHP ?", a: "**Aucun !** Il suffit de ne pas l'attraper : elle remonte toute seule à l'appelant, puis à l'appelant de l'appelant…" },
+  { q: "Une exception est lancée au milieu d'un `try`. Que devient le reste du `try` ?", a: "Il est **sauté** : PHP passe directement au `catch` correspondant." },
+  { q: "Une fois l'exception attrapée, où le programme reprend-il ?", a: "**Après** le bloc `try` / `catch` (et après le `finally` s'il y en a un). Il ne revient jamais dans le `try`." },
+  { q: "Que contient `$e` dans `catch (Exception $e)` ?", a: "L'**objet** exception qui a été lancé. On peut appeler ses méthodes, comme `$e->getMessage()`." },
+  { q: "Quand le bloc `finally` s'exécute-t-il ?", a: "**Dans tous les cas** : exception ou non, attrapée ou non, et même si le `try` contient un `return`." },
+  { q: "À quoi sert typiquement un `finally` ?", a: "À ce qu'il faut faire **quoi qu'il arrive** : fermer un fichier, libérer une ressource, afficher un message de fin…" },
+  { q: "Comment créer son propre type d'exception ?", a: "`class MonException extends Exception {}`\nLe corps peut rester vide : tout est **hérité** de `Exception`." },
+  { q: "D'où vient `getMessage()` dans une exception personnalisée ?", a: "Elle est **héritée** de la classe `Exception`, tout comme le constructeur qui reçoit le message." },
+  { q: "Comment donner un message à une exception ?", a: "En le passant au **constructeur** au moment du lancement :\n`throw new MonException(\"Texte du message\");`" },
+  { q: "Plusieurs `catch` se suivent. Lequel PHP exécute-t-il ?", a: "Le **premier** dont le type correspond à l'exception — et **celui-là seulement**." },
+  { q: "Dans quel ordre écrire plusieurs `catch` ?", a: "Du **plus précis** au **plus général**. Un `catch (Exception $e)` placé en premier attraperait tout et rendrait les suivants inutiles." },
+  { q: "Quel est le défaut de `catch (Exception $e)` ?", a: "Il attrape **tout** : on ne peut plus réagir différemment selon l'erreur, et on risque d'attraper une exception qu'on voulait laisser passer." },
+  { q: "Que devient une exception dont le type ne correspond à aucun `catch` ?", a: "Elle **traverse** le bloc `try` / `catch` sans être attrapée et continue de remonter vers l'appelant." },
+  { q: "`class B extends A {}` et `class A extends Exception {}`. Que attrape `catch (A $e)` ?", a: "Les exceptions de type `A` **et** de type `B`, puisqu'un `B` est aussi un `A` (héritage)." },
+  { q: "Un constructeur lance une exception. Que devient l'objet ?", a: "Il n'est **jamais créé**. La variable qui devait le recevoir garde son ancienne valeur." },
+  { q: "Pourquoi ne pas retourner une valeur spéciale (`-1`, `false`…) en cas d'erreur ?", a: "1) Cette valeur peut être un **vrai résultat** : impossible de distinguer.\n2) L'appelant peut **oublier de la tester** et continuer avec une valeur absurde. Une exception, elle, ne passe pas inaperçue." },
+  { q: "Où faut-il attraper une exception ?", a: "**Là où l'on sait quoi en faire.** Si on ne sait pas, on la laisse remonter." },
+  { q: "Que fait `throw $e;` dans un `catch` ?", a: "Il **relance la même** exception, avec son type et son message d'origine. Utile pour faire un peu de nettoyage avant de la laisser continuer." },
+  { q: "Peut-on lancer une **autre** exception dans un `catch` ?", a: "Oui : on attrape une exception et on en lance une nouvelle, plus adaptée à l'appelant. On « traduit » l'erreur." },
+  { q: "Une exception lancée dans un `catch` est-elle attrapée par les `catch` suivants du même `try` ?", a: "**Non.** Les `catch` d'un `try` ne surveillent que le `try`. La nouvelle exception remonte plus haut (un `try` extérieur, l'appelant…)." },
+  { q: "`try` dans un `try` : où va une exception que le `catch` intérieur n'attrape pas ?", a: "Elle sort du `try` intérieur et peut être attrapée par un `catch` du `try` **extérieur**." },
+  { q: "Ce qui a été affiché **avant** un `throw` disparaît-il ?", a: "**Non.** Tout ce qui a été exécuté avant le `throw` reste fait. L'exception n'annule rien : elle arrête simplement la suite." },
+  { q: "Que montre la « Stack trace » d'une erreur ?", a: "La **pile d'appels** : le chemin des fonctions traversées par l'exception, de celle qui l'a lancée (`#0`) jusqu'au script principal (`{main}`)." },
+];
+
+// --- Questions de compréhension (QCM) ---------------------------------------
+// La première option est toujours la bonne (elles sont mélangées à l'affichage).
+const QCM = [
+  { q: "Après un `throw`, que se passe-t-il dans la fonction ?", o: ["Elle s'arrête immédiatement", "Elle continue jusqu'au `return`", "Elle retourne `null`", "Elle affiche le message de l'exception"], e: "Après un `throw`, plus aucune ligne de la fonction n'est exécutée, même pas le `return`." },
+  { q: "Quel mot-clé faut-il écrire pour qu'une exception remonte à l'appelant ?", o: ["Aucun : il suffit de ne pas l'attraper", "`throws`", "`return $e;`", "`propagate`"], e: "En PHP, propager c'est ne rien faire : une exception non attrapée remonte toute seule." },
+  { q: "Comment définir une exception `SoldeInsuffisantException` ?", o: ["`class SoldeInsuffisantException extends Exception {}`", "`class SoldeInsuffisantException {}`", "`new Exception(\"SoldeInsuffisant\");`", "`function SoldeInsuffisantException() {}`"], e: "Une exception personnalisée hérite de `Exception` : le corps peut rester vide." },
+  { q: "Comment récupérer le texte d'une exception attrapée dans `$e` ?", o: ["`$e->getMessage()`", "`$e->message()`", "`getMessage($e)`", "`$e->getError()`"], e: "`getMessage()` est une méthode héritée de `Exception`." },
+  { q: "Où indique-t-on le message d'une exception ?", o: ["En argument du constructeur, au moment du `throw`", "Dans le `catch`", "Dans une méthode `setMessage()`", "Dans le `finally`"], e: "`throw new MonException(\"message\");` — le constructeur hérité de `Exception` le reçoit." },
+  { q: "Le bloc `finally` s'exécute…", o: ["dans tous les cas", "seulement si une exception a été lancée", "seulement si aucune exception n'a été lancée", "seulement s'il n'y a pas de `catch`"], e: "`finally` s'exécute quoi qu'il arrive." },
+  { q: "Que met-on typiquement dans un `finally` ?", o: ["Ce qui doit être fait quoi qu'il arrive (fermer un fichier…)", "Le code qui peut lancer une exception", "Le traitement de l'erreur", "La définition de l'exception"], e: "C'est l'endroit idéal pour libérer une ressource, erreur ou pas." },
+  { q: "Un constructeur lance une exception. Que se passe-t-il ?", o: ["L'objet n'est jamais créé", "L'objet est créé mais ses attributs sont vides", "L'objet est créé puis supprimé", "Le constructeur retourne `false`"], e: "Un objet dans un état incohérent ne peut donc jamais exister." },
+  { q: "Plusieurs `catch` se suivent après un `try`. Lequel s'exécute ?", o: ["Le premier dont le type correspond, et lui seul", "Tous ceux dont le type correspond", "Le dernier dont le type correspond", "Le plus précis, peu importe l'ordre"], e: "PHP lit les `catch` dans l'ordre et s'arrête au premier qui correspond." },
+  { q: "Dans quel ordre faut-il écrire les `catch` ?", o: ["Du plus précis au plus général", "Du plus général au plus précis", "Par ordre alphabétique", "L'ordre n'a aucune importance"], e: "Un `catch` général placé en premier attraperait tout avant les plus précis." },
+  { q: "Quel est l'inconvénient d'un seul `catch (Exception $e)` ?", o: ["On ne peut plus réagir différemment selon l'erreur", "Il n'attrape pas les exceptions personnalisées", "Il est interdit en PHP", "Il arrête le programme"], e: "Il attrape tout : on perd l'information sur le type d'erreur." },
+  { q: "Une exception est lancée dans un `try`, mais aucun `catch` n'a son type. Que se passe-t-il ?", o: ["Elle continue de remonter vers l'appelant", "Le premier `catch` l'attrape quand même", "Elle est ignorée", "Le `try` recommence"], e: "Un `catch` n'attrape que son type (et ses sous-classes)." },
+  { q: "`class ReseauException extends AppException {}`. Quel `catch` attrape une `ReseauException` ?", o: ["`catch (AppException $e)` et `catch (ReseauException $e)`", "Seulement `catch (ReseauException $e)`", "Seulement `catch (AppException $e)`", "Aucun des deux"], e: "Une `ReseauException` est aussi une `AppException` (et une `Exception`)." },
+  { q: "Que fait `throw $e;` placé dans un `catch` ?", o: ["Il relance la même exception (même type, même message)", "Il crée une nouvelle `Exception` vide", "Il affiche l'exception", "Il annule l'exception"], e: "L'appelant reçoit l'exception d'origine." },
+  { q: "Pourquoi `return -1;` est-il une mauvaise façon de signaler une erreur ?", o: ["`-1` peut aussi être un vrai résultat", "`return` est interdit dans une fonction", "PHP ne sait pas retourner un nombre négatif", "Ça arrête le programme"], e: "Impossible de distinguer l'erreur d'un vrai résultat, et l'appelant peut oublier de tester." },
+  { q: "Que signifie « Uncaught » dans « Fatal error: Uncaught Exception » ?", o: ["Non attrapée", "Non lancée", "Non définie", "Non trouvée"], e: "Personne n'a attrapé l'exception : le programme s'arrête." },
+  { q: "Une exception est lancée au milieu d'un `try`. Que deviennent les lignes suivantes du `try` ?", o: ["Elles sont sautées", "Elles sont exécutées après le `catch`", "Elles sont exécutées avant le `catch`", "Elles provoquent une erreur"], e: "On saute directement au `catch` qui correspond." },
+  { q: "Après l'exécution d'un `catch`, où le programme continue-t-il ?", o: ["Après le bloc `try` / `catch`", "À la ligne qui a lancé l'exception", "Au début du `try`", "Nulle part : il s'arrête"], e: "On ne revient jamais dans le `try`." },
+  { q: "Une exception est lancée **dans un `catch`**. Est-elle attrapée par un autre `catch` du même `try` ?", o: ["Non, elle remonte plus haut", "Oui, par le `catch` suivant", "Oui, par le même `catch`", "Elle est ignorée"], e: "Les `catch` ne surveillent que le bloc `try`, pas les autres `catch`." },
+  { q: "Pourquoi créer plusieurs types d'exception plutôt qu'une seule `Exception` ?", o: ["Pour pouvoir réagir différemment selon l'erreur", "Parce que `Exception` ne peut pas avoir de message", "Pour que le programme soit plus rapide", "Parce que PHP l'impose"], e: "Chaque type a son propre `catch`, donc sa propre réaction." },
+  { q: "Où faut-il attraper une exception ?", o: ["Là où l'on sait quoi en faire", "Toujours dans la fonction qui la lance", "Toujours dans le script principal", "Le plus tôt possible, partout"], e: "Si on ne sait pas quoi en faire, on la laisse remonter." },
+  { q: "Pourquoi une fonction lance-t-elle une exception plutôt que d'afficher elle-même un message d'erreur ?", o: ["Elle ne sait pas comment l'appelant veut réagir", "Parce qu'`echo` est interdit dans une fonction", "Pour que l'erreur passe inaperçue", "Pour arrêter le programme à coup sûr"], e: "Afficher, réessayer, ignorer… c'est à l'appelant de décider." },
+  { q: "Que montre la « Stack trace » d'une erreur ?", o: ["Le chemin des appels traversés par l'exception", "La liste des variables du programme", "Le contenu du `finally`", "Les exceptions définies dans le programme"], e: "De la fonction qui a lancé l'exception (`#0`) jusqu'au script principal (`{main}`)." },
+  { q: "`$e` dans `catch (Exception $e)` est…", o: ["un objet", "une chaîne de caractères", "un booléen", "un nombre (le code d'erreur)"], e: "C'est l'objet exception lancé : on appelle ses méthodes avec `->`." },
+];
+
+// --- Prédis l'affichage (code) ---------------------------------------------
+const INVERSE = `function inverse($x) {
+  if ($x == 0) {
+    throw new Exception("0 n'a pas d'inverse");
+  }
+  return 1 / $x;
+}`;
+const VERIF = `class TropPetitException extends Exception {}
+class TropGrandException extends Exception {}
+
+function verifier($n) {
+  if ($n < 0)  throw new TropPetitException("$n < 0");
+  if ($n > 10) throw new TropGrandException("$n > 10");
+  return "ok";
+}`;
+const CODE = [
+  { pre: INVERSE, code: `$r = "départ";
+try {
+  $r = inverse(0);
+  echo "Calcul réussi<br>";
+} catch (Exception $e) {
+  echo "Erreur<br>";
+}
+echo $r;`,
+    o: ["Erreur\ndépart", "Erreur\n0", "Calcul réussi\nErreur\ndépart", "Erreur\n(rien : $r a été effacée)"],
+    e: "`inverse(0)` lance l'exception **avant** de rendre une valeur : l'affectation `$r = …` n'a jamais lieu. `$r` garde donc son ancienne valeur." },
+  { pre: `function connecter($essai) {
+  if ($essai < 3) {
+    throw new Exception("Échec n°$essai");
+  }
+  return "Connecté";
+}`, code: `$essai = 1;
+$ok = false;
+while (!$ok) {
+  try {
+    echo connecter($essai) . "<br>";
+    $ok = true;
+  } catch (Exception $e) {
+    echo $e->getMessage() . "<br>";
+    $essai++;
+  }
+}
+echo "Essais : $essai";`,
+    o: ["Échec n°1\nÉchec n°2\nConnecté\nEssais : 3", "Échec n°1\nConnecté\nEssais : 2", "Échec n°1\nÉchec n°2\nÉchec n°3\nConnecté\nEssais : 3", "Échec n°1\nFatal error: Uncaught Exception…"],
+    e: "Le `try` est dans la boucle : chaque échec est attrapé, on augmente `$essai` et on réessaie. Au 3e essai, plus d'exception : `$ok = true` est enfin exécuté." },
+  { pre: `class CoordonneeException extends Exception {}
+
+class Point {
+  function __construct($x) {
+    if ($x < 0) {
+      throw new CoordonneeException("x négatif");
+    }
+    echo "P$x ";
+  }
+}`, code: `$points = array();
+try {
+  foreach (array(1, 2, -3, 4) as $x) {
+    array_push($points, new Point($x));
+  }
+} catch (CoordonneeException $e) {
+  echo "Stop ";
+}
+echo count($points);`,
+    o: ["P1 P2 Stop 2", "P1 P2 Stop P4 3", "P1 P2 Stop 3", "Stop 0"],
+    e: "Le 3e objet n'est jamais créé (donc jamais ajouté), et comme le `try` entoure la boucle, le point 4 n'est même pas tenté. Les deux premiers, eux, restent dans le tableau." },
+  { pre: INVERSE, code: `try {
+  echo "1 ";
+  inverse(0);
+  echo "2 ";
+} catch (Exception $e) {
+  echo "3 ";
+} finally {
+  echo "4 ";
+}
+echo "5";`,
+    o: ["1 3 4 5", "1 3 5", "1 2 3 4 5", "1 4 5"],
+    e: "Exception → on saute « 2 », on passe dans le `catch` (3), `finally` s'exécute toujours (4), puis la suite (5)." },
+  { pre: INVERSE, code: `try {
+  echo "1 ";
+  inverse(5);
+  echo "2 ";
+} catch (Exception $e) {
+  echo "3 ";
+} finally {
+  echo "4 ";
+}
+echo "5";`,
+    o: ["1 2 4 5", "1 2 3 4 5", "1 2 5", "1 2 3 5"],
+    e: "Aucune exception : le `catch` est ignoré, mais `finally` s'exécute quand même." },
+  { pre: VERIF, code: `foreach (array(15, 3, -2) as $n) {
+  try {
+    echo verifier($n) . "<br>";
+  } catch (TropPetitException $e) {
+    echo "Petit : " . $e->getMessage() . "<br>";
+  } catch (TropGrandException $e) {
+    echo "Grand : " . $e->getMessage() . "<br>";
+  }
+}`,
+    o: ["Grand : 15 > 10\nok\nPetit : -2 < 0", "Petit : 15 > 10\nok\nGrand : -2 < 0", "Grand : 15 > 10", "Grand : 15 > 10\nPetit : 15 > 10\nok\nPetit : -2 < 0"],
+    e: "Pour chaque valeur, PHP exécute le `catch` qui correspond au **type** de l'exception lancée." },
+  { pre: VERIF, code: `try {
+  verifier(12);
+} catch (Exception $e) {
+  echo "Erreur quelconque";
+} catch (TropGrandException $e) {
+  echo "Trop grand";
+}`,
+    o: ["Erreur quelconque", "Trop grand", "Erreur quelconqueTrop grand", "Fatal error: Uncaught TropGrandException…"],
+    e: "`TropGrandException` hérite de `Exception` : le **premier** `catch` correspond déjà. Le second ne sert plus à rien." },
+  { pre: VERIF, code: `try {
+  echo verifier(-3);
+} catch (TropGrandException $e) {
+  echo "Trop grand";
+}
+echo "Fin";`,
+    o: ["Fatal error: Uncaught TropPetitException: -3 < 0 …\n(« Fin » n'est pas affiché)", "Trop grand\nFin", "Fin", "ok\nFin"],
+    e: "Aucun `catch` ne correspond à `TropPetitException` : elle n'est pas attrapée et le programme s'arrête." },
+  { pre: ``, code: `function c() {
+  echo "c début<br>";
+  throw new Exception("boum");
+  echo "c fin<br>";
+}
+function b() {
+  echo "b début<br>";
+  c();
+  echo "b fin<br>";
+}
+function a() {
+  echo "a début<br>";
+  b();
+  echo "a fin<br>";
+}
+
+try {
+  a();
+} catch (Exception $e) {
+  echo "Attrapée : " . $e->getMessage() . "<br>";
+}
+echo "Fin";`,
+    o: ["a début\nb début\nc début\nAttrapée : boum\nFin", "a début\nb début\nc début\nc fin\nb fin\na fin\nAttrapée : boum\nFin", "a début\nb début\nc début\nAttrapée : boum\nb fin\na fin\nFin", "a début\nb début\nc début\nFatal error: Uncaught Exception…"],
+    e: "L'exception remonte `c` → `b` → `a` → script **sans aucun mot-clé**, et interrompt chaque fonction au passage : aucun « fin » n'est affiché." },
+  { pre: ``, code: `function c() {
+  throw new Exception("boum");
+}
+function b() {
+  try {
+    c();
+    echo "b suite<br>";
+  } catch (Exception $e) {
+    echo "b attrape<br>";
+  }
+  echo "b fin<br>";
+}
+function a() {
+  b();
+  echo "a fin<br>";
+}
+
+try {
+  a();
+} catch (Exception $e) {
+  echo "Script attrape<br>";
+}
+echo "Fin";`,
+    o: ["b attrape\nb fin\na fin\nFin", "b attrape\nScript attrape\nFin", "b attrape\nb fin\na fin\nScript attrape\nFin", "b suite\nb fin\na fin\nFin"],
+    e: "`b` attrape l'exception : elle est **consommée**. Pour `a` et le script, tout s'est bien passé." },
+  { pre: INVERSE, code: `function calculer() {
+  try {
+    inverse(0);
+  } catch (Exception $e) {
+    echo "Nettoyage<br>";
+    throw $e;
+  }
+}
+
+try {
+  calculer();
+} catch (Exception $e) {
+  echo "Script : " . $e->getMessage();
+}`,
+    o: ["Nettoyage\nScript : 0 n'a pas d'inverse", "Nettoyage", "Script : 0 n'a pas d'inverse", "Nettoyage\nFatal error: Uncaught Exception…"],
+    e: "`calculer()` attrape, fait son nettoyage, puis **relance la même** exception avec `throw $e;`. Le script la reçoit avec son message d'origine." },
+  { pre: `class FormatException extends Exception {}
+class ConversionException extends Exception {}
+
+function lireNombre($texte) {
+  if (!is_numeric($texte)) {
+    throw new FormatException("'$texte' n'est pas un nombre");
+  }
+  return $texte * 1;
+}
+
+function convertir($texte) {
+  try {
+    return lireNombre($texte);
+  } catch (FormatException $e) {
+    throw new ConversionException("Conversion impossible");
+  }
+}`, code: `try {
+  convertir("abc");
+} catch (FormatException $e) {
+  echo "A : " . $e->getMessage();
+} catch (ConversionException $e) {
+  echo "B : " . $e->getMessage();
+}`,
+    o: ["B : Conversion impossible", "A : 'abc' n'est pas un nombre", "A : 'abc' n'est pas un nombre\nB : Conversion impossible", "B : 'abc' n'est pas un nombre"],
+    e: "`convertir()` attrape la `FormatException` et lance **une autre** exception. C'est une `ConversionException` qui arrive au script." },
+  { pre: `class AException extends Exception {}
+class BException extends Exception {}`, code: `try {
+  try {
+    throw new AException("a");
+  } catch (AException $e) {
+    echo "1 ";
+    throw new BException("b");
+  } catch (BException $e) {
+    echo "2 ";
+  }
+} catch (BException $e) {
+  echo "3 ";
+}
+echo "4";`,
+    o: ["1 3 4", "1 2 4", "1 2 3 4", "1 4"],
+    e: "La `BException` est lancée **dans un `catch`** : le `catch (BException)` voisin ne surveille que le `try` intérieur. Elle remonte au `try` extérieur." },
+  { pre: `class SaisieException extends Exception {}
+class PanneException extends Exception {}
+
+function traiter($cas) {
+  if ($cas == "panne")  throw new PanneException("panne");
+  if ($cas == "erreur") throw new SaisieException("saisie");
+  return "OK";
+}`, code: `foreach (array("erreur", "panne", "bon") as $cas) {
+  try {
+    try {
+      echo traiter($cas) . "<br>";
+    } catch (SaisieException $e) {
+      echo "Saisie incorrecte<br>";
+    }
+  } catch (PanneException $e) {
+    echo "Service indisponible<br>";
+  }
+}`,
+    o: ["Saisie incorrecte\nService indisponible\nOK", "Saisie incorrecte\nService indisponible", "Saisie incorrecte\nSaisie incorrecte\nOK", "Saisie incorrecte\nFatal error: Uncaught PanneException…"],
+    e: "La `SaisieException` est attrapée par le `catch` intérieur ; la `PanneException` traverse le `try` intérieur et est attrapée par l'extérieur. Tout est dans la boucle : on continue." },
+  { pre: ``, code: `try {
+  try {
+    throw new Exception("x");
+  } catch (Exception $e) {
+    echo "A ";
+    throw $e;
+  } finally {
+    echo "B ";
+  }
+} catch (Exception $e) {
+  echo "C ";
+}`,
+    o: ["A B C", "A C B", "A C", "A B"],
+    e: "Même quand le `catch` relance l'exception, le `finally` s'exécute **avant** qu'elle ne remonte au `try` extérieur." },
+  { pre: ``, code: `function test() {
+  try {
+    return "T ";
+  } finally {
+    echo "F ";
+  }
+}
+
+echo test();`,
+    o: ["F T", "T F", "T", "F"],
+    e: "Le `finally` s'exécute même s'il y a un `return` dans le `try`, juste avant que la fonction ne rende sa valeur. L'`echo` du script affiche ensuite « T »." },
+  { pre: `class AppException extends Exception {}
+class ReseauException extends AppException {}
+class SaisieException extends AppException {}`, code: `foreach (array("reseau", "saisie", "autre") as $cas) {
+  try {
+    if ($cas == "reseau") throw new ReseauException("r");
+    if ($cas == "saisie") throw new SaisieException("s");
+    throw new Exception("e");
+  } catch (ReseauException $e) {
+    echo "R ";
+  } catch (AppException $e) {
+    echo "A ";
+  } catch (Exception $e) {
+    echo "E ";
+  }
+}`,
+    o: ["R A E", "R S E", "R A A", "A A E"],
+    e: "`SaisieException` n'a pas son propre `catch`, mais c'est une `AppException` : c'est ce `catch` qui la prend. Une simple `Exception` n'est ni l'une ni l'autre." },
+  { pre: ``, code: `function traiter($x) {
+  echo "Début $x<br>";
+  if ($x < 0) throw new Exception("négatif");
+  echo "Fin $x<br>";
+}
+
+try {
+  traiter(3);
+  traiter(-1);
+  traiter(7);
+} catch (Exception $e) {
+  echo "Erreur : " . $e->getMessage();
+}`,
+    o: ["Début 3\nFin 3\nDébut -1\nErreur : négatif", "Début 3\nFin 3\nErreur : négatif", "Début 3\nFin 3\nDébut -1\nFin -1\nErreur : négatif", "Début 3\nFin 3\nDébut -1\nErreur : négatif\nDébut 7\nFin 7"],
+    e: "Ce qui est affiché **avant** le `throw` reste affiché. Ensuite, la fonction s'arrête et le reste du `try` (7) est sauté." },
+  { pre: ``, code: `$total = 0;
+try {
+  foreach (array(5, 10, -1, 20) as $n) {
+    if ($n < 0) throw new Exception("négatif");
+    $total += $n;
+  }
+} catch (Exception $e) {
+  echo "Erreur<br>";
+}
+echo $total;`,
+    o: ["Erreur\n15", "Erreur\n0", "Erreur\n35", "Erreur\n34"],
+    e: "L'exception n'annule pas ce qui a déjà été fait : 5 et 10 ont été additionnés. Elle empêche seulement la suite (20)." },
+];
+
+// --- Vrai ou faux (chrono) ---------------------------------------------------
+const VF = [
+  ["Après un `throw`, le `return` de la fonction est quand même exécuté.", false, "La fonction s'arrête net au `throw`."],
+  ["En PHP, il faut écrire `throws` pour propager une exception.", false, "Aucun mot-clé : il suffit de ne pas l'attraper."],
+  ["Une exception que personne n'attrape arrête le programme.", true, "C'est une « Fatal error: Uncaught … »."],
+  ["Le bloc `finally` s'exécute même si aucune exception n'a été lancée.", true, "`finally` s'exécute dans tous les cas."],
+  ["Le `finally` s'exécute même si le `try` contient un `return`.", true, "Il s'exécute juste avant que la fonction ne rende sa valeur."],
+  ["Si un constructeur lance une exception, l'objet est créé mais vide.", false, "L'objet n'est jamais créé."],
+  ["`class MonException extends Exception {}` suffit pour créer son propre type d'exception.", true, "Tout est hérité de `Exception`."],
+  ["Il faut écrire `getMessage()` dans chaque exception personnalisée.", false, "Elle est héritée de `Exception`."],
+  ["PHP peut exécuter plusieurs `catch` pour une même exception lancée dans un `try`.", false, "Seulement le premier qui correspond."],
+  ["`catch (Exception $e)` attrape aussi les exceptions personnalisées.", true, "Elles héritent toutes de `Exception`."],
+  ["Si `catch (Exception $e)` est placé en premier, les `catch` suivants ne servent plus à rien.", true, "Il correspond à toutes les exceptions."],
+  ["Il vaut mieux écrire les `catch` du plus général au plus précis.", false, "C'est l'inverse : du plus précis au plus général."],
+  ["`throw $e;` dans un `catch` relance la même exception.", true, "Avec son type et son message d'origine."],
+  ["Dans `catch (Exception $e)`, `$e` est un objet.", true, "On peut appeler ses méthodes, comme `getMessage()`."],
+  ["Dans un `try`, les lignes après celle qui lance l'exception sont exécutées.", false, "Elles sont sautées."],
+  ["Une exception lancée dans un `try` peut ne pas être attrapée par son `catch`.", true, "Si son type ne correspond à aucun `catch`, elle traverse et remonte."],
+  ["Retourner `-1` est une bonne façon de signaler une erreur.", false, "`-1` peut être un vrai résultat."],
+  ["Une exception peut traverser plusieurs fonctions avant d'être attrapée.", true, "Elle remonte toute la chaîne d'appels."],
+  ["On peut placer un `try` à l'intérieur d'un autre `try`.", true, "Une exception non attrapée à l'intérieur peut l'être à l'extérieur."],
+  ["Le message d'une exception est donné à son constructeur au moment du `throw`.", true, "`throw new MonException(\"message\");`"],
+  ["Une exception doit être attrapée dans la fonction qui la lance.", false, "On l'attrape là où l'on sait quoi en faire."],
+  ["Si aucune exception n'est lancée, le `catch` est exécuté quand même.", false, "Le `catch` est ignoré (contrairement à `finally`)."],
+  ["Un `catch` peut lancer une autre exception.", true, "On « traduit » alors l'erreur."],
+  ["Une exception lancée dans un `catch` est attrapée par le `catch` suivant du même `try`.", false, "Les `catch` ne surveillent que le `try` : elle remonte plus haut."],
+  ["`catch (Exception $e)` est toujours la meilleure solution.", false, "On perd l'information sur le type d'erreur."],
+  ["Une fois l'exception attrapée, l'exécution reprend après le bloc `try` / `catch`.", true, "Le programme continue normalement."],
+  ["Après le `catch`, le programme revient à la ligne qui a lancé l'exception.", false, "Il continue après le bloc `try` / `catch`."],
+  ["Un objet dont le constructeur a lancé une exception peut être utilisé après le `catch`.", false, "Il n'existe pas."],
+  ["Une exception personnalisée peut transporter un message.", true, "Le constructeur hérité de `Exception` l'accepte."],
+  ["Si `B extends A`, alors `catch (A $e)` attrape aussi les exceptions de type `B`.", true, "Un `B` est aussi un `A`."],
+  ["Une exception annule tout ce que le `try` avait déjà fait.", false, "Ce qui est fait reste fait : elle arrête seulement la suite."],
+  ["Une même fonction peut lancer plusieurs types d'exception différents.", true, "Un `throw` par cas d'erreur, chacun avec son type."],
+  ["On peut écrire un `try` avec un `finally` et sans aucun `catch`.", true, "L'exception remonte alors, mais le `finally` s'exécute d'abord."],
+  ["Lancer une exception plutôt qu'afficher un message laisse l'appelant décider de la réaction.", true, "C'est tout l'intérêt des exceptions."],
+];
+
+/* =========================================================================
+   MOTEUR
+   ========================================================================= */
+const STORE_KEY = 'uaa14-exceptions-v1';
+const defaultState = () => ({ xp: 0, best: {}, mastered: [], missed: [], streak: 0, lastDay: null });
+let S = defaultState();
+try { S = Object.assign(defaultState(), JSON.parse(localStorage.getItem(STORE_KEY)) || {}); } catch (e) {}
+function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(S)); } catch (e) {} }
+
+// Identifiants stables
+CARTES.forEach((c, i) => c.id = 'c' + i);
+QCM.forEach((q, i) => { q.id = 'q' + i; q.kind = 'qcm'; });
+CODE.forEach((q, i) => { q.id = 'p' + i; q.kind = 'code'; });
+const ALLQ = Object.fromEntries([...QCM, ...CODE].map(q => [q.id, q]));
+
+const LEVELS = ["Débutant·e", "Lanceur·se d'exceptions", "Attrapeur·se", "As du try/catch", "Maître de la propagation", "Expert·e de la pile d'appels", "Légende du finally"];
+const XP_PER_LEVEL = 150;
+
+const $app = document.getElementById('app');
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const fmt = s => esc(s).replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
+const plain = s => s.replace(/`/g, '').replace(/\*\*/g, '');
+
+function highlight(src) {
+  const re = /(\/\/[^\n]*)|("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')|(\$\w+)|\b(class|extends|function|throw|new|try|catch|finally|return|if|else|foreach|as|echo|array|private|public|true|false|null)\b|\b(\d+)\b|\b([A-Z]\w*)\b/g;
+  let out = '', last = 0, m;
+  while ((m = re.exec(src))) {
+    out += esc(src.slice(last, m.index));
+    const t = esc(m[0]);
+    if (m[1]) out += `<span class="c">${t}</span>`;
+    else if (m[2]) out += `<span class="s">${t.replace(/(\$\w+)/g, '<span class="v">$1</span>')}</span>`;
+    else if (m[3]) out += `<span class="v">${t}</span>`;
+    else if (m[4]) out += `<span class="k">${t}</span>`;
+    else if (m[5]) out += `<span class="n">${t}</span>`;
+    else out += `<span class="t">${t}</span>`;
+    last = re.lastIndex;
+  }
+  return out + esc(src.slice(last));
+}
+
+function today() { const d = new Date(); return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); }
+function touchStreak() {
+  const t = today();
+  if (S.lastDay === t) return;
+  const y = new Date(); y.setDate(y.getDate() - 1);
+  const yd = y.getFullYear() + '-' + (y.getMonth() + 1) + '-' + y.getDate();
+  S.streak = (S.lastDay === yd) ? S.streak + 1 : 1;
+  S.lastDay = t;
+}
+function addXP(n) { S.xp += n; touchStreak(); save(); }
+function levelInfo() {
+  const lvl = Math.floor(S.xp / XP_PER_LEVEL);
+  return { n: lvl + 1, name: LEVELS[Math.min(lvl, LEVELS.length - 1)], pct: (S.xp % XP_PER_LEVEL) / XP_PER_LEVEL * 100, rest: XP_PER_LEVEL - S.xp % XP_PER_LEVEL };
+}
+function miss(id) { if (!S.missed.includes(id)) S.missed.push(id); save(); }
+function unmiss(id) { S.missed = S.missed.filter(x => x !== id); save(); }
+
+let keyHandler = null, timerId = null;
+document.addEventListener('keydown', e => { if (keyHandler && !e.metaKey && !e.ctrlKey && !e.altKey) keyHandler(e); });
+function stopAll() { keyHandler = null; if (timerId) { clearInterval(timerId); timerId = null; } }
+
+function topbar(back) {
+  const streak = S.streak && S.lastDay ? `<span class="chip">🔥 ${S.streak} j</span>` : '';
+  return `<div class="topbar">
+    ${back ? `<button class="link" data-act="home">← Menu</button>` : `<a href="index.html">← UAA14</a>`}
+    <div class="chips">${streak}<span class="chip">⭐ ${S.xp} XP</span></div>
+  </div>`;
+}
+function bind(root) {
+  root.querySelectorAll('[data-act]').forEach(b => b.addEventListener('click', () => ACTIONS[b.dataset.act]()));
+}
+
+/* ---------- Accueil ---------- */
+function home() {
+  stopAll();
+  const L = levelInfo();
+  const b = S.best;
+  const nMiss = S.missed.filter(id => ALLQ[id]).length;
+  const nMast = S.mastered.filter(id => CARTES.some(c => c.id === id)).length;
+  $app.innerHTML = `${topbar(false)}
+  <div class="hero"><h1>⚡ Les exceptions</h1><p>Entraîne-toi en quelques minutes, où tu veux, quand tu veux.</p></div>
+  <div class="level">
+    <div class="level-top"><span>Niveau ${L.n} · ${L.name}</span><span>${L.rest} XP → niv. ${L.n + 1}</span></div>
+    <div class="xpbar"><div style="width:${L.pct}%"></div></div>
+  </div>
+  <div class="modes">
+    <button class="mode" data-act="cards"><span class="ico">🃏</span><b>Cartes mémoire</b><span class="d">Retourne, réponds, mémorise.</span><span class="best">${nMast}/${CARTES.length} maîtrisées</span></button>
+    <button class="mode" data-act="quiz"><span class="ico">🎯</span><b>Quiz éclair</b><span class="d">10 questions variées.</span><span class="best">${b.quiz != null ? 'Record : ' + b.quiz + '/10' : 'Pas encore joué'}</span></button>
+    <button class="mode" data-act="code"><span class="ico">🔮</span><b>Prédis l'affichage</b><span class="d">Lis le code, devine ce qui s'affiche.</span><span class="best">${b.code != null ? 'Record : ' + b.code + '/8' : 'Pas encore joué'}</span></button>
+    <button class="mode" data-act="chrono"><span class="ico">⏱️</span><b>Chrono 60 s</b><span class="d">Vrai ou faux ? Le plus vite possible.</span><span class="best">${b.chrono != null ? 'Record : ' + b.chrono + ' pts' : 'Pas encore joué'}</span></button>
+    <button class="mode wide" data-act="errors" ${nMiss ? '' : 'disabled'}><span class="ico">🩹</span><span class="txt"><b>Mes erreurs ${nMiss ? '(' + nMiss + ')' : ''}</b><span class="d">${nMiss ? 'Rejoue les questions ratées jusqu\'à les réussir.' : 'Aucune erreur à revoir pour l\'instant 👌'}</span></span></button>
+  </div>
+  <div class="foot">UAA14 · Programmation orientée objet · Ta progression reste sur cet appareil. <button data-act="reset">Réinitialiser</button></div>`;
+  bind($app);
+}
+
+/* ---------- Cartes mémoire ---------- */
+function cards() {
+  stopAll();
+  const notMastered = CARTES.filter(c => !S.mastered.includes(c.id));
+  let deck = shuffle(notMastered.length ? notMastered : CARTES);
+  const total = deck.length;
+  let known = 0, flipped = false;
+
+  function render() {
+    if (!deck.length) return cardsDone();
+    const c = deck[0];
+    flipped = false;
+    $app.innerHTML = `${topbar(true)}
+    <div class="progress"><span>🃏 ${known}/${total}</span><div class="bar"><div style="width:${known / total * 100}%"></div></div></div>
+    <div class="flip" id="flip"><div class="flip-inner">
+      <div class="face front"><span class="tag">Question</span><div class="question">${fmt(c.q)}</div><div class="small">Touche la carte pour la retourner</div></div>
+      <div class="face back"><span class="tag">Réponse</span><div>${fmt(c.a)}</div></div>
+    </div></div>
+    <div class="card-actions">
+      <button class="btn no" id="no">↺ À revoir</button>
+      <button class="btn yes" id="yes">✓ Je savais</button>
+    </div>
+    <p class="hint kbd">Espace : retourner · ← à revoir · → je savais</p>`;
+    bind($app);
+    const flip = document.getElementById('flip');
+    flip.addEventListener('click', () => { flipped = !flipped; flip.classList.toggle('on', flipped); });
+    document.getElementById('no').onclick = () => answer(false);
+    document.getElementById('yes').onclick = () => answer(true);
+    keyHandler = e => {
+      if (e.key === ' ') { e.preventDefault(); flip.click(); }
+      else if (e.key === 'ArrowLeft') answer(false);
+      else if (e.key === 'ArrowRight') answer(true);
+    };
+  }
+  function answer(ok) {
+    const c = deck.shift();
+    if (ok) {
+      known++;
+      if (!S.mastered.includes(c.id)) S.mastered.push(c.id);
+      addXP(5);
+    } else {
+      S.mastered = S.mastered.filter(x => x !== c.id); save();
+      deck.splice(Math.min(deck.length, 3), 0, c); // revient un peu plus tard
+    }
+    render();
+  }
+  function cardsDone() {
+    stopAll();
+    confetti();
+    const all = S.mastered.filter(id => CARTES.some(c => c.id === id)).length === CARTES.length;
+    $app.innerHTML = `${topbar(true)}<div class="panel result">
+      <div class="big">🎉</div><h2>Paquet terminé !</h2>
+      <p class="msg">${total} carte${total > 1 ? 's' : ''} révisée${total > 1 ? 's' : ''}. ${all ? 'Tu maîtrises toutes les cartes 💪' : ''}</p>
+      <div class="actions">
+        <button class="btn" data-act="cardsAll">Tout réviser</button>
+        <button class="btn ghost" data-act="home">Menu</button>
+      </div></div>`;
+    bind($app);
+  }
+  render();
+}
+
+/* ---------- Quiz (QCM + code) ---------- */
+function quiz(pool, title, key) {
+  stopAll();
+  const qs = pool;
+  let i = 0, score = 0, combo = 0, xp = 0;
+  const wrong = [];
+
+  function render() {
+    if (i >= qs.length) return done();
+    const q = qs[i];
+    const opts = shuffle(q.o.map((t, k) => ({ t, good: k === 0 })));
+    const isOut = q.kind === 'code';
+    $app.innerHTML = `${topbar(true)}
+    <div class="progress"><span>${i + 1}/${qs.length}</span><div class="bar"><div style="width:${i / qs.length * 100}%"></div></div><span class="combo ${combo >= 2 ? '' : 'hide'}">🔥 x${combo}</span></div>
+    <div class="panel" id="panel">
+      <span class="tag">${isOut ? '🔮 Qu\'affiche ce programme ?' : '🎯 ' + title}</span>
+      ${isOut ? '' : `<div class="question">${fmt(q.q)}</div>`}
+      ${isOut ? `<pre class="code">${highlight((q.pre ? q.pre + '\n\n' : '') + q.code)}</pre>` : ''}
+      <div class="options">${opts.map((o, k) => `<button class="opt" data-k="${k}"><span class="key">${k + 1}</span>${isOut ? `<pre>${esc(o.t)}</pre>` : `<span>${fmt(o.t)}</span>`}</button>`).join('')}</div>
+      <div class="feedback" id="fb"></div>
+      <button class="btn full" id="next" style="display:none">Continuer →</button>
+    </div>
+    <p class="hint kbd">Touches 1-4 pour répondre · Entrée pour continuer</p>`;
+    bind($app);
+    const btns = [...$app.querySelectorAll('.opt')];
+    let answered = false;
+    const pick = k => {
+      if (answered) return; answered = true;
+      const ok = opts[k].good;
+      btns.forEach((b, j) => { b.disabled = true; if (opts[j].good) b.classList.add('good'); });
+      if (!ok) btns[k].classList.add('bad');
+      const fb = document.getElementById('fb');
+      if (ok) {
+        score++; combo++;
+        const gain = 10 + Math.min(combo - 1, 4) * 2; xp += gain;
+        unmiss(q.id);
+        fb.className = 'feedback show good';
+        fb.innerHTML = `<b>${['Bien vu !', 'Exact !', 'Parfait !', 'Bravo !', 'Yes !'][Math.floor(Math.random() * 5)]} +${gain} XP</b>${fmt(q.e)}`;
+      } else {
+        combo = 0; miss(q.id); wrong.push(q);
+        fb.className = 'feedback show bad';
+        fb.innerHTML = `<b>Pas tout à fait…</b>${fmt(q.e)}`;
+      }
+      const nx = document.getElementById('next');
+      nx.style.display = 'flex'; nx.focus({ preventScroll: true });
+      nx.onclick = () => { i++; render(); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+      nx.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    };
+    btns.forEach((b, k) => b.onclick = () => pick(k));
+    keyHandler = e => {
+      const n = parseInt(e.key, 10);
+      if (!answered && n >= 1 && n <= btns.length) pick(n - 1);
+      else if (answered && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); document.getElementById('next').click(); }
+    };
+  }
+
+  function done() {
+    stopAll();
+    addXP(xp);
+    let record = false;
+    if (key) { if (S.best[key] == null || score > S.best[key]) { S.best[key] = score; record = S.best[key] > 0; save(); } }
+    const pct = score / qs.length;
+    const stars = pct === 1 ? 3 : pct >= .7 ? 2 : pct >= .4 ? 1 : 0;
+    if (pct >= .8) confetti();
+    const msg = pct === 1 ? 'Sans faute, impressionnant ! 🏆' : pct >= .7 ? 'Très bien, encore un petit effort !' : pct >= .4 ? 'Pas mal ! Revois tes erreurs ci-dessous.' : 'Courage : relis les cartes mémoire et réessaie.';
+    $app.innerHTML = `${topbar(true)}<div class="panel result">
+      <div class="big">${score}/${qs.length}</div>
+      <div class="stars">${'⭐'.repeat(stars)}${'<span style="opacity:.25">⭐</span>'.repeat(3 - stars)}</div>
+      <p class="msg">${msg}</p>
+      <div class="xp">+${xp} XP</div>
+      ${record ? '<p class="record">🏅 Nouveau record !</p>' : ''}
+      <div class="actions"><button class="btn" id="again">Rejouer</button><button class="btn ghost" data-act="home">Menu</button></div>
+      ${wrong.length ? `<div class="review"><h3>À retenir</h3>${wrong.map(q => `<div class="item">${q.kind === 'code' ? '<b>Prédis l\'affichage</b>' : fmt(q.q)}<div class="r">${q.kind === 'code' ? '<pre>' + esc(q.o[0]) + '</pre>' : '✓ ' + fmt(q.o[0])}</div></div>`).join('')}</div>` : ''}
+    </div>`;
+    bind($app);
+    document.getElementById('again').onclick = () => ACTIONS[key || 'errors']();
+  }
+  render();
+}
+
+/* ---------- Chrono vrai/faux ---------- */
+function chrono() {
+  stopAll();
+  let deck = shuffle(VF), idx = 0, score = 0, combo = 0, left = 60, ended = false;
+  const wrong = [];
+  $app.innerHTML = `${topbar(true)}
+    <div class="timer" id="t">60</div>
+    <div class="score-live" id="sc">0 pt</div>
+    <div class="panel" id="panel"><span class="tag" style="display:block;text-align:center">Vrai ou faux ?</span><div class="statement" id="st"></div></div>
+    <div class="vf"><button class="btn f" id="bf">✗ Faux</button><button class="btn v" id="bv">✓ Vrai</button></div>
+    <p class="hint">Bonne réponse : +1 (bonus combo) · Erreur : −3 s</p>
+    <p class="hint kbd">← Faux · → Vrai</p>`;
+  bind($app);
+  const st = document.getElementById('st'), t = document.getElementById('t'), sc = document.getElementById('sc'), panel = document.getElementById('panel');
+  const show = () => { if (idx >= deck.length) { deck = shuffle(VF); idx = 0; } st.innerHTML = fmt(deck[idx][0]); };
+  const answer = v => {
+    if (ended) return;
+    const item = deck[idx];
+    const ok = item[1] === v;
+    panel.classList.remove('flash-good', 'flash-bad'); void panel.offsetWidth;
+    if (ok) { combo++; score += combo >= 5 ? 2 : 1; panel.classList.add('flash-good'); }
+    else { combo = 0; left = Math.max(0, left - 3); panel.classList.add('flash-bad'); if (!wrong.includes(item)) wrong.push(item); tick(true); }
+    sc.textContent = score + ' pt' + (score > 1 ? 's' : '') + (combo >= 5 ? ' · 🔥 x2' : '');
+    idx++; show();
+  };
+  const tick = (noDec) => {
+    if (!noDec) left--;
+    t.textContent = left; t.classList.toggle('low', left <= 10);
+    if (left <= 0) finish();
+  };
+  function finish() {
+    if (ended) return; ended = true; stopAll();
+    const gain = score * 3; addXP(gain);
+    let record = false;
+    if (S.best.chrono == null || score > S.best.chrono) { S.best.chrono = score; record = score > 0; save(); }
+    if (record) confetti();
+    $app.innerHTML = `${topbar(true)}<div class="panel result">
+      <div class="big">${score} pt${score > 1 ? 's' : ''}</div>
+      <p class="msg">en 60 secondes ${record ? '' : '· record : ' + S.best.chrono}</p>
+      <div class="xp">+${gain} XP</div>
+      ${record ? '<p class="record">🏅 Nouveau record !</p>' : ''}
+      <div class="actions"><button class="btn" data-act="chrono">Rejouer</button><button class="btn ghost" data-act="home">Menu</button></div>
+      ${wrong.length ? `<div class="review"><h3>Tes erreurs</h3>${wrong.map(w => `<div class="item">${fmt(w[0])}<div class="r">${w[1] ? 'VRAI' : 'FAUX'} — ${fmt(w[2])}</div></div>`).join('')}</div>` : ''}
+    </div>`;
+    bind($app);
+  }
+  document.getElementById('bf').onclick = () => answer(false);
+  document.getElementById('bv').onclick = () => answer(true);
+  keyHandler = e => { if (e.key === 'ArrowLeft') answer(false); else if (e.key === 'ArrowRight') answer(true); };
+  show();
+  timerId = setInterval(() => tick(false), 1000);
+}
+
+/* ---------- Effets ---------- */
+function confetti() {
+  const em = ['🎉', '⭐', '✨', '⚡', '🧡'];
+  for (let k = 0; k < 28; k++) {
+    const d = document.createElement('div');
+    d.className = 'confetti';
+    d.textContent = em[k % em.length];
+    d.style.left = Math.random() * 100 + 'vw';
+    d.style.animationDuration = (1.8 + Math.random() * 1.8) + 's';
+    d.style.animationDelay = (Math.random() * .5) + 's';
+    document.body.appendChild(d);
+    setTimeout(() => d.remove(), 4500);
+  }
+}
+
+const ACTIONS = {
+  home,
+  cards,
+  cardsAll: () => { S.mastered = []; save(); cards(); },
+  quiz: () => {
+    const code = shuffle(CODE).slice(0, 3);
+    quiz(shuffle([...shuffle(QCM).slice(0, 7), ...code]), 'Quiz éclair', 'quiz');
+  },
+  code: () => quiz(shuffle(CODE).slice(0, 8), 'Prédis l\'affichage', 'code'),
+  chrono,
+  errors: () => {
+    const pool = S.missed.map(id => ALLQ[id]).filter(Boolean);
+    if (!pool.length) return home();
+    quiz(shuffle(pool).slice(0, 10), 'Mes erreurs', null);
+  },
+  reset: () => {
+    if (!document.getElementById('confirmReset')) {
+      const b = document.querySelector('[data-act="reset"]');
+      b.outerHTML = `<button id="confirmReset">Confirmer la remise à zéro ?</button>`;
+      document.getElementById('confirmReset').onclick = () => { S = defaultState(); save(); home(); };
+    }
+  },
+};
+
+home();
+</script>
+</body>
+</html>
