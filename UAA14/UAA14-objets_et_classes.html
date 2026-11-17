@@ -837,7 +837,7 @@ function __construct($nom, $capacite, $placesLibres = $capacite) {
 ## Arguments facultatifs / Valeur par défaut
 ### La solution : `null` + test
 
-On met `null` par défaut, puis on décide **dans le corps** de la méthode :
+On met `null` par défaut, puis on teste avec `=== null` **dans le corps** de la méthode :
 
 ```php
 function __construct($nom, $capacite, $placesLibres = null) {
@@ -878,6 +878,27 @@ $salleRouge->réserver();     // réserve tout le reste
 ```
 
 → <span style="color: red;">À retenir : valeur par défaut **fixe** → directement dans la signature ; valeur par défaut **calculée** → `null` + test.</span>
+
+---
+## Arguments facultatifs / Valeur par défaut
+### Le test s'écrit **toujours** `=== null`
+
+Avec `==`, PHP considère que `0`, `""` et `false` sont « égaux » à `null` :
+
+```php
+function réserver($nombre = null) {
+  if ($nombre == null) {               // ✗ À NE PAS FAIRE
+    $nombre = $this->placesLibres;
+  }
+  $this->placesLibres -= $nombre;
+}
+
+$salleRouge->réserver(0);   // 0 == null est vrai → réserve TOUTES les places !
+```
+
+Avec `=== null`, la valeur par défaut n'est utilisée que si **aucune valeur** n'a été fournie : `réserver(0)` réserve bien 0 place.
+
+→ <span style="color: red;">À retenir : on compare **toujours** avec `=== null` (et `!== null` pour l'inverse), jamais avec `== null`.</span>
 
 ---
 ## Coding time !
