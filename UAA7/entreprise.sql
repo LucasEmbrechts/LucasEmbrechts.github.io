@@ -1,5 +1,5 @@
 CREATE TABLE regions (
-	region_id SERIAL PRIMARY KEY,
+	region_id INT AUTO_INCREMENT PRIMARY KEY,
 	region_name VARCHAR (25) DEFAULT NULL
 );
 
@@ -11,7 +11,7 @@ CREATE TABLE countries (
 );
 
 CREATE TABLE locations (
-	location_id SERIAL PRIMARY KEY,
+	location_id INT AUTO_INCREMENT PRIMARY KEY,
 	street_address VARCHAR (40) DEFAULT NULL,
 	postal_code VARCHAR (12) DEFAULT NULL,
 	city VARCHAR (30) NOT NULL,
@@ -21,21 +21,21 @@ CREATE TABLE locations (
 );
 
 CREATE TABLE jobs (
-	job_id SERIAL PRIMARY KEY,
+	job_id INT AUTO_INCREMENT PRIMARY KEY,
 	job_title VARCHAR (35) NOT NULL,
 	min_salary DECIMAL (8, 2) DEFAULT NULL,
 	max_salary DECIMAL (8, 2) DEFAULT NULL
 );
 
 CREATE TABLE departments (
-	department_id SERIAL PRIMARY KEY,
+	department_id INT AUTO_INCREMENT PRIMARY KEY,
 	department_name VARCHAR (30) NOT NULL,
 	location_id INT DEFAULT NULL,
 	FOREIGN KEY (location_id) REFERENCES locations (location_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE employees (
-	employee_id SERIAL PRIMARY KEY,
+	employee_id INT AUTO_INCREMENT PRIMARY KEY,
 	first_name VARCHAR (20) DEFAULT NULL,
 	last_name VARCHAR (25) NOT NULL,
 	email VARCHAR (100) NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE employees (
 );
 
 CREATE TABLE dependents (
-	dependent_id SERIAL PRIMARY KEY,
+	dependent_id INT AUTO_INCREMENT PRIMARY KEY,
 	first_name VARCHAR (50) NOT NULL,
 	last_name VARCHAR (50) NOT NULL,
 	relationship VARCHAR (25) NOT NULL,
