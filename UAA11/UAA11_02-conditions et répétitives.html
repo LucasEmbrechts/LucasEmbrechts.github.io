@@ -431,7 +431,7 @@ Objectif : traduire le diagramme d'action suivant.
 ---
 ### Les différentes répétitives
 
-* l'instruction `while`
+* l'instruction `while` : pour un **calcul**
 
 ```c
 int nombre = -10;
@@ -440,16 +440,17 @@ while(nombre < 0){
 }
 ```
 
-* l'instruction `do ... while`
+* l'instruction `do ... while` : pour **demander** quelque chose à l'utilisateur
 
 ```c
-int nombre = -10;
+int age;
 do{
-  nombre += 2;
-} while (nombre < 0)
+  printf("Age : ");
+  scanf("%d", &age);
+} while (age < 0);
 ```
 
-* l'instruction `for`
+* l'instruction `for` : quand on **connaît** le nombre de tours
 
 ```c
 for(int cpt = 0; cpt < 10; cpt++){
@@ -465,13 +466,15 @@ name: comparatif
 | Le test a lieu... | **avant** le corps | **après** le corps | **avant** le corps |
 | Nb minimal d'exécutions | 0 | **1** | 0 |
 | Le compteur est déclaré... | avant la boucle | avant la boucle | **dans** la boucle |
-| La plus adaptée quand... | le nombre de tours est inconnu | il faut agir **au moins une fois** | le nombre de tours est **connu** |
+| On l'utilise pour... | un **calcul** dont le nombre de tours est inconnu (et peut être nul) | **demander** quelque chose à l'utilisateur | un nombre de tours **connu** |
 
 → `do…while` se termine par un `;` après la parenthèse ; les deux autres, non.
 
 → Le compteur d'un `for` **n'existe plus** après la boucle.
 
-→ La question à se poser : **« est-ce que je connais d'avance le nombre de tours ? »** Si oui → `for`. Si non → `while`, sauf s'il faut agir au moins une fois → `do…while`.
+→ Les questions à se poser : **« est-ce que je demande quelque chose à l'utilisateur ? »** Si oui → `do…while`. Sinon, **« est-ce que je connais d'avance le nombre de tours ? »** Si oui → `for`, si non → `while`.
+
+→ On demande toujours **au moins une fois** à l'utilisateur : c'est pour cela que le `do…while` lui est réservé.
 
 → Les trois formes sont **interchangeables** : toute boucle peut s'écrire avec n'importe laquelle des trois.
 ---
@@ -588,12 +591,17 @@ Un **accumulateur** est une variable déclarée **avant** la boucle, mise à jou
 | une somme | `somme = 0` | `somme += n;` |
 | un produit, une factorielle | `produit = 1` | `produit *= n;` |
 | un compteur | `compteur = 0` | `compteur++;` |
-| un maximum | **la première valeur lue** | `if(n > max) max = n;` |
-| un minimum | **la première valeur lue** | `if(n < min) min = n;` |
+| un maximum | **la première valeur traitée** | voir ci-dessous |
+| un minimum | **la première valeur traitée** | voir ci-dessous |
+
+```c
+if(nb == 0 || n > max) max = n;   // AVANT nb++ : nb == 0 => 1re valeur
+if(nb == 0 || n < min) min = n;
+```
 
 → `0` pour une somme, `1` pour un produit : sinon tout est écrasé ou annulé.
 
-→ **Ne jamais** initialiser un maximum à `0` : avec une série de valeurs toutes négatives, le résultat serait `0`, qui ne fait pas partie de la série. On lit la première valeur **hors** de la boucle et on la prend comme maximum de départ.
+→ **Ne jamais** initialiser un maximum à `0` : avec une série de valeurs toutes négatives, le résultat serait `0`, qui ne fait pas partie de la série. C'est la **première valeur traitée** qui sert de maximum de départ : le test `nb == 0` la reconnaît, puisqu'aucune valeur n'a encore été comptée.
 
 → Attention aux dépassements : au-delà de 12!, un `int` déborde sans prévenir.
 ---
@@ -603,14 +611,18 @@ name: sentinelle
 Le nombre de tours n'est **pas connu** : c'est une valeur particulière, la **sentinelle**, qui annonce la fin.
 
 ```c
-// lire la première valeur AVANT la boucle
-while( /* la valeur n'est pas la sentinelle */ ){
-  // traiter la valeur
-  // lire la valeur SUIVANTE, en fin de corps
-}
+do{
+  // demander la valeur
+  // la lire
+  if( /* la valeur n'est pas la sentinelle */ ){
+    // traiter la valeur
+  }
+} while( /* la valeur n'est pas la sentinelle */ );
 ```
 
-→ Le schéma **« lire avant, relire à la fin »** est la signature de la boucle à sentinelle.
+→ On demande quelque chose à l'utilisateur, et au moins une fois : c'est un `do…while`, et la saisie n'est écrite **qu'une seule fois**.
+
+→ Le `if` et le `while` portent la **même condition** : le `if` empêche de traiter la sentinelle, le `while` arrête la boucle.
 
 → La sentinelle **ne fait pas partie** des données : elle n'est ni comptée, ni additionnée, ni comparée.
 
